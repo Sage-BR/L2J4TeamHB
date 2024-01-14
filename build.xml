@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Helbound_GameServer" default="dist" basedir=".">
+
+	<property name="src" location="java" />
+	<property name="lib" location="lib" />
+	<property name="build" location="build" />
+
+	<target name="dist" depends="jar">
+		<copy todir="data/libs">
+			<fileset dir="${src}/../lib">
+			<include name="bsh-2.0b5.jar" />
+			<include name="bsh-engine.jar" />
+			<include name="c3p0-0.9.5.5.jar" />
+			<include name="ecj-4.4.jar" />
+			<include name="java-engine-1.8.jar" />
+			<include name="javolution.jar" />
+			<include name="jython.jar" />
+			<include name="jython-engine.jar" />
+			<include name="mchange-commons-java-0.2.19.jar" />
+			<include name="mmocore.jar" />
+			<include name="mysql-connector-java-5.1.49.jar" />
+			</fileset>
+		</copy>
+		<copy todir="data/libs">
+			<fileset dir="${src}/../lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="jar" depends="compile" description="Create the jar file.">
+		<jar destfile="${build}/l2jserver.jar">
+			<fileset dir="classes" />
+			<manifest>
+				<attribute name="Main-Class" value="net.sf.l2j.Server" />
+				<attribute name="Class-Path" value="${manifest.libs}" />
+			</manifest>
+		</jar>
+		<copy todir="data/Server/">
+			<fileset dir="${build}">
+				<include name="l2jserver.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile" depends="init" description="Compile the source.">
+		<javac srcdir="${src}" classpathref="classpath" destdir="classes" compiler="modern" debug="true" debuglevel="lines,vars,source" includeantruntime="false" source="8" target="8" encoding="UTF-8" />
+	</target>
+	
+	<target name="init" depends="clean,checkRequirements" description="Create the output directories.">
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="clean" description="Remove the output directories.">
+		<delete dir="${build}" />
+	</target>
+
+	<target name="checkRequirements" description="Check requirements.">
+		<available classname="java.util.stream.Stream" property="JDK8.present" />
+		<fail unless="JDK8.present" message="Java 8 is required, but your version is Java ${ant.java.version}. Install latest JDK." />
+	</target>
+	
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<pathconvert property="manifest.libs" pathsep=" ">
+		<path refid="classpath" />
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*.jar" to="../libs/*.jar" />
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+	
+</project>

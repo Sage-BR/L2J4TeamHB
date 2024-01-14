@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<list>
+<skill id="9900" levels="1" name="Summon de demonios 1 MOB 123551,123547">
+  <set name="summonTotalLifeTime" val="3600000"/>
+  <set name="summonTimeLostIdle" val="500"/>
+  <set name="summonTimeLostActive" val="1000"/>
+  <set name="mpInitialConsume" val="1"/>
+  <set name="mpConsume" val="1"/>
+  <set name="power" val="0.0"/>
+  <set name="target" val="TARGET_SELF"/>
+  <set name="reuseDelay" val="10000"/>
+  <set name="hitTime" val="3"/>
+  <set name="skillType" val="SUMMON"/>
+  <set name="isMagic" val="true"/>
+  <set name="operateType" val="OP_ACTIVE"/>
+  <set name="castRange" val="-1"/>
+  <set name="effectRange" val="-1"/>
+  <set name="npcId" val="20117" />
+  <set name="isCubic" val="false"/>
+  <for>
+  </for>
+</skill>
+<skill id="9901" levels="1" name="SET NATIVO">
+  <set name="power" val="0.0"/>
+  <set name="target" val="TARGET_SELF"/>
+  <set name="skillType" val="BUFF"/>
+  <set name="operateType" val="OP_PASSIVE"/>
+  <set name="castRange" val="-1"/>
+  <set name="effectRange" val="-1"/>
+  <for>
+    <mul order="0x30" stat="runSpd" val="1.20"/> <!-- Speed +20% -->
+  </for>
+</skill>
+</list>

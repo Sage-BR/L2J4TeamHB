@@ -1,0 +1,100 @@
+03-12-2020 01:09:10	INFO	1	net.sf.l2j.Config	loading gameserver config
+03-12-2020 01:09:10	INFO	12	com.mchange.v2.log.MLog	MLog clients using java 1.4+ standard logging.
+03-12-2020 01:09:11	INFO	1	com.mchange.v2.c3p0.C3P0Registry	Initializing c3p0-0.9.5-pre5 [debug? false; trace: 5]
+03-12-2020 01:09:11	INFO	1	net.sf.l2j.gameserver.idfactory.IdFactory	Updated characters online status.
+03-12-2020 01:09:11	INFO	1	net.sf.l2j.gameserver.idfactory.BitSetIDFactory	IDFactory: 102912 id's available.
+03-12-2020 01:09:12	INFO	1	net.sf.l2j.gameserver.scripting.L2ScriptEngineManager	Initializing Script Engine Manager
+03-12-2020 01:09:12	INFO	1	net.sf.l2j.gameserver.scripting.L2ScriptEngineManager	Script Engine: BeanShell Engine 1.1 - Language: BeanShell - Language Version: 2.0b5
+03-12-2020 01:09:12	INFO	1	net.sf.l2j.gameserver.scripting.L2ScriptEngineManager	Script Engine: java 1.8 - Language: java - Language Version: 1.8
+03-12-2020 01:09:12	INFO	1	net.sf.l2j.gameserver.scripting.L2ScriptEngineManager	Script Engine: jython 2.2.1 - Language: python - Language Version: 2.2.1
+03-12-2020 01:09:13	INFO	1	net.sf.l2j.gameserver.scripting.L2ScriptEngineManager	Script Engine: Oracle Nashorn 1.8.0_144 - Language: ECMAScript - Language Version: ECMA - 262 Edition 5.1
+03-12-2020 01:09:13	CONFIG	1	net.sf.l2j.gameserver.datatables.ItemTable	ItemTable: Loaded 1292 Armors.
+03-12-2020 01:09:13	CONFIG	1	net.sf.l2j.gameserver.datatables.ItemTable	ItemTable: Loaded 7387 Items.
+03-12-2020 01:09:14	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	SkillTreeTable: Loaded 41307 skills.
+03-12-2020 01:09:14	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	FishingSkillTreeTable: Loaded 109 general skills.
+03-12-2020 01:09:14	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	FishingSkillTreeTable: Loaded 8 dwarven skills.
+03-12-2020 01:09:14	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	EnchantSkillTreeTable: Loaded 235 enchant skills.
+03-12-2020 01:09:14	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	PledgeSkillTreeTable: Loaded 64 pledge skills
+03-12-2020 01:09:14	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	TransformSkillTreeTable: Loaded 48 transform skills
+03-12-2020 01:09:16	CONFIG	1	net.sf.l2j.gameserver.datatables.ItemTable	ItemTable: Loaded 1599 Weapons.
+03-12-2020 01:09:16	SEVERE	1	net.sf.l2j.gameserver.datatables.ItemTable	highest item id used:10278
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.datatables.ExtractableItemsData	Extractable items data: Loaded 334 extractable items!
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.datatables.SummonItemsData	Summon items data: Loaded 15 summon items.
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.instancemanager.CastleManager	Initializing CastleManager
+03-12-2020 01:09:16	CONFIG	1	net.sf.l2j.gameserver.model.L2World	L2World: Setting up World Regions
+03-12-2020 01:09:16	CONFIG	1	net.sf.l2j.gameserver.model.L2World	L2World: (87 by 128) World Region Grid set up.
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.instancemanager.CastleManager	Loaded: 9 castles
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.datatables.MerchantPriceConfigTable	MerchantPriceConfigTable: Loaded 19 merchant price configs.
+03-12-2020 01:09:16	CONFIG	1	net.sf.l2j.gameserver.TradeController	TradeController: Loaded 659 Buylists.
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.datatables.SpawnTable	Initializing Walkers Routes Table.
+03-12-2020 01:09:16	INFO	1	net.sf.l2j.gameserver.datatables.SpawnTable	WalkerRoutesTable: Loaded 224 Npc Walker Routes.
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.RecipeController	RecipeController: Loaded 899 recipes.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.ArmorSetsTable	ArmorSetsTable: Loaded 78 armor sets.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	FishTable: Loaded 270 Fishes.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.SkillTreeTable	SkillSpellbookTable: Loaded 432 Spellbooks.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.CharTemplateTable	CharTemplateTable: Loaded 103 Character Templates.
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.cache.HtmCache	Cache[HTML]: Running lazy cache
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.cache.CrestCache	Cache[Crest]: 0,000MB on 0 files loaded. (Forget Time: 300s , Capacity: 50)
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.ClanTable	Restored 1 clans from the database.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.NpcTable	NpcTable: Loaded 8060 Npc Templates.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.NpcTable	NpcTable: Loaded 445 Minions.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.HennaTable	HennaTable: Loaded 180 Templates.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.HennaTreeTable	HennaTreeTable: Loaded 8136 Henna Tree Templates.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.HennaTable	Helper Buff Table: Loaded 14 Templates.
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.GeoData	Geodata Engine: Disabled.
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.ClanHallManager	Initializing ClanHallManager
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.ClanHallManager	Loaded: 0 clan halls
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.ClanHallManager	Loaded: 44 free clan halls
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.SiegeManager	Initializing SiegeManager
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.FortManager	Initializing FortManager
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.FortManager	Loaded: 21 fortress
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.FortSiegeManager	Initializing SiegeManager
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.TeleportLocationTable	TeleportLocationTable: Loaded 678 Teleport Location Templates.
+03-12-2020 01:09:17	CONFIG	1	net.sf.l2j.gameserver.datatables.LevelUpData	LevelUpData: Loaded 103 Character Level Up Templates.
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.datatables.ZoneData	Loading zones...
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.ArenaManager	Initializing ArenaManager
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.TownManager	Initializing TownManager
+03-12-2020 01:09:17	INFO	1	net.sf.l2j.gameserver.instancemanager.OlympiadStadiaManager	Initializing OlympiadStadiaManager
+03-12-2020 01:09:18	INFO	1	net.sf.l2j.gameserver.instancemanager.GrandBossManager	Initializing GrandBossManager
+03-12-2020 01:09:18	INFO	1	net.sf.l2j.gameserver.instancemanager.GrandBossManager	GrandBossManager: Loaded 15 Instances
+03-12-2020 01:09:18	INFO	1	net.sf.l2j.gameserver.instancemanager.FishingZoneManager	Initializing FishingZoneManager
+03-12-2020 01:09:18	INFO	1	net.sf.l2j.gameserver.instancemanager.GrandBossManager	GrandBossManager: Initialized 7 Grand Boss Zones
+03-12-2020 01:09:18	INFO	1	net.sf.l2j.gameserver.datatables.ZoneData	Done: loaded 323 zones.
+03-12-2020 01:09:19	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Oren: Sun Dec 06 16:00:00 BRST 2020
+03-12-2020 01:09:19	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Giran: Sun Dec 06 16:00:00 BRST 2020
+03-12-2020 01:09:20	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Gludio: Sat Dec 12 20:00:00 BRST 2020
+03-12-2020 01:09:20	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Dion: Sat Dec 12 20:00:00 BRST 2020
+03-12-2020 01:09:20	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Innadril: Sun Dec 06 16:00:00 BRST 2020
+03-12-2020 01:09:20	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Aden: Sat Dec 12 20:00:00 BRST 2020
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Goddard: Sun Dec 06 16:00:00 BRST 2020
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager	DayNightSpawnManager: Day/Night handler initialized
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Rune: Sat Dec 12 20:00:00 BRST 2020
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.model.entity.Siege	Siege of Schuttgart: Sat Dec 12 20:00:00 BRST 2020
+03-12-2020 01:09:21	WARNING	1	net.sf.l2j.gameserver.datatables.SpawnTable	SpawnTable: Data missing in NPC table for ID: 22448.
+03-12-2020 01:09:21	WARNING	1	net.sf.l2j.gameserver.datatables.SpawnTable	SpawnTable: Data missing in NPC table for ID: 22451.
+03-12-2020 01:09:21	WARNING	1	net.sf.l2j.gameserver.datatables.SpawnTable	SpawnTable: Data missing in NPC table for ID: 18493.
+03-12-2020 01:09:21	CONFIG	1	net.sf.l2j.gameserver.datatables.SpawnTable	SpawnTable: Loaded 41346 Npc Spawn Locations.
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager	RaidBossSpawnManager: Loaded 179 Instances
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager	RaidBossSpawnManager: Scheduled 0 Instances
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager	DimensionalRiftManager: Loaded 7 room types with 56 rooms.
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager	DimensionalRiftManager: Loaded 462 dimensional rift spawns, 0 errors.
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.QuestManager	Initializing QuestManager
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.model.L2Manor	ManorManager: Loaded 256 seeds
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.AuctionManager	Initializing AuctionManager
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.AuctionManager	Loaded: 38 auction(s)
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.BoatManager	Initializing BoatManager
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.CastleManorManager	Initializing CastleManorManager
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.CastleManorManager	Manor System: Manor period approve updated
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.CastleManager	Initializing MercTicketManager
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.CastleManager	Loaded: 0 Mercenary Tickets
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.instancemanager.PetitionManager	Initializing PetitionManager
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.GameServer	AI
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	AI load:
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Antharas_l2j
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Baium_l2j
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Core
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Queen Ant
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Gordon
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Orfen
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Zaken_l2j
+03-12-2020 01:09:21	INFO	1	net.sf.l2j.gameserver.ai.special.manager.AILoader	 - Frintezza_l2j
