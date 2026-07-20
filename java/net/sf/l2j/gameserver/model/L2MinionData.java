@@ -15,6 +15,8 @@
 package net.sf.l2j.gameserver.model;
 
 import net.sf.l2j.util.Rnd;
+
+import java.util.Set;
 /**
  * This class defines the spawn data of a Minion type
  * In a group mob, there are one master called RaidBoss and several slaves called Minions.
@@ -34,7 +36,6 @@ public class L2MinionData
 	private int _minionAmount;
 	private int _minionAmountMin;
 	private int _minionAmountMax;
-
 
 	/**
 	 * Set the Identifier of the Minion to spawn.<BR><BR>

@@ -35,7 +35,6 @@ public final class RequestQuestAbort extends L2GameClientPacket
 
 	private int _questId;
 
-
 	@Override
 	protected void readImpl()
 	{

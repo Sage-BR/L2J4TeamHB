@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
@@ -38,6 +37,9 @@ import net.sf.l2j.gameserver.serverpackets.SSQInfo;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Broadcast;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  *  Seven Signs Engine
@@ -141,10 +143,10 @@ public class SevenSigns
 
 	public SevenSigns()
 	{
-		_signsPlayerData = new FastMap<Integer, StatsSet>();
-		_signsSealOwners = new FastMap<Integer, Integer>();
-		_signsDuskSealTotals = new FastMap<Integer, Integer>();
-		_signsDawnSealTotals = new FastMap<Integer, Integer>();
+		_signsPlayerData = new ConcurrentHashMap<Integer, StatsSet>();
+		_signsSealOwners = new ConcurrentHashMap<Integer, Integer>();
+		_signsDuskSealTotals = new ConcurrentHashMap<Integer, Integer>();
+		_signsDawnSealTotals = new ConcurrentHashMap<Integer, Integer>();
 
 		try
 		{
@@ -870,7 +872,6 @@ public class SevenSigns
     {
 		return _signsPlayerData.containsKey(player.getObjectId());
 	}
-
 
 	/**
      * Used to specify cabal-related details for the specified player. This method

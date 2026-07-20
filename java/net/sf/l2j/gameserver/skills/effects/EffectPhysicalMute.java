@@ -23,11 +23,9 @@ import net.sf.l2j.gameserver.skills.Env;
  */
 public class EffectPhysicalMute extends L2Effect {
 
-
     public EffectPhysicalMute(Env env, EffectTemplate template) {
         super(env, template);
     }
-
 
     @Override
 	public EffectType getEffectType() {

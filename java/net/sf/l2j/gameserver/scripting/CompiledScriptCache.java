@@ -37,8 +37,9 @@ import javax.script.CompiledScript;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Cache of Compiled Scripts
@@ -53,7 +54,7 @@ public class CompiledScriptCache implements Serializable
 	
 	private static final Logger LOG = Logger.getLogger(CompiledScriptCache.class.getName());
 	
-	private final Map<String, CompiledScriptHolder> _compiledScriptCache = new FastMap<>();
+	private final Map<String, CompiledScriptHolder> _compiledScriptCache = new ConcurrentHashMap<>();
 	private transient boolean _modified = false;
 	
 	public CompiledScript loadCompiledScript(final ScriptEngine engine, final File file) throws ScriptException

@@ -21,6 +21,8 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -96,7 +98,6 @@ public class L2ClanMember
 		_sex = _player.getAppearance().getSex();
         _raceOrdinal = _player.getRace().ordinal();
 	}
-
 
 	public void setPlayerInstance(L2PcInstance player)
 	{

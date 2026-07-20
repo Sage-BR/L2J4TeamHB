@@ -53,6 +53,9 @@ import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
+import java.util.List;
+import java.util.Set;
+
 public abstract class L2Summon extends L2PlayableInstance
 {
     //private static Logger _log = Logger.getLogger(L2Summon.class.getName());
@@ -517,7 +520,6 @@ public abstract class L2Summon extends L2PlayableInstance
     {
         return _follow;
     }
-
 
     @Override
 	public boolean isAutoAttackable(L2Character attacker)

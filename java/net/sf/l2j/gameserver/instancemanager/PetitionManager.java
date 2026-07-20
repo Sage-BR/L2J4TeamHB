@@ -20,9 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GmListTable;
 import net.sf.l2j.gameserver.clientpackets.Say2;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 /**
  * Petition Manager
@@ -95,7 +97,7 @@ public final class PetitionManager
 		private PetitionState _state = PetitionState.Pending;
 		private String _content;
 
-		private List<CreatureSay> _messageLog = new FastList<CreatureSay>();
+		private List<CreatureSay> _messageLog = new ArrayList<CreatureSay>();
 
 		private L2PcInstance _petitioner;
 		private L2PcInstance _responder;
@@ -239,11 +241,10 @@ public final class PetitionManager
 		}
 	}
 
-
 	private PetitionManager()
 	{
-		_pendingPetitions = new FastMap<Integer, Petition>();
-		_completedPetitions = new FastMap<Integer, Petition>();
+		_pendingPetitions = new ConcurrentHashMap<Integer, Petition>();
+		_completedPetitions = new ConcurrentHashMap<Integer, Petition>();
 	}
 
 	public void clearCompletedPetitions()
@@ -501,7 +502,7 @@ public final class PetitionManager
 
 	public void sendPendingPetitionList(L2PcInstance activeChar)
 	{
-        TextBuilder htmlContent = new TextBuilder("<html><body>" +
+        StringBuilder htmlContent = new StringBuilder("<html><body>" +
 		"<center><font color=\"LEVEL\">Current Petitions</font><br><table width=\"300\">");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm z");
 
@@ -561,7 +562,7 @@ public final class PetitionManager
 			return;
 
 		Petition currPetition = getPendingPetitions().get(petitionId);
-        TextBuilder htmlContent = new TextBuilder("<html><body>");
+        StringBuilder htmlContent = new StringBuilder("<html><body>");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd MMM HH:mm z");
 
 		htmlContent.append("<center><br><font color=\"LEVEL\">Petition #" + currPetition.getId() + "</font><br1>");

@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-
 public class SpecialCamera extends L2GameServerPacket
 {
     private static final String _S__C7_SPECIALCAMERA = "[S] d6 SpecialCamera";

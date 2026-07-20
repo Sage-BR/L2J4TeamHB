@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.clientpackets;
 
 import java.util.logging.Logger;
 
-
 /**
  * Format: (c) dddd
  * d: dx

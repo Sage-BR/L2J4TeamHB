@@ -34,7 +34,6 @@ public final class RequestConfirmGemStone extends L2GameClientPacket
 	private int _gemstoneItemObjId;
 	private int _gemstoneCount;
 
-
 	/**
 	 * @param buf
 	 * @param client

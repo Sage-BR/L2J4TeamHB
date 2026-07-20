@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.instancemanager.AuctionManager;
@@ -31,6 +30,8 @@ import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.List;
 
 /**
  * This class handles all siege commands:
@@ -197,7 +198,7 @@ public class AdminSiege implements IAdminCommandHandler
 		int i=0;
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/castles.htm");
-		TextBuilder cList = new TextBuilder();
+		StringBuilder cList = new StringBuilder();
 		for (Castle castle: CastleManager.getInstance().getCastles())
 		{
 			if (castle != null)
@@ -213,7 +214,7 @@ public class AdminSiege implements IAdminCommandHandler
 			}
 		}
 		adminReply.replace("%castles%", cList.toString());
-		cList.clear();
+		cList.setLength(0);
 		i=0;
 		for (ClanHall clanhall: ClanHallManager.getInstance().getClanHalls().values())
 		{
@@ -230,7 +231,7 @@ public class AdminSiege implements IAdminCommandHandler
 			}
 		}
 		adminReply.replace("%clanhalls%", cList.toString());
-		cList.clear();
+		cList.setLength(0);
 		i=0;
 		for (ClanHall clanhall: ClanHallManager.getInstance().getFreeClanHalls().values())
 		{

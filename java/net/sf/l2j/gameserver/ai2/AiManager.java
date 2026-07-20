@@ -23,11 +23,14 @@ import java.util.Set;
 import java.util.jar.JarFile;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-import javolution.util.FastSet;
+
+
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.ai2.AiInstance.QueueEventRunner;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * This class will load all the AI's and retain all of them.
@@ -55,10 +58,10 @@ public class AiManager
 
 	private AiManager()
 	{
-		_aiList = new FastList<AiInstance>();
-		_aiMap = new FastMap<Integer, AiInstance>();
+		_aiList = new ArrayList<AiInstance>();
+		_aiMap = new ConcurrentHashMap<Integer, AiInstance>();
 		_tpm = ThreadPoolManager.getInstance();
-		_paramcache = new FastMap<String, String>();
+		_paramcache = new ConcurrentHashMap<String, String>();
 		load();
 	}
 
@@ -84,7 +87,7 @@ public class AiManager
 					try
 					{
 						Class<?> managerClass = Class.forName("net.sf.l2j.gameserver.ai.managers."+file.substring(0, file.length() - 6));
-						Object managerObject = managerClass.newInstance();
+						Object managerObject = managerClass.getDeclaredConstructor().newInstance();
 						if(!(managerObject instanceof ISpecificAiManager))
 						{
 							_log.info("A class that was not a ISpecificAiManager was found in the ai managers folder.");
@@ -97,7 +100,7 @@ public class AiManager
 							pparams.convertToIDs();
 							boolean perfectMatch = false;
 							// let's check if any previously created AiInstance is allready used for the NPC concerned by this handler
-							List<Intersection> intersections = new FastList<Intersection>();
+							List<Intersection> intersections = new ArrayList<Intersection>();
 							for(AiInstance ai : _aiList)
 							{
 								if(ai.getPluginingParamaters().equals(pparams))
@@ -160,11 +163,19 @@ public class AiManager
 					{
 						e.printStackTrace();
 					}
-					catch (IllegalAccessException e)
-					{
-						e.printStackTrace();
-					}
+				catch (IllegalAccessException e)
+				{
+					e.printStackTrace();
 				}
+				catch (NoSuchMethodException e)
+				{
+					e.printStackTrace();
+				}
+				catch (java.lang.reflect.InvocationTargetException e)
+				{
+					e.printStackTrace();
+				}
+			}
 			}
 		}
 		catch (IOException e1)
@@ -224,7 +235,7 @@ public class AiManager
 		public Intersection(AiInstance instance)
 		{
 			ai = instance;
-			ids = new FastSet<Integer>();
+			ids = new HashSet<Integer>();
 		}
 
 		public boolean isEmpty()

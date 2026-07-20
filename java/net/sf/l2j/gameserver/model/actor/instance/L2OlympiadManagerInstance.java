@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Olympiad;
 import net.sf.l2j.gameserver.datatables.NpcBufferTable;
@@ -30,7 +29,11 @@ import net.sf.l2j.gameserver.serverpackets.InventoryUpdate;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
-import net.sf.l2j.util.L2FastList;
+import net.sf.l2j.util.L2ArrayList;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Olympiad Npc's Instance
@@ -67,7 +70,7 @@ public class L2OlympiadManagerInstance extends L2FolkInstance
 
             int val = Integer.parseInt(command.substring(14));
             NpcHtmlMessage reply;
-            TextBuilder replyMSG;
+            StringBuilder replyMSG;
 
             switch(val)
             {
@@ -87,7 +90,7 @@ public class L2OlympiadManagerInstance extends L2FolkInstance
                     }
 
                     reply = new NpcHtmlMessage(getObjectId());
-                    replyMSG = new TextBuilder("<html><body>");
+                    replyMSG = new StringBuilder("<html><body>");
                     replyMSG.append("The number of people on the waiting list for " +
                             "Grand Olympiad" +
                             "<center>" +
@@ -116,7 +119,7 @@ public class L2OlympiadManagerInstance extends L2FolkInstance
                     if (points >= 0)
                     {
                         reply = new NpcHtmlMessage(getObjectId());
-                        replyMSG = new TextBuilder("<html><body>");
+                        replyMSG = new StringBuilder("<html><body>");
                         replyMSG.append("There are " + points + " Grand Olympiad " +
                                 "points granted for this event.<br><br>" +
                                 "<a action=\"bypass -h npc_"+getObjectId()+"_OlympiadDesc 2a\">Return</a>");
@@ -216,7 +219,7 @@ public class L2OlympiadManagerInstance extends L2FolkInstance
             int val = Integer.parseInt(command.substring(9,10));
 
             NpcHtmlMessage reply = new NpcHtmlMessage(getObjectId());
-            TextBuilder replyMSG = new TextBuilder("<html><body>");
+            StringBuilder replyMSG = new StringBuilder("<html><body>");
 
             switch (val)
             {
@@ -257,7 +260,7 @@ public class L2OlympiadManagerInstance extends L2FolkInstance
                         replyMSG.append("<center>Grand Olympiad Ranking");
                         replyMSG.append("<img src=\"L2UI.SquareWhite\" width=270 height=1><img src=\"L2UI.SquareBlank\" width=1 height=3>");
 
-                        L2FastList<String> names = Olympiad.getInstance().getClassLeaderBoard(classId);
+                        L2ArrayList<String> names = Olympiad.getInstance().getClassLeaderBoard(classId);
                         if (names.size() != 0)
                         {
                             replyMSG.append("<table width=270 border=0 bgcolor=\"000000\">");

@@ -16,9 +16,9 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -33,7 +33,6 @@ public class ExOlympiadSpelledInfo extends L2GameServerPacket
 	private static final String _S__FE_2A_OLYMPIADSPELLEDINFO = "[S] FE:7b ExOlympiadSpelledInfo";
 	private L2PcInstance _player;
 	private List<Effect> _effects;
-
 
 	private class Effect
 	{
@@ -51,7 +50,7 @@ public class ExOlympiadSpelledInfo extends L2GameServerPacket
 
 	public ExOlympiadSpelledInfo(L2PcInstance player)
 	{
-		_effects = new FastList<Effect>();
+		_effects = new ArrayList<Effect>();
         _player = player;
 	}
 

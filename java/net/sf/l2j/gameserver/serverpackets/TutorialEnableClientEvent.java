@@ -24,7 +24,6 @@ public class TutorialEnableClientEvent extends L2GameServerPacket
 		_eventId = event;
 	}
 
-
 	@Override
 	protected void writeImpl()
 	{

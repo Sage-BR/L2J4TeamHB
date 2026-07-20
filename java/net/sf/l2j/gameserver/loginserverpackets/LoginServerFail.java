@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.loginserverpackets;
 
-
 public class LoginServerFail extends LoginServerBasePacket
 {
 

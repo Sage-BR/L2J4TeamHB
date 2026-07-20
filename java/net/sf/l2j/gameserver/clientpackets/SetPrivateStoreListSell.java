@@ -37,7 +37,6 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 	private boolean _packageSale;
 	private int[] _items; // count * 3
 
-
 	@Override
 	protected void readImpl()
 	{

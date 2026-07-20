@@ -20,7 +20,6 @@
  */
 package net.sf.l2j.gameserver.ai.special.manager;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -28,12 +27,14 @@ import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author programmos
  */
 public class AIExtend implements Runnable
 {
-	private static FastMap<Integer, AIExtend> _AI = new FastMap<>();
+	private static ConcurrentHashMap<Integer, AIExtend> _AI = new ConcurrentHashMap<>();
 	private int _idCharacter;
 	
 	/**

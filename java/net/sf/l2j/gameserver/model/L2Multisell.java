@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.templates.L2Weapon;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * Multisell list manager
  *
@@ -40,7 +42,7 @@ import org.w3c.dom.Node;
 public class L2Multisell
 {
     private static Logger _log = Logger.getLogger(L2Multisell.class.getName());
-    private List<MultiSellListContainer> _entries = new FastList<MultiSellListContainer>();
+    private List<MultiSellListContainer> _entries = new ArrayList<MultiSellListContainer>();
     private static L2Multisell _instance = new L2Multisell();
 
     public MultiSellListContainer getList(int id)
@@ -251,8 +253,8 @@ public class L2Multisell
     {
         private int _entryId;
 
-        private List<MultiSellIngredient> _products = new FastList<MultiSellIngredient>();
-        private List<MultiSellIngredient> _ingredients = new FastList<MultiSellIngredient>();
+        private List<MultiSellIngredient> _products = new ArrayList<MultiSellIngredient>();
+        private List<MultiSellIngredient> _ingredients = new ArrayList<MultiSellIngredient>();
 
         /**
          * @param entryId The entryId to set.
@@ -409,7 +411,7 @@ public class L2Multisell
 
         public MultiSellListContainer()
         {
-            _entriesC = new FastList<MultiSellEntry>();
+            _entriesC = new ArrayList<MultiSellEntry>();
         }
 
         /**
@@ -478,7 +480,7 @@ public class L2Multisell
     {
         Document doc = null;
         int id = 0;
-        List<File> files = new FastList<File>();
+        List<File> files = new ArrayList<File>();
         hashFiles("multisell", files);
 
         for (File f : files)

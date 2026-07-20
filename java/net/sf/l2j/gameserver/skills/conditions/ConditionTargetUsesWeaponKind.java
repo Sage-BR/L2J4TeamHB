@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.skills.conditions;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
-
 /**
  * @author mkizub
  *

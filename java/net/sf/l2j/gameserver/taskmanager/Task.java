@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.taskmanager.TaskManager.ExecutedTask;
 
-
 /**
  * @author Layane
  *

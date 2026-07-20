@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.ai2;
 
 import java.util.Set;
 
-import javolution.util.FastSet;
 import net.sf.l2j.gameserver.datatables.NpcTable;
+
+import java.util.HashSet;
 
 /**
  *
@@ -41,9 +42,8 @@ public class AiPlugingParameters
 		_npcIDs = npcIDs;
 		_but = but;
 		if(_npcIDs == null)
-			_npcIDs = new FastSet<Integer>();
+			_npcIDs = new HashSet<Integer>();
 	}
-
 
 	public void convertToIDs()
 	{
@@ -96,7 +96,6 @@ public class AiPlugingParameters
 	{
 		return _npcIDs;
 	}
-
 
 	/**
 	 * @param id

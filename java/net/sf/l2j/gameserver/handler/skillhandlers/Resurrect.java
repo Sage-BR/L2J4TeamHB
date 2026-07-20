@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.skillhandlers;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
@@ -27,6 +26,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PetInstance;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
+
+import java.util.ArrayList;
 /**
  * This class ...
  *
@@ -46,7 +47,7 @@ public class Resurrect implements ISkillHandler
 
         L2Character target = null;
         L2PcInstance targetPlayer;
-        List<L2Character> targetToRes = new FastList<L2Character>();
+        List<L2Character> targetToRes = new ArrayList<L2Character>();
 
         for (int index = 0; index < targets.length; index++)
         {
@@ -91,7 +92,6 @@ public class Resurrect implements ISkillHandler
             	cha.doRevive(Formulas.getInstance().calculateSkillResurrectRestorePercent(skill.getPower(), activeChar.getWIT()));
             }
 	}
-
 
 	public SkillType[] getSkillIds()
 	{

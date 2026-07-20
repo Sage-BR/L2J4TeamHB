@@ -19,19 +19,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class NpcBufferTable
 {
 	private class NpcBufferSkills
 	{
 		private int _npcId = 0;
-		private Map<Integer, Integer> _skillId = new FastMap<Integer, Integer>();
-		private Map<Integer, Integer> _skillLevels = new FastMap<Integer, Integer>();
-		private Map<Integer, Integer> _skillFeeIds = new FastMap<Integer, Integer>();
-		private Map<Integer, Integer> _skillFeeAmounts = new FastMap<Integer, Integer>();
-
+		private Map<Integer, Integer> _skillId = new ConcurrentHashMap<Integer, Integer>();
+		private Map<Integer, Integer> _skillLevels = new ConcurrentHashMap<Integer, Integer>();
+		private Map<Integer, Integer> _skillFeeIds = new ConcurrentHashMap<Integer, Integer>();
+		private Map<Integer, Integer> _skillFeeAmounts = new ConcurrentHashMap<Integer, Integer>();
 
 		public NpcBufferSkills(int npcId)
 		{
@@ -67,7 +67,7 @@ public class NpcBufferTable
 	
 	
 	private static NpcBufferTable _instance = null;
-	private Map<Integer, NpcBufferSkills> _buffers = new FastMap<Integer, NpcBufferSkills>();
+	private Map<Integer, NpcBufferSkills> _buffers = new ConcurrentHashMap<Integer, NpcBufferSkills>();
 
 	private NpcBufferTable()
 	{

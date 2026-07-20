@@ -16,12 +16,12 @@ package net.sf.l2j.server.gameserver.model;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.ExClosePartyRoom;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Gnacik
@@ -33,7 +33,7 @@ public class PartyMatchRoomList
 	
 	private PartyMatchRoomList()
 	{
-		_rooms = new FastMap<Integer, PartyMatchRoom>();
+		_rooms = new ConcurrentHashMap<Integer, PartyMatchRoom>();
 	}	
 	
 	public synchronized void addPartyMatchRoom(int id, PartyMatchRoom room)

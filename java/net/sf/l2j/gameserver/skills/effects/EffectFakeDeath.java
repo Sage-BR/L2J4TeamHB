@@ -73,4 +73,3 @@ final class EffectFakeDeath extends L2Effect {
     }
 }
 
-

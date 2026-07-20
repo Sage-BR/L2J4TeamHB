@@ -55,6 +55,12 @@ public class L2SummonAI extends L2CharacterAI
             return;
         }
         if (maybeMoveToPawn(getAttackTarget(), _actor.getPhysicalAttackRange())) return;
+
+        if (_actor.isAttackingDisabled() || _actor.isCastingNow())
+        {
+            clientActionFailed();
+            return;
+        }
         clientStopMoving(null);
         _accessor.doAttack(getAttackTarget());
         return;

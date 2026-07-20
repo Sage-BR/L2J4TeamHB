@@ -44,7 +44,6 @@ public final class Logout extends L2GameClientPacket
 	private static final String _C__09_LOGOUT = "[C] 09 Logout";
 	private static Logger _log = Logger.getLogger(Logout.class.getName());
 
-
 	@Override
 	protected void readImpl()
 	{

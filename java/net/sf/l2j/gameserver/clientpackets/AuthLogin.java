@@ -76,7 +76,6 @@ public final class AuthLogin extends L2GameClientPacket
 		}
 	}
 
-
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */

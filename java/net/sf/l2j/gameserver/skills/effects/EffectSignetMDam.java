@@ -19,7 +19,6 @@
 
 package net.sf.l2j.gameserver.skills.effects;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.ai.CtrlEvent;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
@@ -43,6 +42,8 @@ import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.skills.l2skills.L2SkillSignetCasttime;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Point3D;
+
+import java.util.ArrayList;
 
 final class EffectSignetMDam extends L2Effect
 {
@@ -124,7 +125,7 @@ final class EffectSignetMDam extends L2Effect
         // if (!bss && !ss)
         //    caster.rechargeAutoSoulShot(false, true, false);
         
-        FastList<L2Character> targets = new FastList<L2Character>();
+        ArrayList<L2Character> targets = new ArrayList<L2Character>();
         
         for (L2Character cha : _actor.getKnownList().getKnownCharactersInRadius(getSkill().getSkillRadius()))
         {

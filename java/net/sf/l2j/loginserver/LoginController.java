@@ -31,9 +31,8 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import javax.crypto.Cipher;
 
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-import javolution.util.FastCollection.Record;
+
+
 import net.sf.l2j.Base64;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
@@ -43,6 +42,11 @@ import net.sf.l2j.loginserver.crypt.ScrambledKeyPair;
 import net.sf.l2j.loginserver.gameserverpackets.ServerStatus;
 import net.sf.l2j.loginserver.serverpackets.LoginFail.LoginFailReason;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This class ...
@@ -59,12 +63,12 @@ public class LoginController
 	private final static int LOGIN_TIMEOUT = 60*1000;
 
 	/** Clients that are on the LS but arent assocated with a account yet*/
-	protected FastSet<L2LoginClient> _clients = new FastSet<L2LoginClient>();
+	protected HashSet<L2LoginClient> _clients = new HashSet<L2LoginClient>();
 
 	/** Authed Clients on LoginServer*/
-	protected FastMap<String, L2LoginClient> _loginServerClients = new FastMap<String, L2LoginClient>().setShared(true);
+	protected ConcurrentHashMap<String, L2LoginClient> _loginServerClients = new ConcurrentHashMap<String, L2LoginClient>();
 
-	private Map<InetAddress, BanInfo> _bannedIps = new FastMap<InetAddress, BanInfo>().setShared(true);
+	private Map<InetAddress, BanInfo> _bannedIps = new ConcurrentHashMap<InetAddress, BanInfo>();
 
 	private Map<InetAddress, FailedLoginAttempt> _hackProtection;
 
@@ -101,7 +105,7 @@ public class LoginController
 		_log.info("                      ###   ###   ##### ###  ### ##   ##              ");
 		_log.info("                       www.4teambr.com      bY SageBR!                ");
 
-		_hackProtection = new FastMap<InetAddress, FailedLoginAttempt>();
+		_hackProtection = new ConcurrentHashMap<InetAddress, FailedLoginAttempt>();
 
 		_keyPairs = new ScrambledKeyPair[10];
 
@@ -284,7 +288,6 @@ public class LoginController
 	{
 		return _bannedIps;
 	}
-
 
 	/**
 	 * Remove the specified address from the ban list
@@ -810,9 +813,8 @@ public class LoginController
 			{
 				synchronized (_clients)
 				{
-					for (Record e = _clients.head(), end = _clients.tail(); (e = e.getNext()) != end;)
+					for (L2LoginClient client : _clients)
 					{
-						L2LoginClient client = _clients.valueOf(e);
 						if (client.getConnectionStartTime() + LOGIN_TIMEOUT >= System.currentTimeMillis())
 						{
 							client.close(LoginFailReason.REASON_ACCESS_FAILED);
@@ -822,7 +824,7 @@ public class LoginController
 
 				synchronized (_loginServerClients)
 				{
-					for (FastMap.Entry<String, L2LoginClient> e = _loginServerClients.head(), end = _loginServerClients.tail(); (e = e.getNext()) != end;)
+					for (Map.Entry<String, L2LoginClient> e : _loginServerClients.entrySet())
 					{
 						L2LoginClient client = e.getValue();
 						if (client.getConnectionStartTime() + LOGIN_TIMEOUT >= System.currentTimeMillis())

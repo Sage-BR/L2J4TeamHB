@@ -28,9 +28,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-import javolution.util.FastSet;
+
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
@@ -39,6 +38,10 @@ import net.sf.l2j.gameserver.model.actor.instance.L2MinionInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2MonsterInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * This class ...
@@ -52,12 +55,12 @@ public class MinionList
 
     /** List containing the current spawned minions for this L2MonsterInstance */
     private final List<L2MinionInstance> minionReferences;
-    protected FastMap<Long,Integer> _respawnTasks = new FastMap<Long,Integer>().setShared(true);
+    protected ConcurrentHashMap<Long,Integer> _respawnTasks = new ConcurrentHashMap<Long,Integer>();
     private final L2MonsterInstance master;
 
     public MinionList(L2MonsterInstance pMaster)
     {
-        minionReferences = new FastList<L2MinionInstance>();
+        minionReferences = new ArrayList<L2MinionInstance>();
         master = pMaster;
     }
 
@@ -105,7 +108,7 @@ public class MinionList
 
     public int lazyCountSpawnedMinionsGroups()
     {
-        Set<Integer> seenGroups = new FastSet<Integer>();
+        Set<Integer> seenGroups = new HashSet<Integer>();
         for (L2MinionInstance minion : getSpawnedMinions())
         {
             seenGroups.add(minion.getNpcId());

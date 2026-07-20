@@ -31,7 +31,6 @@ public class CombatFlag
     public int playerId = 0;
     private L2ItemInstance _item = null;
 
-
     private Location _location;
     public L2ItemInstance itemInstance;
     

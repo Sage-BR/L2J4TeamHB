@@ -26,7 +26,6 @@ public final class RequestPrivateStoreManageBuy extends L2GameClientPacket
 	private static final String _C__90_REQUESTPRIVATESTOREMANAGEBUY = "[C] 90 RequestPrivateStoreManageBuy";
 	//private static Logger _log = Logger.getLogger(RequestPrivateStoreBuyManage.class.getName());
 
-
 	@Override
 	protected void readImpl()
 	{

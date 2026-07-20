@@ -19,10 +19,11 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2TeleportLocation;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -52,7 +53,7 @@ public class TeleportLocationTable
 	}
 	public void reloadAll()
 	{
-		_teleports = new FastMap<Integer, L2TeleportLocation>();
+		_teleports = new ConcurrentHashMap<Integer, L2TeleportLocation>();
 
 		java.sql.Connection con = null;
 		try
@@ -129,7 +130,6 @@ public class TeleportLocationTable
 			}
 		}
 	}
-
 
 	/**
 	 * @param template id

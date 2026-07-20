@@ -19,6 +19,9 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.RecipeShopManageList;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -28,7 +31,6 @@ public final class RequestRecipeShopManageList extends L2GameClientPacket
 {
 	private static final String _C__B0_RequestRecipeShopManageList = "[C] b0 RequestRecipeShopManageList";
 	//private static Logger _log = Logger.getLogger(RequestPrivateStoreManage.class.getName());
-
 
 	@Override
 	protected void readImpl()
@@ -95,9 +97,7 @@ public final class RequestRecipeShopManageList extends L2GameClientPacket
 			player.sendPacket(new ChangeWaitType (player,1));
 			player.broadcastPacket(new ChangeWaitType (player,1));
 
-
 		}*/
-
 
 
 	}

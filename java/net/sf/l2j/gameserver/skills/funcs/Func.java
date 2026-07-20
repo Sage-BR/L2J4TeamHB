@@ -55,7 +55,6 @@ public abstract class Func {
 	/** Function may be disabled by attached condition. */
 	public Condition cond;
 
-
 	/**
 	 * Constructor of Func.<BR><BR>
 	 */
@@ -66,7 +65,6 @@ public abstract class Func {
 		funcOwner = owner;
 	}
 
-
 	/**
 	 * Add a condition to the Func.<BR><BR>
 	 */
@@ -74,7 +72,6 @@ public abstract class Func {
 	{
 		cond = pCond;
 	}
-
 
 	/**
 	 * Run the mathematic function of the Func.<BR><BR>

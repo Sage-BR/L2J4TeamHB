@@ -28,7 +28,6 @@ public class RecipeShopItemInfo  extends L2GameServerPacket
 	private int _shopId;
 	private int _recipeId;
 
-
 	public RecipeShopItemInfo(int shopId, int recipeId)
 	{
 		_shopId = shopId;

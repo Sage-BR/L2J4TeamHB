@@ -27,6 +27,8 @@ import net.sf.l2j.gameserver.script.Parser;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.List;
+
 /**
  * @author Luis Arias
  *

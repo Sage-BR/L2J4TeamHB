@@ -27,13 +27,13 @@ import net.sf.l2j.util.L2FastMap.I2ForEachValue;
 
 /**
  *
- * Fully synchronized version of L2FastMap class.<br>
+ * Fully synchronized version of L2ConcurrentHashMap class.<br>
  * In addition it`s provide ForEach methods and interfaces that can be used for iterating collection<br>
  * without using iterators. As addition its provide full lock on entire class if needed<br>
  * <font color="red">WARNING!!! methods: keySet(), values() and entrySet() are removed!</font>
  * <br>
  * @author  Julian Version: 1.0.0 <2008-02-07> - Original release
- * @author  Julian Varsion: 1.0.1 <2008-06-17> - Changed underlayng map to L2FastMap
+ * @author  Julian Varsion: 1.0.1 <2008-06-17> - Changed underlayng map to L2ConcurrentHashMap
  */
 public class L2SyncMap<K extends Object, V extends Object> implements Map<K, V>
 {
@@ -130,6 +130,7 @@ public class L2SyncMap<K extends Object, V extends Object> implements Map<K, V>
      * @throws UnsupportedOperationException
      * @see java.util.Map#values()
      */
+    @Deprecated
     public Collection<V> values() {
     	throw new UnsupportedOperationException();
     }
@@ -139,6 +140,7 @@ public class L2SyncMap<K extends Object, V extends Object> implements Map<K, V>
      * @deprecated
      * @throws UnsupportedOperationException
      */
+    @Deprecated
     public Set<K> keySet() {
     	throw new UnsupportedOperationException();
     }
@@ -149,6 +151,7 @@ public class L2SyncMap<K extends Object, V extends Object> implements Map<K, V>
      * @throws UnsupportedOperationException
      * @see java.util.Map#entrySet()
      */
+    @Deprecated
     public Set<Map.Entry<K,V>> entrySet() {
     	throw new UnsupportedOperationException();
     }

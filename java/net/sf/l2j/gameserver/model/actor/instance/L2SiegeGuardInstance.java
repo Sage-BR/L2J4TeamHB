@@ -32,6 +32,8 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  * This class represents all guards in the world. It inherits all methods from
  * L2Attackable and adds some more such as tracking PK's or custom interactions.

@@ -65,7 +65,6 @@ public final class RequestSurrenderPledgeWar extends L2GameClientPacket
             return;
         }
 
-
         SystemMessage msg = new SystemMessage(SystemMessageId.YOU_HAVE_SURRENDERED_TO_THE_S1_CLAN);
         msg.addString(_pledgeName);
         _activeChar.sendPacket(msg);

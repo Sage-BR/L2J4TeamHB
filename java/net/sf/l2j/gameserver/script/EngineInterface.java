@@ -31,6 +31,8 @@ import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.L2World;
 
+import java.util.ArrayList;
+
 /**
  * @author Luis Arias
  *
@@ -62,7 +64,6 @@ public interface EngineInterface
     public GameTimeController gameTimeController = GameTimeController.getInstance();
     public Announcements announcements = Announcements.getInstance();
     public MapRegionTable mapRegions = MapRegionTable.getInstance();
-
 
 
     //public ArrayList getAllPlayers();

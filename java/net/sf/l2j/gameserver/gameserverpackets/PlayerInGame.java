@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.gameserverpackets;
 
 import java.io.IOException;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 /**
  * @author -Wooden-
@@ -31,7 +32,7 @@ public class PlayerInGame extends GameServerBasePacket
 		writeS(player);
 	}
 
-	public PlayerInGame (FastList<String> players)
+	public PlayerInGame (ArrayList<String> players)
 	{
 		writeC(0x02);
 		writeH(players.size());

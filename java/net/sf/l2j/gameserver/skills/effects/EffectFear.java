@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.skills.effects;
 
-
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.L2CharPosition;
 import net.sf.l2j.gameserver.model.L2Effect;

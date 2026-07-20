@@ -16,12 +16,14 @@ package net.sf.l2j.gameserver.templates;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.funcs.Func;
 import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class is dedicated to the management of armors.
@@ -142,7 +144,7 @@ public final class L2Armor extends L2Item
 	@Override
 	public Func[] getStatFuncs(L2ItemInstance instance, L2Character player)
     {
-    	List<Func> funcs = new FastList<Func>();
+    	List<Func> funcs = new ArrayList<Func>();
     	if (_funcTemplates != null)
     	{
     		for (FuncTemplate t : _funcTemplates) {

@@ -22,8 +22,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -33,7 +34,7 @@ import net.sf.l2j.Config;
 public abstract class FloodProtectedListener extends Thread
 {
 	private Logger _log = Logger.getLogger(FloodProtectedListener.class.getName());
-	private Map<String, ForeignConnection> _floodProtection = new FastMap<String, ForeignConnection>();
+	private Map<String, ForeignConnection> _floodProtection = new ConcurrentHashMap<String, ForeignConnection>();
 	private String _listenIp;
 	private int _port;
 	private ServerSocket _serverSocket;

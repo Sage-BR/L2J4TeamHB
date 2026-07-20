@@ -54,7 +54,6 @@ public class MoveBackwardToLocation extends L2GameClientPacket
 
 	private static final String _C__01_MOVEBACKWARDTOLOC = "[C] 01 MoveBackwardToLoc";
 
-
 	@Override
 	protected void readImpl()
 	{
@@ -73,7 +72,6 @@ public class MoveBackwardToLocation extends L2GameClientPacket
 			// ignore for now
 		}
 	}
-
 
 	@Override
 	protected void runImpl()

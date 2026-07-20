@@ -38,7 +38,6 @@ public class L2HelperBuff
      *  If False only Fighter class will obtain this Buff */
     private boolean _isMagicClass;
 
-
     /**
      * Constructor of L2HelperBuff.<BR><BR>
      */
@@ -56,7 +55,6 @@ public class L2HelperBuff
             _isMagicClass = true;
 
     }
-
 
     /**
      * Returns the lower level that the L2PcInstance must achieve in order to obtain this buff
@@ -76,7 +74,6 @@ public class L2HelperBuff
         _lowerLevel = lowerLevel;
     }
 
-
     /**
      * Returns the upper level that the L2PcInstance mustn't exceed in order to obtain this buff
      * @return int
@@ -94,7 +91,6 @@ public class L2HelperBuff
     {
         _upperLevel = upperLevel;
     }
-
 
     /**
      * Returns the ID of the buff that the L2PcInstance will receive
@@ -114,7 +110,6 @@ public class L2HelperBuff
         _skillID = skillID;
     }
 
-
     /**
      * Returns the Level of the buff that the L2PcInstance will receive
      * @return int
@@ -132,7 +127,6 @@ public class L2HelperBuff
     {
         _skillLevel = skillLevel;
     }
-
 
     /**
      * Returns if this Buff can be cast on a fighter or a mystic

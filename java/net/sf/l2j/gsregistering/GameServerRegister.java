@@ -28,6 +28,8 @@ import net.sf.l2j.Server;
 import net.sf.l2j.gameserver.LoginServerThread;
 import net.sf.l2j.loginserver.GameServerTable;
 
+import java.util.List;
+
 public class GameServerRegister
 {
 	private static String _choice;
@@ -85,7 +87,7 @@ public class GameServerRegister
 			{
 				try
 				{
-					int id = new Integer(_choice).intValue();
+					int id = Integer.valueOf(_choice).intValue();
 					int size = gameServerTable.getServerNames().size();
 
 					if (size == 0)

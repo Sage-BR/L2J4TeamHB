@@ -144,7 +144,6 @@ public class PetInfo extends L2GameServerPacket
 
         writeC(0); // c2
 
-
         
         // Following all added in C4.
         writeH(0); // ??

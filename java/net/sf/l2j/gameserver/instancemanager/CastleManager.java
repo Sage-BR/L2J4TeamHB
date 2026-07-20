@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.SevenSigns;
 import net.sf.l2j.gameserver.model.L2Clan;
@@ -29,6 +28,7 @@ import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Castle;
 
+import java.util.ArrayList;
 
 public class CastleManager
 {
@@ -46,7 +46,6 @@ public class CastleManager
         return _instance;
     }
     // =========================================================
-
 
     // =========================================================
     // Data Field
@@ -196,7 +195,7 @@ public class CastleManager
 
     public final List<Castle> getCastles()
     {
-        if (_castles == null) _castles = new FastList<Castle>();
+        if (_castles == null) _castles = new ArrayList<Castle>();
         return _castles;
     }
 

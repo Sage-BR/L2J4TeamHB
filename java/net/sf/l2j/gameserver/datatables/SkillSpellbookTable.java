@@ -19,9 +19,10 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2Skill;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SkillSpellbookTable
 {
@@ -40,7 +41,7 @@ public class SkillSpellbookTable
 
 	private SkillSpellbookTable()
 	{
-		_skillSpellbooks = new FastMap<Integer, Integer>();
+		_skillSpellbooks = new ConcurrentHashMap<Integer, Integer>();
 		java.sql.Connection con = null;
 
 		try

@@ -21,6 +21,8 @@ import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.actor.instance.L2MonsterInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.Set;
+
 public class MonsterKnownList extends AttackableKnownList
 {
     // =========================================================

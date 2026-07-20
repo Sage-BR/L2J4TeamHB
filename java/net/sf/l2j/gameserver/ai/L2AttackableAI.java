@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.GeoData;
@@ -52,6 +51,9 @@ import net.sf.l2j.gameserver.model.quest.Quest;
 import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class manages AI of L2Attackable.<BR><BR>
@@ -821,7 +823,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
         		hated.set(0, originalAttackTarget); // effect handles selection
         	else 
         	{
-        		hated = new FastList<L2Character>();
+        		hated = new ArrayList<L2Character>();
         		hated.add(originalAttackTarget);
         		hated.add(null);
         	}

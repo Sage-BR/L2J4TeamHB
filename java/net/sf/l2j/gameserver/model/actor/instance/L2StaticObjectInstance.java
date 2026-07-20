@@ -17,7 +17,6 @@
  */
 package net.sf.l2j.gameserver.model.actor.instance;
 
-
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.ai.CtrlIntention;
@@ -29,6 +28,9 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.MyTargetSelected;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.ShowTownMap;
+
+import java.util.Set;
+import java.util.Map;
 
 /**
  * GODSON ROX!

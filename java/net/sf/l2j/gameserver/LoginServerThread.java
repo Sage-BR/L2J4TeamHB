@@ -31,8 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.gameserverpackets.AuthRequest;
 import net.sf.l2j.gameserver.gameserverpackets.BlowFishKey;
@@ -56,6 +55,10 @@ import net.sf.l2j.gameserver.serverpackets.LoginFail;
 import net.sf.l2j.loginserver.crypt.NewCrypt;
 import net.sf.l2j.util.Rnd;
 import net.sf.l2j.util.Util;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class LoginServerThread extends Thread
 {
@@ -118,8 +121,8 @@ public class LoginServerThread extends Thread
 		_reserveHost = Config.RESERVE_HOST_ON_LOGIN;
 		_gameExternalHost = Config.EXTERNAL_HOSTNAME;
 		_gameInternalHost = Config.INTERNAL_HOSTNAME;
-		_waitingClients = new FastList<WaitingClient>();
-		_accountsInGameServer = new FastMap<String, L2GameClient>().setShared(true);
+		_waitingClients = new ArrayList<WaitingClient>();
+		_accountsInGameServer = new ConcurrentHashMap<String, L2GameClient>();
 		_maxPlayer = Config.MAXIMUM_ONLINE_USERS;
 	}
 
@@ -281,7 +284,7 @@ public class LoginServerThread extends Thread
 						sendPacket(st);
 						if(L2World.getInstance().getAllPlayersCount() > 0)
 						{
-							FastList<String> playerList = new FastList<String>();
+							ArrayList<String> playerList = new ArrayList<String>();
 							Collection<L2PcInstance> pls = L2World.getInstance().getAllPlayers().values();
 							//synchronized (L2World.getInstance().getAllPlayers())
 							{

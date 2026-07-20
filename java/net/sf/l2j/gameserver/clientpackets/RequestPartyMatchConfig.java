@@ -25,6 +25,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoom;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 
+import java.util.List;
+
 /**
  * This class ...
  *
@@ -36,7 +38,6 @@ public final class RequestPartyMatchConfig extends L2GameClientPacket
 	private static final String _C__7F_REQUESTPARTYMATCHCONFIG = "[C] 7F RequestPartyMatchConfig";
 
 	private int _auto, _loc, _lvl;
-
 
 	@Override
 	protected void readImpl()

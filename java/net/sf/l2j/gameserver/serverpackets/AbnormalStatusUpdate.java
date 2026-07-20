@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -46,7 +47,7 @@ public class AbnormalStatusUpdate extends L2GameServerPacket
 
 	public AbnormalStatusUpdate()
 	{
-		_effects = new FastList<Effect>();
+		_effects = new ArrayList<Effect>();
 	}
 
 	public void addEffect(int skillId, int level, int duration)

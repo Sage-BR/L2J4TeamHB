@@ -34,7 +34,6 @@ import java.util.Properties;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.DoorTable;
@@ -60,8 +59,13 @@ import net.sf.l2j.gameserver.serverpackets.InventoryUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
-import net.sf.l2j.util.L2FastList;
+import net.sf.l2j.util.L2ArrayList;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class Olympiad
 {
@@ -299,9 +303,9 @@ public class Olympiad
     private static Olympiad _instance;
     
     protected static Map<Integer, StatsSet> _nobles;
-    protected static L2FastList<StatsSet> _heroesToBe;
-    protected static L2FastList<L2PcInstance> _nonClassBasedRegisters;
-    protected static Map<Integer, L2FastList<L2PcInstance>> _classBasedRegisters;
+    protected static L2ArrayList<StatsSet> _heroesToBe;
+    protected static L2ArrayList<L2PcInstance> _nonClassBasedRegisters;
+    protected static Map<Integer, L2ArrayList<L2PcInstance>> _classBasedRegisters;
 
     private static final String OLYMPIAD_DATA_FILE = "config/olympiad.properties";
     public static final String OLYMPIAD_HTML_FILE = "data/html/olympiad/";
@@ -309,8 +313,8 @@ public class Olympiad
     private static final String OLYMPIAD_SAVE_NOBLES = "INSERT INTO olympiad_nobles " +
             "VALUES (?,?,?,?,?)";
     private static final String OLYMPIAD_UPDATE_NOBLES = "UPDATE olympiad_nobles SET " +
-            "olympiad_points = ?, competitions_done = ? WHERE charId = ?";
-    private static final String OLYMPIAD_GET_HEROS = "SELECT charId, char_name FROM " +
+            "olympiad_points = ?, competitions_done = ? WHERE char_id = ?";
+    private static final String OLYMPIAD_GET_HEROS = "SELECT char_id AS charId, char_name FROM " +
     		"olympiad_nobles WHERE class_id = ? AND competitions_done >= 9 ORDER BY " +
     		"olympiad_points DESC, competitions_done DESC";
     private static final String GET_EACH_CLASS_LEADER = "SELECT char_name FROM " +
@@ -338,7 +342,6 @@ public class Olympiad
     private static final long INITIAL_WAIT = 300000;  // 5mins
     private static final long WEEKLY_PERIOD = 7200000; // 2 hours
     private static final long VALIDATION_PERIOD = 3600000; // 1 hour */
-
 
     private static final int DEFAULT_POINTS = 18;
     protected static final int WEEKLY_POINTS = 3;
@@ -472,7 +475,7 @@ public class Olympiad
 
     private void load() throws IOException, SQLException
     {
-        _nobles = new FastMap<Integer, StatsSet>();
+        _nobles = new ConcurrentHashMap<Integer, StatsSet>();
 
         Properties OlympiadProperties = new Properties();
         InputStream is =  new FileInputStream(new File("./" + OLYMPIAD_DATA_FILE));
@@ -602,8 +605,8 @@ public class Olympiad
     {
         if (_period == 1)
             return;
-    	_nonClassBasedRegisters = new L2FastList<L2PcInstance>();
-        _classBasedRegisters = new FastMap<Integer, L2FastList<L2PcInstance>>();
+    	_nonClassBasedRegisters = new L2ArrayList<L2PcInstance>();
+        _classBasedRegisters = new ConcurrentHashMap<Integer, L2ArrayList<L2PcInstance>>();
 
         _compStart = Calendar.getInstance();
         _compStart.set(Calendar.HOUR_OF_DAY, COMP_START);
@@ -716,7 +719,7 @@ public class Olympiad
 
         if (_classBasedRegisters.containsKey(noble.getClassId().getId()))
         {
-        	L2FastList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
+        	L2ArrayList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
             for (L2PcInstance partecipant: classed)
             {
             	if (partecipant.getObjectId()==noble.getObjectId())
@@ -767,7 +770,7 @@ public class Olympiad
         {
             if (_classBasedRegisters.containsKey(noble.getClassId().getId()))
             {
-            	L2FastList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
+            	L2ArrayList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
                 classed.add(noble);
 
                 _classBasedRegisters.remove(noble.getClassId().getId());
@@ -778,7 +781,7 @@ public class Olympiad
             }
             else
             {
-            	L2FastList<L2PcInstance> classed = new L2FastList<L2PcInstance>();
+            	L2ArrayList<L2PcInstance> classed = new L2ArrayList<L2PcInstance>();
                 classed.add(noble);
 
                 _classBasedRegisters.put(noble.getClassId().getId(), classed);
@@ -810,7 +813,7 @@ public class Olympiad
             }
             else
             {
-            	L2FastList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
+            	L2ArrayList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
                 if (!classed.contains(noble))
                 {
                     return false;
@@ -856,7 +859,7 @@ public class Olympiad
             _nonClassBasedRegisters.remove(noble);
         else
         {
-        	L2FastList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
+        	L2ArrayList<L2PcInstance> classed = _classBasedRegisters.get(noble.getClassId().getId());
             classed.remove(noble);
 
             _classBasedRegisters.remove(noble.getClassId().getId());
@@ -1161,7 +1164,7 @@ public class Olympiad
         		return;
     		}	
     	}
-    	for(L2FastList<L2PcInstance> list : _classBasedRegisters.values())
+    	for(L2ArrayList<L2PcInstance> list : _classBasedRegisters.values())
     	{
     		for(L2PcInstance player : list)
     		{
@@ -1205,7 +1208,7 @@ public class Olympiad
         _manager.getOlympiadInstance(id).removeSpectator(spectator);
     }
 
-    public L2FastList<L2PcInstance> getSpectators(int id)
+    public L2ArrayList<L2PcInstance> getSpectators(int id)
     {
         if (_manager == null || _manager.getOlympiadInstance(id) == null) 
             return null;
@@ -1232,7 +1235,7 @@ public class Olympiad
         int classCount = 0;
 
         if (_classBasedRegisters.size() != 0)
-            for (L2FastList<L2PcInstance> classed : _classBasedRegisters.values())
+            for (L2ArrayList<L2PcInstance> classed : _classBasedRegisters.values())
             {
                 classCount += classed.size();
             }
@@ -1305,7 +1308,7 @@ public class Olympiad
     {
         if (_period != 1) return;
 
-         _heroesToBe = new L2FastList<StatsSet>();
+         _heroesToBe = new L2ArrayList<StatsSet>();
 
          Connection con = null;
 
@@ -1344,11 +1347,11 @@ public class Olympiad
 
     }
 
-    public L2FastList<String> getClassLeaderBoard(int classId)
+    public L2ArrayList<String> getClassLeaderBoard(int classId)
     {
         //if (_period != 1) return;
 
-    	L2FastList<String> names = new L2FastList<String>();
+    	L2ArrayList<String> names = new L2ArrayList<String>();
 
          Connection con = null;
 
@@ -1430,7 +1433,7 @@ public class Olympiad
 
         else if (_classBasedRegisters != null && _classBasedRegisters.containsKey(player.getClassId().getId()))
         {
-        	L2FastList<L2PcInstance> classed = _classBasedRegisters.get(player.getClassId().getId());
+        	L2ArrayList<L2PcInstance> classed = _classBasedRegisters.get(player.getClassId().getId());
             if (classed.contains(player))
                 result = true;
         }
@@ -1518,7 +1521,7 @@ public class Olympiad
 
     	public OlympiadManager()
     	{
-    		_olympiadInstances = new FastMap<Integer, L2OlympiadGame>();
+    		_olympiadInstances = new ConcurrentHashMap<Integer, L2OlympiadGame>();
     		_manager = this;
     	}
 
@@ -1531,7 +1534,7 @@ public class Olympiad
     			_cycleTerminated = true;
     			return;
     		}
-    		Map<Integer, OlympiadGameTask> _gamesQueue = new FastMap<Integer, OlympiadGameTask>();
+    		Map<Integer, OlympiadGameTask> _gamesQueue = new ConcurrentHashMap<Integer, OlympiadGameTask>();
     		while(inCompPeriod())
     		{
     			if (_nobles.size() == 0)
@@ -1544,7 +1547,7 @@ public class Olympiad
     			
     			//_compStarted = true;
     			int classBasedPgCount = 0;
-    			for(L2FastList<L2PcInstance> classList : _classBasedRegisters.values())
+    			for(L2ArrayList<L2PcInstance> classList : _classBasedRegisters.values())
     				classBasedPgCount += classList.size();
     			while((_gamesQueue.size() > 0 || classBasedPgCount >= Config.ALT_OLY_CLASSED || _nonClassBasedRegisters.size() >= Config.ALT_OLY_NONCLASSED) && inCompPeriod())
     			{
@@ -1696,20 +1699,20 @@ public class Olympiad
     		return (_olympiadInstances == null)? null : _olympiadInstances;
     	}
     	
-    	private L2FastList<L2PcInstance> getRandomClassList(Map<Integer, L2FastList<L2PcInstance>> list)
+    	private L2ArrayList<L2PcInstance> getRandomClassList(Map<Integer, L2ArrayList<L2PcInstance>> list)
     	{
     		if(list.size() == 0)
     			return null;
     		
-    		Map<Integer, L2FastList<L2PcInstance>> tmp = new FastMap<Integer, L2FastList<L2PcInstance>>();
+    		Map<Integer, L2ArrayList<L2PcInstance>> tmp = new ConcurrentHashMap<Integer, L2ArrayList<L2PcInstance>>();
     		int tmpIndex = 0;
-    		for(L2FastList<L2PcInstance> l : list.values())
+    		for(L2ArrayList<L2PcInstance> l : list.values())
     		{
     			tmp.put(tmpIndex, l);
     			tmpIndex ++;
     		}
     		
-    		L2FastList<L2PcInstance> rndList = new L2FastList<L2PcInstance>();
+    		L2ArrayList<L2PcInstance> rndList = new L2ArrayList<L2PcInstance>();
     		int classIndex = 0;
     		if(tmp.size() == 1)
     			classIndex = 0;
@@ -1718,9 +1721,9 @@ public class Olympiad
     		rndList = tmp.get(classIndex);
     		return rndList;
     	}
-    	private L2FastList<L2PcInstance> nextOpponents(L2FastList<L2PcInstance> list)
+    	private L2ArrayList<L2PcInstance> nextOpponents(L2ArrayList<L2PcInstance> list)
     	{
-    		L2FastList<L2PcInstance> opponents = new L2FastList<L2PcInstance>();
+    		L2ArrayList<L2PcInstance> opponents = new L2ArrayList<L2PcInstance>();
             if (list.size() == 0)
                 return opponents;
     		int loopCount = (list.size() / 2);
@@ -1742,7 +1745,7 @@ public class Olympiad
 			return opponents;
         
         }
-    	private boolean existNextOpponents(L2FastList<L2PcInstance> list)
+    	private boolean existNextOpponents(L2ArrayList<L2PcInstance> list)
     	{
     		if(list == null)
     			return false;
@@ -1800,16 +1803,16 @@ public class Olympiad
     	public L2PcInstance _playerTwo;
     	public L2Spawn _spawnOne;
     	public L2Spawn _spawnTwo;
-    	private L2FastList<L2PcInstance> _players;
+    	private L2ArrayList<L2PcInstance> _players;
         private int[] _stadiumPort;
         private int x1, y1, z1, x2, y2, z2;
         public int _stadiumID;
-        public L2FastList<L2PcInstance> _spectators;
+        public L2ArrayList<L2PcInstance> _spectators;
         private SystemMessage _sm;
         private SystemMessage _sm2;
         private SystemMessage _sm3;
 
-    	protected L2OlympiadGame(int id, COMP_TYPE type, L2FastList<L2PcInstance> list, int[] stadiumPort)
+    	protected L2OlympiadGame(int id, COMP_TYPE type, L2ArrayList<L2PcInstance> list, int[] stadiumPort)
     	{
     		_aborted = false;
     		_gamestarted = false;
@@ -1818,7 +1821,7 @@ public class Olympiad
     		_playerTwoDisconnected = false;
     		_type = type;
             _stadiumPort = stadiumPort;
-            _spectators = new L2FastList<L2PcInstance>();
+            _spectators = new L2ArrayList<L2PcInstance>();
 
     		if (list != null)
     		{
@@ -2419,7 +2422,7 @@ public class Olympiad
     		return players;
     	}
         
-        protected L2FastList<L2PcInstance> getSpectators()
+        protected L2ArrayList<L2PcInstance> getSpectators()
         {
             return _spectators;
         }

@@ -23,6 +23,8 @@ import net.sf.l2j.gameserver.model.actor.stat.PlayableStat;
 import net.sf.l2j.gameserver.model.actor.status.PlayableStatus;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 
+import java.util.Set;
+
 /**
  * This class represents all Playable characters in the world.<BR><BR>
  *

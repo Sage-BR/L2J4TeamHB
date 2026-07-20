@@ -27,6 +27,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+
 /**
  * Admin Command Handler for Mammon NPCs
  *

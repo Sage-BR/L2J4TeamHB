@@ -15,8 +15,9 @@
 
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Manor;
+
+import java.util.ArrayList;
 
 /**
  * format(packet 0xFE) ch cd [ddddcdcd] c - id h - sub id
@@ -31,7 +32,7 @@ public class ExShowManorDefaultInfo extends L2GameServerPacket
 {
     private static final String _S__FE_1C_EXSHOWSEEDINFO = "[S] FE:25 ExShowManorDefaultInfo";
     
-    private FastList<Integer> _crops = null;
+    private ArrayList<Integer> _crops = null;
     
     public ExShowManorDefaultInfo()
     {

@@ -17,6 +17,8 @@ package net.sf.l2j.gameserver.clientpackets;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.serverpackets.PackageSendableList;
 
+import java.util.List;
+
 /**
  * Format: (c)d
  * d: char object id (?)
@@ -26,7 +28,6 @@ public final class RequestPackageSendableItemList extends L2GameClientPacket
 {
 	private static final String _C_9E_REQUESTPACKAGESENDABLEITEMLIST = "[C] 9E RequestPackageSendableItemList";
 	private int _objectID;
-
 
 	@Override
 	protected void readImpl()

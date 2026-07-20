@@ -25,7 +25,6 @@ public class ValidateLocationInVehicle extends L2GameServerPacket
     private static final String _S__73_ValidateLocationInVehicle = "[S] 80 ValidateLocationInVehicle";
     private L2Character _activeChar;
 
-
     /**
      * 0x73 ValidateLocationInVehicle         hdd
      * @param _characters

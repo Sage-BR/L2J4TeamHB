@@ -33,7 +33,6 @@ public final class RequestShortCutReg extends L2GameClientPacket
 	private int _page;
 	private int _unk;
 
-
 	@Override
 	protected void readImpl()
 	{

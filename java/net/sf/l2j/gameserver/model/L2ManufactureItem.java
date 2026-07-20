@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model;
 
 import net.sf.l2j.gameserver.RecipeController;
 
-
 /**
  * This class ...
  *

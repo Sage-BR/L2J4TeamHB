@@ -25,6 +25,9 @@ import net.sf.l2j.gameserver.serverpackets.NpcInfo;
 import net.sf.l2j.gameserver.serverpackets.PetInfo;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * This class ...
  *

@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.datatables;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

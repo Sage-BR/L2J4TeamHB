@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.clientpackets;
 
-
 import net.sf.l2j.gameserver.datatables.HennaTable;
 import net.sf.l2j.gameserver.model.L2HennaInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -32,7 +31,6 @@ public final class RequestHennaItemInfo extends L2GameClientPacket
 	//private static Logger _log = Logger.getLogger(RequestHennaItemInfo.class.getName());
 	private int _symbolId;
 	// format  cd
-
 
 	@Override
 	protected void readImpl()

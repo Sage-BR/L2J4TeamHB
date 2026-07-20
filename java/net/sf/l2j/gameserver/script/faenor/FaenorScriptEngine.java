@@ -36,6 +36,8 @@ import net.sf.l2j.gameserver.scripting.L2ScriptEngineManager;
 
 import org.w3c.dom.Node;
 
+import java.util.Set;
+
 /**
  * @author Luis Arias
  *

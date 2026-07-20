@@ -32,6 +32,9 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * This class handles following admin commands:
  * - admin|admin1/admin2/admin3/admin4/admin5 = slots for the 5 starting admin menus

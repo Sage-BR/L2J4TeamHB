@@ -178,7 +178,6 @@ public class Heal implements ISkillHandler
 
 	}
 
-
 	public SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

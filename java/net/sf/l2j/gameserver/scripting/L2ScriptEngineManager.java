@@ -45,9 +45,11 @@ import javax.script.SimpleScriptContext;
 
 import com.l2jserver.script.jython.JythonScriptEngine;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * Caches script engines and provides functionality for executing and managing scripts.<BR>
@@ -64,8 +66,8 @@ public final class L2ScriptEngineManager
 		return SingletonHolder._instance;
 	}
 	
-	private final Map<String, ScriptEngine> _nameEngines = new FastMap<>();
-	private final Map<String, ScriptEngine> _extEngines = new FastMap<>();
+	private final Map<String, ScriptEngine> _nameEngines = new ConcurrentHashMap<>();
+	private final Map<String, ScriptEngine> _extEngines = new ConcurrentHashMap<>();
 	private final List<ScriptManager<?>> _scriptManagers = new LinkedList<>();
 	
 	private final CompiledScriptCache _cache;
@@ -463,12 +465,14 @@ public final class L2ScriptEngineManager
 				}
 			}
 			
+			final String scriptClasspath = SCRIPT_FOLDER.getAbsolutePath() + File.pathSeparator + System.getProperty("java.class.path");
+			boolean compiled = false;
 			if (engine instanceof Compilable && Config.SCRIPT_ALLOW_COMPILATION)
 			{
 				final ScriptContext context = new SimpleScriptContext();
 				context.setAttribute("mainClass", getClassForFile(file).replace('/', '.').replace('\\', '.'), ScriptContext.ENGINE_SCOPE);
 				context.setAttribute(ScriptEngine.FILENAME, file.getName(), ScriptContext.ENGINE_SCOPE);
-				context.setAttribute("classpath", SCRIPT_FOLDER.getAbsolutePath(), ScriptContext.ENGINE_SCOPE);
+				context.setAttribute("classpath", scriptClasspath, ScriptContext.ENGINE_SCOPE);
 				context.setAttribute("sourcepath", SCRIPT_FOLDER.getAbsolutePath(), ScriptContext.ENGINE_SCOPE);
 				context.setAttribute(JythonScriptEngine.JYTHON_ENGINE_INSTANCE, engine, ScriptContext.ENGINE_SCOPE);
 				
@@ -488,6 +492,11 @@ public final class L2ScriptEngineManager
 						final CompiledScript cs = eng.compile(lnr);
 						cs.eval(context);
 					}
+					compiled = true;
+				}
+				catch (final Throwable t)
+				{
+					// Fall back to interpreted eval
 				}
 				finally
 				{
@@ -497,12 +506,16 @@ public final class L2ScriptEngineManager
 					context.removeAttribute("mainClass", ScriptContext.ENGINE_SCOPE);
 				}
 			}
-			else
+			
+			if (!compiled)
 			{
+				reader = new FileInputStream(file);
+				buff = new InputStreamReader(reader);
+				lnr = new BufferedReader(buff);
 				final ScriptContext context = new SimpleScriptContext();
 				context.setAttribute("mainClass", getClassForFile(file).replace('/', '.').replace('\\', '.'), ScriptContext.ENGINE_SCOPE);
 				context.setAttribute(ScriptEngine.FILENAME, file.getName(), ScriptContext.ENGINE_SCOPE);
-				context.setAttribute("classpath", SCRIPT_FOLDER.getAbsolutePath(), ScriptContext.ENGINE_SCOPE);
+				context.setAttribute("classpath", scriptClasspath, ScriptContext.ENGINE_SCOPE);
 				context.setAttribute("sourcepath", SCRIPT_FOLDER.getAbsolutePath(), ScriptContext.ENGINE_SCOPE);
 				setCurrentLoadingScript(file);
 				try
@@ -591,8 +604,15 @@ public final class L2ScriptEngineManager
 		if (engine instanceof Compilable && Config.SCRIPT_ALLOW_COMPILATION)
 		{
 			final Compilable eng = (Compilable) engine;
-			final CompiledScript cs = eng.compile(script);
-			return context != null ? cs.eval(context) : cs.eval();
+			try
+			{
+				final CompiledScript cs = eng.compile(script);
+				return context != null ? cs.eval(context) : cs.eval();
+			}
+			catch (final Throwable t)
+			{
+				// Fall back to interpreted eval if compilation fails
+			}
 		}
 		return context != null ? engine.eval(script, context) : engine.eval(script);
 	}

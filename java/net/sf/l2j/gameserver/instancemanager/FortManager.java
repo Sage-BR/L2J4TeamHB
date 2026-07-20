@@ -19,12 +19,12 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.entity.Fort;
 
+import java.util.ArrayList;
 
 public class FortManager
 {
@@ -191,7 +191,7 @@ public class FortManager
     
     public final List<Fort> getForts()
     {
-        if (_forts == null) _forts = new FastList<Fort>();
+        if (_forts == null) _forts = new ArrayList<Fort>();
         return _forts;
     }
     

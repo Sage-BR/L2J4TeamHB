@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.taskmanager.tasks;
 import java.util.Calendar;
 import java.util.Map;
 
-
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
@@ -28,7 +27,6 @@ import net.sf.l2j.gameserver.taskmanager.Task;
 import net.sf.l2j.gameserver.taskmanager.TaskManager;
 import net.sf.l2j.gameserver.taskmanager.TaskManager.ExecutedTask;
 import net.sf.l2j.gameserver.taskmanager.TaskTypes;
-
 
 public class TaskRaidPointsReset extends Task
 {

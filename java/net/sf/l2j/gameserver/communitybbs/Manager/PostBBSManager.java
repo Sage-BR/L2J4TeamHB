@@ -20,14 +20,15 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastMap;
+
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
 import net.sf.l2j.gameserver.communitybbs.BB.Post;
 import net.sf.l2j.gameserver.communitybbs.BB.Topic;
 import net.sf.l2j.gameserver.communitybbs.BB.Post.CPost;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ShowBoard;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PostBBSManager extends BaseBBSManager
 {
@@ -44,7 +45,7 @@ public class PostBBSManager extends BaseBBSManager
 	}
 	public PostBBSManager()
 	{
-		_postByTopic = new FastMap<Topic,Post>();
+		_postByTopic = new ConcurrentHashMap<Topic,Post>();
 	}
 	public Post getGPosttByTopic(Topic t)
 	{
@@ -187,7 +188,7 @@ public class PostBBSManager extends BaseBBSManager
 	 */
 	private void showHtmlEditPost(Topic topic, L2PcInstance activeChar, Forum forum, Post p)
 	{
-        TextBuilder html = new TextBuilder("<html>");
+        StringBuilder html = new StringBuilder("<html>");
 		html.append("<body><br><br>");
 		html.append("<table border=0 width=610><tr><td width=10></td><td width=600 align=left>");
 		html.append("<a action=\"bypass _bbshome\">HOME</a>&nbsp;>&nbsp;<a action=\"bypass _bbsmemo\">"+forum.getName()+" Form</a>");
@@ -244,7 +245,7 @@ public class PostBBSManager extends BaseBBSManager
 		Post p = getGPosttByTopic(topic);
 		Locale locale = Locale.getDefault();
 		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL, locale);
-        TextBuilder html = new TextBuilder("<html><body><br><br>");
+        StringBuilder html = new StringBuilder("<html><body><br><br>");
 		html.append("<table border=0 width=610><tr><td width=10></td><td width=600 align=left>");
 		html.append("<a action=\"bypass _bbshome\">HOME</a>&nbsp;>&nbsp;<a action=\"bypass _bbsmemo\">Memo Form</a>");
 		html.append("</td></tr>");

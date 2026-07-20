@@ -22,7 +22,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
-
 public class MonsterRace
 {
     private L2NpcInstance[] _monsters;
@@ -141,6 +140,5 @@ public class MonsterRace
     {
         return _second[0];
     }
-
 
 }

@@ -20,10 +20,11 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 /**
  * Support for "Chat with Friends" dialog.
@@ -44,7 +45,7 @@ public class FriendList extends L2GameServerPacket
 {
     private static Logger _log = Logger.getLogger(FriendList.class.getName());
     private static final String _S__FA_FRIENDLIST = "[S] 75 FriendList";
-    private List<FriendStatus> _friends = new FastList<FriendStatus>();
+    private List<FriendStatus> _friends = new ArrayList<FriendStatus>();
     private L2PcInstance _activeChar;
     
     public FriendList(L2PcInstance character)
@@ -102,7 +103,7 @@ public class FriendList extends L2GameServerPacket
             
             con = L2DatabaseFactory.getInstance().getConnection();
             PreparedStatement statement = con.prepareStatement(sqlQuery);
-            ResultSet rset = statement.executeQuery(sqlQuery);
+            ResultSet rset = statement.executeQuery();
             
             int friendId;
             String friendName;

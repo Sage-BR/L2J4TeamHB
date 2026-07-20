@@ -25,14 +25,15 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2SummonItem;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SummonItemsData
 {
     protected static final Logger _log = Logger.getLogger(SummonItemsData.class.getName());
-	private FastMap<Integer, L2SummonItem> _summonitems;
+	private ConcurrentHashMap<Integer, L2SummonItem> _summonitems;
 
 	private static SummonItemsData _instance;
 
@@ -46,7 +47,7 @@ public class SummonItemsData
 
 	public SummonItemsData()
 	{
-		_summonitems = new FastMap<Integer, L2SummonItem>();
+		_summonitems = new ConcurrentHashMap<Integer, L2SummonItem>();
 
 		Scanner s;
 

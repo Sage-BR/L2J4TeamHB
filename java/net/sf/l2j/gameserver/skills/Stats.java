@@ -164,7 +164,6 @@ public enum Stats
 	PDEF_GIANTS    ("pDef-giants"),
 
 
-
 	ATK_REUSE 		("atkReuse"),
 	P_REUSE 		("pReuse"),
 

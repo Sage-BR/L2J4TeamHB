@@ -16,12 +16,14 @@ package net.sf.l2j.server.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.TownManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.ExManagePartyRoomMember;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author Gnacik
@@ -36,7 +38,7 @@ public class PartyMatchRoom
 	private int _minlvl;
 	private int _maxlvl;
 	private int _maxmem;
-	private final List<L2PcInstance> _members = new FastList<L2PcInstance>();
+	private final List<L2PcInstance> _members = new ArrayList<L2PcInstance>();
 	
 	public PartyMatchRoom(int id, String title, int loot, int minlvl, int maxlvl, int maxmem, L2PcInstance owner)
 	{

@@ -20,6 +20,8 @@ import net.sf.l2j.loginserver.GameServerTable;
 import net.sf.l2j.loginserver.GameServerTable.GameServerInfo;
 import net.sf.l2j.loginserver.clientpackets.ClientBasePacket;
 
+import java.util.List;
+
 /**
  * @author -Wooden-
  *
@@ -45,7 +47,6 @@ public class ServerStatus extends ClientBasePacket
 
 	public static final int ON = 0x01;
 	public static final int OFF = 0x00;
-
 
 	/**
 	 * @param decrypt

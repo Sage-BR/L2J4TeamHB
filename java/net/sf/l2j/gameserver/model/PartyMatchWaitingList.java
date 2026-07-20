@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 /**
  * @author Gnacik
@@ -29,7 +30,7 @@ public class PartyMatchWaitingList
 
 	private PartyMatchWaitingList()
 	{
-		_members = new FastList<L2PcInstance>();
+		_members = new ArrayList<L2PcInstance>();
 	}
 	
 	public void addPlayer(L2PcInstance player)

@@ -19,7 +19,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2BoatInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.GetOffVehicle;
 
-
 /**
  * @author Maktakien
  *

@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.serverpackets.EtcStatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Env;
 
-
 public class EffectCharge extends L2Effect
 {
 	public int numCharges;

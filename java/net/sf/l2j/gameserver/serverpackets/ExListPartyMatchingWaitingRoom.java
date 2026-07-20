@@ -14,10 +14,11 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.PartyMatchWaitingList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
+
+import java.util.ArrayList;
 
 /**
 * @author Gnacik
@@ -31,7 +32,7 @@ public class ExListPartyMatchingWaitingRoom extends L2GameServerPacket
 	private int _minlvl;
 	private int _maxlvl;
 	private int _mode;
-	private FastList<L2PcInstance> _members;
+	private ArrayList<L2PcInstance> _members;
 	
 	public ExListPartyMatchingWaitingRoom(L2PcInstance player, int page, int minlvl, int maxlvl, int mode)
 	{
@@ -40,7 +41,7 @@ public class ExListPartyMatchingWaitingRoom extends L2GameServerPacket
 		 _minlvl = minlvl;
 		 _maxlvl = maxlvl;
 		 _mode = mode;
-		 _members = new FastList<L2PcInstance>();
+		 _members = new ArrayList<L2PcInstance>();
 	}
     
     @Override

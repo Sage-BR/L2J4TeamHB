@@ -25,7 +25,6 @@ public final class RequestAllyInfo extends L2GameClientPacket
 {
 	private static final String _C__8E_REQUESTALLYINFO = "[C] 8E RequestAllyInfo";
 
-
 	@Override
 	public void readImpl()
 	{

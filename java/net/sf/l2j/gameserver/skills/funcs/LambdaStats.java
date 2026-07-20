@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.skills.funcs;
 
 import net.sf.l2j.gameserver.skills.Env;
 
-
 /**
  * @author mkizub
  *

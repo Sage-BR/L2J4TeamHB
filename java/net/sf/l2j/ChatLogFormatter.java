@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
-import javolution.text.TextBuilder;
 
 /**
  * This class ...
@@ -37,7 +36,7 @@ public class ChatLogFormatter extends Formatter
 	public String format(LogRecord record)
 	{
 		Object[] params = record.getParameters();
-        TextBuilder output = new TextBuilder();
+        StringBuilder output = new StringBuilder();
 		output.append('[');
 		output.append(dateFmt.format(new Date(record.getMillis())));
 		output.append(']');

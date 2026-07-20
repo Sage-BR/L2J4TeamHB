@@ -27,9 +27,10 @@ package net.sf.l2j.gameserver;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.lib.SqlUtils;
 import net.sf.l2j.gameserver.model.L2Territory;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Territory
 {
@@ -50,17 +51,23 @@ public class Territory
 
 	public int[] getRandomPoint(int terr)
 	{
-		return _territory.get(terr).getRandomPoint();
+		L2Territory terrZone = _territory.get(terr);
+		if (terrZone == null)
+			return null;
+		return terrZone.getRandomPoint();
 	}
 
 	public int getProcMax(int terr)
 	{
-		return _territory.get(terr).getProcMax();
+		L2Territory terrZone = _territory.get(terr);
+		if (terrZone == null)
+			return 0;
+		return terrZone.getProcMax();
 	}
 
 	public void reload_data()
 	{
-		_territory = new FastMap<Integer,L2Territory>();
+		_territory = new ConcurrentHashMap<Integer,L2Territory>();
 
 		Integer[][] point = SqlUtils.get2DIntArray(new String[]{"loc_id","loc_x","loc_y","loc_zmin","loc_zmax","proc"}, "locations", "loc_id > 0");
 		for(Integer[] row : point)

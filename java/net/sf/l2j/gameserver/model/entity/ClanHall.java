@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.GameServer;
@@ -38,6 +37,10 @@ import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowInfoUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class ClanHall
 {
@@ -200,8 +203,8 @@ public class ClanHall
         _paidUntil = paidUntil;
         _grade = Grade;
         _paid = paid;
-        _doorDefault = new FastList<String>();
-        _functions = new FastMap<Integer,ClanHallFunction>();
+        _doorDefault = new ArrayList<String>();
+        _functions = new ConcurrentHashMap<Integer,ClanHallFunction>();
 
         if(ownerId != 0)
         {
@@ -268,7 +271,7 @@ public class ClanHall
     /** Return all DoorInstance */
 	public final List<L2DoorInstance> getDoors()
 	{
-        if (_doors == null) _doors = new FastList<L2DoorInstance>();
+        if (_doors == null) _doors = new ArrayList<L2DoorInstance>();
 		return _doors;
 	}
 

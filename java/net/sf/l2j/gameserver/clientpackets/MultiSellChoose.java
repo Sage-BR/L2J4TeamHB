@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.clientpackets;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.L2Augmentation;
@@ -37,6 +36,8 @@ import net.sf.l2j.gameserver.templates.L2Armor;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class MultiSellChoose extends L2GameClientPacket
 {
@@ -96,7 +97,7 @@ public class MultiSellChoose extends L2GameClientPacket
 
         // Generate a list of distinct ingredients and counts in order to check if the correct item-counts
         // are possessed by the player
-    	FastList<MultiSellIngredient> _ingredientsList = new FastList<MultiSellIngredient>();
+    	ArrayList<MultiSellIngredient> _ingredientsList = new ArrayList<MultiSellIngredient>();
     	boolean newIng = true;
     	for(MultiSellIngredient e: entry.getIngredients())
     	{
@@ -170,7 +171,7 @@ public class MultiSellChoose extends L2GameClientPacket
 
     	_ingredientsList.clear();
     	_ingredientsList = null;
-    	FastList<L2Augmentation> augmentation = new FastList<L2Augmentation>();
+    	ArrayList<L2Augmentation> augmentation = new ArrayList<L2Augmentation>();
     	/** All ok, remove items and add final product */
 
     	for(MultiSellIngredient e : entry.getIngredients())

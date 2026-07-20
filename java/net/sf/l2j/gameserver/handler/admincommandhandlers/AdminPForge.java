@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.AdminForgePacket;
@@ -165,11 +164,11 @@ public class AdminPForge implements IAdminCommandHandler
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 		adminReply.setFile("data/html/admin/pforge2.htm");
 		adminReply.replace("%format%", format);
-		TextBuilder replyMSG = new TextBuilder();
+		StringBuilder replyMSG = new StringBuilder();
 		for(int i = 0; i < format.length();i++)
 			replyMSG.append(format.charAt(i)+" : <edit var=\"v"+i+"\" width=100><br1>");
 		adminReply.replace("%valueditors%", replyMSG.toString());
-		replyMSG.clear();
+		replyMSG.setLength(0);
 		for(int i = 0; i < format.length();i++)
 			replyMSG.append(" \\$v"+i);
 		adminReply.replace("%send%", replyMSG.toString());

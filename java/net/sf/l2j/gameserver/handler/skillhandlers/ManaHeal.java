@@ -81,7 +81,6 @@ public class ManaHeal implements ISkillHandler
 		}
 	}
 
-
 	public SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

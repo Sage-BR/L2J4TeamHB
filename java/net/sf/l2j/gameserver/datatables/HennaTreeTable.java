@@ -15,19 +15,20 @@
 package net.sf.l2j.gameserver.datatables;
 
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2HennaInstance;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.templates.L2Henna;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 /**
  * This class ...
  *
@@ -47,7 +48,7 @@ public class HennaTreeTable
 
 	private HennaTreeTable()
 	{
-		_hennaTrees = new FastMap<ClassId, List<L2HennaInstance>>();
+		_hennaTrees = new ConcurrentHashMap<ClassId, List<L2HennaInstance>>();
 		int classId = 0;
         int count   = 0;
 		java.sql.Connection con = null;
@@ -61,12 +62,11 @@ public class HennaTreeTable
 			//L2Henna henna;
 			while (classlist.next())
 			{
-				list = new FastList<L2HennaInstance>();
+				list = new ArrayList<L2HennaInstance>();
 				classId = classlist.getInt("id");
 				PreparedStatement statement2 = con.prepareStatement("SELECT class_id, symbol_id FROM henna_trees where class_id=? ORDER BY symbol_id");
 				statement2.setInt(1, classId);
 				ResultSet hennatree = statement2.executeQuery();
-
 
 				while (hennatree.next())
 				{
@@ -105,7 +105,6 @@ public class HennaTreeTable
 			classlist.close();
 			statement.close();
 
-
 		}
 		catch (Exception e)
 		{
@@ -122,10 +121,9 @@ public class HennaTreeTable
 	}
 
 
-
 	public L2HennaInstance[] getAvailableHenna(ClassId classId)
 	{
-		List<L2HennaInstance> result = new FastList<L2HennaInstance>();
+		List<L2HennaInstance> result = new ArrayList<L2HennaInstance>();
 		List<L2HennaInstance> henna = _hennaTrees.get(classId);
 		if (henna == null)
 		{
@@ -133,7 +131,6 @@ public class HennaTreeTable
 			_log.warning("Hennatree for class " + classId + " is not defined !");
 			return new L2HennaInstance[0];
 		}
-
 
 		for (int i = 0; i < henna.size(); i++)
 		{

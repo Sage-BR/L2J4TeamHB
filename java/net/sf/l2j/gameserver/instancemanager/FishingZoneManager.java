@@ -16,9 +16,10 @@ package net.sf.l2j.gameserver.instancemanager;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.zone.type.L2FishingZone;
 import net.sf.l2j.gameserver.model.zone.type.L2WaterZone;
+
+import java.util.ArrayList;
 
 public class FishingZoneManager
 {
@@ -36,11 +37,10 @@ public class FishingZoneManager
 	}
 	// =========================================================
 
-
 	// =========================================================
 	// Data Field
-	private FastList<L2FishingZone> _fishingZones;
-	private FastList<L2WaterZone> _waterZones;
+	private ArrayList<L2FishingZone> _fishingZones;
+	private ArrayList<L2WaterZone> _waterZones;
 
 	// =========================================================
 	// Constructor
@@ -54,14 +54,14 @@ public class FishingZoneManager
 	public void addFishingZone(L2FishingZone fishingZone)
 	{
 		if (_fishingZones == null)
-			_fishingZones = new FastList<L2FishingZone>();
+			_fishingZones = new ArrayList<L2FishingZone>();
 
 		_fishingZones.add(fishingZone);
 	}
 	public void addWaterZone(L2WaterZone waterZone)
 	{
 		if (_waterZones == null)
-			_waterZones = new FastList<L2WaterZone>();
+			_waterZones = new ArrayList<L2WaterZone>();
 
 		_waterZones.add(waterZone);
 	}

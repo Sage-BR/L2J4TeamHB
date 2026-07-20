@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.model;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ScheduledFuture;
@@ -43,6 +42,8 @@ import net.sf.l2j.gameserver.templates.L2EtcItem;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
+import java.util.List;
+import java.util.Set;
 
 /**
  * This class manages items.
@@ -732,7 +733,6 @@ public final class L2ItemInstance extends L2Object
 		_augmentation = null;
 	}
 
-
 	/**
 	 * Used to decrease mana
 	 * (mana means life time for shadow items)
@@ -758,7 +758,6 @@ public final class L2ItemInstance extends L2Object
 			}
 		}
 	}
-
 
 	/**
 	 * Returns true if this item is a shadow item

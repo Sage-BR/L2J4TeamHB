@@ -22,7 +22,6 @@ package net.sf.l2j.gameserver.ai.special;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.datatables.SkillTable;
@@ -38,6 +37,9 @@ import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class QueenAnt extends Quest implements Runnable
 {
@@ -55,8 +57,8 @@ public class QueenAnt extends Quest implements Runnable
 	private static L2BossZone _Zone;
 	private L2MonsterInstance _larva = null;
 	private L2MonsterInstance _queen = null;
-	private final List<L2MonsterInstance> _Minions = new FastList<>();
-	private final List<L2MonsterInstance> _Nurses = new FastList<>();
+	private final List<L2MonsterInstance> _Minions = new ArrayList<>();
+	private final List<L2MonsterInstance> _Nurses = new ArrayList<>();
 	
 	// L2GrandBossInstance queen = null;
 	

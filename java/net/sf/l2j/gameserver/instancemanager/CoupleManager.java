@@ -18,11 +18,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Couple;
+
+import java.util.ArrayList;
 
 /**
  * @author evill33t
@@ -48,8 +49,7 @@ public class CoupleManager
 
     // =========================================================
     // Data Field
-    private FastList<Couple> _couples;
-
+    private ArrayList<Couple> _couples;
 
     // =========================================================
     // Method - Public
@@ -157,9 +157,9 @@ public class CoupleManager
         return -1;
     }
 
-    public final FastList<Couple> getCouples()
+    public final ArrayList<Couple> getCouples()
     {
-        if (_couples == null) _couples = new FastList<Couple>();
+        if (_couples == null) _couples = new ArrayList<Couple>();
         return _couples;
     }
 }

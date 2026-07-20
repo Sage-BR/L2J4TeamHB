@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.serverpackets;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  *
  * @version $Revision: 1.1.2.1.2.3 $ $Date: 2005/03/27 15:29:57 $
@@ -29,7 +28,6 @@ public class GMViewItemList extends L2GameServerPacket
 	private L2ItemInstance[] _items;
 	private L2PcInstance _cha;
 	private String _playerName;
-
 
 
 	public GMViewItemList(L2PcInstance cha)

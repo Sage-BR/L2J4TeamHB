@@ -4011,7 +4011,6 @@ public enum SystemMessageId
 	//CLAN_HAS_NO_CLAN_HALL(681) // Doesn't exist in Hellbound anymore
 
 
-
 	/**
 	 * ID: 683<br>
 	 * Message: There are no priority rights on a sweeper.
@@ -7195,7 +7194,6 @@ public enum SystemMessageId
 	*/
 	RAID_WAS_SUCCESSFUL(1209),
 
-
 	/**
 	 * ID: 1210<br>
 	 * Message: Seven Signs: The quest event period has begun. 
@@ -7943,7 +7941,6 @@ public enum SystemMessageId
 	* Message: You are no longer blocked from using the Private Store and Private Workshop
 	*/
 	NO_LONGER_BLOCKED_USING_STORE(1331),
-
 
 	/**
 	* ID: 1332<br>

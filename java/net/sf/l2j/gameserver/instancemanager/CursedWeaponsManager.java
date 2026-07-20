@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.CursedWeapon;
@@ -48,6 +47,9 @@ import net.sf.l2j.gameserver.util.Broadcast;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 /**
  *
@@ -78,7 +80,7 @@ public class CursedWeaponsManager
 	public CursedWeaponsManager()
 	{
 		_log.info("Initializing CursedWeaponsManager");
-		_cursedWeapons = new FastMap<Integer, CursedWeapon>();
+		_cursedWeapons = new ConcurrentHashMap<Integer, CursedWeapon>();
 
 		if (!Config.ALLOW_CURSED_WEAPONS) return;
 
@@ -323,7 +325,6 @@ public class CursedWeaponsManager
     		_log.info("DONE");
 	}
 
-
 	// =========================================================
 	// Properties - Public
 	public synchronized void checkDrop(L2Attackable attackable, L2PcInstance player)
@@ -388,7 +389,6 @@ public class CursedWeaponsManager
 
 		return cw.getLevel();
 	}
-
 
 	public static void announce(SystemMessage sm)
 	{
@@ -458,7 +458,6 @@ public class CursedWeaponsManager
 			cw.saveData();
 		}
     }
-
 
 	// =========================================================
     public boolean isCursed(int itemId)

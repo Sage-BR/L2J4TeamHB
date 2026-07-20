@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.skills.effects;
 
-
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.L2Summon;
@@ -70,5 +69,4 @@ final class EffectBetray extends L2Effect
         return false;
     }
 }
-
 

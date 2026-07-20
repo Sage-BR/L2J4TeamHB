@@ -45,7 +45,6 @@ public final class RequestChangePartyLeader extends L2GameClientPacket{
 			activeChar.getParty().changePartyLeader(_name);
 	}
 
-
 	@Override
 	public String getType()
 	{

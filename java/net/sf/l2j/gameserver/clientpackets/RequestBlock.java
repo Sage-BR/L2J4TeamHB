@@ -22,6 +22,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+
 public final class RequestBlock extends L2GameClientPacket
 {
    private static final String _C__A0_REQUESTBLOCK = "[C] A0 RequestBlock";

@@ -27,8 +27,7 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.Inventory;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
@@ -56,6 +55,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
 public class RecipeController
 {
 	protected static final Logger _log = Logger.getLogger(RecipeController.class.getName());
@@ -72,7 +75,7 @@ public class RecipeController
 
 	public RecipeController()
 	{
-		_lists = new FastMap<Integer, L2RecipeList>();
+		_lists = new ConcurrentHashMap<Integer, L2RecipeList>();
 
 		try
         {
@@ -99,7 +102,7 @@ public class RecipeController
 	{
 		for (int i = 0; i < _lists.size(); i++)
 		{
-			L2RecipeList find = _lists.get(new Integer(i));
+			L2RecipeList find = _lists.get(Integer.valueOf(i));
 			if (find.getRecipeId() == itemId)
 			{
 				return find;
@@ -112,7 +115,7 @@ public class RecipeController
     {
         for (int i = 0; i < _lists.size(); i++)
         {
-            L2RecipeList find = _lists.get(new Integer(i));
+            L2RecipeList find = _lists.get(Integer.valueOf(i));
             if (find.getId() == recId)
             {
                 return find;
@@ -160,7 +163,6 @@ public class RecipeController
 			Util.handleIllegalPlayerAction(player,"Warning!! Character "+player.getName()+" of account "+player.getAccountName()+" sent a false recipe id.",Config.DEFAULT_PUNISH);
     		return;
 		}
-
 
 		RecipeItemMaker maker;
 
@@ -233,7 +235,7 @@ public class RecipeController
 		try
 		{
 			StringTokenizer st = new StringTokenizer(line, ";");
-			List<L2RecipeInstance> recipePartList = new FastList<L2RecipeInstance>();
+			List<L2RecipeInstance> recipePartList = new ArrayList<L2RecipeInstance>();
 
 			//we use common/dwarf for easy reading of the recipes.csv file
 			String recipeTypeString = st.nextToken();
@@ -281,7 +283,7 @@ public class RecipeController
 			{
 				recipeList.addRecipe(recipePart);
 			}
-			_lists.put(new Integer(_lists.size()), recipeList);
+			_lists.put(Integer.valueOf(_lists.size()), recipeList);
 		}
 		catch (Exception e)
 		{
@@ -298,7 +300,7 @@ public class RecipeController
         if (file.exists())
         {
             Document doc = factory.newDocumentBuilder().parse(file);
-            List<L2RecipeInstance> recipePartList = new FastList<L2RecipeInstance>();
+            List<L2RecipeInstance> recipePartList = new ArrayList<L2RecipeInstance>();
             
             for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling())
             {
@@ -720,7 +722,7 @@ public class RecipeController
 		{
 			L2RecipeInstance[] recipes = _recipeList.getRecipes();
 			Inventory inv = _target.getInventory();
-			List<TempItem> materials = new FastList<TempItem>();
+			List<TempItem> materials = new ArrayList<TempItem>();
 
 			for (L2RecipeInstance recipe : recipes)
 			{

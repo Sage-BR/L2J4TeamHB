@@ -19,7 +19,6 @@ import net.sf.l2j.gameserver.skills.Env;
 
 public class EffectSilenceMagicPhysical extends L2Effect {
 
-
     public EffectSilenceMagicPhysical(Env env, EffectTemplate template) {
         super(env, template);
     }

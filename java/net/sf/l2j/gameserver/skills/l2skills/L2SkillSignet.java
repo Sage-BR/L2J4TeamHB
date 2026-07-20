@@ -31,6 +31,8 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Point3D;
 
+import java.util.Set;
+
 public final class L2SkillSignet extends L2Skill
 {
 	private int _effectNpcId;

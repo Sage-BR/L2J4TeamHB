@@ -11,6 +11,8 @@ package net.sf.l2j.util;
 
 import java.util.Arrays;
 
+import java.util.List;
+
 /*
  * Modified for Trove to use the java.util.Arrays sort/search
  * algorithms instead of those provided with colt.

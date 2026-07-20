@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -42,6 +41,9 @@ import net.sf.l2j.gameserver.serverpackets.VehicleStarted;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * @author Maktakien
@@ -135,7 +137,7 @@ public class L2BoatInstance extends L2Character
 		public void parseLine(String line)
 		{
 			// L2BoatPath bp = new L2BoatPath();
-			_path = new FastMap<Integer, L2BoatPoint>();
+			_path = new ConcurrentHashMap<Integer, L2BoatPoint>();
 			StringTokenizer st = new StringTokenizer(line, ";");
 			Integer.parseInt(st.nextToken());
 			max = Integer.parseInt(st.nextToken());
@@ -593,7 +595,7 @@ public class L2BoatInstance extends L2Character
 			Collection<L2PcInstance> knownPlayers = getKnownList().getKnownPlayers().values();
 			if (knownPlayers != null && !knownPlayers.isEmpty())
 			{
-				_inboat = new FastMap<Integer, L2PcInstance>();
+				_inboat = new ConcurrentHashMap<Integer, L2PcInstance>();
 				int i = 0;
 				//synchronized (getKnownList().getKnownPlayers())
 				{
@@ -635,7 +637,7 @@ public class L2BoatInstance extends L2Character
 			Collection<L2PcInstance> knownPlayers = getKnownList().getKnownPlayers().values();
 			if (knownPlayers != null && !knownPlayers.isEmpty())
 			{
-				_inboat = new FastMap<Integer, L2PcInstance>();
+				_inboat = new ConcurrentHashMap<Integer, L2PcInstance>();
 				int i = 0;
 				//synchronized (getKnownList().getKnownPlayers())
 				{

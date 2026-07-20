@@ -28,6 +28,8 @@ import net.sf.l2j.gameserver.skills.effects.EffectCharge;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.Set;
+
 public class L2SkillChargeDmg extends L2Skill
 {
 

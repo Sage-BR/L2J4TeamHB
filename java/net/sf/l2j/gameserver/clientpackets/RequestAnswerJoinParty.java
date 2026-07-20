@@ -22,6 +22,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoom;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 
+import java.util.List;
+
 /**
  *  sample
  *  2a

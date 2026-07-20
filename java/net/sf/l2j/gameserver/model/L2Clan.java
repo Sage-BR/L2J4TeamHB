@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
@@ -46,6 +45,10 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.Util;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -58,7 +61,7 @@ public class L2Clan
 	private String _name;
 	private int _clanId;
 	private L2ClanMember _leader;
-	private Map<Integer, L2ClanMember> _members = new FastMap<Integer, L2ClanMember>();
+	private Map<Integer, L2ClanMember> _members = new ConcurrentHashMap<Integer, L2ClanMember>();
 
 	private String _allyName;
 	private int _allyId;
@@ -87,14 +90,14 @@ public class L2Clan
     public static final int PENALTY_TYPE_DISSOLVE_ALLY = 4;
 
     private ItemContainer _warehouse = new ClanWarehouse(this);
-    private List<Integer> _atWarWith = new FastList<Integer>();
-    private List<Integer> _atWarAttackers = new FastList<Integer>();
+    private List<Integer> _atWarWith = new ArrayList<Integer>();
+    private List<Integer> _atWarAttackers = new ArrayList<Integer>();
 
 	private boolean _hasCrestLarge;
 
 	private Forum _forum;
 
-	private List<L2Skill> _skillList = new FastList<L2Skill>();
+	private List<L2Skill> _skillList = new ArrayList<L2Skill>();
 
 	//  Clan Privileges
     /** No privilege to manage any clan activity */
@@ -146,10 +149,10 @@ public class L2Clan
     /** Clan subunit type of Order of Knights B-2 */
     public static final int SUBUNIT_KNIGHT4 = 2002;
 
-    /** FastMap(Integer, L2Skill) containing all skills of the L2Clan */
-    protected final Map<Integer, L2Skill> _skills = new FastMap<Integer, L2Skill>();
-    protected final Map<Integer, RankPrivs> _privs = new FastMap<Integer, RankPrivs>();
-    protected final Map<Integer, SubPledge> _subPledges = new FastMap<Integer, SubPledge>();
+    /** ConcurrentHashMap(Integer, L2Skill) containing all skills of the L2Clan */
+    protected final Map<Integer, L2Skill> _skills = new ConcurrentHashMap<Integer, L2Skill>();
+    protected final Map<Integer, RankPrivs> _privs = new ConcurrentHashMap<Integer, RankPrivs>();
+    protected final Map<Integer, SubPledge> _subPledges = new ConcurrentHashMap<Integer, SubPledge>();
 
     private int _reputationScore = 0;
     private int _rank = 0;
@@ -277,7 +280,7 @@ public class L2Clan
 	 */
 	public String getLeaderName()
 	{
-		return _members.get(new Integer(_leader.getObjectId())).getName();
+		return _members.get(Integer.valueOf(_leader.getObjectId())).getName();
 	}
 
 	/**
@@ -492,7 +495,7 @@ public class L2Clan
 
 	public L2PcInstance[] getOnlineMembers(int exclude)
 	{
-		List<L2PcInstance> result = new FastList<L2PcInstance>();
+		List<L2PcInstance> result = new ArrayList<L2PcInstance>();
 		for (L2ClanMember temp : _members.values())
 		{
 			try	{
@@ -917,7 +920,6 @@ public class L2Clan
         return _skills.values().toArray(new L2Skill[_skills.values().size()]);
     }
 
-
     /** used to add a skill to skill list of this L2Clan */
     public L2Skill addSkill(L2Skill newSkill)
     {
@@ -943,7 +945,6 @@ public class L2Clan
 
             // Replace oldSkill by newSkill or Add the newSkill
             oldSkill = _skills.put(newSkill.getId(), newSkill);
-
 
             try
             {
@@ -979,7 +980,6 @@ public class L2Clan
                 try { con.close(); } catch (Exception e) {}
             }
 
-
             for (L2ClanMember temp : _members.values())
             {
                 try {
@@ -997,7 +997,6 @@ public class L2Clan
 
         return oldSkill;
     }
-
 
     public void addSkillEffects()
     {
@@ -1524,7 +1523,6 @@ public class L2Clan
         if (_privs.get(rank)!= null)
         {
             _privs.get(rank).setPrivs(privs);
-
 
             java.sql.Connection con = null;
 

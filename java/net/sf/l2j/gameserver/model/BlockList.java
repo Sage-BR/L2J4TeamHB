@@ -26,10 +26,12 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.Set;
 
-import javolution.util.FastSet;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * This class ...
@@ -44,7 +46,7 @@ public class BlockList
 
     public BlockList()
     {
-        _blockSet    = new FastSet<String>();
+        _blockSet    = new HashSet<String>();
         _blockAll    = false;
     }
 

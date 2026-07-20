@@ -78,6 +78,8 @@ import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.util.DynamicExtension;
 
+import java.util.List;
+import java.util.Set;
 
 public class GameStatusThread extends Thread
 {
@@ -1155,7 +1157,7 @@ public class GameStatusThread extends Thread
             StackTraceElement[] stes = entry.getValue();
             Thread t = entry.getKey();
             sb.append("--------------\n");
-            sb.append(t.toString()+" ("+t.getId()+")\n");
+            sb.append(t.toString()+" ("+t.threadId()+")\n");
             sb.append("State: "+t.getState()+'\n');
             sb.append("isAlive: "+t.isAlive()+" | isDaemon: "+t.isDaemon()+" | isInterrupted: "+t.isInterrupted()+'\n');
             sb.append('\n');

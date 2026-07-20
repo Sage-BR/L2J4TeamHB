@@ -18,20 +18,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.effects.EffectCharge;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
 public class CharEffectList
 {
 	private static final L2Effect[] EMPTY_EFFECTS = new L2Effect[0];
 
-	private FastList<L2Effect> _buffs;
-	private FastList<L2Effect> _debuffs;
+	private ArrayList<L2Effect> _buffs;
+	private ArrayList<L2Effect> _debuffs;
 
 	// The table containing the List of all stacked effect in progress for each Stack group Identifier
 	protected Map<String, List<L2Effect>> _stackedEffects;
@@ -57,7 +60,7 @@ public class CharEffectList
 		}
 
 		// Create a copy of the effects
-		FastList<L2Effect> temp = new FastList<L2Effect>();
+		ArrayList<L2Effect> temp = new ArrayList<L2Effect>();
 
 		// Add all buffs and all debuffs
 		synchronized (this)
@@ -285,7 +288,6 @@ public class CharEffectList
 	}
 
 
-
 	/**
 	 * Removes the first buff of this list.
 	 *
@@ -315,12 +317,11 @@ public class CharEffectList
 	}
 
 
-
 	public final void removeEffect(L2Effect effect)
 	{
 		if (effect == null || (_buffs == null && _debuffs == null) ) return;
 
-		FastList<L2Effect> effectList = effect.getSkill().isDebuff() ? _debuffs : _buffs;
+		ArrayList<L2Effect> effectList = effect.getSkill().isDebuff() ? _debuffs : _buffs;
 
 		synchronized(effectList)
 		{
@@ -378,7 +379,6 @@ public class CharEffectList
 				}
 			}
 
-
 			// Remove the active skill L2effect from _effects of the L2Character
 			// The Integer key of _effects is the L2Skill Identifier that has created the effect
 			for (L2Effect e : effectList)
@@ -405,12 +405,12 @@ public class CharEffectList
 
 		synchronized (this)
 		{
-			if (_buffs == null) _buffs = new FastList<L2Effect>();
-			if (_debuffs == null) _debuffs = new FastList<L2Effect>();
-			if (_stackedEffects == null) _stackedEffects = new FastMap<String, List<L2Effect>>();
+			if (_buffs == null) _buffs = new ArrayList<L2Effect>();
+			if (_debuffs == null) _debuffs = new ArrayList<L2Effect>();
+			if (_stackedEffects == null) _stackedEffects = new ConcurrentHashMap<String, List<L2Effect>>();
 		}
 
-		FastList<L2Effect> effectList = newEffect.getSkill().isDebuff() ? _debuffs : _buffs;
+		ArrayList<L2Effect> effectList = newEffect.getSkill().isDebuff() ? _debuffs : _buffs;
 		synchronized(effectList)
 		{
 			L2Effect tempEffect, tempEffect2;
@@ -489,7 +489,7 @@ public class CharEffectList
 			L2Effect[] allEffects = getAllEffects();
 
 			if (stackQueue == null)
-				stackQueue = new FastList<L2Effect>();
+				stackQueue = new ArrayList<L2Effect>();
 
 			tempEffect = null;
 			if (stackQueue.size() > 0)
@@ -562,7 +562,7 @@ public class CharEffectList
 	 */
 	private List<L2Effect> effectQueueInsert(L2Effect newStackedEffect, List<L2Effect> stackQueue)
 	{
-		FastList<L2Effect> effectList = newStackedEffect.getSkill().isDebuff() ? _debuffs : _buffs;
+		ArrayList<L2Effect> effectList = newStackedEffect.getSkill().isDebuff() ? _debuffs : _buffs;
 
 		// Get the L2Effect corresponding to the effect identifier from the L2Character _effects
 		if (_buffs == null && _debuffs == null) return null;

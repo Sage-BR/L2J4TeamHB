@@ -27,7 +27,6 @@ public final class SnoopQuit extends L2GameClientPacket
 
 	private int _snoopID;
 
-
 	@Override
 	protected void readImpl()
 	{

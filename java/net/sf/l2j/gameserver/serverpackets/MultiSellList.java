@@ -29,6 +29,7 @@ import net.sf.l2j.gameserver.model.L2Multisell.MultiSellEntry;
 import net.sf.l2j.gameserver.model.L2Multisell.MultiSellIngredient;
 import net.sf.l2j.gameserver.model.L2Multisell.MultiSellListContainer;
 
+import java.util.List;
 
 /**
  * This class ...

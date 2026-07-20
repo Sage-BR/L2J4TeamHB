@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.ai.L2AttackableAI;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.model.zone.type.L2DerbyTrackZone;
 import net.sf.l2j.gameserver.model.zone.type.L2PeaceZone;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * This class ...
@@ -58,8 +60,8 @@ public final class L2WorldRegion
 
     public L2WorldRegion(int pTileX, int pTileY)
     {
-        _allPlayable = new FastMap<Integer, L2PlayableInstance>().setShared(true);
-        _visibleObjects = new FastMap<Integer, L2Object>().setShared(true);
+        _allPlayable = new ConcurrentHashMap<Integer, L2PlayableInstance>();
+        _visibleObjects = new ConcurrentHashMap<Integer, L2Object>();
         _surroundingRegions = new ArrayList<L2WorldRegion>();
 
         _tileX = pTileX;
@@ -409,7 +411,7 @@ public final class L2WorldRegion
     }
 
     /**
-     * Return the FastList _surroundingRegions containing all L2WorldRegion around the current L2WorldRegion
+     * Return the ArrayList _surroundingRegions containing all L2WorldRegion around the current L2WorldRegion
      */
     public List<L2WorldRegion> getSurroundingRegions()
     {

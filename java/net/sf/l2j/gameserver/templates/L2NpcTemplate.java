@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.gameserver.ai.special.manager.AIExtend;
 import net.sf.l2j.gameserver.model.L2DropCategory;
 import net.sf.l2j.gameserver.model.L2DropData;
@@ -28,6 +27,10 @@ import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.quest.Quest;
 import net.sf.l2j.gameserver.skills.Stats;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This cl contains all generic data of a L2Spawn object.<BR><BR>
@@ -126,7 +129,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	//private final StatsSet _npcStatsSet;
 	
 	/** The table containing all Item that can be dropped by L2NpcInstance using this L2NpcTemplate*/
-	private FastList<L2DropCategory> _categories = null;
+	private ArrayList<L2DropCategory> _categories = null;
 	
 	/** The table containing all Minions that must be spawn with the L2NpcInstance using this L2NpcTemplate*/
 	private List<L2MinionData>  _minions     = null;
@@ -190,7 +193,7 @@ public final class L2NpcTemplate extends L2CharTemplate
     public void addTeachInfo(ClassId classId)
 	{
 		if (_teachInfo == null)
-			_teachInfo = new FastList<ClassId>();
+			_teachInfo = new ArrayList<ClassId>();
 		_teachInfo.add(classId);
 	}
 	
@@ -219,10 +222,10 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 	    if (drop.isQuestDrop()) {
 //			if (_questDrops == null)
-//				_questDrops = new FastList<L2DropData>(0);
+//				_questDrops = new ArrayList<L2DropData>(0);
 //	        _questDrops.add(drop);
 	    } else {
-	        if (_categories == null) _categories = new FastList<L2DropCategory>();
+	        if (_categories == null) _categories = new ArrayList<L2DropCategory>();
 	        // if the category doesn't already exist, create it first
 	    	synchronized (_categories)
 	    	{
@@ -248,21 +251,21 @@ public final class L2NpcTemplate extends L2CharTemplate
     
     public void addRaidData(L2MinionData minion)
     {
-        if (_minions == null) _minions = new FastList<L2MinionData>();
+        if (_minions == null) _minions = new ArrayList<L2MinionData>();
     	_minions.add(minion);
     }
 	
     public void addSkill(L2Skill skill)
 	{
 		if (_skills == null)
-			_skills = new FastMap<Integer, L2Skill>();
+			_skills = new ConcurrentHashMap<Integer, L2Skill>();
 		_skills.put(skill.getId(), skill);
 	}
     public void addVulnerability(Stats id, double vuln)
 	{
 		if (_vulnerabilities == null)
-			_vulnerabilities = new FastMap<Stats, Double>();
-		_vulnerabilities.put(id, new Double(vuln));
+			_vulnerabilities = new ConcurrentHashMap<Stats, Double>();
+		_vulnerabilities.put(id, Double.valueOf(vuln));
 	}
     public double getVulnerability(Stats id)
 	{
@@ -278,7 +281,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	/**
 	 * Return the list of all possible UNCATEGORIZED drops of this L2NpcTemplate.<BR><BR>
 	 */
-	public FastList<L2DropCategory> getDropData()
+	public ArrayList<L2DropCategory> getDropData()
 	{
 		return _categories;
 	}	
@@ -290,7 +293,7 @@ public final class L2NpcTemplate extends L2CharTemplate
     public List<L2DropData> getAllDropData()
     {
         if (_categories == null) return null;
-        List<L2DropData> lst = new FastList<L2DropData>();
+        List<L2DropData> lst = new ArrayList<L2DropData>();
         for (L2DropCategory tmp:_categories)
         {
         	lst.addAll(tmp.getAllDrops());
@@ -328,7 +331,7 @@ public final class L2NpcTemplate extends L2CharTemplate
     public void addQuestEvent(Quest.QuestEventType EventType, Quest q)
     {
     	if (_questEvents == null) 
-    		_questEvents = new FastMap<Quest.QuestEventType, Quest[]>();
+    		_questEvents = new ConcurrentHashMap<Quest.QuestEventType, Quest[]>();
     		
 		if (_questEvents.get(EventType) == null) {
 			_questEvents.put(EventType, new Quest[]{q});
@@ -474,7 +477,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return npcId != idTemplate;
 	}
-	private static FastMap<AIExtend.Action, AIExtend[]> _aiEvents = new FastMap<>();
+	private static ConcurrentHashMap<AIExtend.Action, AIExtend[]> _aiEvents = new ConcurrentHashMap<>();
 	// TODO
 		public void addAIEvent(final AIExtend.Action actionType, final AIExtend ai)
 		{

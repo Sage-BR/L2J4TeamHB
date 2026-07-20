@@ -61,7 +61,6 @@ public final class RequestSiegeAttackerList extends L2GameClientPacket
             
     }
 
-
     @Override
 	public String getType()
     {

@@ -16,6 +16,8 @@ package net.sf.l2j.gameserver.model;
 
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.Set;
+
 /**
  * 
  * @author Rayan RPG

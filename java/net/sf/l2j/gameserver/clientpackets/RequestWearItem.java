@@ -38,6 +38,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.util.Util;
 
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -65,7 +67,6 @@ public final class RequestWearItem extends L2GameClientPacket
     /** Player that request a Try on */
     protected L2PcInstance _activeChar;
 
-
     class RemoveWearItemsTask implements Runnable
     {
         public void run()
@@ -79,7 +80,6 @@ public final class RequestWearItem extends L2GameClientPacket
             }
         }
     }
-
 
     /**
      * Decrypt the RequestWearItem Client->Server Packet and Create _items table containing all ItemID to Wear.<BR><BR>
@@ -107,7 +107,6 @@ public final class RequestWearItem extends L2GameClientPacket
             _items[i] = itemId;
         }
     }
-
 
     /**
      * Launch Wear action.<BR><BR>
@@ -250,7 +249,6 @@ public final class RequestWearItem extends L2GameClientPacket
 
         // Send a Server->Client packet UserInfo to this L2PcInstance and CharInfo to all L2PcInstance in its _KnownPlayers
 		player.broadcastUserInfo();
-
 
 		// All weared items should be removed in ALLOW_WEAR_DELAY sec.
 		if (_removeWearItemsTask == null)

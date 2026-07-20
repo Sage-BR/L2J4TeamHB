@@ -163,7 +163,6 @@ public class RequestAquireSkillInfo extends L2GameClientPacket
             if (!canteach)
                 return; // cheater
 
-
             AcquireSkillInfo asi = new AcquireSkillInfo(skill.getId(), skill.getLevel(), requiredRep,2);
 
             if (Config.LIFE_CRYSTAL_NEEDED)

@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model.entity;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.instancemanager.DuelManager;
@@ -34,6 +33,8 @@ import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Duel
 {
@@ -56,7 +57,7 @@ public class Duel
 	private int _countdown=4;
 	private boolean _finished=false;
 
-	private FastList<PlayerCondition> _playerConditions;
+	private ArrayList<PlayerCondition> _playerConditions;
 
 	public static enum DuelResultEnum
 	{
@@ -82,7 +83,7 @@ public class Duel
 		if (_partyDuel) _duelEndTime.add(Calendar.SECOND, 300);
 		else _duelEndTime.add(Calendar.SECOND, 120);
 
-		_playerConditions = new FastList<PlayerCondition>();
+		_playerConditions = new ArrayList<PlayerCondition>();
 
 		setFinished(false);
 
@@ -110,7 +111,7 @@ public class Duel
 		private double _cp;
 		private boolean _paDuel;
 		private int _x, _y, _z;
-		private FastList<L2Effect> _debuffs;
+		private ArrayList<L2Effect> _debuffs;
 
 		public PlayerCondition(L2PcInstance player, boolean partyDuel)
 		{
@@ -150,7 +151,7 @@ public class Duel
 		public void registerDebuff(L2Effect debuff)
 		{
 			if (_debuffs == null)
-				_debuffs = new FastList<L2Effect>();
+				_debuffs = new ArrayList<L2Effect>();
 
 			_debuffs.add(debuff);
 		}
@@ -304,7 +305,6 @@ public class Duel
 			_playerB.sendPacket(af);
 		}
 	}
-
 
 	// ========================================================
 	// Method - Public
@@ -473,9 +473,9 @@ public class Duel
 		if (abnormalDuelEnd) return;
 
 		// restore player conditions
-		for (FastList.Node<PlayerCondition> e = _playerConditions.head(), end = _playerConditions.tail(); (e = e.getNext()) != end;)
+		for (PlayerCondition e : _playerConditions)
 		{
-			e.getValue().restoreCondition();
+			e.restoreCondition();
 		}
 	}
 
@@ -924,22 +924,22 @@ public class Duel
 		// if hes either playerA or playerB cancel the duel and port the players back
 		if (player == _playerA || player == _playerB)
 		{
-			for (FastList.Node<PlayerCondition> e = _playerConditions.head(), end = _playerConditions.tail(); (e = e.getNext()) != end;)
+			for (PlayerCondition e : _playerConditions)
 			{
-				e.getValue().teleportBack();
-				e.getValue().getPlayer().setIsInDuel(0);
+				e.teleportBack();
+				e.getPlayer().setIsInDuel(0);
 			}
 
 			_playerA = null; _playerB = null;
 		}
 		else // teleport the player back & delete his PlayerCondition record
 		{
-			for (FastList.Node<PlayerCondition> e = _playerConditions.head(), end = _playerConditions.tail(); (e = e.getNext()) != end;)
+			for (PlayerCondition e : _playerConditions)
 			{
-				if (e.getValue().getPlayer() == player)
+				if (e.getPlayer() == player)
 				{
-					e.getValue().teleportBack();
-					_playerConditions.remove(e.getValue());
+					e.teleportBack();
+					_playerConditions.remove(e);
 					break;
 				}
 			}
@@ -949,11 +949,11 @@ public class Duel
 
 	public void onBuff(L2PcInstance player, L2Effect debuff)
 	{
-		for (FastList.Node<PlayerCondition> e = _playerConditions.head(), end = _playerConditions.tail(); (e = e.getNext()) != end;)
+		for (PlayerCondition e : _playerConditions)
 		{
-			if (e.getValue().getPlayer() == player)
+			if (e.getPlayer() == player)
 			{
-				e.getValue().registerDebuff(debuff);
+				e.registerDebuff(debuff);
 				return;
 			}
 		}

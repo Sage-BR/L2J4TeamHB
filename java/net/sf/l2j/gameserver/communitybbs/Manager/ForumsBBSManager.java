@@ -20,11 +20,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 public class ForumsBBSManager extends BaseBBSManager
 {
@@ -49,8 +51,8 @@ public class ForumsBBSManager extends BaseBBSManager
 
 	public ForumsBBSManager()
 	{
-		_root = new FastMap<Integer, Forum>();
-		_table = new FastList<Forum>();
+		_root = new ConcurrentHashMap<Integer, Forum>();
+		_table = new ArrayList<Forum>();
 	}
 
 	public void addForum(Forum ff)

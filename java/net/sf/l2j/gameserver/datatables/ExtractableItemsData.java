@@ -25,17 +25,20 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2ExtractableItem;
 import net.sf.l2j.gameserver.model.L2ExtractableProductItem;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class ExtractableItemsData
 {
     protected static final Logger _log = Logger.getLogger(ExtractableItemsData.class.getName());
 	//          Map<itemid, L2ExtractableItem>
-	private FastMap<Integer, L2ExtractableItem> _items;
+	private ConcurrentHashMap<Integer, L2ExtractableItem> _items;
 
 	private static ExtractableItemsData _instance = null;
 
@@ -49,7 +52,7 @@ public class ExtractableItemsData
 
 	public ExtractableItemsData()
 	{
-		_items = new FastMap<Integer,L2ExtractableItem>();
+		_items = new ConcurrentHashMap<Integer,L2ExtractableItem>();
 
 		Scanner s;
 
@@ -94,7 +97,7 @@ public class ExtractableItemsData
             if (!ok)
             	continue;
 
-            FastList<L2ExtractableProductItem> product_temp = new FastList<L2ExtractableProductItem>();
+            ArrayList<L2ExtractableProductItem> product_temp = new ArrayList<L2ExtractableProductItem>();
 
             for (int i=0;i<lineSplit.length-1;i++)
             {

@@ -60,7 +60,6 @@ public class castle implements IVoicedCommandHandler
     	return true;
     }
 
-
     public String[] getVoicedCommandList()
     {
         return VOICED_COMMANDS;

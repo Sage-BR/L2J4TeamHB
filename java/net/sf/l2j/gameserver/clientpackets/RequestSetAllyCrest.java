@@ -26,6 +26,8 @@ import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -112,7 +114,6 @@ public final class RequestSetAllyCrest extends L2GameClientPacket
             {
                 try { con.close(); } catch (Exception e) {}
             }
-
 
             for (L2Clan clan : ClanTable.getInstance().getClans())
             {

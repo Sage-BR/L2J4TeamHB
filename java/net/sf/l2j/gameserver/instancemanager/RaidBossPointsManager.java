@@ -26,10 +26,12 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 /**
   * @author Kerberos
@@ -38,7 +40,7 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public class RaidBossPointsManager
 {
 	private final static Logger _log = Logger.getLogger(RaidBossPointsManager.class.getName());
-	protected static FastMap<Integer, Map<Integer, Integer>> _list;
+	protected static ConcurrentHashMap<Integer, Map<Integer, Integer>> _list;
 	
 	private static final Comparator<Map.Entry<Integer, Integer>> _comparator = new Comparator<Map.Entry<Integer, Integer>>(){
 		public int compare(Map.Entry<Integer, Integer> entry, Map.Entry<Integer, Integer> entry1)
@@ -49,8 +51,8 @@ public class RaidBossPointsManager
 
 	public final static void init()
 	{
-		_list = new FastMap<Integer, Map<Integer, Integer>>();
-		FastList<Integer> _chars = new FastList<Integer>();
+		_list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
+		ArrayList<Integer> _chars = new ArrayList<Integer>();
 		Connection con = null;
 		try
 		{
@@ -65,10 +67,9 @@ public class RaidBossPointsManager
 			statement.close();
 			
 			statement = con.prepareStatement("SELECT * FROM `character_raid_points` WHERE `charId`=?");
-			for(FastList.Node<Integer> n = _chars.head(), end = _chars.tail(); (n = n.getNext()) != end;)
+			for(int charId : _chars)
 			{
-				int charId = n.getValue();
-				FastMap<Integer, Integer> values = new FastMap<Integer, Integer>();
+				ConcurrentHashMap<Integer, Integer> values = new ConcurrentHashMap<Integer, Integer>();
 				
 				statement.setInt(1, charId);
 				rset = statement.executeQuery();
@@ -90,7 +91,9 @@ public class RaidBossPointsManager
 		{
 			_log.warning(e.getMessage());
 		}
-		
+		finally {
+			try { con.close(); } catch (Exception e) {}
+		}
 	}
 
     public final static void updatePointsInDB(L2PcInstance player, int raidId, int points)
@@ -111,7 +114,9 @@ public class RaidBossPointsManager
         {
 			_log.log(Level.WARNING, "could not update char raid points:", e);
         }
-        
+        finally {
+        	try { con.close(); } catch (Exception e) {}
+        }
 	}
 
     public final static void addPoints(L2PcInstance player, int bossId, int points)
@@ -119,11 +124,11 @@ public class RaidBossPointsManager
     	int ownerId = player.getObjectId();
     	Map<Integer, Integer> tmpPoint;
 		if (_list == null)
-			_list = new FastMap<Integer, Map<Integer, Integer>>();
+			_list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
     	tmpPoint = _list.get(ownerId);
     	if(tmpPoint == null || tmpPoint.isEmpty())
     	{
-    		tmpPoint = new FastMap<Integer, Integer>();
+    		tmpPoint = new ConcurrentHashMap<Integer, Integer>();
     		tmpPoint.put(bossId, points);
     		updatePointsInDB(player, bossId, points);
     	}
@@ -142,7 +147,7 @@ public class RaidBossPointsManager
 	{
 		Map<Integer, Integer> tmpPoint;
 		if (_list == null)
-			_list = new FastMap<Integer, Map<Integer, Integer>>();
+			_list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
 		tmpPoint = _list.get(ownerId);
 		int totalPoints = 0;
 		
@@ -172,7 +177,7 @@ public class RaidBossPointsManager
 			statement.executeUpdate();
             statement.close();
             _list.clear();
-            _list = new FastMap<Integer, Map<Integer, Integer>>();
+            _list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
         }
         catch (Exception e)
         {
@@ -182,8 +187,8 @@ public class RaidBossPointsManager
 
 	public final static int calculateRanking(int playerObjId)
 	{
-		Map<Integer, Integer> tmpRanking = new FastMap<Integer, Integer>();
-		Map<Integer, Integer> tmpPoints = new FastMap<Integer, Integer>();
+		Map<Integer, Integer> tmpRanking = new ConcurrentHashMap<Integer, Integer>();
+		Map<Integer, Integer> tmpPoints = new ConcurrentHashMap<Integer, Integer>();
 		int totalPoints;
 		
 		for(int ownerId : _list.keySet())
@@ -209,8 +214,8 @@ public class RaidBossPointsManager
 	
 	public static Map<Integer, Integer> getRankList()
 	{
-		Map<Integer, Integer> tmpRanking = new FastMap<Integer, Integer>();
-		Map<Integer, Integer> tmpPoints = new FastMap<Integer, Integer>();
+		Map<Integer, Integer> tmpRanking = new ConcurrentHashMap<Integer, Integer>();
+		Map<Integer, Integer> tmpPoints = new ConcurrentHashMap<Integer, Integer>();
 		int totalPoints;
 		
 		for(int ownerId : _list.keySet())

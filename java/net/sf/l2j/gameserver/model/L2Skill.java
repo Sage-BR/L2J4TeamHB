@@ -21,7 +21,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.datatables.HeroSkillTable;
@@ -65,6 +64,9 @@ import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class...
@@ -670,7 +672,7 @@ public abstract class L2Skill
         }
         else
         {
-            _canLearn = new FastList<ClassId>();
+            _canLearn = new ArrayList<ClassId>();
             StringTokenizer st = new StringTokenizer(canLearn, " \r\n\t,;");
             while (st.hasMoreTokens())
             {
@@ -693,7 +695,7 @@ public abstract class L2Skill
         }
         else
         {
-            _teachers = new FastList<Integer>();
+            _teachers = new ArrayList<Integer>();
             StringTokenizer st = new StringTokenizer(teachers, " \r\n\t,;");
             while (st.hasMoreTokens())
             {
@@ -1472,7 +1474,7 @@ public abstract class L2Skill
      */
     public final L2Object[] getTargetList(L2Character activeChar, boolean onlyFirst, L2Character target)
     {
-        List<L2Character> targetList = new FastList<L2Character>();
+        List<L2Character> targetList = new ArrayList<L2Character>();
 
         // Get the target type of the skill
         // (ex : ONE, SELF, HOLY, PET, AURA, AURA_CLOSE, AREA, MULTIFACE, PARTY, CLAN, CORPSE_PLAYER, CORPSE_MOB, CORPSE_CLAN, UNLOCKABLE, ITEM, UNDEAD)
@@ -2996,7 +2998,7 @@ public abstract class L2Skill
         if (!(player instanceof L2PcInstance) && !(player instanceof L2Attackable)
             && !(player instanceof L2Summon)) return _emptyFunctionSet;
         if (_funcTemplates == null) return _emptyFunctionSet;
-        List<Func> funcs = new FastList<Func>();
+        List<Func> funcs = new ArrayList<Func>();
         for (FuncTemplate t : _funcTemplates)
         {
             Env env = new Env();
@@ -3028,8 +3030,7 @@ public abstract class L2Skill
         if ((effector != effected) && effected.isInvul())
             return _emptyEffectSet;
 
-
-        List<L2Effect> effects = new FastList<L2Effect>();
+        List<L2Effect> effects = new ArrayList<L2Effect>();
 
         for (EffectTemplate et : _effectTemplates)
         {
@@ -3056,8 +3057,7 @@ public abstract class L2Skill
         if ((!effector.equals(effected)) && effected.isInvul())
             return _emptyEffectSet;
 
-
-        List<L2Effect> effects = new FastList<L2Effect>();
+        List<L2Effect> effects = new ArrayList<L2Effect>();
 
         for (EffectTemplate et : _effectTemplates)
         {
@@ -3081,7 +3081,7 @@ public abstract class L2Skill
 
         if (_effectTemplatesSelf == null) return _emptyEffectSet;
 
-        List<L2Effect> effects = new FastList<L2Effect>();
+        List<L2Effect> effects = new ArrayList<L2Effect>();
 
         for (EffectTemplate et : _effectTemplatesSelf)
         {

@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.datatables.SpawnTable;
 import net.sf.l2j.gameserver.model.L2Spawn;
@@ -35,6 +34,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.EventData;
+
+import java.util.List;
 
 /**
  * This class ...
@@ -143,7 +144,7 @@ public class L2Event
                                                                                                      + eventName)));
             BufferedReader inbr = new BufferedReader(new InputStreamReader(in));
 
-            TextBuilder replyMSG = new TextBuilder("<html><body>");
+            StringBuilder replyMSG = new StringBuilder("<html><body>");
             replyMSG.append("<center><font color=\"LEVEL\">" + eventName
                 + "</font><font color=\"FF0000\"> bY " + inbr.readLine() + "</font></center><br>");
 

@@ -19,12 +19,14 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  *
@@ -58,9 +60,9 @@ public class ClanHallManager
 
 	private ClanHallManager()
 	{
-		_clanHall = new FastMap<Integer, ClanHall>();
-		_freeClanHall = new FastMap<Integer, ClanHall>();
-		_allClanHalls = new FastMap<Integer, ClanHall>();
+		_clanHall = new ConcurrentHashMap<Integer, ClanHall>();
+		_freeClanHall = new ConcurrentHashMap<Integer, ClanHall>();
+		_allClanHalls = new ConcurrentHashMap<Integer, ClanHall>();
 		load();
 	}
 

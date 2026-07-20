@@ -20,9 +20,10 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Layane
@@ -33,7 +34,7 @@ public class HtmCache
     private static Logger _log = Logger.getLogger(HtmCache.class.getName());
     private static HtmCache _instance;
 
-    private FastMap<Integer, String> _cache;
+    private ConcurrentHashMap<Integer, String> _cache;
 
     private int _loadedFiles;
     private long _bytesBuffLen;
@@ -48,7 +49,7 @@ public class HtmCache
 
     public HtmCache()
     {
-        _cache = new FastMap<Integer, String>();
+        _cache = new ConcurrentHashMap<Integer, String>();
         reload();
     }
 

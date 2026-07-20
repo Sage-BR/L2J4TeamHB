@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.clientpackets;
 
-
 /**
  * @author zabbix
  * Lets drink to code!

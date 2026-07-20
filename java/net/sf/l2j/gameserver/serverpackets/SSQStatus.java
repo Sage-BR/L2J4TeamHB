@@ -23,6 +23,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.Set;
+
 /**
  * Seven Signs Record Update
  *

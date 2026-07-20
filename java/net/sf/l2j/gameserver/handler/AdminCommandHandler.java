@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.handler;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminAdmin;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminAnnouncements;
@@ -77,6 +76,8 @@ import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTvTEvent;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminUnblockIp;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminZone;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * This class ...
  *
@@ -101,7 +102,7 @@ public class AdminCommandHandler
 
 	private AdminCommandHandler()
 	{
-		_datatable = new FastMap<String, IAdminCommandHandler>();
+		_datatable = new ConcurrentHashMap<String, IAdminCommandHandler>();
 		registerAdminCommandHandler(new AdminHero());
 		registerAdminCommandHandler(new AdminOlympiad());
 		registerAdminCommandHandler(new AdminAdmin());

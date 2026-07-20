@@ -16,12 +16,15 @@ package net.sf.l2j.gameserver.datatables;
 
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.skills.SkillsEngine;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class ...
@@ -45,7 +48,7 @@ public class SkillTable
 
 	private SkillTable()
 	{
-		_skills = new FastMap<Integer, L2Skill>();
+		_skills = new ConcurrentHashMap<Integer, L2Skill>();
 		SkillsEngine.getInstance().loadAllSkills(_skills);
 	}
 
@@ -137,7 +140,7 @@ public class SkillTable
 	 */
 	public L2Skill[] getSiegeSkills(boolean addNoble)
 	{
-		FastList<L2Skill> list = new FastList<L2Skill>();
+		ArrayList<L2Skill> list = new ArrayList<L2Skill>();
 		
 		list.add(_skills.get(SkillTable.getSkillHashCode(246, 1))); 
 		list.add(_skills.get(SkillTable.getSkillHashCode(247, 1)));

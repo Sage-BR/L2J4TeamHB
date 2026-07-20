@@ -143,7 +143,7 @@ public class ItemHandler
 		// Add handler for each ID found
 		for (int i = 0; i < ids.length; i++)
 		{
-			_datatable.put(new Integer(ids[i]), handler);
+			_datatable.put(Integer.valueOf(ids[i]), handler);
 		}
 	}
 
@@ -154,6 +154,6 @@ public class ItemHandler
 	 */
 	public IItemHandler getItemHandler(int itemId)
 	{
-		return _datatable.get(new Integer(itemId));
+		return _datatable.get(Integer.valueOf(itemId));
 	}
 }

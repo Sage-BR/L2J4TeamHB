@@ -19,7 +19,6 @@ import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 
-
 /**
  * A Town zone
  *
@@ -33,7 +32,6 @@ public class L2TownZone extends L2ZoneType
 	private int _taxById;
 	private boolean _isPeaceZone;
 	private int[] _spawnLoc;
-
 
 	public L2TownZone(int id)
 	{
@@ -120,7 +118,6 @@ public class L2TownZone extends L2ZoneType
 
 	@Override
 	protected void onReviveInside(L2Character character) {}
-
 
 	/**
 	 * Returns this town zones name

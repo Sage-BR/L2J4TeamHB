@@ -20,7 +20,6 @@ import net.sf.l2j.gameserver.serverpackets.ExRegMax;
 import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.skills.Env;
 
-
 class EffectHealOverTime extends L2Effect
 {
 	public EffectHealOverTime(Env env, EffectTemplate template)

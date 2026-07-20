@@ -27,7 +27,6 @@ public final class Location
 	private int _z;
 	private int _heading;
 
-
 	public Location(int x, int y, int z)
 	{
 		_x = x;

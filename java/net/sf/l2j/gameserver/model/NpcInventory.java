@@ -19,9 +19,10 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2ItemInstance.ItemLocation;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
+
+import java.util.ArrayList;
 
 public class NpcInventory extends Inventory
 {
@@ -60,7 +61,7 @@ public class NpcInventory extends Inventory
 	 */
 	public L2ItemInstance[] getAllItemsByItemId(int itemId)
 	{
-		List<L2ItemInstance> list = new FastList<L2ItemInstance>();
+		List<L2ItemInstance> list = new ArrayList<L2ItemInstance>();
 		for (L2ItemInstance item : _items)
 		{
 			if (item.getItemId() == itemId)

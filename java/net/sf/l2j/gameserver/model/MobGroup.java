@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.ai.L2ControllableMobAI;
 import net.sf.l2j.gameserver.datatables.SpawnTable;
@@ -24,6 +23,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2ControllableMobInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
 
 /**
  * @author littlecrow
@@ -62,7 +63,7 @@ public final class MobGroup
     public List<L2ControllableMobInstance> getMobs()
     {
         if (_mobs == null)
-            _mobs = new FastList<L2ControllableMobInstance>();
+            _mobs = new ArrayList<L2ControllableMobInstance>();
 
         return _mobs;
     }
@@ -312,7 +313,7 @@ public final class MobGroup
 
     protected void removeDead()
     {
-        List<L2ControllableMobInstance> deadMobs = new FastList<L2ControllableMobInstance>();
+        List<L2ControllableMobInstance> deadMobs = new ArrayList<L2ControllableMobInstance>();
 
         for (L2ControllableMobInstance mobInst : getMobs())
             if (mobInst != null && mobInst.isDead())

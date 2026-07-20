@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.model.actor.instance.L2ControllableMobInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author littlecrow
@@ -33,7 +34,7 @@ public class MobGroupTable
 
 	public MobGroupTable()
     {
-		_groupMap = new FastMap<Integer, MobGroup>();
+		_groupMap = new ConcurrentHashMap<Integer, MobGroup>();
 	}
 
 	public static MobGroupTable getInstance()

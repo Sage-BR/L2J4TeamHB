@@ -18,7 +18,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.ArmorSetsTable;
@@ -34,6 +33,9 @@ import net.sf.l2j.gameserver.templates.L2EtcItemType;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class manages inventory
@@ -136,7 +138,7 @@ public abstract class Inventory extends ItemContainer
     	 */
     	ChangeRecorder(Inventory inventory) {
     		_inventory = inventory;
-			_changed = new FastList<L2ItemInstance>();
+			_changed = new ArrayList<L2ItemInstance>();
 			_inventory.addPaperdollListener(this);
     	}
 
@@ -613,7 +615,7 @@ public abstract class Inventory extends ItemContainer
 	protected Inventory()
 	{
 		_paperdoll = new L2ItemInstance[25];
-		_paperdollListeners = new FastList<PaperdollListener>();
+		_paperdollListeners = new ArrayList<PaperdollListener>();
 		addPaperdollListener(new ArmorSetListener());
         addPaperdollListener(new CrossBowListener());
 		addPaperdollListener(new BowListener());
@@ -1079,7 +1081,6 @@ public abstract class Inventory extends ItemContainer
         if(getOwner() instanceof L2PcInstance)
         {
             L2PcInstance player = (L2PcInstance)getOwner();
-
 
             if(player.getPkKills() > 0 && item.getItemId() >= 7816 && item.getItemId() <= 7831)
             {

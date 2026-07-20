@@ -24,7 +24,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -49,6 +48,8 @@ import net.sf.l2j.gameserver.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
+
+import java.util.Set;
 
 /**
  * Baium AI Note1: if the server gets rebooted while players are still fighting Baium, there is no lock, but players also lose their ability to wake baium up. However, should another person enter the room and wake him up, the players who had stayed inside may join the raid. This can be helpful for
@@ -462,7 +463,7 @@ public class Baium extends Quest implements Runnable
 	
 	public L2Character getRandomTarget(final L2NpcInstance npc)
 	{
-		final FastList<L2Character> result = new FastList<>();
+		final ArrayList<L2Character> result = new ArrayList<>();
 		final Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
 		{
 			/*
@@ -504,7 +505,6 @@ public class Baium extends Quest implements Runnable
 		
 		if (result.isEmpty())
 		{
-			FastList.recycle(result);
 			return null;
 		}
 		
@@ -513,9 +513,7 @@ public class Baium extends Quest implements Runnable
 		if (timer != null)
 			timer.cancel();
 		startQuestTimer("clean_player", 20000, npc, null);
-		final L2Character target = (L2Character) characters[Rnd.get(characters.length)];
-		FastList.recycle(result);
-		return target;
+		return (L2Character) characters[Rnd.get(characters.length)];
 		
 	}
 	

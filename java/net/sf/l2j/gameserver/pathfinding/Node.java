@@ -26,7 +26,6 @@ public class Node
 	private Node _parent;
 	private short _cost;
 
-
 	public Node(AbstractNodeLoc Loc, int Neighbors_idx)
 	{
 		_loc = Loc;

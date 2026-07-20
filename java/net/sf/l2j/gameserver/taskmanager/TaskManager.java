@@ -31,8 +31,7 @@ import java.util.Date;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskCleanUp;
@@ -42,6 +41,10 @@ import net.sf.l2j.gameserver.taskmanager.tasks.TaskRecom;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskRestart;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskSevenSignsUpdate;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskShutdown;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author Layane
@@ -58,8 +61,8 @@ public final class TaskManager
                                                       "SELECT id FROM global_tasks WHERE task=?",
                                                       "INSERT INTO global_tasks (task,type,last_activation,param1,param2,param3) VALUES(?,?,?,?,?,?)"};
 
-    private final FastMap<Integer, Task> _tasks = new FastMap<Integer, Task>();
-    protected final FastList<ExecutedTask> _currentTasks = new FastList<ExecutedTask>();
+    private final ConcurrentHashMap<Integer, Task> _tasks = new ConcurrentHashMap<Integer, Task>();
+    protected final ArrayList<ExecutedTask> _currentTasks = new ArrayList<ExecutedTask>();
 
     public class ExecutedTask implements Runnable
     {

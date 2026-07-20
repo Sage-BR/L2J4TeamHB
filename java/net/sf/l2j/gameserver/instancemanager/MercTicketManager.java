@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.datatables.NpcTable;
@@ -32,6 +31,7 @@ import net.sf.l2j.gameserver.model.actor.instance.L2SiegeGuardInstance;
 import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
+import java.util.ArrayList;
 
 /**
  * @author yellowperil & Fulminus
@@ -66,7 +66,6 @@ public class MercTicketManager
         return _instance;
     }
     // =========================================================
-
 
     // =========================================================
     // Data Field
@@ -400,7 +399,6 @@ public class MercTicketManager
     	}
     }
 
-
     /**
      * remove a single ticket and its associated spawn from the world
      * (used when the castle lord picks up a ticket, for example)
@@ -434,7 +432,7 @@ public class MercTicketManager
 
     public final List<L2ItemInstance> getDroppedTickets()
     {
-        if (_droppedTickets == null) _droppedTickets = new FastList<L2ItemInstance>();
+        if (_droppedTickets == null) _droppedTickets = new ArrayList<L2ItemInstance>();
         return _droppedTickets;
     }
 }

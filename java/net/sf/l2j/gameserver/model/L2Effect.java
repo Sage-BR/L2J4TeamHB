@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.network.SystemMessageId;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.skills.effects.EffectTemplate;
 import net.sf.l2j.gameserver.skills.funcs.Func;
 import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
 import net.sf.l2j.gameserver.skills.funcs.Lambda;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This class ...
@@ -474,7 +476,7 @@ public abstract class L2Effect
     public Func[] getStatFuncs()
     {
         if (_funcTemplates == null) return _emptyFunctionSet;
-        List<Func> funcs = new FastList<Func>();
+        List<Func> funcs = new ArrayList<Func>();
         for (FuncTemplate t : _funcTemplates)
         {
             Env env = new Env();

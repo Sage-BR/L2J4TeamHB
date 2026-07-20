@@ -17,11 +17,12 @@ package net.sf.l2j.gameserver.handler;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Banking;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Wedding;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.stats;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -47,7 +48,7 @@ public class VoicedCommandHandler
 
 	private VoicedCommandHandler()
 	{
-		_datatable = new FastMap<String, IVoicedCommandHandler>();
+		_datatable = new ConcurrentHashMap<String, IVoicedCommandHandler>();
 		registerVoicedCommandHandler(new stats());
 		if(Config.L2JMOD_ALLOW_WEDDING)
 			registerVoicedCommandHandler(new Wedding());

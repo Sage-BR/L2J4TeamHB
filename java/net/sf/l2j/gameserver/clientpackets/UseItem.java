@@ -149,7 +149,6 @@ public final class UseItem extends L2GameClientPacket
 				|| itemId == 10129 || itemId == 10130))
 				return;
 
-
            L2Clan cl = activeChar.getClan();
             //A shield that can only be used by the members of a clan that owns a castle.
            if ((cl == null||cl.getHasCastle() == 0) && itemId == 7015 && Config.CASTLE_SHIELD)

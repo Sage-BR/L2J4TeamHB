@@ -17,6 +17,8 @@ package net.sf.l2j.gameserver.serverpackets;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import java.util.List;
+
 /**
  * Format: (c) d[dS]
  * d: list size

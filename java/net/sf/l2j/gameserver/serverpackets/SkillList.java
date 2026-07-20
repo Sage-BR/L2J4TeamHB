@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -58,7 +59,7 @@ public final class SkillList extends L2GameServerPacket
 
     public SkillList()
     {
-        _skills = new FastList<Skill>();
+        _skills = new ArrayList<Skill>();
     }
 
     public void addSkill(int id, int level, boolean passive)

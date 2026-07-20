@@ -59,7 +59,6 @@ public final class EquipUpdate extends L2GameServerPacket
 	private L2ItemInstance _item;
 	private int _change;
 
-
 	public EquipUpdate(L2ItemInstance item, int change)
 	{
 		_item = item;

@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2DropCategory;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -58,7 +60,7 @@ public class NpcTable
 
 	private NpcTable()
 	{
-		_npcs = new FastMap<Integer, L2NpcTemplate>();
+		_npcs = new ConcurrentHashMap<Integer, L2NpcTemplate>();
 
 		restoreNpcData();
 	}
@@ -87,6 +89,7 @@ public class NpcTable
 			{
 				try
 				{
+					try { con.close(); } catch (Exception e) {}
 					con = L2DatabaseFactory.getInstance().getConnection();
 					PreparedStatement statement;
 					statement = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] { "id", "idTemplate", "name", "serverSideName", "title", "serverSideTitle", "class", "collision_radius", "collision_height", "level", "sex", "type", "attackrange", "hp", "mp", "hpreg", "mpreg", "str", "con", "dex", "int", "wit", "men", "exp", "sp", "patk", "pdef", "matk", "mdef", "atkspd", "aggro", "matkspd", "rhand", "lhand", "armor", "walkspd", "runspd", "faction_id", "faction_range", "isUndead", "absorb_level", "absorb_type", "ss", "bss", "ss_rate", "AI"}) + " FROM custom_npc");
@@ -102,6 +105,7 @@ public class NpcTable
 			}
 			try
 			{
+				try { con.close(); } catch (Exception e) {}
 				con = L2DatabaseFactory.getInstance().getConnection();
 				PreparedStatement statement = con.prepareStatement("SELECT npcid, skillid, level FROM npcskills");
 				ResultSet npcskills = statement.executeQuery();
@@ -367,12 +371,12 @@ public class NpcTable
 		{
 			// save a copy of the old data
 			L2NpcTemplate old = getTemplate(id);
-			Map<Integer,L2Skill> skills = new FastMap<Integer,L2Skill>();
+			Map<Integer,L2Skill> skills = new ConcurrentHashMap<Integer,L2Skill>();
 
 			if (old.getSkills() != null)
 				skills.putAll(old.getSkills());
 
-			FastList<L2DropCategory> categories = new FastList<L2DropCategory>();
+			ArrayList<L2DropCategory> categories = new ArrayList<L2DropCategory>();
 
 			if (old.getDropData() != null)
 				categories.addAll(old.getDropData());
@@ -382,7 +386,7 @@ public class NpcTable
 			if (old.getTeachInfo() != null)
 				classIds=old.getTeachInfo().clone();
 
-			List<L2MinionData> minions = new FastList<L2MinionData>();
+			List<L2MinionData> minions = new ArrayList<L2MinionData>();
 
 			if (old.getMinionData() != null)
 				minions.addAll(old.getMinionData());
@@ -493,7 +497,7 @@ public class NpcTable
 
 	public L2NpcTemplate[] getAllOfLevel(int lvl)
 	{
-		List<L2NpcTemplate> list = new FastList<L2NpcTemplate>();
+		List<L2NpcTemplate> list = new ArrayList<L2NpcTemplate>();
 
 		for (L2NpcTemplate t : _npcs.values())
 			if (t.level == lvl)
@@ -504,7 +508,7 @@ public class NpcTable
 
 	public L2NpcTemplate[] getAllMonstersOfLevel(int lvl)
 	{
-		List<L2NpcTemplate> list = new FastList<L2NpcTemplate>();
+		List<L2NpcTemplate> list = new ArrayList<L2NpcTemplate>();
 
 		for (L2NpcTemplate t : _npcs.values())
 			if (t.level == lvl && "L2Monster".equals(t.type))
@@ -515,7 +519,7 @@ public class NpcTable
 
 	public L2NpcTemplate[] getAllNpcStartingWith(String letter)
 	{
-		List<L2NpcTemplate> list = new FastList<L2NpcTemplate>();
+		List<L2NpcTemplate> list = new ArrayList<L2NpcTemplate>();
 
 		for (L2NpcTemplate t : _npcs.values())
 			if (t.name.startsWith(letter) && "L2Npc".equals(t.type))

@@ -33,6 +33,8 @@ import net.sf.l2j.gameserver.serverpackets.RestartResponse;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.taskmanager.AttackStanceTaskManager;
 
+import java.util.List;
+
 /**
  * This class ...
  *
@@ -42,7 +44,6 @@ public final class RequestRestart extends L2GameClientPacket
 {
     private static final String _C__46_REQUESTRESTART = "[C] 46 RequestRestart";
     private static Logger _log = Logger.getLogger(RequestRestart.class.getName());
-
 
     @Override
 	protected void readImpl()
@@ -129,7 +130,6 @@ public final class RequestRestart extends L2GameClientPacket
         // removing player from the world
         player.deleteMe();
         L2GameClient.saveCharToDisk(client.getActiveChar());
-
 
         getClient().setActiveChar(null);
 

@@ -18,7 +18,6 @@ import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Stats;
 
 
-
 public class FuncBaseMul extends Func {
 	private final Lambda _lambda;
 	public FuncBaseMul(Stats pStat, int pOrder, Object owner, Lambda lambda) {

@@ -38,6 +38,8 @@ import net.sf.l2j.gameserver.serverpackets.StaticObject;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.serverpackets.VehicleInfo;
 
+import java.util.List;
+
 public class RequestRecordInfo extends L2GameClientPacket
 {
 	private static final String _0__CF_REQUEST_RECORD_INFO = "[0] CF RequestRecordInfo";

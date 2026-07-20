@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 public class DoorTable
 {
@@ -52,7 +54,7 @@ public class DoorTable
 
 	public DoorTable()
 	{
-		_staticItems = new FastMap<Integer,L2DoorInstance>();
+		_staticItems = new ConcurrentHashMap<Integer,L2DoorInstance>();
 		//parseData();
 	}
 

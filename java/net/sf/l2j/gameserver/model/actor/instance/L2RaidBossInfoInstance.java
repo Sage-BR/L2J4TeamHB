@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 import Dev.SpecialMods.RaidBossInfoManager;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
@@ -177,7 +176,6 @@ sb.append("<table bgcolor=\"000000\" width=\"350\">");
 sb.append("<tr><td><center><a action=\"bypass -h npc_%objectId%_Chat 0\">Return</a></center></td></tr>");
 sb.append("</table>");
 sb.append("<img src=\"L2UI.SquareGray\" width=300 height=1>");
-
 
 sb.append("</center>");
 sb.append("</body>");

@@ -16,9 +16,10 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2ItemInstance.ItemLocation;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 public class PcFreight extends ItemContainer
 {
@@ -62,7 +63,7 @@ public class PcFreight extends ItemContainer
 	@Override
 	public L2ItemInstance[] getItems()
 	{
-		List<L2ItemInstance> list = new FastList<L2ItemInstance>();
+		List<L2ItemInstance> list = new ArrayList<L2ItemInstance>();
 		for (L2ItemInstance item : _items)
 		{
 			if (item.getLocationSlot() == 0 || item.getLocationSlot() == _activeLocationId) list.add(item);

@@ -20,6 +20,8 @@ import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.L2WorldRegion;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
+import java.util.Set;
+
 /**
  * This class manages all Minions.
  * In a group mob, there are one master called RaidBoss and several slaves called Minions.

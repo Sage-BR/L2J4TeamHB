@@ -16,6 +16,8 @@ package net.sf.l2j.gameserver.ai;
 
 import net.sf.l2j.gameserver.model.L2Character;
 
+import java.util.Set;
+
 /**
  * Interface of AI and client state.
  *

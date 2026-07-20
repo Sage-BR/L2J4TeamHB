@@ -52,7 +52,6 @@ public final class AnswerTradeRequest extends L2GameClientPacket
             return;
         }
 
-
         L2PcInstance partner = player.getActiveRequester();
         if (partner == null)
         {

@@ -29,7 +29,6 @@ public final class RequestPledgeSetMemberPowerGrade extends L2GameClientPacket
     private int _powerGrade;
     private String _member;
 
-
     @Override
 	protected void readImpl()
     {

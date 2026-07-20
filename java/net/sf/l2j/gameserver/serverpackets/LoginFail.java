@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-
 /**
  * format  d   rev 417
  *

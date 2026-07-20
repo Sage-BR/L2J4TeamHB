@@ -16,10 +16,11 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 /**
  * 0x53 WareHouseDepositList  dh (h dddhh dhhh d)
@@ -36,7 +37,7 @@ public final class WareHouseDepositList extends L2GameServerPacket
 	private static final String _S__53_WAREHOUSEDEPOSITLIST = "[S] 41 WareHouseDepositList";
 	private L2PcInstance _activeChar;
 	private int _playerAdena;
-	private FastList<L2ItemInstance> _items;
+	private ArrayList<L2ItemInstance> _items;
 	private int _whType;
 
 	public WareHouseDepositList(L2PcInstance player, int type)
@@ -44,7 +45,7 @@ public final class WareHouseDepositList extends L2GameServerPacket
 		_activeChar = player;
 		_whType = type;
 		_playerAdena = _activeChar.getAdena();
-		_items = new FastList<L2ItemInstance>();
+		_items = new ArrayList<L2ItemInstance>();
 
 		for (L2ItemInstance temp : _activeChar.getInventory().getAvailableItems(true))
 			_items.add(temp);

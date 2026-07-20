@@ -92,7 +92,6 @@ public class L2WaterZone extends L2ZoneType
         }
 	}
 
-
 	@Override
 	protected void onDieInside(L2Character character) {}
 

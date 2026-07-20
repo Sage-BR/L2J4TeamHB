@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.SevenSigns;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
@@ -45,6 +44,9 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * Castle Chamberlains implementation used for: - tax rate control - regional
@@ -479,7 +481,7 @@ public class L2CastleChamberlainInstance extends L2MerchantInstance
 					if (val != "")
 						getCastle().setTaxPercent(player, Integer.parseInt(val));
 
-					TextBuilder msg = new TextBuilder("<html><body>");
+					StringBuilder msg = new StringBuilder("<html><body>");
 					msg.append(getName() + ":<br>");
 					msg.append("Current tax rate: "	+ getCastle().getTaxPercent() + "%<br>");
 					msg.append("<table>");

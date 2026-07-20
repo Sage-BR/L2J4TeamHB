@@ -22,6 +22,8 @@ import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.knownlist.CommanderKnownList;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
+import java.util.Set;
+
 public class L2CommanderInstance extends L2Attackable
 {
 

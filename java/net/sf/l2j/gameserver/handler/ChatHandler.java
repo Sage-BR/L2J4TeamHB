@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.chathandlers.ChatAll;
 import net.sf.l2j.gameserver.handler.chathandlers.ChatAlliance;
@@ -31,6 +30,8 @@ import net.sf.l2j.gameserver.handler.chathandlers.ChatShout;
 import net.sf.l2j.gameserver.handler.chathandlers.ChatTell;
 import net.sf.l2j.gameserver.handler.chathandlers.ChatTrade;
 
+import java.util.concurrent.ConcurrentHashMap;
+
  /**
   * This class handles all chat handlers
   *
@@ -42,7 +43,7 @@ public class ChatHandler
 
 	private static ChatHandler _instance;
 
-	private FastMap<Integer, IChatHandler> _datatable;
+	private ConcurrentHashMap<Integer, IChatHandler> _datatable;
 
 	public static ChatHandler getInstance()
 	{
@@ -58,7 +59,7 @@ public class ChatHandler
 	 */
 	private ChatHandler()
 	{
-		_datatable = new FastMap<Integer, IChatHandler>();
+		_datatable = new ConcurrentHashMap<Integer, IChatHandler>();
 		registerChatHandler(new ChatPartyMatchRoom());
 		registerChatHandler(new ChatAll());
 		registerChatHandler(new ChatAlliance());

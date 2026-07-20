@@ -33,6 +33,8 @@ import net.sf.l2j.gameserver.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 public class Sailren extends Quest implements Runnable
 {
 	private static final int SAILREN = 29065;

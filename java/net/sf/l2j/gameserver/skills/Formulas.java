@@ -49,6 +49,8 @@ import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  * Global calculations, can be modified by server admins
  */
@@ -1242,7 +1244,6 @@ public final class Formulas
 					break;
 			}
 		}
-
 
 		if (crit)
 			damage += (attacker.getCriticalDmg(target, damage) * target.calcStat(Stats.CRIT_VULN, target.getTemplate().baseCritVuln, target, skill != null ? skill : null));

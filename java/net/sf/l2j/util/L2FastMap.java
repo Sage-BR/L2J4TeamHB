@@ -17,6 +17,8 @@ package net.sf.l2j.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  *
  * A custom version of HashMap with extension for iterating without using temporary collection<br>

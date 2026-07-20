@@ -18,7 +18,6 @@ package net.sf.l2j.gameserver.ai.special;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.datatables.DoorTable;
@@ -48,6 +47,9 @@ import net.sf.l2j.gameserver.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Frintezza AI
@@ -1117,10 +1119,10 @@ public class Frintezza extends Quest implements Runnable
 	private L2GrandBossInstance frintezza, weakScarlet, strongScarlet, activeScarlet;
 	private L2MonsterInstance demon1, demon2, demon3, demon4, portrait1, portrait2, portrait3, portrait4;
 	private L2NpcInstance _frintezzaDummy, _overheadDummy, _portraitDummy1, _portraitDummy3, _scarletDummy;
-	private final List<L2PcInstance> _PlayersInside = new FastList<>();
-	private final List<L2NpcInstance> _Room1Mobs = new FastList<>();
-	private final List<L2NpcInstance> _Room2Mobs = new FastList<>();
-	private final List<L2Attackable> Minions = new FastList<>();
+	private final List<L2PcInstance> _PlayersInside = new ArrayList<>();
+	private final List<L2NpcInstance> _Room1Mobs = new ArrayList<>();
+	private final List<L2NpcInstance> _Room2Mobs = new ArrayList<>();
+	private final List<L2Attackable> Minions = new ArrayList<>();
 	
 	// Boss: Frintezza
 	public Frintezza(final int id, final String name, final String descr)

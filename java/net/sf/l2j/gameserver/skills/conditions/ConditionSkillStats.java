@@ -18,7 +18,6 @@ import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Stats;
 
 
-
 /**
  * @author mkizub
  *

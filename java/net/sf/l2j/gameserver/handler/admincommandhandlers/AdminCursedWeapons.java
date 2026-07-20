@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
 import net.sf.l2j.gameserver.model.CursedWeapon;
@@ -25,6 +24,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.List;
 
 /**
  * This class handles following admin commands:
@@ -79,7 +80,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler {
 			}
 			else
 			{
-				TextBuilder replyMSG = new TextBuilder();
+				StringBuilder replyMSG = new StringBuilder();
 				NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 				adminReply.setFile("data/html/admin/cwinfo.htm");
 				for (CursedWeapon cw : cwm.getCursedWeapons())

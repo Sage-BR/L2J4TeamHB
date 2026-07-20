@@ -21,7 +21,6 @@
  */
 package net.sf.l2j.util;
 
-import javolution.text.TextBuilder;
 
 /**
  * String utilities optimized for the best performance. <h1>How to Use It</h1> <h2>concat() or append()</h2> If concatenating strings in single call, use StringUtil.concat(), otherwise use StringUtil.append() and its variants. <h2>Minimum Calls</h2> Bad:
@@ -125,42 +124,42 @@ import javolution.text.TextBuilder;
  * Why?</br> In first case, new memory has to be allocated for the second string. In second case already allocated memory is reused, but only in case the new string is not longer than the previously allocated string. Anyway, the second way is better because the string either fits in the memory and
  * some memory is saved, or it does not fit in the memory, and in that case it works as in the first case. <h2>Primitives to Strings</h2> To convert primitives to string, use String.valueOf(). <h2>How much faster is it?</h2> Here are some results of my tests. Count is number of strings concatenated.
  * Don't take the numbers as 100% true as the numbers are affected by other programs running on my computer at the same time. Anyway, from the results it is obvious that using StringBuilder with predefined size is the fastest (and also most memory efficient) solution. It is about 5 times faster when
- * concatenating 7 strings, compared to TextBuilder. Also, with more strings concatenated, the difference between StringBuilder and TextBuilder gets larger. In code, there are many cases, where there are concatenated 50+ strings so the time saving is even greater.
+ * concatenating 7 strings, compared to StringBuilder. Also, with more strings concatenated, the difference between StringBuilder and StringBuilder gets larger. In code, there are many cases, where there are concatenated 50+ strings so the time saving is even greater.
  * 
  * <pre>
  * Count: 2
- * TextBuilder: 1893
- * TextBuilder with size: 1703
+ * StringBuilder: 1893
+ * StringBuilder with size: 1703
  * String: 1033
  * StringBuilder: 993
  * StringBuilder with size: 1024
  * Count: 3
- * TextBuilder: 1973
- * TextBuilder with size: 1872
+ * StringBuilder: 1973
+ * StringBuilder with size: 1872
  * String: 2583
  * StringBuilder: 1633
  * StringBuilder with size: 1156
  * Count: 4
- * TextBuilder: 2188
- * TextBuilder with size: 2229
+ * StringBuilder: 2188
+ * StringBuilder with size: 2229
  * String: 4207
  * StringBuilder: 1816
  * StringBuilder with size: 1444
  * Count: 5
- * TextBuilder: 9185
- * TextBuilder with size: 9464
+ * StringBuilder: 9185
+ * StringBuilder with size: 9464
  * String: 6937
  * StringBuilder: 2745
  * StringBuilder with size: 1882
  * Count: 6
- * TextBuilder: 9785
- * TextBuilder with size: 10082
+ * StringBuilder: 9785
+ * StringBuilder with size: 10082
  * String: 9471
  * StringBuilder: 2889
  * StringBuilder with size: 1857
  * Count: 7
- * TextBuilder: 10169
- * TextBuilder with size: 10528
+ * StringBuilder: 10169
+ * StringBuilder with size: 10528
  * String: 12746
  * StringBuilder: 3081
  * StringBuilder with size: 2139
@@ -182,16 +181,14 @@ public final class StringUtil
 	 */
 	public static String concat(final String... strings)
 	{
-		final TextBuilder sbString = TextBuilder.newInstance();
+		final StringBuilder sbString = new StringBuilder();
 		
 		for (final String string : strings)
 		{
 			sbString.append(string);
 		}
 		
-		final String result = sbString.toString();
-		TextBuilder.recycle(sbString);
-		return result;
+		return sbString.toString();
 	}
 	
 	/**
@@ -252,15 +249,13 @@ public final class StringUtil
 	
 	public static String getTraceString(final StackTraceElement[] trace)
 	{
-		final TextBuilder sbString = TextBuilder.newInstance();
+		final StringBuilder sbString = new StringBuilder();
 		for (final StackTraceElement element : trace)
 		{
 			sbString.append(element.toString()).append('\n');
 		}
 		
-		final String result = sbString.toString();
-		TextBuilder.recycle(sbString);
-		return result;
+		return sbString.toString();
 	}
 
 	/**

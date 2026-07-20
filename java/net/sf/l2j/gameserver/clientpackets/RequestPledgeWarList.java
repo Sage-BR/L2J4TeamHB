@@ -32,7 +32,6 @@ public final class RequestPledgeWarList extends L2GameClientPacket
     private int _unk1;
     private int _tab;
 
-
     @Override
 	protected void readImpl()
     {

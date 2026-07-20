@@ -19,7 +19,6 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.AugmentationData;
 import net.sf.l2j.gameserver.datatables.SkillTable;
@@ -27,6 +26,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.gameserver.skills.funcs.FuncAdd;
 import net.sf.l2j.gameserver.skills.funcs.LambdaConst;
+
+import java.util.ArrayList;
 
 /**
  * Used to store an augmentation and its boni
@@ -70,7 +71,7 @@ public final class L2Augmentation
 		public augmentationStatBoni(int augmentationId)
 		{
 			_active = false;
-			FastList <AugmentationData.AugStat> as = AugmentationData.getInstance().getAugStatsById(augmentationId);
+			ArrayList <AugmentationData.AugStat> as = AugmentationData.getInstance().getAugStatsById(augmentationId);
 
 			_stats = new Stats[as.size()];
 			_values = new float[as.size()];

@@ -32,7 +32,6 @@ public final class TargetSelected extends L2GameServerPacket
 	private int _y;
 	private int _z;
 
-
 	/**
 	 * @param _characters
 	 */

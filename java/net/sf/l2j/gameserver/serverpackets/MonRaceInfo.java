@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 
-
 /**
  * sample
  * 06 8f19904b 2522d04b 00000000 80 950c0000 4af50000 08f2ffff 0000    - 0 damage (missed 0x80)
@@ -53,7 +52,6 @@ public class MonRaceInfo extends L2GameServerPacket
     }
 
 //  0xf3;;EtcStatusUpdatePacket;ddddd
-
 
     @Override
 	protected final void writeImpl()

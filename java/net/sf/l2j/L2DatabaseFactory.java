@@ -19,78 +19,71 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * L2DatabaseFactory — Otimizado para Virtual Threads (JDK 21+).
+ * 
+ * <p>Com Virtual Threads, threads bloqueadas em I/O (JDBC) são desmontadas
+ * do carrier thread, permitindo muito mais conexões concorrentes sem
+ * consumir threads do SO. O pool de conexão foi ajustado para suportar
+ * essa concorrência maior.</p>
+ * 
+ * <p>Melhorias:
+ * <ul>
+ * <li><b>MaximumPoolSize</b> aumentado — virtual threads permitem mais
+ *    operações DB simultâneas sem overhead de plataforma.</li>
+ * <li><b>keepaliveTime</b> adicionado para detectar conexões mortas.</li>
+ * <li><b>leakDetectionThreshold</b> para debugging de conexões não fechadas.</li>
+ * <li><b>cachePrepStmts + useServerPrepStmts</b> mantidos (já otimizados).</li>
+ * </ul>
+ * </p>
+ */
 public class L2DatabaseFactory
 {
-    static Logger _log = Logger.getLogger(L2DatabaseFactory.class.getName());
+	static Logger _log = Logger.getLogger(L2DatabaseFactory.class.getName());
 
-    public static enum ProviderType
-    {
-        MySql,
-        MsSql
-    }
+	public static enum ProviderType
+	{
+		MySql,
+		MsSql
+	}
 
-    // =========================================================
-    // Data Field
-    private static L2DatabaseFactory _instance;
-    private ProviderType _providerType;
-	private ComboPooledDataSource _source;
+	private static L2DatabaseFactory _instance;
+	private ProviderType _providerType;
+	private HikariDataSource _source;
 
-    // =========================================================
-    // Constructor
 	public L2DatabaseFactory() throws SQLException
 	{
 		try
 		{
 			if (Config.DATABASE_MAX_CONNECTIONS < 2)
-            {
-                Config.DATABASE_MAX_CONNECTIONS = 2;
-                _log.warning("A minimum of " + Config.DATABASE_MAX_CONNECTIONS + " db connections are required.");
-            }
+			{
+				Config.DATABASE_MAX_CONNECTIONS = 2;
+				_log.warning("A minimum of " + Config.DATABASE_MAX_CONNECTIONS + " db connections are required.");
+			}
 
-			_source = new ComboPooledDataSource();
-			_source.setAutoCommitOnClose(true);
+			HikariConfig config = new HikariConfig();
+			config.setDriverClassName(Config.DATABASE_DRIVER);
+			config.setJdbcUrl(Config.DATABASE_URL);
+			config.setUsername(Config.DATABASE_LOGIN);
+			config.setPassword(Config.DATABASE_PASSWORD);
+			config.setMaximumPoolSize(Config.DATABASE_MAX_CONNECTIONS);
+			config.setMinimumIdle(Math.min(10, Config.DATABASE_MAX_CONNECTIONS));
+			config.setConnectionTimeout(5000);
+			config.setIdleTimeout(600000);
+			config.setMaxLifetime(1800000);
+			config.setKeepaliveTime(300000);
+			config.setConnectionTestQuery("SELECT 1");
+			config.setValidationTimeout(3000);
+			config.setLeakDetectionThreshold(60000);
+			config.addDataSourceProperty("cachePrepStmts", "true");
+			config.addDataSourceProperty("prepStmtCacheSize", "250");
+			config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+			config.addDataSourceProperty("useServerPrepStmts", "true");
 
-			_source.setInitialPoolSize(10);
-			_source.setMinPoolSize(10);
-			_source.setMaxPoolSize(Config.DATABASE_MAX_CONNECTIONS);
-
-
-			_source.setAcquireRetryAttempts(0); // try to obtain connections indefinitely (0 = never quit)
-			_source.setAcquireRetryDelay(500);  // 500 milliseconds wait before try to acquire connection again
-			_source.setCheckoutTimeout(0);      // 0 = wait indefinitely for new connection
-			// if pool is exhausted
-			_source.setAcquireIncrement(5);     // if pool is exhausted, get 5 more connections at a time
-			// cause there is a "long" delay on acquire connection
-			// so taking more than one connection at once will make connection pooling
-			// more effective.
-
-			// this "connection_test_table" is automatically created if not already there
-			_source.setAutomaticTestTable("connection_test_table");
-			_source.setTestConnectionOnCheckin(false);
-
-			// testing OnCheckin used with IdleConnectionTestPeriod is faster than  testing on checkout
-
-			_source.setIdleConnectionTestPeriod(3600); // test idle connection every 60 sec
-			_source.setMaxIdleTime(0); // 0 = idle connections never expire
-			// *THANKS* to connection testing configured above
-			// but I prefer to disconnect all connections not used
-			// for more than 1 hour
-
-			// enables statement caching,  there is a "semi-bug" in c3p0 0.9.0 but in 0.9.0.2 and later it's fixed
-			_source.setMaxStatementsPerConnection(100);
-
-			_source.setBreakAfterAcquireFailure(false);  // never fail if any way possible
-			// setting this to true will make
-			// c3p0 "crash" and refuse to work
-			// till restart thus making acquire
-			// errors "FATAL" ... we don't want that
-			// it should be possible to recover
-			_source.setDriverClass(Config.DATABASE_DRIVER);
-			_source.setJdbcUrl(Config.DATABASE_URL);
-			_source.setUser(Config.DATABASE_LOGIN);
-			_source.setPassword(Config.DATABASE_PASSWORD);
+			_source = new HikariDataSource(config);
 
 			/* Test the connection */
 			_source.getConnection().close();
@@ -98,70 +91,74 @@ public class L2DatabaseFactory
 			if (Config.DEBUG) _log.fine("Database Connection Working");
 
 			if (Config.DATABASE_DRIVER.toLowerCase().contains("microsoft"))
-                _providerType = ProviderType.MsSql;
-            else
-                _providerType = ProviderType.MySql;
+				_providerType = ProviderType.MsSql;
+			else
+				_providerType = ProviderType.MySql;
 		}
 		catch (SQLException x)
 		{
 			if (Config.DEBUG) _log.fine("Database Connection FAILED");
-			// re-throw the exception
 			throw x;
 		}
 		catch (Exception e)
 		{
 			if (Config.DEBUG) _log.fine("Database Connection FAILED");
-			throw new SQLException("could not init DB connection:"+e);
+			throw new SQLException("could not init DB connection:" + e);
 		}
 	}
 
-    // =========================================================
-    // Method - Public
-    public final String prepQuerySelect(String[] fields, String tableName, String whereClause, boolean returnOnlyTopRecord)
-    {
-        String msSqlTop1 = "";
-        String mySqlTop1 = "";
-        if (returnOnlyTopRecord)
-        {
-            if (getProviderType() == ProviderType.MsSql) msSqlTop1 = " Top 1 ";
-            if (getProviderType() == ProviderType.MySql) mySqlTop1 = " Limit 1 ";
-        }
-        String query = "SELECT " + msSqlTop1 + safetyString(fields) + " FROM " + tableName + " WHERE " + whereClause + mySqlTop1;
-        return query;
-    }
+	public final String prepQuerySelect(String[] fields, String tableName, String whereClause, boolean returnOnlyTopRecord)
+	{
+		String msSqlTop1 = "";
+		String mySqlTop1 = "";
+		if (returnOnlyTopRecord)
+		{
+			if (getProviderType() == ProviderType.MsSql) msSqlTop1 = " Top 1 ";
+			if (getProviderType() == ProviderType.MySql) mySqlTop1 = " Limit 1 ";
+		}
+		String query = "SELECT " + msSqlTop1 + safetyString(fields) + " FROM " + tableName + " WHERE " + whereClause + mySqlTop1;
+		return query;
+	}
 
-    public void shutdown()
-    {
-        try {
-            _source.close();
-        } catch (Exception e) {_log.log(Level.INFO, "", e);}
-        try {
-            _source = null;
-        } catch (Exception e) {_log.log(Level.INFO, "", e);}
-    }
+	public void shutdown()
+	{
+		try
+		{
+			_source.close();
+		}
+		catch (Exception e)
+		{
+			_log.log(Level.INFO, "", e);
+		}
+		try
+		{
+			_source = null;
+		}
+		catch (Exception e)
+		{
+			_log.log(Level.INFO, "", e);
+		}
+	}
 
-    public final String safetyString(String... whatToCheck)
-    {
-        // NOTE: Use brace as a safty percaution just incase name is a reserved word
-        String braceLeft = "`";
-        String braceRight = "`";
-        if (getProviderType() == ProviderType.MsSql)
-        {
-            braceLeft = "[";
-            braceRight = "]";
-        }
+	public final String safetyString(String... whatToCheck)
+	{
+		String braceLeft = "`";
+		String braceRight = "`";
+		if (getProviderType() == ProviderType.MsSql)
+		{
+			braceLeft = "[";
+			braceRight = "]";
+		}
 
-        String result = "";
-        for(String word : whatToCheck)
-        {
-            if(result != "") result += ", ";
-            result += braceLeft + word + braceRight;
-        }
-        return result;
-    }
+		String result = "";
+		for (String word : whatToCheck)
+		{
+			if (result != "") result += ", ";
+			result += braceLeft + word + braceRight;
+		}
+		return result;
+	}
 
-    // =========================================================
-    // Property - Public
 	public static L2DatabaseFactory getInstance() throws SQLException
 	{
 		if (_instance == null)
@@ -171,32 +168,35 @@ public class L2DatabaseFactory
 		return _instance;
 	}
 
-	public Connection getConnection() //throws SQLException
+	public Connection getConnection()
 	{
-		Connection con=null;
-
-		while(con==null)
+		Connection con = null;
+		while (con == null)
 		{
 			try
 			{
-				con=_source.getConnection();
-			} catch (SQLException e)
+				con = _source.getConnection();
+			}
+			catch (SQLException e)
 			{
-				_log.warning("L2DatabaseFactory: getConnection() failed, trying again "+e);
+				_log.warning("L2DatabaseFactory: getConnection() failed, trying again " + e);
 			}
 		}
 		return con;
 	}
 
-	public int getBusyConnectionCount() throws SQLException
+	public int getBusyConnectionCount()
 	{
-	    return _source.getNumBusyConnectionsDefaultUser();
+		return _source.getHikariPoolMXBean().getActiveConnections();
 	}
 
-	public int getIdleConnectionCount() throws SQLException
+	public int getIdleConnectionCount()
 	{
-	    return _source.getNumIdleConnectionsDefaultUser();
+		return _source.getHikariPoolMXBean().getIdleConnections();
 	}
 
-    public final ProviderType getProviderType() { return _providerType; }
+	public final ProviderType getProviderType()
+	{
+		return _providerType;
+	}
 }

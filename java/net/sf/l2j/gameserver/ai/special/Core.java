@@ -22,7 +22,6 @@ package net.sf.l2j.gameserver.ai.special;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.instancemanager.GrandBossManager;
 import net.sf.l2j.gameserver.model.L2Attackable;
@@ -34,6 +33,9 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Core AI
@@ -56,7 +58,7 @@ public class Core extends Quest implements Runnable
 	
 	private static boolean _FirstAttacked;
 	
-	List<L2Attackable> Minions = new FastList<>();
+	List<L2Attackable> Minions = new ArrayList<>();
 	
 	// private static final Logger LOGGER = Logger.getLogger(Core.class);
 	

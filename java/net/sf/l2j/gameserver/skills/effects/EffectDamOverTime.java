@@ -59,7 +59,6 @@ class EffectDamOverTime extends L2Effect
         					&& !(getSkill().getTargetType() == SkillTargetType.TARGET_SELF
         							&& getSkill().isToggle());
 
-
         getEffected().reduceCurrentHp(damage, getEffector(),awake);
 
 		return true;

@@ -20,7 +20,6 @@ import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Olympiad;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -44,6 +43,8 @@ import net.sf.l2j.gameserver.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.skills.l2skills.L2SkillDrain;
 import net.sf.l2j.gameserver.taskmanager.AttackStanceTaskManager;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
 
 public class L2CubicInstance
 {
@@ -82,7 +83,7 @@ public class L2CubicInstance
     protected int _activationchance;
     protected boolean _active;
     
-    protected List<L2Skill> _skills = new FastList<L2Skill>();
+    protected List<L2Skill> _skills = new ArrayList<L2Skill>();
     
     private Future<?> _disappearTask;
     private Future<?> _actionTask;
@@ -312,7 +313,7 @@ public class L2CubicInstance
     					return;
     				}
     			}
-    			List<L2Character> potentialTarget = new FastList<L2Character>();
+    			List<L2Character> potentialTarget = new ArrayList<L2Character>();
     			
     			for (L2PcInstance enemy : enemyTeam.getParticipatedPlayers().values())
     			{
@@ -490,8 +491,8 @@ public class L2CubicInstance
     				}
     			}
     		// cubic can not attack owner target, so now we look for a random target 
-    		List<L2Character> potentialTarget = new FastList<L2Character>();
-    		List<L2Character> potentialPvPTarget = new FastList<L2Character>();
+    		List<L2Character> potentialTarget = new ArrayList<L2Character>();
+    		List<L2Character> potentialPvPTarget = new ArrayList<L2Character>();
     		Collection<L2Character> knownTarget = _owner.getKnownList().getKnownCharactersInRadius(MAX_MAGIC_RANGE);
    		
    		   	for (L2Character tgMob : knownTarget)

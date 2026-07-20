@@ -24,6 +24,8 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 
+import java.util.Set;
+
 /**
  * This class manages some npcs can walk in the city. <br>
  * It inherits all methods from L2NpcInstance. <br><br>

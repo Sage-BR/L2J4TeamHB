@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 
 import javax.script.ScriptContext;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.script.IntList;
 import net.sf.l2j.gameserver.script.Parser;
@@ -27,6 +26,8 @@ import net.sf.l2j.gameserver.script.ParserFactory;
 import net.sf.l2j.gameserver.script.ScriptEngine;
 
 import org.w3c.dom.Node;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Luis Arias
@@ -61,7 +62,7 @@ public class FaenorWorldDataParser extends FaenorParser
         Map<String, String> statValues;
         public PetData()
         {
-            statValues = new FastMap<String, String>();
+            statValues = new ConcurrentHashMap<String, String>();
         }
     }
 

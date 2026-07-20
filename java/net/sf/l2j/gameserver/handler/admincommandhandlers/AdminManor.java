@@ -16,8 +16,7 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
@@ -27,6 +26,9 @@ import net.sf.l2j.gameserver.instancemanager.CastleManorManager.SeedProduction;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Admin comand handler for Manor System
@@ -76,10 +78,10 @@ public class AdminManor implements IAdminCommandHandler {
 
 			if (castleId>0) {
 				Castle castle = CastleManager.getInstance().getCastleById(castleId);
-				castle.setCropProcure(new FastList<CropProcure>(), CastleManorManager.PERIOD_CURRENT);
-				castle.setCropProcure(new FastList<CropProcure>(), CastleManorManager.PERIOD_NEXT);
-				castle.setSeedProduction(new FastList<SeedProduction>(), CastleManorManager.PERIOD_CURRENT);
-				castle.setSeedProduction(new FastList<SeedProduction>(), CastleManorManager.PERIOD_NEXT);
+				castle.setCropProcure(new ArrayList<CropProcure>(), CastleManorManager.PERIOD_CURRENT);
+				castle.setCropProcure(new ArrayList<CropProcure>(), CastleManorManager.PERIOD_NEXT);
+				castle.setSeedProduction(new ArrayList<SeedProduction>(), CastleManorManager.PERIOD_CURRENT);
+				castle.setSeedProduction(new ArrayList<SeedProduction>(), CastleManorManager.PERIOD_NEXT);
 				if (Config.ALT_MANOR_SAVE_ALL_ACTIONS) {
 					castle.saveCropData();
 					castle.saveSeedData();
@@ -87,10 +89,10 @@ public class AdminManor implements IAdminCommandHandler {
 				activeChar.sendMessage("Manor data for " + castle.getName() + " was nulled");
 			} else {
 				for (Castle castle : CastleManager.getInstance().getCastles()) {
-					castle.setCropProcure(new FastList<CropProcure>(), CastleManorManager.PERIOD_CURRENT);
-					castle.setCropProcure(new FastList<CropProcure>(), CastleManorManager.PERIOD_NEXT);
-					castle.setSeedProduction(new FastList<SeedProduction>(), CastleManorManager.PERIOD_CURRENT);
-					castle.setSeedProduction(new FastList<SeedProduction>(), CastleManorManager.PERIOD_NEXT);
+					castle.setCropProcure(new ArrayList<CropProcure>(), CastleManorManager.PERIOD_CURRENT);
+					castle.setCropProcure(new ArrayList<CropProcure>(), CastleManorManager.PERIOD_NEXT);
+					castle.setSeedProduction(new ArrayList<SeedProduction>(), CastleManorManager.PERIOD_CURRENT);
+					castle.setSeedProduction(new ArrayList<SeedProduction>(), CastleManorManager.PERIOD_NEXT);
 					if (Config.ALT_MANOR_SAVE_ALL_ACTIONS) {
 						castle.saveCropData();
 						castle.saveSeedData();
@@ -145,7 +147,7 @@ public class AdminManor implements IAdminCommandHandler {
 
 	private void showMainPage(L2PcInstance activeChar) {
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-        TextBuilder replyMSG = new TextBuilder("<html><body>");
+        StringBuilder replyMSG = new StringBuilder("<html><body>");
 
         replyMSG.append("<center><font color=\"LEVEL\"> [Manor System] </font></center><br>");
         replyMSG.append("<table width=\"100%\"><tr><td>");

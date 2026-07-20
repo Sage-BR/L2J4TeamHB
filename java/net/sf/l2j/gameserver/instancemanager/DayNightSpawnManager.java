@@ -14,15 +14,19 @@
  */
 package net.sf.l2j.gameserver.instancemanager;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.model.L2Spawn;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2RaidBossInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -51,9 +55,9 @@ public class DayNightSpawnManager {
 
     private DayNightSpawnManager()
     {
-        _dayCreatures = new FastMap<L2Spawn, L2NpcInstance>();
-        _nightCreatures = new FastMap<L2Spawn, L2NpcInstance>();
-        _bosses = new FastMap<L2Spawn, L2RaidBossInstance>();
+        _dayCreatures = Collections.synchronizedMap(new HashMap<L2Spawn, L2NpcInstance>());
+        _nightCreatures = Collections.synchronizedMap(new HashMap<L2Spawn, L2NpcInstance>());
+        _bosses = Collections.synchronizedMap(new HashMap<L2Spawn, L2RaidBossInstance>());
         
         _log.info("DayNightSpawnManager: Day/Night handler initialized");
     }
@@ -118,7 +122,7 @@ public class DayNightSpawnManager {
 
             int i = 0;
             L2NpcInstance creature = null;
-            for (L2Spawn spawnDat : SpawnCreatures.keySet())
+            for (L2Spawn spawnDat : new ArrayList<L2Spawn>(SpawnCreatures.keySet()))
             {
                 if (SpawnCreatures.get(spawnDat) == null)
                 {

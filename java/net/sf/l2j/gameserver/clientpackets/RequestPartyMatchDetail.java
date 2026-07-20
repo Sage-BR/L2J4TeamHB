@@ -24,6 +24,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoom;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 
+import java.util.List;
+
 /**
  * @author Gnacik
  */
@@ -37,7 +39,6 @@ public final class RequestPartyMatchDetail extends L2GameClientPacket
     private int _unk2;
 	@SuppressWarnings("unused")
     private int _unk3;
-
 
 	@Override
 	protected void readImpl()

@@ -24,7 +24,6 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.util.Point3D;
 
-
 public final class RequestMoveToLocationInVehicle extends L2GameClientPacket
 {
 	private final Point3D _pos = new Point3D(0,0,0);
@@ -81,7 +80,6 @@ public final class RequestMoveToLocationInVehicle extends L2GameClientPacket
 	/**
 	 * @return
 	 */
-
 
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()

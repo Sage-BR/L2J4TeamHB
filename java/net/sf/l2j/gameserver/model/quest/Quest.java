@@ -23,8 +23,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -45,6 +44,10 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Luis Arias
@@ -55,9 +58,9 @@ public class Quest extends ManagedScript
 	protected static final Logger _log = Logger.getLogger(Quest.class.getName());
 
 	/** HashMap containing events from String value of the event */
-	private static Map<String, Quest> _allEventsS = new FastMap<String, Quest>();
+	private static Map<String, Quest> _allEventsS = new ConcurrentHashMap<String, Quest>();
 	/** HashMap containing lists of timers from the name of the timer */
-	private Map<String, FastList<QuestTimer>> _allEventTimers = new FastMap<String, FastList<QuestTimer>>();
+	private Map<String, ArrayList<QuestTimer>> _allEventTimers = new ConcurrentHashMap<String, ArrayList<QuestTimer>>();
 
 	private final int _questId;
 	private final String _name;
@@ -217,11 +220,11 @@ public class Quest extends ManagedScript
     public void startQuestTimer(String name, long time, L2NpcInstance npc, L2PcInstance player, boolean repeating)
     {
         // Add quest timer if timer doesn't already exist
-        FastList<QuestTimer> timers = getQuestTimers(name);
+        ArrayList<QuestTimer> timers = getQuestTimers(name);
         // no timer exists with the same name, at all 
         if (timers == null)
         {
-            timers = new FastList<QuestTimer>();
+            timers = new ArrayList<QuestTimer>();
             timers.add(new QuestTimer(this, name, time, npc, player, repeating));
             _allEventTimers.put(name, timers);
         }
@@ -238,7 +241,7 @@ public class Quest extends ManagedScript
 
     public QuestTimer getQuestTimer(String name, L2NpcInstance npc, L2PcInstance player)
     {
-    	FastList<QuestTimer> qt = _allEventTimers.get(name);
+    	ArrayList<QuestTimer> qt = _allEventTimers.get(name);
 		
 		if (qt == null || qt.isEmpty())
 			return null;
@@ -255,7 +258,7 @@ public class Quest extends ManagedScript
 		return null;
     }
 
-    public FastList<QuestTimer> getQuestTimers(String name)
+    public ArrayList<QuestTimer> getQuestTimers(String name)
     {
     	return _allEventTimers.get(name);
     }
@@ -271,7 +274,7 @@ public class Quest extends ManagedScript
     {
     	if (timer == null)
     		return;
-    	FastList<QuestTimer> timers = getQuestTimers(timer.getName());
+    	ArrayList<QuestTimer> timers = getQuestTimers(timer.getName());
     	if (timers == null)
     		return;
     	timers.remove(timer);    		
@@ -597,7 +600,6 @@ public class Quest extends ManagedScript
 			player.processQuestEvent(name, "enter");
 		}
 	}
-
 
 	/**
 	 * Insert (or Update) in the database variables that need to stay persistant for this quest after a reboot.
@@ -1022,7 +1024,7 @@ public class Quest extends ManagedScript
     	
     	// if the player is in a party, gather a list of all matching party members (possibly 
     	// including this player) 
-    	FastList<L2PcInstance> candidates = new FastList<L2PcInstance>();
+    	ArrayList<L2PcInstance> candidates = new ArrayList<L2PcInstance>();
     	
     	// get the target for enforcing distance limitations.
     	L2Object target = player.getTarget();
@@ -1074,7 +1076,7 @@ public class Quest extends ManagedScript
     	
     	// if the player is in a party, gather a list of all matching party members (possibly 
     	// including this player) 
-    	FastList<L2PcInstance> candidates = new FastList<L2PcInstance>();
+    	ArrayList<L2PcInstance> candidates = new ArrayList<L2PcInstance>();
 
     	// get the target for enforcing distance limitations.
     	L2Object target = player.getTarget();
@@ -1252,7 +1254,7 @@ public class Quest extends ManagedScript
         // if timers ought to be restarted, the quest can take care of it
         // with its code (example: save global data indicating what timer must 
         // be restarted).
-        for (FastList<QuestTimer> timers : _allEventTimers.values())
+        for (ArrayList<QuestTimer> timers : _allEventTimers.values())
             for(QuestTimer timer :timers)
                 timer.cancel();
         _allEventTimers.clear();

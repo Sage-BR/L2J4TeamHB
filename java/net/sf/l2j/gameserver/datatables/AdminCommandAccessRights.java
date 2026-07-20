@@ -20,8 +20,9 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author FBIagent<br>
@@ -34,7 +35,7 @@ public class AdminCommandAccessRights
 	private static AdminCommandAccessRights _instance = null;
 
 	/** The access rights<br> */
-	private Map< String, AdminCommandAccessRight > _adminCommandAccessRights = new FastMap< String, AdminCommandAccessRight >();
+	private Map< String, AdminCommandAccessRight > _adminCommandAccessRights = new ConcurrentHashMap< String, AdminCommandAccessRight >();
 
 	/**
 	 * Loads admin command access rights from database<br>

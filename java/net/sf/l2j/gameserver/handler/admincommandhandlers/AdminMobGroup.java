@@ -28,6 +28,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 
+import java.util.List;
+
 /**
  * @author littlecrow
  * Admin commands handler for controllable mobs

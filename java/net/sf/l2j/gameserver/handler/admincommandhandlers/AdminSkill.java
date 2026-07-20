@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
@@ -30,6 +29,8 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.PledgeSkillList;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.List;
 
 /**
  * This class handles following admin commands:
@@ -232,7 +233,7 @@ public class AdminSkill implements IAdminCommandHandler {
 			SkillsEnd = SkillsStart + MaxSkillsPerPage;
 
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-		TextBuilder replyMSG = new TextBuilder("<html><body>");
+		StringBuilder replyMSG = new StringBuilder("<html><body>");
 		replyMSG.append("<table width=260><tr>");
 		replyMSG.append("<td width=40><button value=\"Main\" action=\"bypass -h admin_admin\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>");
 		replyMSG.append("<td width=180><center>Character Selection Menu</center></td>");

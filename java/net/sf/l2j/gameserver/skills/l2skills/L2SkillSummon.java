@@ -31,6 +31,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.Set;
+
 public class L2SkillSummon extends L2Skill
 {
 

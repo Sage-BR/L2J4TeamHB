@@ -14,12 +14,12 @@
  */
 package net.sf.l2j.gameserver.clientpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager.SeedProduction;
 
+import java.util.ArrayList;
 
 /**
  * Format: (ch) dd [ddd]
@@ -74,7 +74,7 @@ public class RequestSetSeed extends L2GameClientPacket {
 		if (_size < 1)
 			return;
 
-		FastList<SeedProduction> seeds = new FastList<SeedProduction>();
+		ArrayList<SeedProduction> seeds = new ArrayList<SeedProduction>();
 		for (int i = 0; i < _size; i++)
 		{
 			int id = _items[i * 3 + 0];

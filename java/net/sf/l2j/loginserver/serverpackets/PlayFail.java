@@ -44,7 +44,6 @@ public final class PlayFail extends L2LoginServerPacket
 
 	private final PlayFailReason _reason;
 
-
 	public PlayFail(PlayFailReason reason)
 	{
 		_reason = reason;

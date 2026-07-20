@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ItemsAutoDestroy;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -59,6 +58,10 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * This class manages all NPC that can be attacked.<BR><BR>
  *
@@ -94,7 +97,6 @@ public class L2Attackable extends L2NpcInstance
         /** Number of damages that the attaker L2Character gave to this L2Attackable */
         protected int _damage;
 
-
         /**
          * Constructor of AggroInfo.<BR><BR>
          */
@@ -124,7 +126,6 @@ public class L2Attackable extends L2NpcInstance
         }
 
     }
-
 
     /**
      * This class contains all RewardInfo of the L2Attackable against the any attacker L2Character, based on amount of damage done.<BR><BR>
@@ -231,15 +232,15 @@ public class L2Attackable extends L2NpcInstance
     /** The table containing all autoAttackable L2Character in its Aggro Range and L2Character that attacked the L2Attackable
      * This Map is Thread Safe, but Removing Object While Interating Over It Will Result NPE
      * */
-    private FastMap<L2Character, AggroInfo> _aggroList = new FastMap<L2Character, AggroInfo>().setShared(true);
+    private ConcurrentHashMap<L2Character, AggroInfo> _aggroList = new ConcurrentHashMap<L2Character, AggroInfo>();
     /** Use this to Read or Put Object to this Map */
-    public final FastMap<L2Character, AggroInfo> getAggroListRP()
+    public final ConcurrentHashMap<L2Character, AggroInfo> getAggroListRP()
     {
     	return _aggroList;
     }
     /** Use this to Remove Object from this Map
      * This Should be Synchronized While Interating over This Map - ie u cant interating and removing object at once*/
-    public final FastMap<L2Character, AggroInfo> getAggroList()
+    public final ConcurrentHashMap<L2Character, AggroInfo> getAggroList()
     {
     	return _aggroList;
     }
@@ -278,7 +279,7 @@ public class L2Attackable extends L2NpcInstance
     private boolean _absorbed;
 
     /** The table containing all L2PcInstance that successfuly absorbed the soul of this L2Attackable */
-    private FastMap<L2PcInstance, AbsorberInfo> _absorbersList = new FastMap<L2PcInstance, AbsorberInfo>().setShared(true);
+    private ConcurrentHashMap<L2PcInstance, AbsorberInfo> _absorbersList = new ConcurrentHashMap<L2PcInstance, AbsorberInfo>();
 
     /** Have this L2Attackable to reward Exp and SP on Die? **/
     private boolean _mustGiveExpSp;
@@ -524,7 +525,7 @@ public class L2Attackable extends L2NpcInstance
     protected void calculateRewards(L2Character lastAttacker)
     {
         // Creates an empty list of rewards
-        FastMap<L2Character, RewardInfo> rewards = new FastMap<L2Character, RewardInfo>().setShared(true);
+        ConcurrentHashMap<L2Character, RewardInfo> rewards = new ConcurrentHashMap<L2Character, RewardInfo>();
 
         try
         {
@@ -594,7 +595,7 @@ public class L2Attackable extends L2NpcInstance
         		RewardInfo reward2;
         		int[] tmp;
 
-        		for (FastMap.Entry<L2Character, RewardInfo> entry = rewards.head(), end = rewards.tail(); (entry = entry.getNext()) != end;)
+        		for (Map.Entry<L2Character, RewardInfo> entry : rewards.entrySet())
         		{
         			if (entry == null) continue;
 
@@ -689,7 +690,7 @@ public class L2Attackable extends L2NpcInstance
         				partyLvl = 0;
 
         				// Get all L2Character that can be rewarded in the party
-        				List<L2PlayableInstance> rewardedMembers = new FastList<L2PlayableInstance>();
+        				List<L2PlayableInstance> rewardedMembers = new ArrayList<L2PlayableInstance>();
 
         				// Go through all L2PcInstance in the party
         				List<L2PcInstance> groupMembers;
@@ -805,7 +806,6 @@ public class L2Attackable extends L2NpcInstance
         	_log.log(Level.SEVERE, "", e);
         }
     }
-
 
     /**
      * Add damage and hate to the attacker AggroInfo of the L2Attackable _aggroList.<BR><BR>
@@ -985,7 +985,7 @@ public class L2Attackable extends L2NpcInstance
         L2Character mostHated = null;
         L2Character secondMostHated = null;
         int maxHate = 0;
-        List<L2Character> result = new FastList<L2Character>();
+        List<L2Character> result = new ArrayList<L2Character>();
 
         // While iterating over this map removing objects is not allowed
         synchronized (getAggroList())
@@ -1231,7 +1231,6 @@ public class L2Attackable extends L2NpcInstance
                   else if (min == max) itemCount += min;
                   else itemCount++;
 
-
                   // Prepare for next iteration if dropChance > L2DropData.MAX_CHANCE
                   dropChance -= L2DropData.MAX_CHANCE;
               }
@@ -1244,7 +1243,6 @@ public class L2Attackable extends L2NpcInstance
               else if (itemCount == 0 && Config.DEBUG) _log.fine("Roll produced 0 items to drop...");
         }
         return null;
-
 
         /*
          // Applies Drop rates
@@ -1263,7 +1261,6 @@ public class L2Attackable extends L2NpcInstance
          int minCount = drop.getMinDrop();
          int maxCount = drop.getMaxDrop();
          int itemCount = 0;
-
 
 
          if (itemCount > 0) return new RewardItem(drop.getItemId(), itemCount);
@@ -1343,7 +1340,7 @@ public class L2Attackable extends L2NpcInstance
             	 // according to sh1ny, seeded mobs CAN be spoiled and swept.
             	 if ( isSpoil()/* && !isSeeded() */)
             	 {
-	    			 FastList<RewardItem> sweepList = new FastList<RewardItem>();
+	    			 ArrayList<RewardItem> sweepList = new ArrayList<RewardItem>();
 
 	    	         for(L2DropData drop: cat.getAllDrops() )
 	    	         {
@@ -1820,7 +1817,6 @@ public class L2Attackable extends L2NpcInstance
         // If we have no _absorbersList initiated, do it
         AbsorberInfo ai = _absorbersList.get(attacker);
 
-
         // If the L2Character attacker isn't already in the _absorbersList of this L2Attackable, add it
         if (ai == null)
         {
@@ -1915,7 +1911,7 @@ public class L2Attackable extends L2NpcInstance
         // 3- Everything is correct, but it failed. The crystal scatters. A sound event is played. (10%)
         // 4- Everything is correct, the crystal level up. A sound event is played. (32.5%)
 
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
 
         if (absorbType == L2NpcTemplate.AbsorbCrystalType.FULL_PARTY && killer.isInParty())
             players = killer.getParty().getPartyMembers();
@@ -2277,7 +2273,7 @@ public class L2Attackable extends L2NpcInstance
             count += diff;
         }
 
-        FastList<RewardItem> harvested = new FastList<RewardItem>();
+        ArrayList<RewardItem> harvested = new ArrayList<RewardItem>();
 
         harvested.add(new RewardItem(L2Manor.getInstance().getCropType(_seedType), count* Config.RATE_DROP_MANOR));
 

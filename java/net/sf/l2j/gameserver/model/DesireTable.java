@@ -29,7 +29,8 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 /**
  * This class ...
@@ -77,7 +78,7 @@ public class DesireTable
 
         public Desires(DesireType... desireList)
         {
-            _desireTable = new FastMap<DesireType, DesireValue>();
+            _desireTable = new ConcurrentHashMap<DesireType, DesireValue>();
 
             for (DesireType desire : desireList)
             {
@@ -117,7 +118,7 @@ public class DesireTable
     public DesireTable(DesireType... desireList)
     {
         _desireTypes = desireList;
-        _objectDesireTable = new FastMap<L2Object, Desires>();
+        _objectDesireTable = new ConcurrentHashMap<L2Object, Desires>();
         _generalDesires = new Desires(_desireTypes);
     }
 

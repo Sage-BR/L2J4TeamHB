@@ -19,10 +19,12 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.templates.L2Henna;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * This class ...
@@ -49,7 +51,7 @@ public class HennaTable
 
 	private HennaTable()
 	{
-		_henna = new FastMap<Integer, L2Henna>();
+		_henna = new ConcurrentHashMap<Integer, L2Henna>();
 		restoreHennaData();
 
 	}
@@ -101,19 +103,16 @@ public class HennaTable
 			hennaDat.set("stat_DEX", HennaData.getInt("stat_DEX"));
 			hennaDat.set("stat_WIT", HennaData.getInt("stat_WIT"));
 
-
 			L2Henna template = new L2Henna(hennaDat);
 			_henna.put(id, template);
 		}
 		_log.config("HennaTable: Loaded " + _henna.size() + " Templates.");
 	}
 
-
 	public boolean isInitialized()
 	{
 		return _initialized;
 	}
-
 
 	public L2Henna getTemplate(int id)
 	{

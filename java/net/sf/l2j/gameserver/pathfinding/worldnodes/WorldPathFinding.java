@@ -19,10 +19,11 @@ import java.nio.IntBuffer;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 import net.sf.l2j.gameserver.pathfinding.Node;
 import net.sf.l2j.gameserver.pathfinding.PathFinding;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -33,8 +34,8 @@ public class WorldPathFinding extends PathFinding
 	//private static Logger _log = Logger.getLogger(WorldPathFinding.class.getName());
 	private static WorldPathFinding _instance;
     @SuppressWarnings("unused")
-	private static Map<Short, ByteBuffer> _pathNodes = new FastMap<Short, ByteBuffer>();
-	private static Map<Short, IntBuffer> _pathNodesIndex = new FastMap<Short, IntBuffer>();
+	private static Map<Short, ByteBuffer> _pathNodes = new ConcurrentHashMap<Short, ByteBuffer>();
+	private static Map<Short, IntBuffer> _pathNodesIndex = new ConcurrentHashMap<Short, IntBuffer>();
 
 	public static WorldPathFinding getInstance()
 	{

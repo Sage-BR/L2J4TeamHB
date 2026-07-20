@@ -16,12 +16,15 @@ package net.sf.l2j.gameserver.model.zone;
 
 import java.util.List;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Abstract base class for any zone type
@@ -33,7 +36,7 @@ public abstract class L2ZoneType
 {
     private final int _id;
 	protected List<L2ZoneForm> _zone;
-	protected FastMap<Integer, L2Character> _characterList;
+	protected ConcurrentHashMap<Integer, L2Character> _characterList;
 
 	/** Parameters to affect specific characters */
 	private boolean _checkAffected;
@@ -47,7 +50,7 @@ public abstract class L2ZoneType
 	protected L2ZoneType(int id)
 	{
         _id = id;
-		_characterList = new FastMap<Integer, L2Character>().setShared(true);
+		_characterList = new ConcurrentHashMap<Integer, L2Character>();
 
 		_checkAffected = false;
 
@@ -229,7 +232,7 @@ public abstract class L2ZoneType
 
 	public final List<L2ZoneForm> getZones()
 	{
-		if (_zone == null) _zone = new FastList<L2ZoneForm>();
+		if (_zone == null) _zone = new ArrayList<L2ZoneForm>();
 		return _zone;
 	}
 	/**
@@ -309,7 +312,7 @@ public abstract class L2ZoneType
 			onExit(character);
 		}
 	}
-	public FastMap<Integer, L2Character> getCharactersInside()
+	public ConcurrentHashMap<Integer, L2Character> getCharactersInside()
 	{
 		return _characterList;
 	}

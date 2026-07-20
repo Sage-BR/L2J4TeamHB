@@ -19,13 +19,14 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager;
 import net.sf.l2j.gameserver.model.L2Spawn;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -39,7 +40,7 @@ public class SpawnTable
 
     private static final SpawnTable _instance = new SpawnTable();
 
-    private Map<Integer, L2Spawn> _spawntable = new FastMap<Integer, L2Spawn>().setShared(true);
+    private Map<Integer, L2Spawn> _spawntable = new ConcurrentHashMap<Integer, L2Spawn>();
     private int _npcSpawnCount;
     private int _customSpawnCount;
 
@@ -83,56 +84,63 @@ public class SpawnTable
 
             while (rset.next())
             {
-                template1 = NpcTable.getInstance().getTemplate(rset.getInt("npc_templateid"));
-                if (template1 != null)
+                try
                 {
-                    if (template1.type.equalsIgnoreCase("L2SiegeGuard"))
+                    template1 = NpcTable.getInstance().getTemplate(rset.getInt("npc_templateid"));
+                    if (template1 != null)
                     {
-                        // Don't spawn
-                    }
-                    else if (template1.type.equalsIgnoreCase("L2RaidBoss"))
-                    {
-                        // Don't spawn raidboss
-                    }
-                    else if (!Config.ALLOW_CLASS_MASTERS && template1.type.equals("L2ClassMaster"))
-                    {
-                        // Dont' spawn class masters
+                        if (template1.type.equalsIgnoreCase("L2SiegeGuard"))
+                        {
+                            // Don't spawn
+                        }
+                        else if (template1.type.equalsIgnoreCase("L2RaidBoss"))
+                        {
+                            // Don't spawn raidboss
+                        }
+                        else if (!Config.ALLOW_CLASS_MASTERS && template1.type.equals("L2ClassMaster"))
+                        {
+                            // Dont' spawn class masters
+                        }
+                        else
+                        {
+                            spawnDat = new L2Spawn(template1);
+                            spawnDat.setId(rset.getInt("id"));
+                            spawnDat.setAmount(rset.getInt("count"));
+                            spawnDat.setLocx(rset.getInt("locx"));
+                            spawnDat.setLocy(rset.getInt("locy"));
+                            spawnDat.setLocz(rset.getInt("locz"));
+                            spawnDat.setHeading(rset.getInt("heading"));
+                            spawnDat.setRespawnDelay(rset.getInt("respawn_delay"));
+                            int loc_id = rset.getInt("loc_id");
+                            spawnDat.setLocation(loc_id);
+
+                            switch(rset.getInt("periodOfDay")) {
+                                case 0: // default
+                                    _npcSpawnCount += spawnDat.init();
+                                    break;
+                                case 1: // Day
+                                    DayNightSpawnManager.getInstance().addDayCreature(spawnDat);
+                                    _npcSpawnCount++;
+                                    break;
+                                case 2: // Night
+                                    DayNightSpawnManager.getInstance().addNightCreature(spawnDat);
+                                    _npcSpawnCount++;
+                                    break;
+                            }
+
+                            _spawntable.put(spawnDat.getId(), spawnDat);
+                            if (spawnDat.getId() > _highestId) _highestId = spawnDat.getId();
+                        }
                     }
                     else
                     {
-                        spawnDat = new L2Spawn(template1);
-                        spawnDat.setId(rset.getInt("id"));
-                        spawnDat.setAmount(rset.getInt("count"));
-                        spawnDat.setLocx(rset.getInt("locx"));
-                        spawnDat.setLocy(rset.getInt("locy"));
-                        spawnDat.setLocz(rset.getInt("locz"));
-                        spawnDat.setHeading(rset.getInt("heading"));
-                        spawnDat.setRespawnDelay(rset.getInt("respawn_delay"));
-                        int loc_id = rset.getInt("loc_id");
-                        spawnDat.setLocation(loc_id);
-
-                        switch(rset.getInt("periodOfDay")) {
-                            case 0: // default
-                                _npcSpawnCount += spawnDat.init();
-                                break;
-                            case 1: // Day
-                                DayNightSpawnManager.getInstance().addDayCreature(spawnDat);
-                                _npcSpawnCount++;
-                                break;
-                            case 2: // Night
-                                DayNightSpawnManager.getInstance().addNightCreature(spawnDat);
-                                _npcSpawnCount++;
-                                break;
-                        }
-
-                        _spawntable.put(spawnDat.getId(), spawnDat);
-                        if (spawnDat.getId() > _highestId) _highestId = spawnDat.getId();
+                        _log.warning("SpawnTable: Data missing in NPC table for ID: "
+                            + rset.getInt("npc_templateid") + ".");
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    _log.warning("SpawnTable: Data missing in NPC table for ID: "
-                        + rset.getInt("npc_templateid") + ".");
+                    _log.warning("SpawnTable: Spawn could not be initialized: " + e);
                 }
             }
             rset.close();
@@ -140,8 +148,7 @@ public class SpawnTable
         }
         catch (Exception e)
         {
-            // problem with initializing spawn, go to next one
-            _log.warning("SpawnTable: Spawn could not be initialized: " + e);
+            _log.warning("SpawnTable: Error processing spawnlist query: " + e);
         }
         finally
         {
@@ -176,57 +183,64 @@ public class SpawnTable
     
                 while (rset.next())
                 {
-                    template1 = NpcTable.getInstance().getTemplate(rset.getInt("npc_templateid"));
-                    if (template1 != null)
+                    try
                     {
-                        if (template1.type.equalsIgnoreCase("L2SiegeGuard"))
+                        template1 = NpcTable.getInstance().getTemplate(rset.getInt("npc_templateid"));
+                        if (template1 != null)
                         {
-                            // Don't spawn
-                        }
-                        else if (template1.type.equalsIgnoreCase("L2RaidBoss"))
-                        {
-                            // Don't spawn raidboss
-                        }
-                        else if (!Config.ALLOW_CLASS_MASTERS && template1.type.equals("L2ClassMaster"))
-                        {
-                            // Dont' spawn class masters
+                            if (template1.type.equalsIgnoreCase("L2SiegeGuard"))
+                            {
+                                // Don't spawn
+                            }
+                            else if (template1.type.equalsIgnoreCase("L2RaidBoss"))
+                            {
+                                // Don't spawn raidboss
+                            }
+                            else if (!Config.ALLOW_CLASS_MASTERS && template1.type.equals("L2ClassMaster"))
+                            {
+                                // Dont' spawn class masters
+                            }
+                            else
+                            {
+                                spawnDat = new L2Spawn(template1);
+                                spawnDat.setId(rset.getInt("id"));
+                                spawnDat.setAmount(rset.getInt("count"));
+                                spawnDat.setLocx(rset.getInt("locx"));
+                                spawnDat.setLocy(rset.getInt("locy"));
+                                spawnDat.setLocz(rset.getInt("locz"));
+                                spawnDat.setHeading(rset.getInt("heading"));
+                                spawnDat.setRespawnDelay(rset.getInt("respawn_delay"));
+                                spawnDat.setCustom(true);
+                                int loc_id = rset.getInt("loc_id");
+                                spawnDat.setLocation(loc_id);
+        
+                                switch(rset.getInt("periodOfDay")) {
+                                    case 0: // default
+                                        _customSpawnCount += spawnDat.init();
+                                        break;
+                                    case 1: // Day
+                                        DayNightSpawnManager.getInstance().addDayCreature(spawnDat);
+                                        _customSpawnCount++;
+                                        break;
+                                    case 2: // Night
+                                        DayNightSpawnManager.getInstance().addNightCreature(spawnDat);
+                                        _customSpawnCount++;
+                                        break;
+                                }
+        
+                                _spawntable.put(spawnDat.getId(), spawnDat);
+                                if (spawnDat.getId() > _highestId) _highestId = spawnDat.getId();
+                            }
                         }
                         else
                         {
-                            spawnDat = new L2Spawn(template1);
-                            spawnDat.setId(rset.getInt("id"));
-                            spawnDat.setAmount(rset.getInt("count"));
-                            spawnDat.setLocx(rset.getInt("locx"));
-                            spawnDat.setLocy(rset.getInt("locy"));
-                            spawnDat.setLocz(rset.getInt("locz"));
-                            spawnDat.setHeading(rset.getInt("heading"));
-                            spawnDat.setRespawnDelay(rset.getInt("respawn_delay"));
-                            spawnDat.setCustom(true);
-                            int loc_id = rset.getInt("loc_id");
-                            spawnDat.setLocation(loc_id);
-    
-                            switch(rset.getInt("periodOfDay")) {
-                                case 0: // default
-                                    _customSpawnCount += spawnDat.init();
-                                    break;
-                                case 1: // Day
-                                    DayNightSpawnManager.getInstance().addDayCreature(spawnDat);
-                                    _customSpawnCount++;
-                                    break;
-                                case 2: // Night
-                                    DayNightSpawnManager.getInstance().addNightCreature(spawnDat);
-                                    _customSpawnCount++;
-                                    break;
-                            }
-    
-                            _spawntable.put(spawnDat.getId(), spawnDat);
-                            if (spawnDat.getId() > _highestId) _highestId = spawnDat.getId();
+                            _log.warning("CustomSpawnTable: Data missing in NPC table for ID: "
+                                + rset.getInt("npc_templateid") + ".");
                         }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        _log.warning("CustomSpawnTable: Data missing in NPC table for ID: "
-                            + rset.getInt("npc_templateid") + ".");
+                        _log.warning("CustomSpawnTable: Spawn could not be initialized: " + e);
                     }
                 }
                 rset.close();
@@ -234,8 +248,7 @@ public class SpawnTable
             }
             catch (Exception e)
             {
-                // problem with initializing spawn, go to next one
-                _log.warning("CustomSpawnTable: Spawn could not be initialized: " + e);
+                _log.warning("CustomSpawnTable: Error processing custom spawnlist query: " + e);
             }
             finally
             {

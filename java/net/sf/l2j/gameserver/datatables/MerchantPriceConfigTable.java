@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2MerchantInstance;
@@ -32,6 +31,8 @@ import net.sf.l2j.gameserver.model.entity.Castle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -55,7 +56,7 @@ public class MerchantPriceConfigTable
     private static final String MPCS_FILE = "MerchantPriceConfig.xml";
     
     
-    private Map<Integer, MerchantPriceConfig> _mpcs = new FastMap<Integer, MerchantPriceConfig>();
+    private Map<Integer, MerchantPriceConfig> _mpcs = new ConcurrentHashMap<Integer, MerchantPriceConfig>();
     private MerchantPriceConfig _defaultMpc;
     
     private MerchantPriceConfigTable()

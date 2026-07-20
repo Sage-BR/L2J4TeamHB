@@ -24,7 +24,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.LoginServerThread;
@@ -41,6 +40,9 @@ import net.sf.l2j.util.EventData;
 
 import org.mmocore.network.MMOClient;
 import org.mmocore.network.MMOConnection;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Represents a client connected on Game Server
@@ -68,7 +70,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 
 	private boolean _isAuthedGG;
 	private long _connectionStartTime;
-	private List<Integer> _charSlotMapping = new FastList<Integer>();
+	private List<Integer> _charSlotMapping = new ArrayList<Integer>();
 
 	// Task
 	protected final ScheduledFuture<?> _autoSaveInDB;
@@ -310,7 +312,6 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 
 
 
-
 	public static void deleteCharByObjId(int objid)
 	{
 	    if (objid < 0)
@@ -369,12 +370,12 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 			statement.execute();
 			statement.close();
 
-            statement = con.prepareStatement("DELETE FROM heroes WHERE charId=?");
+            statement = con.prepareStatement("DELETE FROM heroes WHERE char_id=?");
             statement.setInt(1, objid);
             statement.execute();
             statement.close();
 
-            statement = con.prepareStatement("DELETE FROM olympiad_nobles WHERE charId=?");
+            statement = con.prepareStatement("DELETE FROM olympiad_nobles WHERE char_id=?");
             statement.setInt(1, objid);
             statement.execute();
             statement.close();
@@ -403,7 +404,6 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 			statement.setInt(1, objid);
 			statement.execute();
 			statement.close();
-
 
 			statement = con.prepareStatement("DELETE FROM characters WHERE charId=?");
 			statement.setInt(1, objid);
@@ -454,7 +454,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
         for (int i = 0; i < chars.length; i++)
         {
             int objectId = chars[i].getObjectId();
-            _charSlotMapping.add(new Integer(objectId));
+            _charSlotMapping.add(Integer.valueOf(objectId));
         }
     }
 

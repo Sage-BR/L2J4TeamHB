@@ -22,8 +22,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Announcements;
@@ -35,6 +34,10 @@ import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Auto Spawn Handler
@@ -79,8 +82,8 @@ public class AutoSpawnHandler
 
 	private AutoSpawnHandler()
 	{
-		_registeredSpawns = new FastMap<Integer, AutoSpawnInstance>();
-		_runningSpawns = new FastMap<Integer, ScheduledFuture<?>>();
+		_registeredSpawns = new ConcurrentHashMap<Integer, AutoSpawnInstance>();
+		_runningSpawns = new ConcurrentHashMap<Integer, ScheduledFuture<?>>();
 
 		restoreSpawnData();
 	}
@@ -397,7 +400,7 @@ public class AutoSpawnHandler
 
 	public Map<Integer, AutoSpawnInstance> getAutoSpawnInstances(int npcId)
 	{
-		Map<Integer, AutoSpawnInstance> spawnInstList = new FastMap<Integer, AutoSpawnInstance>();
+		Map<Integer, AutoSpawnInstance> spawnInstList = new ConcurrentHashMap<Integer, AutoSpawnInstance>();
 
 		for (AutoSpawnInstance spawnInst : _registeredSpawns.values())
 			if (spawnInst.getNpcId() == npcId)
@@ -645,9 +648,9 @@ public class AutoSpawnHandler
 
 		protected int _lastLocIndex = -1;
 
-		private List<L2NpcInstance> _npcList = new FastList<L2NpcInstance>();
+		private List<L2NpcInstance> _npcList = new ArrayList<L2NpcInstance>();
 
-		private List<Location> _locList = new FastList<Location>();
+		private List<Location> _locList = new ArrayList<Location>();
 
 		private boolean _spawnActive;
 
@@ -727,7 +730,7 @@ public class AutoSpawnHandler
 
 		public L2Spawn[] getSpawns()
 		{
-			List<L2Spawn> npcSpawns = new FastList<L2Spawn>();
+			List<L2Spawn> npcSpawns = new ArrayList<L2Spawn>();
 
 			for (L2NpcInstance npcInst : _npcList)
 				npcSpawns.add(npcInst.getSpawn());

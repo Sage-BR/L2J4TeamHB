@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import javolution.util.FastSet;
 import net.sf.l2j.Config;
 import net.sf.l2j.loginserver.GameServerTable.GameServerInfo;
 import net.sf.l2j.loginserver.crypt.NewCrypt;
@@ -47,6 +46,8 @@ import net.sf.l2j.loginserver.loginserverpackets.LoginServerFail;
 import net.sf.l2j.loginserver.loginserverpackets.PlayerAuthResponse;
 import net.sf.l2j.loginserver.serverpackets.ServerBasePacket;
 import net.sf.l2j.util.Util;
+
+import java.util.HashSet;
 
 /**
  * @author -Wooden-
@@ -70,7 +71,7 @@ public class GameServerThread extends Thread
 	private GameServerInfo _gsi;
 
 	/** Authed Clients on a GameServer*/
-	private Set<String> _accountsOnGameServer = new FastSet<String>();
+	private Set<String> _accountsOnGameServer = new HashSet<String>();
 
 	private String _connectionIPAddress;
 

@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.instancemanager.FortManager;
@@ -27,6 +26,8 @@ import net.sf.l2j.gameserver.model.entity.Fort;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.List;
 
 /**
  * This class handles all siege commands:
@@ -147,7 +148,7 @@ public class AdminFortSiege implements IAdminCommandHandler
         int i=0;
         NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
         adminReply.setFile("data/html/admin/forts.htm");
-        TextBuilder cList = new TextBuilder();
+        StringBuilder cList = new StringBuilder();
         for (Fort fort: FortManager.getInstance().getForts())
         {
             if (fort != null)

@@ -26,7 +26,6 @@ import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.gameserver.util.FloodProtector;
 import net.sf.l2j.util.Rnd;
 
-
 /**
  * This class ...
  *

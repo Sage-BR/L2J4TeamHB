@@ -47,7 +47,6 @@ public final class LoginFail extends L2LoginServerPacket
 
 	private LoginFailReason _reason;
 
-
 	public LoginFail(LoginFailReason reason)
 	{
 		_reason = reason;

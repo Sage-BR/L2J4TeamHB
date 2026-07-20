@@ -14,15 +14,16 @@
  */
 package net.sf.l2j.gameserver.skills.conditions;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.skills.Env;
 
+import java.util.ArrayList;
+
 public class ConditionTargetClassIdRestriction extends Condition {
 
-	private final FastList<Integer> _classIds;
+	private final ArrayList<Integer> _classIds;
 
-	public ConditionTargetClassIdRestriction(FastList<Integer> classId)
+	public ConditionTargetClassIdRestriction(ArrayList<Integer> classId)
 	{
 		_classIds = classId;
 	}

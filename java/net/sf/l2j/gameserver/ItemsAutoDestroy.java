@@ -17,12 +17,13 @@ package net.sf.l2j.gameserver;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.instancemanager.ItemsOnGroundManager;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.templates.L2EtcItemType;
+
+import java.util.ArrayList;
 
 public class ItemsAutoDestroy
 {
@@ -33,7 +34,7 @@ public class ItemsAutoDestroy
 
     private ItemsAutoDestroy()
     {
-        _items = new FastList<L2ItemInstance>();
+        _items = new ArrayList<L2ItemInstance>();
         _sleep	= Config.AUTODESTROY_ITEM_AFTER * 1000;
         if(_sleep == 0) // it should not happend as it is not called when AUTODESTROY_ITEM_AFTER = 0 but we never know..
         	_sleep = 3600000;

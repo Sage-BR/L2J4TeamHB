@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
@@ -35,13 +34,16 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
+
 public final class L2AuctioneerInstance extends L2FolkInstance
 {
     private static final int COND_ALL_FALSE = 0;
     private static final int COND_BUSY_BECAUSE_OF_SIEGE = 1;
     private static final int COND_REGULAR = 3;
 
-    private Map<Integer, Auction> _pendingAuctions = new FastMap<Integer, Auction>();
+    private Map<Integer, Auction> _pendingAuctions = new ConcurrentHashMap<Integer, Auction>();
 
     public L2AuctioneerInstance(int objectId, L2NpcTemplate template)
     {

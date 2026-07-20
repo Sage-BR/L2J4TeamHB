@@ -80,7 +80,6 @@ public class L2RecipeList
 		_recipes = tmp;
 	}
 
-
 	/**
 	 * Return the Identifier of the Instance.<BR><BR>
 	 */

@@ -72,4 +72,3 @@ public final class TradeOtherAdd extends L2GameServerPacket
 	}
 }
 
-

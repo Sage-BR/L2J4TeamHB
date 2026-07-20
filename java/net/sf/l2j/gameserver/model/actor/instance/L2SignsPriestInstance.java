@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.SevenSigns;
 import net.sf.l2j.gameserver.cache.HtmCache;
@@ -29,6 +28,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.List;
 
 /**
  * Dawn/Dusk Seven Signs Priest Instance
@@ -550,7 +551,7 @@ public class L2SignsPriestInstance extends L2FolkInstance
                     showChatWindow(player, val, fileSuffix, false);
                     break;
                 case 20: // Seal Status (for when joining a cabal)
-                    TextBuilder contentBuffer = new TextBuilder("<html><body><font color=\"LEVEL\">[ Seal Status ]</font><br>");
+                    StringBuilder contentBuffer = new StringBuilder("<html><body><font color=\"LEVEL\">[ Seal Status ]</font><br>");
 
                     for (int i = 1; i < 4; i++)
                     {

@@ -23,11 +23,13 @@ import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ai.CtrlEvent;
 import net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager;
 import net.sf.l2j.gameserver.model.L2Character;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * This class ...
@@ -47,7 +49,7 @@ public class GameTimeController
 	protected static long _gameStartTime;
 	protected static boolean _isNight = false;
 
-	private static Map<Integer,L2Character> _movingObjects = new FastMap<Integer,L2Character>().setShared(true);
+	private static Map<Integer,L2Character> _movingObjects = new ConcurrentHashMap<Integer,L2Character>();
 
 	protected static TimerThread _timer;
 	private ScheduledFuture<?> _timerWatcher;
@@ -117,7 +119,7 @@ public class GameTimeController
 	 */
 	protected void moveObjects()
 	{
-		// Create an FastList to contain all L2Character that are arrived to
+		// Create an ArrayList to contain all L2Character that are arrived to
 		// destination
 		List<L2Character> ended = null;
 		

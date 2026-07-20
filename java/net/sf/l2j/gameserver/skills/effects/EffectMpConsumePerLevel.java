@@ -19,7 +19,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Env;
 
-
 class EffectMpConsumePerLevel extends L2Effect
 {
 	public EffectMpConsumePerLevel(Env env, EffectTemplate template)

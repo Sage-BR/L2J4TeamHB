@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.SevenSignsFestival;
@@ -46,6 +45,9 @@ import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoom;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class ...
@@ -114,7 +116,7 @@ public class L2Party {
 	 */
 	public List<L2PcInstance> getPartyMembers()
 	{
-		if (_members == null) _members = new FastList<L2PcInstance>();
+		if (_members == null) _members = new ArrayList<L2PcInstance>();
 		return _members;
 	}
 
@@ -125,7 +127,7 @@ public class L2Party {
 	//private L2PcInstance getRandomMember() { return getPartyMembers().get(Rnd.get(getPartyMembers().size())); }
 	private L2PcInstance getCheckedRandomMember(int ItemId, L2Character target)
 	{
-		List<L2PcInstance> availableMembers = new FastList<L2PcInstance>();
+		List<L2PcInstance> availableMembers = new ArrayList<L2PcInstance>();
 		for (L2PcInstance member : getPartyMembers())
 		{
 			if (member.getInventory().validateCapacityByItemId(ItemId) &&
@@ -220,7 +222,6 @@ public class L2Party {
 			member.sendPacket(msg);
 		}
 	}
-
 
 	/**
 	 * Send a Server->Client packet to all other L2PcInstance of the Party.<BR><BR>
@@ -523,7 +524,6 @@ public class L2Party {
 	 }
 	 */
 
-
 	/**
 	 * distribute item(s) to party members
 	 * @param player
@@ -609,7 +609,7 @@ public class L2Party {
 
         // Check the number of party members that must be rewarded
         // (The party member must be in range to receive its reward)
-        List<L2PcInstance> ToReward = new FastList<L2PcInstance>();
+        List<L2PcInstance> ToReward = new ArrayList<L2PcInstance>();
 		for(L2PcInstance member : membersList)
 		{
             if (!Util.checkIfInRange(Config.ALT_PARTY_RANGE2, target, member, true)) continue;
@@ -682,7 +682,6 @@ public class L2Party {
 						penalty = (float)0.85;
 				}
 
-
 				// Calculate and add the EXP and SP reward to the member
 				if (validMembers.contains(member))
 				{
@@ -745,7 +744,7 @@ public class L2Party {
 
 	private List<L2PlayableInstance> getValidMembers(List<L2PlayableInstance> members, int topLvl)
 	{
-		List<L2PlayableInstance> validMembers = new FastList<L2PlayableInstance>();
+		List<L2PlayableInstance> validMembers = new ArrayList<L2PlayableInstance>();
 
 //		Fixed LevelDiff cutoff point
 		if (Config.PARTY_XP_CUTOFF_METHOD.equalsIgnoreCase("level"))

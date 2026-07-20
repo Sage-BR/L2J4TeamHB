@@ -39,7 +39,6 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 		}
 	}
 
-
 	@Override
 	public boolean isAggressive()
     {

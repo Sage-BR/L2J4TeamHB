@@ -52,7 +52,6 @@ public class PlaySound extends L2GameServerPacket
         _unknown7   = unknown7;
     }
 
-
     @Override
 	protected final void writeImpl()
     {

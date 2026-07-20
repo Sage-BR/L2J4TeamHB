@@ -62,7 +62,6 @@ public final class RequestBuyItem extends L2GameClientPacket
 //		 count*8 is the size of a for iteration of each item
 		if(_count * 2 < 0 || _count * 8 > _buf.remaining() || _count > Config.MAX_ITEM_IN_PACKET) _count = 0;
 
-
 		_items = new int[_count * 2];
 		for (int i = 0; i < _count; i++)
 		{
@@ -216,7 +215,6 @@ public final class RequestBuyItem extends L2GameClientPacket
 
 				return;
 			}
-
 
             price = list.getPriceForItemId(itemId);
             if (itemId >= 3960 && itemId <= 4026) 

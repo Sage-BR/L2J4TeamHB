@@ -28,8 +28,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.model.L2World;
@@ -37,6 +36,9 @@ import net.sf.l2j.gameserver.model.Location;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 import net.sf.l2j.gameserver.pathfinding.Node;
 import net.sf.l2j.gameserver.pathfinding.PathFinding;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 /**
  *
@@ -46,8 +48,8 @@ public class GeoPathFinding extends PathFinding
 {
 	private static Logger _log = Logger.getLogger(GeoPathFinding.class.getName());
 	private static GeoPathFinding _instance;
-	private static Map<Short, ByteBuffer> _pathNodes = new FastMap<Short, ByteBuffer>();
-	private static Map<Short, IntBuffer> _pathNodesIndex = new FastMap<Short, IntBuffer>();
+	private static Map<Short, ByteBuffer> _pathNodes = new ConcurrentHashMap<Short, ByteBuffer>();
+	private static Map<Short, IntBuffer> _pathNodesIndex = new ConcurrentHashMap<Short, IntBuffer>();
 
 	public static GeoPathFinding getInstance()
 	{
@@ -110,7 +112,7 @@ public class GeoPathFinding extends PathFinding
 		short regoffset = getRegionOffset(getRegionX(node_x),getRegionY(node_y));
 		ByteBuffer pn = _pathNodes.get(regoffset);
 
-		List<Node> Neighbors = new FastList<Node>(8);
+		List<Node> Neighbors = new ArrayList<Node>(8);
 		Node newNode;
 		short new_node_x, new_node_y;
 

@@ -14,9 +14,10 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager.CropProcure;
 import net.sf.l2j.gameserver.model.L2Manor;
+
+import java.util.ArrayList;
 
 /**
  * Format: ch cddd[ddddcdcdcd]
@@ -46,16 +47,16 @@ import net.sf.l2j.gameserver.model.L2Manor;
 public class ExShowCropInfo extends L2GameServerPacket
 {
 	private static final String _S__FE_1C_EXSHOWSEEDINFO = "[S] FE:24 ExShowCropInfo";
-	private FastList<CropProcure> _crops;
+	private ArrayList<CropProcure> _crops;
 	private int _manorId;
 
-    public ExShowCropInfo(int manorId, FastList<CropProcure> crops)
+    public ExShowCropInfo(int manorId, ArrayList<CropProcure> crops)
     {
 		_manorId = manorId;
 		_crops = crops;
 		if (_crops == null)
         {
-			_crops = new FastList<CropProcure>();
+			_crops = new ArrayList<CropProcure>();
 		}
     }
 
@@ -88,6 +89,5 @@ public class ExShowCropInfo extends L2GameServerPacket
     {
 		return _S__FE_1C_EXSHOWSEEDINFO;
     }
-
 
 }

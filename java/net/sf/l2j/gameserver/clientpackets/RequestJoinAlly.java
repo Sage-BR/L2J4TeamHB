@@ -85,7 +85,6 @@ public final class RequestJoinAlly extends L2GameClientPacket
 		return;
 	}
 
-
 	@Override
 	public String getType()
 	{

@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 /**
  * <code>
@@ -56,7 +57,7 @@ public class AcquireSkillInfo extends L2GameServerPacket
 
 	public AcquireSkillInfo(int id, int level, int spCost, int mode)
 	{
-		_reqs = new FastList<Req>();
+		_reqs = new ArrayList<Req>();
 		_id = id;
 		_level = level;
 		_spCost = spCost;

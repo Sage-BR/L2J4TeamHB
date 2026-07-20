@@ -16,7 +16,10 @@ package net.sf.l2j.gameserver.templates;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * @author mkizub
@@ -26,7 +29,7 @@ import javolution.util.FastMap;
  */
 public final class StatsSet  {
 
-	private final Map<String, Object> _set = new FastMap<String, Object>();
+	private final Map<String, Object> _set = new ConcurrentHashMap<String, Object>();
 
 	/**
 	 * Returns the set of values

@@ -46,13 +46,15 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastList;
-import javolution.util.FastSet;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class L2BoxInstance extends L2NpcInstance {
 
@@ -178,7 +180,7 @@ public class L2BoxInstance extends L2NpcInstance {
 	public List<String> getAccess()
 	{
 		java.sql.Connection con = null;
-		List<String> acl = new FastList<String>();
+		List<String> acl = new ArrayList<String>();
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
@@ -290,7 +292,7 @@ public class L2BoxInstance extends L2NpcInstance {
 
 		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 		int nitems = 0;
-		Set<L2BoxItem> _items = new FastSet<L2BoxItem>();
+		Set<L2BoxItem> _items = new HashSet<L2BoxItem>();
 		for (L2ItemInstance i : player.getInventory().getItems())
 		{
 			if (i.getItemId() == 57 || i.isEquipped())
@@ -328,7 +330,7 @@ public class L2BoxInstance extends L2NpcInstance {
 
 	private Set<L2BoxItem> getItems(String drawer)
 	{
-		Set<L2BoxItem> it = new FastSet<L2BoxItem>();
+		Set<L2BoxItem> it = new HashSet<L2BoxItem>();
 		java.sql.Connection con = null;
 		try
 		{

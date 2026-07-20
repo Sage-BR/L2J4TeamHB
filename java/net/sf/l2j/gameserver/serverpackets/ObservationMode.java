@@ -15,7 +15,6 @@
 package net.sf.l2j.gameserver.serverpackets;
 
 
-
 /**
  * This class ...
  *
@@ -27,7 +26,6 @@ public class ObservationMode extends L2GameServerPacket
 	private static final String _S__DF_OBSERVMODE = "[S] eb ObservationMode";
 	private int _x, _y, _z;
 
-
 	/**
 	 * @param _characters
 	 */
@@ -37,7 +35,6 @@ public class ObservationMode extends L2GameServerPacket
 		_y = y;
 		_z = z;
 	}
-
 
 	@Override
 	protected final void writeImpl()

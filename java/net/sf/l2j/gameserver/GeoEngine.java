@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.DoorTable;
 import net.sf.l2j.gameserver.model.L2Object;
@@ -40,6 +39,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2DoorInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2SiegeGuardInstance;
 import net.sf.l2j.util.Point3D;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -53,8 +54,8 @@ public class GeoEngine extends GeoData
     private final static byte _w = 2;
     private final static byte _s = 4;
     private final static byte _n = 8;
-	private static Map<Short, MappedByteBuffer> _geodata = new FastMap<Short, MappedByteBuffer>();
-	private static Map<Short, IntBuffer> _geodataIndex = new FastMap<Short, IntBuffer>();
+	private static Map<Short, MappedByteBuffer> _geodata = new ConcurrentHashMap<Short, MappedByteBuffer>();
+	private static Map<Short, IntBuffer> _geodataIndex = new ConcurrentHashMap<Short, IntBuffer>();
 	private static BufferedOutputStream _geoBugsOut;
 
 	public static GeoEngine getInstance()

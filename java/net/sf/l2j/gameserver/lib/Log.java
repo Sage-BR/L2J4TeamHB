@@ -109,7 +109,6 @@ public class Log
 		if(exp || !Config.ASSERT)
 			return;
 
-
 		_log.warning("Assertion error ["+cmt+"]");
 		Thread.dumpStack();
 	}

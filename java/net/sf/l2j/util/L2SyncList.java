@@ -123,6 +123,7 @@ public class L2SyncList<T extends Object> implements List<T>
      * @deprecated
      * @see java.util.List#listIterator()
      */
+    @Deprecated
     public ListIterator<T> listIterator() {
     	throw new UnsupportedOperationException();
     }
@@ -131,6 +132,7 @@ public class L2SyncList<T extends Object> implements List<T>
      * @deprecated
      * @see java.util.List#listIterator(int)
      */
+    @Deprecated
     public ListIterator<T> listIterator(int index) {
     	throw new UnsupportedOperationException();
     }
@@ -139,6 +141,7 @@ public class L2SyncList<T extends Object> implements List<T>
      * @deprecated
      * @see java.util.List#iterator()
      */
+    @Deprecated
     public Iterator<T> iterator() {
     	throw new UnsupportedOperationException();
     }
@@ -147,6 +150,7 @@ public class L2SyncList<T extends Object> implements List<T>
      * @deprecated
      * @see java.util.List#toArray()
      */
+	@Deprecated
 	public synchronized Object[] toArray() {
 		throw new UnsupportedOperationException();
 	}
@@ -155,6 +159,7 @@ public class L2SyncList<T extends Object> implements List<T>
 	 * @deprecated
 	 * @see java.util.List#toArray(T[])
 	 */
+	@Deprecated
 	@SuppressWarnings("hiding")
 	public synchronized <T> T[] toArray(T[] a) {
 		throw new UnsupportedOperationException();

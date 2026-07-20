@@ -24,6 +24,8 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowMemberListDelete;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+
 /**
  * This class ...
  *

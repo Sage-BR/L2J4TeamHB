@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 /**
  * Format : (h) d [dS]
@@ -36,7 +37,7 @@ public class ExSendManorList extends L2GameServerPacket
 
 	private List<String> _manors;
 
-	public ExSendManorList(FastList<String> manors)
+	public ExSendManorList(ArrayList<String> manors)
 	{
 		_manors = manors;
 	}

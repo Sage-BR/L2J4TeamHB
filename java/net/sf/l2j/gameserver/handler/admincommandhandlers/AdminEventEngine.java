@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.SpawnTable;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.L2Spawn;
@@ -40,6 +39,9 @@ import net.sf.l2j.gameserver.serverpackets.ItemList;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
+
+import java.util.List;
+import java.util.Set;
 /**
  * This class handles following admin commands:
  * - admin = shows menu
@@ -89,7 +91,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
             try {
                 NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-
                 DataInputStream in =
                     new DataInputStream(
                       new BufferedInputStream(
@@ -97,8 +98,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
                   BufferedReader inbr =
                     new BufferedReader(new InputStreamReader(in));
 
-
-                TextBuilder replyMSG = new TextBuilder("<html><body>");
+                StringBuilder replyMSG = new StringBuilder("<html><body>");
                 replyMSG.append("<center><font color=\"LEVEL\">" + eventName + "</font><font color=\"FF0000\"> bY " + inbr.readLine() + "</font></center><br>");
 
                 replyMSG.append("<br>" + inbr.readLine());
@@ -171,7 +171,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
         else if (command.startsWith("admin_event_control_begin"))
         {
 
-
             try {
 
             L2Event.active = true;
@@ -186,7 +185,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
             int i = 0;
 
 
-
             while(L2Event.participatingPlayers.size()>0){
                 String target = getMaxLeveledPlayer();
 
@@ -195,7 +193,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
                     L2Event.players.get(i+1).add(target);
                     i=(i+1)%L2Event.teamsNumber;
                 }
-
 
 
             }
@@ -217,7 +214,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
             }
             showEventControl(activeChar);
         }
-
 
         else if (command.startsWith("admin_event_control_sit"))
         {
@@ -297,9 +293,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
             L2Event.active = false;
             npcsDeleted = false;
 
-
         }
-
 
         else if (command.startsWith("admin_event_announce"))
         {
@@ -323,7 +317,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
                  i++;}
             }
 
-
             L2Event.participatingPlayers.clear();
 
             muestraNpcConInfoAPlayers(activeChar, L2Event.id);
@@ -334,7 +327,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
 
             NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-            TextBuilder replyMSG = new TextBuilder("<html><body>");
+            StringBuilder replyMSG = new StringBuilder("<html><body>");
 
             replyMSG.append("<center><font color=\"LEVEL\">[ L2J EVENT ENGINE</font></center><br>");
             replyMSG.append("<center>The event <font color=\"LEVEL\">"+ L2Event.eventName + "</font> has been announced, now you can type //event_panel to see the event panel control</center><br>");
@@ -342,7 +335,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
             adminReply.setHtml(replyMSG.toString());
             activeChar.sendPacket(adminReply);
       }
-
 
 		return true;
 	}
@@ -369,12 +361,11 @@ public class AdminEventEngine implements IAdminCommandHandler {
         return result;
    }
 
-
     public void showMainPage(L2PcInstance activeChar)
 	{
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-		TextBuilder replyMSG = new TextBuilder("<html><body>");
+		StringBuilder replyMSG = new StringBuilder("<html><body>");
 
 		replyMSG.append("<center><font color=\"LEVEL\">[ L2J EVENT ENGINE ]</font></center><br>");
 		replyMSG.append("<br><center><button value=\"Create NEW event \" action=\"bypass -h admin_event_new\" width=90 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
@@ -389,7 +380,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
     {
         NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-        TextBuilder replyMSG = new TextBuilder("<html><body>");
+        StringBuilder replyMSG = new StringBuilder("<html><body>");
 
         replyMSG.append("<center><font color=\"LEVEL\">[ L2J EVENT ENGINE ]</font></center><br>");
         replyMSG.append("<br><center>Event's Title <br><font color=\"LEVEL\">");
@@ -403,7 +394,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
 
        if(!(tempName.equals("")&&tempBuffer.equals(""))) replyMSG.append("<br><button value=\"Crear\" action=\"bypass -h admin_event_store\" width=90 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 
-
         replyMSG.append("</body></html>");
 
         adminReply.setHtml(replyMSG.toString());
@@ -413,7 +403,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
     {
         NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-        TextBuilder replyMSG = new TextBuilder("<html><body>");
+        StringBuilder replyMSG = new StringBuilder("<html><body>");
 
         replyMSG.append("<center><font color=\"LEVEL\">[ L2J EVENT ENGINE ]</font></center><br>");
         replyMSG.append("<center><font color=\"LEVEL\">" + L2Event.eventName + "</font></center><br>");
@@ -468,7 +458,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
 
        NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-       TextBuilder replyMSG = new TextBuilder("<html><body>");
+       StringBuilder replyMSG = new StringBuilder("<html><body>");
 
        replyMSG.append("<center><font color=\"LEVEL\">[ L2J EVENT ENGINE ]</font></center><br><font color=\"LEVEL\">" + L2Event.eventName + "</font><br><br><table width=200>");
        replyMSG.append("<tr><td>Apply this command to teams number </td><td><edit var=\"team_number\" width=100 height=15></td></tr>");
@@ -520,7 +510,6 @@ public class AdminEventEngine implements IAdminCommandHandler {
        while(L2Event.npcs.size()>0){
            try{
                npc = (L2NpcInstance) L2World.getInstance().findObject(Integer.parseInt(L2Event.npcs.getFirst()));
-
 
            L2Spawn spawn = npc.getSpawn();
 
@@ -614,7 +603,7 @@ public class AdminEventEngine implements IAdminCommandHandler {
         player.sendPacket(il);
 
         NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-        TextBuilder replyMSG = new TextBuilder("<html><body>");
+        StringBuilder replyMSG = new StringBuilder("<html><body>");
 
         replyMSG.append("CONGRATULATIONS, you should have a present in your inventory");
         replyMSG.append("</body></html>");

@@ -20,11 +20,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
 import net.sf.l2j.gameserver.communitybbs.Manager.TopicBBSManager;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 public class Forum
 {
@@ -59,8 +61,8 @@ public class Forum
 	{
 		_forumId = Forumid;
 		_fParent = FParent;
-		_children = new FastList<Forum>();
-		_topic = new FastMap<Integer,Topic>();
+		_children = new ArrayList<Forum>();
+		_topic = new ConcurrentHashMap<Integer,Topic>();
 
 		/*load();
 		getChildren();	*/
@@ -84,8 +86,8 @@ public class Forum
 		_forumPerm = perm;
 		_fParent = parent;
 		_ownerID = OwnerID;
-		_children = new FastList<Forum>();
-		_topic = new FastMap<Integer,Topic>();
+		_children = new ArrayList<Forum>();
+		_topic = new ConcurrentHashMap<Integer,Topic>();
 		parent._children.add(this);
 		ForumsBBSManager.getInstance().addForum(this);
 		_loaded = true;
@@ -345,10 +347,8 @@ public class Forum
 	}
 
 
-
 	/**
 	 * @return
 	 */
-
 
 }

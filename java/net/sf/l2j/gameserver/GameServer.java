@@ -120,7 +120,6 @@ import org.mmocore.network.SelectorThread;
 
 import Dev.SpecialMods.XMLDocumentFactory;
 
-
 /**
  * This class ...
  *
@@ -446,11 +445,11 @@ public class GameServer
 		_loginThread.start();
         
         L2GamePacketHandler gph = new L2GamePacketHandler();
-		SelectorConfig<L2GameClient> sc = new SelectorConfig<L2GameClient>(null, null, gph, gph);
-        sc.setMaxSendPerPass(12);
-        sc.setSelectorSleepTime(20);
+		SelectorConfig sc = new SelectorConfig();
+        sc.MAX_SEND_PER_PASS = 12;
+        sc.SLEEP_TIME = 20;
         
-		_selectorThread = new SelectorThread<L2GameClient>(sc, gph, gph, null);
+		_selectorThread = new SelectorThread<L2GameClient>(sc, gph, gph, gph, null);
 		
 		InetAddress bindAddress = null;
 		if (!Config.GAMESERVER_HOSTNAME.equals("*"))

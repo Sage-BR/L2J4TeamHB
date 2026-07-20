@@ -24,8 +24,7 @@ import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
@@ -53,6 +52,10 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *  Seven Signs Festival of Darkness Engine
@@ -801,17 +804,17 @@ public class SevenSignsFestival implements SpawnListener
 
     public SevenSignsFestival()
     {
-        _accumulatedBonuses = new FastList<Integer>();
+        _accumulatedBonuses = new ArrayList<Integer>();
 
-        _dawnFestivalParticipants = new FastMap<Integer, List<L2PcInstance>>();
-        _dawnPreviousParticipants = new FastMap<Integer, List<L2PcInstance>>();
-        _dawnFestivalScores = new FastMap<Integer, Integer>();
+        _dawnFestivalParticipants = new ConcurrentHashMap<Integer, List<L2PcInstance>>();
+        _dawnPreviousParticipants = new ConcurrentHashMap<Integer, List<L2PcInstance>>();
+        _dawnFestivalScores = new ConcurrentHashMap<Integer, Integer>();
 
-        _duskFestivalParticipants = new FastMap<Integer, List<L2PcInstance>>();
-        _duskPreviousParticipants = new FastMap<Integer, List<L2PcInstance>>();
-        _duskFestivalScores = new FastMap<Integer, Integer>();
+        _duskFestivalParticipants = new ConcurrentHashMap<Integer, List<L2PcInstance>>();
+        _duskPreviousParticipants = new ConcurrentHashMap<Integer, List<L2PcInstance>>();
+        _duskFestivalScores = new ConcurrentHashMap<Integer, Integer>();
 
-        _festivalData = new FastMap<Integer, Map<Integer, StatsSet>>();
+        _festivalData = new ConcurrentHashMap<Integer, Map<Integer, StatsSet>>();
 
         restoreFestivalData();
 
@@ -992,7 +995,7 @@ public class SevenSignsFestival implements SpawnListener
               Map<Integer, StatsSet> tempData = _festivalData.get(festivalCycle);
 
               if (tempData == null)
-                  tempData = new FastMap<Integer, StatsSet>();
+                  tempData = new ConcurrentHashMap<Integer, StatsSet>();
 
               tempData.put(festivalId, festivalDat);
               _festivalData.put(festivalCycle, tempData);
@@ -1236,7 +1239,6 @@ public class SevenSignsFestival implements SpawnListener
     }
     }
 
-
     /**
      * Used to reset all festival data at the beginning of a new quest event period.
      */
@@ -1258,7 +1260,7 @@ public class SevenSignsFestival implements SpawnListener
         _duskFestivalScores.clear();
 
         // Set up a new data set for the current cycle of festivals
-        Map<Integer, StatsSet> newData = new FastMap<Integer, StatsSet>();
+        Map<Integer, StatsSet> newData = new ConcurrentHashMap<Integer, StatsSet>();
 
         for (int i = 0; i < FESTIVAL_COUNT * 2; i++)
         {
@@ -1306,7 +1308,6 @@ public class SevenSignsFestival implements SpawnListener
 
         _log.info("SevenSignsFestival: Reinitialized engine for next competition period.");
     }
-
 
     public final int getCurrentFestivalCycle()
     {
@@ -1438,7 +1439,7 @@ public class SevenSignsFestival implements SpawnListener
 
     public void setParticipants(int oracle, int festivalId, L2Party festivalParty)
     {
-        List<L2PcInstance> participants = new FastList<L2PcInstance>();
+        List<L2PcInstance> participants = new ArrayList<L2PcInstance>();
 
         if (festivalParty != null)
         {
@@ -1615,7 +1616,7 @@ public class SevenSignsFestival implements SpawnListener
             if (thisCabalHighScore < otherCabalHighScore)
                 return false;
 
-            partyMembers = new FastList<String>();
+            partyMembers = new ArrayList<String>();
             List<L2PcInstance> prevParticipants = getPreviousParticipants(oracle, festivalId);
 
             // Record a string list of the party members involved.
@@ -1791,7 +1792,6 @@ public class SevenSignsFestival implements SpawnListener
         }
     }
 
-
     /**
      * The FestivalManager class is the main runner of all the festivals.
      * It is used for easier integration and management of all running festivals.
@@ -1804,7 +1804,7 @@ public class SevenSignsFestival implements SpawnListener
 
         public FestivalManager()
         {
-            _festivalInstances = new FastMap<Integer, L2DarknessFestival>();
+            _festivalInstances = new ConcurrentHashMap<Integer, L2DarknessFestival>();
             _managerInstance = this;
 
             // Increment the cycle counter.
@@ -1910,7 +1910,6 @@ public class SevenSignsFestival implements SpawnListener
             // Participants can now opt to increase the challenge, if desired.
             _festivalInProgress = true;
 
-
             /* PROPOGATION */
             // Sequentially set all festivals to begin, spawn the Festival Witch and notify participants.
             for (L2DarknessFestival festivalInst : _festivalInstances.values())
@@ -1922,7 +1921,6 @@ public class SevenSignsFestival implements SpawnListener
             if (Config.DEBUG)
                 _log.info("SevenSignsFestival: Each of the festivals will end in " + (Config.ALT_FESTIVAL_LENGTH / 60000) + " minutes. New participants can signup then.");
 
-
             // After a short time period, move all idle spawns to the center of the arena.
             try {
                 wait(Config.ALT_FESTIVAL_FIRST_SWARM - Config.ALT_FESTIVAL_FIRST_SPAWN);
@@ -1933,7 +1931,6 @@ public class SevenSignsFestival implements SpawnListener
 
             for (L2DarknessFestival festivalInst : _festivalInstances.values())
                 festivalInst.moveMonstersToCenter();
-
 
             // Stand by until the time comes for the second spawn.
             try {
@@ -1951,7 +1948,6 @@ public class SevenSignsFestival implements SpawnListener
 
             elapsedTime += Config.ALT_FESTIVAL_SECOND_SPAWN - Config.ALT_FESTIVAL_FIRST_SWARM;
 
-
             // After another short time period, again move all idle spawns to the center of the arena.
             try {
                 wait(Config.ALT_FESTIVAL_SECOND_SWARM - Config.ALT_FESTIVAL_SECOND_SPAWN);
@@ -1962,7 +1958,6 @@ public class SevenSignsFestival implements SpawnListener
                 festivalInst.moveMonstersToCenter();
 
             elapsedTime += Config.ALT_FESTIVAL_SECOND_SWARM - Config.ALT_FESTIVAL_SECOND_SPAWN;
-
 
             // Stand by until the time comes for the chests to be spawned.
             try {
@@ -1988,7 +1983,6 @@ public class SevenSignsFestival implements SpawnListener
 
             // Participants can no longer opt to increase the challenge, as the festival will soon close.
             _festivalInProgress = false;
-
 
             /* TERMINATION */
             // Sequentially begin the ending sequence for all running festivals.
@@ -2044,7 +2038,6 @@ public class SevenSignsFestival implements SpawnListener
         }
     }
 
-
     /**
      * Each running festival is represented by an L2DarknessFestival class.
      * It contains all the spawn information and data for the running festival.
@@ -2072,8 +2065,8 @@ public class SevenSignsFestival implements SpawnListener
         {
             _cabal = cabal;
             _levelRange = levelRange;
-            _originalLocations = new FastMap<L2PcInstance, FestivalSpawn>();
-            _npcInsts = new FastList<L2FestivalMonsterInstance>();
+            _originalLocations = new ConcurrentHashMap<L2PcInstance, FestivalSpawn>();
+            _npcInsts = new ArrayList<L2FestivalMonsterInstance>();
 
             if (cabal == SevenSigns.CABAL_DAWN)
             {
@@ -2090,7 +2083,7 @@ public class SevenSignsFestival implements SpawnListener
 
             // FOR TESTING!
             if (_participants == null)
-                _participants = new FastList<L2PcInstance>();
+                _participants = new ArrayList<L2PcInstance>();
 
             festivalInit();
         }

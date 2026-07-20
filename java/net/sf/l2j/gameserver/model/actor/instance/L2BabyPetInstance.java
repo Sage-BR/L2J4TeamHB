@@ -16,13 +16,14 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.concurrent.Future;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class L2BabyPetInstance extends L2PetInstance
 		super(objectId, template, owner, control);
 
 		// look through the skills that this template has and find the weak and strong heal.
-		FastMap<Integer, L2Skill> skills = (FastMap<Integer, L2Skill>) getTemplate().getSkills();
+		ConcurrentHashMap<Integer, L2Skill> skills = (ConcurrentHashMap<Integer, L2Skill>) getTemplate().getSkills();
 		L2Skill skill1 = null;
 		L2Skill skill2 = null;
 

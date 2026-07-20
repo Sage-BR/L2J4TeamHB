@@ -72,7 +72,6 @@ public class CombatPointHeal implements ISkillHandler
         }
     }
 
-
     public SkillType[] getSkillIds()
     {
         return SKILL_IDS;

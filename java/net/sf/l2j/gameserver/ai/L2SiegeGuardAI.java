@@ -41,6 +41,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2SiegeGuardInstance;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  * This class manages AI of L2Attackable.<BR><BR>
  *

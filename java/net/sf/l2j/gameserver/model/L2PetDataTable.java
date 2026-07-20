@@ -19,9 +19,11 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2PetInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 public class L2PetDataTable
 {
@@ -41,7 +43,7 @@ public class L2PetDataTable
 
     private L2PetDataTable()
     {
-        _petTable = new FastMap<Integer, Map<Integer, L2PetData>>();
+        _petTable = new ConcurrentHashMap<Integer, Map<Integer, L2PetData>>();
     }
 
     public void loadPetsData()
@@ -87,9 +89,9 @@ public class L2PetDataTable
                 petData.setPetRegenMP( rset.getInt("mpregen") );
                 petData.setOwnerExpTaken( rset.getFloat("owner_exp_taken") );
 
-                // if its the first data for this petid, we initialize its level FastMap
+                // if its the first data for this petid, we initialize its level ConcurrentHashMap
                 if (!_petTable.containsKey(petId))
-                    _petTable.put(petId, new FastMap<Integer, L2PetData>());
+                    _petTable.put(petId, new ConcurrentHashMap<Integer, L2PetData>());
 
                 _petTable.get(petId).put(petLevel,petData);
             }
@@ -113,7 +115,7 @@ public class L2PetDataTable
 
         if (h == null)
         {
-            Map<Integer, L2PetData> statTable = new FastMap<Integer, L2PetData>();
+            Map<Integer, L2PetData> statTable = new ConcurrentHashMap<Integer, L2PetData>();
             statTable.put(petData.getPetLevel(), petData);
             _petTable.put(petData.getPetID(), statTable);
             return;
@@ -360,7 +362,6 @@ public class L2PetDataTable
 				return new int[]{0};
 		}
     }
-
 
     public static boolean isMountable(int npcId)
     {

@@ -22,8 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Olympiad;
 import net.sf.l2j.gameserver.SevenSigns;
@@ -92,6 +91,9 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 /**
  * This class represents a Non-Player-Character in the world. It can be a monster or a friendly character.
  * It also uses a template to fetch some static values. The templates are hardcoded in the client, so we can rely on them.<BR><BR>
@@ -715,7 +717,7 @@ public class L2NpcInstance extends L2Character
 
             // Send a Server->Client NpcHtmlMessage() containing the GM console about this L2NpcInstance
             NpcHtmlMessage html = new NpcHtmlMessage(0);
-            TextBuilder html1 = new TextBuilder("<html><body><center><font color=\"LEVEL\">NPC Information</font></center>");
+            StringBuilder html1 = new StringBuilder("<html><body><center><font color=\"LEVEL\">NPC Information</font></center>");
             String className = getClass().getName().substring(43);
             html1.append("<br>");
 
@@ -780,7 +782,7 @@ public class L2NpcInstance extends L2Character
             }
 
             NpcHtmlMessage html = new NpcHtmlMessage(0);
-            TextBuilder html1 = new TextBuilder("<html><body>");
+            StringBuilder html1 = new StringBuilder("<html><body>");
 
             html1.append("<br><center><font color=\"LEVEL\">[Combat Stats]</font></center>");
             html1.append("<table border=0 width=\"100%\">");
@@ -1217,7 +1219,7 @@ public class L2NpcInstance extends L2Character
      */
     public void showQuestChooseWindow(L2PcInstance player, Quest[] quests) 
     {
-        TextBuilder sb = new TextBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html><body><title>Talk about:</title><br>");
         for (Quest q : quests) 
         {
@@ -1348,7 +1350,7 @@ public class L2NpcInstance extends L2Character
     public void showQuestWindow(L2PcInstance player) 
     {
         // collect awaiting quests and start points
-        List<Quest> options = new FastList<Quest>();
+        List<Quest> options = new ArrayList<Quest>();
         
         QuestState[] awaits = player.getQuestsForTalk(getTemplate().npcId);
         Quest[] starts = getTemplate().getEventQuests(Quest.QuestEventType.QUEST_START);

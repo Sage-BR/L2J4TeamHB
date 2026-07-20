@@ -23,6 +23,9 @@ import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * This class handles the admin commands that acts on the login
  *
@@ -61,8 +64,8 @@ public class AdminLogin implements IAdminCommandHandler
 				String number = st.nextToken();
 				try
 				{
-					LoginServerThread.getInstance().setMaxPlayer(new Integer(number).intValue());
-					activeChar.sendMessage("maxPlayer set to "+new Integer(number).intValue());
+					LoginServerThread.getInstance().setMaxPlayer(Integer.valueOf(number).intValue());
+					activeChar.sendMessage("maxPlayer set to "+Integer.valueOf(number).intValue());
 					showMainPage(activeChar);
 				}
 				catch(NumberFormatException e)

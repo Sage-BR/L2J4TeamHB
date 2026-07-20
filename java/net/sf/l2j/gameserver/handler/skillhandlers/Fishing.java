@@ -41,7 +41,6 @@ public class Fishing implements ISkillHandler
 	// protected SkillType[] _skillIds = {SkillType.FISHING};
 	private static final SkillType[] SKILL_IDS = { SkillType.FISHING };
 
-
 	public void useSkill(L2Character activeChar, @SuppressWarnings("unused")
 	L2Skill skill, @SuppressWarnings("unused")
 	L2Object[] targets)

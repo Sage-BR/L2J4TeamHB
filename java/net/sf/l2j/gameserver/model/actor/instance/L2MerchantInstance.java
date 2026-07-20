@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.TradeController;
 import net.sf.l2j.gameserver.datatables.MerchantPriceConfigTable;
@@ -32,6 +31,8 @@ import net.sf.l2j.gameserver.serverpackets.SellList;
 import net.sf.l2j.gameserver.serverpackets.ShopPreviewList;
 import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.List;
 
 /**
  * This class ...
@@ -204,7 +205,7 @@ public class L2MerchantInstance extends L2FolkInstance
     {
         if (!Config.LIST_PET_RENT_NPC.contains(getTemplate().npcId)) return;
 
-        TextBuilder html1 = new TextBuilder("<html><body>Pet Manager:<br>");
+        StringBuilder html1 = new StringBuilder("<html><body>Pet Manager:<br>");
         html1.append("You can rent a wyvern or strider for adena.<br>My prices:<br1>");
         html1.append("<table border=0><tr><td>Ride</td></tr>");
         html1.append("<tr><td>Wyvern</td><td>Strider</td></tr>");
@@ -273,7 +274,7 @@ public class L2MerchantInstance extends L2FolkInstance
             }
 
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder html1 = new TextBuilder("<html><body><table border=0>");
+            StringBuilder html1 = new StringBuilder("<html><body><table border=0>");
             html1.append("<tr><td>Current Target:</td></tr>");
             html1.append("<tr><td><br></td></tr>");
 

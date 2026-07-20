@@ -16,8 +16,9 @@ package net.sf.l2j.loginserver.gameserverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.loginserver.clientpackets.ClientBasePacket;
+
+import java.util.ArrayList;
 
 /**
  * @author -Wooden-
@@ -33,7 +34,7 @@ public class PlayerInGame extends ClientBasePacket
 	public PlayerInGame(byte[] decrypt)
 	{
 		super(decrypt);
-		_accounts =  new FastList<String>();
+		_accounts =  new ArrayList<String>();
 		int size = readH();
 		for (int i = 0; i < size; i++)
 		{

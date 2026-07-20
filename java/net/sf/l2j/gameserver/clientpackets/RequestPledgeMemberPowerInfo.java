@@ -34,7 +34,6 @@ public final class RequestPledgeMemberPowerInfo extends L2GameClientPacket
     private int _unk1;
     private String _player;
 
-
     @Override
 	protected void readImpl()
     {

@@ -24,6 +24,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.BuyList;
 
+import java.util.List;
+
 /**
  * This class handles following admin commands:
  * - gmshop = shows menu

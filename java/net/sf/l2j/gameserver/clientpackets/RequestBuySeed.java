@@ -47,7 +47,6 @@ import net.sf.l2j.gameserver.util.Util;
  */
 
 
-
 public class RequestBuySeed extends L2GameClientPacket
 {
 	private static final String _C__C4_REQUESTBUYSEED = "[C] C4 RequestBuySeed";

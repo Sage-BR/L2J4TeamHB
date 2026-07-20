@@ -39,6 +39,8 @@ import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.Point3D;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 public class CursedWeapon
 {
 	private static final Logger _log = Logger.getLogger(CursedWeaponsManager.class.getName());
@@ -388,7 +390,6 @@ public class CursedWeapon
         _player.sendSkillList();
 	}
 
-
 	// =========================================================
 	// Public
 	public void reActivate()
@@ -566,7 +567,6 @@ public class CursedWeapon
 		}
 	}
 
-
 	public void increaseKills()
 	{
 		_nbKills++;
@@ -583,7 +583,6 @@ public class CursedWeapon
 		_endTime -= _durationLost * 60000L;
 		saveData();
 	}
-
 
 
 
@@ -645,7 +644,6 @@ public class CursedWeapon
 	{
 		_item = item;
 	}
-
 
 
 	// =========================================================

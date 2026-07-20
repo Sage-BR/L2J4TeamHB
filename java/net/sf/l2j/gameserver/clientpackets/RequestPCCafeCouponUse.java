@@ -27,7 +27,6 @@ public final class RequestPCCafeCouponUse extends L2GameClientPacket
     private static final String _C__D0_20_REQUESTPCCAFECOUPONUSE = "[C] D0:20 RequestPCCafeCouponUse";
     private String _str;
 
-
     @Override
 	protected void readImpl()
     {

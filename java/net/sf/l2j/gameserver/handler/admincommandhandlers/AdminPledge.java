@@ -26,6 +26,8 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.GMViewPledgeInfo;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.Set;
+
 /**
  * <B>Pledge Manipulation:</B><BR>
  * <LI>With target in a character without clan:<BR>

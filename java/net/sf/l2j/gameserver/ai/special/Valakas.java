@@ -18,7 +18,6 @@ package net.sf.l2j.gameserver.ai.special;
 
 import java.util.Collection;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
@@ -41,6 +40,9 @@ import net.sf.l2j.gameserver.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Valakas AI
@@ -980,7 +982,7 @@ public class Valakas extends Quest implements Runnable
 	
 	public L2Character getRandomTarget(final L2NpcInstance npc)
 	{
-		final FastList<L2Character> result = new FastList<>();
+		final ArrayList<L2Character> result = new ArrayList<>();
 		final Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
 		{
 			for (final L2Object obj : objs)

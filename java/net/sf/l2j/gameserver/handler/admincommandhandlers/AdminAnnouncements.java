@@ -21,6 +21,8 @@ import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.List;
+
 /**
  * This class handles following admin commands:
  * - announce text = announces text to all players
@@ -86,7 +88,7 @@ public class AdminAnnouncements implements IAdminCommandHandler {
 		{
             try
             {
-    			int val = new Integer(command.substring(23)).intValue();
+    			int val = Integer.valueOf(command.substring(23)).intValue();
     			Announcements.getInstance().delAnnouncement(val);
     			Announcements.getInstance().listAnnouncements(activeChar);
             }

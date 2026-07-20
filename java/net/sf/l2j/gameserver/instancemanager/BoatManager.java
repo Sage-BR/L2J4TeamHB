@@ -23,12 +23,14 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2BoatInstance;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 public class BoatManager
 {
@@ -52,7 +54,7 @@ public class BoatManager
 	
 	// =========================================================
 	// Data Field
-	private Map<Integer, L2BoatInstance> _staticItems = new FastMap<Integer, L2BoatInstance>();
+	private Map<Integer, L2BoatInstance> _staticItems = new ConcurrentHashMap<Integer, L2BoatInstance>();
 	
 	@SuppressWarnings("unused")
 	private boolean _initialized;
@@ -219,7 +221,7 @@ public class BoatManager
 	public L2BoatInstance getBoat(int boatId)
 	{
 		if (_staticItems == null)
-			_staticItems = new FastMap<Integer, L2BoatInstance>();
+			_staticItems = new ConcurrentHashMap<Integer, L2BoatInstance>();
 		return _staticItems.get(boatId);
 	}
 }

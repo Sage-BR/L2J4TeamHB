@@ -16,7 +16,9 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+import java.util.Set;
+
 
 /**
  * This class ...
@@ -31,7 +33,7 @@ public class L2ManufactureList
 
     public L2ManufactureList()
     {
-        _list = new FastList<L2ManufactureItem>();
+        _list = new ArrayList<L2ManufactureItem>();
         _confirmed = false;
     }
 

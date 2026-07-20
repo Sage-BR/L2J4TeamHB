@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -49,6 +48,9 @@ import net.sf.l2j.gameserver.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class ... control for sequence of fight against Antharas.
@@ -88,14 +90,14 @@ public class Antharas extends Quest implements Runnable
 		}
 	};
 	
-	protected List<L2Spawn> _teleportCubeSpawn = new FastList<>();
-	protected List<L2NpcInstance> _teleportCube = new FastList<>();
+	protected List<L2Spawn> _teleportCubeSpawn = new ArrayList<>();
+	protected List<L2NpcInstance> _teleportCube = new ArrayList<>();
 	
 	// Spawn data of monsters.
 	protected HashMap<Integer, L2Spawn> _monsterSpawn = new HashMap<>();
 	
 	// Instance of monsters.
-	protected List<L2NpcInstance> _monsters = new FastList<>();
+	protected List<L2NpcInstance> _monsters = new ArrayList<>();
 	protected L2GrandBossInstance _antharas = null;
 	
 	// monstersId

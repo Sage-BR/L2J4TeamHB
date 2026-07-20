@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.GameTimeController;
@@ -28,6 +27,9 @@ import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.L2ItemInstance.ItemLocation;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.L2Item;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author Advi
@@ -41,7 +43,7 @@ public abstract class ItemContainer
 
 	protected ItemContainer()
 	{
-		_items = new FastList<L2ItemInstance>();
+		_items = new ArrayList<L2ItemInstance>();
 	}
 
 	protected abstract L2Character getOwner();
@@ -86,7 +88,7 @@ public abstract class ItemContainer
 	 */
 	public List<L2ItemInstance> getItemsByItemId(int itemId)
 	{
-		List<L2ItemInstance> returnList = new FastList<L2ItemInstance>();
+		List<L2ItemInstance> returnList = new ArrayList<L2ItemInstance>();
 	    for (L2ItemInstance item : _items)
 	    {
 	        if (item != null && item.getItemId() == itemId)
@@ -530,7 +532,7 @@ public abstract class ItemContainer
 	public void deleteMe()
 	{
 		try { updateDatabase(); } catch (Throwable t) {_log.log(Level.SEVERE, "deletedMe()", t); }
-		List<L2Object> items = new FastList<L2Object>(_items);
+		List<L2Object> items = new ArrayList<L2Object>(_items);
     	_items.clear();
 
     	L2World.getInstance().removeObjects(items);

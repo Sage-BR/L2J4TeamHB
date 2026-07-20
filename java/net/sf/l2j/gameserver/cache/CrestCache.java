@@ -24,12 +24,14 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.L2Clan;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * @author Layane
@@ -85,10 +87,10 @@ public class CrestCache
 			_cacheAlly.clear();
 		}
 
-		FastMap<Integer, byte[]> _mapPledge = _cachePledge.getContentMap();
-		FastMap<Integer, byte[]> _mapPledgeLarge = _cachePledgeLarge
+		ConcurrentHashMap<Integer, byte[]> _mapPledge = _cachePledge.getContentMap();
+		ConcurrentHashMap<Integer, byte[]> _mapPledgeLarge = _cachePledgeLarge
 				.getContentMap();
-		FastMap<Integer, byte[]> _mapAlly = _cacheAlly.getContentMap();
+		ConcurrentHashMap<Integer, byte[]> _mapAlly = _cacheAlly.getContentMap();
 
 		for (File file : files)
 		{

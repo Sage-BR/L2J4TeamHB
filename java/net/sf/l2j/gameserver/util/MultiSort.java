@@ -20,7 +20,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+import java.util.Set;
+
 
 /**
  *  Descending Integer Sort Algorithm
@@ -75,7 +77,7 @@ public class MultiSort
         Integer[] tempIntList = new Integer[valueList.length];
 
         for (int i = 0; i < valueList.length; i++)
-            tempIntList[i] = new Integer(valueList[i]);
+            tempIntList[i] = Integer.valueOf(valueList[i]);
 
         return Arrays.asList(tempIntList);
     }
@@ -89,7 +91,6 @@ public class MultiSort
 	{
 		return Arrays.asList(valueList);
 	}
-
 
 	public final int getCount()
 	{
@@ -112,7 +113,7 @@ public class MultiSort
     public final List<?> getKeys()
     {
         if (_keyList == null)
-            return new FastList<Object>();
+            return new ArrayList<Object>();
 
         return _keyList;
     }
@@ -145,7 +146,7 @@ public class MultiSort
         if (getValues().isEmpty())
             return -1;
 
-        List<Double> tempValList = new FastList<Double>();
+        List<Double> tempValList = new ArrayList<Double>();
 
         int meanValue = getMean();
         int numValues = getCount();
@@ -180,7 +181,7 @@ public class MultiSort
 	public final List<Integer> getValues()
 	{
 		if (_valueList == null)
-			return new FastList<Integer>();
+			return new ArrayList<Integer>();
 
 		return _valueList;
 	}
@@ -204,8 +205,8 @@ public class MultiSort
 	{
 		try
 		{
-			List<Object> newKeyList = new FastList<Object>();
-			List<Integer> newValueList = new FastList<Integer>();
+			List<Object> newKeyList = new ArrayList<Object>();
+			List<Integer> newValueList = new ArrayList<Integer>();
 
 			// Sort the list of values in ascending numerical order.
 			Collections.sort(getValues());

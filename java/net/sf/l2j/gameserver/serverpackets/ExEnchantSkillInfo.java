@@ -14,16 +14,17 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
 import net.sf.l2j.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ExEnchantSkillList.EnchantSkillType;
 
+import java.util.ArrayList;
+
 public final class ExEnchantSkillInfo extends L2GameServerPacket
 {
     private static final String _S__FE_18_EXENCHANTSKILLINFO = "[S] FE:2a ExEnchantSkillInfo";
-    private FastList<SkillEnchantDetailElement> _routes;
+    private ArrayList<SkillEnchantDetailElement> _routes;
     
     private final int _id;
     private final EnchantSkillType _type;
@@ -31,7 +32,7 @@ public final class ExEnchantSkillInfo extends L2GameServerPacket
     
     public ExEnchantSkillInfo(EnchantSkillType type, int id)
     {
-        _routes = new FastList<SkillEnchantDetailElement>();
+        _routes = new ArrayList<SkillEnchantDetailElement>();
         _id = id;
         _type = type;
         _xpSpCostMultiplier = (type == EnchantSkillType.SAFE ? SkillTreeTable.SAFE_ENCHANT_COST_MULTIPLIER : SkillTreeTable.NORMAL_ENCHANT_COST_MULTIPLIER);

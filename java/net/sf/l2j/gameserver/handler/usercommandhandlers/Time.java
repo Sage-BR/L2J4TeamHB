@@ -42,7 +42,6 @@ public class Time implements IUserCommandHandler
 			m = "" + t%60;
 
 
-
 		SystemMessage sm;
 		if (GameTimeController.getInstance().isNowNight()) {
 			sm = new SystemMessage(SystemMessageId.TIME_S1_S2_IN_THE_NIGHT);

@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.serverpackets;
 import net.sf.l2j.gameserver.model.L2CommandChannel;
 import net.sf.l2j.gameserver.model.L2Party;
 
-
 /**
  *
  * @author  chris_00

@@ -19,7 +19,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Env;
 
-
 class EffectManaDamOverTime extends L2Effect
 {
 	public EffectManaDamOverTime(Env env, EffectTemplate template)

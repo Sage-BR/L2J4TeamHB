@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GmListTable;
 import net.sf.l2j.gameserver.datatables.NpcTable;
@@ -36,6 +35,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
+
+import java.util.List;
 
 /**
  * This class handles following admin commands: - show_spawns = shows menu -
@@ -212,7 +213,7 @@ public class AdminSpawn implements IAdminCommandHandler
 
 	private void showMonsters(L2PcInstance activeChar, int level, int from)
 	{
-		TextBuilder tb = new TextBuilder();
+		StringBuilder tb = new StringBuilder();
 
 		L2NpcTemplate[] mobs = NpcTable.getInstance().getAllMonstersOfLevel(level);
 
@@ -248,7 +249,7 @@ public class AdminSpawn implements IAdminCommandHandler
 
 	private void showNpcs(L2PcInstance activeChar, String starting, int from)
 	{
-		TextBuilder tb = new TextBuilder();
+		StringBuilder tb = new StringBuilder();
 		L2NpcTemplate[] mobs = NpcTable.getInstance().getAllNpcStartingWith(starting);
 		// Start
 		tb.append("<html><title>Spawn Monster:</title><body><p> There are "+mobs.length+" Npcs whose name starts with "+starting+":<br>");

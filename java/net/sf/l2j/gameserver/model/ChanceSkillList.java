@@ -14,17 +14,19 @@
  */
 package net.sf.l2j.gameserver.model;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.serverpackets.MagicSkillLaunched;
 import net.sf.l2j.gameserver.serverpackets.MagicSkillUse;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
+
 /**
  *
  * @author  kombat
  */
-public class ChanceSkillList extends FastMap<L2Skill, ChanceCondition>
+public class ChanceSkillList extends ConcurrentHashMap<L2Skill, ChanceCondition>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -32,8 +34,6 @@ public class ChanceSkillList extends FastMap<L2Skill, ChanceCondition>
 
 	public ChanceSkillList(L2Character owner)
 	{
-		super();
-		setShared(true);
 		_owner = owner;
 	}
 
@@ -94,7 +94,7 @@ public class ChanceSkillList extends FastMap<L2Skill, ChanceCondition>
 
 	public void onEvent(int event, L2Character target)
 	{
-		for (FastMap.Entry<L2Skill, ChanceCondition> e = head(), end = tail(); (e = e.getNext()) != end;)
+		for (Map.Entry<L2Skill, ChanceCondition> e : entrySet())
 		{
 			if (e.getValue() != null && e.getValue().trigger(event))
 			{

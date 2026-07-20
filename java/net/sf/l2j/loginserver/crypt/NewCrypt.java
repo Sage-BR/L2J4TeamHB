@@ -17,7 +17,6 @@ package net.sf.l2j.loginserver.crypt;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-
 /**
  * This class ...
  *
@@ -164,7 +163,6 @@ public class NewCrypt
 		raw[pos++] = (byte) (ecx >> 16 & 0xFF);
 		raw[pos++] = (byte) (ecx >> 24 & 0xFF);
 	}
-
 
 	public byte[] decrypt(byte[] raw) throws IOException
 	{

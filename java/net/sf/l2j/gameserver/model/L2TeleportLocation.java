@@ -28,7 +28,6 @@ public class L2TeleportLocation
 	private int _price;
 	private boolean _forNoble;
 
-
 	/**
 	 * @param id
 	 */
@@ -76,7 +75,6 @@ public class L2TeleportLocation
 	{
 		_forNoble = val;
 	}
-
 
 	/**
 	 * @return

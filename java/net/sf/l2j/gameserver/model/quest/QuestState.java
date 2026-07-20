@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model.quest;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.cache.HtmCache;
@@ -41,6 +40,10 @@ import net.sf.l2j.gameserver.serverpackets.TutorialShowHtml;
 import net.sf.l2j.gameserver.serverpackets.TutorialShowQuestionMark;
 import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Luis Arias
@@ -173,7 +176,7 @@ public final class QuestState
 	String setInternal(String var, String val)
     {
 		if (_vars == null)
-			_vars = new FastMap<String, String>();
+			_vars = new ConcurrentHashMap<String, String>();
 
 		if (val == null)
 			val = "";
@@ -187,8 +190,8 @@ public final class QuestState
 	 * <U><I>Actions :</I></U><BR>
 	 * <LI>Initialize class variable "vars" if is null</LI>
 	 * <LI>Initialize parameter "val" if is null</LI>
-	 * <LI>Add/Update couple (var,val) in class variable FastMap "vars"</LI>
-	 * <LI>If the key represented by "var" exists in FastMap "vars", the couple (var,val) is updated in the database. The key is known as
+	 * <LI>Add/Update couple (var,val) in class variable ConcurrentHashMap "vars"</LI>
+	 * <LI>If the key represented by "var" exists in ConcurrentHashMap "vars", the couple (var,val) is updated in the database. The key is known as
 	 * existing if the preceding value of the key (given as result of function put()) is not null.<BR>
 	 * If the key doesn't exist, the couple is added/created in the database</LI>
 	 * @param var : String indicating the name of the variable for quest
@@ -198,12 +201,12 @@ public final class QuestState
 	public String set(String var, String val)
     {
 		if (_vars == null)
-			_vars = new FastMap<String, String>();
+			_vars = new ConcurrentHashMap<String, String>();
 
 		if (val == null)
 			val = "";
 
-		// FastMap.put() returns previous value associated with specified key, or null if there was no mapping for key.
+		// ConcurrentHashMap.put() returns previous value associated with specified key, or null if there was no mapping for key.
 		String old = _vars.put(var, val);
 
 		if (old != null)
@@ -334,7 +337,7 @@ public final class QuestState
 	/**
 	 * Remove the variable of quest from the list of variables for the quest.<BR><BR>
 	 * <U><I>Concept : </I></U>
-	 * Remove the variable of quest represented by "var" from the class variable FastMap "vars" and from the database.
+	 * Remove the variable of quest represented by "var" from the class variable ConcurrentHashMap "vars" and from the database.
 	 * @param var : String designating the variable for the quest to be deleted
 	 * @return String pointing out the previous value associated with the variable "var"
 	 */

@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.List;
 
-import javolution.util.FastTable;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -70,7 +71,7 @@ public final class L2EnchantSkillLearn
                 List<EnchantSkillDetail>[] newArray = new List[enchantType+1];
                 System.arraycopy(_enchantDetails, 0, newArray, 0, _enchantDetails.length);
                 _enchantDetails = newArray;
-                _enchantDetails[enchantType] = new FastTable<EnchantSkillDetail>();
+                _enchantDetails[enchantType] = new ArrayList<EnchantSkillDetail>();
             }
             int index = L2EnchantSkillLearn.getEnchantIndex(esd.getLevel());
             _enchantDetails[enchantType].add(index, esd);

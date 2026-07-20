@@ -217,7 +217,6 @@ public class RequestProcureCropList extends L2GameClientPacket
 				continue;
 			}
 
-
 			if (manorId != currentManorId)
 				fee = sellPrice * 5 / 100; // 5% fee for selling to other manor
 
@@ -259,7 +258,6 @@ public class RequestProcureCropList extends L2GameClientPacket
 
 			if (itemDel == null || itemAdd == null)
 				continue;
-
 
 			playerIU.addRemovedItem(itemDel);
 			if (itemAdd.getCount() > rewardItemCount)

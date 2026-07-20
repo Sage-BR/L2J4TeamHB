@@ -26,6 +26,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  * @author Nemesiss
  *

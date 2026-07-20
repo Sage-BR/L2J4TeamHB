@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.GameServer;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -32,6 +31,9 @@ import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 public class Auction
 {
@@ -53,7 +55,7 @@ public class Auction
 	private int _currentBid						= 0;
 	private int _startingBid					= 0;
 
-	private Map<Integer, Bidder> _bidders        = new FastMap<Integer, Bidder>();
+	private Map<Integer, Bidder> _bidders        = new ConcurrentHashMap<Integer, Bidder>();
 	private static final String[] ItemTypeName =
 	{
 	             "ClanHall"

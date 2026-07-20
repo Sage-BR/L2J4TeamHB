@@ -14,8 +14,10 @@
  */
 package net.sf.l2j.gameserver.model.zone;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Character;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class manages all zones for a given world region
@@ -24,7 +26,7 @@ import net.sf.l2j.gameserver.model.L2Character;
  */
 public class L2ZoneManager
 {
-	private final FastList<L2ZoneType> _zones;
+	private final ArrayList<L2ZoneType> _zones;
 
 	/**
 	 * The Constructor creates an initial zone list
@@ -34,7 +36,7 @@ public class L2ZoneManager
 	 */
 	public L2ZoneManager()
 	{
-		_zones = new FastList<L2ZoneType>();
+		_zones = new ArrayList<L2ZoneType>();
 	}
 
 	/**
@@ -46,7 +48,7 @@ public class L2ZoneManager
 		_zones.add(zone);
 	}
     
-    public FastList<L2ZoneType> getZones()
+    public ArrayList<L2ZoneType> getZones()
     {
         return _zones;
     }

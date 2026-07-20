@@ -16,10 +16,11 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.instance.L2PetInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2SummonInstance;
+
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -48,7 +49,7 @@ public class PartySpelled extends L2GameServerPacket
 
     public PartySpelled(L2Character cha)
     {
-        _effects = new FastList<Effect>();
+        _effects = new ArrayList<Effect>();
         _activeChar = cha;
     }
 

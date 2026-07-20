@@ -18,7 +18,6 @@ package net.sf.l2j.gameserver.ai.special;
 
 import java.util.Collection;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.datatables.SkillTable;
@@ -36,6 +35,7 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
+import java.util.ArrayList;
 
 
 public class Monastery extends L2AttackableAIScript implements Runnable
@@ -107,7 +107,7 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 	{
 		if (Util.contains(mobs1, npc.getNpcId()))
 		{
-			final FastList<L2PlayableInstance> result = new FastList<>();
+			final ArrayList<L2PlayableInstance> result = new ArrayList<>();
 			final Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
 			for (final L2Object obj : objs)
 			{

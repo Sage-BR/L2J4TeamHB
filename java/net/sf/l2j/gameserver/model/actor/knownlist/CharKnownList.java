@@ -17,8 +17,7 @@ package net.sf.l2j.gameserver.model.actor.knownlist;
 import java.util.Collection;
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.L2Summon;
@@ -27,6 +26,10 @@ import net.sf.l2j.gameserver.model.actor.instance.L2MonsterInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class CharKnownList extends ObjectKnownList
 {
@@ -182,7 +185,7 @@ public class CharKnownList extends ObjectKnownList
 
     public Collection<L2Character> getKnownCharacters()
     {
-        FastList<L2Character> result = new FastList<L2Character>();
+        ArrayList<L2Character> result = new ArrayList<L2Character>();
 
         Collection<L2Object> objs = getKnownObjects().values();
         //synchronized (getKnownObjects())
@@ -198,7 +201,7 @@ public class CharKnownList extends ObjectKnownList
 
     public Collection<L2Character> getKnownCharactersInRadius(long radius)
     {
-       FastList<L2Character> result = new FastList<L2Character>();
+       ArrayList<L2Character> result = new ArrayList<L2Character>();
 
        Collection<L2Object> objs = getKnownObjects().values();
        //synchronized (getKnownObjects())
@@ -228,25 +231,25 @@ public class CharKnownList extends ObjectKnownList
 
     public final Map<Integer, L2PcInstance> getKnownPlayers()
     {
-        if (_knownPlayers == null) _knownPlayers = new FastMap<Integer, L2PcInstance>().setShared(true);
+        if (_knownPlayers == null) _knownPlayers = new ConcurrentHashMap<Integer, L2PcInstance>();
         return _knownPlayers;
     }
 
     public final Map<Integer, Integer> getKnownRelations()
     {
-        if (_knownRelations == null) _knownRelations = new FastMap<Integer, Integer>().setShared(true);
+        if (_knownRelations == null) _knownRelations = new ConcurrentHashMap<Integer, Integer>();
         return _knownRelations;
     }
 
     public final Map<Integer, L2Summon> getKnownSummons()
     {
-        if (_knownSummons == null) _knownSummons = new FastMap<Integer, L2Summon>().setShared(true);
+        if (_knownSummons == null) _knownSummons = new ConcurrentHashMap<Integer, L2Summon>();
         return _knownSummons;
     }
     
     public final Collection<L2PcInstance> getKnownPlayersInRadius(long radius)
     {
-        FastList<L2PcInstance> result = new FastList<L2PcInstance>();
+        ArrayList<L2PcInstance> result = new ArrayList<L2PcInstance>();
 
         Collection<L2PcInstance> plrs = getKnownPlayers().values();
         //synchronized (getKnownPlayers())

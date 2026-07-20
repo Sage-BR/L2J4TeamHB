@@ -39,7 +39,6 @@ public class MagicSkillLaunched extends L2GameServerPacket
 	private L2Object[] _targets;
 	private int _singleTargetId;
 
-
 	public MagicSkillLaunched(L2Character cha, int skillId, int skillLevel, L2Object[] targets)
 	{
 		_charObjId = cha.getObjectId();

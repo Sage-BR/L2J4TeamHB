@@ -19,8 +19,9 @@ import java.net.Socket;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -29,7 +30,7 @@ import net.sf.l2j.Config;
 public class GameServerListener extends FloodProtectedListener
 {
 	private static Logger _log = Logger.getLogger(GameServerListener.class.getName());
-	private static List<GameServerThread> _gameServers = new FastList<GameServerThread>();
+	private static List<GameServerThread> _gameServers = new ArrayList<GameServerThread>();
 
 	public GameServerListener() throws IOException
 	{

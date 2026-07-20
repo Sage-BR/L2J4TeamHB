@@ -20,7 +20,6 @@ package net.sf.l2j.gameserver.serverpackets;
 import net.sf.l2j.gameserver.model.L2HennaInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 public final class HennaInfo extends L2GameServerPacket
 {
 	private static final String _S__E4_HennaInfo = "[S] e5 HennaInfo";
@@ -45,7 +44,6 @@ public final class HennaInfo extends L2GameServerPacket
 		_count = j;
 	}
 
-
 	@Override
 	protected final void writeImpl()
 	{
@@ -68,7 +66,6 @@ public final class HennaInfo extends L2GameServerPacket
 			writeD(_hennas[i].getSymbolId());
 		}
 	}
-
 
 	/* (non-Javadoc)
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()

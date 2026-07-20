@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Env;
 
-
 class EffectRelax extends L2Effect
 {
 	public EffectRelax(Env env, EffectTemplate template)

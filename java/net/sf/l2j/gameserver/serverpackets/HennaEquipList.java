@@ -33,7 +33,6 @@ public class HennaEquipList extends L2GameServerPacket
         _hennaEquipList = hennaEquipList;
     }
 
-
     @Override
 	protected final void writeImpl()
     {

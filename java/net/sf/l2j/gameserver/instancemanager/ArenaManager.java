@@ -16,9 +16,10 @@ package net.sf.l2j.gameserver.instancemanager;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.zone.type.L2ArenaZone;
+
+import java.util.ArrayList;
 
 public class ArenaManager
 {
@@ -36,10 +37,9 @@ public class ArenaManager
     }
     // =========================================================
 
-
     // =========================================================
     // Data Field
-    private FastList<L2ArenaZone> _arenas;
+    private ArrayList<L2ArenaZone> _arenas;
 
     // =========================================================
     // Constructor
@@ -53,7 +53,7 @@ public class ArenaManager
     public void addArena(L2ArenaZone arena)
     {
     	if (_arenas == null)
-    		_arenas = new FastList<L2ArenaZone>();
+    		_arenas = new ArrayList<L2ArenaZone>();
 
     	_arenas.add(arena);
     }

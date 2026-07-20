@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.model.actor.instance;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -25,6 +24,8 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.List;
 
 public class L2FishermanInstance extends L2MerchantInstance
 {
@@ -133,7 +134,7 @@ public class L2FishermanInstance extends L2MerchantInstance
 		    }
             else
             {
-                TextBuilder sb = new TextBuilder();
+                StringBuilder sb = new StringBuilder();
                 sb.append("<html><head><body>");
                 sb.append("You've learned all skills.<br>");
                 sb.append("</body></html>");

@@ -18,8 +18,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.TaskPriority;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -37,7 +38,7 @@ public class AiInstance
 			throw new IllegalArgumentException("AiPluginingParameters of an Ai instance must be converted");
 		_pluginigParams = params;
 		//TODO:update the params (bottom-up)
-		_eventHandlers = new FastMap<AiEventType,EventHandlerSet>();
+		_eventHandlers = new ConcurrentHashMap<AiEventType,EventHandlerSet>();
 		AiManager.getInstance().addAiInstance(this);
 	}
 	

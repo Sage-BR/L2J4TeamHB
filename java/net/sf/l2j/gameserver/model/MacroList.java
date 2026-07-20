@@ -22,13 +22,15 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2Macro.L2MacroCmd;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.SendMacroList;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -42,7 +44,7 @@ public class MacroList
     private L2PcInstance _owner;
 	private int _revision;
 	private int _macroId;
-    private Map<Integer, L2Macro> _macroses = new FastMap<Integer, L2Macro>();
+    private Map<Integer, L2Macro> _macroses = new ConcurrentHashMap<Integer, L2Macro>();
 
     public MacroList(L2PcInstance owner)
     {
@@ -126,7 +128,7 @@ public class MacroList
             statement.setString(4, macro.name);
             statement.setString(5, macro.descr);
             statement.setString(6, macro.acronym);
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
 			for (L2MacroCmd cmd : macro.commands) {
 				sb.append(cmd.type).append(',');
 				sb.append(cmd.d1).append(',');
@@ -192,7 +194,7 @@ public class MacroList
                 String name = rset.getString("name");
                 String descr = rset.getString("descr");
                 String acronym = rset.getString("acronym");
-				List<L2MacroCmd> commands = new FastList<L2MacroCmd>();
+				List<L2MacroCmd> commands = new ArrayList<L2MacroCmd>();
 				StringTokenizer st1 = new StringTokenizer(rset.getString("commands"),";");
 				while (st1.hasMoreTokens()) {
 					StringTokenizer st = new StringTokenizer(st1.nextToken(),",");

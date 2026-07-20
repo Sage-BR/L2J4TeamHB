@@ -42,6 +42,8 @@ import net.sf.l2j.gameserver.serverpackets.SetupGauge;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.util.Broadcast;
 
+import java.util.List;
+
 /**
  * @author evill33t
  *
@@ -181,7 +183,6 @@ public class Wedding implements IVoicedCommandHandler
             activeChar.sendMessage("Player already engaged with someone else.");
             return false;
         }
-
 
         if (ptarget.getAppearance().getSex()==activeChar.getAppearance().getSex() && !Config.L2JMOD_WEDDING_SAMESEX)
         {

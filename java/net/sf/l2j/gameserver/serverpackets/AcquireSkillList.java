@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 /**
  * sample
@@ -75,7 +76,7 @@ public final class AcquireSkillList extends L2GameServerPacket
 
 	public AcquireSkillList(skillType type)
 	{
-		_skills = new FastList<Skill>();
+		_skills = new ArrayList<Skill>();
 		_fishingSkills = type;
 	}
 

@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * This class ...
  *
@@ -28,7 +27,6 @@ public class ObservationReturn extends L2GameServerPacket
 	private static final String _S__E0_OBSERVRETURN = "[S] ec ObservationReturn";
 	private L2PcInstance _activeChar;
 
-
 	/**
 	 * @param _characters
 	 */
@@ -36,7 +34,6 @@ public class ObservationReturn extends L2GameServerPacket
 	{
 		_activeChar = observer;
 	}
-
 
 	@Override
 	protected final void writeImpl()

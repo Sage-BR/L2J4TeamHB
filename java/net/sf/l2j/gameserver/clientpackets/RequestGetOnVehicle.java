@@ -55,7 +55,6 @@ public final class RequestGetOnVehicle extends L2GameClientPacket
         activeChar.broadcastPacket(Gon);
         activeChar.revalidateZone(true);
 
-
     }
 
     /* (non-Javadoc)

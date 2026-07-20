@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -35,6 +34,9 @@ import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Class For Castle Manor Manager Load manor data from DB Update/Reload/Delete
@@ -159,10 +161,10 @@ public class CastleManorManager {
 			// Get Connection
 			con = L2DatabaseFactory.getInstance().getConnection();
 			for (Castle castle : CastleManager.getInstance().getCastles()) {
-				FastList<SeedProduction> production = new FastList<SeedProduction>();
-				FastList<SeedProduction> productionNext = new FastList<SeedProduction>();
-				FastList<CropProcure> procure = new FastList<CropProcure>();
-				FastList<CropProcure> procureNext = new FastList<CropProcure>();
+				ArrayList<SeedProduction> production = new ArrayList<SeedProduction>();
+				ArrayList<SeedProduction> productionNext = new ArrayList<SeedProduction>();
+				ArrayList<CropProcure> procure = new ArrayList<CropProcure>();
+				ArrayList<CropProcure> procureNext = new ArrayList<CropProcure>();
 
 				// restore seed production info
 				statement = con.prepareStatement(CASTLE_MANOR_LOAD_PRODUCTION);
@@ -258,7 +260,6 @@ public class CastleManorManager {
             }
             }, getMillisToManorRefresh());
 
-
 	}
 
 	public void updatePeriodApprove() {
@@ -352,14 +353,14 @@ public class CastleManorManager {
 				c.setSeedProduction(getNewSeedsList(c.getCastleId()), PERIOD_NEXT);
 				c.setCropProcure(getNewCropsList(c.getCastleId()), PERIOD_NEXT);
 			} else {
-				FastList<SeedProduction> production = new FastList<SeedProduction>();
+				ArrayList<SeedProduction> production = new ArrayList<SeedProduction>();
 				for (SeedProduction s : c.getSeedProduction(PERIOD_CURRENT)) {
 					s.setCanProduce(s.getStartProduce());
 					production.add(s);
 				}
 				c.setSeedProduction(production, PERIOD_NEXT);
 
-				FastList<CropProcure> procure = new FastList<CropProcure>();
+				ArrayList<CropProcure> procure = new ArrayList<CropProcure>();
 				for (CropProcure cr : c.getCropProcure(PERIOD_CURRENT)) {
 					cr.setAmount(cr.getStartAmount());
 					procure.add(cr);
@@ -387,8 +388,8 @@ public class CastleManorManager {
 			boolean notFunc = false;
 
 			if (c.getOwnerId() <= 0 ) {       				 	  // Castle has no owner
-				c.setCropProcure(new FastList<CropProcure>(), PERIOD_NEXT);
-				c.setSeedProduction(new FastList<SeedProduction>(), PERIOD_NEXT);
+				c.setCropProcure(new ArrayList<CropProcure>(), PERIOD_NEXT);
+				c.setSeedProduction(new ArrayList<SeedProduction>(), PERIOD_NEXT);
 			} else if (c.getTreasury() < c.getManorCost(PERIOD_NEXT)) {
 				notFunc = true;
 				c.setSeedProduction(getNewSeedsList(c.getCastleId()), PERIOD_NEXT);
@@ -427,18 +428,18 @@ public class CastleManorManager {
 
 	}
 
-	private FastList<SeedProduction> getNewSeedsList(int castleId) {
-		FastList<SeedProduction> seeds = new FastList<SeedProduction>();
-		FastList<Integer> seedsIds = L2Manor.getInstance().getSeedsForCastle(castleId);
+	private ArrayList<SeedProduction> getNewSeedsList(int castleId) {
+		ArrayList<SeedProduction> seeds = new ArrayList<SeedProduction>();
+		ArrayList<Integer> seedsIds = L2Manor.getInstance().getSeedsForCastle(castleId);
 		for (int sd : seedsIds) {
 			seeds.add(new SeedProduction(sd));
 		}
 		return seeds;
 	}
 
-	private FastList<CropProcure> getNewCropsList(int castleId) {
-		FastList<CropProcure> crops = new FastList<CropProcure>();
-		FastList<Integer> cropsIds = L2Manor.getInstance().getCropsForCastle(castleId);
+	private ArrayList<CropProcure> getNewCropsList(int castleId) {
+		ArrayList<CropProcure> crops = new ArrayList<CropProcure>();
+		ArrayList<Integer> cropsIds = L2Manor.getInstance().getCropsForCastle(castleId);
 		for (int cr : cropsIds) {
 			crops.add(new CropProcure(cr));
 		}

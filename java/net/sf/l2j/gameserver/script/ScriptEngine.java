@@ -19,7 +19,6 @@ import java.util.Hashtable;
 import net.sf.l2j.gameserver.script.faenor.FaenorInterface;
 
 
-
 /**
  * @author Luis Arias
  *

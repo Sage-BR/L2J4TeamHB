@@ -22,8 +22,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Announcements;
@@ -47,16 +46,20 @@ import net.sf.l2j.gameserver.model.zone.type.L2CastleZone;
 import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowInfoUpdate;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
 public class Castle
 {
     protected static final Logger _log = Logger.getLogger(Castle.class.getName());
 
  // =========================================================
     // Data Field
-    private FastList<CropProcure>    _procure        = new FastList<CropProcure>();
-    private FastList<SeedProduction> _production     = new FastList<SeedProduction>();
-    private FastList<CropProcure>    _procureNext    = new FastList<CropProcure>();
-    private FastList<SeedProduction> _productionNext = new FastList<SeedProduction>();
+    private ArrayList<CropProcure>    _procure        = new ArrayList<CropProcure>();
+    private ArrayList<SeedProduction> _production     = new ArrayList<SeedProduction>();
+    private ArrayList<CropProcure>    _procureNext    = new ArrayList<CropProcure>();
+    private ArrayList<SeedProduction> _productionNext = new ArrayList<SeedProduction>();
     private boolean _isNextPeriodApproved = false;
 
     private static final String CASTLE_MANOR_DELETE_PRODUCTION =
@@ -74,8 +77,8 @@ public class Castle
 	// =========================================================
     // Data Field
 	private int _castleId                      = 0;
-	private List<L2DoorInstance> _doors        = new FastList<L2DoorInstance>();
-	private List<String> _doorDefault          = new FastList<String>();
+	private List<L2DoorInstance> _doors        = new ArrayList<L2DoorInstance>();
+	private List<String> _doorDefault          = new ArrayList<String>();
 	private String _name                       = "";
 	private int _ownerId                       = 0;
 	private Siege _siege                       = null;
@@ -89,7 +92,7 @@ public class Castle
     private L2CastleTeleportZone _teleZone;
     private L2Clan _formerOwner				   = null;
     private int _nbArtifact					   = 1;
-    private Map<Integer, Integer> _engrave	   = new FastMap<Integer, Integer>();
+    private Map<Integer, Integer> _engrave	   = new ConcurrentHashMap<Integer, Integer>();
     private Map<Integer,CastleFunction> _function;
 
 	/** Castle Functions */
@@ -228,7 +231,7 @@ public class Castle
 			_nbArtifact = 2;
         load();
 		loadDoor();
-		_function = new FastMap<Integer,CastleFunction>();
+		_function = new ConcurrentHashMap<Integer,CastleFunction>();
 		if (getOwnerId() != 0)
 		{
 			loadFunctions();
@@ -950,17 +953,17 @@ public class Castle
 		return _treasury;
 	}
 
-	public FastList<SeedProduction> getSeedProduction(int period)
+	public ArrayList<SeedProduction> getSeedProduction(int period)
 	{
 		return (period == CastleManorManager.PERIOD_CURRENT ? _production : _productionNext);
 	}
 
-	public FastList<CropProcure> getCropProcure(int period)
+	public ArrayList<CropProcure> getCropProcure(int period)
 	{
 		return (period == CastleManorManager.PERIOD_CURRENT ? _procure : _procureNext);
 	}
 
-	public void setSeedProduction(FastList<SeedProduction> seed, int period)
+	public void setSeedProduction(ArrayList<SeedProduction> seed, int period)
 	{
 		if (period == CastleManorManager.PERIOD_CURRENT)
 			_production = seed;
@@ -968,7 +971,7 @@ public class Castle
 			_productionNext = seed;
 	}
 
-	public void setCropProcure(FastList<CropProcure> crop, int period)
+	public void setCropProcure(ArrayList<CropProcure> crop, int period)
 	{
 		if (period == CastleManorManager.PERIOD_CURRENT)
 			_procure = crop;
@@ -1002,8 +1005,8 @@ public class Castle
 
 	public int getManorCost (int period)
 	{
-		FastList<CropProcure> procure;
-		FastList<SeedProduction> production;
+		ArrayList<CropProcure> procure;
+		ArrayList<SeedProduction> production;
 
 		if (period == CastleManorManager.PERIOD_CURRENT)
 		{
@@ -1116,7 +1119,7 @@ public class Castle
             statement.execute();
             statement.close();
 
-            FastList<SeedProduction> prod = null;
+            ArrayList<SeedProduction> prod = null;
             prod = getSeedProduction(period);
 
             if (prod != null)
@@ -1229,7 +1232,7 @@ public class Castle
 			statement.execute();
 			statement.close();
 
-			FastList<CropProcure> proc = null;
+			ArrayList<CropProcure> proc = null;
 			proc = getCropProcure(period);
 
 			if (proc != null)

@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.datatables.NpcTable;
@@ -255,12 +254,10 @@ public class AdminTeleport implements IAdminCommandHandler
         }
     }
 
-
     private void showTeleportWindow(L2PcInstance activeChar)
     {
     	AdminHelpPage.showHelpPage(activeChar, "move.htm");
     }
-
 
     private void showTeleportCharWindow(L2PcInstance activeChar)
     {
@@ -277,7 +274,7 @@ public class AdminTeleport implements IAdminCommandHandler
         }
         NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-        TextBuilder replyMSG = new TextBuilder("<html><title>Teleport Character</title>");
+        StringBuilder replyMSG = new StringBuilder("<html><title>Teleport Character</title>");
         replyMSG.append("<body>");
         replyMSG.append("The character you will teleport is " + player.getName() + ".");
         replyMSG.append("<br>");

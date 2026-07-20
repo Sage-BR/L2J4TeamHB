@@ -15,11 +15,12 @@
 
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager.CropProcure;
 import net.sf.l2j.gameserver.model.entity.Castle;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * format(packet 0xFE) ch dd [dddc] c - id h - sub id
@@ -35,12 +36,12 @@ public class ExShowProcureCropDetail extends L2GameServerPacket
     
     private int _cropId;
     
-    private FastMap<Integer, CropProcure> _castleCrops;
+    private ConcurrentHashMap<Integer, CropProcure> _castleCrops;
     
     public ExShowProcureCropDetail(int cropId)
     {
         _cropId = cropId;
-        _castleCrops = new FastMap<Integer, CropProcure>();
+        _castleCrops = new ConcurrentHashMap<Integer, CropProcure>();
         
         for (Castle c : CastleManager.getInstance().getCastles())
         {

@@ -22,11 +22,14 @@ import java.io.LineNumberReader;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.templates.L2Item;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Service class for manor
@@ -38,10 +41,10 @@ public class L2Manor
 	private static Logger _log = Logger.getLogger(L2Manor.class.getName());
     private static L2Manor _instance;
 
-    private static FastMap<Integer,SeedData> _seeds;
+    private static ConcurrentHashMap<Integer,SeedData> _seeds;
 
     public L2Manor() {
-		_seeds = new FastMap<Integer, SeedData>().setShared(true);
+		_seeds = new ConcurrentHashMap<Integer, SeedData>();
 		parseData();
 	}
 
@@ -52,8 +55,8 @@ public class L2Manor
 		return _instance;
 	}
 
-    public FastList<Integer> getAllCrops() {
-    	FastList<Integer> crops = new FastList<Integer>();
+    public ArrayList<Integer> getAllCrops() {
+    	ArrayList<Integer> crops = new ArrayList<Integer>();
 
     	for (SeedData seed: _seeds.values()) {
     		if (!crops.contains(seed.getCrop()) && seed.getCrop() != 0 && !crops.contains(seed.getCrop())) {
@@ -188,8 +191,8 @@ public class L2Manor
 	 * @param castleId
 	 * @return
 	 */
-    public FastList<Integer> getCropsForCastle(int castleId) {
-		FastList<Integer> crops = new FastList<Integer>();
+    public ArrayList<Integer> getCropsForCastle(int castleId) {
+		ArrayList<Integer> crops = new ArrayList<Integer>();
 
 		for (SeedData seed : _seeds.values()) {
 			if (seed.getManorId() == castleId && !crops.contains(seed.getCrop())) {
@@ -204,8 +207,8 @@ public class L2Manor
      * @param castleId - id of the castle
      * @return seedIds - list of seed ids
      */
-    public FastList<Integer> getSeedsForCastle(int castleId) {
-		FastList<Integer> seedsID = new FastList<Integer>();
+    public ArrayList<Integer> getSeedsForCastle(int castleId) {
+		ArrayList<Integer> seedsID = new ArrayList<Integer>();
 
 		for (SeedData seed : _seeds.values()) {
 			if (seed.getManorId() == castleId && !seedsID.contains(seed.getId())) {
@@ -249,7 +252,6 @@ public class L2Manor
     }
 
 
-
     private class SeedData {
         private int _id;
         private int _level;      // seed level
@@ -286,7 +288,6 @@ public class L2Manor
         	return _id;
         }
 
-
         public int getCrop() {
         	return _crop;
         }
@@ -315,7 +316,6 @@ public class L2Manor
         	return _limitCrops*Config.RATE_DROP_MANOR;
         }
     }
-
 
     private void parseData() {
 		LineNumberReader lnr = null;

@@ -24,8 +24,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.SkillTable;
@@ -38,6 +37,9 @@ import net.sf.l2j.gameserver.model.Location;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Fort;
 import net.sf.l2j.gameserver.model.entity.FortSiege;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 public class FortSiegeManager
 {
@@ -64,8 +66,8 @@ public class FortSiegeManager
     private int _defenderRespawnDelay                          = 10000; // Time in ms. Changeable in siege.config
 
     // Fort Siege settings
-    private FastMap<Integer,FastList<SiegeSpawn>>  _commanderSpawnList;
-    private FastMap<Integer,FastList<CombatFlag>>  _flagList;
+    private ConcurrentHashMap<Integer,ArrayList<SiegeSpawn>>  _commanderSpawnList;
+    private ConcurrentHashMap<Integer,ArrayList<CombatFlag>>  _flagList;
 
     private int _controlTowerLosePenalty                         = 20000; // Time in ms. Changeable in siege.config
     private int _flagMaxCount                                   = 1; // Changeable in siege.config
@@ -179,13 +181,13 @@ public class FortSiegeManager
             _siegeLength = Integer.decode(siegeSettings.getProperty("SiegeLength", "120"));
 
             // Siege spawns settings
-            _commanderSpawnList = new FastMap<Integer,FastList<SiegeSpawn>>();
-            _flagList = new FastMap<Integer,FastList<CombatFlag>>();
+            _commanderSpawnList = new ConcurrentHashMap<Integer,ArrayList<SiegeSpawn>>();
+            _flagList = new ConcurrentHashMap<Integer,ArrayList<CombatFlag>>();
 
             for (Fort fort: FortManager.getInstance().getForts())
             {
-                FastList<SiegeSpawn> _commanderSpawns = new FastList<SiegeSpawn>();
-                FastList<CombatFlag> _flagSpawns = new FastList<CombatFlag>();
+                ArrayList<SiegeSpawn> _commanderSpawns = new ArrayList<SiegeSpawn>();
+                ArrayList<CombatFlag> _flagSpawns = new ArrayList<CombatFlag>();
 
                 for (int i=1; i<5; i++)
                 {
@@ -248,7 +250,7 @@ public class FortSiegeManager
 
     // =========================================================
     // Property - Public
-    public final FastList<SiegeSpawn> getCommanderSpawnList(int _fortId)
+    public final ArrayList<SiegeSpawn> getCommanderSpawnList(int _fortId)
     {
         if (_commanderSpawnList.containsKey(_fortId))
             return _commanderSpawnList.get(_fortId);
@@ -256,7 +258,7 @@ public class FortSiegeManager
             return null;
     }
 
-    public final FastList<CombatFlag> getFlagList(int _fortId)
+    public final ArrayList<CombatFlag> getFlagList(int _fortId)
     {
         if (_flagList.containsKey(_fortId))
             return _flagList.get(_fortId);
@@ -292,14 +294,14 @@ public class FortSiegeManager
     public final List<FortSiege> getSieges()
     {
         if (_sieges == null) 
-        	_sieges = new FastList<FortSiege>();
+        	_sieges = new ArrayList<FortSiege>();
         return _sieges;
     }
 
     public final void addSiege(FortSiege fortSiege)
     {
     	if (_sieges == null)
-    		_sieges = new FastList<FortSiege>();
+    		_sieges = new ArrayList<FortSiege>();
     	_sieges.add(fortSiege);
     }
 
@@ -315,7 +317,7 @@ public class FortSiegeManager
         
         Fort fort = FortManager.getInstance().getFort(player);
         
-        FastList<CombatFlag> fcf =  _flagList.get(fort.getFortId());
+        ArrayList<CombatFlag> fcf =  _flagList.get(fort.getFortId());
         for ( CombatFlag cf : fcf)
         {
             if ( cf.itemInstance == item)
@@ -364,7 +366,7 @@ public class FortSiegeManager
         System.out.println("Fort " + fort.getName());
         
         
-        FastList<CombatFlag> fcf =  _flagList.get(fort.getFortId());
+        ArrayList<CombatFlag> fcf =  _flagList.get(fort.getFortId());
         System.out.println("fast list size " + fcf.size());
 
         for ( CombatFlag cf : fcf)

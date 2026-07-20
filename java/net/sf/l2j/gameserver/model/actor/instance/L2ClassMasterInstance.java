@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.model.actor.instance;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
@@ -29,6 +28,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.Set;
 
 /**
  * This class ...
@@ -113,7 +114,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 					if (classId.getId() == SECONDN_CLASS_IDS[i])
 					{
                         NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-                        TextBuilder sb = new TextBuilder();
+                        StringBuilder sb = new StringBuilder();
                         sb.append("<html><body<table width=200>");
                         sb.append("<tr><td><center>"+CharTemplateTable.getClassNameById(player.getClassId().getId())+" Class Master:</center></td></tr>");
                         sb.append("<tr><td><br></td></tr>");
@@ -133,7 +134,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 			else
 			{
 				NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-				TextBuilder sb = new TextBuilder();
+				StringBuilder sb = new StringBuilder();
 				sb.append("<html><body>");
 				switch (jobLevel)
 				{
@@ -218,7 +219,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
                 	player.sendPacket(new SystemMessage(SystemMessageId.CLASS_TRANSFER));    // system sound for 1st and 2nd occupation
 
                 NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-                TextBuilder sb = new TextBuilder();
+                StringBuilder sb = new StringBuilder();
                 sb.append("<html><body>");
                 sb.append("You have now become a <font color=\"LEVEL\">" + CharTemplateTable.getClassNameById(player.getClassId().getId()) + "</font>.");
                 sb.append("</body></html>");
@@ -268,7 +269,6 @@ public final class L2ClassMasterInstance extends L2FolkInstance
             if (level < 75 && newJobLevel > 3) return;
             // -- prevention ends
 
-
             changeClass(player, val);
 
             if(player.getClassId().level() == 3)
@@ -279,7 +279,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
             player.rewardSkills();
 
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("You have now become a <font color=\"LEVEL\">" + CharTemplateTable.getClassNameById(player.getClassId().getId()) + "</font>.");
             sb.append("</body></html>");
@@ -295,7 +295,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 	private void showChatWindowChooseClass(L2PcInstance player)
 	{
   		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-        TextBuilder sb = new TextBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html>");
         sb.append("<body>");
         sb.append("<table width=200>");
@@ -317,7 +317,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 	private void showChatWindow1st(L2PcInstance player)
 	{
   		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-        TextBuilder sb = new TextBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html>");
         sb.append("<body>");
         sb.append("<table width=200>");
@@ -352,7 +352,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 	private void showChatWindow2nd(L2PcInstance player)
 	{
   		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-        TextBuilder sb = new TextBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html>");
         sb.append("<body>");
         sb.append("<table width=200>");
@@ -400,7 +400,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 	private void showChatWindow3rd(L2PcInstance player)
 	{
   		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-        TextBuilder sb = new TextBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html>");
         sb.append("<body>");
         sb.append("<table width=200>");
@@ -448,7 +448,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance
 	private void showChatWindowBase(L2PcInstance player)
 	{
   		NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-        TextBuilder sb = new TextBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html>");
         sb.append("<body>");
         sb.append("<table width=200>");

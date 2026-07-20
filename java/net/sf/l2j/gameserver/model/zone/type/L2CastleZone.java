@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.model.zone.type;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.L2Character;
@@ -24,6 +23,9 @@ import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * A castle zone
@@ -180,9 +182,9 @@ public class L2CastleZone extends L2ZoneType
 	 * Returns all players within this zone
 	 * @return
 	 */
-	public FastList<L2PcInstance> getAllPlayers()
+	public ArrayList<L2PcInstance> getAllPlayers()
 	{
-		FastList<L2PcInstance> players = new FastList<L2PcInstance>();
+		ArrayList<L2PcInstance> players = new ArrayList<L2PcInstance>();
 
 		for (L2Character temp : _characterList.values())
 		{

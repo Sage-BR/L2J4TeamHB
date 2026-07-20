@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.MonsterRace;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
@@ -33,6 +32,8 @@ import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
+
+import java.util.ArrayList;
 
 public class L2RaceManagerInstance extends L2NpcInstance
 {
@@ -70,8 +71,8 @@ public class L2RaceManagerInstance extends L2NpcInstance
         {
             _notInitialized = false;
             //*
-            _history = new FastList<Race>();
-            _managers = new FastList<L2RaceManagerInstance>();
+            _history = new ArrayList<Race>();
+            _managers = new ArrayList<L2RaceManagerInstance>();
 
             ThreadPoolManager s = ThreadPoolManager.getInstance();
             s.scheduleGeneralAtFixedRate(

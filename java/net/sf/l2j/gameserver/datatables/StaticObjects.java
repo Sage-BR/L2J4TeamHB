@@ -23,10 +23,11 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2StaticObjectInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class StaticObjects
 {
@@ -34,7 +35,6 @@ public class StaticObjects
 
     private static StaticObjects _instance;
     private Map<Integer,L2StaticObjectInstance> _staticObjects;
-
 
     public static StaticObjects getInstance()
     {
@@ -45,7 +45,7 @@ public class StaticObjects
 
     public StaticObjects()
     {
-        _staticObjects = new FastMap<Integer,L2StaticObjectInstance>();
+        _staticObjects = new ConcurrentHashMap<Integer,L2StaticObjectInstance>();
         parseData();
         _log.config("StaticObject: Loaded " + _staticObjects.size() + " StaticObject Templates.");
     }

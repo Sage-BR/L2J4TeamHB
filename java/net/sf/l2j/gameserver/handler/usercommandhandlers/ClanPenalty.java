@@ -15,7 +15,6 @@
 
 package net.sf.l2j.gameserver.handler.usercommandhandlers;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.handler.IUserCommandHandler;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
@@ -37,7 +36,7 @@ public class ClanPenalty implements IUserCommandHandler
 
         String penaltyStr = "No current penalties in effect.";
 
-        TextBuilder htmlContent = new TextBuilder("<html><body>");
+        StringBuilder htmlContent = new StringBuilder("<html><body>");
         htmlContent.append("<center><table width=\"270\" border=\"0\" bgcolor=\"111111\">");
         htmlContent.append("<tr><td width=\"170\">Penalty</td>");
         htmlContent.append("<td width=\"100\" align=\"center\">Expiration Date</td></tr>");

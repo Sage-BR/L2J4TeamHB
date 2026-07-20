@@ -16,11 +16,12 @@ package net.sf.l2j.gameserver.instancemanager;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Duel;
 import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
+
+import java.util.ArrayList;
 
 public class DuelManager
 {
@@ -40,7 +41,7 @@ public class DuelManager
 
 	// =========================================================
 	// Data Field
-	private FastList<Duel> _duels;
+	private ArrayList<Duel> _duels;
 	private int _currentDuelId = 0x90;
 
 	// =========================================================
@@ -48,7 +49,7 @@ public class DuelManager
 	private DuelManager()
 	{
 		_log.info("Initializing DuelManager");
-		_duels = new FastList<Duel>();
+		_duels = new ArrayList<Duel>();
 	}
 
 	// =========================================================
@@ -67,9 +68,9 @@ public class DuelManager
 
 	public Duel getDuel(int duelId)
 	{
-		for (FastList.Node<Duel> e = _duels.head(), end = _duels.tail(); (e = e.getNext()) != end;)
+		for (Duel e : _duels)
 		{
-			if (e.getValue().getId() == duelId) return e.getValue();
+			if (e.getId() == duelId) return e;
 		}
 		return null;
 	}

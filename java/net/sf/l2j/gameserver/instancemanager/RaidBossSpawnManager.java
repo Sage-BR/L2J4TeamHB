@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.GmListTable;
@@ -40,6 +39,9 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 public class RaidBossSpawnManager {
 
@@ -72,10 +74,10 @@ public class RaidBossSpawnManager {
 
     private void init()
     {
-        _bosses = new FastMap<Integer, L2RaidBossInstance>();
-        _schedules = new FastMap<Integer,ScheduledFuture<?>>();
-        _storedInfo = new FastMap<Integer, StatsSet>();
-        _spawns = new FastMap<Integer, L2Spawn>();
+        _bosses = new ConcurrentHashMap<Integer, L2RaidBossInstance>();
+        _schedules = new ConcurrentHashMap<Integer,ScheduledFuture<?>>();
+        _storedInfo = new ConcurrentHashMap<Integer, StatsSet>();
+        _spawns = new ConcurrentHashMap<Integer, L2Spawn>();
 
         Connection con = null;
 

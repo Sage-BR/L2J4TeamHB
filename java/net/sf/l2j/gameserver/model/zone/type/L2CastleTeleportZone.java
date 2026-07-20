@@ -14,13 +14,14 @@
  */
 package net.sf.l2j.gameserver.model.zone.type;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
 
 /**
  * A castle teleporter zone
@@ -91,9 +92,9 @@ public class L2CastleTeleportZone extends L2ZoneType
 	 * Returns all players within this zone
 	 * @return
 	 */
-	public FastList<L2PcInstance> getAllPlayers()
+	public ArrayList<L2PcInstance> getAllPlayers()
 	{
-		FastList<L2PcInstance> players = new FastList<L2PcInstance>();
+		ArrayList<L2PcInstance> players = new ArrayList<L2PcInstance>();
 
 		for (L2Character temp : _characterList.values())
 		{

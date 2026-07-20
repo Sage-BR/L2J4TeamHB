@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Olympiad;
@@ -44,6 +43,8 @@ import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 public class Hero
 {
@@ -55,7 +56,7 @@ public class Hero
     private static final String UPDATE_ALL = "UPDATE heroes SET played = 0";
     private static final String INSERT_HERO = "INSERT INTO heroes VALUES (?,?,?,?,?)";
     private static final String UPDATE_HERO = "UPDATE heroes SET count = ?, played = ?" +
-            " WHERE charId = ?";
+            " WHERE char_id = ?";
     private static final String GET_CLAN_ALLY = "SELECT characters.clanid AS clanid, coalesce(clan_data.ally_Id, 0) AS allyId FROM characters LEFT JOIN clan_data ON clan_data.clan_id = characters.clanid " +
             " WHERE characters.charId = ?";
     private static final String GET_CLAN_NAME = "SELECT clan_name FROM clan_data WHERE clan_id = (SELECT clanid FROM characters WHERE char_name = ?)";
@@ -88,8 +89,8 @@ public class Hero
 
     private void init()
     {
-        _heroes = new FastMap<Integer, StatsSet>();
-        _completeHeroes = new FastMap<Integer, StatsSet>();
+        _heroes = new ConcurrentHashMap<Integer, StatsSet>();
+        _completeHeroes = new ConcurrentHashMap<Integer, StatsSet>();
 
         PreparedStatement statement;
         PreparedStatement statement2;
@@ -307,7 +308,7 @@ public class Hero
             return;
         }
 
-        Map<Integer, StatsSet> heroes = new FastMap<Integer, StatsSet>();
+        Map<Integer, StatsSet> heroes = new ConcurrentHashMap<Integer, StatsSet>();
 
         for (StatsSet hero : newHeroes)
         {

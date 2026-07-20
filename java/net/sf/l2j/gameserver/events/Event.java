@@ -14,7 +14,7 @@
  */
 package net.sf.l2j.gameserver.events;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
 
 /**
  * @author Layane
@@ -22,7 +22,7 @@ import javolution.util.FastList;
  */
 public class Event
 {
-    private final FastList<EventHandler> _handlers = new FastList<EventHandler>();
+    private final ArrayList<EventHandler> _handlers = new ArrayList<EventHandler>();
 
     public void add(EventHandler handler)
     {

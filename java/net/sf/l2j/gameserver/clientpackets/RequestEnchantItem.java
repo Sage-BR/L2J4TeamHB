@@ -33,6 +33,8 @@ import net.sf.l2j.gameserver.util.IllegalPlayerAction;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 public final class RequestEnchantItem extends L2GameClientPacket
 {
 	protected static final Logger _log = Logger.getLogger(Inventory.class.getName());

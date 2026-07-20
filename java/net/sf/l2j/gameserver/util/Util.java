@@ -158,7 +158,6 @@ public final class Util
         return result;
     }
 
-
     /*
      *  Checks if object is within range, adding collisionRadius
      */

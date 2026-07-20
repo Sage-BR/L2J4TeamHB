@@ -18,9 +18,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2NpcWalkerNode;
+
+import java.util.ArrayList;
 
 /**
  * Main Table to Load Npc Walkers Routes and Chat SQL Table.<br>
@@ -36,7 +37,7 @@ public class NpcWalkerRoutesTable
 
 	private static NpcWalkerRoutesTable  _instance;
 
-	private FastList<L2NpcWalkerNode> _routes;
+	private ArrayList<L2NpcWalkerNode> _routes;
 
 	public static NpcWalkerRoutesTable getInstance()
 	{
@@ -55,7 +56,7 @@ public class NpcWalkerRoutesTable
 	//FIXME: NPE while loading. :S
 	public void load()
 	{
-		 _routes = new FastList<L2NpcWalkerNode>();
+		 _routes = new ArrayList<L2NpcWalkerNode>();
 		java.sql.Connection con = null;
 		try
 		{
@@ -102,14 +103,14 @@ public class NpcWalkerRoutesTable
 		}
 	}
 	
-	public FastList<L2NpcWalkerNode> getRouteForNpc(int id)
+	public ArrayList<L2NpcWalkerNode> getRouteForNpc(int id)
 	{
-		FastList<L2NpcWalkerNode> _return = new FastList<L2NpcWalkerNode>();
+		ArrayList<L2NpcWalkerNode> _return = new ArrayList<L2NpcWalkerNode>();
 		
-		 for (FastList.Node<L2NpcWalkerNode> n = _routes.head(), end = _routes.tail(); (n = n.getNext()) != end;) {
-	         if(n.getValue().getNpcId() == id)
+		 for (L2NpcWalkerNode n : _routes) {
+	         if(n.getNpcId() == id)
 	         {
-	        	 _return.add(n.getValue());
+	        	 _return.add(n);
 	         }
 	     }
 		return _return;

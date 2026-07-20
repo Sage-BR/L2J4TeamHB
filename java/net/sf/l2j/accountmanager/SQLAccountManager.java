@@ -23,11 +23,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javolution.util.FastList;
 import net.sf.l2j.Base64;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.Server;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This class SQL Account Manager
@@ -233,9 +236,9 @@ public class SQLAccountManager
             statement.setString(1, account);
             rset = statement.executeQuery();
             
-            FastList<String> objIds = new FastList<String>();
-            FastList<String> charNames = new FastList<String>();
-            FastList<String> clanIds = new FastList<String>();
+            ArrayList<String> objIds = new ArrayList<String>();
+            ArrayList<String> charNames = new ArrayList<String>();
+            ArrayList<String> clanIds = new ArrayList<String>();
             
             while (rset.next())
             {

@@ -17,7 +17,6 @@
  */
 package net.sf.l2j.gameserver.model.actor.instance;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.HennaTreeTable;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2HennaInstance;
@@ -59,7 +58,7 @@ public class L2SymbolMakerInstance extends L2FolkInstance
 
 	private void showRemoveChat(L2PcInstance player)
 	{
-		TextBuilder html1 = new TextBuilder("<html><body>");
+		StringBuilder html1 = new StringBuilder("<html><body>");
 		html1.append("Select symbol you would like to remove:<br><br>");
 		boolean hasHennas = false;
 
@@ -89,7 +88,6 @@ public class L2SymbolMakerInstance extends L2FolkInstance
 	{
 		return "data/html/symbolmaker/SymbolMaker.htm";
 	}
-
 
     /* (non-Javadoc)
      * @see net.sf.l2j.gameserver.model.L2Object#isAttackable()

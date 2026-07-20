@@ -3,7 +3,7 @@ title L2J4Team LoginServer Console
 :start
 echo Starting L2J4Team Login Server.
 echo.
-java -Xmx64m -XX:+UseCodeCacheFlushing -XX:+OptimizeStringConcat -XX:+UseG1GC -XX:+TieredCompilation -XX:+UseCompressedOops -XX:SurvivorRatio=8 -XX:NewRatio=4 -cp ./../libs/*;l2jserver.jar net.sf.l2j.loginserver.L2LoginServer
+java -Xmx64m -XX:+UseG1GC -XX:+TieredCompilation -XX:+UseCompressedOops -XX:SurvivorRatio=8 -XX:NewRatio=4 -cp "%~dp0lib\*;%~dp0l2jserver.jar" net.sf.l2j.loginserver.L2LoginServer
 if ERRORLEVEL 2 goto restart
 if ERRORLEVEL 1 goto error
 goto end

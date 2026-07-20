@@ -19,8 +19,9 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Object;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -28,7 +29,7 @@ import net.sf.l2j.gameserver.model.L2Object;
  */
 public final class ExShowTrace extends L2GameServerPacket
 {
-    private final List<Trace> _traces = new FastList<Trace>();
+    private final List<Trace> _traces = new ArrayList<Trace>();
     
     public void addTrace(int x, int y, int z, int time)
     {

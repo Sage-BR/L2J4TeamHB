@@ -103,7 +103,6 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		if (_count > itemToRemove.getCount())
 			count = itemToRemove.getCount();
 
-
 		if (itemToRemove.isEquipped())
 		{
 			L2ItemInstance[] unequiped =

@@ -41,6 +41,8 @@ import javax.imageio.ImageIO;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2CharPosition;
 
+import java.util.Map;
+
 public class Universe implements java.io.Serializable
 {
 
@@ -65,7 +67,6 @@ public class Universe implements java.io.Serializable
 
     private HashSet<Integer> _logPlayers;
     private boolean _logAll = true;
-
 
     public static void main(String[] args)
     {

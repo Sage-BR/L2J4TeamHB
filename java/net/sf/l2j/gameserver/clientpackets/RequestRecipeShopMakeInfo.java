@@ -45,17 +45,14 @@ public final class RequestRecipeShopMakeInfo extends L2GameClientPacket
         if (player == null)
         	return;
 
-
         player.sendPacket(new RecipeShopItemInfo(_playerObjectId,_recipeId));
 
     }
-
 
     @Override
 	public String getType()
     {
         return _C__B5_RequestRecipeShopMakeInfo;
     }
-
 
 }

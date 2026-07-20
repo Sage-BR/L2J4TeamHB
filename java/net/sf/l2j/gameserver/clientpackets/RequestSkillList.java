@@ -32,7 +32,6 @@ public final class RequestSkillList extends L2GameClientPacket
     @SuppressWarnings("unused")
 	private int _unk3;
 
-
 	@Override
 	protected void readImpl()
 	{

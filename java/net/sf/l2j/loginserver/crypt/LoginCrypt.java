@@ -52,7 +52,6 @@ public class LoginCrypt
     	// reserve checksum
     	size += 4;
 
-
     	if (_static)
     	{
     		// reserve for XOR "key"

@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.status;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,6 +31,7 @@ import net.sf.l2j.loginserver.GameServerTable;
 import net.sf.l2j.loginserver.L2LoginServer;
 import net.sf.l2j.loginserver.LoginController;
 
+import java.util.List;
 
 public class LoginStatusThread extends Thread
 {
@@ -41,7 +41,6 @@ public class LoginStatusThread extends Thread
 
 	private PrintWriter             _print;
 	private BufferedReader          _read;
-
 
 	private boolean _redirectLogger;
 
@@ -226,7 +225,6 @@ public class LoginStatusThread extends Thread
 			e.printStackTrace();
 		}
 	}
-
 
 	public void printToTelnet(String msg)
 	{

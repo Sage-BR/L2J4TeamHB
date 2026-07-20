@@ -22,19 +22,20 @@ package net.sf.l2j;
 
 import java.util.StringTokenizer;
 
-import javolution.util.FastMap;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 public class ClassMasterSettings
 {
-	private final FastMap<Integer, FastMap<Integer, Integer>> _claimItems;
-	private final FastMap<Integer, FastMap<Integer, Integer>> _rewardItems;
-	private final FastMap<Integer, Boolean> _allowedClassChange;
+	private final ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Integer>> _claimItems;
+	private final ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Integer>> _rewardItems;
+	private final ConcurrentHashMap<Integer, Boolean> _allowedClassChange;
 	
 	public ClassMasterSettings(final String _configLine)
 	{
-		_claimItems = new FastMap<>();
-		_rewardItems = new FastMap<>();
-		_allowedClassChange = new FastMap<>();
+		_claimItems = new ConcurrentHashMap<>();
+		_rewardItems = new ConcurrentHashMap<>();
+		_allowedClassChange = new ConcurrentHashMap<>();
 		if (_configLine != null)
 		{
 			parseConfigLine(_configLine.trim());
@@ -51,7 +52,7 @@ public class ClassMasterSettings
 			
 			_allowedClassChange.put(job, true);
 			
-			FastMap<Integer, Integer> _items = new FastMap<>();
+			ConcurrentHashMap<Integer, Integer> _items = new ConcurrentHashMap<>();
 			
 			if (st.hasMoreTokens())
 			{
@@ -67,7 +68,7 @@ public class ClassMasterSettings
 			}
 			
 			_claimItems.put(job, _items);
-			_items = new FastMap<>();
+			_items = new ConcurrentHashMap<>();
 			
 			if (st.hasMoreTokens())
 			{
@@ -94,14 +95,14 @@ public class ClassMasterSettings
 		return false;
 	}
 	
-	public FastMap<Integer, Integer> getRewardItems(final int job)
+	public ConcurrentHashMap<Integer, Integer> getRewardItems(final int job)
 	{
 		if (_rewardItems.containsKey(job))
 			return _rewardItems.get(job);
 		return null;
 	}
 	
-	public FastMap<Integer, Integer> getRequireItems(final int job)
+	public ConcurrentHashMap<Integer, Integer> getRequireItems(final int job)
 	{
 		if (_claimItems.containsKey(job))
 			return _claimItems.get(job);

@@ -20,9 +20,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.entity.Auction;
+
+import java.util.ArrayList;
 
 public class AuctionManager
 {
@@ -85,7 +86,7 @@ public class AuctionManager
     }
     public AuctionManager()
     {
-    	_auctions = new FastList<Auction>();
+    	_auctions = new ArrayList<Auction>();
     	load();
     }
     public void reload()

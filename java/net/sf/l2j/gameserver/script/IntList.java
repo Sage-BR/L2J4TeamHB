@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.script;
 
-
 /**
  * @author Luis Arias
  *

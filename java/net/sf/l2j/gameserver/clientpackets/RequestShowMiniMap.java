@@ -28,7 +28,6 @@ public final class RequestShowMiniMap extends L2GameClientPacket
 {
 	private static final String _C__cd_REQUESTSHOWMINIMAP = "[C] cd RequestShowMiniMap";
 
-
 	@Override
 	protected void readImpl()
 	{

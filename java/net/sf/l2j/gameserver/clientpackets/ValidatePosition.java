@@ -47,7 +47,6 @@ public class ValidatePosition extends L2GameClientPacket
     @SuppressWarnings("unused")
     private int _data;
 
-
     @Override
 	protected void readImpl()
     {
@@ -120,7 +119,7 @@ public class ValidatePosition extends L2GameClientPacket
                     activeChar.setHeading(_heading);
                 }
                 else if ((Config.COORD_SYNCHRONIZE & 2) == 2
-                        && diffSq > 10000) // more than can be considered to be result of latency
+                        && diffSq > 250000) // ~500 units — only correct in large divergences
                 {
                     if (Config.DEVELOPER)
                         _log.info(activeChar.getName() + ": Synchronizing position Server --> Client");

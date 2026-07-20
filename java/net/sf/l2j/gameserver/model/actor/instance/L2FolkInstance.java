@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.model.actor.instance;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
@@ -30,6 +29,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.ExEnchantSkillList.EnchantSkillType;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.List;
 
 public class L2FolkInstance extends L2NpcInstance
 {
@@ -62,7 +63,7 @@ public class L2FolkInstance extends L2NpcInstance
 		if (_classesToTeach == null)
 		{
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-			TextBuilder sb = new TextBuilder();
+			StringBuilder sb = new StringBuilder();
 			sb.append("<html><body>");
 			sb.append("I cannot teach you. My class list is empty.<br> Ask admin to fix it. Need add my npcid and classes to skill_learn.sql.<br>NpcId:"+npcId+", Your classId:"+player.getClassId().getId()+"<br>");
 			sb.append("</body></html>");
@@ -75,7 +76,7 @@ public class L2FolkInstance extends L2NpcInstance
 		if (!getTemplate().canTeach(classId))
         {
 			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
 			sb.append("<html><body>");
 			sb.append("I cannot teach you any skills.<br> You must find your current class teachers.");
 			sb.append("</body></html>");
@@ -142,7 +143,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (_classesToTeach == null)
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("I cannot teach you. My class list is empty.<br> Ask admin to fix it. Need add my npcid and classes to skill_learn.sql.<br>NpcId:"+npcId+", Your classId:"+player.getClassId().getId()+"<br>");
             sb.append("</body></html>");
@@ -155,7 +156,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (!getTemplate().canTeach(player.getClassId()))
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("I cannot teach you any skills.<br> You must find your current class teachers.");
             sb.append("</body></html>");
@@ -168,7 +169,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (player.getClassId().level() < 3)
         {
         	NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("You must have 3rd class change quest completed.");
             sb.append("</body></html>");
@@ -228,7 +229,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (_classesToTeach == null)
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("I cannot teach you. My class list is empty.<br> Ask admin to fix it. Need add my npcid and classes to skill_learn.sql.<br>NpcId:"+npcId+", Your classId:"+player.getClassId().getId()+"<br>");
             sb.append("</body></html>");
@@ -241,7 +242,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (!getTemplate().canTeach(player.getClassId()))
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("I cannot teach you any skills.<br> You must find your current class teachers.");
             sb.append("</body></html>");
@@ -254,7 +255,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (player.getClassId().level() < 3)
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("You must have 3rd class change quest completed.");
             sb.append("</body></html>");
@@ -306,7 +307,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (_classesToTeach == null)
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("I cannot teach you. My class list is empty.<br> Ask admin to fix it. Need add my npcid and classes to skill_learn.sql.<br>NpcId:"+npcId+", Your classId:"+player.getClassId().getId()+"<br>");
             sb.append("</body></html>");
@@ -319,7 +320,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (!getTemplate().canTeach(classId))
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("I cannot teach you any skills.<br> You must find your current class teachers.");
             sb.append("</body></html>");
@@ -332,7 +333,7 @@ public class L2FolkInstance extends L2NpcInstance
         if (player.getClassId().level() < 3)
         {
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder sb = new TextBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<html><body>");
             sb.append("You must have 3rd class change quest completed.");
             sb.append("</body></html>");

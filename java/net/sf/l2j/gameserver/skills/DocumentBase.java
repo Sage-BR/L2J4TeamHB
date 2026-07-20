@@ -24,9 +24,8 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Character;
@@ -77,6 +76,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
+
 /**
  * @author mkizub
  *
@@ -93,7 +95,7 @@ abstract class DocumentBase
     DocumentBase(File pFile)
     {
         _file = pFile;
-        _tables = new FastMap<String, String[]>();
+        _tables = new ConcurrentHashMap<String, String[]>();
     }
 
     Document parse()
@@ -133,7 +135,7 @@ abstract class DocumentBase
 
     protected void resetTable()
     {
-        _tables = new FastMap<String, String[]>();
+        _tables = new ConcurrentHashMap<String, String[]>();
     }
 
     protected void setTable(String name, String[] table)
@@ -188,7 +190,7 @@ abstract class DocumentBase
     protected void attachLambdaFunc(Node n, Object template, LambdaCalc calc)
     {
         String name = n.getNodeName();
-        TextBuilder sb = new TextBuilder(name);
+        StringBuilder sb = new StringBuilder(name);
         sb.setCharAt(0, Character.toUpperCase(name.charAt(0)));
         name = sb.toString();
         Lambda lambda = getLambda(n, template);
@@ -463,7 +465,7 @@ abstract class DocumentBase
             }
             else if ("class_id_restriction".equalsIgnoreCase(a.getNodeName()))
             {
-            	FastList<Integer> array = new FastList<Integer>();
+            	ArrayList<Integer> array = new ArrayList<Integer>();
             	StringTokenizer st = new StringTokenizer(a.getNodeValue(), ",");
             	while (st.hasMoreTokens())
                 {
@@ -621,7 +623,7 @@ abstract class DocumentBase
         String name = attrs.getNamedItem("name").getNodeValue();
         if (name.charAt(0) != '#') throw new IllegalArgumentException("Table name must start with #");
         StringTokenizer data = new StringTokenizer(n.getFirstChild().getNodeValue());
-        List<String> array = new FastList<String>();
+        List<String> array = new ArrayList<String>();
         while (data.hasMoreTokens())
             array.add(data.nextToken());
         String[] res = new String[array.size()];

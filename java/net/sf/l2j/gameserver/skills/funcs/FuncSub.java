@@ -18,7 +18,6 @@ import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Stats;
 
 
-
 public class FuncSub extends Func {
 	private final Lambda _lambda;
 	public FuncSub(Stats pStat, int pOrder, Object owner, Lambda lambda) {

@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Announcements;
 import net.sf.l2j.gameserver.FortUpdater;
@@ -37,6 +36,8 @@ import net.sf.l2j.gameserver.model.zone.type.L2FortZone;
 import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowInfoUpdate;
 
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Fort
 {
@@ -45,8 +46,8 @@ public class Fort
     // =========================================================
     // Data Field
     private int _fortId                      = 0;
-    private List<L2DoorInstance> _doors        = new FastList<L2DoorInstance>();
-    private List<String> _doorDefault          = new FastList<String>();
+    private List<L2DoorInstance> _doors        = new ArrayList<L2DoorInstance>();
+    private List<String> _doorDefault          = new ArrayList<String>();
     private String _name                     = "";
     private int _ownerId                     = 0;
     private FortSiege _siege                       = null;

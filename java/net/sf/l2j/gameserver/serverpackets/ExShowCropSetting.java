@@ -14,12 +14,13 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager.CropProcure;
 import net.sf.l2j.gameserver.model.L2Manor;
 import net.sf.l2j.gameserver.model.entity.Castle;
+
+import java.util.ArrayList;
 
 /**
  * format(packet 0xFE) ch dd [ddcdcdddddddcddc] c - id h - sub id
@@ -50,7 +51,7 @@ public class ExShowCropSetting extends L2GameServerPacket
     {
         _manorId = manorId;
         Castle c = CastleManager.getInstance().getCastleById(_manorId);
-        FastList<Integer> crops = L2Manor.getInstance().getCropsForCastle(
+        ArrayList<Integer> crops = L2Manor.getInstance().getCropsForCastle(
                 _manorId);
         _count = crops.size();
         _cropData = new int[_count * 14];

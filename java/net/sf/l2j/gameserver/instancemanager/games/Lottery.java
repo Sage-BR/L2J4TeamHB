@@ -29,6 +29,8 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 public class Lottery
 {
     public static final long SECOND = 1000;

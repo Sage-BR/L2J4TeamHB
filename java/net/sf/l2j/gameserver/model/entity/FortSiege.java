@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Announcements;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -48,6 +47,9 @@ import net.sf.l2j.gameserver.serverpackets.FortressSiegeInfo;
 import net.sf.l2j.gameserver.serverpackets.RelationChanged;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class FortSiege
 {
@@ -189,14 +191,14 @@ public class FortSiege
     // =========================================================
     // Data Field
     // Attacker and Defender
-    private List<L2SiegeClan> _attackerClans = new FastList<L2SiegeClan>(); // L2SiegeClan
+    private List<L2SiegeClan> _attackerClans = new ArrayList<L2SiegeClan>(); // L2SiegeClan
 
-    private List<L2SiegeClan> _defenderClans = new FastList<L2SiegeClan>(); // L2SiegeClan
-    private List<L2SiegeClan> _defenderWaitingClans = new FastList<L2SiegeClan>(); // L2SiegeClan
+    private List<L2SiegeClan> _defenderClans = new ArrayList<L2SiegeClan>(); // L2SiegeClan
+    private List<L2SiegeClan> _defenderWaitingClans = new ArrayList<L2SiegeClan>(); // L2SiegeClan
     private int _defenderRespawnDelayPenalty;
 
     // Fort setting
-    private List<L2CommanderInstance> _commanders = new FastList<L2CommanderInstance>();
+    private List<L2CommanderInstance> _commanders = new ArrayList<L2CommanderInstance>();
     private Fort[] _fort;
     private boolean _isInProgress = false;
     private boolean _isScheduled = false;
@@ -559,7 +561,7 @@ public class FortSiege
     /** Return list of L2PcInstance registered as attacker in the zone. */
     public List<L2PcInstance> getAttackersInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
         L2Clan clan;
         for(L2SiegeClan siegeclan : getAttackerClans())
         {
@@ -575,7 +577,7 @@ public class FortSiege
     /** Return list of L2PcInstance registered as defender but not owner in the zone. */
     public List<L2PcInstance> getDefendersButNotOwnersInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
         L2Clan clan;
         for(L2SiegeClan siegeclan : getDefenderClans())
         {
@@ -598,7 +600,7 @@ public class FortSiege
     /** Return list of L2PcInstance owning the fort in the zone. */
     public List<L2PcInstance> getOwnersInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
         L2Clan clan;
         for(L2SiegeClan siegeclan : getDefenderClans())
         {
@@ -615,7 +617,7 @@ public class FortSiege
     /** Return list of L2PcInstance not registered as attacker or defender in the zone. */
     public List<L2PcInstance> getSpectatorsInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
 
         Collection<L2PcInstance> pls = L2World.getInstance().getAllPlayers().values();
         //synchronized (L2World.getInstance().getAllPlayers())
@@ -1140,7 +1142,7 @@ public class FortSiege
     {
         //Set commanders array size if one does not exist
         if (_commanders == null)
-            _commanders = new FastList<L2CommanderInstance>();
+            _commanders = new ArrayList<L2CommanderInstance>();
 
         for (SiegeSpawn _sp: FortSiegeManager.getInstance().getCommanderSpawnList(Id))
         {

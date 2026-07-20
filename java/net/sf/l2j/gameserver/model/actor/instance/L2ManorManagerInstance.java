@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.StringTokenizer;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
@@ -36,6 +35,9 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class L2ManorManagerInstance extends L2MerchantInstance
 {
@@ -144,7 +146,7 @@ public class L2ManorManagerInstance extends L2MerchantInstance
                 else
                 {
 					L2TradeList tradeList = new L2TradeList(0);
-					FastList<SeedProduction> seeds = getCastle().getSeedProduction(CastleManorManager.PERIOD_CURRENT);
+					ArrayList<SeedProduction> seeds = getCastle().getSeedProduction(CastleManorManager.PERIOD_CURRENT);
 
 					for (SeedProduction s : seeds)
                     {

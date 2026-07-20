@@ -16,6 +16,8 @@ package net.sf.l2j.gameserver.pathfinding.utils;
 
 import net.sf.l2j.gameserver.pathfinding.Node;
 
+import java.util.List;
+
 /**
  *
  * @author -Nemesiss-

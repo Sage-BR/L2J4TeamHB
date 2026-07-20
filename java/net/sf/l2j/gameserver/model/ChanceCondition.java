@@ -17,6 +17,8 @@ package net.sf.l2j.gameserver.model;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  *
  * @author  kombat

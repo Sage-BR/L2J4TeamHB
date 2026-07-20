@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.datatables;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -36,6 +35,8 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.entity.Fort;
 import net.sf.l2j.gameserver.model.zone.type.L2ArenaZone;
 import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
+
+import java.util.Map;
 
 /**
  * This class ...

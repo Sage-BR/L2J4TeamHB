@@ -25,6 +25,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.effects.EffectCharge;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.Set;
+
 public class L2SkillChargeEffect extends L2Skill
 {
 	final int chargeSkillId;

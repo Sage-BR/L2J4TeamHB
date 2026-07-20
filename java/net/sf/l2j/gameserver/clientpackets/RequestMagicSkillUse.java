@@ -22,6 +22,8 @@ import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 
+import java.util.Set;
+
 /**
  * This class ...
  *

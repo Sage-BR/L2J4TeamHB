@@ -25,8 +25,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.clientpackets.Say2;
@@ -38,6 +37,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.util.Broadcast;
 
+import java.util.ArrayList;
+
 /**
  * This class ...
  *
@@ -48,8 +49,8 @@ public class Announcements
 	private static Logger _log = Logger.getLogger(Announcements.class.getName());
 
 	private static Announcements _instance;
-	private List<String> _announcements = new FastList<String>();
-	private List<List<Object>> _eventAnnouncements = new FastList<List<Object>>();
+	private List<String> _announcements = new ArrayList<String>();
+	private List<List<Object>> _eventAnnouncements = new ArrayList<List<Object>>();
 
 	public Announcements()
 	{
@@ -65,7 +66,6 @@ public class Announcements
 
 		return _instance;
 	}
-
 
 	public void loadAnnouncements()
 	{
@@ -112,7 +112,7 @@ public class Announcements
 
 	public void addEventAnnouncement(DateRange validDateRange, String[] msg)
 	{
-	    List<Object> entry = new FastList<Object>();
+	    List<Object> entry = new ArrayList<Object>();
 	    entry.add(validDateRange);
 	    entry.add(msg);
 	    _eventAnnouncements.add(entry);
@@ -123,7 +123,7 @@ public class Announcements
         String content = HtmCache.getInstance().getHtmForce("data/html/admin/announce.htm");
         NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
         adminReply.setHtml(content);
-        TextBuilder replyMSG = new TextBuilder("<br>");
+        StringBuilder replyMSG = new StringBuilder("<br>");
 		for (int i = 0; i < _announcements.size(); i++)
 		{
 			replyMSG.append("<table width=260><tr><td width=220>" + _announcements.get(i) + "</td><td width=40>");

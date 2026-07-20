@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
@@ -37,6 +36,9 @@ import net.sf.l2j.gameserver.skills.conditions.Condition;
 import net.sf.l2j.gameserver.skills.conditions.ConditionGameChance;
 import net.sf.l2j.gameserver.skills.funcs.Func;
 import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class is dedicated to the management of weapons.
@@ -302,7 +304,7 @@ public final class L2Weapon  extends L2Item
 	@Override
 	public Func[] getStatFuncs(L2ItemInstance instance, L2Character player)
     {
-    	List<Func> funcs = new FastList<Func>();
+    	List<Func> funcs = new ArrayList<Func>();
     	if (_funcTemplates != null)
     	{
     		for (FuncTemplate t : _funcTemplates) {
@@ -328,7 +330,7 @@ public final class L2Weapon  extends L2Item
     {
         if (_skillsOnCrit == null || !crit)
             return _emptyEffectSet;
-        List<L2Effect> effects = new FastList<L2Effect>();
+        List<L2Effect> effects = new ArrayList<L2Effect>();
         Env env = new Env();
         env.player = caster;
         env.target = target;

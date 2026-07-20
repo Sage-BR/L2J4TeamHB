@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2Augmentation;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
@@ -33,6 +32,8 @@ import net.sf.l2j.util.Rnd;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import java.util.ArrayList;
 
 /**
  * This class manages the augmentation data and can also create new augmentations.
@@ -77,11 +78,10 @@ public class AugmentationData
 	private static final int BASESTAT_INT = 16343;
 	private static final int BASESTAT_MEN = 16344;
 
-
-	private FastList<?> _augmentationStats[];
-	private FastList<augmentationSkill> _activeSkills;
-	private FastList<augmentationSkill> _passiveSkills;
-	private FastList<augmentationSkill> _chanceSkills;
+	private ArrayList<?> _augmentationStats[];
+	private ArrayList<augmentationSkill> _activeSkills;
+	private ArrayList<augmentationSkill> _passiveSkills;
+	private ArrayList<augmentationSkill> _chanceSkills;
 
 	// =========================================================
 	// Constructor
@@ -89,15 +89,15 @@ public class AugmentationData
 	{
 		_log.info("Initializing AugmentationData.");
 
-		_augmentationStats = new FastList[4];
-		_augmentationStats[0] = new FastList<augmentationStat>();
-		_augmentationStats[1] = new FastList<augmentationStat>();
-		_augmentationStats[2] = new FastList<augmentationStat>();
-		_augmentationStats[3] = new FastList<augmentationStat>();
+		_augmentationStats = new ArrayList[4];
+		_augmentationStats[0] = new ArrayList<augmentationStat>();
+		_augmentationStats[1] = new ArrayList<augmentationStat>();
+		_augmentationStats[2] = new ArrayList<augmentationStat>();
+		_augmentationStats[3] = new ArrayList<augmentationStat>();
 
-		_activeSkills = new FastList<augmentationSkill>();
-		_passiveSkills = new FastList<augmentationSkill>();
-		_chanceSkills = new FastList<augmentationSkill>();
+		_activeSkills = new ArrayList<augmentationSkill>();
+		_passiveSkills = new ArrayList<augmentationSkill>();
+		_chanceSkills = new ArrayList<augmentationSkill>();
 
 		load();
 
@@ -245,7 +245,6 @@ public class AugmentationData
 		}
 
 
-
 		// Load the stats from xml
 		for (int i=1; i<5; i++)
 		{
@@ -285,7 +284,7 @@ public class AugmentationData
 										String tableName = attrs.getNamedItem("name").getNodeValue();
 
 										StringTokenizer data = new StringTokenizer(cd.getFirstChild().getNodeValue());
-										List<Float> array = new FastList<Float>();
+										List<Float> array = new ArrayList<Float>();
 										while (data.hasMoreTokens())
 											array.add(Float.parseFloat(data.nextToken()));
 
@@ -306,7 +305,7 @@ public class AugmentationData
 									}
 								}
 								// store this stat
-								((FastList<augmentationStat>)_augmentationStats[(i-1)]).add(new augmentationStat(Stats.valueOfXml(statName), soloValues, combinedValues));
+								((ArrayList<augmentationStat>)_augmentationStats[(i-1)]).add(new augmentationStat(Stats.valueOfXml(statName), soloValues, combinedValues));
 							}
 						}
 					}
@@ -420,9 +419,9 @@ public class AugmentationData
 	 * @param augmentationId
 	 * @return
 	 */
-	public FastList<AugStat> getAugStatsById(int augmentationId)
+	public ArrayList<AugStat> getAugStatsById(int augmentationId)
 	{
-		FastList <AugStat> temp = new FastList<AugStat>();
+		ArrayList <AugStat> temp = new ArrayList<AugStat>();
 		// An augmentation id contains 2 short vaues so we gotta seperate them here
 		// both values contain a number from 1-16380, the first 14560 values are stats
 		// the 14560 stats are devided into 4 blocks each holding 3640 values

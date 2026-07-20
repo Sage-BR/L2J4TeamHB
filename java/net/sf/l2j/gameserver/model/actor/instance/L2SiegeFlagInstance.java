@@ -25,6 +25,8 @@ import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
+import java.util.Set;
+
 public class L2SiegeFlagInstance extends L2NpcInstance
 {
     private L2PcInstance _player;

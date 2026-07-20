@@ -36,6 +36,7 @@ import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.MagicSkillUse;
 
+import java.util.Map;
 
 /**
  * This class ...

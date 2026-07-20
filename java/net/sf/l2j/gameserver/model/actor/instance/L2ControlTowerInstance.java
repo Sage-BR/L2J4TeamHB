@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.L2Character;
@@ -26,6 +25,9 @@ import net.sf.l2j.gameserver.serverpackets.MyTargetSelected;
 import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class L2ControlTowerInstance extends L2NpcInstance {
 
@@ -127,7 +129,7 @@ public class L2ControlTowerInstance extends L2NpcInstance {
 
     public final List<L2Spawn> getGuards()
     {
-        if (_guards == null) _guards = new FastList<L2Spawn>();
+        if (_guards == null) _guards = new ArrayList<L2Spawn>();
         return _guards;
     }
 }

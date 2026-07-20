@@ -43,7 +43,6 @@ public class EffectInvincible extends L2Effect
 		return false;
 	}
 
-
 	@Override
 	public void onExit()
 	{

@@ -125,7 +125,6 @@ public class StackIDFactory extends IdFactory
         return _instance;
 	}
 
-
 	@Override
 	public synchronized int getNextId()
     {

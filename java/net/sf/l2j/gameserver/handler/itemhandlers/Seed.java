@@ -67,7 +67,6 @@ public class Seed implements IItemHandler {
 									8521,8522,8523,8524,8525,8526
     };
 
-
     private int _seedId;
     private L2MonsterInstance _target;
     private L2PcInstance _activeChar;

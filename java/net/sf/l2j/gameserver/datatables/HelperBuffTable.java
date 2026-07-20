@@ -19,10 +19,12 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.templates.L2HelperBuff;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class represents the Newbie Helper Buff list
@@ -53,7 +55,6 @@ public class HelperBuffTable
     private int _magicClassHighestLevel  = 1;
     private int _physicClassHighestLevel = 1;
 
-
     public static HelperBuffTable getInstance()
     {
         if (_instance == null)
@@ -63,13 +64,12 @@ public class HelperBuffTable
         return _instance;
     }
 
-
     /**
      * Create and Load the Newbie Helper Buff list from SQL Table helper_buff_list
      */
     private HelperBuffTable()
     {
-        _helperBuff = new FastList<L2HelperBuff>();
+        _helperBuff = new ArrayList<L2HelperBuff>();
         restoreHelperBuffData();
 
     }
@@ -105,7 +105,6 @@ public class HelperBuffTable
         }
     }
 
-
     /**
      * Load the Newbie Helper Buff list from SQL Table helper_buff_list
      */
@@ -123,7 +122,6 @@ public class HelperBuffTable
             helperBuffDat.set("lowerLevel", HelperBuffData.getInt("lower_level"));
             helperBuffDat.set("upperLevel", HelperBuffData.getInt("upper_level"));
             helperBuffDat.set("isMagicClass", HelperBuffData.getString("is_magic_class"));
-
 
             // Calulate the range level in wich player must be to obtain buff from Newbie Helper
             if("false".equals(HelperBuffData.getString("is_magic_class")))
@@ -157,12 +155,10 @@ public class HelperBuffTable
         return _initialized;
     }
 
-
     public L2HelperBuff getHelperBuffTableItem(int id)
     {
         return _helperBuff.get(id);
     }
-
 
     /**
      * Return the Helper Buff List
@@ -172,7 +168,6 @@ public class HelperBuffTable
         return _helperBuff;
     }
 
-
     /**
      * @return Returns the magicClassHighestLevel.
      */
@@ -180,7 +175,6 @@ public class HelperBuffTable
     {
         return _magicClassHighestLevel;
     }
-
 
 
     /**
@@ -192,7 +186,6 @@ public class HelperBuffTable
     }
 
 
-
     /**
      * @return Returns the magicClassLowestLevel.
      */
@@ -200,7 +193,6 @@ public class HelperBuffTable
     {
         return _magicClassLowestLevel;
     }
-
 
 
     /**
@@ -212,7 +204,6 @@ public class HelperBuffTable
     }
 
 
-
     /**
      * @return Returns the physicClassHighestLevel.
      */
@@ -220,7 +211,6 @@ public class HelperBuffTable
     {
         return _physicClassHighestLevel;
     }
-
 
 
     /**
@@ -232,7 +222,6 @@ public class HelperBuffTable
     }
 
 
-
     /**
      * @return Returns the physicClassLowestLevel.
      */
@@ -242,7 +231,6 @@ public class HelperBuffTable
     }
 
 
-
     /**
      * @param physicClassLowestLevel The physicClassLowestLevel to set.
      */
@@ -250,6 +238,5 @@ public class HelperBuffTable
     {
         _physicClassLowestLevel = physicClassLowestLevel;
     }
-
 
 }

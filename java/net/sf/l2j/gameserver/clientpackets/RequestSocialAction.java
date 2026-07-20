@@ -37,7 +37,6 @@ public class RequestSocialAction extends L2GameClientPacket
 	// format  cd
 	private int _actionId;
 
-
 	@Override
 	protected void readImpl()
 	{

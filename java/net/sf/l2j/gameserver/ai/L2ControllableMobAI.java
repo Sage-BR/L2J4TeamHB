@@ -20,7 +20,6 @@ import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Attackable;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
@@ -35,6 +34,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PlayableInstance;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
 
 /**
  * @author littlecrow
@@ -457,7 +458,7 @@ public class L2ControllableMobAI extends L2AttackableAI
         double dy, dx;
         double dblAggroRange = aggroRange*aggroRange;
 
-		List<L2Character> potentialTarget = new FastList<L2Character>();
+		List<L2Character> potentialTarget = new ArrayList<L2Character>();
 
 		Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
 		//synchronized (npc.getKnownList().getKnownObjects())

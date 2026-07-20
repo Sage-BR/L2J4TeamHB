@@ -20,6 +20,8 @@ import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ManagePledgePower;
 
+import java.util.Set;
+
 public final class RequestPledgePower extends L2GameClientPacket
 {
     static Logger _log = Logger.getLogger(ManagePledgePower.class.getName());

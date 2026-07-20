@@ -25,6 +25,8 @@ import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 
+import java.util.Set;
+
 public class CharStat
 {
 	// =========================================================

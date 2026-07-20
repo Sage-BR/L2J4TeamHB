@@ -30,6 +30,8 @@ import net.sf.l2j.gameserver.serverpackets.ItemList;
 import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+
 /**
  * This class ...
  *

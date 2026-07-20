@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.ai2;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.TaskPriority;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -34,7 +35,7 @@ public class EventHandlerSet implements Comparable<EventHandlerSet>
 	public EventHandlerSet(AiEventType event, List<EventHandler> handlers, TaskPriority prio)
 	{
 		_comparatorPrio = (prio.ordinal()+1)*3;
-		_handlers = new FastList<EventHandler>();
+		_handlers = new ArrayList<EventHandler>();
 		_eventType = event;
 		for(EventHandler handler : handlers)
 			addHandler(handler);
@@ -43,7 +44,7 @@ public class EventHandlerSet implements Comparable<EventHandlerSet>
 	public EventHandlerSet(EventHandler handler, TaskPriority prio)
 	{
 		_comparatorPrio = (prio.ordinal()+1)*3;
-		_handlers = new FastList<EventHandler>();
+		_handlers = new ArrayList<EventHandler>();
 		_eventType = handler.getEvenType();
 		addHandler(handler);
 	}
@@ -104,7 +105,6 @@ public class EventHandlerSet implements Comparable<EventHandlerSet>
 	{
 		return (int)( (System.currentTimeMillis() - _insertionTime)/1000) + _comparatorPrio - es.getComparatorPriority();
 	}
-
 
 	@Override
 	public String toString()

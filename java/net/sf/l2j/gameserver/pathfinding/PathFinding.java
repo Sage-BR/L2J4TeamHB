@@ -22,6 +22,8 @@ import net.sf.l2j.gameserver.pathfinding.geonodes.GeoPathFinding;
 import net.sf.l2j.gameserver.pathfinding.utils.BinaryNodeHeap;
 import net.sf.l2j.gameserver.pathfinding.utils.FastNodeList;
 
+import java.util.Map;
+
 /**
  *
  * @author -Nemesiss-
@@ -170,7 +172,6 @@ public abstract class PathFinding
 		//No Path found
 		return null;
 	}
-
 
 	public List<AbstractNodeLoc> searchAStar(Node start, Node end)
 	{

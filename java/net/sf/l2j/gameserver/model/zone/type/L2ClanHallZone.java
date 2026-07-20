@@ -23,6 +23,8 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.serverpackets.AgitDecoInfo;
 
+import java.util.Set;
+
 /**
  * A clan hall zone
  *

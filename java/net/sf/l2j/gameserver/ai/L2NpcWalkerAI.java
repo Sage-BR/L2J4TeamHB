@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.ai;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.datatables.NpcWalkerRoutesTable;
@@ -22,6 +21,9 @@ import net.sf.l2j.gameserver.model.L2CharPosition;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2NpcWalkerNode;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcWalkerInstance;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 {
@@ -39,13 +41,12 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 	/**
 	 * route of the current npc
 	 */
-	private FastList<L2NpcWalkerNode> _route;
+	private ArrayList<L2NpcWalkerNode> _route;
 
 	/**
 	 * current node
 	 */
 	private int _currentPos;
-
 
 	/**
 	 * Constructor of L2CharacterAI.<BR><BR>

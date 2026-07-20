@@ -23,6 +23,8 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.Set;
+
 /**
  * A chat handler
  *

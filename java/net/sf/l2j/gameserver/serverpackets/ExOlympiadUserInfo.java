@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * This class ...
  *
@@ -31,7 +30,6 @@ public class ExOlympiadUserInfo extends L2GameServerPacket
 	@SuppressWarnings("unused")
 	private static L2PcInstance _activeChar;
 
-
 	/**
 	 * @param _player
 	 * @param _side (1 = right, 2 = left)
@@ -40,7 +38,6 @@ public class ExOlympiadUserInfo extends L2GameServerPacket
 	{
 		_activeChar = player;
 	}
-
 
 	@Override
 	protected final void writeImpl()

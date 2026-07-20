@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.instancemanager.ArenaManager;
@@ -61,6 +60,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * This class manages the augmentation data and can also create new augmentations.
  *
@@ -93,7 +96,6 @@ public class ZoneData
 
 		load();
 	}
-
 
 	// =========================================================
 	// Method - Private
@@ -183,7 +185,6 @@ public class ZoneData
                             else if (zoneType.equals("WaterZone"))
                                 temp = new L2WaterZone(zoneId);
 
-
 							// Check for unknown type
 							if (temp == null)
 							{
@@ -234,7 +235,7 @@ public class ZoneData
 								}
 								else if (zoneShape.equalsIgnoreCase("NPoly"))
 								{
-									FastList<Integer> fl_x = new FastList<Integer>(), fl_y = new FastList<Integer>();
+									ArrayList<Integer> fl_x = new ArrayList<Integer>(), fl_y = new ArrayList<Integer>();
 
 									// Load the rest
 									while (rset.next())
@@ -300,7 +301,6 @@ public class ZoneData
 							{
 								_log.warning("ZoneData: Failed to load zone coordinates: " + e);
 							}
-
 
 							// Check for aditional parameters
 							for (Node cd=d.getFirstChild(); cd != null; cd = cd.getNextSibling())

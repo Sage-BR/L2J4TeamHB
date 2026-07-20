@@ -27,7 +27,6 @@ public final class RequestOlympiadObserverEnd extends L2GameClientPacket
 {
 	private static final String _C__D0_12_REQUESTOLYMPIADOBSERVEREND = "[C] D0:12 RequestOlympiadObserverEnd";
 
-
 	@Override
 	protected void readImpl()
 	{

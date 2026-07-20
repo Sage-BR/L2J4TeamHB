@@ -16,10 +16,12 @@ package net.sf.l2j.gameserver.templates;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.base.Race;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author mkizub
@@ -47,8 +49,7 @@ public class L2PcTemplate extends L2CharTemplate {
 	public final float   lvlMpAdd;
 	public final float   lvlMpMod;
 
-	private List<L2Item> _items = new FastList<L2Item>();
-
+	private List<L2Item> _items = new ArrayList<L2Item>();
 
 	public L2PcTemplate(StatsSet set)
 	{

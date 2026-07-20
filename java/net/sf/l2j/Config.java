@@ -27,9 +27,11 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 import Dev.SpecialMods.BuffSkillHolder;
-import javolution.text.TypeFormat;
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
+
+
 
 /**
  * This class contains global server configuration.<br>
@@ -368,7 +370,7 @@ public final class Config
     public static int		AUTODESTROY_ITEM_AFTER;
     public static int		HERB_AUTO_DESTROY_TIME;
     public static String	PROTECTED_ITEMS;
-    public static List<Integer> LIST_PROTECTED_ITEMS = new FastList<Integer>();
+    public static List<Integer> LIST_PROTECTED_ITEMS = new ArrayList<Integer>();
     public static int		CHAR_STORE_INTERVAL;
     public static boolean	LAZY_ITEMS_UPDATE;
     public static boolean	UPDATE_ITEMS_ON_CHAR_STORE;
@@ -442,7 +444,7 @@ public final class Config
     public static int		ALT_OLY_MIN_POINT_FOR_EXCH;
     public static int		ALT_OLY_HERO_POINTS;
     public static String	ALT_OLY_RESTRICTED_ITEMS;
-    public static List<Integer> LIST_OLY_RESTRICTED_ITEMS = new FastList<Integer>();
+    public static List<Integer> LIST_OLY_RESTRICTED_ITEMS = new ArrayList<Integer>();
     public static int		ALT_MANOR_REFRESH_TIME;
     public static int		ALT_MANOR_REFRESH_MIN;
     public static int		ALT_MANOR_APPROVE_TIME;
@@ -521,7 +523,7 @@ public final class Config
     public static int[]		TVT_EVENT_TEAM_1_COORDINATES = new int[3];
     public static String	TVT_EVENT_TEAM_2_NAME;
     public static int[]		TVT_EVENT_TEAM_2_COORDINATES = new int[3];
-    public static List<int[]>	TVT_EVENT_REWARDS = new FastList<int[]>();
+    public static List<int[]>	TVT_EVENT_REWARDS = new ArrayList<int[]>();
     public static boolean	TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED;
     public static boolean	TVT_EVENT_SCROLL_ALLOWED;
     public static boolean	TVT_EVENT_POTIONS_ALLOWED;
@@ -564,7 +566,7 @@ public final class Config
     public static boolean	GUARD_ATTACK_AGGRO_MOB;
     public static boolean	ALLOW_WYVERN_UPGRADER;
     public static String	PET_RENT_NPC;
-    public static List<Integer> LIST_PET_RENT_NPC   = new FastList<Integer>();
+    public static List<Integer> LIST_PET_RENT_NPC   = new ArrayList<Integer>();
     public static int		WYVERN_SPEED;
     public static int		STRIDER_SPEED;
     public static int 		FENRIR_SPEED;
@@ -608,9 +610,9 @@ public final class Config
     /** List of items that cannot be dropped (separated by ",") when PVP*/
     public static String	KARMA_NONDROPPABLE_ITEMS;
     /** List of pet items that cannot be dropped when PVP */
-    public static List<Integer> KARMA_LIST_NONDROPPABLE_PET_ITEMS   = new FastList<Integer>();
+    public static List<Integer> KARMA_LIST_NONDROPPABLE_PET_ITEMS   = new ArrayList<Integer>();
     /** List of items that cannot be dropped when PVP */
-    public static List<Integer> KARMA_LIST_NONDROPPABLE_ITEMS       = new FastList<Integer>();
+    public static List<Integer> KARMA_LIST_NONDROPPABLE_ITEMS       = new ArrayList<Integer>();
     public static boolean ANNOUNCE_BOSS_ALIVE;
 	public static boolean ANNOUNCE_RAIDBOS_KILL;
 	public static boolean ANNOUNCE_GRANDBOS_KILL;
@@ -822,7 +824,7 @@ public final class Config
     /** List of items that cannot be dropped (seperated by ",") */
     public static String        NONDROPPABLE_ITEMS;
     /** List of items that cannot be dropped */
-    public static List<Integer> LIST_NONDROPPABLE_ITEMS       = new FastList<Integer>();
+    public static List<Integer> LIST_NONDROPPABLE_ITEMS       = new ArrayList<Integer>();
 
     /** Duration (in ms) while a player stay in PVP mode after hitting an innocent */
     public static int PVP_NORMAL_TIME;
@@ -921,7 +923,6 @@ public final class Config
     /** Allow auto-create account ? */
     public static boolean AUTO_CREATE_ACCOUNTS;
 
-
     public static boolean FLOOD_PROTECTION;
     public static int     FAST_CONNECTION_LIMIT;
     public static int     NORMAL_CONNECTION_TIME;
@@ -962,11 +963,11 @@ public final class Config
                 REQUEST_ID              = Integer.parseInt(serverSettings.getProperty("RequestServerID","0"));
                 ACCEPT_ALTERNATE_ID     = Boolean.parseBoolean(serverSettings.getProperty("AcceptAlternateID","True"));
 
-                DATABASE_DRIVER             = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
-                DATABASE_URL                = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
+                DATABASE_DRIVER             = serverSettings.getProperty("Driver", "org.mariadb.jdbc.Driver");
+                DATABASE_URL                = serverSettings.getProperty("URL", "jdbc:mariadb://localhost:3306/l2jdb");
                 DATABASE_LOGIN              = serverSettings.getProperty("Login", "root");
                 DATABASE_PASSWORD           = serverSettings.getProperty("Password", "");
-                DATABASE_MAX_CONNECTIONS    = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
+                DATABASE_MAX_CONNECTIONS    = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "100"));
 
                 DATAPACK_ROOT           = new File(serverSettings.getProperty("DatapackRoot", ".")).getCanonicalFile();
 
@@ -1159,8 +1160,8 @@ public final class Config
     			BYPASS_FRINTEZZA_PARTIES_CHECK = Boolean.valueOf(bossSettings.getProperty("BypassPartiesCheck", "false"));
     			FRINTEZZA_MIN_PARTIES = Integer.parseInt(bossSettings.getProperty("FrintezzaMinParties", "4"));
     			FRINTEZZA_MAX_PARTIES = Integer.parseInt(bossSettings.getProperty("FrintezzaMaxParties", "5"));
-    			SAILREN_RESP_FIRST = TypeFormat.parseInt(bossSettings.getProperty("SailrenRespFirst", "12"));
-    			SAILREN_RESP_SECOND = TypeFormat.parseInt(bossSettings.getProperty("SailrenRespSecond", "24"));
+    			SAILREN_RESP_FIRST = Integer.parseInt(bossSettings.getProperty("SailrenRespFirst", "12"));
+    			SAILREN_RESP_SECOND = Integer.parseInt(bossSettings.getProperty("SailrenRespSecond", "24"));
     			
             }
                 catch (Exception e)
@@ -1247,7 +1248,7 @@ public final class Config
                 // Create Map only if enabled
                 if (ENABLE_MODIFY_SKILL_DURATION)
                 {
-                    SKILL_DURATION_LIST = new FastMap<Integer, Integer>();
+                    SKILL_DURATION_LIST = new ConcurrentHashMap<Integer, Integer>();
                     String[] propertySplit;
                     propertySplit = Character.getProperty("SkillDurationList", "").split(";");
                     for (String skill : propertySplit)
@@ -1276,7 +1277,7 @@ public final class Config
                 // Create Map only if enabled
                 if (ENABLE_MODIFY_SKILL_REUSE)
                 {
-                    SKILL_REUSE_LIST = new FastMap<Integer, Integer>();
+                    SKILL_REUSE_LIST = new ConcurrentHashMap<Integer, Integer>();
                     String[] propertySplit;
                     propertySplit = Character.getProperty("SkillReuseList", "").split(";");
                     for (String skill : propertySplit)
@@ -1487,7 +1488,7 @@ public final class Config
                 AUTODESTROY_ITEM_AFTER						= Integer.parseInt(General.getProperty("AutoDestroyDroppedItemAfter", "0"));
                 HERB_AUTO_DESTROY_TIME						= Integer.parseInt(General.getProperty("AutoDestroyHerbTime","15"))*1000;
                 PROTECTED_ITEMS								= General.getProperty("ListOfProtectedItems");
-                LIST_PROTECTED_ITEMS						= new FastList<Integer>();
+                LIST_PROTECTED_ITEMS						= new ArrayList<Integer>();
                                 							for (String id : PROTECTED_ITEMS.split(","))
                                 							{
                                 								LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
@@ -1568,7 +1569,7 @@ public final class Config
                 ALT_OLY_MIN_POINT_FOR_EXCH					= Integer.parseInt(General.getProperty("AltOlyMinPointForExchange","50"));
                 ALT_OLY_HERO_POINTS							= Integer.parseInt(General.getProperty("AltOlyHeroPoints","300"));
                 ALT_OLY_RESTRICTED_ITEMS					= General.getProperty("AltOlyRestrictedItems","0");
-                LIST_OLY_RESTRICTED_ITEMS					= new FastList<Integer>();
+                LIST_OLY_RESTRICTED_ITEMS					= new ArrayList<Integer>();
                                 							for (String id : ALT_OLY_RESTRICTED_ITEMS.split(","))
                                 							{
                                 								LIST_OLY_RESTRICTED_ITEMS.add(Integer.parseInt(id));
@@ -1636,7 +1637,7 @@ public final class Config
                 GUARD_ATTACK_AGGRO_MOB					= Boolean.parseBoolean(NPC.getProperty("GuardAttackAggroMob", "False"));
                 ALLOW_WYVERN_UPGRADER					= Boolean.parseBoolean(NPC.getProperty("AllowWyvernUpgrader", "False"));
                 PET_RENT_NPC 							= NPC.getProperty("ListPetRentNpc", "30827");
-                LIST_PET_RENT_NPC 						= new FastList<Integer>();
+                LIST_PET_RENT_NPC 						= new ArrayList<Integer>();
                                 						for (String id : PET_RENT_NPC.split(","))
                                 						{
                                 							LIST_PET_RENT_NPC.add(Integer.parseInt(id));
@@ -1902,12 +1903,12 @@ public final class Config
                 KARMA_NONDROPPABLE_PET_ITEMS    = pvpSettings.getProperty("ListOfPetItems", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650,9882");
                 KARMA_NONDROPPABLE_ITEMS        = pvpSettings.getProperty("ListOfNonDroppableItems", "57,1147,425,1146,461,10,2368,7,6,2370,2369,6842,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621,7694,8181,5575,7694,9388,9389,9390");
 
-                KARMA_LIST_NONDROPPABLE_PET_ITEMS = new FastList<Integer>();
+                KARMA_LIST_NONDROPPABLE_PET_ITEMS = new ArrayList<Integer>();
                 for (String id : KARMA_NONDROPPABLE_PET_ITEMS.split(",")) {
                     KARMA_LIST_NONDROPPABLE_PET_ITEMS.add(Integer.parseInt(id));
                 }
 
-                KARMA_LIST_NONDROPPABLE_ITEMS = new FastList<Integer>();
+                KARMA_LIST_NONDROPPABLE_ITEMS = new ArrayList<Integer>();
                 for (String id : KARMA_NONDROPPABLE_ITEMS.split(",")) {
                     KARMA_LIST_NONDROPPABLE_ITEMS.add(Integer.parseInt(id));
                 }
@@ -1967,11 +1968,11 @@ public final class Config
                 INTERNAL_HOSTNAME   = serverSettings.getProperty("InternalHostname", "localhost");
                 EXTERNAL_HOSTNAME   = serverSettings.getProperty("ExternalHostname", "localhost");
 
-                DATABASE_DRIVER             = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
-                DATABASE_URL                = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
+                DATABASE_DRIVER             = serverSettings.getProperty("Driver", "org.mariadb.jdbc.Driver");
+                DATABASE_URL                = serverSettings.getProperty("URL", "jdbc:mariadb://localhost:3306/l2jdb");
                 DATABASE_LOGIN              = serverSettings.getProperty("Login", "root");
                 DATABASE_PASSWORD           = serverSettings.getProperty("Password", "");
-                DATABASE_MAX_CONNECTIONS    = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
+                DATABASE_MAX_CONNECTIONS    = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "100"));
 
                 SHOW_LICENCE = Boolean.parseBoolean(serverSettings.getProperty("ShowLicence", "true"));
                 IP_UPDATE_TIME                = Integer.parseInt(serverSettings.getProperty("IpUpdateTime","15"));

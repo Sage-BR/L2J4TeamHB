@@ -19,8 +19,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.ai.CtrlIntention;
@@ -48,6 +47,9 @@ import net.sf.l2j.gameserver.serverpackets.StaticObject;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class ...
@@ -81,7 +83,6 @@ public class L2DoorInstance extends L2Character
 
     protected int _autoActionDelay = -1;
     private ScheduledFuture<?> _autoActionTask;
-
 
     /** This class may be created only by L2Character and only for AI */
     public class AIAccessor extends L2Character.AIAccessor
@@ -471,7 +472,7 @@ public class L2DoorInstance extends L2Character
             player.sendPacket(su);
 
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-            TextBuilder html1 = new TextBuilder("<html><body><table border=0>");
+            StringBuilder html1 = new StringBuilder("<html><body><table border=0>");
             html1.append("<tr><td>S.Y.L. Says:</td></tr>");
             html1.append("<tr><td>Current HP  "+getCurrentHp()+ "</td></tr>");
             html1.append("<tr><td>Max HP      "+getMaxHp()+"</td></tr>");
@@ -610,7 +611,7 @@ public class L2DoorInstance extends L2Character
 
     public Collection<L2SiegeGuardInstance> getKnownSiegeGuards()
     {
-        FastList<L2SiegeGuardInstance> result = new FastList<L2SiegeGuardInstance>();
+        ArrayList<L2SiegeGuardInstance> result = new ArrayList<L2SiegeGuardInstance>();
 
         Collection<L2Object> objs = getKnownList().getKnownObjects().values();
         //synchronized (getKnownList().getKnownObjects())

@@ -59,7 +59,6 @@ public class Topic
 			_cReply = Creply;
 			TopicBBSManager.getInstance().addTopic(this);
 
-
 		 if(ct == ConstructorType.CREATE)
 		{
 

@@ -24,12 +24,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import javolution.text.TextBuilder;
-import javolution.util.FastList;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.Server;
 import net.sf.l2j.util.Rnd;
 
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Status extends Thread
 {
@@ -114,14 +115,13 @@ public class Status extends Thread
         }
         statusServerSocket = new ServerSocket(_statusPort);
         _uptime = (int) System.currentTimeMillis();
-        _loginStatus = new FastList<LoginStatusThread>();
+        _loginStatus = new ArrayList<LoginStatusThread>();
     }
-
 
 
     private String rndPW(int length)
     {
-        TextBuilder password = new TextBuilder();
+        StringBuilder password = new StringBuilder();
         String lowerChar= "qwertyuiopasdfghjklzxcvbnm";
         String upperChar = "QWERTYUIOPASDFGHJKLZXCVBNM";
         String digits = "1234567890";
@@ -146,7 +146,7 @@ public class Status extends Thread
 
     public void sendMessageToTelnets(String msg)
     {
-    	List<LoginStatusThread> lsToRemove = new FastList<LoginStatusThread>();
+    	List<LoginStatusThread> lsToRemove = new ArrayList<LoginStatusThread>();
     	for(LoginStatusThread ls :_loginStatus)
     	{
     		if(ls.isInterrupted())

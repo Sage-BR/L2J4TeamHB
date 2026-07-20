@@ -41,6 +41,8 @@ import net.sf.l2j.gameserver.serverpackets.StopMove;
 import net.sf.l2j.gameserver.serverpackets.StopRotation;
 import net.sf.l2j.gameserver.taskmanager.AttackStanceTaskManager;
 
+import java.util.Set;
+
 /**
  * Mother class of all objects AI in the world.<BR><BR>
  *

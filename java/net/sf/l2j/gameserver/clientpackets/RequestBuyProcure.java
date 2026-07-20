@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.clientpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
@@ -34,13 +33,15 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.util.Util;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("unused")
 public class RequestBuyProcure extends L2GameClientPacket {
 	private static final String _C__C3_REQUESTBUYPROCURE = "[C] C3 RequestBuyProcure";
 	private int _listId;
 	private int _count;
 	private int[] _items;
-	private List<CropProcure> _procureList = new FastList<CropProcure>();
+	private List<CropProcure> _procureList = new ArrayList<CropProcure>();
 
 	@Override
 	protected void readImpl()
@@ -74,7 +75,6 @@ public class RequestBuyProcure extends L2GameClientPacket {
 		L2PcInstance player = getClient().getActiveChar();
 		if (player == null) return;
 
-
 		// Alt game - Karma punishment
         if (!Config.ALT_GAME_KARMA_PLAYER_CAN_SHOP && player.getKarma() > 0) return;
 
@@ -93,7 +93,6 @@ public class RequestBuyProcure extends L2GameClientPacket {
         int slots = 0;
         int weight = 0;
         L2ManorManagerInstance manor = (target instanceof L2ManorManagerInstance) ? (L2ManorManagerInstance)target : null;
-
 
 		for (int i = 0; i < _count; i++)
 		{
@@ -121,7 +120,6 @@ public class RequestBuyProcure extends L2GameClientPacket {
 			sendPacket(new SystemMessage(SystemMessageId.WEIGHT_LIMIT_EXCEEDED));
 			return;
 		}
-
 
 		if (!player.getInventory().validateCapacity(slots))
 		{

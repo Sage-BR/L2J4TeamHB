@@ -22,6 +22,9 @@ import net.sf.l2j.gameserver.model.actor.instance.L2DoorInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Castle;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
+
 /**
  * This class handles following admin commands:
  * - open1 = open coloseum door 24190001
@@ -50,7 +53,7 @@ public class AdminDoorControl implements IAdminCommandHandler
         "admin_openall",
         "admin_closeall"
     };
-    //private static final Map<String, Integer>   doorMap = new FastMap<String, Integer>(); //FIXME: should we jute remove this?
+    //private static final Map<String, Integer>   doorMap = new ConcurrentHashMap<String, Integer>(); //FIXME: should we jute remove this?
 
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{

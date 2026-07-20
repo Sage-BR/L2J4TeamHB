@@ -16,10 +16,11 @@ package net.sf.l2j.gameserver.util;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
-import javolution.util.FastMap.Entry;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Flood protector
@@ -42,7 +43,7 @@ public class FloodProtector
 
 	// =========================================================
 	// Data Field
-	private FastMap<Integer,Integer[]> _floodClient;
+	private ConcurrentHashMap<Integer,Integer[]> _floodClient;
 
 	// =========================================================
 
@@ -61,7 +62,7 @@ public class FloodProtector
 	private FloodProtector()
 	{
 		_log.info("Initializing FloodProtector");
-		_floodClient = new FastMap<Integer, Integer[]>(Config.FLOODPROTECTOR_INITIALSIZE).setShared(true);
+		_floodClient = new ConcurrentHashMap<Integer, Integer[]>(Config.FLOODPROTECTOR_INITIALSIZE);
 	}
 
 	/**
@@ -108,14 +109,12 @@ public class FloodProtector
 	 */
 	public boolean tryPerformAction(int playerObjId, int action)
 	{
-		Entry<Integer, Integer[]> entry = _floodClient.getEntry(playerObjId);
-		if (entry == null) return false; // player just disconnected 
-		Integer[] value = entry.getValue();
+		Integer[] value = _floodClient.get(playerObjId);
+		if (value == null) return false;
 
 		if (value[action] < GameTimeController.getGameTicks())
 		{
 			value[action] = GameTimeController.getGameTicks()+REUSEDELAY[action];
-			entry.setValue(value);
 			return true;
 		}
 		return false;

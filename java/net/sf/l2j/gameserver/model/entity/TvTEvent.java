@@ -40,6 +40,9 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author FBIagent
  */
@@ -837,7 +840,6 @@ public class TvTEvent {
 	public static int[] getParticipantTeamCoordinates( int playerObjectId ) {
 		return _teams[0].containsPlayer( playerObjectId ) ? _teams[ 0 ].getCoordinates() : ( _teams[ 1 ].containsPlayer( playerObjectId ) ? _teams[ 1 ].getCoordinates() : null);
 	}
-
 
 	/**
 	 * Is given player participant of the event?<br><br>

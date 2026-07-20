@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -28,6 +27,8 @@ import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2EtcItemType;
 import net.sf.l2j.gameserver.templates.L2Item;
+
+import java.util.ArrayList;
 
 /**
  * @author Advi
@@ -50,7 +51,6 @@ public class TradeList
         private int _def_earth;
         private int _def_holy;
         private int _def_unholy;
-
 
         public TradeItem(L2ItemInstance item, int count, int price)
         {
@@ -196,7 +196,7 @@ public class TradeList
 
     public TradeList(L2PcInstance owner)
     {
-        _items = new FastList<TradeItem>();
+        _items = new ArrayList<TradeItem>();
         _owner = owner;
     }
 
@@ -259,7 +259,7 @@ public class TradeList
      */
     public TradeList.TradeItem[] getAvailableItems(PcInventory inventory)
     {
-        List<TradeList.TradeItem> list = new FastList<TradeList.TradeItem>();
+        List<TradeList.TradeItem> list = new ArrayList<TradeList.TradeItem>();
         for (TradeList.TradeItem item : _items)
         {
             item = new TradeItem(item, item.getCount(), item.getPrice());

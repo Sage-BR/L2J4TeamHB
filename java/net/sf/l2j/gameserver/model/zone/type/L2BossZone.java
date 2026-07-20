@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.zone.type;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameServer;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
@@ -24,7 +23,11 @@ import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
-import net.sf.l2j.util.L2FastList;
+import net.sf.l2j.util.L2ArrayList;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author DaRkRaGe
@@ -39,19 +42,19 @@ public class L2BossZone extends L2ZoneType
     // to log back into the zone as long as their log-out was within _timeInvade
     // time...
     // <player objectId, expiration time in milliseconds>
-    private FastMap<Integer, Long> _playerAllowedReEntryTimes;
+    private ConcurrentHashMap<Integer, Long> _playerAllowedReEntryTimes;
 
     // track the players admitted to the zone who should be allowed back in 
     // after reboot/server downtime (outside of their control), within 30 
     // of server restart
-    private L2FastList<Integer> _playersAllowed;
+    private L2ArrayList<Integer> _playersAllowed;
     private int[] _oustLoc = {0,0,0};
     
     public L2BossZone(int id)
     {
         super(id);
-        _playerAllowedReEntryTimes = new FastMap<Integer, Long>();
-        _playersAllowed = new L2FastList<Integer>();
+        _playerAllowedReEntryTimes = new ConcurrentHashMap<Integer, Long>();
+        _playersAllowed = new L2ArrayList<Integer>();
         _oustLoc = new int[3];
     }
     
@@ -198,13 +201,13 @@ public class L2BossZone extends L2ZoneType
         return _timeInvade;
     }
 
-    public void setAllowedPlayers(L2FastList<Integer> players)
+    public void setAllowedPlayers(L2ArrayList<Integer> players)
     {
         if (players != null)
             _playersAllowed = players;
     }
 
-    public L2FastList<Integer> getAllowedPlayers()
+    public L2ArrayList<Integer> getAllowedPlayers()
     {
         return _playersAllowed;
     }

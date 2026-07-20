@@ -24,6 +24,8 @@ import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 
+import java.util.Set;
+
 /**
  * extension loader for l2j
  * @author galun
@@ -112,7 +114,7 @@ public class DynamicExtension {
             return "already loaded";
         try {
             Class<?> extension = Class.forName(className, true, _classLoader);
-            Object obj = extension.newInstance();
+            Object obj = extension.getDeclaredConstructor().newInstance();
             extension.getMethod("init", new Class[0]).invoke(obj, new Object[0]);
             _log.info("Extension " + className + " loaded.");
             _loadedExtensions.put(className, obj);

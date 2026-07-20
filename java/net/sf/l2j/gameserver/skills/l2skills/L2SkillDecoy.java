@@ -25,6 +25,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.Set;
+
 public class L2SkillDecoy extends L2Skill
 {
     

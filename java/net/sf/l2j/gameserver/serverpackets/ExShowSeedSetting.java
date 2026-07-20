@@ -15,12 +15,13 @@
 
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager.SeedProduction;
 import net.sf.l2j.gameserver.model.L2Manor;
 import net.sf.l2j.gameserver.model.entity.Castle;
+
+import java.util.ArrayList;
 
 /**
  * format(packet 0xFE) ch dd [ddcdcdddddddd] c - id h - sub id
@@ -51,7 +52,7 @@ public class ExShowSeedSetting extends L2GameServerPacket
     {
         _manorId = manorId;
         Castle c = CastleManager.getInstance().getCastleById(_manorId);
-        FastList<Integer> seeds = L2Manor.getInstance().getSeedsForCastle(
+        ArrayList<Integer> seeds = L2Manor.getInstance().getSeedsForCastle(
                 _manorId);
         _count = seeds.size();
         _seedData = new int[_count * 12];

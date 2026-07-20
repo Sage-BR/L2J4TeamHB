@@ -17,6 +17,8 @@ package net.sf.l2j.gameserver.pathfinding.geonodes;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 
+import java.util.Map;
+
 /**
  *
  * @author -Nemesiss-

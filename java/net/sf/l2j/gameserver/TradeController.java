@@ -22,13 +22,16 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.model.L2TradeList;
 import net.sf.l2j.gameserver.model.L2TradeList.L2TradeItem;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class ...
@@ -72,7 +75,7 @@ public class TradeController
     
     private TradeController()
     {
-        _lists = new FastMap<Integer, L2TradeList>();
+        _lists = new ConcurrentHashMap<Integer, L2TradeList>();
         java.sql.Connection con = null;
         
         /*
@@ -282,7 +285,7 @@ public class TradeController
     
     public List<L2TradeList> getBuyListByNpcId(int npcId)
     {
-        List<L2TradeList> lists = new FastList<L2TradeList>();
+        List<L2TradeList> lists = new ArrayList<L2TradeList>();
         Collection<L2TradeList> values = _lists.values();
         
         for (L2TradeList list : values)

@@ -42,7 +42,6 @@ public class GiveSp implements ISkillHandler
         }
     }
 
-
     public SkillType[] getSkillIds()
     {
         return SKILL_IDS;

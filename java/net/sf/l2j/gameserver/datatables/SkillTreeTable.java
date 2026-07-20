@@ -22,8 +22,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2EnchantSkillLearn;
 import net.sf.l2j.gameserver.model.L2PledgeSkillLearn;
@@ -33,6 +32,9 @@ import net.sf.l2j.gameserver.model.L2TransformSkillLearn;
 import net.sf.l2j.gameserver.model.L2EnchantSkillLearn.EnchantSkillDetail;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.base.ClassId;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -147,7 +149,7 @@ public class SkillTreeTable
 
 			while (classlist.next())
 			{
-				map = new FastMap<Integer, L2SkillLearn>();
+				map = new ConcurrentHashMap<Integer, L2SkillLearn>();
 				parentClassId = classlist.getInt("parent_id");
 				classId = classlist.getInt("id");
 				PreparedStatement statement2 = con.prepareStatement("SELECT class_id, skill_id, level, name, sp, min_level FROM skill_trees where class_id=? ORDER BY skill_id, level");
@@ -201,8 +203,8 @@ public class SkillTreeTable
 
         try
         {
-            _fishingSkillTrees = new FastList<L2SkillLearn>();
-            _expandDwarfCraftSkillTrees = new FastList<L2SkillLearn>();
+            _fishingSkillTrees = new ArrayList<L2SkillLearn>();
+            _expandDwarfCraftSkillTrees = new ArrayList<L2SkillLearn>();
 
             PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, sp, min_level, costid, cost, isfordwarf FROM fishing_skill_trees ORDER BY skill_id, level");
             ResultSet skilltree2 = statement.executeQuery();
@@ -245,7 +247,7 @@ public class SkillTreeTable
         int count4   = 0;
         try
         {
-            _enchantSkillTrees = new FastMap<Integer, L2EnchantSkillLearn>();
+            _enchantSkillTrees = new ConcurrentHashMap<Integer, L2EnchantSkillLearn>();
 
             PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, base_lvl, sp, min_skill_lvl, exp, success_rate76, success_rate77, success_rate78 FROM enchant_skill_trees ORDER BY skill_id, level");
             ResultSet skilltree3 = statement.executeQuery();
@@ -291,7 +293,7 @@ public class SkillTreeTable
         int count5   = 0;
         try
         {
-            _pledgeSkillTrees = new FastList<L2PledgeSkillLearn>();
+            _pledgeSkillTrees = new ArrayList<L2PledgeSkillLearn>();
 
             PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, clan_lvl, repCost, itemId FROM pledge_skill_trees ORDER BY skill_id, level");
             ResultSet skilltree4 = statement.executeQuery();
@@ -327,7 +329,7 @@ public class SkillTreeTable
         int count6   = 0;
         try
         {
-            _TransformSkillTrees = new FastList<L2TransformSkillLearn>();
+            _TransformSkillTrees = new ArrayList<L2TransformSkillLearn>();
 
             PreparedStatement statement = con.prepareStatement("SELECT race_id, skill_id, item_id, level, name, sp, min_level FROM transform_skill_trees ORDER BY race_id, skill_id, level");
             ResultSet skilltree5 = statement.executeQuery();
@@ -377,14 +379,14 @@ public class SkillTreeTable
     private Map<ClassId, Map<Integer, L2SkillLearn>> getSkillTrees()
     {
         if (_skillTrees == null)
-            _skillTrees = new FastMap<ClassId, Map<Integer, L2SkillLearn>>();
+            _skillTrees = new ConcurrentHashMap<ClassId, Map<Integer, L2SkillLearn>>();
 
         return _skillTrees;
     }
 
 	public L2SkillLearn[] getAvailableSkills(L2PcInstance cha, ClassId classId)
 	{
-		List<L2SkillLearn> result = new FastList<L2SkillLearn>();
+		List<L2SkillLearn> result = new ArrayList<L2SkillLearn>();
 		Collection<L2SkillLearn> skills = getSkillTrees().get(classId).values();
 
 		if (skills == null)
@@ -429,8 +431,8 @@ public class SkillTreeTable
 
 	public L2SkillLearn[] getAvailableSkills(L2PcInstance cha)
 	{
-	    List<L2SkillLearn> result = new FastList<L2SkillLearn>();
-	    List<L2SkillLearn> skills = new FastList<L2SkillLearn>();
+	    List<L2SkillLearn> result = new ArrayList<L2SkillLearn>();
+	    List<L2SkillLearn> skills = new ArrayList<L2SkillLearn>();
 
         skills.addAll(_fishingSkillTrees);
 
@@ -497,7 +499,7 @@ public class SkillTreeTable
 
     public L2TransformSkillLearn[] getAvailableTransformSkills(L2PcInstance cha)
     {
-        List<L2TransformSkillLearn> result = new FastList<L2TransformSkillLearn>();
+        List<L2TransformSkillLearn> result = new ArrayList<L2TransformSkillLearn>();
         List<L2TransformSkillLearn> skills = _TransformSkillTrees;
 
         if (skills == null)
@@ -543,7 +545,7 @@ public class SkillTreeTable
 
     public L2PledgeSkillLearn[] getAvailablePledgeSkills(L2PcInstance cha)
     {
-        List<L2PledgeSkillLearn> result = new FastList<L2PledgeSkillLearn>();
+        List<L2PledgeSkillLearn> result = new ArrayList<L2PledgeSkillLearn>();
         List<L2PledgeSkillLearn> skills = _pledgeSkillTrees;
 
         if (skills == null)
@@ -587,7 +589,6 @@ public class SkillTreeTable
         return result.toArray(new L2PledgeSkillLearn[result.size()]);
     }
 
-
 	/**
 	 * Returns all allowed skills for a given class.
 	 * @param classId
@@ -623,7 +624,7 @@ public class SkillTreeTable
     public int getMinLevelForNewSkill(L2PcInstance cha)
     {
         int minLevel = 0;
-        List<L2SkillLearn> skills = new FastList<L2SkillLearn>();
+        List<L2SkillLearn> skills = new ArrayList<L2SkillLearn>();
 
         skills.addAll(_fishingSkillTrees);
 
@@ -652,7 +653,7 @@ public class SkillTreeTable
     public int getMinLevelForNewTransformSkill(L2PcInstance cha)
     {
         int minLevel = 0;
-        List<L2TransformSkillLearn> skills = new FastList<L2TransformSkillLearn>();
+        List<L2TransformSkillLearn> skills = new ArrayList<L2TransformSkillLearn>();
 
         skills.addAll(_TransformSkillTrees);
 

@@ -25,7 +25,6 @@ public class L2RecipeInstance
 	/** The item quantity needed in the L2RecipeInstance */
     private int _quantity;
 
-
 	/**
 	 * Constructor of L2RecipeInstance (create a new line in a RecipeList).<BR><BR>
 	 */

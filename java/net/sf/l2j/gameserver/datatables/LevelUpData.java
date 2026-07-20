@@ -19,10 +19,11 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2LvlupData;
 import net.sf.l2j.gameserver.model.base.ClassId;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -62,7 +63,7 @@ public class LevelUpData
 
 	private LevelUpData()
 	{
-		_lvlTable = new FastMap<Integer, L2LvlupData>();
+		_lvlTable = new ConcurrentHashMap<Integer, L2LvlupData>();
 		java.sql.Connection con = null;
 		try
 		{
@@ -86,7 +87,7 @@ public class LevelUpData
 				lvlDat.setClassMpAdd(rset.getFloat(MP_ADD));
 				lvlDat.setClassMpModifier(rset.getFloat(MP_MOD));
 
-				_lvlTable.put(new Integer(lvlDat.getClassid()), lvlDat);
+				_lvlTable.put(Integer.valueOf(lvlDat.getClassid()), lvlDat);
 			}
 
 			rset.close();

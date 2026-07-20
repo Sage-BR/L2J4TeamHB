@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.Territory;
@@ -28,6 +27,9 @@ import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class manages the spawn and respawn of a group of L2NpcInstance that are in the same are and have the same type.
@@ -94,7 +96,7 @@ public class L2Spawn
     private boolean _customSpawn;
 
     private L2NpcInstance _lastSpawn;
-    private static List<SpawnListener> _spawnListeners = new FastList<SpawnListener>();
+    private static List<SpawnListener> _spawnListeners = new ArrayList<SpawnListener>();
 
 	/** The task launching the function doSpawn() */
 	class SpawnTask implements Runnable
@@ -124,7 +126,6 @@ public class L2Spawn
 			_scheduledCount--;
 		}
 	}
-
 
 	/**
 	 * Constructor of L2Spawn.<BR><BR>
@@ -483,6 +484,9 @@ public class L2Spawn
 
             // Calculate the random position in the location area
             int p[] = Territory.getInstance().getRandomPoint(getLocation());
+            
+            if (p == null)
+                return mob;
 
             // Set the calculated position of the L2NpcInstance
             newlocx = p[0];

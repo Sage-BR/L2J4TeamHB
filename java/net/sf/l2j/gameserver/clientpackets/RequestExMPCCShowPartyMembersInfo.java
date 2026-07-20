@@ -28,7 +28,6 @@ public final class RequestExMPCCShowPartyMembersInfo extends L2GameClientPacket
 	private static final String _C__D0_26_REQUESTMPCCSHOWPARTYMEMBERINFO = "[C] D0:26 RequestExMPCCShowPartyMembersInfo";
 	private int _partyLeaderId;
 
-
 	@Override
 	protected void readImpl()
 	{

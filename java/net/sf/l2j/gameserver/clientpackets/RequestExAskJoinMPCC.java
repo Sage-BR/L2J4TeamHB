@@ -128,7 +128,6 @@ public final class RequestExAskJoinMPCC extends L2GameClientPacket
 			}
 		}
 
-
 	}
 
 	private void askJoinMPCC(L2PcInstance requestor, L2PcInstance target)

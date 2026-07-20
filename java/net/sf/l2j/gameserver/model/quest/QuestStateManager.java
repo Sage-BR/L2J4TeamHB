@@ -16,9 +16,10 @@ package net.sf.l2j.gameserver.model.quest;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 public class QuestStateManager
 {
@@ -39,7 +40,7 @@ public class QuestStateManager
     // =========================================================
     // Data Field
     private static QuestStateManager _instance;
-    private List<QuestState> _questStates = new FastList<QuestState>();
+    private List<QuestState> _questStates = new ArrayList<QuestState>();
 
     // =========================================================
     // Constructor
@@ -115,7 +116,7 @@ public class QuestStateManager
     public List<QuestState> getQuestStates()
     {
         if (_questStates == null)
-            _questStates = new FastList<QuestState>();
+            _questStates = new ArrayList<QuestState>();
         return _questStates;
     }
 }

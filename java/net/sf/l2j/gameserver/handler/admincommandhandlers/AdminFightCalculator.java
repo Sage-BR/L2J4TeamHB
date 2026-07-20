@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
@@ -29,6 +28,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
+
+import java.util.List;
 
 /**
  * This class handles following admin commands:
@@ -87,10 +88,9 @@ public class AdminFightCalculator implements IAdminCommandHandler {
 		if (mid2 != 0)
 			npc2 = NpcTable.getInstance().getTemplate(mid2);
 
-
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-		TextBuilder replyMSG = new TextBuilder();
+		StringBuilder replyMSG = new StringBuilder();
 		if (npc1 != null && npc2 != null)
 		{
 			replyMSG.append("<html><title>Selected mobs to fight</title>");
@@ -143,7 +143,6 @@ public class AdminFightCalculator implements IAdminCommandHandler {
 		activeChar.sendPacket(adminReply);
 	}
 
-
 	private void handleShow(String params, L2PcInstance activeChar) {
 		Formulas f = Formulas.getInstance();
 		params = params.trim();
@@ -186,7 +185,6 @@ public class AdminFightCalculator implements IAdminCommandHandler {
 		double pdef2 = 0;
 		double dmg1 = 0;
 		double dmg2 = 0;
-
 
 		// ATTACK speed in milliseconds
 		int sAtk1 = npc1.calculateTimeBetweenAttacks(npc2, null);
@@ -268,7 +266,7 @@ public class AdminFightCalculator implements IAdminCommandHandler {
 
 		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
 
-		TextBuilder replyMSG = new TextBuilder();
+		StringBuilder replyMSG = new StringBuilder();
 		replyMSG.append("<html><title>Selected mobs to fight</title>");
 		replyMSG.append("<body>");
 		replyMSG.append("<table>");

@@ -26,7 +26,6 @@ import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_REST;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Universe;
 import net.sf.l2j.gameserver.model.L2Attackable;
@@ -45,6 +44,9 @@ import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.util.Point3D;
 import net.sf.l2j.util.Rnd;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class manages AI of L2Character.<BR><BR>
@@ -1130,19 +1132,19 @@ public class L2CharacterAI extends AbstractAI
         public boolean isArcher = false;
         public boolean isFighter = false;
         public boolean cannotMoveOnLand = false;
-        public List<L2Skill> generalSkills = new FastList<L2Skill>();
-        public List<L2Skill> buffSkills = new FastList<L2Skill>();
+        public List<L2Skill> generalSkills = new ArrayList<L2Skill>();
+        public List<L2Skill> buffSkills = new ArrayList<L2Skill>();
         public int lastBuffTick = 0;
-        public List<L2Skill> debuffSkills = new FastList<L2Skill>();
+        public List<L2Skill> debuffSkills = new ArrayList<L2Skill>();
         public int lastDebuffTick = 0;
-        public List<L2Skill> cancelSkills = new FastList<L2Skill>();
-        public List<L2Skill> healSkills = new FastList<L2Skill>();
-        //public List<L2Skill> trickSkills = new FastList<L2Skill>();
-        public List<L2Skill> generalDisablers = new FastList<L2Skill>();
-        public List<L2Skill> sleepSkills = new FastList<L2Skill>();
-        public List<L2Skill> rootSkills = new FastList<L2Skill>();
-        public List<L2Skill> muteSkills = new FastList<L2Skill>();
-        public List<L2Skill> resurrectSkills = new FastList<L2Skill>();
+        public List<L2Skill> cancelSkills = new ArrayList<L2Skill>();
+        public List<L2Skill> healSkills = new ArrayList<L2Skill>();
+        //public List<L2Skill> trickSkills = new ArrayList<L2Skill>();
+        public List<L2Skill> generalDisablers = new ArrayList<L2Skill>();
+        public List<L2Skill> sleepSkills = new ArrayList<L2Skill>();
+        public List<L2Skill> rootSkills = new ArrayList<L2Skill>();
+        public List<L2Skill> muteSkills = new ArrayList<L2Skill>();
+        public List<L2Skill> resurrectSkills = new ArrayList<L2Skill>();
         public boolean hasHealOrResurrect = false;
         public boolean hasLongRangeSkills = false;
         public boolean hasLongRangeDamageSkills = false;

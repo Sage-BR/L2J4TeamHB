@@ -41,6 +41,8 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2PcTemplate;
 import net.sf.l2j.gameserver.util.Util;
 
+import java.util.List;
+
 /**
  * This class ...
  *

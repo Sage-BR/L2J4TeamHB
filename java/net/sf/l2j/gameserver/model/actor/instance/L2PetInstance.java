@@ -54,6 +54,8 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
+import java.util.Set;
+
 /**
  *
  * This class ...
@@ -873,7 +875,6 @@ public class L2PetInstance extends L2Summon
 		}
 	}
 
-
     private void deathPenalty()
     {
         // TODO Need Correct Penalty
@@ -978,5 +979,4 @@ public class L2PetInstance extends L2Summon
         }
     }
 }
-
 

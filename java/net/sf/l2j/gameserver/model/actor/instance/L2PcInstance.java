@@ -27,8 +27,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.GameTimeController;
@@ -212,6 +211,11 @@ import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.gameserver.util.FloodProtector;
 import net.sf.l2j.util.Point3D;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class represents all player characters in the world.
@@ -408,8 +412,8 @@ public final class L2PcInstance extends L2PlayableInstance
     private static int _transformationId = 0;
 
 	/** The table containing all L2RecipeList of the L2PcInstance */
-	private Map<Integer, L2RecipeList> _dwarvenRecipeBook = new FastMap<Integer, L2RecipeList>();
-	private Map<Integer, L2RecipeList> _commonRecipeBook = new FastMap<Integer, L2RecipeList>();
+	private Map<Integer, L2RecipeList> _dwarvenRecipeBook = new ConcurrentHashMap<Integer, L2RecipeList>();
+	private Map<Integer, L2RecipeList> _commonRecipeBook = new ConcurrentHashMap<Integer, L2RecipeList>();
 
 		/** True if the L2PcInstance is sitting */
 	private boolean _waitTypeSitting;
@@ -436,7 +440,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	/** Date when recom points were updated last time */
 	private long _lastRecomUpdate;
 	/** List with the recomendations that I've give */
-	private List<Integer> _recomChars = new FastList<Integer>();
+	private List<Integer> _recomChars = new ArrayList<Integer>();
 
 	/** The random number of the L2PcInstance */
 	//private static final Random _rnd = new Random();
@@ -467,7 +471,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	private int _questNpcObject = 0;
 
 	/** The table containing all Quests began by the L2PcInstance */
-	private Map<String, QuestState> _quests = new FastMap<String, QuestState>();
+	private Map<String, QuestState> _quests = new ConcurrentHashMap<String, QuestState>();
 
 	/** The list containing all shortCuts of this L2PcInstance */
 	private ShortCuts _shortCuts = new ShortCuts(this);
@@ -475,8 +479,8 @@ public final class L2PcInstance extends L2PlayableInstance
 	/** The list containing all macroses of this L2PcInstance */
 	private MacroList _macroses = new MacroList(this);
 
-	private List<L2PcInstance> _snoopListener = new FastList<L2PcInstance>();
-	private List<L2PcInstance> _snoopedPlayer = new FastList<L2PcInstance>();
+	private List<L2PcInstance> _snoopListener = new ArrayList<L2PcInstance>();
+	private List<L2PcInstance> _snoopedPlayer = new ArrayList<L2PcInstance>();
 
 	private ClassId _skillLearningClassId;
 
@@ -574,7 +578,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	/** The fists L2Weapon of the L2PcInstance (used when no weapon is equiped) */
 	private L2Weapon _fistsWeaponItem;
 
-	private final Map<Integer, String> _chars = new FastMap<Integer, String>();
+	private final Map<Integer, String> _chars = new ConcurrentHashMap<Integer, String>();
 
 	//private byte _updateKnownCounter = 0;
 
@@ -586,10 +590,10 @@ public final class L2PcInstance extends L2PlayableInstance
 
 	protected boolean _inventoryDisable = false;
 
-	protected Map<Integer, L2CubicInstance> _cubics = new FastMap<Integer, L2CubicInstance>().setShared(true);
+	protected Map<Integer, L2CubicInstance> _cubics = new ConcurrentHashMap<Integer, L2CubicInstance>();
 
-	/** Active shots. A FastSet variable would actually suffice but this was changed to fix threading stability... */
-	protected Map<Integer, Integer> _activeSoulShots = new FastMap<Integer, Integer>().setShared(true);
+	/** Active shots. A HashSet variable would actually suffice but this was changed to fix threading stability... */
+	protected Map<Integer, Integer> _activeSoulShots = new ConcurrentHashMap<Integer, Integer>();
 
 	public final ReentrantLock soulShotLock = new ReentrantLock();
 
@@ -630,8 +634,8 @@ public final class L2PcInstance extends L2PlayableInstance
     private ScheduledFuture<?> _taskWater;
 
 	/** Bypass validations */
-	private List<String> _validBypass = new FastList<String>();
-	private List<String> _validBypass2 = new FastList<String>();
+	private List<String> _validBypass = new ArrayList<String>();
+	private List<String> _validBypass2 = new ArrayList<String>();
 
 	private Forum _forumMail;
 	private Forum _forumMemo;
@@ -991,7 +995,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		return _ai;
 	}
 
-
 	/**
 	 * Calculate a destination to explore the area and set the AI Intention to AI_INTENTION_MOVE_TO.<BR><BR>
 	 */
@@ -1029,6 +1032,7 @@ public final class L2PcInstance extends L2PlayableInstance
      * Return the _newbie state of the L2PcInstance.<BR><BR>
      * @deprecated Use {@link #getNewbie()} instead
      */
+    @Deprecated
     public int isNewbie()
     {
         return getNewbie();
@@ -1052,7 +1056,6 @@ public final class L2PcInstance extends L2PlayableInstance
 	{
 		_newbie = newbieRewards;
 	}
-
 
 	public void setBaseClass(int baseClass)
 	{
@@ -1198,7 +1201,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		_quests.put(qs.getQuestName(), qs);
 	}
 
-
 	/**
 	 * Remove a QuestState from the table _quest containing all quests began by the L2PcInstance.<BR><BR>
 	 *
@@ -1224,7 +1226,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	 */
 	public Quest[] getAllActiveQuests()
 	{
-		FastList<Quest> quests = new FastList<Quest>();
+		ArrayList<Quest> quests = new ArrayList<Quest>();
 
 		for (QuestState qs : _quests.values())
 		{
@@ -1677,7 +1679,6 @@ public final class L2PcInstance extends L2PlayableInstance
 	}
 
 
-
 	/**
 	 * Return the number of recommandation that the L2PcInstance can give.<BR><BR>
 	 */
@@ -2018,7 +2019,6 @@ public final class L2PcInstance extends L2PlayableInstance
 
 	/** Return the Experience of the L2PcInstance. */
 	public long getExp() { return getStat().getExp(); }
-
 
 	public void setActiveEnchantItem(L2ItemInstance scroll)
 	{
@@ -3083,7 +3083,6 @@ public final class L2PcInstance extends L2PlayableInstance
 			}
 		}
 
-
         // Send the StatusUpdate Server->Client Packet to the player with new CUR_LOAD (0x0e) information
 		StatusUpdate su = new StatusUpdate(getObjectId());
 		su.addAttribute(StatusUpdate.CUR_LOAD, getCurrentLoad());
@@ -3983,7 +3982,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		else addItem("Loot", item.getItemId(), item.getCount(), target, true);
 	}
 
-
 	/**
 	 * Manage Pickup Task.<BR><BR>
 	 *
@@ -4649,7 +4647,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		return null;
 	}
 
-
 	/**
 	 *
      * Kill the L2Character, Apply Death Penalty, Manage gain/loss Karma and Item Drop.<BR><BR>
@@ -4759,9 +4756,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	    if (isTransformed())
 	        untransform();
 
-
 		setPvpFlag(0);              // Clear the pvp flag
-
 
 		// Unsummon Cubics
 		if (_cubics.size() > 0)
@@ -4843,8 +4838,8 @@ public final class L2PcInstance extends L2PlayableInstance
 			while (dropPercent > 0 && Rnd.get(100) < dropPercent && dropCount < dropLimit)
 			{
                 int itemDropPercent = 0;
-				List<Integer> nonDroppableList = new FastList<Integer>();
-				List<Integer> nonDroppableListPet = new FastList<Integer>();
+				List<Integer> nonDroppableList = new ArrayList<Integer>();
+				List<Integer> nonDroppableListPet = new ArrayList<Integer>();
 
 				nonDroppableList = Config.KARMA_LIST_NONDROPPABLE_ITEMS;
 				nonDroppableListPet = Config.KARMA_LIST_NONDROPPABLE_ITEMS;
@@ -6015,7 +6010,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		}
 	}
 
-
 	/**
 	 * Manage the Leave Party task of the L2PcInstance.<BR><BR>
 	 */
@@ -6869,7 +6863,7 @@ public final class L2PcInstance extends L2PlayableInstance
 			// reuse delays for matching skills. 'restore_type'= 0.
 			statement = con.prepareStatement(ADD_SKILL_SAVE);
 			
-			List<L2Skill> storedSkills = new FastList<L2Skill>();
+			List<L2Skill> storedSkills = new ArrayList<L2Skill>();
 			
 			for (L2Effect effect : getAllEffects())
 			{
@@ -7670,7 +7664,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		return false;
 	}
 
-
 	/**
 	 * Check if the active L2Skill can be casted.<BR><BR>
 	 *
@@ -7755,7 +7748,6 @@ public final class L2PcInstance extends L2PlayableInstance
         		&& !SiegeManager.getInstance().checkIfOkToSummon(this, false) 
                 && !FortSiegeManager.getInstance().checkIfOkToSummon(this, false))
 			return;
-
 
         //************************************* Check Casting in Progress *******************************************
 
@@ -8227,7 +8219,6 @@ public final class L2PcInstance extends L2PlayableInstance
 	{
 		return getClassId().isMage();
 	}
-
 
 	public boolean isMounted()
 	{
@@ -9174,7 +9165,7 @@ public final class L2PcInstance extends L2PlayableInstance
 		if (skillTree == null)
 			return true;
 
-		Map<Integer, L2Skill> prevSkillList = new FastMap<Integer, L2Skill>();
+		Map<Integer, L2Skill> prevSkillList = new ConcurrentHashMap<Integer, L2Skill>();
 
 		for (L2SkillLearn skillInfo : skillTree)
 		{
@@ -9279,7 +9270,7 @@ public final class L2PcInstance extends L2PlayableInstance
     public Map<Integer, SubClass> getSubClasses()
     {
         if (_subClasses == null)
-            _subClasses = new FastMap<Integer, SubClass>();
+            _subClasses = new ConcurrentHashMap<Integer, SubClass>();
 
         return _subClasses;
     }
@@ -9375,7 +9366,6 @@ public final class L2PcInstance extends L2PlayableInstance
 
         if(isInParty())
         	getParty().recalculatePartyLevel();
-
 
         /*
 		 * Update the character's change in class status.
@@ -10684,7 +10674,6 @@ public final class L2PcInstance extends L2PlayableInstance
         return _currentSkill;
     }
 
-
     /**
      * Create a new SkillDat object and set the player _currentSkill.<BR><BR>
      *
@@ -10711,7 +10700,6 @@ public final class L2PcInstance extends L2PlayableInstance
     {
         return _queuedSkill;
     }
-
 
     /**
      * Create a new SkillDat object and queue it in the player _queuedSkill.<BR><BR>
@@ -11129,14 +11117,14 @@ public final class L2PcInstance extends L2PlayableInstance
     	}
     }
 
-	private FastMap<Integer, TimeStamp> _reuseTimeStamps = new FastMap<Integer, TimeStamp>().setShared(true);
+	private ConcurrentHashMap<Integer, TimeStamp> _reuseTimeStamps = new ConcurrentHashMap<Integer, TimeStamp>();
 
     public Collection<TimeStamp> getReuseTimeStamps()
     {
         return _reuseTimeStamps.values();
     }
     
-    public FastMap<Integer, TimeStamp> getReuseTimeStamp()
+    public ConcurrentHashMap<Integer, TimeStamp> getReuseTimeStamp()
     {
     	return _reuseTimeStamps;
     }

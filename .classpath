@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/bsh-engine.jar"/>
-	<classpathentry kind="lib" path="lib/c3p0-0.9.5.5.jar"/>
-	<classpathentry kind="lib" path="lib/ecj-4.4.jar"/>
-	<classpathentry kind="lib" path="lib/java-engine-1.8.jar"/>
-	<classpathentry kind="lib" path="lib/javolution.jar"/>
-	<classpathentry kind="lib" path="lib/mchange-commons-java-0.2.19.jar"/>
-	<classpathentry kind="lib" path="lib/mmocore.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.49.jar"/>
-	<classpathentry kind="lib" path="lib/jython.jar"/>
-	<classpathentry kind="lib" path="lib/jython-engine.jar"/>
-	<classpathentry kind="lib" path="lib/bsh-2.0b5.jar"/>
+	<classpathentry kind="src" path="data/Server/data/scripts"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="data/Server/lib/bsh-2.0b5.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/bsh-engine.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/HikariCP-7.0.2.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/java-engine-1.8.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/jython-engine.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/jython.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/mariadb-java-client-3.0.7.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/slf4j-api-2.0.17.jar"/>
+	<classpathentry kind="lib" path="data/Server/lib/slf4j-simple-2.0.17.jar"/>
+	<classpathentry kind="lib" path="data/Server/l2jserver.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -23,7 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Item;
@@ -49,6 +48,10 @@ import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -59,11 +62,11 @@ public class ItemTable
 	private static Logger _log = Logger.getLogger(ItemTable.class.getName());
 	private static Logger _logItems = Logger.getLogger("item");
 
-	private static final Map<String, Integer> _materials = new FastMap<String, Integer>();
-	private static final Map<String, Integer> _crystalTypes = new FastMap<String, Integer>();
-	private static final Map<String, L2WeaponType> _weaponTypes = new FastMap<String, L2WeaponType>();
-	private static final Map<String, L2ArmorType> _armorTypes = new FastMap<String, L2ArmorType>();
-	private static final Map<String, Integer> _slots = new FastMap<String, Integer>();
+	private static final Map<String, Integer> _materials = new ConcurrentHashMap<String, Integer>();
+	private static final Map<String, Integer> _crystalTypes = new ConcurrentHashMap<String, Integer>();
+	private static final Map<String, L2WeaponType> _weaponTypes = new ConcurrentHashMap<String, L2WeaponType>();
+	private static final Map<String, L2ArmorType> _armorTypes = new ConcurrentHashMap<String, L2ArmorType>();
+	private static final Map<String, Integer> _slots = new ConcurrentHashMap<String, Integer>();
 
 	private L2Item[] _allTemplates;
 	private Map<Integer, L2EtcItem> _etcItems;
@@ -165,7 +168,6 @@ public class ItemTable
 
 	}
 
-
 	private static ItemTable _instance;
 
 	/** Table of SQL request in order to obtain items from tables [etcitem], [armor], [weapon] */
@@ -202,11 +204,11 @@ public class ItemTable
      };
     
     /** List of etcItem */
-    private static final Map<Integer, Item> itemData    = new FastMap<Integer, Item>();
+    private static final Map<Integer, Item> itemData    = new ConcurrentHashMap<Integer, Item>();
     /** List of weapons */
-    private static final Map<Integer, Item> weaponData  = new FastMap<Integer, Item>();
+    private static final Map<Integer, Item> weaponData  = new ConcurrentHashMap<Integer, Item>();
     /** List of armor */
-    private static final Map<Integer, Item> armorData   = new FastMap<Integer, Item>();
+    private static final Map<Integer, Item> armorData   = new ConcurrentHashMap<Integer, Item>();
 
     /**
      * Returns instance of ItemTable
@@ -235,9 +237,9 @@ public class ItemTable
      */
 	public ItemTable()
 	{
-		_etcItems = new FastMap<Integer, L2EtcItem>();
-		_armors = new FastMap<Integer, L2Armor>();
-		_weapons = new FastMap<Integer, L2Weapon>();
+		_etcItems = new ConcurrentHashMap<Integer, L2EtcItem>();
+		_armors = new ConcurrentHashMap<Integer, L2Armor>();
+		_weapons = new ConcurrentHashMap<Integer, L2Weapon>();
 		
 		java.sql.Connection con = null;
 		try
@@ -248,7 +250,7 @@ public class ItemTable
 				PreparedStatement statement = con.prepareStatement(selectQuery);
 				ResultSet rset = statement.executeQuery();
 				
-				// Add item in correct FastMap
+				// Add item in correct ConcurrentHashMap
 				while (rset.next())
 				{
 					if (selectQuery.endsWith("etcitem"))
@@ -297,7 +299,7 @@ public class ItemTable
 					PreparedStatement statement = con.prepareStatement(selectQuery);
 					ResultSet rset = statement.executeQuery();
 					
-					// Add item in correct FastMap
+					// Add item in correct ConcurrentHashMap
 					while (rset.next())
 					{
 						if (selectQuery.endsWith("etcitem"))
@@ -485,7 +487,6 @@ public class ItemTable
         item.set.set("destroyable", Boolean.valueOf(rset.getString("destroyable")));
         item.set.set("tradeable", Boolean.valueOf(rset.getString("tradeable")));
         item.set.set("skill", rset.getString("skill"));
-
 
         if (bodypart == L2Item.SLOT_NECK ||
                 bodypart == L2Item.SLOT_HAIR ||
@@ -684,7 +685,7 @@ public class ItemTable
 	{
 		int highestId = 0;
 
-		// Get highest ID of item in armor FastMap, then in weapon FastMap, and finally in etcitem FastMap
+		// Get highest ID of item in armor ConcurrentHashMap, then in weapon ConcurrentHashMap, and finally in etcitem ConcurrentHashMap
 		for (L2Armor item : _armors.values())
 		{
 			if (item.getItemId() > highestId)

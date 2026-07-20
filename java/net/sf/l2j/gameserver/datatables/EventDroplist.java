@@ -17,8 +17,9 @@ package net.sf.l2j.gameserver.datatables;
 import java.util.Date;
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.script.DateRange;
+
+import java.util.ArrayList;
 
 /**
  * This class manage drop of Special Events created by GM for a defined period.
@@ -46,7 +47,6 @@ public class EventDroplist
 		return _instance;
 	}
 
-
 	public class DateDrop
 	{
 		/** Start and end date of the Event */
@@ -64,18 +64,15 @@ public class EventDroplist
 		/** The rate of drop for this Event */
 	    public int chance;
 
-
 	}
-
 
 	/**
 	 * Constructor of EventDroplist.<BR><BR>
 	 */
 	private EventDroplist()
 	{
-		_allNpcDateDrops = new FastList<DateDrop>();
+		_allNpcDateDrops = new ArrayList<DateDrop>();
 	}
-
 
 	/**
 	 * Create and Init a new DateDrop then add it to the allNpcDateDrops of EventDroplist .<BR><BR>
@@ -105,7 +102,7 @@ public class EventDroplist
 	 */
 	public List<DateDrop> getAllDrops()
 	{
-	    List<DateDrop> list = new FastList<DateDrop>();
+	    List<DateDrop> list = new ArrayList<DateDrop>();
 
 	    for (DateDrop drop : _allNpcDateDrops)
 	    {

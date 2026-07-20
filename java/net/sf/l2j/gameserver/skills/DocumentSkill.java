@@ -18,7 +18,6 @@ import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.L2Skill.SkillType;
 import net.sf.l2j.gameserver.skills.conditions.Condition;
@@ -27,6 +26,9 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @author mkizub
@@ -47,12 +49,12 @@ class DocumentSkill extends DocumentBase {
         public StatsSet[]           enchsets4;
         public StatsSet[]           enchsets5;
         public int                  currentLevel;
-        public List<L2Skill>   skills          = new FastList<L2Skill>();
-        public List<L2Skill>   currentSkills   = new FastList<L2Skill>();
+        public List<L2Skill>   skills          = new ArrayList<L2Skill>();
+        public List<L2Skill>   currentSkills   = new ArrayList<L2Skill>();
     }
 
     private Skill _currentSkill;
-    private List<L2Skill> _skillsInFile  = new FastList<L2Skill>();
+    private List<L2Skill> _skillsInFile  = new ArrayList<L2Skill>();
 
 	DocumentSkill(File file)
 	{
@@ -542,7 +544,7 @@ class DocumentSkill extends DocumentBase {
     private void makeSkills()
 	{
         int count = 0;
-        _currentSkill.currentSkills = new FastList<L2Skill>(_currentSkill.sets.length+_currentSkill.enchsets1.length+_currentSkill.enchsets2.length+_currentSkill.enchsets3.length+_currentSkill.enchsets4.length+_currentSkill.enchsets5.length);
+        _currentSkill.currentSkills = new ArrayList<L2Skill>(_currentSkill.sets.length+_currentSkill.enchsets1.length+_currentSkill.enchsets2.length+_currentSkill.enchsets3.length+_currentSkill.enchsets4.length+_currentSkill.enchsets5.length);
 
 		for (int i=0; i < _currentSkill.sets.length; i++)
         {

@@ -35,7 +35,6 @@ public final class NpcInfo extends L2GameServerPacket
 	//   ddddddddddddddddddffffdddcccccSSddd dddddc
 	//   ddddddddddddddddddffffdddcccccSSddd dddddccffd
 
-
 	private static final String _S__22_NPCINFO = "[S] 0c NpcInfo";
 	private L2Character _activeChar;
 	private int _x, _y, _z, _heading;

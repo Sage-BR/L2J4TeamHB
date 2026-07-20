@@ -162,7 +162,6 @@ public final class RequestJoinParty extends L2GameClientPacket
 		msg = null;
 	}
 
-
 	/**
 	 * @param client
 	 * @param itemDistribution

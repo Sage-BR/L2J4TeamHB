@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 import javax.script.ScriptContext;
 import javax.script.ScriptException;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Announcements;
 import net.sf.l2j.gameserver.datatables.EventDroplist;
@@ -32,6 +31,8 @@ import net.sf.l2j.gameserver.script.DateRange;
 import net.sf.l2j.gameserver.script.EngineInterface;
 import net.sf.l2j.gameserver.script.Expression;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.ArrayList;
 
 /**
  * @author Luis Arias
@@ -154,7 +155,6 @@ public class FaenorInterface implements EngineInterface
     	npc.addDropData(drop, category);
     }
 
-
     /**
      * @return Returns the _questDrops.
      */
@@ -165,7 +165,7 @@ public class FaenorInterface implements EngineInterface
         {
             return null;
         }
-        List<L2DropData> questDrops = new FastList<L2DropData>();
+        List<L2DropData> questDrops = new ArrayList<L2DropData>();
         if (npc.getDropData()!=null)
         for (L2DropCategory cat:npc.getDropData())
         for (L2DropData drop : cat.getAllDrops() )
@@ -199,7 +199,7 @@ public class FaenorInterface implements EngineInterface
             petData[level - 1].setPetID(petID);
             petData[level - 1].setPetLevel(level);
 
-	        context.setAttribute("level", new Double(level), ScriptContext.ENGINE_SCOPE);
+	        context.setAttribute("level", Double.valueOf(level), ScriptContext.ENGINE_SCOPE);
             for (String stat : stats.keySet())
             {
 				value = ((Number)Expression.eval(context, "beanshell", stats.get(stat))).intValue();

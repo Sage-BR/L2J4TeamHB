@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 
-
 /**
  *
  * This class ...
@@ -30,7 +29,6 @@ import net.sf.l2j.gameserver.ThreadPoolManager;
 public class L2Potion extends L2Object
 {
     protected static final Logger _log = Logger.getLogger(L2Character.class.getName());
-
 
     @SuppressWarnings("unused")
 	private L2Character _target;
@@ -43,7 +41,6 @@ public class L2Potion extends L2Object
 	private int _potion;
     protected Object _mpLock = new Object();
     protected Object _hpLock = new Object();
-
 
 	class PotionHpHealing implements Runnable
 	{
@@ -80,7 +77,6 @@ public class L2Potion extends L2Object
 			}
 		}
 	}
-
 
 	public L2Potion(int objectId)
 	{

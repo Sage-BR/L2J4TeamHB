@@ -24,13 +24,14 @@ package net.sf.l2j.gameserver.taskmanager;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Summon;
 import net.sf.l2j.gameserver.model.actor.instance.L2CubicInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.AutoAttackStop;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -42,7 +43,7 @@ public class AttackStanceTaskManager
 {
     protected static final Logger _log = Logger.getLogger(AttackStanceTaskManager.class.getName());
 
-    protected Map<L2Character,Long> _attackStanceTasks = new FastMap<L2Character,Long>().setShared(true);
+    protected Map<L2Character,Long> _attackStanceTasks = new ConcurrentHashMap<L2Character,Long>();
 
     private static AttackStanceTaskManager _instance;
 

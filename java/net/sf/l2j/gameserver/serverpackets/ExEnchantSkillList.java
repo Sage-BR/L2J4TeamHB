@@ -16,7 +16,8 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+
 
 public class ExEnchantSkillList extends L2GameServerPacket
 {
@@ -52,7 +53,7 @@ public class ExEnchantSkillList extends L2GameServerPacket
     public ExEnchantSkillList(EnchantSkillType type)
     {
         _type = type;
-        _skills = new FastList<Skill>();
+        _skills = new ArrayList<Skill>();
     }
 
     /* (non-Javadoc)

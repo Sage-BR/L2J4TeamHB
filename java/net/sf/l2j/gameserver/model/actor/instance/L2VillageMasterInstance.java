@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 import java.util.Iterator;
 import java.util.Set;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Olympiad;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
@@ -44,6 +43,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.List;
 
 /**
  * This class ...
@@ -162,7 +163,7 @@ public final class L2VillageMasterInstance extends L2FolkInstance
                 return;
             }
 
-            TextBuilder content = new TextBuilder("<html><body>");
+            StringBuilder content = new StringBuilder("<html><body>");
             NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
             Set<PlayerClass> subsAvailable;
 
@@ -853,7 +854,7 @@ public final class L2VillageMasterInstance extends L2FolkInstance
             }
             else
             {
-                TextBuilder sb = new TextBuilder();
+                StringBuilder sb = new StringBuilder();
                 sb.append("<html><body>");
                 sb.append("You've learned all skills available for your Clan.<br>");
                 sb.append("</body></html>");

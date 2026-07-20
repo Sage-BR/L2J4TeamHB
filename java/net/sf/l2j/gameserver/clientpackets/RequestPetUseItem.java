@@ -28,13 +28,14 @@ import net.sf.l2j.gameserver.serverpackets.PetInfo;
 import net.sf.l2j.gameserver.serverpackets.PetItemList;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.List;
+
 public final class RequestPetUseItem extends L2GameClientPacket
 {
 	private static Logger _log = Logger.getLogger(RequestPetUseItem.class.getName());
 	private static final String _C__8A_REQUESTPETUSEITEM = "[C] 8a RequestPetUseItem";
 
 	private int _objectId;
-
 
 	@Override
 	protected void readImpl()

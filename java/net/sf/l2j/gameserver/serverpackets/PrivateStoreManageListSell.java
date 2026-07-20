@@ -17,6 +17,7 @@ package net.sf.l2j.gameserver.serverpackets;
 import net.sf.l2j.gameserver.model.TradeList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.List;
 
 /**
  * 3 section to this packet

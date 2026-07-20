@@ -16,11 +16,12 @@ package net.sf.l2j.gameserver.instancemanager;
 
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
+
+import java.util.ArrayList;
 
 public class TownManager
 {
@@ -39,10 +40,9 @@ public class TownManager
     }
     // =========================================================
 
-
     // =========================================================
     // Data Field
-    private FastList<L2TownZone> _towns;
+    private ArrayList<L2TownZone> _towns;
 
     // =========================================================
     // Constructor
@@ -56,7 +56,7 @@ public class TownManager
     public void addTown(L2TownZone arena)
     {
     	if (_towns == null)
-    		_towns = new FastList<L2TownZone>();
+    		_towns = new ArrayList<L2TownZone>();
 
     	_towns.add(arena);
     }

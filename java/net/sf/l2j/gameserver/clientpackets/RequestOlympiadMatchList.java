@@ -25,7 +25,6 @@ public final class RequestOlympiadMatchList extends L2GameClientPacket
 {
 	private static final String _C__D0_13_REQUESTOLYMPIADMATCHLIST = "[C] D0:13 RequestOlympiadMatchList";
 
-
 	@Override
 	protected void readImpl()
 	{

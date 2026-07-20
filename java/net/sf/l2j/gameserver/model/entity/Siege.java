@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.Announcements;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -50,6 +49,9 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Siege
 {
@@ -234,14 +236,14 @@ public class Siege
     // =========================================================
     // Data Field
     // Attacker and Defender
-    private List<L2SiegeClan> _attackerClans = new FastList<L2SiegeClan>(); // L2SiegeClan
+    private List<L2SiegeClan> _attackerClans = new ArrayList<L2SiegeClan>(); // L2SiegeClan
 
-    private List<L2SiegeClan> _defenderClans = new FastList<L2SiegeClan>(); // L2SiegeClan
-    private List<L2SiegeClan> _defenderWaitingClans = new FastList<L2SiegeClan>(); // L2SiegeClan
+    private List<L2SiegeClan> _defenderClans = new ArrayList<L2SiegeClan>(); // L2SiegeClan
+    private List<L2SiegeClan> _defenderWaitingClans = new ArrayList<L2SiegeClan>(); // L2SiegeClan
     private int _defenderRespawnDelayPenalty;
 
     // Castle setting
-    private List<L2ControlTowerInstance> _controlTowers = new FastList<L2ControlTowerInstance>();
+    private List<L2ControlTowerInstance> _controlTowers = new ArrayList<L2ControlTowerInstance>();
     private Castle[] _castle;
     private boolean _isInProgress = false;
     private boolean _isNormalSide = true; // true = Atk is Atk, false = Atk is Def
@@ -636,7 +638,7 @@ public class Siege
     /** Return list of L2PcInstance registered as attacker in the zone. */
     public List<L2PcInstance> getAttackersInZone()
     {
-    	List<L2PcInstance> players = new FastList<L2PcInstance>();
+    	List<L2PcInstance> players = new ArrayList<L2PcInstance>();
     	L2Clan clan;
     	for(L2SiegeClan siegeclan : getAttackerClans())
         {
@@ -652,7 +654,7 @@ public class Siege
     /** Return list of L2PcInstance registered as defender but not owner in the zone. */
     public List<L2PcInstance> getDefendersButNotOwnersInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
     	L2Clan clan;
     	for(L2SiegeClan siegeclan : getDefenderClans())
         {
@@ -675,7 +677,7 @@ public class Siege
     /** Return list of L2PcInstance owning the castle in the zone. */
     public List<L2PcInstance> getOwnersInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
     	L2Clan clan;
     	for(L2SiegeClan siegeclan : getDefenderClans())
         {
@@ -692,7 +694,7 @@ public class Siege
     /** Return list of L2PcInstance not registered as attacker or defender in the zone. */
     public List<L2PcInstance> getSpectatorsInZone()
     {
-        List<L2PcInstance> players = new FastList<L2PcInstance>();
+        List<L2PcInstance> players = new ArrayList<L2PcInstance>();
 
         Collection<L2PcInstance> pls = L2World.getInstance().getAllPlayers().values();
         //synchronized (L2World.getInstance().getAllPlayers())
@@ -1231,7 +1233,7 @@ public class Siege
     {
         //Set control tower array size if one does not exist
         if (_controlTowers == null)
-        	_controlTowers = new FastList<L2ControlTowerInstance>();
+        	_controlTowers = new ArrayList<L2ControlTowerInstance>();
 
         for (SiegeSpawn _sp: SiegeManager.getInstance().getControlTowerSpawnList(Id))
         {
@@ -1245,7 +1247,6 @@ public class Siege
             // template.addVulnerability(Stats.DAGGER_WPN_VULN,0);
 
             ct = new L2ControlTowerInstance(IdFactory.getInstance().getNextId(), template);
-
 
             ct.setCurrentHpMp(_sp.getHp(), ct.getMaxMp());
             ct.spawnMe(_sp.getLocation().getX(),_sp.getLocation().getY(),_sp.getLocation().getZ() + 20);

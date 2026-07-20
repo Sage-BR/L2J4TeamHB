@@ -14,10 +14,11 @@
  */
 package net.sf.l2j.gameserver.serverpackets;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoom;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
+
+import java.util.ArrayList;
 
 /**
  * @author Gnacik
@@ -28,14 +29,14 @@ public class ListPartyWating extends L2GameServerPacket
 	private L2PcInstance _cha;
 	private int _loc;
 	private int _lim;
-	private FastList<PartyMatchRoom> _rooms;
+	private ArrayList<PartyMatchRoom> _rooms;
 	
 	public ListPartyWating(L2PcInstance player, int auto, int location, int limit)
 	{
 		_cha = player;
 		_loc = location;
 		_lim = limit;
-		_rooms = new FastList<PartyMatchRoom>();
+		_rooms = new ArrayList<PartyMatchRoom>();
 	}
 
 	@Override

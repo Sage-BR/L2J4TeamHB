@@ -19,13 +19,14 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.model.L2Spawn;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Fort;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+
+import java.util.ArrayList;
 
 public class FortSiegeGuardManager {
 
@@ -34,7 +35,7 @@ public class FortSiegeGuardManager {
     // =========================================================
     // Data Field
     private Fort _fort;
-    private List<L2Spawn> _siegeGuardSpawn  = new FastList<L2Spawn>();
+    private List<L2Spawn> _siegeGuardSpawn  = new ArrayList<L2Spawn>();
 
     // =========================================================
     // Constructor

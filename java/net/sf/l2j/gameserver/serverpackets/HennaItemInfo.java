@@ -20,7 +20,6 @@ package net.sf.l2j.gameserver.serverpackets;
 import net.sf.l2j.gameserver.model.L2HennaInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 public class HennaItemInfo extends L2GameServerPacket
 {
     private static final String _S__E3_HennaItemInfo = "[S] e4 HennaItemInfo";

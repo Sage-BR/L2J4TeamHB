@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.model;
 
-
 /**
  * Used to Store data sent to Client for Character
  * Selection screen.
@@ -48,7 +47,6 @@ public class CharSelectInfoPackage
     private int _pkKills=0;
     private int _augmentationId=0;
     private int _transformId = 0;
-
 
     /**
      * @param int1

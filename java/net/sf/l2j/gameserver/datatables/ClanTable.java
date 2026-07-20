@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -36,6 +35,9 @@ import net.sf.l2j.gameserver.serverpackets.PledgeShowMemberListUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.Util;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 /**
  * This class ...
@@ -65,7 +67,7 @@ public class ClanTable
 
 	private ClanTable()
 	{
-		_clans = new FastMap<Integer, L2Clan>();
+		_clans = new ConcurrentHashMap<Integer, L2Clan>();
 		L2Clan clan;
 		java.sql.Connection con = null;
 	     try
@@ -115,7 +117,7 @@ public class ClanTable
 	 */
 	public L2Clan getClan(int clanId)
 	{
-        L2Clan clan = _clans.get(new Integer(clanId));
+        L2Clan clan = _clans.get(Integer.valueOf(clanId));
 
 		return clan;
 	}
@@ -196,7 +198,7 @@ public class ClanTable
 		if (Config.DEBUG)
 			_log.fine("New clan created: "+clan.getClanId() + " " +clan.getName());
 
-		_clans.put(new Integer(clan.getClanId()), clan);
+		_clans.put(Integer.valueOf(clan.getClanId()), clan);
 
         //should be update packet only
         player.sendPacket(new PledgeShowInfoUpdate(clan));

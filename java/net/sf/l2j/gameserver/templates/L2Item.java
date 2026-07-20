@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.templates;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Effect;
@@ -26,6 +25,9 @@ import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.effects.EffectTemplate;
 import net.sf.l2j.gameserver.skills.funcs.Func;
 import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * This class contains all informations concerning the item (weapon, armor, etc).<BR>
@@ -466,7 +468,7 @@ public abstract class L2Item
     {
 		if (_funcTemplates == null)
 			return _emptyFunctionSet;
-    	List<Func> funcs = new FastList<Func>();
+    	List<Func> funcs = new ArrayList<Func>();
 		for (FuncTemplate t : _funcTemplates) {
 	    	Env env = new Env();
 	    	env.player = player;
@@ -491,7 +493,7 @@ public abstract class L2Item
     {
 		if (_effectTemplates == null)
 			return _emptyEffectSet;
-    	List<L2Effect> effects = new FastList<L2Effect>();
+    	List<L2Effect> effects = new ArrayList<L2Effect>();
 		for (EffectTemplate et : _effectTemplates) {
 	    	Env env = new Env();
 	    	env.player = player;
@@ -516,7 +518,7 @@ public abstract class L2Item
     {
         if (_skills == null)
             return _emptyEffectSet;
-        List<L2Effect> effects = new FastList<L2Effect>();
+        List<L2Effect> effects = new ArrayList<L2Effect>();
 
         for (L2Skill skill : _skills)
         {
@@ -532,7 +534,6 @@ public abstract class L2Item
             return _emptyEffectSet;
         return effects.toArray(new L2Effect[effects.size()]);
     }
-
 
     /**
      * Add the FuncTemplate f to the list of functions used with the item

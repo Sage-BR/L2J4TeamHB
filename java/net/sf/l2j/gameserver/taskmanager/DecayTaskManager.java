@@ -18,9 +18,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.model.L2Character;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author la2
@@ -29,7 +30,7 @@ import net.sf.l2j.gameserver.model.L2Character;
 public class DecayTaskManager
 {
     protected static final Logger _log = Logger.getLogger(DecayTaskManager.class.getName());
-	protected Map<L2Character,Long> _decayTasks = new FastMap<L2Character,Long>().setShared(true);
+	protected Map<L2Character,Long> _decayTasks = new ConcurrentHashMap<L2Character,Long>();
 
 	public static final int RAID_BOSS_DECAY_TIME = 30000;
 	public static final int ATTACKABLE_DECAY_TIME = 8500;

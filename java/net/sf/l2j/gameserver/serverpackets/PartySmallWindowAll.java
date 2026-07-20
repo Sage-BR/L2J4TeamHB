@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -46,7 +47,7 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public final class PartySmallWindowAll extends L2GameServerPacket
 {
 	private static final String _S__63_PARTYSMALLWINDOWALL = "[S] 4e PartySmallWindowAll";
-	private List<L2PcInstance> _partyMembers = new FastList<L2PcInstance>();
+	private List<L2PcInstance> _partyMembers = new ArrayList<L2PcInstance>();
 	private L2PcInstance _exclude;
 
 	public PartySmallWindowAll(L2PcInstance exclude, List<L2PcInstance> party)

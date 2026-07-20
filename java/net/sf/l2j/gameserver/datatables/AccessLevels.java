@@ -20,9 +20,10 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author FBIagent<br>
@@ -41,8 +42,8 @@ public class AccessLevels
 	public static final int _userAccessLevelNum = 0;
 	/** The user access level which can do no administrative tasks<br> */
 	public static AccessLevel _userAccessLevel = new AccessLevel(_userAccessLevelNum, "User", Integer.decode("0xFFFFFF"), Integer.decode("0xFFFFFF"), null, false, false, false, true, false, true, true, true);
-	/** FastMap of access levels defined in database<br> */
-	private Map<Integer, AccessLevel> _accessLevels = new FastMap<Integer, AccessLevel>();
+	/** ConcurrentHashMap of access levels defined in database<br> */
+	private Map<Integer, AccessLevel> _accessLevels = new ConcurrentHashMap<Integer, AccessLevel>();
 
 	/**
 	 * Loads the access levels from database<br>

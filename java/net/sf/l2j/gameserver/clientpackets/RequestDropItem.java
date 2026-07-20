@@ -107,7 +107,6 @@ public final class RequestDropItem extends L2GameClientPacket
         	return;
         }
 
-
         if (!activeChar.getAccessLevel().allowTransaction())
         {
             activeChar.sendMessage("Transactions are disable for your Access Level");

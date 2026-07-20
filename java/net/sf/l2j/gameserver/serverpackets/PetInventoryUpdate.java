@@ -17,10 +17,11 @@ package net.sf.l2j.gameserver.serverpackets;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.ItemInfo;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
+
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -49,7 +50,7 @@ public class PetInventoryUpdate extends L2GameServerPacket
 
 	public PetInventoryUpdate()
 	{
-		this(new FastList<ItemInfo>());
+		this(new ArrayList<ItemInfo>());
 	}
 
 	public void addItem(L2ItemInstance item) { _items.add(new ItemInfo(item)); }

@@ -20,9 +20,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.FishData;
+
+import java.util.ArrayList;
 
 /**
  * @author -Nemesiss-
@@ -49,9 +50,9 @@ public class FishTable
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
-			_fishsEasy = new FastList<FishData>();
-			_fishsNormal = new FastList<FishData>();
-			_fishsHard = new FastList<FishData>();
+			_fishsEasy = new ArrayList<FishData>();
+			_fishsNormal = new ArrayList<FishData>();
+			_fishsHard = new ArrayList<FishData>();
 			FishData fish;
 			PreparedStatement statement = con.prepareStatement("SELECT id, level, name, hp, hpregen, fish_type, fish_group, fish_guts, guts_check_time, wait_time, combat_time FROM fish ORDER BY id");
 			ResultSet Fishes = statement.executeQuery();
@@ -103,7 +104,7 @@ public class FishTable
 	 */
 	public List<FishData> getfish(int lvl, int type, int group)
 	{
-		List<FishData> result = new FastList<FishData>();
+		List<FishData> result = new ArrayList<FishData>();
 		List<FishData> _Fishs = null;
 		switch (group) {
 			case 0:

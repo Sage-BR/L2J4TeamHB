@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  * This class ...
  *
@@ -31,7 +30,6 @@ public class ExOlympiadUserInfoSpectator extends L2GameServerPacket
 	private int _side;
 	private L2PcInstance _player;
 
-
 	/**
 	 * @param _player
 	 * @param _side (1 = right, 2 = left)
@@ -41,7 +39,6 @@ public class ExOlympiadUserInfoSpectator extends L2GameServerPacket
 		_player = player;
 		_side = side;
 	}
-
 
 	@Override
 	protected final void writeImpl()

@@ -28,7 +28,6 @@ public final class StartRotating extends L2GameClientPacket
 	private int _degree;
 	private int _side;
 
-
 	@Override
 	protected void readImpl()
 	{

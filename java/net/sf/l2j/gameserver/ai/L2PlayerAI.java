@@ -31,6 +31,8 @@ import net.sf.l2j.gameserver.model.L2Skill.SkillTargetType;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2StaticObjectInstance;
 
+import java.util.Set;
+
 public class L2PlayerAI extends L2CharacterAI
 {
 
@@ -247,6 +249,17 @@ public class L2PlayerAI extends L2CharacterAI
             return;
         }
         if (maybeMoveToPawn(target, _actor.getPhysicalAttackRange())) return;
+
+        if (_actor.isAttackingNow() || _actor.isCastingNow())
+        {
+        	// Queue the attack — fires automatically when the current
+        	// animation finishes (onEvtReadyToAct), instead of dropping it.
+        	// isAttackingNow() uses real-time millis and is perfectly aligned
+        	// with EVT_READY_TO_ACT scheduling, so no tick-alignment delay.
+        	saveNextIntention(AI_INTENTION_ATTACK, target, null);
+        	clientActionFailed();
+        	return;
+        }
 
         _accessor.doAttack(target);
         return;

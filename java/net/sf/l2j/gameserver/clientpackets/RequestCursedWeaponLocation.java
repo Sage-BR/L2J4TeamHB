@@ -16,13 +16,14 @@ package net.sf.l2j.gameserver.clientpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
 import net.sf.l2j.gameserver.model.CursedWeapon;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.serverpackets.ExCursedWeaponLocation;
 import net.sf.l2j.gameserver.serverpackets.ExCursedWeaponLocation.CursedWeaponInfo;
 import net.sf.l2j.util.Point3D;
+
+import java.util.ArrayList;
 
 /**
  * Format: (ch)
@@ -49,7 +50,7 @@ public final class RequestCursedWeaponLocation extends L2GameClientPacket
 		if (activeChar == null)
 			return;
 
-		List<CursedWeaponInfo> list = new FastList<CursedWeaponInfo>();
+		List<CursedWeaponInfo> list = new ArrayList<CursedWeaponInfo>();
 		for (CursedWeapon cw : CursedWeaponsManager.getInstance().getCursedWeapons())
 		{
 			if (!cw.isActive()) continue;
@@ -59,7 +60,6 @@ public final class RequestCursedWeaponLocation extends L2GameClientPacket
 			if (pos != null)
 				list.add(new CursedWeaponInfo(pos, cw.getItemId(), cw.isActivated() ? 1 : 0));
 		}
-
 
 		//send the ExCursedWeaponLocation
 		if (!list.isEmpty())

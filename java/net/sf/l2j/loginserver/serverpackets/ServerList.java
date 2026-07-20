@@ -18,11 +18,12 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.loginserver.GameServerTable;
 import net.sf.l2j.loginserver.L2LoginClient;
 import net.sf.l2j.loginserver.GameServerTable.GameServerInfo;
 import net.sf.l2j.loginserver.gameserverpackets.ServerStatus;
+
+import java.util.ArrayList;
 
 /**
  * ServerList
@@ -85,7 +86,7 @@ public final class ServerList extends L2LoginServerPacket
 
 	public ServerList(L2LoginClient client)
 	{
-		_servers = new FastList<ServerData>();
+		_servers = new ArrayList<ServerData>();
 		_lastServer = client.getLastServer();
 		for (GameServerInfo gsi : GameServerTable.getInstance().getRegisteredGameServers().values())
 		{

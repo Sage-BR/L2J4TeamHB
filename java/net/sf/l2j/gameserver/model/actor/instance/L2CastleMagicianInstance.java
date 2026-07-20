@@ -18,7 +18,6 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-
 /**
  * @author  Kerberos
  */

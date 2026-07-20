@@ -23,7 +23,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Env;
 
-
 class EffectChameleonRest extends L2Effect
 {
 	public EffectChameleonRest(Env env, EffectTemplate template)

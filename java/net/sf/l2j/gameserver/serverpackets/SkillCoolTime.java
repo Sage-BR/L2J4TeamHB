@@ -19,6 +19,8 @@ import java.util.Collection;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance.TimeStamp;
 
+import java.util.List;
+
 /**
  *
  * @author  KenM

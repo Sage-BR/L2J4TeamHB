@@ -26,6 +26,6 @@ public class FileLogFormatter extends Formatter
 	@Override
 	public String format(LogRecord record)
 	{
-		return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(record.getMillis()) + SPACE + record.getLevel().getName() + SPACE + record.getThreadID() + SPACE + record.getLoggerName() + SPACE + record.getMessage() + CRLF;
+		return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(record.getMillis()) + SPACE + record.getLevel().getName() + SPACE + record.getLongThreadID() + SPACE + record.getLoggerName() + SPACE + record.getMessage() + CRLF;
 	}
 }

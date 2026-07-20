@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.templates.L2PcTemplate;
+
+import java.util.ArrayList;
 
 /**
  * This class ...
@@ -28,7 +29,7 @@ public class NewCharacterSuccess extends L2GameServerPacket
 {
 	// dddddddddddddddddddd
 	private static final String _S__23_CHARTEMPLATES = "[S] 0d CharTemplates";
-	private List<L2PcTemplate> _chars = new FastList<L2PcTemplate>();
+	private List<L2PcTemplate> _chars = new ArrayList<L2PcTemplate>();
 
     public NewCharacterSuccess()
     {

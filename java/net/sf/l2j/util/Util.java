@@ -27,7 +27,6 @@ package net.sf.l2j.util;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 
-import javolution.text.TextBuilder;
 
 /**
  * This class ...
@@ -53,7 +52,7 @@ public class Util
 
     public static String printData(byte[] data, int len)
 	{
-        TextBuilder result = new TextBuilder();
+        StringBuilder result = new StringBuilder();
 
 		int counter = 0;
 
@@ -113,7 +112,6 @@ public class Util
 
 			result.append("\n");
 		}
-
 
 		return result.toString();
 	}

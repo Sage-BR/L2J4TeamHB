@@ -31,14 +31,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
-import javolution.io.UTF8StreamReader;
-import javolution.util.FastMap;
-import javolution.xml.stream.XMLStreamConstants;
-import javolution.xml.stream.XMLStreamException;
-import javolution.xml.stream.XMLStreamReaderImpl;
+
+
+
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.loginserver.gameserverpackets.ServerStatus;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
 
 /**
  *
@@ -50,10 +54,10 @@ public class GameServerTable
 	private static GameServerTable _instance;
 
 	// Server Names Config
-	private static Map<Integer, String> _serverNames = new FastMap<Integer, String>();
+	private static Map<Integer, String> _serverNames = new ConcurrentHashMap<Integer, String>();
 
 	// Game Server Table
-	private Map<Integer, GameServerInfo> _gameServerTable = new FastMap<Integer, GameServerInfo>().setShared(true);
+	private Map<Integer, GameServerInfo> _gameServerTable = new ConcurrentHashMap<Integer, GameServerInfo>();
 
 	// RSA Config
 	private static final int KEYS_SIZE = 10;
@@ -107,15 +111,14 @@ public class GameServerTable
 		try
 		{
 			in = new FileInputStream("servername.xml");
-			XMLStreamReaderImpl xpp = new XMLStreamReaderImpl();
-			xpp.setInput(new UTF8StreamReader().setInput(in));
+			XMLStreamReader xpp = XMLInputFactory.newInstance().createXMLStreamReader(in, "UTF-8");
 			for (int e = xpp.getEventType(); e != XMLStreamConstants.END_DOCUMENT; e = xpp.next())
 			{
 				if (e == XMLStreamConstants.START_ELEMENT)
 				{
 					if(xpp.getLocalName().toString().equals("server"))
 					{
-						Integer id = new Integer(xpp.getAttributeValue(null,"id").toString());
+						Integer id = Integer.valueOf(xpp.getAttributeValue(null,"id").toString());
 						String name = xpp.getAttributeValue(null,"name").toString();
 						_serverNames.put(id,name);
 					}

@@ -14,7 +14,6 @@
  */
 package net.sf.l2j.gameserver.clientpackets;
 
-
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
@@ -65,7 +64,6 @@ public class CharacterSelect extends L2GameClientPacket
 		// be a  [S]0x21 packet
 		// after playback is done, the client will not work correct and need to exit
 		//playLogFile(getConnection()); // try to play log file
-
 
 		// we should always be abble to acquire the lock
 		// but if we cant lock then nothing should be done (ie repeated packet)

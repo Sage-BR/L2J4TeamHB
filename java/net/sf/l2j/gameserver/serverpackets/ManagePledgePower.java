@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import net.sf.l2j.gameserver.model.L2Clan;
 
-
 public class ManagePledgePower extends L2GameServerPacket
 {
     private static final String _S__30_MANAGEPLEDGEPOWER = "[S] 2a ManagePledgePower";

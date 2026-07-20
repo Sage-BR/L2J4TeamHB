@@ -16,10 +16,11 @@ package net.sf.l2j.gameserver.clientpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
 import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.serverpackets.ExCursedWeaponList;
+
+import java.util.ArrayList;
 
 /**
  * Format: (ch)
@@ -47,7 +48,7 @@ public class RequestCursedWeaponList extends L2GameClientPacket
 			return;
 
 		//send a ExCursedWeaponList :p
-		List<Integer> list = new FastList<Integer>();
+		List<Integer> list = new ArrayList<Integer>();
 		for (int id : CursedWeaponsManager.getInstance().getCursedWeaponsIds())
 		{
 			list.add(id);

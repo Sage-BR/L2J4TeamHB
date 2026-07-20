@@ -33,7 +33,6 @@ import net.sf.l2j.gameserver.model.quest.Quest;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Util;
 
-
 public class L2AttackableAIScript extends Quest
 {
 	@Override

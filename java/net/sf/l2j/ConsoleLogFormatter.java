@@ -19,7 +19,6 @@ import java.io.StringWriter;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
-import javolution.text.TextBuilder;
 
 /**
  * This class ...
@@ -38,7 +37,7 @@ public class ConsoleLogFormatter extends Formatter
 	@Override
 	public String format(LogRecord record)
 	{
-        TextBuilder output = new TextBuilder();
+        StringBuilder output = new StringBuilder();
 //		output.append(record.getLevel().getName());
 //		output.append(_);
 //		output.append(record.getLoggerName());

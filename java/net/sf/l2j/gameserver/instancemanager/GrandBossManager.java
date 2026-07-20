@@ -21,7 +21,6 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.model.L2Character;
@@ -30,7 +29,12 @@ import net.sf.l2j.gameserver.model.actor.instance.L2GrandBossInstance;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
-import net.sf.l2j.util.L2FastList;
+import net.sf.l2j.util.L2ArrayList;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -90,7 +94,7 @@ public class GrandBossManager
 
 	private Map<Integer, Integer> _bossStatus;
 
-	private L2FastList<L2BossZone> _zones;
+	private L2ArrayList<L2BossZone> _zones;
 
 	public static final GrandBossManager getInstance()
 	{
@@ -109,11 +113,11 @@ public class GrandBossManager
 
 	private void init()
 	{
-		_zones = new L2FastList<L2BossZone>();
+		_zones = new L2ArrayList<L2BossZone>();
 
-		_bosses = new FastMap<Integer, L2GrandBossInstance>();
-		_storedInfo = new FastMap<Integer, StatsSet>();
-		_bossStatus = new FastMap<Integer, Integer>();
+		_bosses = new ConcurrentHashMap<Integer, L2GrandBossInstance>();
+		_storedInfo = new ConcurrentHashMap<Integer, StatsSet>();
+		_bossStatus = new ConcurrentHashMap<Integer, Integer>();
 		Connection con = null;
 		try
 		{
@@ -179,7 +183,7 @@ public class GrandBossManager
 	{
 		Connection con = null;
 
-		FastMap<Integer, L2FastList<Integer>> zones = new FastMap<Integer, L2FastList<Integer>>();
+		ConcurrentHashMap<Integer, L2ArrayList<Integer>> zones = new ConcurrentHashMap<Integer, L2ArrayList<Integer>>();
 
 		if (_zones == null)
 		{
@@ -191,7 +195,7 @@ public class GrandBossManager
 		{
 			if (zone == null)
 				continue;
-			zones.put(zone.getId(), new L2FastList<Integer>());
+			zones.put(zone.getId(), new L2ArrayList<Integer>());
 		}
 
 		try
@@ -353,7 +357,7 @@ public class GrandBossManager
 				if (zone == null)
 					continue;
 				Integer id = zone.getId();
-				L2FastList<Integer> list = zone.getAllowedPlayers();
+				L2ArrayList<Integer> list = zone.getAllowedPlayers();
 				if (list == null || list.isEmpty())
 					continue;
 				for (Integer player : list)

@@ -80,7 +80,6 @@ public class L2HennaInstance
 		return _template;
 	}
 
-
     public int getSymbolId()
     {
         return _symbolId;
@@ -101,7 +100,6 @@ public class L2HennaInstance
 		_itemIdDye = ItemIdDye;
 	}
 
-
 	public int getAmountDyeRequire()
 	{
 		return _amountDyeRequire;
@@ -121,7 +119,6 @@ public class L2HennaInstance
 	{
 		_price = Price;
 	}
-
 
 	public int getStatINT()
 	{

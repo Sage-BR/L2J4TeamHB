@@ -601,7 +601,6 @@ public class AdminEffects implements IAdminCommandHandler
 		return true;
 	}
 
-
 	/**
 	 * @param action bitmask that should be applied over target's abnormal
 	 * @param target
@@ -693,7 +692,6 @@ public class AdminEffects implements IAdminCommandHandler
 		activeChar.broadcastPacket(_snd);
 		activeChar.sendMessage("Playing "+sound+".");
 	}
-
 
 	public String[] getAdminCommandList()
 	{

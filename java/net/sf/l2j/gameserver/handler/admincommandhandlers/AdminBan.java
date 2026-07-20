@@ -31,6 +31,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
+import java.util.Set;
+
 /**
  * This class handles following admin commands:
  * - ban account_name = changes account access level to -100 and logs him off. If no account is specified, target's account is used.

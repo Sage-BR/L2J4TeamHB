@@ -26,6 +26,8 @@ import javax.script.ScriptException;
 
 import net.sf.l2j.Config;
 
+import java.util.Set;
+
 /**
  * Abstract class for classes that are meant to be implemented by scripts.
  * @author KenM

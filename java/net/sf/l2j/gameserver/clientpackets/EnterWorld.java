@@ -71,6 +71,9 @@ import net.sf.l2j.gameserver.serverpackets.SkillCoolTime;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.FloodProtector;
+
+import java.util.List;
+import java.util.Map;
 /**
  * Enter World Packet Handler<p>
  * <p>
@@ -248,7 +251,6 @@ public class EnterWorld extends L2GameClientPacket
 
         // Send client time
         sendPacket(ClientSetTime.STATIC_PACKET);
-
 
         SevenSigns.getInstance().sendCurrentPeriodMsg(activeChar);
         Announcements.getInstance().showAnnouncements(activeChar);

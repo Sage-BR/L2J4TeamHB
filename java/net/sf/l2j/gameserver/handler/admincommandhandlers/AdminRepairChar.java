@@ -23,6 +23,8 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import java.util.Set;
+
 /**
  * This class handles following admin commands: - delete = deletes target
  *
@@ -82,7 +84,6 @@ public class AdminRepairChar implements IAdminCommandHandler
             statement.setInt(1, objId);
             statement.execute();
             statement.close();
-
 
             //connection = L2DatabaseFactory.getInstance().getConnection();
             statement = connection.prepareStatement("UPDATE items SET loc=\"INVENTORY\" WHERE owner_id=?");

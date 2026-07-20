@@ -17,12 +17,14 @@ package net.sf.l2j.gameserver.serverpackets;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager.CropProcure;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class SellListProcure extends L2GameServerPacket
@@ -32,8 +34,8 @@ public class SellListProcure extends L2GameServerPacket
 
     private final L2PcInstance _activeChar;
     private int _money;
-    private Map<L2ItemInstance,Integer> _sellList = new FastMap<L2ItemInstance,Integer>();
-    private List<CropProcure> _procureList = new FastList<CropProcure>();
+    private Map<L2ItemInstance,Integer> _sellList = new ConcurrentHashMap<L2ItemInstance,Integer>();
+    private List<CropProcure> _procureList = new ArrayList<CropProcure>();
     private int _castle;
 
     public SellListProcure(L2PcInstance player, int castleId)

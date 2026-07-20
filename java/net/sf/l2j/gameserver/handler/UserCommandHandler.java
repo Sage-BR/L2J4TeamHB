@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.handler;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.usercommandhandlers.ChannelDelete;
 import net.sf.l2j.gameserver.handler.usercommandhandlers.ChannelLeave;
@@ -32,6 +31,8 @@ import net.sf.l2j.gameserver.handler.usercommandhandlers.Mount;
 import net.sf.l2j.gameserver.handler.usercommandhandlers.OlympiadStat;
 import net.sf.l2j.gameserver.handler.usercommandhandlers.PartyInfo;
 import net.sf.l2j.gameserver.handler.usercommandhandlers.Time;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -57,7 +58,7 @@ public class UserCommandHandler
 
 	private UserCommandHandler()
 	{
-		_datatable = new FastMap<Integer, IUserCommandHandler>();
+		_datatable = new ConcurrentHashMap<Integer, IUserCommandHandler>();
 		registerUserCommandHandler(new ClanPenalty());
         registerUserCommandHandler(new ClanWarsList());
         registerUserCommandHandler(new DisMount());
@@ -80,14 +81,14 @@ public class UserCommandHandler
 		for (int i = 0; i < ids.length; i++)
 		{
 			if (Config.DEBUG) _log.fine("Adding handler for user command "+ids[i]);
-			_datatable.put(new Integer(ids[i]), handler);
+			_datatable.put(Integer.valueOf(ids[i]), handler);
 		}
 	}
 
 	public IUserCommandHandler getUserCommandHandler(int userCommand)
 	{
 		if (Config.DEBUG) _log.fine("getting handler for user command: "+userCommand);
-		return _datatable.get(new Integer(userCommand));
+		return _datatable.get(Integer.valueOf(userCommand));
 	}
 
     /**

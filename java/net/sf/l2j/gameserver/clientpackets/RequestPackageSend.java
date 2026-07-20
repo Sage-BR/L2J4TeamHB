@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.clientpackets;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.ItemContainer;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
@@ -32,6 +31,8 @@ import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2EtcItemType;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author  -Wooden-
@@ -40,7 +41,7 @@ public final class RequestPackageSend extends L2GameClientPacket
 {
 	private static final String _C_9F_REQUESTPACKAGESEND = "[C] 9F RequestPackageSend";
 	private static Logger _log = Logger.getLogger(RequestPackageSend.class.getName());
-	private List<Item> _items = new FastList<Item>();
+	private List<Item> _items = new ArrayList<Item>();
 	private int _objectID;
 	private int _count;
 

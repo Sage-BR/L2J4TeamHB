@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import javolution.util.FastList;
+import java.util.ArrayList;
+import java.util.Set;
+
 
 /**
  * @author Luis Arias
@@ -36,8 +38,8 @@ public class ScriptPackage
 
     public ScriptPackage(ZipFile pack)
     {
-        _scriptFiles = new FastList<ScriptDocument>();
-        _otherFiles = new FastList<String>();
+        _scriptFiles = new ArrayList<ScriptDocument>();
+        _otherFiles = new ArrayList<String>();
         _name = pack.getName();
         addFiles(pack);
     }

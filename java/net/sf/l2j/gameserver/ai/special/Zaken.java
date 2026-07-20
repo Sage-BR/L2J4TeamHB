@@ -38,6 +38,8 @@ import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  * Zaken AI
  */

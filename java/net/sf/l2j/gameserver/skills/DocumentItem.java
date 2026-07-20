@@ -18,8 +18,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.gameserver.Item;
 import net.sf.l2j.gameserver.templates.L2Armor;
 import net.sf.l2j.gameserver.templates.L2ArmorType;
@@ -33,6 +32,10 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * @author mkizub
  *
@@ -42,8 +45,8 @@ import org.w3c.dom.Node;
 final class DocumentItem extends DocumentBase
 {
     private Item _currentItem = null;
-    private List<L2Item> _itemsInFile = new FastList<L2Item>();
-    private Map<Integer, Item> _itemData = new FastMap<Integer, Item>();
+    private List<L2Item> _itemsInFile = new ArrayList<L2Item>();
+    private Map<Integer, Item> _itemData = new ConcurrentHashMap<Integer, Item>();
 
     /**
      * @param armorData

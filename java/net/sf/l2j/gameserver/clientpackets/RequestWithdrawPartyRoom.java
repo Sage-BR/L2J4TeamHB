@@ -32,7 +32,6 @@ public final class RequestWithdrawPartyRoom extends L2GameClientPacket
 	@SuppressWarnings("unused")
     private int _unk1;
 
-
 	@Override
 	protected void readImpl()
 	{

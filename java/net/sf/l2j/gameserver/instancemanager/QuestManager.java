@@ -17,9 +17,10 @@ package net.sf.l2j.gameserver.instancemanager;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.model.quest.Quest;
 import net.sf.l2j.gameserver.scripting.ScriptManager;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 public class QuestManager extends ScriptManager<Quest>
 {
@@ -38,10 +39,9 @@ public class QuestManager extends ScriptManager<Quest>
     }
     // =========================================================
 
-
     // =========================================================
     // Data Field
-    private Map<String, Quest> _quests = new FastMap<String, Quest>();
+    private Map<String, Quest> _quests = new ConcurrentHashMap<String, Quest>();
 
     // =========================================================
     // Constructor
@@ -139,10 +139,10 @@ public class QuestManager extends ScriptManager<Quest>
         return this.getQuests().remove(q.getName()) != null;
     }
     
-    public final FastMap<String, Quest> getQuests()
+    public final ConcurrentHashMap<String, Quest> getQuests()
     {
-        if (_quests == null) _quests = new FastMap<String, Quest>();
-        return (FastMap<String, Quest>) _quests;
+        if (_quests == null) _quests = new ConcurrentHashMap<String, Quest>();
+        return (ConcurrentHashMap<String, Quest>) _quests;
     }
 
     /**

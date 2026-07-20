@@ -99,7 +99,6 @@ public final class RequestJoinSiege extends L2GameClientPacket
 
     }
 
-
     @Override
 	public String getType()
     {

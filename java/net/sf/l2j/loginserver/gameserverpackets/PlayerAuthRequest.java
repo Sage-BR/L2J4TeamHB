@@ -27,7 +27,6 @@ public class PlayerAuthRequest extends ClientBasePacket
 	private String _account;
 	private SessionKey _sessionKey;
 
-
 	/**
 	 * @param decrypt
 	 */

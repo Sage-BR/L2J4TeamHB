@@ -17,6 +17,8 @@ package net.sf.l2j.gameserver.clientpackets;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 
+import java.util.Set;
+
 /**
  * This class ...
  *
@@ -26,7 +28,6 @@ public final class RequestPrivateStoreManageSell extends L2GameClientPacket
 {
 	private static final String _C__73_REQUESTPRIVATESTOREMANAGESELL = "[C] 73 RequestPrivateStoreManageSell";
 	//private static Logger _log = Logger.getLogger(RequestPrivateStoreManage.class.getName());
-
 
 	@Override
 	protected void readImpl()

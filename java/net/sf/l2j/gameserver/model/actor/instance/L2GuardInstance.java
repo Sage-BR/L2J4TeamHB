@@ -33,6 +33,8 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
+import java.util.Set;
+
 /**
  * This class manages all Guards in the world.
  * It inherits all methods from L2Attackable and adds some more such as tracking PK and aggressive L2MonsterInstance.<BR><BR>
@@ -91,7 +93,6 @@ public final class L2GuardInstance extends L2Attackable
 		return attacker instanceof L2MonsterInstance;
 	}
 
-
 	/**
 	 * Notify the L2GuardInstance to return to its home location (AI_INTENTION_MOVE_TO) and clear its _aggroList.<BR><BR>
 	 */
@@ -119,7 +120,6 @@ public final class L2GuardInstance extends L2Attackable
             ((L2AttackableAI) getAI()).stopAITask();
 	}
 
-
 	/**
 	 * Return the pathfile of the selected HTML file in function of the L2GuardInstance Identifier and of the page number.<BR><BR>
 	 *
@@ -145,7 +145,6 @@ public final class L2GuardInstance extends L2Attackable
 		}
 		return "data/html/guard/" + pom + ".htm";
 	}
-
 
 	/**
 	 * Manage actions when a player click on the L2GuardInstance.<BR><BR>

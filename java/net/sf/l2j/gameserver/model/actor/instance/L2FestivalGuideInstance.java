@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model.actor.instance;
 import java.util.Calendar;
 import java.util.List;
 
-import javolution.text.TextBuilder;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.SevenSigns;
 import net.sf.l2j.gameserver.SevenSignsFestival;
@@ -29,6 +28,8 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.Set;
 
 /**
  * Festival of Darkness Guide (Seven Signs)
@@ -295,7 +296,7 @@ public final class L2FestivalGuideInstance extends L2FolkInstance
                         showChatWindow(player, 3, "d", false);
                     break;
                 case 4: // Current High Scores
-                    TextBuilder strBuffer = new TextBuilder("<html><body>Festival Guide:<br>These are the top scores of the week, for the ");
+                    StringBuilder strBuffer = new StringBuilder("<html><body>Festival Guide:<br>These are the top scores of the week, for the ");
 
                     final StatsSet dawnData = SevenSignsFestival.getInstance().getHighestScoreData(SevenSigns.CABAL_DAWN, _festivalType);
                     final StatsSet duskData = SevenSignsFestival.getInstance().getHighestScoreData(SevenSigns.CABAL_DUSK, _festivalType);
@@ -438,7 +439,7 @@ public final class L2FestivalGuideInstance extends L2FolkInstance
 
     private final String getStatsTable()
     {
-        TextBuilder tableHtml = new TextBuilder();
+        StringBuilder tableHtml = new StringBuilder();
 
         // Get the scores for each of the festival level ranges (types).
         for (int i = 0; i < 5; i++)
@@ -462,7 +463,7 @@ public final class L2FestivalGuideInstance extends L2FolkInstance
 
     private final String getBonusTable()
     {
-        TextBuilder tableHtml = new TextBuilder();
+        StringBuilder tableHtml = new StringBuilder();
 
         // Get the accumulated scores for each of the festival level ranges (types).
         for (int i = 0; i < 5; i++)

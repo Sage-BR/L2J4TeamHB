@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.SevenSigns;
@@ -32,6 +31,10 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2SiegeGuardInstance;
 import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.util.Rnd;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Auto Chat Handler
@@ -52,7 +55,7 @@ public class AutoChatHandler implements SpawnListener
 
     protected AutoChatHandler()
     {
-        _registeredChats = new FastMap<Integer, AutoChatInstance>();
+        _registeredChats = new ConcurrentHashMap<Integer, AutoChatInstance>();
         restoreChatData();
         L2Spawn.addSpawnListener(this);
     }
@@ -282,7 +285,7 @@ public class AutoChatHandler implements SpawnListener
         private boolean _globalChat = false;
         private boolean _isActive;
 
-        private Map<Integer, AutoChatDefinition> _chatDefinitions = new FastMap<Integer, AutoChatDefinition>();
+        private Map<Integer, AutoChatDefinition> _chatDefinitions = new ConcurrentHashMap<Integer, AutoChatDefinition>();
         protected ScheduledFuture<?> _chatTask;
 
         protected AutoChatInstance(int npcId, String[] chatTexts, long chatDelay, boolean isGlobal)
@@ -436,7 +439,7 @@ public class AutoChatHandler implements SpawnListener
          */
         public L2NpcInstance[] getNPCInstanceList()
         {
-            List<L2NpcInstance> npcInsts = new FastList<L2NpcInstance>();
+            List<L2NpcInstance> npcInsts = new ArrayList<L2NpcInstance>();
 
             for (AutoChatDefinition chatDefinition : _chatDefinitions.values())
                 npcInsts.add(chatDefinition._npcInstance);
@@ -700,8 +703,8 @@ public class AutoChatHandler implements SpawnListener
                     try
                     {
                         L2NpcInstance chatNpc = chatDef._npcInstance;
-                        List<L2PcInstance> nearbyPlayers = new FastList<L2PcInstance>();
-                        List<L2PcInstance> nearbyGMs = new FastList<L2PcInstance>();
+                        List<L2PcInstance> nearbyPlayers = new ArrayList<L2PcInstance>();
+                        List<L2PcInstance> nearbyGMs = new ArrayList<L2PcInstance>();
 
                         for (L2Character player : chatNpc.getKnownList().getKnownCharactersInRadius(1500))
                         {

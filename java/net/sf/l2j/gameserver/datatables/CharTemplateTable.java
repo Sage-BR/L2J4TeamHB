@@ -20,11 +20,14 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.templates.L2PcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This class ...
@@ -68,7 +71,7 @@ public class CharTemplateTable
 
 	private CharTemplateTable()
 	{
-		_templates = new FastMap<Integer, L2PcTemplate>();
+		_templates = new ConcurrentHashMap<Integer, L2PcTemplate>();
 		java.sql.Connection con = null;
 
 		try

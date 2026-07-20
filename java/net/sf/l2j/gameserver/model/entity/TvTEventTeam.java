@@ -16,8 +16,9 @@ package net.sf.l2j.gameserver.model.entity;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author FBIagent
@@ -29,8 +30,8 @@ public class TvTEventTeam {
 	private int[] _coordinates = new int[ 3 ];
 	/** The points of the team<br> */
 	private short _points;
-	/** Name and instance of all participated players in FastMap<br> */
-	private Map< Integer, L2PcInstance > _participatedPlayers = new FastMap< Integer, L2PcInstance >();
+	/** Name and instance of all participated players in ConcurrentHashMap<br> */
+	private Map< Integer, L2PcInstance > _participatedPlayers = new ConcurrentHashMap< Integer, L2PcInstance >();
 
 	/**
 	 * C'tor initialize the team<br><br>
@@ -86,7 +87,7 @@ public class TvTEventTeam {
 	public void cleanMe()
 	{
 		_participatedPlayers.clear();
-		_participatedPlayers = new FastMap< Integer, L2PcInstance >();
+		_participatedPlayers = new ConcurrentHashMap< Integer, L2PcInstance >();
 		_points = 0;
 	}
 
@@ -134,7 +135,7 @@ public class TvTEventTeam {
 	}
 
 	/**
-	 * Returns name and instance of all participated players in FastMap<br><br>
+	 * Returns name and instance of all participated players in ConcurrentHashMap<br><br>
 	 *
 	 * @return Map<String, L2PcInstance>: map of players in this team<br>
 	 */
