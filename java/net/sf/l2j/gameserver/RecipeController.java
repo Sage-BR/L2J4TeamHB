@@ -589,15 +589,12 @@ public class RecipeController
 				}
 				else
 				{
-					// for alt mode, sleep delay msec before finishing
+					// for alt mode, finish crafting on virtual thread after delay
 					_player.sendPacket(new SetupGauge(0, _delay));
-
-					try {
-						Thread.sleep(_delay);
-					} catch (InterruptedException e) {
-					} finally {
+					Thread.ofVirtual().name("VT-CraftFinish").start(() -> {
+						try { Thread.sleep(_delay); } catch (InterruptedException e) { }
 						finishCrafting();
-					}
+					});
 				}
 			}    // for old craft mode just finish
 			else finishCrafting();

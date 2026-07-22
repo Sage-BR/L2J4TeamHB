@@ -14,6 +14,7 @@
  */
 package net.sf.l2j.gameserver.ai;
 
+import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_CAST;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
@@ -22,6 +23,7 @@ import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_MOVE_TO;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_PICK_UP;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_REST;
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.model.L2Attackable;
 import net.sf.l2j.gameserver.model.L2CharPosition;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
@@ -134,6 +136,44 @@ public class L2PlayerAI extends L2CharacterAI
     }
     
     /**
+     * Launch actions corresponding to the Event Arrived.<BR><BR>
+     *
+     * When intention is ATTACK, calls thinkAttack() directly to bypass
+     * the _thinking flag guard in onEvtThink(), preventing a ~2s delay
+     * on attack-start after arriving at a pawn (Revellion pattern).
+     */
+    @Override
+	protected void onEvtArrived()
+    {
+        if (_actor instanceof L2PcInstance)
+        {
+            if (Config.ACTIVATE_POSITION_RECORDER)
+                ((L2PcInstance) _actor).explore();
+            ((L2PcInstance) _actor).revalidateZone(true);
+        }
+        else
+            _actor.revalidateZone();
+
+        if (_actor.moveToNextRoutePoint())
+            return;
+
+        if (_actor instanceof L2Attackable)
+            ((L2Attackable) _actor).setisReturningToSpawnPoint(false);
+
+        clientStoppedMoving();
+
+        if (getIntention() == AI_INTENTION_MOVE_TO)
+            setIntention(AI_INTENTION_ACTIVE);
+        else if (getIntention() == AI_INTENTION_ATTACK)
+        {
+            thinkAttack();
+            return;
+        }
+
+        onEvtThink();
+    }
+
+    /**
      * Finalize the casting of a skill. This method overrides L2CharacterAI method.<BR><BR>
      *
      * <B>What it does:</B>
@@ -208,6 +248,9 @@ public class L2PlayerAI extends L2CharacterAI
 
         if (_actor.isAllSkillsDisabled() || _actor.isAttackingNow())
         {
+        	// During melee wind-up the swing animation must finish client-side, otherwise
+        	// movement would cancel the visual. Queue the move intent for after the hit.
+        	// Once isAttackingNow() returns false (backswing), movement is fully free for kiting.
         	clientActionFailed();
         	saveNextIntention(AI_INTENTION_MOVE_TO, pos, null);
         	return;
@@ -218,9 +261,6 @@ public class L2PlayerAI extends L2CharacterAI
 
         // Stop the actor auto-attack client side by sending Server->Client packet AutoAttackStop (broadcast)
         clientStopAutoAttack();
-
-        // Abort the attack of the L2Character and send Server->Client ActionFailed packet
-        _actor.abortAttack();
 
         // Move the actor to Location (x,y,z) server side AND client side by sending Server->Client packet CharMoveToLocation (broadcast)
         moveTo(pos.x, pos.y, pos.z);
@@ -248,19 +288,48 @@ public class L2PlayerAI extends L2CharacterAI
             }
             return;
         }
-        if (maybeMoveToPawn(target, _actor.getPhysicalAttackRange())) return;
+
+        final int attackRange = _actor.getPhysicalAttackRange();
+        final int totalRange = attackRange + _actor.getTemplate().collisionRadius + target.getTemplate().collisionRadius;
+
+        // Out of range: start/keep following — do NOT also call doAttack logic.
+        // This mirrors Brproject thinkAttack: once follow is engaged, the FollowTask
+        // (running every 500ms) drives positioning; the AI layer here just waits and
+        // re-evaluates on the next think tick. This avoids competing MoveToPawn
+        // broadcasts vs attack-broadcasts that manifest as client-side micro-teleports.
+        if (!_actor.isInsideRadius(target, totalRange, false, false))
+        {
+            if (!_actor.isMovementDisabled())
+            {
+                if (getFollowTarget() != target)
+                    startFollow(target, totalRange);
+            }
+            return;
+        }
+
+        // In range: stop following (if any) so FollowTask does not keep firing
+        // MoveToPawn packets while we are standing still attacking.
+        if (getFollowTarget() != null && _actor.isInsideRadius(target, totalRange - 30, true, false))
+            stopFollow();
 
         if (_actor.isAttackingNow() || _actor.isCastingNow())
         {
         	// Queue the attack — fires automatically when the current
         	// animation finishes (onEvtReadyToAct), instead of dropping it.
-        	// isAttackingNow() uses real-time millis and is perfectly aligned
-        	// with EVT_READY_TO_ACT scheduling, so no tick-alignment delay.
         	saveNextIntention(AI_INTENTION_ATTACK, target, null);
         	clientActionFailed();
         	return;
         }
 
+        // Final range check defensive layer (in case client/server position drifted)
+        if (!_actor.isInsideRadius(target, totalRange, false, false))
+        {
+        	clientActionFailed();
+        	return;
+        }
+
+        if (_actor.isMoving())
+        	_actor.stopMove(null);
         _accessor.doAttack(target);
         return;
     }

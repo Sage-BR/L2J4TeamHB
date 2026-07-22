@@ -77,111 +77,62 @@ public class ValidatePosition extends L2GameClientPacket
         		// System.out.println("Spawnheight validation diff="+Math.abs(geoHeight - _z));
         	}
         }
-        if (Config.COORD_SYNCHRONIZE > 0)
+        // --- CoordSynchronize unificado (padrão Brproject: threshold 64 + speed 2x, sem broadcast MoveToLocation) ---
+        activeChar.setClientX(_x);
+        activeChar.setClientY(_y);
+        activeChar.setClientZ(_z);
+        activeChar.setClientHeading(_heading);
+        int realX = activeChar.getX();
+        int realY = activeChar.getY();
+        int realZ = activeChar.getZ();
+
+        // Sync thresholds aligned with Brproject (ValidatePosition.java).
+        // - MAX_DISTANCE_DIFF: absolute cap on 3D divergence between client and server.
+        // - MAX_SPEED_CHECK: multiplier over the character's move speed used as per-tick travel cap.
+        // Above either limit, the server authoritatively rejects the client position and
+        // sends ValidateLocation so the client snaps back. This prevents "fast/jumpy" movement
+        // and out-of-range attacks caused by trusting large client predictions.
+        final double MAX_DISTANCE_DIFF = 64.0;
+        final double MAX_SPEED_CHECK = 2.0;
+
+        double dx = _x - realX;
+        double dy = _y - realY;
+        double dz = _z - realZ;
+        double distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+        if (distance > MAX_DISTANCE_DIFF)
         {
-            activeChar.setClientX(_x);
-            activeChar.setClientY(_y);
-            activeChar.setClientZ(_z);
-            activeChar.setClientHeading(_heading);
-            int realX = activeChar.getX();
-            int realY = activeChar.getY();
-            // int realZ = activeChar.getZ();
-
-            double dx = _x - realX;
-            double dy = _y - realY;
-            double diffSq = (dx*dx + dy*dy);
-
-            /*
-            if (Config.DEVELOPER && false)
-            {
-            	int dxs = (_x - activeChar._lastClientPosition.x);
-            	int dys = (_y - activeChar._lastClientPosition.y);
-            	int dist = (int)Math.sqrt(dxs*dxs + dys*dys);
-            	int heading = dist > 0 ? (int)(Math.atan2(-dys/dist, -dxs/dist) * 10430.378350470452724949566316381) + 32768 : 0;
-                _log.info("Client X:" + _x + ", Y:" + _y + ", Z:" + _z + ", H:" + _heading + ", Dist:" + activeChar.getLastClientDistance(_x, _y, _z));
-                _log.info("Server X:" + realX + ", Y:" + realY + ", Z:" + realZ + ", H:" + activeChar.getHeading() + ", Dist:" + activeChar.getLastServerDistance(realX, realY, realZ));
-            }
-        	*/
-
-            if (diffSq > 0 && diffSq < 250000) // if too large, messes observation
-            {
-                if ((Config.COORD_SYNCHRONIZE & 1) == 1
-                    && (!activeChar.isMoving() // character is not moving, take coordinates from client
-                    || !activeChar.validateMovementHeading(_heading))) // Heading changed on client = possible obstacle
-                {
-                    if (Config.DEVELOPER)
-                        _log.info(activeChar.getName() + ": Synchronizing position Client --> Server" + (activeChar.isMoving()?" (collision)":" (stay sync)"));
-                    
-                    if (diffSq < 2500) // 50*50 - attack won't work fluently if even small differences are corrected
-                    	activeChar.setXYZ(realX, realY, _z);
-                    else
-                    	activeChar.setXYZ(_x, _y, _z);
-                    activeChar.setHeading(_heading);
-                }
-                else if ((Config.COORD_SYNCHRONIZE & 2) == 2
-                        && diffSq > 250000) // ~500 units — only correct in large divergences
-                {
-                    if (Config.DEVELOPER)
-                        _log.info(activeChar.getName() + ": Synchronizing position Server --> Client");
-                    if (activeChar.isInBoat())
-                    {
-                        sendPacket(new ValidateLocationInVehicle(activeChar));
-                    }
-                    else
-                    {
-                    	activeChar.sendPacket(new ValidateLocation(activeChar));
-                    }
-                }
-            }
-            activeChar.setLastClientPosition(_x, _y, _z);
-            activeChar.setLastServerPosition(activeChar.getX(), activeChar.getY(), activeChar.getZ());
+            // Emergency: too far — force server authoritative position
+            if (activeChar.isInBoat())
+                sendPacket(new ValidateLocationInVehicle(activeChar));
+            else
+                activeChar.sendPacket(new ValidateLocation(activeChar));
         }
-        else if (Config.COORD_SYNCHRONIZE == -1)
+        else
         {
-            activeChar.setClientX(_x);
-            activeChar.setClientY(_y);
-            activeChar.setClientZ(_z);
-            activeChar.setClientHeading(_heading); // No real need to validate heading.
-            int realX = activeChar.getX();
-            int realY = activeChar.getY();
-            int realZ = activeChar.getZ();
-
-            double dx = _x - realX;
-            double dy = _y - realY;
-            double diffSq = (dx*dx + dy*dy);
-            if (diffSq < 250000)
-                activeChar.setXYZ(realX,realY,_z);
-
-            //TODO: do we need to validate?
-            /*double dx = (_x - realX);
-             double dy = (_y - realY);
-             double dist = Math.sqrt(dx*dx + dy*dy);
-             if ((dist < 500)&&(dist > 2)) //check it wasnt teleportation, and char isn't there yet
-             activeChar.sendPacket(new CharMoveToLocation(activeChar));*/
-
-            if (Config.DEBUG) {
-                _log.fine("client pos: "+ _x + " "+ _y + " "+ _z +" head "+ _heading);
-                _log.fine("server pos: "+ realX + " "+realY+ " "+realZ +" head "+activeChar.getHeading());
-            }
-
-            if (Config.ACTIVATE_POSITION_RECORDER && !activeChar.isFlying() && Universe.getInstance().shouldLog(activeChar.getObjectId()))
-                Universe.getInstance().registerHeight(realX, realY, _z);
-
-            if (Config.DEVELOPER)
+            double moveSpeed = activeChar.getStat().getMoveSpeed();
+            double maxMovePerTick = moveSpeed * MAX_SPEED_CHECK;
+            double planarMove = Math.sqrt(dx*dx + dy*dy);
+            if (planarMove > maxMovePerTick)
             {
-                if (diffSq > 1000000) {
-                    if (Config.DEBUG) _log.fine("client/server dist diff "+ (int)Math.sqrt(diffSq));
-                    if (activeChar.isInBoat())
-                    {
-                        sendPacket(new ValidateLocationInVehicle(activeChar));
-                    }
-                    else
-                    {
-                    	activeChar.sendPacket(new ValidateLocation(activeChar));
-                    }
-                }
+                // Speed check failed — reject client prediction (no setXYZ)
+                if (activeChar.isInBoat())
+                    sendPacket(new ValidateLocationInVehicle(activeChar));
+                else
+                    activeChar.sendPacket(new ValidateLocation(activeChar));
+            }
+            else
+            {
+                // Within tolerance: trust client
+                activeChar.setXYZ(_x, _y, _z);
             }
         }
+
+        activeChar.setLastClientPosition(_x, _y, _z);
+        activeChar.setLastServerPosition(activeChar.getX(), activeChar.getY(), activeChar.getZ());
+        // --- fim sincronização ---
+        
+		if(activeChar.getParty() != null)
 		if(activeChar.getParty() != null)
 			activeChar.getParty().broadcastToPartyMembers(activeChar,new PartyMemberPosition(activeChar));
 

@@ -389,7 +389,6 @@ public final class Config
     public static int		MAX_NPC_ANIMATION;
     public static int		MIN_MONSTER_ANIMATION;
     public static int		MAX_MONSTER_ANIMATION;
-    public static int		COORD_SYNCHRONIZE;
     public static boolean	GRIDS_ALWAYS_ON;
     public static int		GRID_NEIGHBOR_TURNON_TIME;
     public static int		GRID_NEIGHBOR_TURNOFF_TIME;
@@ -1511,7 +1510,7 @@ public final class Config
                 MAX_NPC_ANIMATION							= Integer.parseInt(General.getProperty("MaxNPCAnimation", "20"));
                 MIN_MONSTER_ANIMATION						= Integer.parseInt(General.getProperty("MinMonsterAnimation", "5"));
                 MAX_MONSTER_ANIMATION						= Integer.parseInt(General.getProperty("MaxMonsterAnimation", "20"));
-                COORD_SYNCHRONIZE							= Integer.parseInt(General.getProperty("CoordSynchronize", "-1"));
+                // CoordSynchronize removed — unified mode (VERGE + Revellion) always active.
                 GRIDS_ALWAYS_ON								= Boolean.parseBoolean(General.getProperty("GridsAlwaysOn", "False"));
                 GRID_NEIGHBOR_TURNON_TIME					= Integer.parseInt(General.getProperty("GridNeighborTurnOnTime", "1"));
                 GRID_NEIGHBOR_TURNOFF_TIME					= Integer.parseInt(General.getProperty("GridNeighborTurnOffTime", "90"));
@@ -2063,7 +2062,7 @@ public final class Config
 
         else if (pName.equalsIgnoreCase("PreciseDropCalculation")) PRECISE_DROP_CALCULATION = Boolean.parseBoolean(pValue);
         else if (pName.equalsIgnoreCase("MultipleItemDrop")) MULTIPLE_ITEM_DROP = Boolean.parseBoolean(pValue);
-        else if (pName.equalsIgnoreCase("CoordSynchronize")) COORD_SYNCHRONIZE = Integer.parseInt(pValue);
+        // CoordSynchronize removed — unified mode always active.
         else if (pName.equalsIgnoreCase("DeleteCharAfterDays")) DELETE_DAYS = Integer.parseInt(pValue);
 
         else if (pName.equalsIgnoreCase("AllowDiscardItem")) ALLOW_DISCARDITEM = Boolean.parseBoolean(pValue);

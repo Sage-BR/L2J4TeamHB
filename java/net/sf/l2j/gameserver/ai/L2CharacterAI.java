@@ -1018,11 +1018,8 @@ public class L2CharacterAI extends AbstractAI
         {
         	// Caller should be L2Playable and thinkAttack/thinkCast/thinkInteract/thinkPickUp
             if (getFollowTarget() != null) {
-
-            	// allow larger hit range when the target is moving (check is run only once per second)
-                if (!_actor.isInsideRadius(target, offset + 100, false, false)) return true;
-                stopFollow();
-                return false;
+            	// Already following but still out of range — keep following (don't attack from afar).
+            	return true;
             }
 
             if (_actor.isMovementDisabled()) return true;
@@ -1033,9 +1030,6 @@ public class L2CharacterAI extends AbstractAI
             stopFollow();
             if ((target instanceof L2Character) && !(target instanceof L2DoorInstance))
             {
-                if (((L2Character)target).isMoving()) offset -= 100;
-                if (offset < 5) offset = 5;
-
             	startFollow((L2Character) target, offset);
             }
             else

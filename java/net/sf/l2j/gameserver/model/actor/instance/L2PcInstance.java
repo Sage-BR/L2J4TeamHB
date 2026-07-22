@@ -9820,10 +9820,6 @@ public final class L2PcInstance extends L2PlayableInstance
 	@Override
 	public final boolean updatePosition(int gameTicks)
 	{
-		// Disables custom movement for L2PCInstance when Old Synchronization is selected
-		if (Config.COORD_SYNCHRONIZE == -1)
-			return super.updatePosition(gameTicks);
-
 		// Get movement data
 		MoveData m = _move;
 

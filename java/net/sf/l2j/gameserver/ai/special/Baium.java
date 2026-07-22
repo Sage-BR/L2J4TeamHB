@@ -517,53 +517,47 @@ public class Baium extends Quest implements Runnable
 		
 	}
 	
-	public synchronized void callSkillAI(final L2NpcInstance npc)
+	public void callSkillAI(final L2NpcInstance npc)
 	{
-		if (npc.isInvul() || npc.isCastingNow())
-			return;
-		
-		if (_target == null || _target.isDead() || !(_Zone.isInsideZone(_target)))
+		final L2Character target;
+		final L2Skill skill;
+		synchronized (this)
 		{
-			_target = getRandomTarget(npc);
-			if (_target != null)
-				_skill = SkillTable.getInstance().getInfo(getRandomSkill(npc), 1);
-		}
-		
-		final L2Character target = _target;
-		L2Skill skill = _skill;
-		if (skill == null)
-			skill = SkillTable.getInstance().getInfo(getRandomSkill(npc), 1);
-		if (target == null || target.isDead() || !(_Zone.isInsideZone(target)))
-		{
-			// npc.setIsCastingNow(false);
-			return;
-		}
-		
-		if (Util.checkIfInRange(skill.getCastRange(), npc, target, true))
-		{
+			if (npc.isInvul() || npc.isCastingNow())
+				return;
+			
+			if (_target == null || _target.isDead() || !(_Zone.isInsideZone(_target)))
+			{
+				_target = getRandomTarget(npc);
+				if (_target != null)
+					_skill = SkillTable.getInstance().getInfo(getRandomSkill(npc), 1);
+			}
+			
+			target = _target;
+			skill = _skill != null ? _skill : SkillTable.getInstance().getInfo(getRandomSkill(npc), 1);
+			if (target == null || target.isDead() || !(_Zone.isInsideZone(target)))
+				return;
+			
+			if (!Util.checkIfInRange(skill.getCastRange(), npc, target, true))
+			{
+				npc.getAI().setIntention(AI_INTENTION_FOLLOW, target, null);
+				return;
+			}
+			
 			npc.getAI().setIntention(AI_INTENTION_IDLE);
 			npc.setTarget(target);
-			// npc.setIsCastingNow(true);
 			_target = null;
 			_skill = null;
-			if (getDist(skill.getCastRange()) > 0)
-				npc.broadcastPacket(new MoveToPawn(npc, target, getDist(skill.getCastRange())));
-			try
-			{
-				wait(1000);
-				npc.stopMove(null);
-				npc.doCast(skill);
-			}
-			catch (final Exception e)
-			{
-				e.printStackTrace();
-			}
 		}
-		else
-		{
-			npc.getAI().setIntention(AI_INTENTION_FOLLOW, target, null);
-			// npc.setIsCastingNow(false);
-		}
+		
+		if (getDist(skill.getCastRange()) > 0)
+			npc.broadcastPacket(new MoveToPawn(npc, target, getDist(skill.getCastRange())));
+		
+		ThreadPoolManager.getInstance().executeTask(() -> {
+			try { Thread.sleep(1000); } catch (InterruptedException e) { }
+			npc.stopMove(null);
+			npc.doCast(skill);
+		});
 	}
 	
 	public int getRandomSkill(final L2NpcInstance npc)

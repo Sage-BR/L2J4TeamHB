@@ -931,8 +931,7 @@ public class Olympiad
                 Announcements.getInstance().announceToAll(new SystemMessage(SystemMessageId.THE_OLYMPIAD_GAME_HAS_STARTED));
                 _log.info("Olympiad System: Olympiad Game Started");
 
-                Thread olyCycle = new Thread(om);
-                olyCycle.start();
+                Thread.ofVirtual().name("VT-OlympiadManager").start(om);
                 
                 //_scheduledManagerTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(om, INITIAL_WAIT, BATTLE_WAIT);
    
@@ -1570,9 +1569,8 @@ public class Olympiad
 							}
 						}else if(_gamesQueue.get(i) != null && !_gamesQueue.get(i).isStarted())
 						{
-							//start new games
-							Thread T = new Thread(_gamesQueue.get(i));
-							T.start();
+							//start new games on virtual threads
+							Thread.ofVirtual().name("VT-OlympiadGame-" + i).start(_gamesQueue.get(i));
 						}
 					}
     				//set up the games queue   				

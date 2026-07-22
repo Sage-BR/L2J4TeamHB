@@ -21,13 +21,13 @@ import org.python.util.PythonInterpreter;
 
 /**
  * @author Layane
- *
+ * 
+ * Executa scripts Jython em uma Virtual Thread para n�o bloquear
+ * o carrier thread do pool de tarefas agendadas.
  */
 public class TaskJython extends Task
 {
     public static final String NAME = "jython";
-
-    private final PythonInterpreter _python = new PythonInterpreter();
 
     /* (non-Javadoc)
      * @see net.sf.l2j.gameserver.taskmanager.Task#getName()
@@ -44,9 +44,13 @@ public class TaskJython extends Task
     @Override
     public void onTimeElapsed(ExecutedTask task)
     {
-        _python.cleanup();
-        _python.exec("import sys");
-        _python.execfile("data/scripts/cron/" + task.getParams()[2]);
+        final PythonInterpreter python = new PythonInterpreter();
+        final String scriptPath = "data/scripts/cron/" + task.getParams()[2];
+        Thread.ofVirtual().name("VT-Jython").start(() -> {
+            python.cleanup();
+            python.exec("import sys");
+            python.execfile(scriptPath);
+        });
     }
 
 }

@@ -14,9 +14,14 @@
  */
 package net.sf.l2j.gameserver.ai;
 
+import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
+import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_FOLLOW;
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
+import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_MOVE_TO;
+import net.sf.l2j.gameserver.model.L2Attackable;
 import net.sf.l2j.gameserver.model.L2Summon;
+import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Character.AIAccessor;
 
 public class L2SummonAI extends L2CharacterAI
@@ -49,19 +54,47 @@ public class L2SummonAI extends L2CharacterAI
 
     private void thinkAttack()
     {
-        if (checkTargetLostOrDead(getAttackTarget()))
+        L2Character target = getAttackTarget();
+        if (checkTargetLostOrDead(target))
         {
             setAttackTarget(null);
             return;
         }
-        if (maybeMoveToPawn(getAttackTarget(), _actor.getPhysicalAttackRange())) return;
+
+        final int attackRange = _actor.getPhysicalAttackRange();
+        final int totalRange = attackRange + _actor.getTemplate().collisionRadius + target.getTemplate().collisionRadius;
+
+        // Out of range: start/keep following — do NOT call doAttack logic (mirrors Brproject thinkAttack).
+        // Avoids competing MoveToPawn broadcasts that manifest as client-side micro-teleports.
+        if (!_actor.isInsideRadius(target, totalRange, false, false))
+        {
+            if (!_actor.isMovementDisabled())
+            {
+                if (getFollowTarget() != target)
+                    startFollow(target, totalRange);
+            }
+            return;
+        }
+
+        // In range: stop following so FollowTask does not keep firing MoveToPawn packets.
+        if (getFollowTarget() != null && _actor.isInsideRadius(target, totalRange - 30, true, false))
+            stopFollow();
 
         if (_actor.isAttackingDisabled() || _actor.isCastingNow())
         {
             clientActionFailed();
             return;
         }
-        clientStopMoving(null);
+
+        // Final range check defensive layer
+        if (!_actor.isInsideRadius(target, totalRange, false, false))
+        {
+            clientActionFailed();
+            return;
+        }
+
+        if (_actor.isMoving())
+            _actor.stopMove(null);
         _accessor.doAttack(getAttackTarget());
         return;
     }
@@ -101,6 +134,30 @@ public class L2SummonAI extends L2CharacterAI
         if (maybeMoveToPawn(getTarget(), 36)) return;
         setIntention(AI_INTENTION_IDLE);
         return;
+    }
+
+    @Override
+	protected void onEvtArrived()
+    {
+        _actor.revalidateZone();
+
+        if (_actor.moveToNextRoutePoint())
+            return;
+
+        if (_actor instanceof L2Attackable)
+            ((L2Attackable) _actor).setisReturningToSpawnPoint(false);
+
+        clientStoppedMoving();
+
+        if (getIntention() == AI_INTENTION_MOVE_TO)
+            setIntention(AI_INTENTION_ACTIVE);
+        else if (getIntention() == AI_INTENTION_ATTACK)
+        {
+            thinkAttack();
+            return;
+        }
+
+        onEvtThink();
     }
 
     @Override

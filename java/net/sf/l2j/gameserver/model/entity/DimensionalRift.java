@@ -14,10 +14,10 @@
  */
 package net.sf.l2j.gameserver.model.entity;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ScheduledFuture;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
 import net.sf.l2j.gameserver.instancemanager.QuestManager;
 import net.sf.l2j.gameserver.model.L2Party;
@@ -42,10 +42,8 @@ public class DimensionalRift
 	//private static final int MILLISECONDS_IN_MINUTE = 60000;
 	protected byte jumps_current = 0;
 
-	private Timer teleporterTimer;
-	private TimerTask teleporterTimerTask;
-	private Timer spawnTimer;
-	private TimerTask spawnTimerTask;
+	private ScheduledFuture<?> teleporterTimer;
+	private ScheduledFuture<?> spawnTimer;
 
 	protected byte _choosenRoom = -1;
 	private boolean _hasJumped = false;
@@ -89,82 +87,54 @@ public class DimensionalRift
 
 	protected void createTeleporterTimer(final boolean reasonTP)
 	{
-		if(teleporterTimerTask != null)
-		{
-			teleporterTimerTask.cancel();
-			teleporterTimerTask = null;
-		}
-
 		if(teleporterTimer != null)
 		{
-			teleporterTimer.cancel();
+			teleporterTimer.cancel(false);
 			teleporterTimer = null;
 		}
 
-		teleporterTimer = new Timer();
-		teleporterTimerTask = new TimerTask()
+		final Runnable task = () ->
 		{
-			@Override
-			public void run()
+			if(_choosenRoom > -1)
+				DimensionalRiftManager.getInstance().getRoom(_type, _choosenRoom).unspawn();
+
+			if(reasonTP && jumps_current < getMaxJumps() && _party.getMemberCount() > deadPlayers.size())
 			{
-				if(_choosenRoom > -1)
-					DimensionalRiftManager.getInstance().getRoom(_type, _choosenRoom).unspawn();
+				jumps_current++;
 
-				if(reasonTP && jumps_current < getMaxJumps() && _party.getMemberCount() > deadPlayers.size())
-				{
-					jumps_current++;
+				_completedRooms.add(_choosenRoom);
+				_choosenRoom = -1;
 
-					_completedRooms.add(_choosenRoom);
-					_choosenRoom = -1;
-
-					for(L2PcInstance p : _party.getPartyMembers())
-						if(!revivedInWaitingRoom.contains(p))
-							teleportToNextRoom(p);
-					createTeleporterTimer(true);
-					createSpawnTimer(_choosenRoom);
-				}
-				else
-				{
-					for(L2PcInstance p : _party.getPartyMembers())
-						if(!revivedInWaitingRoom.contains(p))
-							teleportToWaitingRoom(p);
-					killRift();
-					cancel();
-				}
+				for(L2PcInstance p : _party.getPartyMembers())
+					if(!revivedInWaitingRoom.contains(p))
+						teleportToNextRoom(p);
+				createTeleporterTimer(true);
+				createSpawnTimer(_choosenRoom);
+			}
+			else
+			{
+				for(L2PcInstance p : _party.getPartyMembers())
+					if(!revivedInWaitingRoom.contains(p))
+						teleportToWaitingRoom(p);
+				killRift();
 			}
 		};
 
-		if(reasonTP)
-			teleporterTimer.schedule(teleporterTimerTask, calcTimeToNextJump()); //Teleporter task, 8-10 minutes
-		else
-			teleporterTimer.schedule(teleporterTimerTask, seconds_5); //incorrect party member invited.
+		teleporterTimer = ThreadPoolManager.getInstance().scheduleGeneral(task,
+			reasonTP ? calcTimeToNextJump() : seconds_5);
 	}
 
 	public void createSpawnTimer(final byte room)
 	{
-		if(spawnTimerTask != null)
-		{
-			spawnTimerTask.cancel();
-			spawnTimerTask = null;
-		}
-
 		if(spawnTimer != null)
 		{
-			spawnTimer.cancel();
+			spawnTimer.cancel(false);
 			spawnTimer = null;
 		}
 
-		spawnTimer = new Timer();
-		spawnTimerTask = new TimerTask()
-		{
-			@Override
-			public void run()
-			{
-				DimensionalRiftManager.getInstance().getRoom(_type, room).spawn();
-			}
-		};
-
-		spawnTimer.schedule(spawnTimerTask, Config.RIFT_SPAWN_DELAY);
+		spawnTimer = ThreadPoolManager.getInstance().scheduleGeneral(
+			() -> DimensionalRiftManager.getInstance().getRoom(_type, room).spawn(),
+			Config.RIFT_SPAWN_DELAY);
 	}
 
 	public void partyMemberInvited()
@@ -269,44 +239,24 @@ public class DimensionalRift
 		DimensionalRiftManager.getInstance().killRift(this);
 	}
 
-	public Timer getTeleportTimer()
+	public ScheduledFuture<?> getTeleportTimer()
 	{
 		return teleporterTimer;
 	}
 
-	public TimerTask getTeleportTimerTask()
-	{
-		return teleporterTimerTask;
-	}
-
-	public Timer getSpawnTimer()
+	public ScheduledFuture<?> getSpawnTimer()
 	{
 		return spawnTimer;
 	}
 
-	public TimerTask getSpawnTimerTask()
-	{
-		return spawnTimerTask;
-	}
-
-	public void setTeleportTimer(Timer t)
+	public void setTeleportTimer(ScheduledFuture<?> t)
 	{
 		teleporterTimer = t;
 	}
 
-	public void setTeleportTimerTask(TimerTask tt)
-	{
-		teleporterTimerTask = tt;
-	}
-
-	public void setSpawnTimer(Timer t)
+	public void setSpawnTimer(ScheduledFuture<?> t)
 	{
 		spawnTimer = t;
-	}
-
-	public void setSpawnTimerTask(TimerTask st)
-	{
-		spawnTimerTask = st;
 	}
 
 	private long calcTimeToNextJump()

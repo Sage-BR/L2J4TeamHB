@@ -586,6 +586,7 @@ public class GeoEngine extends GeoData
 	//GeoEngine
 	private static void nInitGeodata()
 	{
+		int _geoLoadedCount = 0;
 		LineNumberReader lnr = null;
 		try
 		{
@@ -608,8 +609,10 @@ public class GeoEngine extends GeoData
 				StringTokenizer st = new StringTokenizer(line, "_");
 				byte rx = Byte.parseByte(st.nextToken());
 				byte ry = Byte.parseByte(st.nextToken());
-				loadGeodataFile(rx,ry);
+				if (loadGeodataFile(rx,ry))
+					_geoLoadedCount++;
 			}
+			_log.info("Geo Engine: - Loaded " + _geoLoadedCount + " geodata archives.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Error("Failed to Read geo_index File.");
@@ -634,7 +637,8 @@ public class GeoEngine extends GeoData
 	{
 		String fname = "./data/geodata/"+rx+"_"+ry+".l2j";
 		short regionoffset = (short)((rx << 5) + ry);
-		_log.info("Geo Engine: - Loading: "+fname+" -> region offset: "+regionoffset+"X: "+rx+" Y: "+ry);
+		if (Config.DEBUG)
+			_log.info("Geo Engine: - Loading: "+fname+" -> region offset: "+regionoffset+"X: "+rx+" Y: "+ry);
 		File Geo = new File(fname);
 		int size, index = 0, block = 0, flor = 0;
 		try {
@@ -679,7 +683,8 @@ public class GeoEngine extends GeoData
 			}
 			_geodata.put(regionoffset,geo);
 
-			_log.info("Geo Engine: - Max Layers: "+flor+" Size: "+size+" Loaded: "+index);
+			if (Config.DEBUG)
+				_log.info("Geo Engine: - Max Layers: "+flor+" Size: "+size+" Loaded: "+index);
 	    } catch (Exception e)
 		{
 			e.printStackTrace();

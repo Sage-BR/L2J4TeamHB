@@ -254,6 +254,7 @@ public class GeoPathFinding extends PathFinding
 
 	private GeoPathFinding()
 	{
+		int _pnLoadedCount = 0;
 		LineNumberReader lnr = null;
 		try
 		{
@@ -277,7 +278,9 @@ public class GeoPathFinding extends PathFinding
 				byte rx = Byte.parseByte(st.nextToken());
 				byte ry = Byte.parseByte(st.nextToken());
 				LoadPathNodeFile(rx,ry);
+				_pnLoadedCount++;
 			}
+			_log.info("PathFinding Engine: - Loaded " + _pnLoadedCount + " pathnode archives.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Error("Failed to Read pn_index File.");
@@ -288,7 +291,8 @@ public class GeoPathFinding extends PathFinding
 	{
 		String fname = "./data/pathnode/"+rx+"_"+ry+".pn";
 		short regionoffset = getRegionOffset(rx,ry);
-		_log.info("PathFinding Engine: - Loading: "+fname+" -> region offset: "+regionoffset+"X: "+rx+" Y: "+ry);
+		if (Config.DEBUG)
+			_log.info("PathFinding Engine: - Loading: "+fname+" -> region offset: "+regionoffset+"X: "+rx+" Y: "+ry);
 		File Pn = new File(fname);
 		int node = 0,size, index = 0;
 		try {

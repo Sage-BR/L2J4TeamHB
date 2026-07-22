@@ -656,6 +656,26 @@ public abstract class L2Character extends L2Object
             return;
         }
 
+        // Anti-spam: do not start a new attack while one is still in progress (mirrors Brproject canAttack _isAttackingNow)
+        if (_attackEndTime > GameTimeController.getGameTicks() || isCastingNow())
+        {
+        	sendPacket(ActionFailed.STATIC_PACKET);
+        	return;
+        }
+
+        // Range check at attack time (mirrors Brproject canAttack distance validation):
+        // If target is out of reach, refuse to start the swing and let the AI follow instead.
+        if (this instanceof L2PcInstance && target != null)
+        {
+        	int atkRange = getStat().getPhysicalAttackRange();
+        	int totalRange = atkRange + getTemplate().collisionRadius + target.getTemplate().collisionRadius;
+        	if (!isInsideRadius(target, totalRange, false, false))
+        	{
+        		sendPacket(ActionFailed.STATIC_PACKET);
+        		return;
+        	}
+        }
+
 		if (this instanceof L2PcInstance)
 		{
 	        if (((L2PcInstance)this).inObserverMode())
@@ -842,9 +862,18 @@ public abstract class L2Character extends L2Object
 		int timeAtk = calculateTimeBetweenAttacks(target, weaponItem);
 		// the hit is calculated to happen halfway to the animation - might need further tuning e.g. in bow case
 		int timeToHit = timeAtk/2;
-		_attackEndTime = GameTimeController.getGameTicks();
+		int currentTick = GameTimeController.getGameTicks();
+		_attackEndTime = currentTick;
 		_attackEndTime += (timeAtk / GameTimeController.MILLIS_IN_TICK);
-		_attackEndTimeMillis = System.currentTimeMillis() + timeAtk;
+
+		// movement lock mirrors Brproject behaviour:
+		// - Bows: locked for the entire shot animation (wind-up + release) + 150ms buffer
+		// - Melee: locked only during the wind-up (timeToHit + buffer), so the client-side swing
+		//          animation can start without being cancelled; backswing is free for kiting.
+		// Damage sync is guaranteed separately in onHitTimer via range validation at hit time.
+		boolean isBow = weaponItem != null && (weaponItem.getItemType() == L2WeaponType.BOW || weaponItem.getItemType() == L2WeaponType.CROSSBOW);
+		int movementLockTime = isBow ? timeAtk + 150 : Math.min(timeToHit + Math.max(100, GameTimeController.MILLIS_IN_TICK), timeAtk);
+		_attackTimeToMove = currentTick + (movementLockTime / GameTimeController.MILLIS_IN_TICK);
 
         int ssGrade = 0;
 
@@ -2042,8 +2071,8 @@ public abstract class L2Character extends L2Object
 	/** Return True if the L2Character can't use its skills (ex : stun, sleep...). */
 	public final boolean isAllSkillsDisabled() { return _allSkillsDisabled || isImmobileUntilAttacked() || isStunned() || isSleeping() || isParalyzed(); }
 
-	/** Return True if the L2Character can't attack (stun, sleep, attackEndTime, fakeDeath, paralyse, attackMute, bow/crossbow cooldown). */
-	public boolean isAttackingDisabled() { return isStunned() || isImmobileUntilAttacked() || isSleeping() || _attackEndTime > GameTimeController.getGameTicks() || isFakeDeath() || isParalyzed() || isPhysicalAttackMuted() || _disableBowAttackEndTime > GameTimeController.getGameTicks() || _disableCrossBowAttackEndTime > GameTimeController.getGameTicks(); }
+	/** Return True if the L2Character can't attack (stun, sleep, fakeDeath, paralyse, attackMute, bow/crossbow cooldown). Anti-spam handled in doAttack() via _attackEndTime. */
+	public boolean isAttackingDisabled() { return isStunned() || isImmobileUntilAttacked() || isSleeping() || isFakeDeath() || isParalyzed() || isPhysicalAttackMuted() || _disableBowAttackEndTime > GameTimeController.getGameTicks() || _disableCrossBowAttackEndTime > GameTimeController.getGameTicks(); }
 
 	public final Calculator[] getCalculators() { return _calculators; }
 
@@ -3252,7 +3281,7 @@ public abstract class L2Character extends L2Object
 
 	// set by the start of attack, in game ticks
 	private int     _attackEndTime;
-	private long    _attackEndTimeMillis;
+	private int     _attackTimeToMove;
 	private int     _attacking;
 	private int     _disableBowAttackEndTime;
     private int     _disableCrossBowAttackEndTime;
@@ -3777,7 +3806,7 @@ public abstract class L2Character extends L2Object
 	 */
 	public final boolean isAttackingNow()
 	{
-		return System.currentTimeMillis() < _attackEndTimeMillis;
+		return _attackTimeToMove > GameTimeController.getGameTicks();
 	}
 
 	/**
@@ -4772,6 +4801,29 @@ public abstract class L2Character extends L2Object
 
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
+		}
+
+		// Melee range validation at hit time (mirrors Brproject onHitTimer isTargetInMeleeRange)
+		// If the actor fled too far during the wind-up, cancel the hit without applying damage.
+		L2Weapon weaponAtHit = getActiveWeaponItem();
+		boolean isBowHit = (weaponAtHit != null && (weaponAtHit.getItemType() == L2WeaponType.BOW || weaponAtHit.getItemType() == L2WeaponType.CROSSBOW));
+		if (!isBowHit && this instanceof L2PcInstance)
+		{
+			int attackRange = getStat().getPhysicalAttackRange();
+			int totalRange = attackRange + getTemplate().collisionRadius + target.getTemplate().collisionRadius;
+			int tolerance = 20;
+			double dist = Util.calculateDistance(this, target, false);
+			if (dist > (totalRange + tolerance))
+			{
+				// Actor fled combat range during wind-up — drop this hit
+				if (dist > 300)
+				{
+					// Too far: clean-cancel the attack stance
+					getAI().notifyEvent(CtrlEvent.EVT_CANCEL);
+				}
+				sendPacket(ActionFailed.STATIC_PACKET);
+				return;
+			}
 		}
 
         if (miss)

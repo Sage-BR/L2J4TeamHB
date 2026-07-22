@@ -233,7 +233,7 @@ public class ItemsOnGroundManager
 		}
 	}
 	
-	protected class storeInDb extends Thread
+	protected class storeInDb implements Runnable
 	{
 		@Override
 		public void run()

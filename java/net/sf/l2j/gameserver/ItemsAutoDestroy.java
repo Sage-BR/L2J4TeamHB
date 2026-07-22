@@ -97,7 +97,7 @@ public class ItemsAutoDestroy
     		_log.info("[ItemsAutoDestroy] : "+_items.size()+" items remaining.");
     }
 
-    protected class CheckItemsForDestroy extends Thread
+    protected class CheckItemsForDestroy implements Runnable
     {
         @Override
 		public void run()

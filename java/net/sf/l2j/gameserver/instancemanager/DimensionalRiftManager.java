@@ -356,17 +356,17 @@ public class DimensionalRiftManager
 
     public void killRift(DimensionalRift d)
     {
-        if(d.getTeleportTimerTask() != null)d.getTeleportTimerTask().cancel();
-        d.setTeleportTimerTask(null);
+        if(d.getTeleportTimer() != null)
+        {
+            d.getTeleportTimer().cancel(false);
+            d.setTeleportTimer(null);
+        }
 
-        if(d.getTeleportTimer() != null)d.getTeleportTimer().cancel();
-        d.setTeleportTimer(null);
-
-        if(d.getSpawnTimerTask() != null)d.getSpawnTimerTask().cancel();
-        d.setSpawnTimerTask(null);
-
-        if(d.getSpawnTimer() != null)d.getSpawnTimer().cancel();
-        d.setSpawnTimer(null);
+        if(d.getSpawnTimer() != null)
+        {
+            d.getSpawnTimer().cancel(false);
+            d.setSpawnTimer(null);
+        }
     }
 
     public class DimensionalRiftRoom
