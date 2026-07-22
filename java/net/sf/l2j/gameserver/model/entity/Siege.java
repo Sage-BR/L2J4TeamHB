@@ -31,6 +31,7 @@ import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.MercTicketManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeGuardManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
+import net.sf.l2j.gameserver.instancemanager.SiegeRewardManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager.SiegeSpawn;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Clan;
@@ -289,6 +290,12 @@ public class Siege
             _siegeGuardManager.unspawnSiegeGuard(); // Remove all spawned siege guard from this castle
             if (getCastle().getOwnerId() > 0) _siegeGuardManager.removeMercs();
             getCastle().spawnDoor(); // Respawn door to castle
+
+            if (getCastle().getOwnerId() > 0)
+                SiegeRewardManager.getInstance().notifySiegeEnded(
+                    ClanTable.getInstance().getClan(getCastle().getOwnerId()),
+                    getCastle().getName());
+
             getCastle().getZone().updateZoneStatusForCharactersInside();
         }
     }

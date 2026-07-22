@@ -593,7 +593,11 @@ public class GeoEngine extends GeoData
 			_log.info("Geo Engine: - Loading Geodata...");
 			File Data = new File("./data/geodata/geo_index.txt");
 			if (!Data.exists())
+			{
+				_log.warning("Geo Engine: - No geo_index.txt found. Disabling GEODATA for this session.");
+				Config.GEODATA = 0;
 				return;
+			}
 
 			lnr = new LineNumberReader(new BufferedReader(new FileReader(Data)));
 		} catch (Exception e) {
@@ -612,7 +616,13 @@ public class GeoEngine extends GeoData
 				if (loadGeodataFile(rx,ry))
 					_geoLoadedCount++;
 			}
-			_log.info("Geo Engine: - Loaded " + _geoLoadedCount + " geodata archives.");
+			if (_geoLoadedCount == 0)
+			{
+				_log.warning("Geo Engine: - No geodata files found. Disabling GEODATA for this session.");
+				Config.GEODATA = 0;
+			}
+			else
+				_log.info("Geo Engine: - Loaded " + _geoLoadedCount + " geodata archives.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Error("Failed to Read geo_index File.");
@@ -640,6 +650,8 @@ public class GeoEngine extends GeoData
 		if (Config.DEBUG)
 			_log.info("Geo Engine: - Loading: "+fname+" -> region offset: "+regionoffset+"X: "+rx+" Y: "+ry);
 		File Geo = new File(fname);
+		if (!Geo.exists())
+			return false;
 		int size, index = 0, block = 0, flor = 0;
 		try {
 	        // Create a read-only memory-mapped file

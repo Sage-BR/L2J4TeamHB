@@ -91,6 +91,7 @@ import net.sf.l2j.gameserver.instancemanager.GrandBossManager;
 import net.sf.l2j.gameserver.instancemanager.ItemsOnGroundManager;
 import net.sf.l2j.gameserver.instancemanager.MercTicketManager;
 import net.sf.l2j.gameserver.instancemanager.PetitionManager;
+import net.sf.l2j.gameserver.instancemanager.SiegeRewardManager;
 import net.sf.l2j.gameserver.instancemanager.QuestManager;
 import net.sf.l2j.gameserver.instancemanager.RaidBossPointsManager;
 import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
@@ -260,6 +261,7 @@ public class GameServer
 				PetitionManager.getInstance();
 				QuestManager.getInstance();
 				TransformationManager.getInstance();
+				SiegeRewardManager.getInstance();
 			}
 		);
 

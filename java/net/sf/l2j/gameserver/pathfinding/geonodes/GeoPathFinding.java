@@ -277,9 +277,19 @@ public class GeoPathFinding extends PathFinding
 				StringTokenizer st = new StringTokenizer(line, "_");
 				byte rx = Byte.parseByte(st.nextToken());
 				byte ry = Byte.parseByte(st.nextToken());
-				LoadPathNodeFile(rx,ry);
+			if (LoadPathNodeFile(rx,ry))
 				_pnLoadedCount++;
+		}
+		if (_pnLoadedCount == 0)
+		{
+			_log.info("PathFinding Engine: - No pathnode files found.");
+			if (Config.GEODATA == 2)
+			{
+				_log.warning("PathFinding Engine: - PathNode files missing. Downgrading GEODATA to 1 (no pathfinding).");
+				Config.GEODATA = 1;
 			}
+		}
+		else
 			_log.info("PathFinding Engine: - Loaded " + _pnLoadedCount + " pathnode archives.");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -287,13 +297,15 @@ public class GeoPathFinding extends PathFinding
 		}
 	}
 
-	private void LoadPathNodeFile(byte rx,byte ry)
+	private boolean LoadPathNodeFile(byte rx,byte ry)
 	{
 		String fname = "./data/pathnode/"+rx+"_"+ry+".pn";
 		short regionoffset = getRegionOffset(rx,ry);
 		if (Config.DEBUG)
 			_log.info("PathFinding Engine: - Loading: "+fname+" -> region offset: "+regionoffset+"X: "+rx+" Y: "+ry);
 		File Pn = new File(fname);
+		if (!Pn.exists())
+			return false;
 		int node = 0,size, index = 0;
 		try {
 	        // Create a read-only memory-mapped file
@@ -318,11 +330,12 @@ public class GeoPathFinding extends PathFinding
 			}
 			_pathNodesIndex.put(regionoffset, indexs);
 			_pathNodes.put(regionoffset, nodes);
+			return true;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 			_log.warning("Failed to Load PathNode File: "+fname+"\n");
+			return false;
 	    }
-
 	}
 }

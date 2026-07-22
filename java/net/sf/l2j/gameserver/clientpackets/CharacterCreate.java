@@ -24,6 +24,7 @@ import net.sf.l2j.gameserver.datatables.CharNameTable;
 import net.sf.l2j.gameserver.datatables.CharTemplateTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
+import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.QuestManager;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
@@ -172,6 +173,25 @@ public final class CharacterCreate extends L2GameClientPacket
 		L2World.getInstance().storeObject(newChar);
 
 		L2PcTemplate template = newChar.getTemplate();
+
+		if (Config.ALLOW_CUSTOM_STARTER_ITEMS)
+		{
+		    List<int[]> starterItems = newChar.isMageClass() ? Config.CUSTOM_STARTER_ITEMS_MAGE : Config.CUSTOM_STARTER_ITEMS_FIGHTER;
+		    for (int[] itemData : starterItems)
+		    {
+		        if (ItemTable.getInstance().createDummyItem(itemData[0]).isStackable())
+		        {
+		            newChar.getInventory().addItem("Starter Items", itemData[0], itemData[1], newChar, null);
+		        }
+		        else
+		        {
+		            for (int i = 0; i < itemData[1]; i++)
+		            {
+		                newChar.getInventory().addItem("Starter Items", itemData[0], 1, newChar, null);
+		            }
+		        }
+		    }
+		}
 
 		newChar.addAdena("Init", Config.STARTING_ADENA, null, false);
 

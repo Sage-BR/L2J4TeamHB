@@ -548,6 +548,11 @@ public final class Config
     public static boolean	L2JMOD_ENABLE_WAREHOUSESORTING_CLAN;
     public static boolean	L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE;
     public static boolean	L2JMOD_ENABLE_WAREHOUSESORTING_FREIGHT;
+    public static boolean	ALLOW_CUSTOM_CHAR_LVL;
+    public static int		CUSTOM_CHAR_LVL;
+    public static boolean	ALLOW_CUSTOM_STARTER_ITEMS;
+    public static List<int[]> CUSTOM_STARTER_ITEMS_FIGHTER = new ArrayList<int[]>();
+    public static List<int[]> CUSTOM_STARTER_ITEMS_MAGE = new ArrayList<int[]>();
     
     /** ************************************************** **/
 	/** L2JMods Settings -End                              **/
@@ -1876,6 +1881,58 @@ public final class Config
                 BANKING_SYSTEM_ENABLED	= Boolean.parseBoolean(L2JModSettings.getProperty("BankingEnabled", "false"));
                 BANKING_SYSTEM_GOLDBARS	= Integer.parseInt(L2JModSettings.getProperty("BankingGoldbarCount", "1"));
                 BANKING_SYSTEM_ADENA	= Integer.parseInt(L2JModSettings.getProperty("BankingAdenaCount", "500000000"));
+                
+                ALLOW_CUSTOM_CHAR_LVL = Boolean.parseBoolean(L2JModSettings.getProperty("AllowCustomStartLvl", "false"));
+                CUSTOM_CHAR_LVL = Integer.parseInt(L2JModSettings.getProperty("CustomStartLvl", "1"));
+                
+                ALLOW_CUSTOM_STARTER_ITEMS = Boolean.parseBoolean(L2JModSettings.getProperty("AllowCustomStarterItems", "false"));
+                
+                if (ALLOW_CUSTOM_STARTER_ITEMS)
+                {
+                    String[] fighterSplit = L2JModSettings.getProperty("CustomStarterItemsFighter", "0,0").split(";");
+                    for (String item : fighterSplit)
+                    {
+                        String[] split = item.split(",");
+                        if (split.length != 2)
+                        {
+                            System.out.println("StarterItems[Config.load()]: invalid fighter item -> " + item);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                CUSTOM_STARTER_ITEMS_FIGHTER.add(new int[]{Integer.parseInt(split[0]), Integer.parseInt(split[1])});
+                            }
+                            catch (NumberFormatException nfe)
+                            {
+                                if (!item.equals(""))
+                                    System.out.println("StarterItems[Config.load()]: invalid fighter item -> " + item);
+                            }
+                        }
+                    }
+                    
+                    String[] mageSplit = L2JModSettings.getProperty("CustomStarterItemsMage", "0,0").split(";");
+                    for (String item : mageSplit)
+                    {
+                        String[] split = item.split(",");
+                        if (split.length != 2)
+                        {
+                            System.out.println("StarterItems[Config.load()]: invalid mage item -> " + item);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                CUSTOM_STARTER_ITEMS_MAGE.add(new int[]{Integer.parseInt(split[0]), Integer.parseInt(split[1])});
+                            }
+                            catch (NumberFormatException nfe)
+                            {
+                                if (!item.equals(""))
+                                    System.out.println("StarterItems[Config.load()]: invalid mage item -> " + item);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -2260,6 +2317,13 @@ public final class Config
         else if (pName.equalsIgnoreCase("EnableWarehouseSortingClan")) L2JMOD_ENABLE_WAREHOUSESORTING_CLAN = Boolean.parseBoolean(pValue);
         else if (pName.equalsIgnoreCase("EnableWarehouseSortingPrivate")) L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE = Boolean.parseBoolean(pValue);
         else if (pName.equalsIgnoreCase("EnableWarehouseSortingFreight")) L2JMOD_ENABLE_WAREHOUSESORTING_FREIGHT = Boolean.parseBoolean(pValue);
+
+        // L2JMOD Custom Start Lvl
+        else if (pName.equalsIgnoreCase("AllowCustomStartLvl")) ALLOW_CUSTOM_CHAR_LVL = Boolean.parseBoolean(pValue);
+        else if (pName.equalsIgnoreCase("CustomStartLvl")) CUSTOM_CHAR_LVL = Integer.parseInt(pValue);
+
+        // L2JMOD Custom Starter Items
+        else if (pName.equalsIgnoreCase("AllowCustomStarterItems")) ALLOW_CUSTOM_STARTER_ITEMS = Boolean.parseBoolean(pValue);
 
         // PvP settings
         else if (pName.equalsIgnoreCase("MinKarma")) KARMA_MIN_KARMA = Integer.parseInt(pValue);

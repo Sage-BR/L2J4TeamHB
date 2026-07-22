@@ -37,12 +37,14 @@ import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
 import net.sf.l2j.gameserver.instancemanager.PetitionManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
+import net.sf.l2j.gameserver.instancemanager.SiegeRewardManager;
 import net.sf.l2j.gameserver.instancemanager.TransformationManager;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+import net.sf.l2j.gameserver.model.base.Experience;
 import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.entity.Couple;
 import net.sf.l2j.gameserver.model.entity.Hero;
@@ -111,11 +113,21 @@ public class EnterWorld extends L2GameClientPacket
         // Register in flood protector
         FloodProtector.getInstance().registerNewPlayer(activeChar.getObjectId());
 
+        if (SiegeRewardManager.ACTIVATED_SYSTEM && !SiegeRewardManager.REWARD_ACTIVE_MEMBERS_ONLY)
+        {
+            SiegeRewardManager.getInstance().processWorldEnter(activeChar);
+        }
+
         if (L2World.getInstance().findObject(activeChar.getObjectId()) != null)
         {
             if(Config.DEBUG)
                 _log.warning("User already exist in OID map! User "+activeChar.getName()+" is character clone");
             //activeChar.closeNetConnection();
+        }
+        
+        if (Config.ALLOW_CUSTOM_CHAR_LVL && (activeChar.getLevel() == 1))
+        {
+            activeChar.getStat().addExp(Experience.LEVEL[Config.CUSTOM_CHAR_LVL]);
         }
         
         if (activeChar.isGM())
