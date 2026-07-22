@@ -394,6 +394,7 @@ public final class Config
     public static int		GRID_NEIGHBOR_TURNOFF_TIME;
     public static int		GEODATA;
     public static boolean	FORCE_GEODATA;
+    public static boolean	LAZY_GEODATA;
     public static boolean 	MOVE_BASED_KNOWNLIST;
     public static long		KNOWNLIST_UPDATE_INTERVAL;
     public static int		ZONE_TOWN;
@@ -1516,6 +1517,7 @@ public final class Config
                 GRID_NEIGHBOR_TURNOFF_TIME					= Integer.parseInt(General.getProperty("GridNeighborTurnOffTime", "90"));
                 GEODATA										= Integer.parseInt(General.getProperty("GeoData", "0"));
                 FORCE_GEODATA								= Boolean.parseBoolean(General.getProperty("ForceGeoData", "True"));
+                LAZY_GEODATA								= Boolean.parseBoolean(General.getProperty("LazyGeoData", "False"));
                 MOVE_BASED_KNOWNLIST						= Boolean.parseBoolean(General.getProperty("MoveBasedKnownlist", "False"));
                 KNOWNLIST_UPDATE_INTERVAL					= Long.parseLong(General.getProperty("KnownListUpdateInterval", "1250"));
                 ZONE_TOWN									= Integer.parseInt(General.getProperty("ZoneTown", "0"));

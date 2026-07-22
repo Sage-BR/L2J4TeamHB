@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -129,20 +131,20 @@ public class GameServer
 {
 	private static final Logger _log = Logger.getLogger(GameServer.class.getName());
 	private final SelectorThread<L2GameClient> _selectorThread;
-	private final SkillTable _skillTable;
-	private final ItemTable _itemTable;
-	private final NpcTable _npcTable;
-	private final HennaTable _hennaTable;
+	private SkillTable _skillTable;
+	private ItemTable _itemTable;
+	private NpcTable _npcTable;
+	private HennaTable _hennaTable;
 	private final IdFactory _idFactory;
 	public static GameServer gameServer;
 	private static ClanHallManager _cHManager;
 	private final Shutdown _shutdownHandler;
-    private final DoorTable _doorTable;
-    private final SevenSigns _sevenSignsEngine;
-    private final AutoChatHandler _autoChatHandler;
-	private final AutoSpawnHandler _autoSpawnHandler;
+    private DoorTable _doorTable;
+    private SevenSigns _sevenSignsEngine;
+    private AutoChatHandler _autoChatHandler;
+	private AutoSpawnHandler _autoSpawnHandler;
 	private LoginServerThread _loginThread;
-    private final HelperBuffTable _helperBuffTable;
+    private HelperBuffTable _helperBuffTable;
 
 	private static Status _statusServer;
 	@SuppressWarnings("unused")
@@ -165,6 +167,7 @@ public class GameServer
 	}
 	public GameServer() throws Exception
 	{
+		final long startTime = System.currentTimeMillis();
         gameServer = this;
 		_log.finest("used mem:" + getUsedMemoryMB()+"MB" );
         
@@ -186,116 +189,112 @@ public class GameServer
 		// start game time control early
 		GameTimeController.getInstance();
 
-		// keep the references of Singletons to prevent garbage collection
-		CharNameTable.getInstance();
+		// Parallel data loading via Virtual Threads
+		loadParallel(
+			// Group A: Items and characters
+			() -> {
+				CharNameTable.getInstance();
+				_itemTable = ItemTable.getInstance();
+				ExtractableItemsData.getInstance();
+				SummonItemsData.getInstance();
+				MerchantPriceConfigTable.getInstance();
+				TradeController.getInstance();
+				CharTemplateTable.getInstance();
+				AccessLevels.getInstance();
+				AdminCommandAccessRights.getInstance();
+			},
+			// Group B: Skills and NPCs (NpcTable depends on SkillTable)
+			() -> {
+				_skillTable = SkillTable.getInstance();
+				SkillTreeTable.getInstance();
+				SkillSpellbookTable.getInstance();
+				NobleSkillTable.getInstance();
+				HeroSkillTable.getInstance();
+				NpcBufferTable.getInstance();
+				_npcTable = NpcTable.getInstance();
+			},
+			// Group C: Character data tables
+			() -> {
+				_hennaTable = HennaTable.getInstance();
+				HennaTreeTable.getInstance();
+				_helperBuffTable = HelperBuffTable.getInstance();
+				LevelUpData.getInstance();
+				TeleportLocationTable.getInstance();
+				FishTable.getInstance();
+				ArmorSetsTable.getInstance();
+				IconTable.getInstance();
+			},
+			// Group D: World, caches, and utilities
+			() -> {
+				RecipeController.getInstance();
+				PartyMatchWaitingList.getInstance();
+				PartyMatchRoomList.getInstance();
+				if (Config.ALLOW_NPC_WALKERS)
+					NpcWalkerRoutesTable.getInstance().load();
+				HtmCache.getInstance();
+				CrestCache.getInstance();
+				L2World.getInstance();
+				MapRegionTable.getInstance();
+				ZoneData.getInstance();
+				GeoData.getInstance();
+				if (Config.GEODATA == 2)
+					GeoPathFinding.getInstance();
+			},
+			// Group E: Entities and managers
+			() -> {
+				ClanTable.getInstance();
+				AuctionManager.getInstance();
+				CastleManager.getInstance();
+				SiegeManager.getInstance();
+				FortManager.getInstance();
+				FortSiegeManager.getInstance();
+				_cHManager = ClanHallManager.getInstance();
+				Announcements.getInstance();
+				EventDroplist.getInstance();
+				BufferTable.getInstance();
+				XMLDocumentFactory.getInstance();
+				L2Manor.getInstance();
+				BoatManager.getInstance();
+				CastleManorManager.getInstance();
+				MercTicketManager.getInstance();
+				PetitionManager.getInstance();
+				QuestManager.getInstance();
+				TransformationManager.getInstance();
+			}
+		);
 
-		_itemTable = ItemTable.getInstance();
+		// Spawn loading (heavy DB I/O, runs sequentially to avoid connection contention)
+		SpawnTable.getInstance();
+		RaidBossSpawnManager.getInstance();
+		DayNightSpawnManager.getInstance().notifyChangeMode();
+		GrandBossManager.getInstance();
+		RaidBossPointsManager.init();
+		DimensionalRiftManager.getInstance();
+
+		// Post-parallel validation
 		if (!_itemTable.isInitialized())
 		{
 		    _log.severe("Could not find the extraced files. Please Check Your Data.");
 		    throw new Exception("Could not initialize the item table");
 		}
-
-		ExtractableItemsData.getInstance();
-		SummonItemsData.getInstance();
-
-		MerchantPriceConfigTable.getInstance();
-		TradeController.getInstance();
-		_skillTable = SkillTable.getInstance();
 		if (!_skillTable.isInitialized())
 		{
 		    _log.severe("Could not find the extraced files. Please Check Your Data.");
 		    throw new Exception("Could not initialize the skill table");
 		}
-		
-		// L2EMU_ADD by Rayan. L2J - BigBro
-		if(Config.ALLOW_NPC_WALKERS)
-		    NpcWalkerRoutesTable.getInstance().load();
-		
-		NpcBufferTable.getInstance();
-		
-		RecipeController.getInstance();
-		PartyMatchWaitingList.getInstance();
-		PartyMatchRoomList.getInstance();
-		SkillTreeTable.getInstance();
-		ArmorSetsTable.getInstance();
-		FishTable.getInstance();
-		SkillSpellbookTable.getInstance();
-		CharTemplateTable.getInstance();
-		NobleSkillTable.getInstance();
-		HeroSkillTable.getInstance();
-		IconTable.getInstance();
-        //Call to load caches
-        HtmCache.getInstance();
-        CrestCache.getInstance();
-        ClanTable.getInstance();
-		_npcTable = NpcTable.getInstance();
-
 		if (!_npcTable.isInitialized())
 		{
 		    _log.severe("Could not find the extraced files. Please Check Your Data.");
 		    throw new Exception("Could not initialize the npc table");
 		}
-
-		_hennaTable = HennaTable.getInstance();
-
 		if (!_hennaTable.isInitialized())
 		{
 		   throw new Exception("Could not initialize the Henna Table");
 		}
-
-		HennaTreeTable.getInstance();
-
-		if (!_hennaTable.isInitialized())
+		if (!_helperBuffTable.isInitialized())
 		{
-		   throw new Exception("Could not initialize the Henna Tree Table");
+		   throw new Exception("Could not initialize the Helper Buff Table");
 		}
-
-        _helperBuffTable = HelperBuffTable.getInstance();
-
-        if (!_helperBuffTable.isInitialized())
-        {
-           throw new Exception("Could not initialize the Helper Buff Table");
-        }
-
-        GeoData.getInstance();
-        if (Config.GEODATA == 2)
-        	GeoPathFinding.getInstance();
-
-        // Load clan hall data before zone data
-        _cHManager = ClanHallManager.getInstance();
-		CastleManager.getInstance();
-		SiegeManager.getInstance();
-		FortManager.getInstance();
-        FortSiegeManager.getInstance();
-
-		TeleportLocationTable.getInstance();
-		LevelUpData.getInstance();
-		L2World.getInstance();
-		ZoneData.getInstance();
-        SpawnTable.getInstance();
-        RaidBossSpawnManager.getInstance();
-        DayNightSpawnManager.getInstance().notifyChangeMode();
-        GrandBossManager.getInstance();
-        RaidBossPointsManager.init();
-        DimensionalRiftManager.getInstance();
-		Announcements.getInstance();
-		MapRegionTable.getInstance();
-		EventDroplist.getInstance();
-		BufferTable.getInstance();
-		XMLDocumentFactory.getInstance();
-		/** Load Manor data */
-		L2Manor.getInstance();
-
-		/** Load Manager */
-		AuctionManager.getInstance();
-		BoatManager.getInstance();
-		CastleManorManager.getInstance();
-		MercTicketManager.getInstance();
-		//PartyCommandManager.getInstance();
-		PetitionManager.getInstance();
-		QuestManager.getInstance();
-        TransformationManager.getInstance();
         
         _log.info("AI");
 		if (!Config.ALT_DEV_NO_AI)
@@ -437,9 +436,9 @@ public class GameServer
         KnownListUpdateTaskManager.getInstance();
 		System.gc();
 		// maxMemory is the upper limit the jvm can use, totalMemory the size of the current allocation pool, freeMemory the unused memory in the allocation pool
-		long freeMem = (Runtime.getRuntime().maxMemory()-Runtime.getRuntime().totalMemory()+Runtime.getRuntime().freeMemory()) / 1048576; // 1024 * 1024 = 1048576;
+		long usedMem = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576;
 		long totalMem = Runtime.getRuntime().maxMemory() / 1048576;
-		_log.info("GameServer Started, free memory "+freeMem+" Mb of "+totalMem+" Mb");
+		_log.info("GameServer Started in " + (System.currentTimeMillis() - startTime) / 1000 + "s, used memory "+usedMem+" Mb of "+totalMem+" Mb");
 
 		_loginThread = LoginServerThread.getInstance();
 		_loginThread.start();
@@ -483,6 +482,34 @@ public class GameServer
 		}
 		_selectorThread.start();
 		_log.config("Maximum Numbers of Connected Players: " + Config.MAXIMUM_ONLINE_USERS);
+	}
+
+	private static void loadParallel(Runnable... groups) throws Exception
+	{
+		if (groups.length == 0) return;
+		List<Thread> threads = new ArrayList<>(groups.length);
+		Exception[] ex = { null };
+		for (Runnable group : groups)
+		{
+			Thread t = Thread.ofVirtual().start(() ->
+			{
+				try
+				{
+					group.run();
+				}
+				catch (Exception e)
+				{
+					synchronized (ex)
+					{
+						if (ex[0] == null) ex[0] = e;
+					}
+				}
+			});
+			threads.add(t);
+		}
+		for (Thread t : threads)
+			t.join();
+		if (ex[0] != null) throw ex[0];
 	}
 
 	public static void main(String[] args) throws Exception
