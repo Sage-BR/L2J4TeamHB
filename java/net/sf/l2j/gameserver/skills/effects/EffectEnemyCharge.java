@@ -14,6 +14,8 @@
  */
 package net.sf.l2j.gameserver.skills.effects;
 
+import java.util.logging.Logger;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.model.L2Effect;
@@ -27,6 +29,7 @@ import java.util.Set;
 
 public class EffectEnemyCharge extends L2Effect
 {
+	static final Logger _log = Logger.getLogger(EffectEnemyCharge.class.getName());
 
 	private int	_x, _y, _z;
 
@@ -54,7 +57,11 @@ public class EffectEnemyCharge extends L2Effect
 		double dy = getEffected().getY() - curY;
 		double dz = getEffected().getZ() - curZ;
 		double distance = Math.sqrt(dx*dx + dy*dy);
-		
+		if (distance > 2000)
+		{
+			_log.info("EffectEnemyCharge was going to use invalid coordinates for characters, getEffector: "+curX+","+curY+" and getEffected: "+getEffected().getX()+","+getEffected().getY());
+			return;
+		}
 		int offset = Math.max((int)distance-getSkill().getFlyRadius(), 30);
 		
 		double cos;

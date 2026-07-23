@@ -1468,7 +1468,7 @@ public final class Formulas
 				}
 			}
 		}
-		else if (mcrit) damage *= 4;
+		else if (mcrit) damage *= 3;
 		
 		return damage;
 	}

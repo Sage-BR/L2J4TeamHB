@@ -225,8 +225,8 @@ public class GeoEngine extends GeoData
     	int gy = (y - L2World.MAP_MIN_Y) >> 4;
         short region = getRegionOffset(gx,gy);
         if (_geodata.get(region) != null)
-			return false;
-        return true;
+			return true;
+        return false;
     }
     
     private static boolean canSee(int x, int y, double z, int tx, int ty, int tz)
@@ -1165,7 +1165,7 @@ public class GeoEngine extends GeoData
 	        short upperHeight = Short.MAX_VALUE; // big positive value
 	        short lowerHeight = Short.MIN_VALUE; // big negative value
 	        byte temp_layers = layers;
-	        boolean highestlayer = false;
+	        boolean highestlayer = true;
 	        while(temp_layers > 0) // from higher to lower
 	        {
 	            // reads tempZ for current layer, result in world z coordinate
@@ -1177,10 +1177,10 @@ public class GeoEngine extends GeoData
 					lowerHeight = tempZ;
 	                NSWE = geo.getShort(index);
 	                NSWE = (short)(NSWE&0x0F);
+	                highestlayer = false;
 	                break;
 				}
 				else {
-					highestlayer = false;
 					upperHeight = tempZ;
 				}
 	            
@@ -1290,7 +1290,7 @@ public class GeoEngine extends GeoData
 	            if ((z-tempz)*(z-tempz) > (z-height)*(z-height))
 	            {
 	                tempz = height;
-	                NSWE = geo.get(index);
+	                NSWE = geo.getShort(index);
 	                NSWE = (short)(NSWE&0x0F);
 	            }
 	            layers--;

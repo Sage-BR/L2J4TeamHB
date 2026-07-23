@@ -281,7 +281,7 @@ public abstract class Inventory extends ItemContainer
 
 							if (_itemSkill != null)
 							{
-								player.removeSkill(_itemSkill, false);
+								player.removeSkill(_itemSkill, false, _itemSkill.isPassive());
 								player.sendSkillList(); 
 							}
 						}
@@ -307,7 +307,7 @@ public abstract class Inventory extends ItemContainer
 							
 							if (_itemSkill != null)
 							{
-					    		player.removeSkill(_itemSkill, false);
+					    		player.removeSkill(_itemSkill, false, _itemSkill.isPassive());
 					    		player.sendSkillList(); 
 							}
 						}
@@ -1360,7 +1360,7 @@ public abstract class Inventory extends ItemContainer
 	        con = L2DatabaseFactory.getInstance().getConnection();
 	        PreparedStatement statement = con.prepareStatement(
 	                "SELECT object_id, item_id, count, enchant_level, loc, loc_data, custom_type1, custom_type2, mana_left FROM items WHERE owner_id=? AND (loc=? OR loc=?) ");
-	        statement.setInt(1, getOwner().getObjectId());
+	        statement.setInt(1, getOwnerId());
 	        statement.setString(2, getBaseLocation().name());
 	        statement.setString(3, getEquipLocation().name());
 	        ResultSet inv = statement.executeQuery();
@@ -1368,7 +1368,7 @@ public abstract class Inventory extends ItemContainer
 	        L2ItemInstance item;
 	        while (inv.next())
 	        {
-	            item = L2ItemInstance.restoreFromDb(getOwner().getObjectId(), inv);
+	            item = L2ItemInstance.restoreFromDb(getOwnerId(), inv);
 	            if (item == null) continue;
 	            
 	            if(getOwner() instanceof L2PcInstance)

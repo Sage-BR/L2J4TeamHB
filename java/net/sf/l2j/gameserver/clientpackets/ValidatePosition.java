@@ -22,6 +22,7 @@ import net.sf.l2j.gameserver.TaskPriority;
 import net.sf.l2j.gameserver.Universe;
 import net.sf.l2j.gameserver.geoeditorcon.GeoEditorListener;
 import net.sf.l2j.gameserver.model.L2Character;
+import net.sf.l2j.gameserver.model.Location;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.PartyMemberPosition;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
@@ -64,7 +65,6 @@ public class ValidatePosition extends L2GameClientPacket
         if (activeChar == null || activeChar.isTeleporting()) return;
 
         if (Config.GEODATA > 0 
-        		&& (activeChar.isInOlympiadMode() || activeChar.isInsideZone(L2Character.ZONE_SIEGE))
         		&& !activeChar.isFlying()
         		&& GeoData.getInstance().hasGeo(_x, _y))
         {
@@ -85,6 +85,12 @@ public class ValidatePosition extends L2GameClientPacket
         int realX = activeChar.getX();
         int realY = activeChar.getY();
         int realZ = activeChar.getZ();
+
+        if (_x == 0 && _y == 0) 
+        {
+        	if (realX != 0) // in this case this seems like a client error
+        		return;
+        }
 
         // Sync thresholds aligned with Brproject (ValidatePosition.java).
         // - MAX_DISTANCE_DIFF: absolute cap on 3D divergence between client and server.
@@ -123,8 +129,40 @@ public class ValidatePosition extends L2GameClientPacket
             }
             else
             {
-                // Within tolerance: trust client
-                activeChar.setXYZ(_x, _y, _z);
+                // Within tolerance: geo-collision check (Brproject pattern)
+                if (Config.GEODATA > 0 && !activeChar.isFlying() && !activeChar.isInsideZone(L2Character.ZONE_WATER))
+                {
+                    if (!GeoData.getInstance().canMoveToTarget(realX, realY, realZ, _x, _y, _z))
+                    {
+                        // Client pos is through a wall — find last valid position
+                        Location validPos = GeoData.getInstance().getValidLocation(realX, realY, realZ, _x, _y, _z);
+                        double vdx = validPos.getX() - realX;
+                        double vdy = validPos.getY() - realY;
+                        double vdz = validPos.getZ() - realZ;
+                        double validDist = Math.sqrt(vdx*vdx + vdy*vdy + vdz*vdz);
+                        if (validDist < MAX_DISTANCE_DIFF)
+                        {
+                            // Smooth correction to valid position
+                            activeChar.setXYZ(validPos.getX(), validPos.getY(), validPos.getZ());
+                            activeChar.sendPacket(new ValidateLocation(activeChar));
+                        }
+                        else
+                        {
+                            // Too far — hard rollback
+                            activeChar.sendPacket(new ValidateLocation(activeChar));
+                        }
+                    }
+                    else
+                    {
+                        // Path is clear — trust client
+                        activeChar.setXYZ(_x, _y, _z);
+                    }
+                }
+                else
+                {
+                    // Geo disabled, flying, or swimming — trust client
+                    activeChar.setXYZ(_x, _y, _z);
+                }
             }
         }
 
@@ -132,7 +170,6 @@ public class ValidatePosition extends L2GameClientPacket
         activeChar.setLastServerPosition(activeChar.getX(), activeChar.getY(), activeChar.getZ());
         // --- fim sincronização ---
         
-		if(activeChar.getParty() != null)
 		if(activeChar.getParty() != null)
 			activeChar.getParty().broadcastToPartyMembers(activeChar,new PartyMemberPosition(activeChar));
 

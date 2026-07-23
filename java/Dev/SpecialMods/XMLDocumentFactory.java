@@ -45,12 +45,19 @@ public final class XMLDocumentFactory
 		if (!file.exists() || !file.isFile())
 			throw new Exception("File: " + file.getAbsolutePath() + " doesn't exist and/or is not a file.");
 		
-		return _builder.parse(file);
+		synchronized (_builder)
+		{
+			_builder.reset();
+			return _builder.parse(file);
+		}
 	}
 	
 	public final Document newDocument()
 	{
-		return _builder.newDocument();
+		synchronized (_builder)
+		{
+			return _builder.newDocument();
+		}
 	}
 	
 	private static class SingletonHolder

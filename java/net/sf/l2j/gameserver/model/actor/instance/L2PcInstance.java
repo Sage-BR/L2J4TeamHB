@@ -233,8 +233,8 @@ public final class L2PcInstance extends L2PlayableInstance
 	private static final String DELETE_CHAR_SKILLS = "DELETE FROM character_skills WHERE charId=? AND class_index=?";
 
 	// Character Skill Save SQL String Definitions:
-	private static final String ADD_SKILL_SAVE = "INSERT INTO character_skills_save (charId,skill_id,skill_level,effect_count,effect_cur_time,reuse_delay,restore_type,class_index,buff_index) VALUES (?,?,?,?,?,?,?,?,?)";
-	private static final String RESTORE_SKILL_SAVE = "SELECT skill_id,skill_level,effect_count,effect_cur_time, reuse_delay FROM character_skills_save WHERE charId=? AND class_index=? AND restore_type=? ORDER BY buff_index ASC";
+	private static final String ADD_SKILL_SAVE = "INSERT INTO character_skills_save (charId,skill_id,skill_level,effect_count,effect_cur_time,reuse_delay,systime,restore_type,class_index,buff_index) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	private static final String RESTORE_SKILL_SAVE = "SELECT skill_id,skill_level,effect_count,effect_cur_time, reuse_delay, systime FROM character_skills_save WHERE charId=? AND class_index=? AND restore_type=? ORDER BY buff_index ASC";
 	private static final String DELETE_SKILL_SAVE = "DELETE FROM character_skills_save WHERE charId=? AND class_index=?";
 
 	// Character Character SQL String Definitions:
@@ -3192,7 +3192,7 @@ public final class L2PcInstance extends L2PlayableInstance
 			return false;
 		}
 
-		item.dropMe(this, getClientX() + Rnd.get(50) - 25, getClientY() + Rnd.get(50) - 25, getClientZ() + 20);
+		item.dropMe(this, getX() + Rnd.get(50) - 25, getY() + Rnd.get(50) - 25, getZ() + 20);
 
 		 if (Config.AUTODESTROY_ITEM_AFTER >0 && Config.DESTROY_DROPPED_PLAYER_ITEM && !Config.LIST_PROTECTED_ITEMS.contains(item.getItemId()))
 			 {
@@ -4214,16 +4214,21 @@ public final class L2PcInstance extends L2PlayableInstance
     
     public void transform(L2Transformation transformation)
     {
-        if (this.isTransformed())
+        if (isTransformed())
         {
             // You already polymorphed and cannot polymorph again.
             SystemMessage msg = new SystemMessage(SystemMessageId.YOU_ALREADY_POLYMORPHED_AND_CANNOT_POLYMORPH_AGAIN);
-            this.sendPacket(msg);
+            sendPacket(msg);
             return;
+        }
+        if (isMounted())
+        {
+            // Get off the strider or something else if character is mounted
+            dismount();
         }
         _transformation = transformation;
         transformation.onTransform();
-        this.broadcastUserInfo();
+        broadcastUserInfo();
     }
     
     public void untransform()
@@ -6889,15 +6894,17 @@ public final class L2PcInstance extends L2PlayableInstance
 					{
 						TimeStamp t = _reuseTimeStamps.remove(skillId);
 						statement.setLong(6, t.hasNotPassed() ? t.getReuse() : 0);
+						statement.setDouble(7, t.hasNotPassed() ? t.getStamp() : 0);
 					}
 					else
 					{
 						statement.setLong(6, 0);
+						statement.setDouble(7, 0);
 					}
 					
-					statement.setInt(7, 0);
-					statement.setInt(8, getClassIndex());
-					statement.setInt(9, buff_index);
+					statement.setInt(8, 0);
+					statement.setInt(9, getClassIndex());
+					statement.setInt(10, buff_index);
 					statement.execute();
 				}
 			}
@@ -6915,9 +6922,10 @@ public final class L2PcInstance extends L2PlayableInstance
 					statement.setInt(4, -1);
 					statement.setInt(5, -1);
 					statement.setLong(6, t.getReuse());
-					statement.setInt(7, 1);
-					statement.setInt(8, getClassIndex());
-					statement.setInt(9, buff_index);
+					statement.setDouble(7, t.getStamp());
+					statement.setInt(8, 1);
+					statement.setInt(9, getClassIndex());
+					statement.setInt(10, buff_index);
 					statement.execute();
 					
 				}
@@ -6988,6 +6996,53 @@ public final class L2PcInstance extends L2PlayableInstance
 			return removeSkill(skill);
 		else
 			return super.removeSkill(skill);
+	}
+
+	public L2Skill removeSkill(L2Skill skill, boolean store, boolean cancelEffects)
+	{
+		if (cancelEffects)
+			return removeSkill(skill, store);
+		
+		L2Skill oldSkill = _skills.remove(skill.getId());
+		if (oldSkill != null)
+		{
+			if (oldSkill.isChance() && _chanceSkills != null)
+				removeChanceSkill(oldSkill.getId());
+			
+			if (store)
+			{
+				Connection con = null;
+				try
+				{
+					con = L2DatabaseFactory.getInstance().getConnection();
+					PreparedStatement statement = con.prepareStatement(DELETE_SKILL_FROM_CHAR);
+					statement.setInt(1, oldSkill.getId());
+					statement.setInt(2, getObjectId());
+					statement.setInt(3, getClassIndex());
+					statement.execute();
+					statement.close();
+				}
+				catch (Exception e)
+				{
+					_log.warning("Error could not delete skill: " + e);
+				}
+				finally
+				{
+					try { con.close(); } catch (Exception e) {}
+				}
+			}
+			
+			if (transformId() > 0 || isCursedWeaponEquipped())
+				return oldSkill;
+			
+			L2ShortCut[] allShortCuts = getAllShortCuts();
+			for (L2ShortCut sc : allShortCuts)
+			{
+				if (sc != null && sc.getId() == oldSkill.getId() && sc.getType() == L2ShortCut.TYPE_SKILL)
+					deleteShortCut(sc.getSlot(), sc.getPage());
+			}
+		}
+		return oldSkill;
 	}
 
 	/**
@@ -7162,6 +7217,8 @@ public final class L2PcInstance extends L2PlayableInstance
 	{
 		L2Object[] targets = new L2Character[]{this};
 		Connection con = null;
+		
+		long delaytime = System.currentTimeMillis() - this.getLastAccess();
 
 		try
 		{
@@ -7188,7 +7245,8 @@ public final class L2PcInstance extends L2PlayableInstance
 				int skillLvl = rset.getInt("skill_level");
 				int effectCount = rset.getInt("effect_count");
 				int effectCurTime = rset.getInt("effect_cur_time");
-				long reuseDelay = rset.getLong("reuse_delay");
+				double reuseDelay = rset.getInt("reuse_delay");
+				double systime = rset.getDouble("systime");
 
 				// Just incase the admin minipulated this table incorrectly :x
 				if(skillId == -1 || effectCount == -1 || effectCurTime == -1 || reuseDelay < 0) continue;
@@ -7202,8 +7260,8 @@ public final class L2PcInstance extends L2PlayableInstance
 
 				if (reuseDelay > 10)
 				{
-					disableSkill(skillId, reuseDelay);
-					addTimeStamp(new TimeStamp(skillId, reuseDelay));
+					disableSkill(skillId, (long)reuseDelay);
+					addTimeStamp(new TimeStamp(skillId, (long)reuseDelay, (long)systime));
 				}
 
 				for (L2Effect effect : getAllEffects())
@@ -7232,12 +7290,15 @@ public final class L2PcInstance extends L2PlayableInstance
 			while (rset.next())
 			{
 				int skillId = rset.getInt("skill_id");
-				long reuseDelay = rset.getLong("reuse_delay");
+				double reuseDelay = rset.getDouble("reuse_delay");
+				double systime = rset.getDouble("systime");
+
+				reuseDelay = reuseDelay - delaytime;
 
 				if (reuseDelay <= 0) continue;
 
-				disableSkill(skillId, reuseDelay);
-				addTimeStamp(new TimeStamp(skillId, reuseDelay));
+				disableSkill(skillId, (long)reuseDelay);
+				addTimeStamp(new TimeStamp(skillId, (long)reuseDelay, (long)systime));
 			}
 			rset.close();
 			statement.close();
@@ -7754,10 +7815,22 @@ public final class L2PcInstance extends L2PlayableInstance
         // If a skill is currently being used, queue this one if this is not the same
 		// Note that this check is currently imperfect: getCurrentSkill() isn't always null when a skill has
 		// failed to cast, or the casting is not yet in progress when this is rechecked
-        if (getCurrentSkill() != null && isCastingNow())
+        if (isCastingNow())
         {
+        	int interrupt = getCastInterruptTime();
+        	if (interrupt != 0 && ((interrupt+40) < GameTimeController.getGameTicks()))
+        	{
+        		if (getLastSkillCast() != null)
+        			_log.warning("Debug msg: fixing skill use stuck for a player, last skill cast was: "+getLastSkillCast().getName());
+        		else
+        			_log.warning("Debug msg: fixing skill use stuck for a player, last skill cast was: null");
+        		if (getCurrentSkill() != null)
+        			_log.warning("and current skill: "+getCurrentSkill().getSkill().getName());
+        		abortCast();
+        		return;
+        	}
             // Check if new skill different from current skill in progress
-            if (skill.getId() == getCurrentSkill().getSkillId())
+            if (getCurrentSkill() != null && skill.getId() == getCurrentSkill().getSkillId())
             {
             	sendPacket(ActionFailed.STATIC_PACKET);
             	return;
@@ -8201,6 +8274,11 @@ public final class L2PcInstance extends L2PlayableInstance
 			}
 			else if (getCurrentSkill() != null && !getCurrentSkill().isCtrlPressed() && skill.isOffensive())
 			{
+				if(getClan() != null && ((L2PcInstance)target).getClan() != null)
+				{
+					if(getClan().isAtWarWith(((L2PcInstance)target).getClan().getClanId()) && ((L2PcInstance)target).getClan().isAtWarWith(getClan().getClanId()))
+						return true; // in clan war player can attack whites even without ctrl
+				}
 				if (
 						((L2PcInstance)target).getPvpFlag() == 0 &&             //   target's pvp flag is not set and
 						((L2PcInstance)target).getKarma() == 0                  //   target has no karma
@@ -8348,11 +8426,11 @@ public final class L2PcInstance extends L2PlayableInstance
 	/**
 	 * Add a L2CubicInstance to the L2PcInstance _cubics.<BR><BR>
 	 */
-	public void addCubic(int id, int level, double matk, int activationtime, int activationchance)
+	public void addCubic(int id, int level, double matk, int activationtime, int activationchance, boolean givenByOther)
 	{
 		if (Config.DEBUG)
 			_log.info("L2PcInstance(" + getName() + "): addCubic(" + id + "|" + level + "|" + matk + ")");
-		L2CubicInstance cubic = new L2CubicInstance(this, id, level, (int) matk, activationtime, activationchance);
+		L2CubicInstance cubic = new L2CubicInstance(this, id, level, (int) matk, activationtime, activationchance, givenByOther);
 
 		_cubics.put(id, cubic);
 	}
@@ -11046,7 +11124,9 @@ public final class L2PcInstance extends L2PlayableInstance
     {
     	if(Rnd.get(100) <= Config.DEATH_PENALTY_CHANCE 
     			&& !(killer instanceof L2PcInstance) && !(this.isGM())
-    			&& !(this.getCharmOfLuck() && (killer instanceof L2GrandBossInstance || killer instanceof L2RaidBossInstance))) 
+    			&& !(this.getCharmOfLuck() && (killer instanceof L2GrandBossInstance || killer instanceof L2RaidBossInstance))
+    			&& !isPhoenixBlessed()
+    			&& !(TvTEvent.isStarted() && TvTEvent.isPlayerParticipant(getObjectId()))) 
     		
     		increaseDeathPenaltyBuffLevel();
 	}
@@ -11142,6 +11222,18 @@ public final class L2PcInstance extends L2PlayableInstance
 			skill = _skill;
 			reuse = _reuse;
 			stamp = System.currentTimeMillis()+ reuse;
+		}
+
+		public TimeStamp(int _skill, long _reuse, long _systime)
+		{
+			skill = _skill;
+			reuse = _reuse;
+			stamp = _systime;
+		}
+
+		public long getStamp()
+		{
+			return stamp;
 		}
 
 		public int getSkill()

@@ -167,4 +167,34 @@ public class GeoData
     {
     	return false;
     }
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     * @param tx
+     * @param ty
+     * @param tz
+     * @return True if (x,y,z) can reach (tx,ty,tz) without being blocked by geodata.
+     */
+    public boolean canMoveToTarget(int x, int y, int z, int tx, int ty, int tz)
+    {
+    	Location loc = moveCheck(x, y, z, tx, ty, tz);
+    	return loc.getX() == tx && loc.getY() == ty;
+    }
+
+    /**
+     * Returns the last valid position before an obstacle (or the target if clear).
+     * @param x
+     * @param y
+     * @param z
+     * @param tx
+     * @param ty
+     * @param tz
+     * @return Last valid Location on the path from (x,y,z) toward (tx,ty,tz).
+     */
+    public Location getValidLocation(int x, int y, int z, int tx, int ty, int tz)
+    {
+    	return moveCheck(x, y, z, tx, ty, tz);
+    }
 }

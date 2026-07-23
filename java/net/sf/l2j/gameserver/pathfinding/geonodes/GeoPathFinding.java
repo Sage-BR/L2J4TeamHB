@@ -211,12 +211,14 @@ public class GeoPathFinding extends PathFinding
 		short nby = getNodeBlock(node_y);
 		int idx = _pathNodesIndex.get(regoffset).get((nby << 8)+nbx);
 		ByteBuffer pn = _pathNodes.get(regoffset);
+		if (pn == null) return null;
 		//reading
 		byte nodes = pn.get(idx);
 		idx += layer*10+1;//byte + layer*10byte
 		if (nodes < layer)
 		{
-			_log.warning("SmthWrong!");
+			_log.warning("GeoPathFinding: node "+node_x+"_"+node_y+" requested layer "+layer+" but has only "+nodes+" layers.");
+			return null;
 		}
 		short node_z = pn.getShort(idx);
 		idx += 2;
@@ -233,6 +235,7 @@ public class GeoPathFinding extends PathFinding
 		short nby = getNodeBlock(node_y);
 		int idx = _pathNodesIndex.get(regoffset).get((nby << 8)+nbx);
 		ByteBuffer pn = _pathNodes.get(regoffset);
+		if (pn == null) return null;
 		//reading
 		byte nodes = pn.get(idx);
 		idx++;//byte

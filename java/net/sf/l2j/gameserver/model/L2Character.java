@@ -96,6 +96,7 @@ import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.StopMove;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.TeleportToLocation;
+import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.serverpackets.FlyToLocation.FlyType;
 import net.sf.l2j.gameserver.skills.Calculator;
 import net.sf.l2j.gameserver.skills.Formulas;
@@ -656,24 +657,12 @@ public abstract class L2Character extends L2Object
             return;
         }
 
-        // Anti-spam: do not start a new attack while one is still in progress (mirrors Brproject canAttack _isAttackingNow)
-        if (_attackEndTime > GameTimeController.getGameTicks() || isCastingNow())
+        // Anti-spam: do not start a new attack while one is still in progress
+        // (mirrors Brproject canAttack _isAttackingNow).
+        if (isAttackingNow() || isCastingNow())
         {
         	sendPacket(ActionFailed.STATIC_PACKET);
         	return;
-        }
-
-        // Range check at attack time (mirrors Brproject canAttack distance validation):
-        // If target is out of reach, refuse to start the swing and let the AI follow instead.
-        if (this instanceof L2PcInstance && target != null)
-        {
-        	int atkRange = getStat().getPhysicalAttackRange();
-        	int totalRange = atkRange + getTemplate().collisionRadius + target.getTemplate().collisionRadius;
-        	if (!isInsideRadius(target, totalRange, false, false))
-        	{
-        		sendPacket(ActionFailed.STATIC_PACKET);
-        		return;
-        	}
         }
 
 		if (this instanceof L2PcInstance)
@@ -863,17 +852,30 @@ public abstract class L2Character extends L2Object
 		// the hit is calculated to happen halfway to the animation - might need further tuning e.g. in bow case
 		int timeToHit = timeAtk/2;
 		int currentTick = GameTimeController.getGameTicks();
-		_attackEndTime = currentTick;
-		_attackEndTime += (timeAtk / GameTimeController.MILLIS_IN_TICK);
 
-		// movement lock mirrors Brproject behaviour:
-		// - Bows: locked for the entire shot animation (wind-up + release) + 150ms buffer
-		// - Melee: locked only during the wind-up (timeToHit + buffer), so the client-side swing
-		//          animation can start without being cancelled; backswing is free for kiting.
-		// Damage sync is guaranteed separately in onHitTimer via range validation at hit time.
+		// Get the Attack Reuse Delay of the L2Weapon
+		int reuse = calculateReuseTime(target, weaponItem);
+
+		// Brproject pattern: _attackTimeToMove and _attackEndTime cover the FULL
+		// swing + reuse window. isAttackingNow() stays true for the entire duration,
+		// preventing the FollowTask (via moveToPawn) from broadcasting movement
+		// packets that would cancel the client-side attack animation.
+		//
+		// The lock is sized one tick SHORTER than the EVT_READY_TO_ACT schedule
+		// (which fires at timeAtk+reuse in wall-clock ms). Because the tick counter
+		// advances in 50ms steps while the scheduler fires in real ms, shaving one
+		// tick guarantees that by the time EVT_READY_TO_ACT lands and calls
+		// onEvtReadyToAct(), _attackTimeToMove has already expired — so a queued
+		// MOVE_TO intention can be processed instead of re-queued (which would
+		// deadlock the AI). Kiting works with 1-attack delay: player clicks move
+		// during the swing → queued → MOVE_TO executes when EVT_READY_TO_ACT fires.
 		boolean isBow = weaponItem != null && (weaponItem.getItemType() == L2WeaponType.BOW || weaponItem.getItemType() == L2WeaponType.CROSSBOW);
-		int movementLockTime = isBow ? timeAtk + 150 : Math.min(timeToHit + Math.max(100, GameTimeController.MILLIS_IN_TICK), timeAtk);
-		_attackTimeToMove = currentTick + (movementLockTime / GameTimeController.MILLIS_IN_TICK);
+		int fullLockTime = isBow ? timeAtk + 150 + reuse : timeAtk + reuse;
+		int lockTicks = (fullLockTime / GameTimeController.MILLIS_IN_TICK) - 1;
+		if (lockTicks < 1) lockTicks = 1;
+
+		_attackEndTime = currentTick + lockTicks;
+		_attackTimeToMove = currentTick + lockTicks;
 
         int ssGrade = 0;
 
@@ -893,8 +895,7 @@ public abstract class L2Character extends L2Object
 		// also works: setHeading(Util.convertDegreeToClientHeading(Util.calculateAngleFrom(this, target)));
 		setHeading(Util.calculateHeadingFrom(this, target));
 		
-		// Get the Attack Reuse Delay of the L2Weapon
-		int reuse = calculateReuseTime(target, weaponItem);
+		// reuse already calculated above (needed for the movement-lock window)
 		boolean hitted;
 		// Select the type of attack to start
 		if (weaponItem == null || isTransformed())
@@ -3269,6 +3270,11 @@ public abstract class L2Character extends L2Object
 	/** Movement data of this L2Character */
 	protected MoveData _move;
 
+	/** Guards against repeated path recalc attempts for the same destination */
+	private int _lastRecalcDestX = Integer.MIN_VALUE;
+	private int _lastRecalcDestY = Integer.MIN_VALUE;
+	private long _lastRecalcTime = 0;
+
 	/** Orientation of the L2Character */
 	private int _heading;
 
@@ -3801,6 +3807,11 @@ public abstract class L2Character extends L2Object
 		return _castInterruptTime > GameTimeController.getGameTicks();
 	}
 
+	public int getCastInterruptTime()
+	{
+		return _castInterruptTime;
+	}
+
 	/**
 	 * Return True if the L2Character is attacking.<BR><BR>
 	 */
@@ -3938,7 +3949,24 @@ public abstract class L2Character extends L2Object
 		}
 		else
 		{
-			super.getPosition().setXYZ(m._xMoveFrom + (int)(elapsed * m._xSpeedTicks),m._yMoveFrom + (int)(elapsed * m._ySpeedTicks),super.getZ());
+			int nextX = m._xMoveFrom + (int)(elapsed * m._xSpeedTicks);
+			int nextY = m._yMoveFrom + (int)(elapsed * m._ySpeedTicks);
+			int nextZ = super.getZ();
+
+			// Snap Z to terrain height for ground players every tick (Brproject pattern).
+			// Prevents falling through the map and client Z-desync rollbacks.
+			if (this instanceof L2PcInstance && Config.GEODATA > 0 && !isFlying() && !isInsideZone(ZONE_WATER))
+			{
+				int terrainZ = GeoData.getInstance().getHeight(nextX, nextY, nextZ);
+				if (Math.abs(terrainZ - nextZ) > 100)
+				{
+					nextZ = terrainZ;
+					// Z changed significantly — sync client
+					((L2PcInstance)this).sendPacket(new ValidateLocation(this));
+				}
+			}
+
+			super.getPosition().setXYZ(nextX, nextY, nextZ);
 			if (this instanceof L2PcInstance) ((L2PcInstance)this).revalidateZone(false);
 			else revalidateZone();
 		}
@@ -4188,12 +4216,15 @@ public abstract class L2Character extends L2Object
 						_move.onGeodataPathIndex = -1; // Set not on geodata path
 				}
 				
-				if (curX < L2World.MAP_MIN_X || curX > L2World.MAP_MAX_X || curY < L2World.MAP_MIN_Y  || curY > 294912)
+				if (curX < L2World.MAP_MIN_X || curX > L2World.MAP_MAX_X || curY < L2World.MAP_MIN_Y  || curY > L2World.MAP_MAX_Y)
 				{
-					// Temporary fix for character outside world region errors
 					_log.warning("Character "+this.getName()+" outside world area, in coordinates x:"+curX+" y:"+curY);
 					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-					if (this instanceof L2PcInstance) ((L2PcInstance)this).deleteMe();
+					if (this instanceof L2PcInstance)
+					{
+					L2PcInstance player = (L2PcInstance)this;
+					player.teleToLocation(MapRegionTable.TeleportWhereType.Town);
+					}
 					else this.onDecay();
         			return;
 				}
@@ -4215,28 +4246,47 @@ public abstract class L2Character extends L2Object
 				if(this instanceof L2PlayableInstance || this.isInCombat())
 				{
 		
-					m.geoPath = GeoPathFinding.getInstance().findPath(curX, curY, curZ, originalX, originalY, originalZ);
-                	if (m.geoPath == null || m.geoPath.size() < 2) // No path found
-                	{
-                		// Even though there's no path found (remember geonodes aren't perfect), 
-                		// the mob is attacking and right now we set it so that the mob will go
-                		// after target anyway, is dz is small enough. Summons will follow their masters no matter what.
-                		if (this instanceof L2PcInstance 
-                				|| (!(this instanceof L2PlayableInstance) && Math.abs(z - curZ) > 140)
-                				|| (this instanceof L2Summon && !((L2Summon)this).getFollowStatus())) 
-                		{
-                			getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-                			return;
-                		}
-                		else
-                		{
-                			x = originalX;
-                			y = originalY;
-                			z = originalZ;
-                			distance = originalDistance;
-                		}
-                	}
-                	else
+				m.geoPath = GeoPathFinding.getInstance().findPath(curX, curY, curZ, originalX, originalY, originalZ);
+            	if (m.geoPath == null || m.geoPath.size() < 2) // No path found
+            	{
+            		// Even though there's no path found (remember geonodes aren't perfect), 
+            		// the mob is attacking and right now we set it so that the mob will go
+            		// after target anyway, is dz is small enough. Summons will follow their masters no matter what.
+				if (this instanceof L2PcInstance 
+            				|| (!(this instanceof L2PlayableInstance) && Math.abs(z - curZ) > 140)
+            				|| (this instanceof L2Summon && !((L2Summon)this).getFollowStatus())) 
+            		{
+            			// Pathfinding failed but moveCheck already found a valid partial path.
+            			// Try to recalculate from current position (forward-dot-product).
+            			if (tryRecalculatePathWithoutRetreat(originalX, originalY, originalZ))
+            				return; // recalc succeeded — movement already set up
+            			// Recalc failed — check if the moveCheck Z is safe (prevents "falling off bridges").
+            			// x,y,z already modified by moveCheck at line 4202.
+            			if (Math.abs(z - curZ) > 200)
+            			{
+            				// Z would change too drastically — stop instead of falling.
+            				// x,y,z already set by moveCheck but z would be wrong (terrain height).
+            				z = curZ; // keep current Z to prevent fall
+            				distance = Math.sqrt((x - curX)*(x - curX) + (y - curY)*(y - curY));
+            				if (distance < 50)
+            				{
+            					// Too close to start and wrong Z — complete stop.
+            					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+            					if (this instanceof L2PcInstance)
+            						((L2PcInstance)this).sendPacket(new ValidateLocation((L2Character)this));
+            					return;
+            				}
+            			}
+            		}
+            		else
+            		{
+            			x = originalX;
+            			y = originalY;
+            			z = originalZ;
+            			distance = originalDistance;
+            		}
+            	}
+            	else
                 	{
                 		m.onGeodataPathIndex = 0; // on first segment
                 		m.geoPathGtx = gtx;
@@ -4268,6 +4318,12 @@ public abstract class L2Character extends L2Object
                 		dx = (x - curX);
                 		dy = (y - curY);
                 		distance = Math.sqrt(dx*dx + dy*dy);
+                		if (distance < 1)
+                		{
+                			m.geoPath = null;
+                			getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+                			return;
+                		}
                 		sin = dy/distance;
                 		cos = dx/distance;
                 	}
@@ -4422,7 +4478,115 @@ public abstract class L2Character extends L2Object
 
 		return true;
 	}
-	
+
+	/**
+	 * Try to recalculate a path from current position toward the original destination
+	 * and redirect movement to the first forward node without stopping.
+	 * Mirrors Brproject's tryRecalculatePathWithoutRetreat.
+	 */
+	private boolean tryRecalculatePathWithoutRetreat(int origX, int origY, int origZ)
+	{
+		if (Config.GEODATA < 2 || _move == null)
+			return false;
+
+		// Guard: don't retry same destination within 2 seconds (prevents loops)
+		long now = System.currentTimeMillis();
+		if (origX == _lastRecalcDestX && origY == _lastRecalcDestY && now - _lastRecalcTime < 2000)
+			return false;
+		_lastRecalcDestX = origX;
+		_lastRecalcDestY = origY;
+		_lastRecalcTime = now;
+
+		int curX = super.getX();
+		int curY = super.getY();
+		int curZ = super.getZ();
+
+		if (curX == origX && curY == origY)
+		{
+			_lastRecalcDestX = Integer.MIN_VALUE;
+			return false;
+		}
+
+		List<AbstractNodeLoc> path = GeoPathFinding.getInstance().findPath(curX, curY, curZ, origX, origY, origZ);
+		if (path == null || path.size() < 2)
+			return false;
+
+		// Find the first node that is "forward" towards the original destination
+		double dxToGoal = origX - curX;
+		double dyToGoal = origY - curY;
+
+		AbstractNodeLoc nextForward = null;
+		for (AbstractNodeLoc loc : path)
+		{
+			double dxToPoint = loc.getX() - curX;
+			double dyToPoint = loc.getY() - curY;
+			double dotProduct = dxToPoint * dxToGoal + dyToPoint * dyToGoal;
+			if (dotProduct > 0)
+			{
+				nextForward = loc;
+				break;
+			}
+		}
+		if (nextForward == null)
+			nextForward = path.get(0);
+
+		// Save remaining path for later
+		int idx = path.indexOf(nextForward);
+
+		// Create new MoveData for the recalculated path segment
+		MoveData m = new MoveData();
+		m._xMoveFrom = curX;
+		m._yMoveFrom = curY;
+		m._zMoveFrom = curZ;
+		m._xDestination = nextForward.getX();
+		m._yDestination = nextForward.getY();
+		m._zDestination = nextForward.getZ();
+
+		// Set remaining path nodes
+		if (idx >= 0 && idx < path.size() - 1)
+		{
+			m.geoPath = new java.util.ArrayList<AbstractNodeLoc>(path.subList(idx + 1, path.size()));
+			m.onGeodataPathIndex = 0;
+			m.geoPathAccurateTx = origX;
+			m.geoPathAccurateTy = origY;
+		}
+		else
+		{
+			m.geoPath = null;
+			m.onGeodataPathIndex = -1;
+		}
+
+		// Calculate movement params
+		float speed = getStat().getMoveSpeed();
+		if (speed <= 0)
+			return false;
+
+		double dx = m._xDestination - m._xMoveFrom;
+		double dy = m._yDestination - m._yMoveFrom;
+		double distance = Math.sqrt(dx * dx + dy * dy);
+		if (distance < 1)
+			return false;
+
+		double sin = dy / distance;
+		double cos = dx / distance;
+
+		m._ticksToMove = 1 + (int) (GameTimeController.TICKS_PER_SECOND * distance / speed);
+		m._xSpeedTicks = (float) (cos * speed / GameTimeController.TICKS_PER_SECOND);
+		m._ySpeedTicks = (float) (sin * speed / GameTimeController.TICKS_PER_SECOND);
+		m._heading = 0;
+		m._moveStartTime = GameTimeController.getGameTicks();
+		m._moveTimestamp = 0;
+
+		_move = m;
+
+		GameTimeController.getInstance().registerMovingObject(this);
+
+		// Broadcast new movement to client
+		broadcastPacket(new MoveToLocation(this));
+
+		return true;
+	}
+
 	public boolean validateMovementHeading(int heading)
 	{
 		MoveData md = _move;

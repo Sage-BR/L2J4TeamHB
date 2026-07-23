@@ -77,13 +77,26 @@ public class L2SummonAI extends L2CharacterAI
         }
 
         // In range: stop following so FollowTask does not keep firing MoveToPawn packets.
-        if (getFollowTarget() != null && _actor.isInsideRadius(target, totalRange - 30, true, false))
+        // Brproject pattern: 2D range check, consistent with main range gate. The
+        // _attackTimeToMove covering the full swing (set in doAttack) keeps movement
+        // locked during attack, preventing MoveToPawn broadcasts that would cancel
+        // the client-side animation.
+        if (getFollowTarget() != null && _actor.isInsideRadius(target, totalRange, false, false))
             stopFollow();
 
-        if (_actor.isAttackingDisabled() || _actor.isCastingNow())
+        // Abort early if currently attacking or casting — queue next attack intention
+        // (mirrors L2PlayerAI.thinkAttack pattern). The AI will re-enter thinkAttack
+        // on EVT_READY_TO_ACT once the swing completes.
+        if (_actor.isAttackingNow() || _actor.isCastingNow())
         {
-            clientActionFailed();
-            return;
+        	clientActionFailed();
+        	return;
+        }
+
+        if (_actor.isAttackingDisabled())
+        {
+        	clientActionFailed();
+        	return;
         }
 
         // Final range check defensive layer

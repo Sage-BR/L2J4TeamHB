@@ -307,9 +307,11 @@ public class L2PlayerAI extends L2CharacterAI
             return;
         }
 
-        // In range: stop following (if any) so FollowTask does not keep firing
-        // MoveToPawn packets while we are standing still attacking.
-        if (getFollowTarget() != null && _actor.isInsideRadius(target, totalRange - 30, true, false))
+        // In range: stop following so FollowTask does not keep firing MoveToPawn packets.
+        // Brproject pattern: range comparison is 2D (checkZ=false), consistent with the
+        // main range gate above. _attackTimeToMove covering the full swing (set in
+        // doAttack) prevents the FollowTask from broadcasting MoveToPawn during attack.
+        if (getFollowTarget() != null && _actor.isInsideRadius(target, totalRange, false, false))
             stopFollow();
 
         if (_actor.isAttackingNow() || _actor.isCastingNow())

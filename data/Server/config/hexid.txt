@@ -1,4 +1,4 @@
 #the hexID to auth into login
-#Wed Jul 22 11:47:02 GMT-03:00 2026
+#Thu Jul 23 10:20:10 GMT-03:00 2026
 HexID=-13d72bb1761e1a149f0615399f160a7b
 ServerID=1

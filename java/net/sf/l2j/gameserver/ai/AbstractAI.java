@@ -83,7 +83,13 @@ abstract class AbstractAI implements Ctrl
             		return;
             	}
 
-                if (!_actor.isInsideRadius(followTarget, _range, true, false))
+            	// Brproject pattern (offensiveFollowTask): range check uses 2D
+            	// (checkZ=false) for the actual "am I in range" gate. The anti-teleport
+            	// gate 3000 stays 3D to catch large Z-only teleports. Using 3D for the
+            	// range gate previously caused a mismatch vs thinkAttack()'s 2D check
+            	// that left the FollowTask broadcasting MoveToPawn during the attack
+            	// swing even though thinkAttack considered the actor "in range".
+                if (!_actor.isInsideRadius(followTarget, _range, false, false))
                 {
                 	 if (!_actor.isInsideRadius(followTarget, 3000, true, false))
                 	 {
@@ -92,9 +98,18 @@ abstract class AbstractAI implements Ctrl
                 			 ((L2Summon)_actor).setFollowStatus(false);
 
                 		 setIntention(AI_INTENTION_IDLE);
-                 		 return;
+                  		 return;
                 	 }
-                	
+
+                	 // Do not start movement while the actor is in the middle of an attack
+                	 // swing. Broadcasting MoveToPawn during the attack animation would
+                	 // cancel the client-side swing. _attackTimeToMove now covers the
+                	 // full swing + reuse window (set in doAttack), so this is the
+                	 // secondary safety net — the primary is thinkAttack() stopping the
+                	 // FollowTask via stopFollow() when entering range.
+                	 if (_actor.isAttackingNow())
+                	 	return;
+
                 	 moveToPawn(followTarget, _range);
                 }
             }

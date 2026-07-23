@@ -15,6 +15,7 @@
 
 package net.sf.l2j.gameserver.clientpackets;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -50,9 +51,16 @@ public final class RequestLinkHtml extends L2GameClientPacket
 		}
 
 		NpcHtmlMessage msg = new NpcHtmlMessage(0);
-		msg.setFile(_link);
-
-		sendPacket(msg);
+		try
+		{
+			String filename = "data/html/"+_link;
+			msg.setFile(filename);
+			sendPacket(msg);
+		}
+		catch (Exception e)
+		{
+			_log.log(Level.WARNING, "Bad RequestLinkHtml: ", e);
+		}
 	}
 
 	@Override
