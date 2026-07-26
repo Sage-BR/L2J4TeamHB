@@ -29,6 +29,7 @@ import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
+import net.sf.l2j.gameserver.util.FloodProtector;
 import net.sf.l2j.gameserver.util.IllegalPlayerAction;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
@@ -64,10 +65,112 @@ public final class RequestEnchantItem extends L2GameClientPacket
 			return;
 		}
 		
+		if (!FloodProtector.getInstance().tryPerformAction(activeChar.getObjectId(), FloodProtector.PROTECTED_ENCHANTITEM))
+		{
+			activeChar.sendMessage("Anti Enchant Interface Delay!");
+			return;
+		}
+
 		if (activeChar.isProcessingTransaction())
 		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.CANNOT_ENCHANT_WHILE_STORE));
 			activeChar.setActiveEnchantItem(null);
+			return;
+		}
+		if (activeChar.isInCraftMode())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Crafting");
+			return;
+		}
+		if (activeChar.isDead())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Dead");
+			return;
+		}
+		if (activeChar.isTeleporting())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Teleporting");
+			return;
+		}
+		if (activeChar.isSleeping())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Sleeping");
+			return;
+		}
+		if (activeChar.isParalyzed())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Paralyzed");
+			return;
+		}
+		if (activeChar.isCastingNow())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Casting");
+			return;
+		}
+		if (activeChar.isMoving())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Moving");
+			return;
+		}
+		if (activeChar.isStunned())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Stunned");
+			return;
+		}
+		if (activeChar.isMounted())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Mounted");
+			return;
+		}
+		if (activeChar.isFakeDeath())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Fake Death");
+			return;
+		}
+		if (activeChar.isInJail())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while in Jail");
+			return;
+		}
+		if (activeChar.isCursedWeaponEquipped())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant with Cursed Weapon");
+			return;
+		}
+		if (activeChar.isInWater())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while in Water");
+			return;
+		}
+		if (activeChar.isFlying())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Flying");
+			return;
+		}
+		if (activeChar.isFishing())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Fishing");
+			return;
+		}
+		if (activeChar.isSitting())
+		{
+			activeChar.setActiveEnchantItem(null);
+			activeChar.sendMessage("Can't enchant while Sitting");
 			return;
 		}
 		

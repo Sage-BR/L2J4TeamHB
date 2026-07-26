@@ -24,6 +24,8 @@ import net.sf.l2j.gameserver.communitybbs.CommunityBoard;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.handler.IVoicedCommandHandler;
+import net.sf.l2j.gameserver.handler.VoicedCommandHandler;
 import net.sf.l2j.gameserver.model.GMAudit;
 import net.sf.l2j.gameserver.model.L2CharPosition;
 import net.sf.l2j.gameserver.model.L2Object;
@@ -90,6 +92,18 @@ public final class RequestBypassToServer extends L2GameClientPacket
 					GMAudit.auditGMAction(activeChar.getName(), _command, (activeChar.getTarget() != null?activeChar.getTarget().getName():"no-target"));
 
 				ach.useAdminCommand(_command, activeChar);
+			}
+			else if (_command.startsWith("voiced_"))
+			{
+				IVoicedCommandHandler vch = VoicedCommandHandler.getInstance().getVoicedCommandHandler(_command.substring(7));
+
+				if (vch == null)
+				{
+					activeChar.sendMessage("The command " + _command.substring(7) + " does not exist!");
+					_log.warning("No handler registered for command '" + _command + "'");
+					return;
+				}
+				vch.useVoicedCommand(_command.substring(7), activeChar, null);
 			}
 			else if (_command.equals("come_here") && ( activeChar.isGM()))
 			{

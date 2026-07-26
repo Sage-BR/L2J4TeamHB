@@ -111,7 +111,7 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 		int destinationY = _route.get(_currentPos).getMoveY();
 		int destinationZ = _route.get(_currentPos).getMoveZ();
 
-		if(getActor().getX() == destinationX && getActor().getY() == destinationY && getActor().getZ() == destinationZ)
+		if(getActor().isInsideRadius(destinationX, destinationY, 10, false) && Math.abs(getActor().getZ() - destinationZ) < 30)
 		{
 			String chat = _route.get(_currentPos).getChatText();
 			if(chat != null && !chat.equals(""))

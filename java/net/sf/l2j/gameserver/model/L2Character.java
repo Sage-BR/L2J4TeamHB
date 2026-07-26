@@ -3934,7 +3934,8 @@ public abstract class L2Character extends L2Object
 			}
 			else
 			{
-				super.getPosition().setXYZ(m._xDestination, m._yDestination, m._zDestination);
+				super.getPosition().setXYZ(m._xDestination, m._yDestination,
+					GeoData.getInstance().traceTerrainZ(m._xMoveFrom, m._yMoveFrom, super.getZ(), m._xDestination, m._yDestination));
 			}
 
 			return true;
@@ -3951,24 +3952,18 @@ public abstract class L2Character extends L2Object
 		{
 			int nextX = m._xMoveFrom + (int)(elapsed * m._xSpeedTicks);
 			int nextY = m._yMoveFrom + (int)(elapsed * m._ySpeedTicks);
-			int nextZ = super.getZ();
 
-			// Snap Z to terrain height for ground players every tick (Brproject pattern).
-			// Prevents falling through the map and client Z-desync rollbacks.
-			if (this instanceof L2PcInstance && Config.GEODATA > 0 && !isFlying() && !isInsideZone(ZONE_WATER))
+			// Trace terrain Z along movement path (L2J HorridoJoho pattern).
+			if (Config.GEODATA > 0 && !isFlying() && !isInsideZone(ZONE_WATER))
 			{
-				int terrainZ = GeoData.getInstance().getHeight(nextX, nextY, nextZ);
-				if (Math.abs(terrainZ - nextZ) > 100)
-				{
-					nextZ = terrainZ;
-					// Z changed significantly — sync client
-					((L2PcInstance)this).sendPacket(new ValidateLocation(this));
-				}
+				int tracedZ = GeoData.getInstance().traceTerrainZ(m._xMoveFrom, m._yMoveFrom, super.getZ(), nextX, nextY);
+				super.getPosition().setXYZ(nextX, nextY, tracedZ);
 			}
-
-			super.getPosition().setXYZ(nextX, nextY, nextZ);
-			if (this instanceof L2PcInstance) ((L2PcInstance)this).revalidateZone(false);
-			else revalidateZone();
+			else
+			{
+				super.getPosition().setXYZ(nextX, nextY, super.getZ());
+			}
+			revalidateZone();
 		}
 
 		// Set the timer of last position update to now
@@ -4239,7 +4234,7 @@ public abstract class L2Character extends L2Object
 			// Pathfinding checks. Only when geodata setting is 2, the LoS check gives shorter result
 			// than the original movement was and the LoS gives a shorter distance than 2000
 			// This way of detecting need for pathfinding could be changed.
-			if(Config.GEODATA == 2 && originalDistance-distance > 100 && distance < 2000 && !this.isAfraid())
+			if(Config.GEODATA == 2 && originalDistance-distance > 100 && !this.isAfraid())
 			{
 				// Path calculation
 				// Overrides previous movement check

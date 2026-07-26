@@ -237,6 +237,9 @@ public class GameServer
 				L2World.getInstance();
 				MapRegionTable.getInstance();
 				ZoneData.getInstance();
+			},
+			// Group F: Geodata (heavy I/O, own VT to start immediately)
+			() -> {
 				GeoData.getInstance();
 				if (Config.GEODATA == 2)
 					GeoPathFinding.getInstance();

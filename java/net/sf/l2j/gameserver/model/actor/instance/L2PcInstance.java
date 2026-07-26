@@ -430,6 +430,8 @@ public final class L2PcInstance extends L2PlayableInstance
 	/** Stored from last ValidatePosition **/
 	private Point3D _lastClientPosition = new Point3D(0, 0, 0);
 	private Point3D _lastServerPosition = new Point3D(0, 0, 0);
+	private long _fallingTimestamp = 0;
+	private static final long FALLING_VALIDATION_DELAY = 1000;
 
 	/** The number of recommandation obtained by the L2PcInstance */
 	private int _recomHave; // how much I was recommended by others
@@ -2418,7 +2420,7 @@ public final class L2PcInstance extends L2PlayableInstance
 			return;
 		}
 
-		if (!_waitTypeSitting && !isAttackingDisabled() && !isOutOfControl() && !isImmobilized())
+		if (!_waitTypeSitting && !isAttackingDisabled() && !isOutOfControl() && !isImmobilized() && !isMoving())
 		{
 			breakAttack();
 			setIsSitting(true);
@@ -9927,13 +9929,29 @@ public final class L2PcInstance extends L2PlayableInstance
 		
 		if (distFraction > 1)
 		{
-			// Set the position of the L2Character to the destination
-			super.setXYZ(m._xDestination, m._yDestination, m._zDestination);
+			// Trace terrain Z at destination to prevent falling below ground around columns.
+			int destZ = GeoData.getInstance().traceTerrainZ(getX(), getY(), getZ(), m._xDestination, m._yDestination);
+			super.setXYZ(m._xDestination, m._yDestination, destZ);
 		}
 		else
 		{
-			// Set the position of the L2Character to estimated after parcial move
-			super.setXYZ(getX() + (int)(dx * distFraction + 0.5), getY() + (int)(dy * distFraction + 0.5), getZ() + (int)(dz * distFraction));
+			int nextX = getX() + (int)(dx * distFraction + 0.5);
+			int nextY = getY() + (int)(dy * distFraction + 0.5);
+			int nextZ;
+
+			// Trace terrain Z along movement path (L2J HorridoJoho pattern).
+			if (Config.GEODATA > 0 && !isFlying() && !isInsideZone(ZONE_WATER))
+			{
+				int prevX = getX();
+				int prevY = getY();
+				nextZ = GeoData.getInstance().traceTerrainZ(prevX, prevY, getZ(), nextX, nextY);
+				super.setXYZ(nextX, nextY, nextZ);
+			}
+			else
+			{
+				nextZ = getZ() + (int)(dz * distFraction);
+				super.setXYZ(nextX, nextY, nextZ);
+			}
 		}
 
 		// Set the timer of last position update to now
@@ -9980,6 +9998,57 @@ public final class L2PcInstance extends L2PlayableInstance
 		double dz = (z - _lastServerPosition.getZ());
 
 		return (int)Math.sqrt(dx*dx + dy*dy + dz*dz);
+	}
+
+	/**
+	 * Checks if the character is falling based on Z difference.
+	 * @param z the client Z
+	 * @return true if falling
+	 */
+	public boolean isFalling(int z)
+	{
+		if (isDead() || isFlying() || isMounted() || isInsideZone(ZONE_WATER))
+			return false;
+
+		int serverX = getX();
+		int serverY = getY();
+		int serverZ = getZ();
+		int spawnZ = GeoData.getInstance().getSpawnHeight(serverX, serverY, serverZ - 1000, serverZ + 1000, getObjectId());
+
+		if (System.currentTimeMillis() < _fallingTimestamp)
+		{
+			if (spawnZ >= z && spawnZ <= serverZ)
+			{
+				sendPacket(new ValidateLocation(this));
+				stopFalling();
+				return false;
+			}
+			return true;
+		}
+
+		if (z > serverZ || spawnZ < z)
+		{
+			stopFalling();
+			return false;
+		}
+
+		if ((serverZ - z) > 200)
+		{
+			setFalling();
+			return true;
+		}
+
+		return false;
+	}
+
+	private void setFalling()
+	{
+		_fallingTimestamp = System.currentTimeMillis() + FALLING_VALIDATION_DELAY;
+	}
+
+	public void stopFalling()
+	{
+		_fallingTimestamp = 0;
 	}
 
 	@Override

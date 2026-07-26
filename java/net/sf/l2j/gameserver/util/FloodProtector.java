@@ -48,7 +48,7 @@ public class FloodProtector
 	// =========================================================
 
 	// reuse delays for protected actions (in game ticks 1 tick = 100ms)
-	private static final int[] REUSEDELAY = new int[]{ 4, 42, 42, 16, 100, 20, 10 };
+	private static final int[] REUSEDELAY = new int[]{ 4, 42, 42, 16, 100, 20, 10, 20 };
 
 	// protected actions
 	public static final int PROTECTED_USEITEM		= 0;
@@ -58,6 +58,7 @@ public class FloodProtector
 	public static final int PROTECTED_HEROVOICE		= 4;
 	public static final int PROTECTED_SUBCLASS		= 5;
 	public static final int PROTECTED_DROPITEM		= 6;
+	public static final int PROTECTED_ENCHANTITEM	= 7;
 
 	// =========================================================
 	// Constructor

@@ -95,6 +95,14 @@ public class GeoEngine extends GeoData
     	return nGetSpawnHeight((x - L2World.MAP_MIN_X) >> 4,(y - L2World.MAP_MIN_Y) >> 4,zmin,zmax,spawnid);
     }
     /**
+     * @see net.sf.l2j.gameserver.GeoData#traceTerrainZ(int, int, int, int, int)
+     */
+    @Override
+    public short traceTerrainZ(int x, int y, int z, int tx, int ty)
+    {
+    	return nTraceTerrainZ((x - L2World.MAP_MIN_X) >> 4,(y - L2World.MAP_MIN_Y) >> 4,z,(tx - L2World.MAP_MIN_X) >> 4,(ty - L2World.MAP_MIN_Y) >> 4);
+    }
+    /**
      * @see net.sf.l2j.gameserver.GeoData#geoPosition(int, int)
      */
     @Override
@@ -139,7 +147,14 @@ public class GeoEngine extends GeoData
     	if (!(target instanceof L2DoorInstance)
     			&& DoorTable.getInstance().checkIfDoorsBetween(cha.getX(),cha.getY(),z,target.getX(),target.getY(),z2))
     		return false;
-    	if(target instanceof L2DoorInstance) return true; // door coordinates are hinge coords..
+    	if(target instanceof L2DoorInstance)
+    	{
+    		int doorZ = target.getZ() + 45;
+    		if(cha.getZ() >= doorZ)
+    			return canSeeTarget(cha.getX(), cha.getY(), z, target.getX(), target.getY(), doorZ);
+    		else
+    			return canSeeTarget(target.getX(), target.getY(), doorZ, cha.getX(), cha.getY(), z);
+    	}
     	if(target instanceof L2SiegeGuardInstance) z2 += 30; // well they don't move closer to balcony fence at the moment :(
     	if(cha.getZ() >= target.getZ())
     		return canSeeTarget(cha.getX(),cha.getY(),z,target.getX(),target.getY(),z2);
@@ -975,8 +990,9 @@ public class GeoEngine extends GeoData
 	            height = geo.getShort(index);
 	            height = (short)(height&0x0fff0);
 				height = (short)(height >> 1); //height / 2
-	            if ((zmin-temph)*(zmin-temph) > (zmin-height)*(zmin-height))
-	                temph = height;
+            int refZ = (zmin + zmax) / 2;
+            if ((refZ - temph) * (refZ - temph) > (refZ - height) * (refZ - height))
+                temph = height;
 	            layers--;
 	            index += 2;
 	        }
@@ -996,6 +1012,26 @@ public class GeoEngine extends GeoData
 	    return temph;
 	}
 	/**
+	 * @return Terrain Z at (tx,ty) stepping cell by cell from (x,y,z).
+	 */
+	private static short nTraceTerrainZ(int geox, int geoy, int z, int tgeox, int tgeoy)
+	{
+		int dx = tgeox - geox;
+		int dy = tgeoy - geoy;
+		int steps = Math.max(Math.abs(dx), Math.abs(dy));
+		short terrainZ = (short)z;
+		if (steps == 0)
+			return nGetHeight(geox, geoy, z);
+		for (int i = 1; i <= steps; i++)
+		{
+			int cx = geox + (dx * i) / steps;
+			int cy = geoy + (dy * i) / steps;
+			terrainZ = nGetHeight(cx, cy, terrainZ);
+		}
+		return terrainZ;
+	}
+
+	/**
 	 * @param x
 	 * @param y
 	 * @param z
@@ -1004,6 +1040,71 @@ public class GeoEngine extends GeoData
 	 * @param tz
 	 * @return True if char can move to (tx,ty,tz)
 	 */
+	/**
+	 * Read NSWE flags for a given geo cell. Used by nCanMoveNext to validate
+	 * both origin and target cells (Brproject pattern).
+	 */
+	private static short nGetCellNSWE(int gx, int gy, int z)
+	{
+	    short region = getRegionOffset(gx, gy);
+	    int blockX = getBlock(gx);
+		int blockY = getBlock(gy);
+		int cellX, cellY;
+	    short nswe = 15; // default all passable
+
+		int index;
+		if (_geodataIndex.get(region) == null) index = ((blockX << 8) + blockY) * 3;
+		else index = _geodataIndex.get(region).get(((blockX << 8)) + (blockY));
+
+		ByteBuffer geo = _geodata.get(region);
+		if (geo == null) return 15; // no geodata → all passable
+
+		byte type = geo.get(index);
+		index++;
+		if (type == 0) // flat
+			return 15;
+		else if (type == 1) // complex
+		{
+			cellX = getCell(gx);
+			cellY = getCell(gy);
+			index += ((cellX << 3) + cellY) << 1;
+			short height = geo.getShort(index);
+			nswe = (short) (height & 0x0F);
+		}
+		else // multilevel
+		{
+			cellX = getCell(gx);
+			cellY = getCell(gy);
+			int offset = (cellX << 3) + cellY;
+			while (offset > 0)
+			{
+				byte lc = geo.get(index);
+				index += (lc << 1) + 1;
+				offset--;
+			}
+			byte layers = geo.get(index);
+			index++;
+			if (layers <= 0 || layers > 125)
+				return 15;
+			short tempz = Short.MIN_VALUE;
+			while (layers > 0)
+			{
+				short height = geo.getShort(index);
+				height = (short) (height & 0x0fff0);
+				height = (short) (height >> 1);
+				if ((z - tempz) * (z - tempz) > (z - height) * (z - height))
+				{
+					tempz = height;
+					nswe = geo.getShort(index);
+					nswe = (short) (nswe & 0x0F);
+				}
+				layers--;
+				index += 2;
+			}
+		}
+		return nswe;
+	}
+
 	private static double nCanMoveNext(int x, int y, int z, int tx, int ty, int tz)
 	{
 	    short region = getRegionOffset(x,y);
@@ -1029,7 +1130,15 @@ public class GeoEngine extends GeoData
 		byte type = geo.get(index);
 		index++;
 	    if(type == 0) //flat
-	        return geo.getShort(index);
+	    {
+	        // Flat block: origin is all-passable, but target might be blocked (column edge).
+	        // Check target cell's NSWE using terrain Z at target for correct height-level check.
+	        short targetNSWE = nGetCellNSWE(tx, ty, nGetHeight(tx, ty, z));
+	        if (checkNSWE(targetNSWE, tx, ty, x, y))
+	        	return geo.getShort(index);
+	        else
+	        	return Double.MIN_VALUE;
+	    }
 	    else if(type == 1) //complex
 	    {
 	    	cellX = getCell(x);
@@ -1039,8 +1148,9 @@ public class GeoEngine extends GeoData
 			NSWE = (short)(height&0x0F);
 			height = (short)(height&0x0fff0);
 			height = (short)(height >> 1); //height / 2
-			if(checkNSWE(NSWE,x,y,tx,ty)) return height;
-			else return Double.MIN_VALUE;
+			if(!checkNSWE(NSWE,x,y,tx,ty))
+				return Double.MIN_VALUE;
+			return height;
 	    }
 	    else //multilevel, type == 2
 	    {
@@ -1080,8 +1190,9 @@ public class GeoEngine extends GeoData
 	            layers--;
 	            index += 2;
 	        }
-	        if(checkNSWE(NSWE,x,y,tx,ty)) return tempz;
-	        else return Double.MIN_VALUE;
+	        if(!checkNSWE(NSWE,x,y,tx,ty))
+	        	return Double.MIN_VALUE;
+			return tempz;
 	    }
 	}
 	/**
@@ -1313,25 +1424,39 @@ public class GeoEngine extends GeoData
         //Check NSWE
 	    if(NSWE == 15)
 	       return true;
-	    if(tx > x)//E
+
+	    boolean canX = true;
+	    boolean canY = true;
+
+	    if(tx > x)
+	    	canX = (NSWE & _e) != 0;
+	    else if (tx < x)
+	    	canX = (NSWE & _w) != 0;
+
+	    if (ty > y)
+	    	canY = (NSWE & _s) != 0;
+	    else if (ty < y)
+	    	canY = (NSWE & _n) != 0;
+
+	    if (!canX || !canY)
+	    	return false;
+
+	    if (tx != x && ty != y)
 	    {
-	    	if ((NSWE & _e) == 0)
-	            return false;
-	    }
-	    else if (tx < x)//W
-	    {
-	    	if ((NSWE & _w) == 0)
-	            return false;
-	    }
-	    if (ty > y)//S
-	    {
-	    	if ((NSWE & _s) == 0)
-	            return false;
-	    }
-	    else if (ty < y)//N
-	    {
-	    	if ((NSWE & _n) == 0)
-	            return false;
+	    	if (ty > y)
+	    	{
+	    		if (tx > x)
+	    			return checkNSWE(NSWE, x, y, tx, y) && checkNSWE(NSWE, x, y, x, ty);
+	    		else
+	    			return checkNSWE(NSWE, x, y, tx, y) && checkNSWE(NSWE, x, y, x, ty);
+	    	}
+	    	else
+	    	{
+	    		if (tx > x)
+	    			return checkNSWE(NSWE, x, y, tx, y) && checkNSWE(NSWE, x, y, x, ty);
+	    		else
+	    			return checkNSWE(NSWE, x, y, tx, y) && checkNSWE(NSWE, x, y, x, ty);
+	    	}
 	    }
 	    return true;
     }

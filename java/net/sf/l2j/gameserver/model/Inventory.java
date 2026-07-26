@@ -17,6 +17,7 @@ package net.sf.l2j.gameserver.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.logging.Level;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
@@ -1368,10 +1369,18 @@ public abstract class Inventory extends ItemContainer
 	        L2ItemInstance item;
 	        while (inv.next())
 	        {
-	            item = L2ItemInstance.restoreFromDb(getOwnerId(), inv);
-	            if (item == null) continue;
-	            
-	            if(getOwner() instanceof L2PcInstance)
+    	        item = L2ItemInstance.restoreFromDb(getOwnerId(), inv);
+    	        if (item == null) continue;
+    	        
+    	        // Check if that item already exists in OID map.
+    	    	if (L2World.getInstance().findObject(inv.getInt("object_id")) != null)
+    	    	{
+    	    		_log.log(Level.WARNING, "Item: "+ item.getObjectId() +" Has Duplied on World And Cannot be Load");
+    	    		L2World.getInstance().removeObject(item);
+    	    		continue;
+    	    	}
+    	        
+    	        if(getOwner() instanceof L2PcInstance)
 	            {
 	                L2PcInstance player = (L2PcInstance)getOwner();
 

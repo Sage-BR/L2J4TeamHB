@@ -22,12 +22,10 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.sf.l2j.gameserver.lib.Log;
-
 public class GMAudit
 {
 	
-	private static final Logger _log = Logger.getLogger(Log.class.getName());
+	private static final Logger _log = Logger.getLogger(GMAudit.class.getName());
 	
 	public static void auditGMAction(String gmName, String action, String target, String params)
 	{

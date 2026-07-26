@@ -917,7 +917,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
         	}
         }
             
-        if (_mostHatedAnalysis.character.isMoving()) range += 50;
+        if (_mostHatedAnalysis.character.isMoving() || _actor.isMoving()) range += 50;
         // Check if the actor is far from target
         if (dist2 > range*range)
         {
@@ -1426,7 +1426,10 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
         	
         	// Finally, physical attacks
         	clientStopMoving(null);
-        	_accessor.doAttack(getAttackTarget());
+        	if (GeoData.getInstance().canSeeTarget(_actor, getAttackTarget()))
+        		_accessor.doAttack(getAttackTarget());
+        	else
+        		moveToPawn(getAttackTarget(), range);
         }
     }
 

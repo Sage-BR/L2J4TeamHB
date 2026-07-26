@@ -81,6 +81,18 @@ public class GeoData
     /**
      * @param x
      * @param y
+     * @param z
+     * @param tx
+     * @param ty
+     * @return Terrain Z at (tx,ty) traced from (x,y,z) stepping cell by cell.
+     */
+    public short traceTerrainZ(int x, int y, int z, int tx, int ty)
+    {
+        return (short)z;
+    }
+    /**
+     * @param x
+     * @param y
      * @return
      */
     public String geoPosition(int x, int y)

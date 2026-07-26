@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.GameTimeController;
+import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.model.L2CharPosition;
 import net.sf.l2j.gameserver.model.L2Character;
@@ -584,6 +585,10 @@ abstract class AbstractAI implements Ctrl
             		if (GameTimeController.getGameTicks() < (_moveToPawnTimeout+10)) return;            		
             	}
             }
+
+            // If can't see target, move directly without offset (L2J Maneco2 pattern).
+            if (!GeoData.getInstance().canSeeTarget(_actor, pawn))
+                offset = 0;
 
             // Set AI movement data
             _clientMoving = true;

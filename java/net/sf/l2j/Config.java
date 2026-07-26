@@ -550,6 +550,9 @@ public final class Config
     public static boolean	L2JMOD_ENABLE_WAREHOUSESORTING_FREIGHT;
     public static boolean	ALLOW_CUSTOM_CHAR_LVL;
     public static int		CUSTOM_CHAR_LVL;
+    public static int		MAX_PATK_SPEED;
+    public static int		MAX_MATK_SPEED;
+    public static int		MAX_PATK_SPEED_ARCHERS;
     public static boolean	ALLOW_CUSTOM_STARTER_ITEMS;
     public static List<int[]> CUSTOM_STARTER_ITEMS_FIGHTER = new ArrayList<int[]>();
     public static List<int[]> CUSTOM_STARTER_ITEMS_MAGE = new ArrayList<int[]>();
@@ -1885,6 +1888,10 @@ public final class Config
                 ALLOW_CUSTOM_CHAR_LVL = Boolean.parseBoolean(L2JModSettings.getProperty("AllowCustomStartLvl", "false"));
                 CUSTOM_CHAR_LVL = Integer.parseInt(L2JModSettings.getProperty("CustomStartLvl", "1"));
                 
+                MAX_PATK_SPEED = Integer.parseInt(L2JModSettings.getProperty("MaxPAtkSpeed", "1500"));
+                MAX_MATK_SPEED = Integer.parseInt(L2JModSettings.getProperty("MaxMAtkSpeed", "2100"));
+                MAX_PATK_SPEED_ARCHERS = Integer.parseInt(L2JModSettings.getProperty("MaxPAtkSpeedArchers", "1300"));
+                
                 ALLOW_CUSTOM_STARTER_ITEMS = Boolean.parseBoolean(L2JModSettings.getProperty("AllowCustomStarterItems", "false"));
                 
                 if (ALLOW_CUSTOM_STARTER_ITEMS)
@@ -2324,6 +2331,11 @@ public final class Config
 
         // L2JMOD Custom Starter Items
         else if (pName.equalsIgnoreCase("AllowCustomStarterItems")) ALLOW_CUSTOM_STARTER_ITEMS = Boolean.parseBoolean(pValue);
+
+        // L2JMOD Atk Speed Limits
+        else if (pName.equalsIgnoreCase("MaxPAtkSpeed")) MAX_PATK_SPEED = Integer.parseInt(pValue);
+        else if (pName.equalsIgnoreCase("MaxMAtkSpeed")) MAX_MATK_SPEED = Integer.parseInt(pValue);
+        else if (pName.equalsIgnoreCase("MaxPAtkSpeedArchers")) MAX_PATK_SPEED_ARCHERS = Integer.parseInt(pValue);
 
         // PvP settings
         else if (pName.equalsIgnoreCase("MinKarma")) KARMA_MIN_KARMA = Integer.parseInt(pValue);

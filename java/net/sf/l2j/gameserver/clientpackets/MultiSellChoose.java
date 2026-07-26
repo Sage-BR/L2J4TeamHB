@@ -87,6 +87,8 @@ public class MultiSellChoose extends L2GameClientPacket
     {
     	PcInventory inv = player.getInventory();
 
+    	boolean maintainItemFound = false;
+
         // given the template entry and information about maintaining enchantment and applying taxes
         // re-create the instance of the entry that will be used for this exchange
     	// i.e. change the enchantment level of select ingredient/products and adena amount appropriately.
@@ -121,12 +123,26 @@ public class MultiSellChoose extends L2GameClientPacket
     				newIng = false;
     			}
     		}
-    		if(newIng)
+    		if (newIng)
     		{
+    			// If there is a maintainIngredient, then we do not need to check the enchantment parameter
+    			// as the enchant level will be checked elsewhere
+    			if (maintainEnchantment && e.getMantainIngredient())
+    				maintainItemFound = true;
+
     			// if it's a new ingredient, just store its info directly (item id, count, enchantment)
     			_ingredientsList.add(L2Multisell.getInstance().new MultiSellIngredient(e));
     		}
     	}
+
+    	// If there is no maintainIngredient, then we must make sure that the
+    	// enchantment is not kept from the client packet, as it may have been forged
+    	if (!maintainItemFound)
+    	{
+    		for (MultiSellIngredient product : entry.getProducts())
+    			product.setEnchantmentLevel(0);
+    	}
+
     	// now check if the player has sufficient items in the inventory to cover the ingredients' expences
     	for(MultiSellIngredient e : _ingredientsList)
     	{

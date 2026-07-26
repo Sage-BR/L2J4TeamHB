@@ -19,6 +19,7 @@ import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PlayableInstance;
+import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.skills.Calculator;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Stats;
@@ -372,6 +373,8 @@ public class CharStat
     		bonusSpdAtk = Config.L2JMOD_CHAMPION_SPD_ATK;
 		double val = calcStat(Stats.MAGIC_ATTACK_SPEED, _activeChar.getTemplate().baseMAtkSpd * bonusSpdAtk, null, null);
 		val /= _activeChar.getArmourExpertisePenalty();
+		if (val > Config.MAX_MATK_SPEED)
+			val = Config.MAX_MATK_SPEED;
 		return (int) val;
 	}
 
@@ -525,7 +528,21 @@ public class CharStat
     	float bonusAtk = 1;
         if  (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
     		bonusAtk = Config.L2JMOD_CHAMPION_SPD_ATK;
-		return (int) (calcStat(Stats.POWER_ATTACK_SPEED, _activeChar.getTemplate().basePAtkSpd * bonusAtk, null, null) / _activeChar.getArmourExpertisePenalty());
+		int val = (int) (calcStat(Stats.POWER_ATTACK_SPEED, _activeChar.getTemplate().basePAtkSpd * bonusAtk, null, null) / _activeChar.getArmourExpertisePenalty());
+		if (val > Config.MAX_PATK_SPEED)
+			val = Config.MAX_PATK_SPEED;
+		if (_activeChar instanceof L2PcInstance)
+		{
+			ClassId classId = ((L2PcInstance)_activeChar).getClassId();
+			if (classId == ClassId.hawkeye || classId == ClassId.sagittarius
+				|| classId == ClassId.silverRanger || classId == ClassId.moonlightSentinel
+				|| classId == ClassId.phantomRanger || classId == ClassId.ghostSentinel)
+			{
+				if (val > Config.MAX_PATK_SPEED_ARCHERS)
+					return Config.MAX_PATK_SPEED_ARCHERS;
+			}
+		}
+		return val;
 	}
 
 	/** Return the PAtk Modifier against undead. */

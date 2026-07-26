@@ -21,8 +21,6 @@ import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.TaskPriority;
 import net.sf.l2j.gameserver.Universe;
 import net.sf.l2j.gameserver.geoeditorcon.GeoEditorListener;
-import net.sf.l2j.gameserver.model.L2Character;
-import net.sf.l2j.gameserver.model.Location;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.PartyMemberPosition;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
@@ -92,6 +90,13 @@ public class ValidatePosition extends L2GameClientPacket
         		return;
         }
 
+        activeChar.setLastClientPosition(_x, _y, _z);
+        activeChar.setLastServerPosition(activeChar.getX(), activeChar.getY(), activeChar.getZ());
+
+        // If falling, skip position validation to avoid "jumping" (L2J HorridoJoho pattern).
+        if (GeoData.getInstance().hasGeo(realX, realY) && activeChar.isFalling(_z))
+            return;
+
         // Sync thresholds aligned with Brproject (ValidatePosition.java).
         // - MAX_DISTANCE_DIFF: absolute cap on 3D divergence between client and server.
         // - MAX_SPEED_CHECK: multiplier over the character's move speed used as per-tick travel cap.
@@ -129,47 +134,27 @@ public class ValidatePosition extends L2GameClientPacket
             }
             else
             {
-                // Within tolerance: geo-collision check (Brproject pattern)
-                if (Config.GEODATA > 0 && !activeChar.isFlying() && !activeChar.isInsideZone(L2Character.ZONE_WATER))
-                {
-                    if (!GeoData.getInstance().canMoveToTarget(realX, realY, realZ, _x, _y, _z))
-                    {
-                        // Client pos is through a wall — find last valid position
-                        Location validPos = GeoData.getInstance().getValidLocation(realX, realY, realZ, _x, _y, _z);
-                        double vdx = validPos.getX() - realX;
-                        double vdy = validPos.getY() - realY;
-                        double vdz = validPos.getZ() - realZ;
-                        double validDist = Math.sqrt(vdx*vdx + vdy*vdy + vdz*vdz);
-                        if (validDist < MAX_DISTANCE_DIFF)
-                        {
-                            // Smooth correction to valid position
-                            activeChar.setXYZ(validPos.getX(), validPos.getY(), validPos.getZ());
-                            activeChar.sendPacket(new ValidateLocation(activeChar));
-                        }
-                        else
-                        {
-                            // Too far — hard rollback
-                            activeChar.sendPacket(new ValidateLocation(activeChar));
-                        }
-                    }
-                    else
-                    {
-                        // Path is clear — trust client
-                        activeChar.setXYZ(_x, _y, _z);
-                    }
-                }
-                else
-                {
-                    // Geo disabled, flying, or swimming — trust client
-                    activeChar.setXYZ(_x, _y, _z);
-                }
+                // Trust client position (Brproject pattern — no geo-collision check per tick)
+                activeChar.setXYZ(_x, _y, _z);
             }
         }
 
-        activeChar.setLastClientPosition(_x, _y, _z);
-        activeChar.setLastServerPosition(activeChar.getX(), activeChar.getY(), activeChar.getZ());
         // --- fim sincronização ---
-        
+
+        // Brproject: terrain height snap — if client Z is slightly below walkable terrain
+        // after all validations, correct it. Prevents "below ground" artifacts when routing
+        // through geodata gaps (columns, bridges, etc).
+        if (Config.GEODATA > 0 && !activeChar.isFlying())
+        {
+            int terrainZ = GeoData.getInstance().getSpawnHeight(_x, _y, _z - 50, _z + 50, activeChar.getObjectId());
+            int heightDiff = terrainZ - _z;
+            if (heightDiff > 5 && heightDiff < 50)
+            {
+                activeChar.setXYZ(_x, _y, terrainZ);
+                activeChar.sendPacket(new ValidateLocation(activeChar));
+            }
+        }
+
 		if(activeChar.getParty() != null)
 			activeChar.getParty().broadcastToPartyMembers(activeChar,new PartyMemberPosition(activeChar));
 

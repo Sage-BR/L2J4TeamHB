@@ -111,6 +111,12 @@ public final class Say2 extends L2GameClientPacket
 			return;
 		}
 
+		if (_text.length() >= 100)
+		{
+			_log.warning("Say2: Max input exceeded.");
+			return;
+		}
+
 		if (activeChar.isCursedWeaponEquipped() && (_type == TRADE || _type == SHOUT))
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.SHOUT_AND_TRADE_CHAT_CANNOT_BE_USED_WHILE_POSSESSING_CURSED_WEAPON);
