@@ -65,7 +65,7 @@ Commits aplicados manualmente no servidor, baseados em análise do repositório 
 - Branch `upstream/fix/door_coords` — `47f30f98d` NÃO aplicável (getX/getY final em L2Object, sem DoorData/L2DoorTemplate)
 - Branch `upstream/feature/attackable-ai-rework` — refactor massivo disponível para futuro cherry-pick
 
-## 2026-07-27 — Sessão 12: FLAT blocks always passable in nCanMoveNext (Brproject pattern)
+## 2026-07-27 — Sessão 12: FLAT blocks always passable in nCanMoveNext
 
 - `GeoEngine.java` — Removed target NSWE check from FLAT case in `nCanMoveNext`; FLAT blocks are now always passable (Brproject pattern). Fixes rollback ("passa e volta") when walking across block boundaries where FLAT tiles meet complex/multilevel tiles with blocking NSWE at the boundary edge.
 - `GeoEngine.java` — Removed dead `nGetCellNSWE(gx, gy, z)` function (was only called from the FLAT case).

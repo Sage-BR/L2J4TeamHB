@@ -272,7 +272,7 @@ public class GeoEngine extends GeoData
         		short region = getRegionOffset(x,y);
         		// geodata is loaded for region and mobs should have correct Z coordinate...
         		// so there would likely be a floor in between the two
-        		if (_geodata.get(region) != null)
+        		if (_geoBlocks.get(region) != null)
         			return false;
         	}
         	return true;
@@ -392,7 +392,7 @@ public class GeoEngine extends GeoData
         		short region = getRegionOffset(x,y);
         		// geodata is loaded for region and mobs should have correct Z coordinate...
         		// so there would likely be a floor in between the two
-        		if (_geodata.get(region) != null)
+        		if (_geoBlocks.get(region) != null)
         			return false;
         	}
         	return true;
@@ -660,8 +660,6 @@ public class GeoEngine extends GeoData
 	public static void unloadGeodata(byte rx, byte ry)
 	{
 		short regionoffset = (short)((rx << 5) + ry);
-		_geodataIndex.remove(regionoffset);
-		_geodata.remove(regionoffset);
 		_geoBlocks.remove(regionoffset);
 	}
 	public static boolean loadGeodataFile(byte rx, byte ry)
@@ -712,8 +710,6 @@ public class GeoEngine extends GeoData
 			            }
 			        }
 			    }
-				_geodataIndex.put(regionoffset, indexs);
-			
 			// Build pre-decoded ABlock array for this region
 			ABlock[] blocks = new ABlock[65536];
 			for (int bi = 0; bi < 65536; bi++)
@@ -735,6 +731,8 @@ public class GeoEngine extends GeoData
 				}
 			}
 			_geoBlocks.put(regionoffset, blocks);
+			// Release old MappedByteBuffer — _geoBlocks replaces it
+			_geodata.remove(regionoffset);
 		}
 		else
 		{
@@ -747,8 +745,9 @@ public class GeoEngine extends GeoData
 				blocks[bi] = new BlockFlat(geo.getShort());
 			}
 			_geoBlocks.put(regionoffset, blocks);
+			// Release old structures
+			_geodata.remove(regionoffset);
 		}
-		_geodata.put(regionoffset,geo);
 
 			if (Config.DEBUG)
 				_log.info("Geo Engine: - Max Layers: "+flor+" Size: "+size+" Loaded: "+index);
@@ -881,13 +880,14 @@ public class GeoEngine extends GeoData
 		else if (block instanceof BlockMultilayer)
 		{
 			BlockMultilayer bm = (BlockMultilayer)block;
-			short[] heights = bm.getHeights(cellX, cellY);
+			int layers = bm.getLayerCount(cellX, cellY);
 			int refZ = (zmin + zmax) / 2;
-			temph = heights[0];
-			for (int i = 1; i < heights.length; i++)
+			temph = bm.getLayerHeight(cellX, cellY, 0);
+			for (int i = 1; i < layers; i++)
 			{
-				if ((refZ - temph) * (refZ - temph) > (refZ - heights[i]) * (refZ - heights[i]))
-					temph = heights[i];
+				short h = bm.getLayerHeight(cellX, cellY, i);
+				if ((refZ - temph) * (refZ - temph) > (refZ - h) * (refZ - h))
+					temph = h;
 			}
 			if (temph > zmax + 200 || temph < zmin - 200)
 			{
@@ -974,38 +974,10 @@ public class GeoEngine extends GeoData
 		else if (block instanceof BlockMultilayer)
 		{
 			BlockMultilayer bm = (BlockMultilayer)block;
-			short[] layerHeights = bm.getHeights(cellX, cellY);
-			byte[] layerNSWEs = bm.getNSWEs(cellX, cellY);
-			int layers = layerHeights.length;
-			
-			if (layers <= 0)
-				return z;
-			
-			int closest = 0;
-			for (int i = 1; i < layers; i++)
-			{
-				if ((z - layerHeights[closest]) * (z - layerHeights[closest])
-						> (z - layerHeights[i]) * (z - layerHeights[i]))
-					closest = i;
-			}
-			if (checkNSWE((short)(layerNSWEs[closest] & 0xFF), x, y, tx, ty))
-				return layerHeights[closest];
-			// Layer closest blocks movement: try the next layer above (ramp ascending case).
-			// Layers are stored from highest to lowest, so above = smaller index.
-			for (int i = closest - 1; i >= 0; i--)
-			{
-				if (layerHeights[i] > layerHeights[closest]
-						&& checkNSWE((short)(layerNSWEs[i] & 0xFF), x, y, tx, ty))
-					return layerHeights[i];
-			}
-			if (Config.MOVE_DEBUG)
-			{
-				StringBuilder sb = new StringBuilder("layers=[");
-				for (int i = 0; i < layers; i++) { if(i>0)sb.append(","); sb.append(layerHeights[i]).append(":NSWE=").append(layerNSWEs[i]); }
-				sb.append("] closest=").append(closest).append(" z=").append(z);
-				_log.info("[GEO] nCanMoveNext BLOCKED (multilevel): from=("+x+","+y+","+z+") to=("+tx+","+ty+") closestNSWE="+layerNSWEs[closest]+" closestH="+layerHeights[closest]+" "+sb);
-			}
-			return Double.MIN_VALUE;
+			double result = bm.checkMove(cellX, cellY, z, tx - x, ty - y);
+			if (result == Double.MIN_VALUE && Config.MOVE_DEBUG)
+				_log.info("[GEO] nCanMoveNext BLOCKED (multilevel): from=("+x+","+y+","+z+") to=("+tx+","+ty+")");
+			return result;
 		}
 		return z;
 	}
@@ -1050,9 +1022,7 @@ public class GeoEngine extends GeoData
 		else if (block instanceof BlockMultilayer)
 		{
 			BlockMultilayer bm = (BlockMultilayer)block;
-			short[] heights = bm.getHeights(cellX, cellY);
-			byte[] nswes = bm.getNSWEs(cellX, cellY);
-			int layers = heights.length;
+			int layers = bm.getLayerCount(cellX, cellY);
 			
 			if (layers <= 0 || layers > 125)
 				return false;
@@ -1066,16 +1036,17 @@ public class GeoEngine extends GeoData
 			// Layers stored highest to lowest
 			for (int i = 0; i < layers; i++)
 			{
-				if (z > heights[i])
+				short h = bm.getLayerHeight(cellX, cellY, i);
+				if (z > h)
 				{
-					lowerHeight = heights[i];
-					currentNSWE = nswes[i];
+					lowerHeight = h;
+					currentNSWE = bm.getLayerNSWE(cellX, cellY, i);
 					highestlayer = false;
 					break;
 				}
 				else
 				{
-					upperHeight = heights[i];
+					upperHeight = h;
 				}
 			}
 			
