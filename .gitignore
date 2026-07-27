@@ -1,3 +1,7 @@
 .agents/
 .freebuff/
 /bin/
+/data/Server/lib/cachedir/
+/data/Server/log/
+/classes/
+/build/

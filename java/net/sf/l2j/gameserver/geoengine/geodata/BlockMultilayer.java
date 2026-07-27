@@ -1,104 +1,54 @@
 package net.sf.l2j.gameserver.geoengine.geodata;
 
+import java.nio.ByteBuffer;
+
 /**
  * Multilayer block: 64 cells (8x8), each with variable number of layers.
- * Data is pre-decoded in the constructor to avoid repeated ByteBuffer reads
- * and to preserve the sign bit for negative Z values.
+ * Lightweight: reads from the MappedByteBuffer on demand instead of
+ * pre-decoding into a byte[] array. Saves hundreds of MB across all regions.
  * 
- * Buffer layout per cell:
- *   [byte: layerCount]
- *   for each layer:
- *     [byte: NSWE] [short: height] (3 bytes per layer)
+ * Layers are stored from highest to lowest. Buffer layout per block:
+ *   [byte: type=2]
+ *   for each cell (0..63):
+ *     [byte: layerCount]
+ *     for each layer:
+ *       [short: (height << 1) | NSWE]
  */
 public class BlockMultilayer extends ABlock
 {
-	private final byte[] _buffer;
-	/** Pre-computed start position of each cell in _buffer for O(1) lookup. */
-	private final int[] _cellStartPos;
+	private final ByteBuffer _geo;
+	/** Absolute position of this block's type byte in the MappedByteBuffer. */
+	private final int _blockStart;
 	
-	public BlockMultilayer(java.nio.ByteBuffer bb)
+	public BlockMultilayer(ByteBuffer geo, int blockStart)
 	{
-		// Temporary buffer to accumulate decoded data
-		byte[] temp = new byte[GeoStructure.BLOCK_CELLS * 3 * 126]; // max 125 layers + 1 count byte per cell
-		int pos = 0;
-		_cellStartPos = new int[GeoStructure.BLOCK_CELLS];
-		
-		for (int cell = 0; cell < GeoStructure.BLOCK_CELLS; cell++)
-		{
-			_cellStartPos[cell] = pos;
-			int layers = bb.get() & 0xFF;
-			
-			if (layers <= 0 || layers > 125)
-			{
-				// Corrupted data: treat as flat with height 0 and ALL NSWE
-				temp[pos++] = 1; // layer count
-				temp[pos++] = GeoStructure.CELL_FLAG_ALL;
-				temp[pos++] = 0;
-				temp[pos++] = 0;
-				continue;
-			}
-			
-			temp[pos++] = (byte)layers;
-			
-			for (int layer = 0; layer < layers; layer++)
-			{
-				int raw = bb.getShort() & 0xFFFF;
-				
-				// NSWE: lowest 4 bits
-				temp[pos++] = (byte)(raw & 0x0F);
-				
-				// Height: extract bits, cast to short to preserve sign, then shift
-				int height = (short)(raw & 0xFFF0);
-				height >>= 1; // arithmetic shift preserves sign
-				
-				temp[pos++] = (byte)(height & 0xFF);
-				temp[pos++] = (byte)((height >> 8) & 0xFF);
-			}
-		}
-		
-		// Copy to exact-sized buffer
-		_buffer = new byte[pos];
-		System.arraycopy(temp, 0, _buffer, 0, pos);
+		_geo = geo;
+		_blockStart = blockStart;
 	}
 	
 	/**
-	 * @param cellX 0-7
-	 * @param cellY 0-7
-	 * @return start position of cell data in _buffer (O(1) lookup via _cellStartPos)
+	 * @return absolute position of cell (cellX, cellY) data, pointing to the layerCount byte.
 	 */
-	private int getCellStartPos(int cellX, int cellY)
+	private int findCellStart(int cellX, int cellY)
 	{
-		return _cellStartPos[cellX * GeoStructure.BLOCK_CELLS_Y + cellY];
+		int addr = _blockStart + 1; // skip type byte
+		int cellsToSkip = cellX * GeoStructure.BLOCK_CELLS_Y + cellY;
+		for (int i = 0; i < cellsToSkip; i++)
+		{
+			int layers = _geo.get(addr++) & 0xFF;
+			addr += layers * 2; // each layer = 1 short
+		}
+		return addr;
 	}
 	
 	/**
-	 * Returns the layer index nearest to worldZ for cell (cellX, cellY).
+	 * Decode raw short (height << 1 | NSWE) into height with sign fix.
 	 */
-	private int findNearestLayerIndex(int cellX, int cellY, int worldZ)
+	private static short decodeHeight(int raw)
 	{
-		int pos = getCellStartPos(cellX, cellY);
-		int layers = _buffer[pos++] & 0xFF;
-		int nearest = 0;
-		int bestDist = Math.abs((int)getShort(pos + 1) - worldZ);
-		
-		for (int i = 1; i < layers; i++)
-		{
-			int layerPos = pos + i * 3;
-			int dist = Math.abs((int)getShort(layerPos + 1) - worldZ);
-			if (dist < bestDist)
-			{
-				bestDist = dist;
-				nearest = i;
-			}
-		}
-		return nearest;
-	}
-	
-	private short getShort(int index)
-	{
-		int low = _buffer[index] & 0xFF;
-		int high = _buffer[index + 1] & 0xFF;
-		return (short)((high << 8) | low);
+		int height = (short)(raw & 0xFFF0);
+		height >>= 1;
+		return (short)height;
 	}
 	
 	@Override
@@ -112,8 +62,25 @@ public class BlockMultilayer extends ABlock
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
-		int idx = findNearestLayerIndex(cellX, cellY, worldZ);
-		return getLayerHeight(cellX, cellY, idx);
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
+		if (layers <= 0)
+			return (short)worldZ;
+		
+		int nearestAddr = addr;
+		int nearestDist = Math.abs(_geo.getShort(addr) - worldZ);
+		
+		for (int i = 1; i < layers; i++)
+		{
+			int layerAddr = addr + i * 2;
+			int dist = Math.abs(_geo.getShort(layerAddr) - worldZ);
+			if (dist < nearestDist)
+			{
+				nearestDist = dist;
+				nearestAddr = layerAddr;
+			}
+		}
+		return decodeHeight(_geo.getShort(nearestAddr) & 0xFFFF);
 	}
 	
 	@Override
@@ -121,8 +88,26 @@ public class BlockMultilayer extends ABlock
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
-		int idx = findNearestLayerIndex(cellX, cellY, worldZ);
-		return getLayerNSWE(cellX, cellY, idx);
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
+		if (layers <= 0)
+			return GeoStructure.CELL_FLAG_ALL;
+		
+		int nearestAddr = addr;
+		int nearestDist = Math.abs(_geo.getShort(addr) - worldZ);
+		
+		for (int i = 1; i < layers; i++)
+		{
+			int layerAddr = addr + i * 2;
+			int dist = Math.abs(_geo.getShort(layerAddr) - worldZ);
+			if (dist < nearestDist)
+			{
+				nearestDist = dist;
+				nearestAddr = layerAddr;
+			}
+		}
+		int raw = _geo.getShort(nearestAddr) & 0xFFFF;
+		return (byte)(raw & 0x0F);
 	}
 	
 	@Override
@@ -130,19 +115,19 @@ public class BlockMultilayer extends ABlock
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
-		int pos = getCellStartPos(cellX, cellY);
-		int layers = _buffer[pos++] & 0xFF;
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
 		
-		// Layers are stored from highest to lowest.
-		// Seek to the last layer (highest stored first).
-		pos += (layers - 1) * 3;
+		// Seek to last layer (highest stored first = at addr + (layers-1)*2)
+		addr += (layers - 1) * 2;
 		
 		while (layers > 0)
 		{
-			short height = getShort(pos + 1);
-			if (height > worldZ)
-				return height;
-			pos -= 3;
+			int raw = _geo.getShort(addr) & 0xFFFF;
+			short h = decodeHeight(raw);
+			if (h > worldZ)
+				return h;
+			addr -= 2;
 			layers--;
 		}
 		return Short.MAX_VALUE;
@@ -153,8 +138,8 @@ public class BlockMultilayer extends ABlock
 	 */
 	public int getLayerCount(int cellX, int cellY)
 	{
-		int pos = getCellStartPos(cellX, cellY);
-		return _buffer[pos] & 0xFF;
+		int addr = findCellStart(cellX, cellY);
+		return _geo.get(addr) & 0xFF;
 	}
 	
 	/**
@@ -162,11 +147,12 @@ public class BlockMultilayer extends ABlock
 	 */
 	public short getLayerHeight(int cellX, int cellY, int layerIndex)
 	{
-		int pos = getCellStartPos(cellX, cellY);
-		int layers = _buffer[pos++] & 0xFF;
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
 		if (layerIndex < 0 || layerIndex >= layers)
 			return 0;
-		return getShort(pos + 1 + layerIndex * 3);
+		int raw = _geo.getShort(addr + layerIndex * 2) & 0xFFFF;
+		return decodeHeight(raw);
 	}
 	
 	/**
@@ -174,44 +160,47 @@ public class BlockMultilayer extends ABlock
 	 */
 	public byte getLayerNSWE(int cellX, int cellY, int layerIndex)
 	{
-		int pos = getCellStartPos(cellX, cellY);
-		int layers = _buffer[pos++] & 0xFF;
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
 		if (layerIndex < 0 || layerIndex >= layers)
 			return 0;
-		return _buffer[pos + layerIndex * 3];
+		int raw = _geo.getShort(addr + layerIndex * 2) & 0xFFFF;
+		return (byte)(raw & 0x0F);
 	}
 	
 	/**
 	 * Complete movement check without allocating temporary arrays.
+	 * Reads raw shorts from the MappedByteBuffer on demand.
 	 * @return height to move to, or {@link Double#MIN_VALUE} if blocked.
 	 */
 	public double checkMove(int cellX, int cellY, int z, int tx, int ty)
 	{
-		int pos = getCellStartPos(cellX, cellY);
-		int layers = _buffer[pos++] & 0xFF;
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
 		if (layers <= 0)
 			return z;
 		
-		// Find nearest layer without allocating arrays
-		int nearestPos = pos;
-		int nearestDist = Math.abs((int)getShort(pos + 1) - z);
+		// Find nearest layer without allocating arrays, reading from buffer
+		int nearestAddr = addr;
+		int nearestDist = Math.abs((int)decodeHeight(_geo.getShort(addr) & 0xFFFF) - z);
 		
 		for (int i = 1; i < layers; i++)
 		{
-			int layerPos = pos + i * 3;
-			int dist = Math.abs((int)getShort(layerPos + 1) - z);
+			int layerAddr = addr + i * 2;
+			int h = decodeHeight(_geo.getShort(layerAddr) & 0xFFFF);
+			int dist = Math.abs(h - z);
 			if (dist < nearestDist)
 			{
 				nearestDist = dist;
-				nearestPos = layerPos;
+				nearestAddr = layerAddr;
 			}
 		}
 		
-		byte nearestNSWE = _buffer[nearestPos];
-		short nearestHeight = getShort(nearestPos + 1);
+		int raw = _geo.getShort(nearestAddr) & 0xFFFF;
+		byte nearestNSWE = (byte)(raw & 0x0F);
+		short nearestHeight = decodeHeight(raw);
 		
-		// Determine direction from cell position to target for NSWE check
-		int nearestIdx = (nearestPos - pos) / 3;
+		int nearestIdx = (nearestAddr - addr) / 2;
 		
 		if (checkNSWE((short)(nearestNSWE & 0xFF), tx, ty))
 			return nearestHeight;
@@ -219,9 +208,10 @@ public class BlockMultilayer extends ABlock
 		// Ramp-up: try layers above (lower index = higher layer stored first)
 		for (int i = nearestIdx - 1; i >= 0; i--)
 		{
-			int layerPos = pos + i * 3;
-			short h = getShort(layerPos + 1);
-			if (h > nearestHeight && checkNSWE((short)(_buffer[layerPos] & 0xFF), tx, ty))
+			int layerAddr = addr + i * 2;
+			int r = _geo.getShort(layerAddr) & 0xFFFF;
+			short h = decodeHeight(r);
+			if (h > nearestHeight && checkNSWE((short)((byte)(r & 0x0F) & 0xFF), tx, ty))
 				return h;
 		}
 		
@@ -229,14 +219,12 @@ public class BlockMultilayer extends ABlock
 	}
 	
 	/**
-	 * Simplified NSWE check using only target direction (no geoX needed).
+	 * Simplified NSWE check using only direction deltas.
 	 */
 	private static boolean checkNSWE(short NSWE, int tx, int ty)
 	{
 		if (NSWE == 15)
 			return true;
-		// Direction: tx/ty are already absolute differences from current cell
-		// We check: if tx > 0, need E; if tx < 0, need W; if ty > 0, need S; if ty < 0, need N
 		if (tx > 0 && (NSWE & 1) == 0) return false;
 		if (tx < 0 && (NSWE & 2) == 0) return false;
 		if (ty > 0 && (NSWE & 4) == 0) return false;

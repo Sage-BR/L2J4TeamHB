@@ -1,57 +1,48 @@
 package net.sf.l2j.gameserver.geoengine.geodata;
 
+import java.nio.ByteBuffer;
+
 /**
  * Complex block: 64 cells (8x8), each with its own height and NSWE.
- * Data is pre-decoded in the constructor to avoid repeated ByteBuffer reads
- * and to preserve the sign bit for negative Z values.
+ * Lightweight: reads from the MappedByteBuffer on demand instead of
+ * pre-decoding into a byte[] array. This saves ~200 bytes per block
+ * (hundreds of MB total across all regions).
+ * 
+ * The Z-negative sign fix from VERGE SOURCE is applied during reads:
+ * (short) cast BEFORE >> to preserve sign bit on negative Z values.
  */
 public class BlockComplex extends ABlock
 {
-	/** For each cell: 1 byte NSWE + 2 bytes height (little-endian short) = 3 bytes per cell */
-	private final byte[] _buffer;
+	private final ByteBuffer _geo;
+	private final int _blockStart; // absolute position of this block's type byte
 	
-	public BlockComplex(java.nio.ByteBuffer bb)
+	/**
+	 * @param geo the MappedByteBuffer for this region (shared across all blocks in the region)
+	 * @param blockStart absolute position of the block's type byte in the buffer
+	 */
+	public BlockComplex(ByteBuffer geo, int blockStart)
 	{
-		_buffer = new byte[GeoStructure.BLOCK_CELLS * 3];
-		
-		for (int i = 0; i < GeoStructure.BLOCK_CELLS; i++)
-		{
-			// Read raw short (height << 1 | NSWE)
-			int raw = bb.getShort() & 0xFFFF;
-			
-			// NSWE: lowest 4 bits
-			byte nswe = (byte)(raw & 0x0F);
-			
-			// Height: extract bits, cast to short to preserve sign, then shift
-			// This is the same pattern used for multilevel blocks to avoid the
-			// signed/unsigned bug with negative Z values.
-			int height = (short)(raw & 0xFFF0);
-			height >>= 1; // arithmetic shift (preserves sign because of the (short) cast above)
-			
-			_buffer[i * 3] = nswe;
-			_buffer[i * 3 + 1] = (byte)(height & 0xFF);       // low byte
-			_buffer[i * 3 + 2] = (byte)((height >> 8) & 0xFF); // high byte
-		}
+		_geo = geo;
+		_blockStart = blockStart;
 	}
 	
 	/**
-	 * Constructor for pre-decoded data (used by dynamic blocks).
+	 * @return absolute position of cell (cellX, cellY) short in the buffer
 	 */
-	protected BlockComplex(byte[] buffer)
+	private int getCellAddr(int cellX, int cellY)
 	{
-		_buffer = buffer;
+		// blockStart points to type byte, skip it (+1), then cell index * 2 bytes each
+		return _blockStart + 1 + (cellX * GeoStructure.BLOCK_CELLS_Y + cellY) * 2;
 	}
 	
-	private static int getCellIndex(int cellX, int cellY)
+	/**
+	 * Decode raw short (height << 1 | NSWE) into height with sign fix.
+	 */
+	private short decodeHeight(int raw)
 	{
-		return (cellX * GeoStructure.BLOCK_CELLS_Y + cellY) * 3;
-	}
-	
-	private short getShort(int index)
-	{
-		int low = _buffer[index] & 0xFF;
-		int high = _buffer[index + 1] & 0xFF;
-		return (short)((high << 8) | low);
+		int height = (short)(raw & 0xFFF0);
+		height >>= 1; // arithmetic shift preserves sign because of the (short) cast above
+		return (short)height;
 	}
 	
 	@Override
@@ -65,8 +56,8 @@ public class BlockComplex extends ABlock
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
-		int index = getCellIndex(cellX, cellY);
-		return getShort(index + 1);
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		return decodeHeight(raw);
 	}
 	
 	@Override
@@ -74,8 +65,8 @@ public class BlockComplex extends ABlock
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
-		int index = getCellIndex(cellX, cellY);
-		return _buffer[index];
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		return (byte)(raw & 0x0F);
 	}
 	
 	@Override
@@ -83,20 +74,20 @@ public class BlockComplex extends ABlock
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
-		int index = getCellIndex(cellX, cellY);
-		short height = getShort(index + 1);
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		short height = decodeHeight(raw);
 		return (height > worldZ) ? height : Short.MAX_VALUE;
 	}
 	
 	public byte getNswe(int cellX, int cellY)
 	{
-		int index = getCellIndex(cellX, cellY);
-		return _buffer[index];
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		return (byte)(raw & 0x0F);
 	}
 	
 	public short getHeight(int cellX, int cellY)
 	{
-		int index = getCellIndex(cellX, cellY);
-		return getShort(index + 1);
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		return decodeHeight(raw);
 	}
 }

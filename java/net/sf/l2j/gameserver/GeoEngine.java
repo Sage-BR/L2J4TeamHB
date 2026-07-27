@@ -660,7 +660,17 @@ public class GeoEngine extends GeoData
 	public static void unloadGeodata(byte rx, byte ry)
 	{
 		short regionoffset = (short)((rx << 5) + ry);
+		_geodata.remove(regionoffset);
 		_geoBlocks.remove(regionoffset);
+	}
+	
+	/**
+	 * @return true if geodata is loaded for this region.
+	 */
+	public static boolean hasGeodata(byte rx, byte ry)
+	{
+		short regionoffset = (short)((rx << 5) + ry);
+		return _geoBlocks.containsKey(regionoffset);
 	}
 	public static boolean loadGeodataFile(byte rx, byte ry)
 	{
@@ -710,29 +720,28 @@ public class GeoEngine extends GeoData
 			            }
 			        }
 			    }
-			// Build pre-decoded ABlock array for this region
+			// Build lightweight ABlock array for this region
 			ABlock[] blocks = new ABlock[65536];
 			for (int bi = 0; bi < 65536; bi++)
 			{
-				int pos = indexs.get(bi);
-				geo.position(pos);
-				byte type = geo.get();
+				int blockStart = indexs.get(bi);
+				byte type = geo.get(blockStart);
 				if (type == GeoStructure.TYPE_FLAT_L2J)
 				{
-					blocks[bi] = new BlockFlat(geo.getShort());
+					short h = geo.getShort(blockStart + 1);
+					blocks[bi] = new BlockFlat(h);
 				}
 				else if (type == GeoStructure.TYPE_COMPLEX_L2J)
 				{
-					blocks[bi] = new BlockComplex(geo);
+					blocks[bi] = new BlockComplex(geo, blockStart);
 				}
 				else
 				{
-					blocks[bi] = new BlockMultilayer(geo);
+					blocks[bi] = new BlockMultilayer(geo, blockStart);
 				}
 			}
 			_geoBlocks.put(regionoffset, blocks);
-			// Release old MappedByteBuffer — _geoBlocks replaces it
-			_geodata.remove(regionoffset);
+			// Keep _geodata for lightweight block reads (no pre-decoded byte[] anymore)
 		}
 		else
 		{
@@ -745,9 +754,8 @@ public class GeoEngine extends GeoData
 				blocks[bi] = new BlockFlat(geo.getShort());
 			}
 			_geoBlocks.put(regionoffset, blocks);
-			// Release old structures
-			_geodata.remove(regionoffset);
 		}
+		_geodata.put(regionoffset, geo);
 
 			if (Config.DEBUG)
 				_log.info("Geo Engine: - Max Layers: "+flor+" Size: "+size+" Loaded: "+index);

@@ -238,12 +238,6 @@ public class GameServer
 				MapRegionTable.getInstance();
 				ZoneData.getInstance();
 			},
-			// Group F: Geodata (heavy I/O, own VT to start immediately)
-			() -> {
-				GeoData.getInstance();
-				if (Config.GEODATA == 2)
-					GeoPathFinding.getInstance();
-			},
 			// Group E: Entities and managers
 			() -> {
 				ClanTable.getInstance();
@@ -267,6 +261,11 @@ public class GameServer
 				SiegeRewardManager.getInstance();
 			}
 		);
+
+		// GeoData + PathFinding (sequencial, I/O pesado + memória intensa)
+		GeoData.getInstance();
+		if (Config.GEODATA == 2)
+			GeoPathFinding.getInstance();
 
 		// Spawn loading (heavy DB I/O, runs sequentially to avoid connection contention)
 		SpawnTable.getInstance();
@@ -440,10 +439,21 @@ public class GameServer
         TvTManager.getInstance();
         KnownListUpdateTaskManager.getInstance();
 		System.gc();
-		// maxMemory is the upper limit the jvm can use, totalMemory the size of the current allocation pool, freeMemory the unused memory in the allocation pool
-		long usedMem = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576;
+		long usedHeap = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576;
 		long totalMem = Runtime.getRuntime().maxMemory() / 1048576;
-		_log.info("GameServer Started in " + (System.currentTimeMillis() - startTime) / 1000 + "s, used memory "+usedMem+" Mb of "+totalMem+" Mb");
+		long geodataMb = 0;
+		if (Config.GEODATA > 0)
+		{
+			File geoDir = new File("./data/geodata/");
+			File[] files = geoDir.listFiles((d, name) -> name.endsWith(".l2j"));
+			if (files != null)
+			{
+				for (File f : files)
+					geodataMb += f.length();
+				geodataMb /= 1048576;
+			}
+		}
+		_log.info("GameServer Started in " + (System.currentTimeMillis() - startTime) / 1000 + "s, used memory " + (usedHeap + geodataMb) + " Mb of " + totalMem + " Mb");
 
 		_loginThread = LoginServerThread.getInstance();
 		_loginThread.start();
@@ -493,7 +503,7 @@ public class GameServer
 	{
 		if (groups.length == 0) return;
 		List<Thread> threads = new ArrayList<>(groups.length);
-		Exception[] ex = { null };
+		Throwable[] err = { null };
 		for (Runnable group : groups)
 		{
 			Thread t = Thread.ofVirtual().start(() ->
@@ -502,11 +512,11 @@ public class GameServer
 				{
 					group.run();
 				}
-				catch (Exception e)
+				catch (Throwable e)
 				{
-					synchronized (ex)
+					synchronized (err)
 					{
-						if (ex[0] == null) ex[0] = e;
+						if (err[0] == null) err[0] = e;
 					}
 				}
 			});
@@ -514,7 +524,12 @@ public class GameServer
 		}
 		for (Thread t : threads)
 			t.join();
-		if (ex[0] != null) throw ex[0];
+		if (err[0] != null)
+		{
+			if (err[0] instanceof Exception)
+				throw (Exception) err[0];
+			throw new RuntimeException(err[0]);
+		}
 	}
 
 	public static void main(String[] args) throws Exception

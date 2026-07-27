@@ -56,7 +56,7 @@ public class HwidManager
 
 		client.setHwidSession(new HwidSession(deviceId, cpu, hdd, mac));
 
-		LOGGER.info("HWID VALIDADO COM SUCESSO");
+
 		return true;
 	}
 
