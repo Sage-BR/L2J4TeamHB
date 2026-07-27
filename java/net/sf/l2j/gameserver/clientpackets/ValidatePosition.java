@@ -25,6 +25,7 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.PartyMemberPosition;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocationInVehicle;
+import net.sf.l2j.gameserver.model.L2Character;
 
 /**
  * This class ...
@@ -59,8 +60,14 @@ public class ValidatePosition extends L2GameClientPacket
     @Override
 	protected void runImpl()
     {
-        L2PcInstance activeChar = getClient().getActiveChar();
-        if (activeChar == null || activeChar.isTeleporting()) return;
+		L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null || activeChar.isTeleporting()) return;
+
+		int realX0 = activeChar.getX();
+		int realY0 = activeChar.getY();
+		int realZ0 = activeChar.getZ();
+		if (Config.MOVE_DEBUG)
+			_log.info("[MOVE] ValidatePosition IN  client=("+_x+","+_y+","+_z+") server=("+realX0+","+realY0+","+realZ0+") heading="+_heading+" moving="+activeChar.isMoving()+" flying="+activeChar.isFlying());
 
         if (Config.GEODATA > 0 
         		&& !activeChar.isFlying()
@@ -70,6 +77,8 @@ public class ValidatePosition extends L2GameClientPacket
         	short geoHeight = GeoData.getInstance().getSpawnHeight(_x, _y, activeChar.getZ()-30, activeChar.getZ()+30, activeChar.getObjectId());
         	if (Math.abs(geoHeight - _z) > 15)
         	{
+        		if (Config.MOVE_DEBUG)
+        			_log.info("[MOVE] Z override by geoHeight: client_z="+_z+" geoHeight="+geoHeight+" diff="+(geoHeight-_z)+" at ("+_x+","+_y+")");
         		// causes mild flashing in the middle of a drop from a castle wall for example
         		_z = geoHeight;
         		// System.out.println("Spawnheight validation diff="+Math.abs(geoHeight - _z));
@@ -95,7 +104,11 @@ public class ValidatePosition extends L2GameClientPacket
 
         // If falling, skip position validation to avoid "jumping" (L2J HorridoJoho pattern).
         if (GeoData.getInstance().hasGeo(realX, realY) && activeChar.isFalling(_z))
+        {
+            if (Config.MOVE_DEBUG)
+                _log.info("[MOVE] ValidatePosition SKIP (isFalling) client=("+_x+","+_y+","+_z+") server=("+realX+","+realY+","+realZ+")");
             return;
+        }
 
         // Sync thresholds aligned with Brproject (ValidatePosition.java).
         // - MAX_DISTANCE_DIFF: absolute cap on 3D divergence between client and server.
@@ -114,6 +127,8 @@ public class ValidatePosition extends L2GameClientPacket
         if (distance > MAX_DISTANCE_DIFF)
         {
             // Emergency: too far — force server authoritative position
+            if (Config.MOVE_DEBUG)
+                _log.info("[MOVE] ROLLBACK (distance>"+MAX_DISTANCE_DIFF+"): client=("+_x+","+_y+","+_z+") server=("+realX+","+realY+","+realZ+") distance="+distance);
             if (activeChar.isInBoat())
                 sendPacket(new ValidateLocationInVehicle(activeChar));
             else
@@ -127,6 +142,8 @@ public class ValidatePosition extends L2GameClientPacket
             if (planarMove > maxMovePerTick)
             {
                 // Speed check failed — reject client prediction (no setXYZ)
+                if (Config.MOVE_DEBUG)
+                    _log.info("[MOVE] ROLLBACK (speed check): planarMove="+planarMove+" > max="+maxMovePerTick+" (speed="+moveSpeed+" x"+MAX_SPEED_CHECK+") client=("+_x+","+_y+","+_z+") server=("+realX+","+realY+","+realZ+")");
                 if (activeChar.isInBoat())
                     sendPacket(new ValidateLocationInVehicle(activeChar));
                 else
@@ -135,6 +152,8 @@ public class ValidatePosition extends L2GameClientPacket
             else
             {
                 // Trust client position (Brproject pattern — no geo-collision check per tick)
+                if (Config.MOVE_DEBUG)
+                    _log.info("[MOVE] ValidatePosition ACCEPTED: client=("+_x+","+_y+","+_z+") server=("+realX+","+realY+","+realZ+") distance="+distance+" planarMove="+planarMove+"/"+maxMovePerTick);
                 activeChar.setXYZ(_x, _y, _z);
             }
         }
@@ -150,8 +169,14 @@ public class ValidatePosition extends L2GameClientPacket
             int heightDiff = terrainZ - _z;
             if (heightDiff > 5 && heightDiff < 50)
             {
+                if (Config.MOVE_DEBUG)
+                    _log.info("[MOVE] TERRAIN SNAP: client_z="+_z+" terrainZ="+terrainZ+" diff="+heightDiff+" at ("+_x+","+_y+")");
                 activeChar.setXYZ(_x, _y, terrainZ);
                 activeChar.sendPacket(new ValidateLocation(activeChar));
+            }
+            else if (Config.MOVE_DEBUG && heightDiff != 0)
+            {
+                _log.info("[MOVE] TERRAIN no-snap: heightDiff="+heightDiff+" (outside 5-50 range) client_z="+_z+" terrainZ="+terrainZ+" at ("+_x+","+_y+")");
             }
         }
 

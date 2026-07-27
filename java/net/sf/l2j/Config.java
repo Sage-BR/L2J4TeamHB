@@ -396,6 +396,7 @@ public final class Config
     public static boolean	FORCE_GEODATA;
     public static boolean	LAZY_GEODATA;
     public static boolean 	MOVE_BASED_KNOWNLIST;
+    public static boolean	MOVE_DEBUG;
     public static long		KNOWNLIST_UPDATE_INTERVAL;
     public static int		ZONE_TOWN;
     public static boolean	ACTIVATE_POSITION_RECORDER;
@@ -1527,6 +1528,7 @@ public final class Config
                 FORCE_GEODATA								= Boolean.parseBoolean(General.getProperty("ForceGeoData", "True"));
                 LAZY_GEODATA								= Boolean.parseBoolean(General.getProperty("LazyGeoData", "False"));
                 MOVE_BASED_KNOWNLIST						= Boolean.parseBoolean(General.getProperty("MoveBasedKnownlist", "False"));
+                MOVE_DEBUG									= Boolean.parseBoolean(General.getProperty("MoveDebug", "False"));
                 KNOWNLIST_UPDATE_INTERVAL					= Long.parseLong(General.getProperty("KnownListUpdateInterval", "1250"));
                 ZONE_TOWN									= Integer.parseInt(General.getProperty("ZoneTown", "0"));
                 ACTIVATE_POSITION_RECORDER					= Boolean.parseBoolean(General.getProperty("ActivatePositionRecorder", "False"));

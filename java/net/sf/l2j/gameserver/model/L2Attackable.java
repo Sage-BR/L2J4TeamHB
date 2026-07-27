@@ -1199,12 +1199,9 @@ public class L2Attackable extends L2NpcInstance
               if (Config.L2JMOD_CHAMPION_ENABLE && isChampion())
 				dropChance *= Config.L2JMOD_CHAMPION_REWARDS;
 
-              dropChance = Math.round(dropChance);
+               dropChance = Math.round(dropChance);
 
-        	  if (dropChance < L2DropData.MAX_CHANCE)
-        		  dropChance = L2DropData.MAX_CHANCE;
-
-              // Get min and max Item quantity that can be dropped in one time
+               // Get min and max Item quantity that can be dropped in one time
               int min = drop.getMinDrop();
               int max = drop.getMaxDrop();
 

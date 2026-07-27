@@ -4099,6 +4099,10 @@ public abstract class L2Character extends L2Object
 		float speed = getStat().getMoveSpeed();
 		if (speed <= 0 || isMovementDisabled()) return;
 
+		// Clear stale _move immediately so updatePosition won't use orphaned data
+		// if an early return is hit later (prevents distFraction → 0 rollback loop).
+		_move = null;
+
 		// Get current position of the L2Character
 		final int curX = super.getX();
 		final int curY = super.getY();
@@ -4203,13 +4207,12 @@ public abstract class L2Character extends L2Object
 					|| isAfraid()
 					|| this instanceof L2RiftInvaderInstance)
 			{
-				if (isOnGeodataPath())
-				{
-					if (gtx == _move.geoPathGtx && gty == _move.geoPathGty)
-						return;
-					else
-						_move.onGeodataPathIndex = -1; // Set not on geodata path
-				}
+				// Always process the new movement — clear any stale geodata path state.
+			// The early return for "same geo block" is removed because it caused
+			// the new MoveBackwardToLocation to be silently ignored, leaving an
+			// orphan _move with a stale destination (rollback loop).
+			if (isOnGeodataPath())
+					_move.onGeodataPathIndex = -1;
 				
 				if (curX < L2World.MAP_MIN_X || curX > L2World.MAP_MAX_X || curY < L2World.MAP_MIN_Y  || curY > L2World.MAP_MAX_Y)
 				{
@@ -4225,6 +4228,8 @@ public abstract class L2Character extends L2Object
 				}
 				Location destiny = GeoData.getInstance().moveCheck(curX, curY, curZ, x, y, z);
 				// location different if destination wasn't reached (or just z coord is different)
+				if (Config.MOVE_DEBUG && (destiny.getX() != x || destiny.getY() != y))
+					_log.info("[MOVE] moveCheck BLOCKED: orig=("+x+","+y+","+z+") -> destiny=("+destiny.getX()+","+destiny.getY()+","+destiny.getZ()+") cur=("+curX+","+curY+","+curZ+") char="+getName());
 				x = destiny.getX();
 				y = destiny.getY();
 				z = destiny.getZ();
@@ -4241,9 +4246,11 @@ public abstract class L2Character extends L2Object
 				if(this instanceof L2PlayableInstance || this.isInCombat())
 				{
 		
-				m.geoPath = GeoPathFinding.getInstance().findPath(curX, curY, curZ, originalX, originalY, originalZ);
+            	m.geoPath = GeoPathFinding.getInstance().findPath(curX, curY, curZ, originalX, originalY, originalZ);
             	if (m.geoPath == null || m.geoPath.size() < 2) // No path found
             	{
+            		if (Config.MOVE_DEBUG)
+            			_log.info("[MOVE] PATHFIND FAILED: from=("+curX+","+curY+","+curZ+") to=("+originalX+","+originalY+","+originalZ+") char="+getName()+" geoPath="+(m.geoPath == null ? "null" : "size="+m.geoPath.size()));
             		// Even though there's no path found (remember geonodes aren't perfect), 
             		// the mob is attacking and right now we set it so that the mob will go
             		// after target anyway, is dz is small enough. Summons will follow their masters no matter what.
@@ -4256,9 +4263,11 @@ public abstract class L2Character extends L2Object
             			if (tryRecalculatePathWithoutRetreat(originalX, originalY, originalZ))
             				return; // recalc succeeded — movement already set up
             			// Recalc failed — check if the moveCheck Z is safe (prevents "falling off bridges").
-            			// x,y,z already modified by moveCheck at line 4202.
+            			// x,y,z already set by moveCheck at line 4202.
             			if (Math.abs(z - curZ) > 200)
             			{
+                			if (Config.MOVE_DEBUG)
+                				_log.info("[MOVE] Z DRIFT > 200 STOP: z="+z+" curZ="+curZ+" char="+getName()+" at ("+curX+","+curY+","+curZ+") — sending ValidateLocation");
             				// Z would change too drastically — stop instead of falling.
             				// x,y,z already set by moveCheck but z would be wrong (terrain height).
             				z = curZ; // keep current Z to prevent fall

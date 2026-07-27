@@ -125,7 +125,7 @@ public abstract class ReceivablePacket<T extends MMOClient<?>>
 		_sbuf.clear();
 
 		char ch;
-		while ((ch = _buf.getChar()) != 0)
+		while (_buf.remaining() >= 2 && (ch = _buf.getChar()) != 0)
 		{
 			_sbuf.append(ch);
 		}

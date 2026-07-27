@@ -47,17 +47,9 @@ public class EffectGrow extends L2Effect {
 	}
 	
 	@Override
-	public boolean onActionTime() 
+	public boolean onActionTime()
 	{
-		if(getEffected() instanceof L2NpcInstance)
-		{
-			L2NpcInstance npc = (L2NpcInstance)getEffected();
-			npc.setCollisionHeight(npc.getTemplate().collisionHeight);
-			npc.setCollisionRadius(npc.getTemplate().collisionRadius);
-			
-			getEffected().stopAbnormalEffect(L2Character.ABNORMAL_EFFECT_GROW);
-		}
-		return false;
+		return true;
 	}
 
 	@Override

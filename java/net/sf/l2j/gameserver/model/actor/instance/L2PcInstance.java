@@ -3400,6 +3400,14 @@ public final class L2PcInstance extends L2PlayableInstance
 		_client = client;
 	}
 
+	public String getHWID()
+	{
+		if (getClient() == null || getClient().getHwidSession() == null)
+			return "";
+
+		return getClient().getHwidSession().getMac();
+	}
+
 	/**
 	 * Close the active connection with the client.<BR><BR>
 	 */
@@ -9931,6 +9939,8 @@ public final class L2PcInstance extends L2PlayableInstance
 		{
 			// Trace terrain Z at destination to prevent falling below ground around columns.
 			int destZ = GeoData.getInstance().traceTerrainZ(getX(), getY(), getZ(), m._xDestination, m._yDestination);
+			if (Config.MOVE_DEBUG)
+				_log.info("[MOVE] updatePosition ARRIVED: from=("+getX()+","+getY()+","+getZ()+") dest=("+m._xDestination+","+m._yDestination+","+destZ+") (origZ="+m._zDestination+") traceZ="+destZ+" char="+getName());
 			super.setXYZ(m._xDestination, m._yDestination, destZ);
 		}
 		else
@@ -9944,12 +9954,17 @@ public final class L2PcInstance extends L2PlayableInstance
 			{
 				int prevX = getX();
 				int prevY = getY();
-				nextZ = GeoData.getInstance().traceTerrainZ(prevX, prevY, getZ(), nextX, nextY);
+				int prevZ = getZ();
+				nextZ = GeoData.getInstance().traceTerrainZ(prevX, prevY, prevZ, nextX, nextY);
+				if (Config.MOVE_DEBUG)
+					_log.info("[MOVE] updatePosition TICK: ("+prevX+","+prevY+","+prevZ+") -> ("+nextX+","+nextY+","+nextZ+") distFraction="+distFraction+" speed="+getStat().getMoveSpeed());
 				super.setXYZ(nextX, nextY, nextZ);
 			}
 			else
 			{
 				nextZ = getZ() + (int)(dz * distFraction);
+				if (Config.MOVE_DEBUG)
+					_log.info("[MOVE] updatePosition TICK (no-geo): ("+getX()+","+getY()+","+getZ()+") -> ("+nextX+","+nextY+","+nextZ+") distFraction="+distFraction);
 				super.setXYZ(nextX, nextY, nextZ);
 			}
 		}

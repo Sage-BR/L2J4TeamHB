@@ -41,22 +41,31 @@ Commits aplicados manualmente no servidor, baseados em análise do repositório 
 - `geo_index.txt` — Sincronizado com 156 arquivos .l2j no disco
 - `pn_index.txt` — Sincronizado com 156 arquivos .pn no disco
 
-## 2026-07-25 — Sessão 11: Fix teleport-abaixo-terreno nas colunas + pathfallback sem restrição de distância + correção NSWE entre colunas
+## 2026-07-24 — Sessão 9: Correções de bugs (auditoria local)
+
+- `L2AttackableAI.java` — `doAttack` só executa se `canSeeTarget`, senão move para perto
+- `L2PcInstance.java` — Range do `isFalling` expandido de ±200 para ±1000
+- `GeoPathFinding.java` — Z tolerance do pathfinding aumentado de 55 para 128
+- `GeoEngine.java` — `checkNSWE` diagonal agora verifica ambos os eixos (anti-corner-cut)
+- `GeoEngine.java` — `nGetSpawnHeight` usa `(zmin+zmax)/2` como referência em vez de `zmin`
+- `L2Spawn.java` — `getSpawnHeight` chamado com `getLocz()-50, getLocz()+50` em vez de `getLocz(), getLocz()`
+- `GeoEngine.java` — `DoorInstance` não bypassa mais LOS total, faz LOS contra hinge coords
+- `ValidatePosition.java` — `lastClientPosition`/`lastServerPosition` atualizados antes do early return de falling
+- `L2NpcWalkerAI.java` — `checkArrived` usa `isInsideRadius(10)` + Z diff < 30 em vez de comparação exata
+
+## 2026-07-25 — Sessão 11: Fix teleport-abaixo-terreno nas colunas + pathfallback sem restrição de distância
 
 - `L2Character.java` — Removido `distance < 2000` do limite de ativação de pathfinding; NPCs buscam path com qualquer distância
-- `L2Character.java` — Destino de NPC usa `traceTerrainZ` para Z correto ao chegar (previne "teleport abaixo do chão" ao rotear entre colunas)
-- `L2PcInstance.java` — Destino do jogador usa `traceTerrainZ` para Z correto ao chegar (previne teleport abaixo do chão ao forçar pathing entre colunas)
+- `L2Character.java` — Destino de NPC usa `traceTerrainZ` para Z correto ao chegar (previne "teleport abaixo do chão")
+- `L2PcInstance.java` — Destino do jogador usa `traceTerrainZ` para Z correto ao chegar
 - `ValidatePosition.java` — Terrain height snap (5-50 unidades abaixo do terreno → ajusta para cima); reverteu check anterior que causava "jump around" em hills
-- `GeoEngine.java` — `nCanMoveNext` FLAT case agora usa `nGetHeight(tx,ty,z)` para consultar NSWE do alvo na altura do terreno do alvo (corrige oscilação "passa e volta" entre colunas)
+- `GeoEngine.java` — `nCanMoveNext` FLAT case usava `nGetHeight(tx,ty,z)` para consultar NSWE do alvo na altura do terreno do alvo (corrige oscilação "passa e volta" entre colunas) — **Revertido na sessão 12**; FLAT blocks são agora sempre passáveis (Brproject pattern).
 - Branch `upstream/feature/geoengine_and_movement_stabilization` — commits analisados; `c0b8a1940` removeu o bad check de ValidatePosition e usa traceTerrainZ no destino ao invés disso
 - Branch `upstream/feature/colosseum_fences` — commit `22678f0ad` aplicado
 - Branch `upstream/fix/door_coords` — `47f30f98d` NÃO aplicável (getX/getY final em L2Object, sem DoorData/L2DoorTemplate)
 - Branch `upstream/feature/attackable-ai-rework` — refactor massivo disponível para futuro cherry-pick
 
-## 2026-07-24 — Sessão 8
+## 2026-07-27 — Sessão 12: FLAT blocks always passable in nCanMoveNext (Brproject pattern)
 
-## 2026-07-24 — Sessão 7: Correção column bug + ajustes ValidatePosition
-
-- `GeoEngine.java` — `nCanMoveNext`: NSWE da célula de destino verificado apenas quando origem é FLAT
-- `ValidatePosition.java` — Rolagem não causa mais 3+ rollbacks ao andar perto de colunas
-- Índices de geodata/path sincronizados com arquivos reais no disco
+- `GeoEngine.java` — Removed target NSWE check from FLAT case in `nCanMoveNext`; FLAT blocks are now always passable (Brproject pattern). Fixes rollback ("passa e volta") when walking across block boundaries where FLAT tiles meet complex/multilevel tiles with blocking NSWE at the boundary edge.
+- `GeoEngine.java` — Removed dead `nGetCellNSWE(gx, gy, z)` function (was only called from the FLAT case).

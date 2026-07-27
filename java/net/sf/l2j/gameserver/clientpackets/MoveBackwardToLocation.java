@@ -15,6 +15,7 @@
 package net.sf.l2j.gameserver.clientpackets;
 
 import java.nio.BufferUnderflowException;
+import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.TaskPriority;
@@ -31,7 +32,7 @@ import net.sf.l2j.gameserver.serverpackets.PartyMemberPosition;
  */
 public class MoveBackwardToLocation extends L2GameClientPacket
 {
-	//private static Logger _log = Logger.getLogger(MoveBackwardToLocation.class.getName());
+	private static Logger _log = Logger.getLogger(MoveBackwardToLocation.class.getName());
 	// cdddddd
 	private       int _targetX;
 	private       int _targetY;
@@ -120,6 +121,9 @@ public class MoveBackwardToLocation extends L2GameClientPacket
 			}
 			activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO,
 					new L2CharPosition(_targetX, _targetY, _targetZ, 0));
+
+			if (Config.MOVE_DEBUG)
+				_log.info("[MOVE] MoveBackwardToLocation: cur=("+_curX+","+_curY+","+_curZ+") target=("+_targetX+","+_targetY+","+_targetZ+") char="+activeChar.getName()+" moving="+activeChar.isMoving());
 
 			if(activeChar.getParty() != null)
 				activeChar.getParty().broadcastToPartyMembers(activeChar,new PartyMemberPosition(activeChar));

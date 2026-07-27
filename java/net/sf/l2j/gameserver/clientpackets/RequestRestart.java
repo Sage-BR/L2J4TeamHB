@@ -33,6 +33,8 @@ import net.sf.l2j.gameserver.serverpackets.RestartResponse;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.taskmanager.AttackStanceTaskManager;
 
+import net.sf.l2j.protection.hwid.HwidDAO;
+
 import java.util.List;
 
 /**
@@ -44,6 +46,8 @@ public final class RequestRestart extends L2GameClientPacket
 {
     private static final String _C__46_REQUESTRESTART = "[C] 46 RequestRestart";
     private static Logger _log = Logger.getLogger(RequestRestart.class.getName());
+
+    private final HwidDAO dao = new HwidDAO();
 
     @Override
 	protected void readImpl()
@@ -120,6 +124,8 @@ public final class RequestRestart extends L2GameClientPacket
         }
 
         L2GameClient client = getClient();
+
+        dao.restartAndDisconnection(player);
 
         // detach the client from the char so that the connection isnt closed in the deleteMe
         player.setClient(null);
