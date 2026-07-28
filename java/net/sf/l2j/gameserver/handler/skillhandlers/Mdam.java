@@ -181,7 +181,7 @@ public class Mdam implements ISkillHandler
                 	if (target.reflectSkill(skill))
                 	{
                 		activeChar.stopSkillEffects(skill.getId());
-    					skill.getEffects((L2Character) null, activeChar);
+    					skill.getEffects(target, activeChar);
     					SystemMessage sm = new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT);
 						sm.addSkillName(skill);
 						activeChar.sendPacket(sm);
@@ -217,7 +217,7 @@ public class Mdam implements ISkillHandler
         skill.getEffectsSelf(activeChar);
 
         if (skill.isSuicideAttack())
-        	activeChar.doDie(null);
+		activeChar.doDie(activeChar);
 
     }
     

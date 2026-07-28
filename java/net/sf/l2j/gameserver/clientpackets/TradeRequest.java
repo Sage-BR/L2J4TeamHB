@@ -24,6 +24,7 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.SendTradeRequest;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.util.Util;
 
 /**
  *
@@ -107,6 +108,13 @@ public final class TradeRequest extends L2GameClientPacket
             player.sendMessage("Target is in trade refusal mode");
             return;
         }
+
+		if (Util.calculateDistance(player, partner, true) > 150)
+		{
+			SystemMessage sm = new SystemMessage(SystemMessageId.TARGET_TOO_FAR);
+			player.sendPacket(sm);
+			return;
+		}
 
 		player.onTransactionRequest(partner);
 		partner.sendPacket(new SendTradeRequest(player.getObjectId()));

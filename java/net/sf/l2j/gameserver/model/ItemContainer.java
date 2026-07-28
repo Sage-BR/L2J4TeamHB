@@ -417,13 +417,14 @@ public abstract class ItemContainer
                 
                 return item;
             }
-            else 
+            else
             {
-                boolean removed = this.removeItem(item);
+            	if (item.getCount() < count)
+            		return null;
+
+            	boolean removed = this.removeItem(item);
                 if (!removed)
-                {
                     return null;
-                }
                 
                 ItemTable.getInstance().destroyItem(process, item, actor, reference);
                 

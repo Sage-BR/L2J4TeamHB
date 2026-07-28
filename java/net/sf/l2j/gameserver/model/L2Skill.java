@@ -1162,7 +1162,16 @@ public abstract class L2Skill
     
     public final boolean useSoulShot()
     {
-        return ((getSkillType() == SkillType.PDAM) || (getSkillType() == SkillType.STUN) || (getSkillType() == SkillType.CHARGEDAM));
+    	switch (getSkillType())
+    	{
+    		case PDAM:
+    		case STUN:
+    		case CHARGEDAM:
+    		case BLOW:
+    			return true;
+   			default:
+    			return false;
+    	}
     }
 
     public final boolean useSpiritShot()

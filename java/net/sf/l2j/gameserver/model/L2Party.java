@@ -114,7 +114,7 @@ public class L2Party {
 	 * returns all party members
 	 * @return
 	 */
-	public List<L2PcInstance> getPartyMembers()
+	public synchronized List<L2PcInstance> getPartyMembers()
 	{
 		if (_members == null) _members = new ArrayList<L2PcInstance>();
 		return _members;
@@ -854,7 +854,7 @@ public class L2Party {
 
 	public DimensionalRift getDimensionalRift() { return _dr; }
 
-	public L2PcInstance getLeader() { return getPartyMembers().get(0); }
+	public synchronized L2PcInstance getLeader() { return getPartyMembers().get(0); }
 	private long _pendingInviteTimeout;
 	/**
 	 * set invitation process flag and store time for expiration

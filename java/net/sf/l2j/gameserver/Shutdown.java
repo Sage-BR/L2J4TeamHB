@@ -218,6 +218,16 @@ public class Shutdown extends Thread
 				// ignore
 			}
 
+			try
+			{
+				if (Config.DEADLOCK_DETECTOR)
+					GameServer.gameServer.getDeadLockDetectorThread().interrupt();
+			}
+			catch (Throwable t)
+			{
+				// ignore
+			}
+
 			// stop all threadpolls
 			try
 			{

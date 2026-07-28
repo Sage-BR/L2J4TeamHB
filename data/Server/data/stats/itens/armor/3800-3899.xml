@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='utf-8'?>
+<list>
+<item id='3891' name="Wolf's Hide Armor">
+  <for>
+    <add val='13' order='0x10' stat='pDef'/>
+    <add val='16' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="220"/>
+  <set name="material" val="4"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="10000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="13"/>
+  <set name="m_def" val="16"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3892' name="Wolf's Hard Leather Mail">
+  <for>
+    <add val='16' order='0x10' stat='pDef'/>
+    <add val='18' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="240"/>
+  <set name="material" val="4"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="20000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="16"/>
+  <set name="m_def" val="18"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3893' name="Wolf's Wooden Armor">
+  <for>
+    <add val='19' order='0x10' stat='pDef'/>
+    <add val='20' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="250"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="40000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="19"/>
+  <set name="m_def" val="20"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3894' name="Wolf's Ring Mail">
+  <for>
+    <add val='22' order='0x10' stat='pDef'/>
+    <add val='23' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="270"/>
+  <set name="material" val="8"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="80000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="22"/>
+  <set name="m_def" val="23"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3895' name="Wolf's Bone Armor">
+  <for>
+    <add val='26' order='0x10' stat='pDef'/>
+    <add val='26' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="290"/>
+  <set name="material" val="6"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="150000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="26"/>
+  <set name="m_def" val="26"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3896' name="Wolf's Scale Male">
+  <for>
+    <add val='30' order='0x10' stat='pDef'/>
+    <add val='29' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="310"/>
+  <set name="material" val="7"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="300000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="30"/>
+  <set name="m_def" val="29"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3897' name="Wof's Bronze Armor">
+  <for>
+    <add val='33' order='0x10' stat='pDef'/>
+    <add val='31' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="330"/>
+  <set name="material" val="7"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="500000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="33"/>
+  <set name="m_def" val="31"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3898' name="Wolf's Plate Mail">
+  <for>
+    <add val='37' order='0x10' stat='pDef'/>
+    <add val='33' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="350"/>
+  <set name="material" val="8"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="800000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="37"/>
+  <set name="m_def" val="33"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+<item id='3899' name="Wolf's Steel Armor">
+  <for>
+    <add val='40' order='0x10' stat='pDef'/>
+    <add val='36' order='0x10' stat='mDef'/>
+  </for>
+  <set name="bodypart" val="524288"/>
+  <set name="crystallizable" val="false"/>
+  <set name="armor_type" val="pet"/>
+  <set name="weight" val="370"/>
+  <set name="material" val="8"/>
+  <set name="crystal_type" val="0"/>
+  <set name="avoid_modify" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1200000"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <set name="type1" val="2"/>
+  <set name="type2" val="4"/>
+  <set name="p_def" val="40"/>
+  <set name="m_def" val="36"/>
+  <set name="mp_bonus" val="0"/>
+</item>
+</list>

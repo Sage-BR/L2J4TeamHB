@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+  <item id="10122" name="Red Crescent Earring">
+    <for>
+      <add val="24" order="0x10" stat="mDef" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="bodypart" val="3" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="10" />
+    <set name="crystal_type" val="3" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="false" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="24" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10123" name="Necklace of Devotion">
+    <for>
+      <add val="32" order="0x10" stat="mDef" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="bodypart" val="1" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="10" />
+    <set name="crystal_type" val="3" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="false" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="32" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10124" name="Ring of Devotion">
+    <for>
+      <add val="16" order="0x10" stat="mDef" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="bodypart" val="7" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="11" />
+    <set name="crystal_type" val="3" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="false" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="16" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10126" name="Dynasty Leather Armor">
+    <for>
+      <add val="166" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="4180" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="8" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="166" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10127" name="Dynasty Leather Armor">
+    <for>
+      <add val="166" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="4180" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="8" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="166" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10139" name="Agathion Bracelet">
+    <for>
+    </for>
+    <set name="bodypart" val="67108864" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="500" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="false" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10140" name="Blessed Ring of Escape">
+    <for>
+      <add val="49" order="0x10" stat="mDef" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="bodypart" val="7" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="3408-1;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="49" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10141" name="White Talisman - Yeti Transform">
+    <for>
+    </for>
+    <set name="bodypart" val="268435456" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="60" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="3335-1;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10142" name="White Talisman - Buffalo Transform">
+    <for>
+    </for>
+    <set name="bodypart" val="268435456" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="60" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="3336-1;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10158" name="Grey Talisman of Upper Grade Fishing">
+    <for>
+    </for>
+    <set name="bodypart" val="268435456" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="60" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="3315-1;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10168" name="Dynasty Leather Armor">
+    <for>
+      <add val="166" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="4180" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="8" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="166" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10169" name="Enchanter Circlet (Kamael only)">
+    <for>
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10170" name="Baylor's Earring">
+    <for>
+      <add val="71" order="0x10" stat="mDef" />
+      <add val="31" order="0x10" stat="maxMp" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="10175" name="Gobblin Circlet (Event)">
+    <for>
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10176" name="Half Face Mask (Event)">
+    <for>
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="10177" name="Black Half-Mask (Event)">
+    <for>
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+</list>

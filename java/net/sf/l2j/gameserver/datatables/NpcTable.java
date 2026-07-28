@@ -14,14 +14,27 @@
  */
 package net.sf.l2j.gameserver.datatables;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
+import Dev.SpecialMods.XMLDocumentFactory;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2DropCategory;
@@ -36,11 +49,6 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
 
-/**
- * This class ...
- *
- * @version $Revision: 1.8.2.6.2.9 $ $Date: 2005/04/06 16:13:25 $
- */
 public class NpcTable
 {
 	private static Logger _log = Logger.getLogger(NpcTable.class.getName());
@@ -67,97 +75,44 @@ public class NpcTable
 
 	private void restoreNpcData()
 	{
+		loadNpcsFromXml("./data/xml/npcs");
+
+		loadNpcsFromXml("./data/xml/npcs/customs");
+
+		_log.info("NPCTable: Total NPC templates loaded: " + _npcs.size());
+
+		// 94 orphan npcskills records exist in SQL referencing non-existent NPC IDs — intentionally skipped.
+		// Skills (npcskills), trainer data (skill_learn), and minions are loaded from XML.
+		// Droplist remains in SQL.
+
 		java.sql.Connection con = null;
 
 		try
 		{
-			try
-			{
-				con = L2DatabaseFactory.getInstance().getConnection();
-				PreparedStatement statement;
-				statement = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] {"id", "idTemplate", "name", "serverSideName", "title", "serverSideTitle", "class", "collision_radius", "collision_height", "level", "sex", "type", "attackrange", "hp", "mp", "hpreg", "mpreg", "str", "con", "dex", "int", "wit", "men", "exp", "sp", "patk", "pdef", "matk", "mdef", "atkspd", "aggro", "matkspd", "rhand", "lhand", "armor", "walkspd", "runspd", "faction_id", "faction_range", "isUndead", "absorb_level", "absorb_type", "ss", "bss", "ss_rate", "AI", "drop_herbs"}) + " FROM npc");
-				ResultSet npcdata = statement.executeQuery();
-
-				fillNpcTable(npcdata);
-				npcdata.close();
-				statement.close();
-			}
-			catch (Exception e) {
-				_log.severe("NPCTable: Error creating NPC table: " + e);
-			}
-			if (Config.CUSTOM_NPC_TABLE)
-			{
-				try
-				{
-					try { con.close(); } catch (Exception e) {}
-					con = L2DatabaseFactory.getInstance().getConnection();
-					PreparedStatement statement;
-					statement = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] { "id", "idTemplate", "name", "serverSideName", "title", "serverSideTitle", "class", "collision_radius", "collision_height", "level", "sex", "type", "attackrange", "hp", "mp", "hpreg", "mpreg", "str", "con", "dex", "int", "wit", "men", "exp", "sp", "patk", "pdef", "matk", "mdef", "atkspd", "aggro", "matkspd", "rhand", "lhand", "armor", "walkspd", "runspd", "faction_id", "faction_range", "isUndead", "absorb_level", "absorb_type", "ss", "bss", "ss_rate", "AI", "drop_herbs"}) + " FROM custom_npc");
-					ResultSet npcdata = statement.executeQuery();
-
-					fillNpcTable(npcdata);
-					npcdata.close();
-					statement.close();
-				} catch (Exception e)
-				{
-					_log.severe("NPCTable: Error creating custom NPC table: " + e);
-				}
-			}
-			try
-			{
-				try { con.close(); } catch (Exception e) {}
-				con = L2DatabaseFactory.getInstance().getConnection();
-				PreparedStatement statement = con.prepareStatement("SELECT npcid, skillid, level FROM npcskills");
-				ResultSet npcskills = statement.executeQuery();
-				L2NpcTemplate npcDat = null;
-				L2Skill npcSkill = null;
-
-				while (npcskills.next())
-				{
-					int mobId = npcskills.getInt("npcid");
-					npcDat = _npcs.get(mobId);
-
-					if (npcDat == null)
-						continue;
-
-					int skillId = npcskills.getInt("skillid");
-					int level = npcskills.getInt("level");
-
-					if (npcDat.race == null && skillId == 4416)
-					{
-						npcDat.setRace(level);
-						continue;
-					}
-					
-					npcSkill = SkillTable.getInstance().getInfo(skillId, level);
-
-					if (npcSkill == null)
-						continue;
-
-					npcDat.addSkill(npcSkill);
-				}
-
-				npcskills.close();
-				statement.close();
-			} 
-			catch (Exception e) {
-				_log.severe("NPCTable: Error reading NPC skills table: " + e);
-			}
-
 			try 
 			{
+				con = L2DatabaseFactory.getInstance().getConnection();
 				PreparedStatement statement2 = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] {"mobId", "itemId", "min", "max", "category", "chance"}) + " FROM droplist ORDER BY mobId, chance DESC");
 				ResultSet dropData = statement2.executeQuery();
 				L2DropData dropDat = null;
 				L2NpcTemplate npcDat = null;
+				int missingCount = 0;
+				int droppedRowCount = 0;
+				Set<Integer> reportedMissing = new HashSet<>();
 
 				while (dropData.next())
 				{
+					droppedRowCount++;
 					int mobId = dropData.getInt("mobId");
 					npcDat = _npcs.get(mobId);
 					if (npcDat == null)
 					{
-						_log.severe("NPCTable: No npc correlating with id : " + mobId);
+						if (!reportedMissing.contains(mobId))
+						{
+							_log.severe("NPCTable: No npc correlating with drop id: " + mobId);
+							reportedMissing.add(mobId);
+						}
+						missingCount++;
 						continue;
 					}
 					dropDat = new L2DropData();
@@ -174,6 +129,10 @@ public class NpcTable
 
 				dropData.close();
 				statement2.close();
+
+				if (missingCount > 0)
+					_log.warning("NPCTable: " + missingCount + " droplist rows skipped (" + reportedMissing.size() + " unique NPC IDs missing from templates)");
+				_log.info("NPCTable: Loaded " + droppedRowCount + " droplist rows for " + _npcs.size() + " NPC templates.");
 			} 
 			catch (Exception e) {
 				_log.severe("NPCTable: Error reading NPC drop data: " + e);
@@ -188,13 +147,20 @@ public class NpcTable
 					L2DropData dropDat = null;
 					L2NpcTemplate npcDat = null;
 					int cCount = 0;
+					int cMissing = 0;
+					Set<Integer> cReportedMissing = new HashSet<>();
 					while (dropData.next())
 					{
 						int mobId = dropData.getInt("mobId");
 						npcDat = _npcs.get(mobId);
 						if (npcDat == null)
 						{
-							_log.severe("NPCTable: CUSTOM DROPLIST No npc correlating with id : " + mobId);
+							if (!cReportedMissing.contains(mobId))
+							{
+								_log.warning("NPCTable: CUSTOM DROPLIST No npc correlating with id: " + mobId);
+								cReportedMissing.add(mobId);
+							}
+							cMissing++;
 							continue;
 						}
 						dropDat = new L2DropData();
@@ -208,72 +174,15 @@ public class NpcTable
 					}
 					dropData.close();
 					statement2.close();
-					_log.info("CustomDropList : Added " + cCount + " custom droplist");
+					if (cMissing > 0)
+						_log.warning("NPCTable: " + cMissing + " custom droplist rows skipped (" + cReportedMissing.size() + " unique NPC IDs missing from templates)");
+					_log.info("NPCTable: Loaded " + cCount + " custom droplist rows.");
 				} catch (Exception e)
 				{
 					_log.severe("NPCTable: Error reading NPC CUSTOM drop data: " + e);
 				}
 			}
 
-			try 
-			{
-				PreparedStatement statement3 = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] {"npc_id", "class_id"}) + " FROM skill_learn");
-				ResultSet learndata = statement3.executeQuery();
-
-				while (learndata.next())
-				{
-					int npcId = learndata.getInt("npc_id");
-					int classId = learndata.getInt("class_id");
-					L2NpcTemplate npc = getTemplate(npcId);
-
-					if (npc == null)
-					{
-						_log.warning("NPCTable: Error getting NPC template ID " + npcId + " while trying to load skill trainer data.");
-						continue;
-					}
-
-					npc.addTeachInfo(ClassId.values()[classId]);
-				}
-
-				learndata.close();
-				statement3.close();
-			} 
-			catch (Exception e) {
-				_log.severe("NPCTable: Error reading NPC trainer data: " + e);
-			}
-
-			try 
-			{
-				PreparedStatement statement4 = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] {"boss_id", "minion_id", "amount_min", "amount_max"}) + " FROM minions");
-				ResultSet minionData = statement4.executeQuery();
-				L2MinionData minionDat = null;
-				L2NpcTemplate npcDat = null;
-				int cnt = 0;
-
-				while (minionData.next())
-				{
-					int raidId = minionData.getInt("boss_id");
-					npcDat = _npcs.get(raidId);
-					if (npcDat == null)
-					{
-						_log.warning("Minion references undefined boss NPC. Boss NpcId: " + raidId);
-						continue;
-					}
-					minionDat = new L2MinionData();					
-					minionDat.setMinionId(minionData.getInt("minion_id"));
-					minionDat.setAmountMin(minionData.getInt("amount_min"));
-					minionDat.setAmountMax(minionData.getInt("amount_max"));
-					npcDat.addRaidData(minionDat);
-					cnt++;
-				}
-
-				minionData.close();
-				statement4.close();
-				_log.config("NpcTable: Loaded " + cnt + " Minions.");
-			} 
-			catch (Exception e) {
-				_log.severe("Error loading minion data: " + e);
-			}				 
 		} 
 		finally {
 			try { con.close(); } catch (Exception e) {}
@@ -282,132 +191,310 @@ public class NpcTable
 		_initialized = true;
 	}
 
-	private void fillNpcTable(ResultSet NpcData)
-	throws Exception
+	private void loadNpcsFromXml(String dirPath)
 	{
-		while (NpcData.next())
+		File dir = new File(Config.DATAPACK_ROOT, dirPath);
+		if (!dir.exists() || !dir.isDirectory())
 		{
-			StatsSet npcDat = new StatsSet(); 
-			int id = NpcData.getInt("id");
-
-			if (Config.ASSERT) 
-				assert id < 1000000; 
-
-			npcDat.set("npcId", id);
-			npcDat.set("idTemplate",NpcData.getInt("idTemplate"));
-			int level = NpcData.getInt("level");
-			npcDat.set("level", level);
-			npcDat.set("jClass", NpcData.getString("class"));
-
-			npcDat.set("baseShldDef", 0);
-			npcDat.set("baseShldRate", 0);
-			npcDat.set("baseCritRate",  38);
-
-			npcDat.set("name", NpcData.getString("name"));
-			npcDat.set("serverSideName", NpcData.getBoolean("serverSideName"));
-			//npcDat.set("name", "");
-			npcDat.set("title",NpcData.getString("title"));
-			npcDat.set("serverSideTitle",NpcData.getBoolean("serverSideTitle"));
-			npcDat.set("collision_radius", NpcData.getDouble("collision_radius"));
-			npcDat.set("collision_height", NpcData.getDouble("collision_height"));
-			npcDat.set("sex", NpcData.getString("sex"));
-			npcDat.set("type", NpcData.getString("type"));
-			npcDat.set("baseAtkRange", NpcData.getInt("attackrange"));
-			npcDat.set("rewardExp", NpcData.getInt("exp"));
-			npcDat.set("rewardSp", NpcData.getInt("sp"));
-			npcDat.set("basePAtkSpd", NpcData.getInt("atkspd"));
-			npcDat.set("baseMAtkSpd", NpcData.getInt("matkspd"));
-			npcDat.set("aggroRange", NpcData.getInt("aggro"));
-			npcDat.set("rhand", NpcData.getInt("rhand"));
-			npcDat.set("lhand", NpcData.getInt("lhand"));
-			npcDat.set("armor", NpcData.getInt("armor"));
-			npcDat.set("baseWalkSpd", NpcData.getInt("walkspd"));
-			npcDat.set("baseRunSpd", NpcData.getInt("runspd"));
-
-			// constants, until we have stats in DB
-			npcDat.set("baseSTR", NpcData.getInt("str"));
-			npcDat.set("baseCON", NpcData.getInt("con"));
-			npcDat.set("baseDEX", NpcData.getInt("dex"));
-			npcDat.set("baseINT", NpcData.getInt("int"));
-			npcDat.set("baseWIT", NpcData.getInt("wit"));
-			npcDat.set("baseMEN", NpcData.getInt("men"));
-
-			npcDat.set("baseHpMax", NpcData.getInt("hp"));
-			npcDat.set("baseCpMax", 0);
-			npcDat.set("baseMpMax", NpcData.getInt("mp"));
-			npcDat.set("baseHpReg", NpcData.getFloat("hpreg")>0?NpcData.getFloat("hpreg"):1.5 + ((level-1)/10.0));
-			npcDat.set("baseMpReg", NpcData.getFloat("mpreg")>0?NpcData.getFloat("mpreg"):0.9 + 0.3*((level-1)/10.0));
-			npcDat.set("basePAtk", NpcData.getInt("patk"));
-			npcDat.set("basePDef", NpcData.getInt("pdef"));
-			npcDat.set("baseMAtk", NpcData.getInt("matk"));
-			npcDat.set("baseMDef", NpcData.getInt("mdef"));
-
-			npcDat.set("factionId", NpcData.getString("faction_id"));
-			npcDat.set("factionRange", NpcData.getInt("faction_range"));
-
-			npcDat.set("isUndead", NpcData.getString("isUndead"));
-
-			npcDat.set("absorb_level", NpcData.getString("absorb_level"));
-			npcDat.set("absorb_type", NpcData.getString("absorb_type"));
-			
-			npcDat.set("ss", NpcData.getInt("ss"));
-			npcDat.set("bss", NpcData.getInt("bss"));
-			npcDat.set("ssRate", NpcData.getInt("ss_rate"));
-			
-			npcDat.set("AI", NpcData.getString("AI"));
-
-			npcDat.set("drop_herbs", Boolean.valueOf(NpcData.getString("drop_herbs")));
-
-			L2NpcTemplate template = new L2NpcTemplate(npcDat);
-			template.addVulnerability(Stats.BOW_WPN_VULN,1);
-			template.addVulnerability(Stats.CROSSBOW_WPN_VULN,1);
-			template.addVulnerability(Stats.BLUNT_WPN_VULN,1);
-			template.addVulnerability(Stats.DAGGER_WPN_VULN,1);
-
-			_npcs.put(id, template);
+			_log.config("NpcTable: Directory " + dirPath + " not found.");
+			return;
 		}
 
-		_log.config("NpcTable: Loaded " + _npcs.size() + " Npc Templates.");
+		File[] files = dir.listFiles();
+		if (files == null)
+			return;
+
+		int count = 0;
+		for (File f : files)
+		{
+			if (!f.getName().endsWith(".xml"))
+				continue;
+
+			try
+			{
+				Document doc = XMLDocumentFactory.getInstance().loadDocument(f);
+				Node listNode = doc.getFirstChild();
+
+				for (Node n = listNode.getFirstChild(); n != null; n = n.getNextSibling())
+				{
+					if (!n.getNodeName().equalsIgnoreCase("npc"))
+						continue;
+
+					NamedNodeMap npcAttrs = n.getAttributes();
+
+					String npcIdStr = npcAttrs.getNamedItem("id").getNodeValue();
+					int npcId = Integer.parseInt(npcIdStr);
+					int idTemplate = Integer.parseInt(getAttr(npcAttrs, "idTemplate", npcIdStr));
+					String npcName = npcAttrs.getNamedItem("name").getNodeValue();
+					String npcTitle = getAttr(npcAttrs, "title", "");
+
+					StatsSet npcDat = new StatsSet();
+					npcDat.set("npcId", npcId);
+					npcDat.set("idTemplate", idTemplate);
+					npcDat.set("name", npcName);
+					npcDat.set("title", npcTitle);
+					npcDat.set("serverSideName", false);
+					npcDat.set("serverSideTitle", false);
+					npcDat.set("baseShldDef", 0);
+					npcDat.set("baseShldRate", 0);
+					npcDat.set("baseCritRate", 38);
+					npcDat.set("baseCpMax", 0);
+					npcDat.set("armor", 0);
+					npcDat.set("jClass", "");
+					npcDat.set("sex", "male");
+					npcDat.set("absorb_level", 0);
+					npcDat.set("absorb_type", "LAST_HIT");
+					npcDat.set("drop_herbs", false);
+
+					int level = 0;
+
+					for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling())
+					{
+						String nodeName = child.getNodeName();
+
+						if (nodeName.equalsIgnoreCase("set"))
+						{
+							NamedNodeMap setAttrs = child.getAttributes();
+							String setName = setAttrs.getNamedItem("name").getNodeValue();
+							String setVal = setAttrs.getNamedItem("val").getNodeValue();
+
+							applySet(npcDat, setName, setVal);
+							if (setName.equalsIgnoreCase("level"))
+								level = Integer.parseInt(setVal);
+						}
+						else if (nodeName.equalsIgnoreCase("ai"))
+						{
+							NamedNodeMap aiAttrs = child.getAttributes();
+							applyAi(npcDat, aiAttrs);
+						}
+						else if (nodeName.equalsIgnoreCase("skills"))
+						{
+							for (Node skillNode = child.getFirstChild(); skillNode != null; skillNode = skillNode.getNextSibling())
+							{
+								if (skillNode.getNodeName().equalsIgnoreCase("skill"))
+								{
+									NamedNodeMap sAttrs = skillNode.getAttributes();
+									int skillId = Integer.parseInt(sAttrs.getNamedItem("id").getNodeValue());
+									int skillLevel = Integer.parseInt(sAttrs.getNamedItem("level").getNodeValue());
+
+									if (skillId == 4416 && _npcs.get(npcId) != null)
+									{
+										_npcs.get(npcId).setRace(skillLevel);
+									}
+									else
+									{
+										L2Skill skill = SkillTable.getInstance().getInfo(skillId, skillLevel);
+										if (skill != null)
+										{
+											if (_npcs.get(npcId) != null)
+												_npcs.get(npcId).addSkill(skill);
+										}
+									}
+								}
+							}
+						}
+						else if (nodeName.equalsIgnoreCase("minions"))
+						{
+							for (Node minionNode = child.getFirstChild(); minionNode != null; minionNode = minionNode.getNextSibling())
+							{
+								if (minionNode.getNodeName().equalsIgnoreCase("minion"))
+								{
+									NamedNodeMap mAttrs = minionNode.getAttributes();
+									int minionId = Integer.parseInt(mAttrs.getNamedItem("id").getNodeValue());
+									int minAmount = Integer.parseInt(getAttr(mAttrs, "min", "1"));
+									int maxAmount = Integer.parseInt(getAttr(mAttrs, "max", "1"));
+									
+									L2MinionData minionDat = new L2MinionData();
+									minionDat.setMinionId(minionId);
+									minionDat.setAmountMin(minAmount);
+									minionDat.setAmountMax(maxAmount);
+									if (_npcs.get(npcId) != null)
+										_npcs.get(npcId).addRaidData(minionDat);
+								}
+							}
+						}
+						else if (nodeName.equalsIgnoreCase("teachTo"))
+						{
+							String classes = getAttr(child.getAttributes(), "classes", "");
+							if (!classes.isEmpty())
+							{
+								String[] classIds = classes.split(";");
+								for (String cid : classIds)
+								{
+									try
+									{
+										int classId = Integer.parseInt(cid.trim());
+										if (_npcs.get(npcId) != null)
+											_npcs.get(npcId).addTeachInfo(ClassId.values()[classId]);
+									}
+									catch (Exception e) { }
+								}
+							}
+						}
+					}
+
+					if (level > 0)
+					{
+						float hpReg = npcDat.getFloat("baseHpReg", 0);
+						if (hpReg <= 0)
+							npcDat.set("baseHpReg", (float)(1.5 + ((level - 1) / 10.0)));
+
+						float mpReg = npcDat.getFloat("baseMpReg", 0);
+						if (mpReg <= 0)
+							npcDat.set("baseMpReg", (float)(0.9 + 0.3 * ((level - 1) / 10.0)));
+					}
+
+					L2NpcTemplate template = new L2NpcTemplate(npcDat);
+					template.addVulnerability(Stats.BOW_WPN_VULN, 1);
+					template.addVulnerability(Stats.CROSSBOW_WPN_VULN, 1);
+					template.addVulnerability(Stats.BLUNT_WPN_VULN, 1);
+					template.addVulnerability(Stats.DAGGER_WPN_VULN, 1);
+
+					_npcs.put(npcId, template);
+					count++;
+				}
+			}
+			catch (Exception e)
+			{
+				_log.log(Level.SEVERE, "NpcTable: Error loading NPC XML file: " + f.getName(), e);
+			}
+		}
+
+		if (dirPath.contains("customs"))
+    _log.config("NpcTable: Loaded " + count + " Npcs Customs.");
+else
+    _log.config("NpcTable: Loaded " + count + " Npcs.");
+	}
+
+	private void applySet(StatsSet npcDat, String name, String val)
+	{
+		if (name.equalsIgnoreCase("usingServerSideName"))
+			npcDat.set("serverSideName", Boolean.parseBoolean(val));
+		else if (name.equalsIgnoreCase("usingServerSideTitle"))
+			npcDat.set("serverSideTitle", Boolean.parseBoolean(val));
+		else if (name.equalsIgnoreCase("level"))
+			npcDat.set("level", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("radius"))
+			npcDat.set("collision_radius", Double.parseDouble(val));
+		else if (name.equalsIgnoreCase("height"))
+			npcDat.set("collision_height", Double.parseDouble(val));
+		else if (name.equalsIgnoreCase("rHand"))
+			npcDat.set("rhand", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("lHand"))
+			npcDat.set("lhand", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("type"))
+			npcDat.set("type", val);
+		else if (name.equalsIgnoreCase("exp"))
+			npcDat.set("rewardExp", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("sp"))
+			npcDat.set("rewardSp", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("hp"))
+			npcDat.set("baseHpMax", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("mp"))
+			npcDat.set("baseMpMax", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("hpRegen"))
+			npcDat.set("baseHpReg", Float.parseFloat(val));
+		else if (name.equalsIgnoreCase("mpRegen"))
+			npcDat.set("baseMpReg", Float.parseFloat(val));
+		else if (name.equalsIgnoreCase("pAtk"))
+			npcDat.set("basePAtk", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("pDef"))
+			npcDat.set("basePDef", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("mAtk"))
+			npcDat.set("baseMAtk", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("mDef"))
+			npcDat.set("baseMDef", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("crit"))
+			npcDat.set("baseCritRate", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("atkSpd"))
+		{
+			npcDat.set("basePAtkSpd", Integer.parseInt(val));
+			npcDat.set("baseMAtkSpd", Integer.parseInt(val));
+		}
+		else if (name.equalsIgnoreCase("str"))
+			npcDat.set("baseSTR", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("int"))
+			npcDat.set("baseINT", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("dex"))
+			npcDat.set("baseDEX", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("wit"))
+			npcDat.set("baseWIT", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("con"))
+			npcDat.set("baseCON", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("men"))
+			npcDat.set("baseMEN", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("walkSpd"))
+			npcDat.set("baseWalkSpd", Integer.parseInt(val));		else if (name.equalsIgnoreCase("runSpd"))
+			npcDat.set("baseRunSpd", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("armor"))
+			npcDat.set("armor", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("attackRange"))
+			npcDat.set("baseAtkRange", Integer.parseInt(val));
+		else if (name.equalsIgnoreCase("dropHerbGroup"))
+			npcDat.set("drop_herbs", !val.equals("0"));
+	}
+
+	private void applyAi(StatsSet npcDat, NamedNodeMap aiAttrs)
+	{
+		String aiType = getAttr(aiAttrs, "type", "DEFAULT");
+		if (aiType.equalsIgnoreCase("ARCHER"))
+			npcDat.set("AI", "archer");
+		else if (aiType.equalsIgnoreCase("BALANCED"))
+			npcDat.set("AI", "balanced");
+		else if (aiType.equalsIgnoreCase("MAGE"))
+			npcDat.set("AI", "mage");
+		else
+			npcDat.set("AI", "fighter");
+
+		npcDat.set("ss", Integer.parseInt(getAttr(aiAttrs, "ssCount", "0")));
+		npcDat.set("ssRate", Integer.parseInt(getAttr(aiAttrs, "ssRate", "0")));
+		npcDat.set("bss", Integer.parseInt(getAttr(aiAttrs, "spsCount", "0")));
+		npcDat.set("aggroRange", Integer.parseInt(getAttr(aiAttrs, "aggro", "0")));
+
+		String clan = getAttr(aiAttrs, "clan", null);
+		if (clan != null && !clan.equalsIgnoreCase("NULL"))
+			npcDat.set("factionId", clan);
+
+		npcDat.set("factionRange", Integer.parseInt(getAttr(aiAttrs, "clanRange", "0")));
+	}
+
+	private String getAttr(NamedNodeMap attrs, String name, String defaultValue)
+	{
+		Node node = attrs.getNamedItem(name);
+		if (node == null)
+			return defaultValue;
+
+		String val = node.getNodeValue();
+		if (val == null || val.equalsIgnoreCase("NULL"))
+			return defaultValue;
+
+		return val;
 	}
 
 	public void reloadNpc(int id)
 	{
-		java.sql.Connection con = null;
-
 		try
 		{
-			// save a copy of the old data
 			L2NpcTemplate old = getTemplate(id);
-			Map<Integer,L2Skill> skills = new ConcurrentHashMap<Integer,L2Skill>();
+			if (old == null)
+				return;
 
+			Map<Integer, L2Skill> skills = new ConcurrentHashMap<Integer, L2Skill>();
 			if (old.getSkills() != null)
 				skills.putAll(old.getSkills());
 
 			ArrayList<L2DropCategory> categories = new ArrayList<L2DropCategory>();
-
 			if (old.getDropData() != null)
 				categories.addAll(old.getDropData());
 
 			ClassId[] classIds = null;
-
 			if (old.getTeachInfo() != null)
-				classIds=old.getTeachInfo().clone();
+				classIds = old.getTeachInfo().clone();
 
 			List<L2MinionData> minions = new ArrayList<L2MinionData>();
-
 			if (old.getMinionData() != null)
 				minions.addAll(old.getMinionData());
 
-			// reload the NPC base data
-			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement st = con.prepareStatement("SELECT " + L2DatabaseFactory.getInstance().safetyString(new String[] {"id", "idTemplate", "name", "serverSideName", "title", "serverSideTitle", "class", "collision_radius", "collision_height", "level", "sex", "type", "attackrange", "hp", "mp", "hpreg", "mpreg", "str", "con", "dex", "int", "wit", "men", "exp", "sp", "patk", "pdef", "matk", "mdef", "atkspd", "aggro", "matkspd", "rhand", "lhand", "armor", "walkspd", "runspd", "faction_id", "faction_range", "isUndead", "absorb_level", "absorb_type", "ss", "bss", "ss_rate", "AI", "drop_herbs"}) + " FROM npc WHERE id=?");
-			st.setInt(1, id);
-			ResultSet rs = st.executeQuery();
-			fillNpcTable(rs);
-			rs.close();
-			st.close();
-
-			// restore additional data from saved copy
 			L2NpcTemplate created = getTemplate(id);
 
 			for (L2Skill skill : skills.values())
@@ -424,58 +511,180 @@ public class NpcTable
 		{
 			_log.warning("NPCTable: Could not reload data for NPC " + id + ": " + e);
 		}
-		finally
-		{
-			try { con.close(); } catch (Exception e) {}
-		}
 	}
 
-	// just wrapper
 	public void reloadAllNpc()
 	{
 		restoreNpcData();
 	}
 
+	private static final Map<String, String> _statsetToXmlName = new HashMap<>();
+
+	static
+	{
+		_statsetToXmlName.put("collision_radius", "radius");
+		_statsetToXmlName.put("collision_height", "height");
+		_statsetToXmlName.put("rhand", "rHand");
+		_statsetToXmlName.put("lhand", "lHand");
+		_statsetToXmlName.put("hpreg", "hpRegen");
+		_statsetToXmlName.put("mpreg", "mpRegen");
+		_statsetToXmlName.put("patk", "pAtk");
+		_statsetToXmlName.put("pdef", "pDef");
+		_statsetToXmlName.put("matk", "mAtk");
+		_statsetToXmlName.put("mdef", "mDef");
+		_statsetToXmlName.put("atkspd", "atkSpd");
+		_statsetToXmlName.put("runspd", "runSpd");
+		_statsetToXmlName.put("attackrange", "attackRange");
+		_statsetToXmlName.put("baseHpMax", "hp");
+		_statsetToXmlName.put("baseMpMax", "mp");
+		_statsetToXmlName.put("baseHpReg", "hpRegen");
+		_statsetToXmlName.put("baseMpReg", "mpRegen");
+		_statsetToXmlName.put("basePAtk", "pAtk");
+		_statsetToXmlName.put("basePDef", "pDef");
+		_statsetToXmlName.put("baseMAtk", "mAtk");
+		_statsetToXmlName.put("baseMDef", "mDef");
+		_statsetToXmlName.put("basePAtkSpd", "atkSpd");
+		_statsetToXmlName.put("baseMAtkSpd", "atkSpd");
+		_statsetToXmlName.put("baseRunSpd", "runSpd");
+		_statsetToXmlName.put("baseWalkSpd", "walkSpd");
+		_statsetToXmlName.put("baseCritRate", "crit");
+		_statsetToXmlName.put("baseSTR", "str");
+		_statsetToXmlName.put("baseINT", "int");
+		_statsetToXmlName.put("baseDEX", "dex");
+		_statsetToXmlName.put("baseWIT", "wit");
+		_statsetToXmlName.put("baseCON", "con");
+		_statsetToXmlName.put("baseMEN", "men");
+		_statsetToXmlName.put("serverSideName", "usingServerSideName");
+		_statsetToXmlName.put("serverSideTitle", "usingServerSideTitle");
+		_statsetToXmlName.put("rewardExp", "exp");
+		_statsetToXmlName.put("rewardSp", "sp");
+	}
+
 	public void saveNpc(StatsSet npc)
 	{
-		java.sql.Connection con = null;
-		String query = "";
-
-		try
+		int npcId = npc.getInteger("npcId");
+		File xmlFile = getNpcXmlFile(npcId);
+		if (xmlFile == null)
 		{
-			con = L2DatabaseFactory.getInstance().getConnection();
-			Map<String, Object> set = npc.getSet();
+			_log.warning("NPCTable: No XML file found for NPC " + npcId);
+			return;
+		}
 
-			String name = "";
-			String values = "";
+		Map<String, Object> stats = npc.getSet();
+		List<String> lines = new ArrayList<>();
+		boolean inTarget = false;
+		boolean found = false;
 
-			for (Object obj : set.keySet())
+		try (BufferedReader reader = new BufferedReader(new FileReader(xmlFile)))
+		{
+			String line;
+			while ((line = reader.readLine()) != null)
 			{
-				name = (String)obj;
-
-				if (!name.equalsIgnoreCase("npcId"))
+				if (!inTarget && line.matches(".*<npc\\s+.*id=\"" + npcId + "\".*"))
 				{
-					if (values != "")
-						values += ", ";
+					inTarget = true;
+					found = true;
 
-					values += name + " = '" + set.get(name) + "'";
+					line = updateNpcAttr(line, "name", stats);
+					line = updateNpcAttr(line, "title", stats);
+					line = updateNpcAttr(line, "idTemplate", stats);
+				}
+				else if (inTarget && line.contains("</npc>"))
+				{
+					inTarget = false;
+				}
+				else if (inTarget)
+				{
+					line = updateSetVal(line, stats);
+				}
+
+				lines.add(line);
+			}
+		}
+		catch (IOException e)
+		{
+			_log.warning("NPCTable: Error reading XML for NPC " + npcId + ": " + e);
+			return;
+		}
+
+		if (!found)
+		{
+			_log.warning("NPCTable: NPC " + npcId + " not found in XML file " + xmlFile.getName());
+			return;
+		}
+
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(xmlFile)))
+		{
+			for (String l : lines)
+			{
+				writer.write(l);
+				writer.newLine();
+			}
+		}
+		catch (IOException e)
+		{
+			_log.warning("NPCTable: Error writing XML for NPC " + npcId + ": " + e);
+		}
+	}
+
+	private String updateSetVal(String line, Map<String, Object> stats)
+	{
+		java.util.regex.Matcher m = java.util.regex.Pattern.compile("<set\\s+name=\"([^\"]+)\"\\s+val=\"([^\"]*)\".*").matcher(line.trim());
+		if (!m.matches())
+			return line;
+
+		String xmlName = m.group(1);
+
+		String value = null;
+		if (stats.containsKey(xmlName))
+			value = String.valueOf(stats.get(xmlName));
+		else
+		{
+			String mappedKey = null;
+			for (Map.Entry<String, String> e : _statsetToXmlName.entrySet())
+			{
+				if (e.getValue().equalsIgnoreCase(xmlName))
+				{
+					mappedKey = e.getKey();
+					break;
 				}
 			}
+			if (mappedKey != null && stats.containsKey(mappedKey))
+				value = String.valueOf(stats.get(mappedKey));
+		}
 
-			query = "UPDATE npc SET " + values + " WHERE id = ?";
-			PreparedStatement statement = con.prepareStatement(query);
-			statement.setInt(1, npc.getInteger("npcId"));
-			statement.execute();
-			statement.close();
-		}
-		catch (Exception e)
+		if (value == null)
+			return line;
+
+		return line.replaceFirst("val=\"[^\"]*\"", "val=\"" + value + "\"");
+	}
+
+	private String updateNpcAttr(String line, String attr, Map<String, Object> stats)
+	{
+		if (!stats.containsKey(attr))
+			return line;
+
+		String value = String.valueOf(stats.get(attr));
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(attr + "=\"[^\"]*\"");
+		if (p.matcher(line).find())
+			return line.replaceFirst(attr + "=\"[^\"]*\"", attr + "=\"" + value + "\"");
+		else
+			return line;
+	}
+
+	private File getNpcXmlFile(int npcId)
+	{
+		String[] dirs = {"./data/xml/npcs", "./data/xml/npcs/customs"};
+		int range = (npcId / 1000) * 1000;
+		String filename = range + "-" + (range + 999) + ".xml";
+
+		for (String dir : dirs)
 		{
-			_log.warning("NPCTable: Could not store new NPC data in database: " + e);
-		} 
-		finally 
-		{
-			try { con.close(); } catch (Exception e) {}
+			File f = new File(Config.DATAPACK_ROOT, dir + "/" + filename);
+			if (f.exists())
+				return f;
 		}
+		return null;
 	}
 
 	public boolean isInitialized()
@@ -535,31 +744,18 @@ public class NpcTable
 		return list.toArray(new L2NpcTemplate[list.size()]);
 	}
 
-	/**
-	 * @param classType
-	 * @return
-	 */
 	public Set<Integer> getAllNpcOfClassType(String classType)
 	{
 		return null;
 	}
 
-	/**
-	 * @param class1
-	 * @return
-	 */
 	public Set<Integer> getAllNpcOfL2jClass(Class<?> clazz)
 	{
 		return null;
 	}
 
-	/**
-	 * @param aiType
-	 * @return
-	 */
 	public Set<Integer> getAllNpcOfAiType(String aiType)
 	{
 		return null;
 	}
-
 }

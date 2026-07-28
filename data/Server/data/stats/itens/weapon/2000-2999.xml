@@ -1,0 +1,5248 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<list>
+<item id='2368' name="Training Gloves">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1580"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="10"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="7"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="5"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="138"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='7' order='0x08' stat='pAtk'/>
+    <set val='5' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2369' name="Squire\'s Sword">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1600"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="6"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="5"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="138"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='6' order='0x08' stat='pAtk'/>
+    <set val='5' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2370' name="Guild Member\'s Club">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1910"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="6"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="5"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="138"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='6' order='0x08' stat='pAtk'/>
+    <set val='5' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2371' name="Fist of Butcher">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1400"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="16"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="10"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="25500"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='16' order='0x08' stat='pAtk'/>
+    <set val='10' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2372' name="Dagger of Adept">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1050"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="11"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="-3.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="10"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="25500"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='11' order='0x08' stat='pAtk'/>
+    <set val='10' order='0x08' stat='mAtk'/>
+    <set val='12' order='0x08' stat='rCrit'/>
+    <add val='-3' order='0x10' stat='accCombat'/>
+    <set val='433' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2373' name="Eldritch Staff">
+  <set name="weapon_type" val="bigblunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1050"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="13"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="13"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="25500"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='13' order='0x08' stat='pAtk'/>
+    <set val='13' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2374' name="Red Sunset Dagger">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1100"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="11"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="-3.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="10"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="25500"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='11' order='0x08' stat='pAtk'/>
+    <set val='10' order='0x08' stat='mAtk'/>
+    <set val='12' order='0x08' stat='rCrit'/>
+    <add val='-3' order='0x10' stat='accCombat'/>
+    <set val='433' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2493' name="Brigandine Shield">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1320"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="11"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="0"/>
+  <set name="critical" val="0"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="avoid_modify" val="-8"/>
+  <set name="shield_def" val="142"/>
+  <set name="shield_def_rate" val="20"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="78400"/>
+  <set name="crystal_count" val="142"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <sub val='8' order='0x10' stat='rEvas'/>
+    <set val='142' order='0x08' stat='sDef'/>
+    <set val='20' order='0x08' stat='rShld'/>
+    <enchant val='0' order='0x0C' stat='sDef'/>
+  
+  </for>
+</item>
+<item id='2494' name="Plate Shield">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1310"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="11"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="0"/>
+  <set name="critical" val="0"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="avoid_modify" val="-8"/>
+  <set name="shield_def" val="154"/>
+  <set name="shield_def_rate" val="20"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="103000"/>
+  <set name="crystal_count" val="187"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <sub val='8' order='0x10' stat='rEvas'/>
+    <set val='154' order='0x08' stat='sDef'/>
+    <set val='20' order='0x08' stat='rShld'/>
+    <enchant val='0' order='0x0C' stat='sDef'/>
+  
+  </for>
+</item>
+<item id='2495' name="Chain Shield">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1280"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="11"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="0"/>
+  <set name="critical" val="0"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="avoid_modify" val="-8"/>
+  <set name="shield_def" val="166"/>
+  <set name="shield_def_rate" val="20"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="133000"/>
+  <set name="crystal_count" val="53"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <sub val='8' order='0x10' stat='rEvas'/>
+    <set val='166' order='0x08' stat='sDef'/>
+    <set val='20' order='0x08' stat='rShld'/>
+    <enchant val='0' order='0x0C' stat='sDef'/>
+  
+  </for>
+</item>
+<item id='2496' name="Dwarven Chain Shield">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1280"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="11"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="0"/>
+  <set name="critical" val="0"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="avoid_modify" val="-8"/>
+  <set name="shield_def" val="174"/>
+  <set name="shield_def_rate" val="20"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="156000"/>
+  <set name="crystal_count" val="62"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <sub val='8' order='0x10' stat='rEvas'/>
+    <set val='174' order='0x08' stat='sDef'/>
+    <set val='20' order='0x08' stat='rShld'/>
+    <enchant val='0' order='0x0C' stat='sDef'/>
+  
+  </for>
+</item>
+<item id='2497' name="Full Plate Shield">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1220"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="11"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="0"/>
+  <set name="critical" val="0"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="avoid_modify" val="-8"/>
+  <set name="shield_def" val="203"/>
+  <set name="shield_def_rate" val="20"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="375000"/>
+  <set name="crystal_count" val="150"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <sub val='8' order='0x10' stat='rEvas'/>
+    <set val='203' order='0x08' stat='sDef'/>
+    <set val='20' order='0x08' stat='rShld'/>
+    <enchant val='0' order='0x0C' stat='sDef'/>
+  
+  </for>
+</item>
+<item id='2498' name="Shield of Nightmare">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1180"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="11"/>
+  <set name="crystal_type" val="4"/>
+  <set name="p_dam" val="0"/>
+  <set name="critical" val="0"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="avoid_modify" val="-8"/>
+  <set name="shield_def" val="256"/>
+  <set name="shield_def_rate" val="20"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1850000"/>
+  <set name="crystal_count" val="148"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <sub val='8' order='0x10' stat='rEvas'/>
+    <set val='256' order='0x08' stat='sDef'/>
+    <set val='20' order='0x08' stat='rShld'/>
+    <enchant val='0' order='0x0C' stat='sDef'/>
+  
+  </for>
+</item>
+<item id='2499' name="Elven Long Sword">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1440"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="92"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="54"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1800000"/>
+  <set name="crystal_count" val="3272"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="change_weaponId" val="9225"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='92' order='0x08' stat='pAtk'/>
+    <set val='54' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2500' name="Dark Legion\'s Edge">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1320"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="4"/>
+  <set name="p_dam" val="232"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="114"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="27000000"/>
+  <set name="crystal_count" val="2160"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="change_weaponId" val="9340"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='232' order='0x08' stat='pAtk'/>
+    <set val='114' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2501' name="Bone Club">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1850"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="24"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="136000"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='24' order='0x08' stat='pAtk'/>
+    <set val='17' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2502' name="Dwarven War Hammer">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1670"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="122"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="68"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2870000"/>
+  <set name="crystal_count" val="1148"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='122' order='0x08' stat='pAtk'/>
+    <set val='68' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2503' name="Yaksa Mace">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1640"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="156"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='156' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2504' name="Meteor Shower">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1600"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="4"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="107"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="18300000"/>
+  <set name="crystal_count" val="1464"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='107' order='0x08' stat='mAtk'/>
+    <set val='4' order='0x08' stat='rCrit'/>
+    <add val='4' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2505' name="Iron Canine">
+  <set name="weapon_type" val="pet"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="17"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="100"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="4"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="277"/>
+  <set name="m_dam" val="5"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="14000"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <add val='4' order='0x10' stat='pAtk'/>
+    <add val='5' order='0x10' stat='mAtk'/>
+    <set val='80' order='0x08' stat='rCrit'/>
+    <set val='304' order='0x08' stat='pAtkSpd'/>
+  
+  </for>
+</item>
+<item id='2507' name="Lizardspear">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="300"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="5"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="-3.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="5"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="409000"/>
+  <set name="crystal_count" val="743"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='5' order='0x08' stat='pAtk'/>
+    <set val='5' order='0x08' stat='mAtk'/>
+    <set val='12' order='0x08' stat='rCrit'/>
+    <add val='-3' order='0x10' stat='accCombat'/>
+    <set val='433' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2516' name="Saber*Saber">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2530"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="73"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="37"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="877000"/>
+  <set name="crystal_count" val="1594"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='73' order='0x08' stat='pAtk'/>
+    <set val='37' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2517' name="Saber*Bastard Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2520"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="83"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="41"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1060000"/>
+  <set name="crystal_count" val="1927"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='83' order='0x08' stat='pAtk'/>
+    <set val='41' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2518' name="Saber*Spinebone Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2530"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="83"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="41"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1060000"/>
+  <set name="crystal_count" val="1927"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='83' order='0x08' stat='pAtk'/>
+    <set val='41' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2519' name="Saber*Artisan\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2520"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="83"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="41"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1060000"/>
+  <set name="crystal_count" val="1927"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='83' order='0x08' stat='pAtk'/>
+    <set val='41' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2520' name="Saber*Knight\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2510"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="83"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="41"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1060000"/>
+  <set name="crystal_count" val="1927"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='83' order='0x08' stat='pAtk'/>
+    <set val='41' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2521' name="Saber*Crimson Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2530"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2522' name="Saber*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2510"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2523' name="Saber*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2420"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="118"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="56"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1960000"/>
+  <set name="crystal_count" val="784"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='118' order='0x08' stat='pAtk'/>
+    <set val='56' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2524' name="Saber*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2420"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="130"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="61"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2290000"/>
+  <set name="crystal_count" val="916"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='130' order='0x08' stat='pAtk'/>
+    <set val='61' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2525' name="Bastard Sword*Bastard Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2470"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2526' name="Bastard Sword*Spinebone Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2470"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2527' name="Bastard Sword*Artisan\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2480"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2528' name="Bastard Sword*Knight\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2500"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2529' name="Bastard Sword*Crimson Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2470"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2530' name="Bastard Sword*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2460"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2531' name="Bastard Sword*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2450"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="124"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="58"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2120000"/>
+  <set name="crystal_count" val="848"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='124' order='0x08' stat='pAtk'/>
+    <set val='58' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2532' name="Bastard Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2430"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="136"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="63"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2470000"/>
+  <set name="crystal_count" val="988"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='136' order='0x08' stat='pAtk'/>
+    <set val='63' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2533' name="Spinebone Sword*Spinebone Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2520"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2534' name="Spinebone Sword*Artisan\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2460"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2535' name="Spinebone Sword*Knight\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2470"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2536' name="Spinebone Sword*Crimson Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2520"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2537' name="Spinebone Sword*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2460"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2538' name="Spinebone Sword*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2460"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="124"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="58"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2120000"/>
+  <set name="crystal_count" val="848"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='124' order='0x08' stat='pAtk'/>
+    <set val='58' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2539' name="Spinebone Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2390"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="136"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="63"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2470000"/>
+  <set name="crystal_count" val="988"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='136' order='0x08' stat='pAtk'/>
+    <set val='63' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2540' name="Artisan\'s Sword*Artisan\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2480"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2541' name="Artisan\'s Sword*Knight\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2470"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2542' name="Artisan\'s Sword*Crimson Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2450"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2543' name="Artisan\'s Sword*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2470"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2544' name="Artisan\'s Sword*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2420"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="124"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="58"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2120000"/>
+  <set name="crystal_count" val="848"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='124' order='0x08' stat='pAtk'/>
+    <set val='58' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2545' name="Artisan\'s Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2410"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="136"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="63"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2470000"/>
+  <set name="crystal_count" val="988"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='136' order='0x08' stat='pAtk'/>
+    <set val='63' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2546' name="Knight\'s Sword*Knight\'s Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2460"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="96"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1400000"/>
+  <set name="crystal_count" val="2545"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='96' order='0x08' stat='pAtk'/>
+    <set val='47' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2547' name="Knight\'s Sword*Crimson Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2460"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2548' name="Knight\'s Sword*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2450"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="107"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="51"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1660000"/>
+  <set name="crystal_count" val="3018"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='107' order='0x08' stat='pAtk'/>
+    <set val='51' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2549' name="Knight\'s Sword*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2430"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="124"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="58"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2120000"/>
+  <set name="crystal_count" val="848"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='124' order='0x08' stat='pAtk'/>
+    <set val='58' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2550' name="Knight\'s Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2370"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="136"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="63"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2470000"/>
+  <set name="crystal_count" val="988"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='136' order='0x08' stat='pAtk'/>
+    <set val='63' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2551' name="Crimson Sword*Crimson Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2440"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="118"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="56"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1960000"/>
+  <set name="crystal_count" val="784"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='118' order='0x08' stat='pAtk'/>
+    <set val='56' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2552' name="Crimson Sword*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2450"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="118"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="56"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1960000"/>
+  <set name="crystal_count" val="784"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='118' order='0x08' stat='pAtk'/>
+    <set val='56' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2553' name="Crimson Sword*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2390"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="136"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="63"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2470000"/>
+  <set name="crystal_count" val="988"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='136' order='0x08' stat='pAtk'/>
+    <set val='63' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2554' name="Crimson Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2360"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="148"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="68"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2870000"/>
+  <set name="crystal_count" val="1148"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='148' order='0x08' stat='pAtk'/>
+    <set val='68' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='2' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2554;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2555' name="Elven Sword*Elven Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2440"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="118"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="56"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="1960000"/>
+  <set name="crystal_count" val="784"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='118' order='0x08' stat='pAtk'/>
+    <set val='56' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2556' name="Elven Sword*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2410"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="136"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="63"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2470000"/>
+  <set name="crystal_count" val="988"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='136' order='0x08' stat='pAtk'/>
+    <set val='63' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2557' name="Elven Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2410"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="148"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="68"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2870000"/>
+  <set name="crystal_count" val="1148"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='148' order='0x08' stat='pAtk'/>
+    <set val='68' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <add val='61' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2557;16;4"/>
+      </and>
+    </add>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2558' name="Sword of Revolution*Sword of Revolution">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2360"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="148"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="68"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="2870000"/>
+  <set name="crystal_count" val="1148"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='148' order='0x08' stat='pAtk'/>
+    <set val='68' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+   	<mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2558;16;4"/>
+	  </and>
+	</mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2559' name="Sword of Revolution*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2340"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="155"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="70"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="3340000"/>
+  <set name="crystal_count" val="1336"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='155' order='0x08' stat='pAtk'/>
+    <set val='70' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='50' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2559;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2560' name="Elven Long Sword*Elven Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2340"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="162"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="73"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="3820000"/>
+  <set name="crystal_count" val="1528"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='162' order='0x08' stat='pAtk'/>
+    <set val='73' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <mul val='1.04' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2560;16;4"/>
+      </and>
+    </mul>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2561' name="Stormbringer*Stormbringer">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2330"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="175"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="78"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="4780000"/>
+  <set name="crystal_count" val="1912"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='175' order='0x08' stat='pAtk'/>
+    <set val='78' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='2' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2561;16;4"/>
+      </and>
+    </add>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2562' name="Stormbringer*Shamshir">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2300"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="183"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="81"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="5280000"/>
+  <set name="crystal_count" val="2112"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='183' order='0x08' stat='pAtk'/>
+    <set val='81' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='49' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2562;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2563' name="Stormbringer*Katana">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2320"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="183"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="81"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="5280000"/>
+  <set name="crystal_count" val="2112"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='183' order='0x08' stat='pAtk'/>
+    <set val='81' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2563;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2564' name="Stormbringer*Spirit Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2310"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="183"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="81"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="5280000"/>
+  <set name="crystal_count" val="2112"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='183' order='0x08' stat='pAtk'/>
+    <set val='81' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='24' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2564;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2565' name="Stormbringer*Raid Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2340"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="183"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="81"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="5280000"/>
+  <set name="crystal_count" val="2112"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='183' order='0x08' stat='pAtk'/>
+    <set val='81' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.02' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2565;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2566' name="Stormbringer*Caliburs">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2260"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="197"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="86"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6980000"/>
+  <set name="crystal_count" val="930"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='197' order='0x08' stat='pAtk'/>
+    <set val='86' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='5' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2566;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2567' name="Stormbringer*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2240"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="197"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="86"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6980000"/>
+  <set name="crystal_count" val="930"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='197' order='0x08' stat='pAtk'/>
+    <set val='86' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='166' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2567;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2568' name="Stormbringer*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2230"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="197"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="86"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6980000"/>
+  <set name="crystal_count" val="930"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='197' order='0x08' stat='pAtk'/>
+    <set val='86' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2568;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2569' name="Stormbringer*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2250"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="197"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="86"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6980000"/>
+  <set name="crystal_count" val="930"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='197' order='0x08' stat='pAtk'/>
+    <set val='86' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='76' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2569;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2570' name="Stormbringer*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2220"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="197"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="86"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6980000"/>
+  <set name="crystal_count" val="930"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='197' order='0x08' stat='pAtk'/>
+    <set val='86' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.07' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2570;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2571' name="Stormbringer*Samurai Long sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2150"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2571;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2572' name="Shamshir*Shamshir">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2330"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='2' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2572;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2573' name="Shamshir*Katana">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2310"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='84' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2573;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2574' name="Shamshir*Spirit Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2280"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2574;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2575' name="Shamshir*Raid Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2280"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='40' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2575;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2576' name="Shamshir*Caliburs">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2230"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2576;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2577' name="Shamshir*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2240"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+	<add val='146' order='0x10' stat='cAtk'>
+	  <and>
+	    <using slotitem="2577;16;4"/>
+	  </and>
+	</add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2578' name="Shamshir*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2200"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2578;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2579' name="Shamshir*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2210"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='65' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2579;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2580' name="Shamshir*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2220"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.06' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2580;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2581' name="Shamshir*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2110"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="220"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="94"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="9550000"/>
+  <set name="crystal_count" val="1273"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='220' order='0x08' stat='pAtk'/>
+    <set val='94' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='3' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2581;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2582' name="Katana*Katana">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2270"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.04' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2582;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2583' name="Katana*Spirit Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2250"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='2' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2583;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2584' name="Katana*Raid Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2270"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='84' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2584;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2585' name="Katana*Caliburs">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2220"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2585;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2586' name="Katana*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2180"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='146' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2586;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2587' name="Katana*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2190"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2587;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2588' name="Katana*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2170"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='65' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2588;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2589' name="Katana*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2210"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.06' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2589;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2590' name="Katana*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2130"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="220"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="94"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="9550000"/>
+  <set name="crystal_count" val="1273"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='220' order='0x08' stat='pAtk'/>
+    <set val='94' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='106' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2590;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2591' name="Spirit Sword*Spirit Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2240"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2591;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2592' name="Spirit Sword*Raid Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2260"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='40' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2592;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2593' name="Spirit Sword*Caliburs">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2240"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2593;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2594' name="Spirit Sword*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2240"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='146' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2594;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2595' name="Spirit Sword*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2250"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2595;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2596' name="Spirit Sword*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2250"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='65' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2596;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2597' name="Spirit Sword*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2220"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.06' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2597;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2598' name="Spirit Sword*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2110"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="220"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="94"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="9550000"/>
+  <set name="crystal_count" val="1273"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='220' order='0x08' stat='pAtk'/>
+    <set val='94' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2598;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2599' name="Raid Sword*Raid Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2250"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="190"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="83"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="6130000"/>
+  <set name="crystal_count" val="2452"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='190' order='0x08' stat='pAtk'/>
+    <set val='83' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.04' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2599;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2600' name="Raid Sword*Caliburs">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2190"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2600;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2601' name="Raid Sword*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2170"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='146' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2601;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2602' name="Raid Sword*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2180"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2602;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2603' name="Raid Sword*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2170"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='65' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2603;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2604' name="Raid Sword*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2170"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="204"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="89"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="7830000"/>
+  <set name="crystal_count" val="1044"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='204' order='0x08' stat='pAtk'/>
+    <set val='89' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.06' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2604;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2605' name="Raid Sword*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2130"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="220"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="94"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="9550000"/>
+  <set name="crystal_count" val="1273"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='220' order='0x08' stat='pAtk'/>
+    <set val='94' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='43' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2605;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2606' name="Caliburs*Caliburs">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='127' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2606;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2607' name="Caliburs*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2150"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2607;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2608' name="Caliburs*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='54' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2608;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2609' name="Caliburs*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2170"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.05' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2609;16;4"/>
+      </and>
+     </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2610' name="Caliburs*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2150"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2610;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2611' name="Caliburs*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2120"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="228"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="97"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="11300000"/>
+  <set name="crystal_count" val="1506"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='228' order='0x08' stat='pAtk'/>
+    <set val='97' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.05' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2611;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2612' name="Sword of Limit*Sword of Limit">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='127' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2612;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2613' name="Sword of Limit*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2613;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2614' name="Sword of Limit*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2130"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='54' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2614;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2615' name="Sword of Limit*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2120"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.05' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2615;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2616' name="Sword of Limit*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2100"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="228"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="97"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="11300000"/>
+  <set name="crystal_count" val="1506"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='228' order='0x08' stat='pAtk'/>
+    <set val='97' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='3' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2616;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2617' name="Sword of Delusion*Sword of Delusion">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2150"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='4' order='0x10' stat='accCombat'>
+      <and>
+        <using slotitem="2617;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2618' name="Sword of Delusion*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2130"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='127' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2618;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2619' name="Sword of Delusion*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2619;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2620' name="Sword of Delusion*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2110"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="228"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="97"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="11300000"/>
+  <set name="crystal_count" val="1506"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='228' order='0x08' stat='pAtk'/>
+    <set val='97' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='133' order='0x10' stat='cAtk'>
+      <and>
+        <using slotitem="2620;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2621' name="Sword of Nightmare*Sword of Nightmare">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2130"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='54' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2621;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2622' name="Sword of Nightmare*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.05' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2622;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2623' name="Sword of Nightmare*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="228"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="97"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="11300000"/>
+  <set name="crystal_count" val="1506"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='228' order='0x08' stat='pAtk'/>
+    <set val='97' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.25' order='0x30' stat='maxHp'>
+      <and>
+        <using slotitem="2623;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2624' name="Tsurugi*Tsurugi">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2120"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="213"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="91"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="8680000"/>
+  <set name="crystal_count" val="1157"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='213' order='0x08' stat='pAtk'/>
+    <set val='91' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='54' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2624;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2625' name="Tsurugi*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2090"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="228"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="97"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="11300000"/>
+  <set name="crystal_count" val="1506"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='228' order='0x08' stat='pAtk'/>
+    <set val='97' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <add val='52' order='0x40' stat='rCrit'>
+      <and>
+        <using slotitem="2625;16;4"/>
+      </and>
+    </add>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2626' name="Samurai Long Sword*Samurai Long Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="3"/>
+  <set name="p_dam" val="236"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="99"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="13100000"/>
+  <set name="crystal_count" val="1746"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='236' order='0x08' stat='pAtk'/>
+    <set val='99' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='325' order='0x08' stat='pAtkSpd'/>
+    <mul val='1.04' order='0x30' stat='pAtkSpd'>
+      <and>
+        <using slotitem="2626;16;4"/>
+      </and>
+    </mul>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='2915' name="Old Knight Sword">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="3200"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="24"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="136000"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="false"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+    <set val='24' order='0x08' stat='pAtk'/>
+    <set val='17' order='0x08' stat='mAtk'/>
+    <set val='8' order='0x08' stat='rCrit'/>
+    <add val='0' order='0x10' stat='accCombat'/>
+    <set val='379' order='0x08' stat='pAtkSpd'/>
+    <enchant val='0' order='0x0C' stat='pAtk'/>
+    <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+</list>

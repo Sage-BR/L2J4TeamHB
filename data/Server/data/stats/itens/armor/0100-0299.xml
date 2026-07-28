@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+  <item id="112" name="Apprentice's Earring">
+    <for>
+      <add val="11" order="0x10" stat="mDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="113" name="Mystic's Earring">
+    <for>
+      <add val="13" order="0x10" stat="mDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="114" name="Earring of Strength">
+    <for>
+      <add val="16" order="0x10" stat="mDef" />
+    </for>
+    <set name="bodypart" val="3" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="11" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="3510" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="16" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="115" name="Earring of Wisdom">
+    <for>
+      <add val="16" order="0x10" stat="mDef" />
+    </for>
+    <set name="bodypart" val="3" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="11" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="3510" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="16" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="116" name="Magic Ring">
+    <for>
+      <add val="7" order="0x10" stat="mDef" />
+    </for>
+    <set name="bodypart" val="7" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="11" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="33" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="7" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="117" name="Ring of Mana">
+    <for>
+      <add val="34" order="0x10" stat="mDef" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="bodypart" val="7" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="10" />
+    <set name="crystal_type" val="5" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="404000" />
+    <set name="crystal_count" val="53" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="34" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="118" name="Necklace of Magic">
+    <for>
+      <add val="15" order="0x10" stat="mDef" />
+    </for>
+    <set name="bodypart" val="1" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="10" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="66" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="15" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="119" name="Necklace of Binding">
+    <for>
+      <add val="64" order="0x10" stat="mDef" />
+      <enchant val="0" order="0x0C" stat="mDef" />
+    </for>
+    <set name="bodypart" val="1" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="12" />
+    <set name="crystal_type" val="4" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="565000" />
+    <set name="crystal_count" val="226" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="64" />
+    <set name="mp_bonus" val="0" />
+  </item>
+</list>

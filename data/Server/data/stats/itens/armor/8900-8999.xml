@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+  <item id="8910" name="Black Feather Mask - For Event">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="false" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8911" name="Black Half-Mask - For Event">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="8192" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8912" name="Single Stem Flower">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8913" name="Butterfly Hairpin">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8914" name="Luxurious Gold Circlet">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8915" name="Luxurious Silver Circlet">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8916" name="Eye Patch">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="8192" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8917" name="Goddess Circlet">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8918" name="Leather Cap">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8919" name="Commodore\'s Hat - Event Use">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="8920" name="Angel Halo">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8921" name="Demon Circlet">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8922" name="Pirate Hat">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8923" name="Scar">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="8192" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="13" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8936" name="Santa\'s Antlers">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="8947" name="L2 Day: Rabbit Ears">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8948" name="L2 Day: Little Angel Wings">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8949" name="L2 Day: Fairy Antennae">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8950" name="L2 Day: Feathered Hat">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="16384" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="1" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="8951" name="L2 Day: Artisan\'s Goggles">
+    <for>
+      <add val="0" order="0x10" stat="pDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+</list>

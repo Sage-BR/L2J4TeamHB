@@ -1,0 +1,2316 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<list>
+<item id='10003' name="Fleuret">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1500"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="46"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="-1.00000"/>
+  <set name="atk_speed" val="406"/>
+  <set name="m_dam" val="32"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='46' order='0x08' stat='pAtk'/>
+   <set val='32' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='406' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10004' name="Dynasty Dual Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="374"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="7212"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='374' order='0x08' stat='pAtk'/>
+   <set val='140' order='0x08' stat='mAtk'/>
+   <set val='8' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10005' name="Shadow Item: Fleuret">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="500"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="46"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="-1.00000"/>
+  <set name="atk_speed" val="406"/>
+  <set name="m_dam" val="32"/>
+  <set name="duration" val="90"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='46' order='0x08' stat='pAtk'/>
+   <set val='32' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='406' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10006' name="Shadow Item: Military Talwar">
+  <set name="weapon_type" val="ancient"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="693"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="55"/>
+  <set name="critical" val="6"/>
+  <set name="hit_modify" val="2.00000"/>
+  <set name="atk_speed" val="350"/>
+  <set name="m_dam" val="32"/>
+  <set name="duration" val="90"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='55' order='0x08' stat='pAtk'/>
+   <set val='32' order='0x08' stat='mAtk'/>
+   <set val='6' order='0x08' stat='rCrit'/>
+   <set val='350' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10007' name="Shadow Item: Hand Crossbow">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="693"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="1"/>
+  <set name="p_dam" val="64"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="-1.00000"/>
+  <set name="atk_speed" val="303"/>
+  <set name="mp_consume" val="9"/>
+  <set name="m_dam" val="32"/>
+  <set name="duration" val="90"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='64' order='0x08' stat='pAtk'/>
+   <set val='32' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='303' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10008' name="Shadow Item: Blinzlasher">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="467"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="126"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="-1.00000"/>
+  <set name="atk_speed" val="406"/>
+  <set name="m_dam" val="76"/>
+  <set name="duration" val="120"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='126' order='0x08' stat='pAtk'/>
+   <set val='76' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='406' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10009' name="Shadow Item: Immortal Edge">
+  <set name="weapon_type" val="ancient"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="660"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="151"/>
+  <set name="critical" val="6"/>
+  <set name="hit_modify" val="2.00000"/>
+  <set name="atk_speed" val="350"/>
+  <set name="m_dam" val="76"/>
+  <set name="duration" val="120"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='151' order='0x08' stat='pAtk'/>
+   <set val='76' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='350' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10010' name="Shadow Item: Tathlum">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="587"/>
+  <set name="soulshots" val="5"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="176"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="-1.00000"/>
+  <set name="atk_speed" val="303"/>
+  <set name="mp_consume" val="9"/>
+  <set name="m_dam" val="76"/>
+  <set name="duration" val="120"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='176' order='0x08' stat='pAtk'/>
+   <set val='76' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='303' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10011' name="Shadow Item - War Axe">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="533"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="139"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="76"/>
+  <set name="duration" val="120"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='139' order='0x08' stat='pAtk'/>
+   <set val='76' order='0x08' stat='mAtk'/>
+   <set val='4' order='0x08' stat='rCrit'/>
+   <set val='379' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10125' name="Shadow Item - War Axe">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="533"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="2"/>
+  <set name="p_dam" val="139"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="76"/>
+  <set name="duration" val="300"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='139' order='0x08' stat='pAtk'/>
+   <set val='76' order='0x08' stat='mAtk'/>
+   <set val='4' order='0x08' stat='rCrit'/>
+   <set val='379' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10128' name="For Monster only (Crossbow)">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1530"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="31"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="21"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='31' order='0x08' stat='pAtk'/>
+   <set val='21' order='0x08' stat='mAtk'/>
+   <set val='8' order='0x08' stat='rCrit'/>
+   <set val='379' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10167' name="Pig Lollipop">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="0"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="1"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="1"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='1' order='0x08' stat='pAtk'/>
+   <set val='1' order='0x08' stat='mAtk'/>
+   <set val='8' order='0x08' stat='rCrit'/>
+   <set val='379' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10212' name="npc Only (Bow)">
+  <set name="weapon_type" val="bow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="0"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="0"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10215' name="Icarus Sawsword">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10216' name="Icarus Disperser">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="318"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10217' name="Icarus Spirit">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10218' name="Icarus Heavy Arms">
+  <set name="weapon_type" val="bigsword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10219' name="Icarus Trident">
+  <set name="weapon_type" val="pole"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2010"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="3"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10220' name="Icarus Hammer">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10221' name="Icarus Hand">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1550"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10222' name="Icarus Hall">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10223' name="Icarus Spitter">
+  <set name="weapon_type" val="bow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="689"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="mp_consume" val="11"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10224' name="Icarus Stinger">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1280"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="329"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10225' name="Icarus Wingblade">
+  <set name="weapon_type" val="ancient"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1800"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="393"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10226' name="Icarus Shooter">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1580"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="400"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='0' order='0x08' stat='pAtk'/>
+   <set val='0' order='0x08' stat='mAtk'/>
+   <set val='10' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10252' name="Dynasty Staff">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='307' order='0x08' stat='pAtk'/>
+   <set val='140' order='0x08' stat='mAtk'/>
+   <set val='4' order='0x08' stat='rCrit'/>
+   <set val='379' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10253' name="Dynasty Crusher">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='307' order='0x08' stat='pAtk'/>
+   <set val='140' order='0x08' stat='mAtk'/>
+   <set val='4' order='0x08' stat='rCrit'/>
+   <set val='379' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10277' name="Monster Only (Behamah Pole)">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2140"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="24"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="-3.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='24' order='0x08' stat='pAtk'/>
+   <set val='17' order='0x08' stat='mAtk'/>
+   <set val='8' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10278' name="Monster Only (Behamah Dual)">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2530"/>
+  <set name="soulshots" val="0"/>
+  <set name="spiritshots" val="0"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="73"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="37"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+  <for>
+
+   <set val='73' order='0x08' stat='pAtk'/>
+   <set val='37' order='0x08' stat='mAtk'/>
+   <set val='8' order='0x08' stat='rCrit'/>
+   <set val='325' order='0x08' stat='pAtkSpd'/>
+   <enchant val='0' order='0x0C' stat='pAtk'/>
+   <enchant val='0' order='0x0C' stat='mAtk'/>
+  
+  </for>
+</item>
+<item id='10415' name="Icarus Dual Sword">
+  <set name="weapon_type" val="dual"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0"/>
+</item>
+<item id='10434' name="Icarus Sawsword Focus">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3044-19;"/>
+</item>
+<item id='10435' name="Icarus Sawsword Health">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10436' name="Icarus Sawsword Light">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3498-1;"/>
+</item>
+<item id='10437' name="Icarus Heavy Arms - Focus">
+  <set name="weapon_type" val="bigsword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3044-19;"/>
+</item>
+<item id='10438' name="Icarus Heavy Arms - Health">
+  <set name="weapon_type" val="bigsword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10439' name="Icarus Heavy Arms - Light">
+  <set name="weapon_type" val="bigsword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3498-1;"/>
+</item>
+<item id='10440' name="Icarus Spirit - Acumen">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10441' name="Icarus Spirit - Mana Up">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10442' name="Icarus Spirit - Conversion">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10443' name="Icarus Spitter - Cheap Shot">
+  <set name="weapon_type" val="bow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="689"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="mp_consume" val="11"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10444' name="Icarus Spitter - Guidance">
+  <set name="weapon_type" val="bow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="689"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="mp_consume" val="11"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10445' name="Icarus Spitter - Focus">
+  <set name="weapon_type" val="bow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="689"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="mp_consume" val="11"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3044-20;"/>
+</item>
+<item id='10446' name="Icarus Disperser - Focus">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="318"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3044-20;"/>
+</item>
+<item id='10447' name="Icarus Disperser - Evasion">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="318"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10448' name="Icarus Disperser - Critical Damage">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1520"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="318"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10449' name="Icarus Trident - Anger">
+  <set name="weapon_type" val="pole"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2010"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="3"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10450' name="Icarus Trident - Critical Stun">
+  <set name="weapon_type" val="pole"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2010"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="3"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="onCrit_skill_id" val="3070"/>
+  <set name="onCrit_skill_lvl" val="1"/>
+  <set name="onCrit_skill_chance" val="25"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10451' name="Icarus Trident - Light">
+  <set name="weapon_type" val="pole"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="2010"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="3"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3498-1;"/>
+</item>
+<item id='10452' name="Icarus Hammer - Anger">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10453' name="Icarus Hammer - Health">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10454' name="Icarus Hammer - Rsk. Focus">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="363"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10455' name="Icarus Hall - Mana Up">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10456' name="Icarus Hall - Conversion">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10457' name="Icarus Hall - Acumen">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="290"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="217"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3047-3;"/>
+</item>
+<item id='10458' name="Icarus Hand - Rsk. Evasion">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1550"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10459' name="Icarus Hand - Focus">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1550"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3044-18;"/>
+</item>
+<item id='10460' name="Icarus Hand - Haste">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1550"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="442"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10461' name="Icarus Stinger - Focus">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1280"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="329"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="406"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10462' name="Icarus Stinger - Health">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1280"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="329"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="406"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10463' name="Icarus Stinger - Light">
+  <set name="weapon_type" val="rapier"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1280"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="329"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="406"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3498-1;"/>
+</item>
+<item id='10464' name="Icarus Wingblade - Focus">
+  <set name="weapon_type" val="ancient"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1800"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="393"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="350"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10465' name="Icarus Wingblade - Health">
+  <set name="weapon_type" val="ancient"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1800"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="393"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="350"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10466' name="Icarus Wingblade - Light">
+  <set name="weapon_type" val="ancient"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1800"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="393"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="350"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="3498-1;"/>
+</item>
+<item id='10467' name="Icarus Shooter - Cheap Shot">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1580"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="400"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="303"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10468' name="Icarus Shooter - Guidance">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1580"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="400"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="303"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10469' name="Icarus Shooter - Focus">
+  <set name="weapon_type" val="crossbow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1580"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="400"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="303"/>
+  <set name="m_dam" val="163"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10474' name="Shadow Item - Apprentice\'s Staff">
+  <set name="weapon_type" val="bigblunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1070"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="23"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="22"/>
+  <set name="duration" val="180"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10475' name="Shadow Item - Bone Club">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1730"/>
+  <set name="soulshots" val="3"/>
+  <set name="spiritshots" val="3"/>
+  <set name="material" val="12"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="79"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="47"/>
+  <set name="duration" val="180"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10476' name="Shadow Item - Shining Knife">
+  <set name="weapon_type" val="dagger"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1120"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="6"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="21"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="-3.00000"/>
+  <set name="atk_speed" val="433"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="180"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10477' name="Shadow Item - Cestus">
+  <set name="weapon_type" val="dualfist"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1570"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="29"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="325"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="180"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10478' name="Shadow Item - Forest Bow">
+  <set name="weapon_type" val="bow"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="3"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1900"/>
+  <set name="soulshots" val="7"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="49"/>
+  <set name="rnd_dam" val="5"/>
+  <set name="critical" val="12"/>
+  <set name="hit_modify" val="-3.00000"/>
+  <set name="atk_speed" val="293"/>
+  <set name="mp_consume" val="3"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="180"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10479' name="Shadow Item - Long Sword">
+  <set name="weapon_type" val="sword"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1560"/>
+  <set name="soulshots" val="2"/>
+  <set name="spiritshots" val="2"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="24"/>
+  <set name="rnd_dam" val="10"/>
+  <set name="critical" val="8"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="17"/>
+  <set name="duration" val="180"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="false"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10527' name="Dynasty Staff - Mana Up">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10528' name="Dynasty Staff - Conversion">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10529' name="Dynasty Staff - Acumen">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1080"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="9"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10530' name="Dynasty Crusher - Anger">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10531' name="Dynasty Crusher - Health">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10532' name="Dynasty Crusher - Rsk. Focus">
+  <set name="weapon_type" val="blunt"/>
+  <set name="type1" val="0"/>
+  <set name="type2" val="0"/>
+  <set name="bodypart" val="1"/>
+  <set name="crystallizable" val="true"/>
+  <set name="weight" val="1740"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="6"/>
+  <set name="p_dam" val="307"/>
+  <set name="rnd_dam" val="20"/>
+  <set name="critical" val="4"/>
+  <set name="hit_modify" val="4.00000"/>
+  <set name="atk_speed" val="379"/>
+  <set name="m_dam" val="140"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="6132"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+<item id='10548' name="Monster Only (Transparent Shield)">
+  <set name="weapon_type" val="none"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
+  <set name="bodypart" val="2"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="1430"/>
+  <set name="soulshots" val="1"/>
+  <set name="spiritshots" val="1"/>
+  <set name="material" val="0"/>
+  <set name="crystal_type" val="0"/>
+  <set name="p_dam" val="0"/>
+  <set name="rnd_dam" val="15"/>
+  <set name="critical" val="10"/>
+  <set name="hit_modify" val="0.00000"/>
+  <set name="atk_speed" val="0"/>
+  <set name="m_dam" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="sellable" val="true"/>
+  <set name="dropable" val="true"/>
+  <set name="destroyable" val="true"/>
+  <set name="tradeable" val="true"/>
+  <set name="skill" val="0-0;"/>
+</item>
+</list>

@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+  <item id="5300" name="Sealed Boots of The Underworld">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1110" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5301" name="Sealed Tallum Leather Armor">
+    <for>
+      <add val="209" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="5400" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="5080000" />
+    <set name="crystal_count" val="406" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="209" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5302" name="Sealed Gust Bracer">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="580" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5303" name="Sealed Gust Boots">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1120" />
+    <set name="material" val="15" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5304" name="Sealed Tallum Tunic">
+    <for>
+      <add val="86" order="0x10" stat="pDef" />
+      <add val="409" order="0x60" stat="maxMp" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="magic" />
+    <set name="weight" val="1860" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="3470000" />
+    <set name="crystal_count" val="277" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="86" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="409" />
+  </item>
+  <item id="5305" name="Sealed Tallum Stockings">
+    <for>
+      <add val="53" order="0x10" stat="pDef" />
+      <add val="256" order="0x60" stat="maxMp" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="magic" />
+    <set name="weight" val="920" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="2170000" />
+    <set name="crystal_count" val="173" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="53" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="256" />
+  </item>
+  <item id="5306" name="Sealed Gloves of Black Ore">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="570" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5307" name="Sealed Red Flame Boots">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1120" />
+    <set name="material" val="15" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5308" name="Sealed Dark Crystal Robe">
+    <for>
+      <add val="139" order="0x10" stat="pDef" />
+      <add val="665" order="0x60" stat="maxMp" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="magic" />
+    <set name="weight" val="2450" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="5080000" />
+    <set name="crystal_count" val="406" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="139" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="665" />
+  </item>
+  <item id="5309" name="Sealed Phoenix Gloves's_gloves">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="570" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5310" name="Sealed Phoenix Boots's_boots">
+    <for>
+      <add val="45" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1120" />
+    <set name="material" val="15" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1070000" />
+    <set name="crystal_count" val="92" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="45" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5311" name="Sealed Armor of Nightmare">
+    <for>
+      <add val="293" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="9580" />
+    <set name="material" val="15" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="10300000" />
+    <set name="crystal_count" val="824" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="293" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5312" name="Sealed Helm of Nightmare">
+    <for>
+      <add val="73" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="1024" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="560" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="2640000" />
+    <set name="crystal_count" val="211" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="73" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5313" name="Sealed Gloves of Nightmare">
+    <for>
+      <add val="49" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="550" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1760000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="49" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5314" name="Sealed Boots of Nightmare">
+    <for>
+      <add val="49" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1110" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1760000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="49" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5316" name="Sealed Majestic Plate Armor">
+    <for>
+      <add val="293" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="9200" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="10300000" />
+    <set name="crystal_count" val="824" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="293" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5317" name="Sealed Majestic Circlet">
+    <for>
+      <add val="73" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="1024" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="550" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="2640000" />
+    <set name="crystal_count" val="211" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="73" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5318" name="Sealed Majestic Gloves">
+    <for>
+      <add val="49" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="540" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1760000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="49" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5319" name="Sealed Majestic Boots">
+    <for>
+      <add val="49" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1110" />
+    <set name="material" val="15" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1760000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="49" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5320" name="Sealed Leather Armor of Nightmare">
+    <for>
+      <add val="220" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="5300" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="7730000" />
+    <set name="crystal_count" val="618" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="220" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5321" name="Sealed Dark Legion Gloves">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="560" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5322" name="Sealed Dark Legion Boots">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1120" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5323" name="Sealed Majestic Leather Armor">
+    <for>
+      <add val="220" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="5350" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="7730000" />
+    <set name="crystal_count" val="618" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="220" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5324" name="Sealed Gloves of Phantom">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="560" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5325" name="Sealed Boots of Phantom">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1120" />
+    <set name="material" val="14" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5326" name="Sealed Robe of Nightmare">
+    <for>
+      <add val="147" order="0x10" stat="pDef" />
+      <add val="718" order="0x60" stat="maxMp" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="magic" />
+    <set name="weight" val="2300" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="7730000" />
+    <set name="crystal_count" val="618" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="147" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="718" />
+  </item>
+  <item id="5327" name="Sealed Cerberus Gloves">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="540" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5328" name="Sealed Cerberus Boots">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1120" />
+    <set name="material" val="17" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="5329" name="Sealed Majestic Robe">
+    <for>
+      <add val="147" order="0x10" stat="pDef" />
+      <add val="718" order="0x60" stat="maxMp" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="magic" />
+    <set name="weight" val="2330" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="6" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="7730000" />
+    <set name="crystal_count" val="618" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="147" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="718" />
+  </item>
+  <item id="5330" name="Sealed Dasparion's Gloves">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="5331" name="Sealed Dasparion's Boots">
+    <for>
+      <add val="48" order="0x10" stat="pDef" />
+      <enchant val="0" order="0x0C" stat="pDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+</list>

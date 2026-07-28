@@ -16,6 +16,7 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.Olympiad;
@@ -42,6 +43,7 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
+import net.sf.l2j.gameserver.util.FloodProtector;
 import net.sf.l2j.gameserver.util.Util;
 
 import java.util.List;
@@ -53,7 +55,7 @@ import java.util.List;
  */
 public final class L2VillageMasterInstance extends L2FolkInstance
 {
-    //private static Logger _log = Logger.getLogger(L2VillageMasterInstance.class.getName());
+    private static Logger _log = Logger.getLogger(L2VillageMasterInstance.class.getName());
 
     /**
      * @param template
@@ -271,6 +273,13 @@ public final class L2VillageMasterInstance extends L2FolkInstance
                      * If the character is less than level 75 on any of their previously chosen
                      * classes then disallow them to change to their most recently added sub-class choice.
                      */
+                    
+                    if (!FloodProtector.getInstance().tryPerformAction(player.getObjectId(), FloodProtector.PROTECTED_SUBCLASS))
+                    {
+                    	_log.warning("Player "+player.getName()+" has performed a subclass change too fast");
+                    	return;
+                    }
+                    
                     if (player.getLevel() < 75)
                     {
                         player.sendMessage("You may not add a new sub class before you are level 75 on your previous class.");
@@ -410,6 +419,13 @@ public final class L2VillageMasterInstance extends L2FolkInstance
                      * Warning: the information about this subclass will be removed from the
                      * subclass list even if false!
                      */
+                	
+                	if (!FloodProtector.getInstance().tryPerformAction(player.getObjectId(), FloodProtector.PROTECTED_SUBCLASS))
+                    {
+                    	_log.warning("Player "+player.getName()+" has performed a subclass change too fast");
+                    	return;
+                    }
+                	
                     if (player.modifySubClass(paramOne, paramTwo))
                     {
                     	player.stopAllEffects(); // all effects from old subclass stopped!

@@ -13,116 +13,108 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @author godson
- */
-
 package net.sf.l2j.gameserver.datatables;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.File;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
-import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2ArmorSet;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
+import Dev.SpecialMods.XMLDocumentFactory;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- *
- *
- * @author  Luno
- */
 public class ArmorSetsTable
 {
 	private static Logger _log = Logger.getLogger(ArmorSetsTable.class.getName());
 	private static ArmorSetsTable _instance;
 
-	private ConcurrentHashMap<Integer,L2ArmorSet> _armorSets;
+	private ConcurrentHashMap<Integer, L2ArmorSet> _armorSets;
 
 	public static ArmorSetsTable getInstance()
 	{
-		if(_instance == null)
+		if (_instance == null)
 			_instance = new ArmorSetsTable();
 		return _instance;
 	}
+
 	private ArmorSetsTable()
 	{
-		_armorSets = new ConcurrentHashMap<Integer,L2ArmorSet>();
+		_armorSets = new ConcurrentHashMap<Integer, L2ArmorSet>();
 		loadData();
 	}
+
 	private void loadData()
 	{
-		Connection con;
+		loadFromXml("./data/stats/armorsets.xml");
+		loadFromXml("./data/stats/custom_armorsets.xml");
+	}
+
+	private void loadFromXml(String filePath)
+	{
+		File f = new File(Config.DATAPACK_ROOT, filePath);
+		if (!f.exists())
+		{
+			_log.config("ArmorSetsTable: " + f.getAbsolutePath() + " not found.");
+			return;
+		}
+
 		try
 		{
-			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement statement = con.prepareStatement("SELECT chest, legs, head, gloves, feet, skill_id, skill_lvl, shield, shield_skill_id, enchant6skill FROM armorsets");
-			ResultSet rset = statement.executeQuery();
+			Document doc = XMLDocumentFactory.getInstance().loadDocument(f);
+			Node listNode = doc.getFirstChild();
+			int count = 0;
 
-			while(rset.next())
+			for (Node n = listNode.getFirstChild(); n != null; n = n.getNextSibling())
 			{
-				int chest = rset.getInt("chest");
-				int legs  = rset.getInt("legs");
-				int head  = rset.getInt("head");
-				int gloves = rset.getInt("gloves");
-				int feet  = rset.getInt("feet");
-				int skill_id = rset.getInt("skill_id");
-				int skill_lvl = rset.getInt("skill_lvl");
-				int shield = rset.getInt("shield");
-				int shield_skill_id = rset.getInt("shield_skill_id");
-				int enchant6skill = rset.getInt("enchant6skill");
-				_armorSets.put(chest, new L2ArmorSet(chest, legs, head, gloves, feet,skill_id, skill_lvl, shield, shield_skill_id, enchant6skill));
+				if (!n.getNodeName().equalsIgnoreCase("armorset"))
+					continue;
+
+				NamedNodeMap attrs = n.getAttributes();
+				int chest = Integer.parseInt(attrs.getNamedItem("chest").getNodeValue());
+				int legs = Integer.parseInt(getAttr(attrs, "legs", "0"));
+				int head = Integer.parseInt(getAttr(attrs, "head", "0"));
+				int gloves = Integer.parseInt(getAttr(attrs, "gloves", "0"));
+				int feet = Integer.parseInt(getAttr(attrs, "feet", "0"));
+				int skill_id = Integer.parseInt(getAttr(attrs, "skill_id", "0"));
+				int skill_lvl = Integer.parseInt(getAttr(attrs, "skill_lvl", "0"));
+				int shield = Integer.parseInt(getAttr(attrs, "shield", "0"));
+				int shield_skill_id = Integer.parseInt(getAttr(attrs, "shield_skill_id", "0"));
+				int enchant6skill = Integer.parseInt(getAttr(attrs, "enchant6skill", "0"));
+
+				_armorSets.put(chest, new L2ArmorSet(chest, legs, head, gloves, feet, skill_id, skill_lvl, shield, shield_skill_id, enchant6skill));
+				count++;
 			}
 
-			_log.config("ArmorSetsTable: Loaded "+_armorSets.size()+" armor sets.");
-
-			rset.close();
-			statement.close();
-			con.close();
+			_log.config("ArmorSetsTable: Loaded " + count + " armor sets from " + f.getName() + ".");
 		}
 		catch (Exception e)
 		{
-			_log.severe("ArmorSetsTable: Error reading ArmorSets table: " + e);
-		}
-		if (Config.CUSTOM_ARMORSETS_TABLE)
-		{
-			try
-			{
-				int cSets = _armorSets.size();
-				con = L2DatabaseFactory.getInstance().getConnection();
-				PreparedStatement statement = con.prepareStatement("SELECT chest, legs, head, gloves, feet, skill_id, skill_lvl, shield, shield_skill_id, enchant6skill FROM custom_armorsets");
-				ResultSet rset = statement.executeQuery();
-				while (rset.next())
-				{
-					int chest = rset.getInt("chest");
-					int legs = rset.getInt("legs");
-					int head = rset.getInt("head");
-					int gloves = rset.getInt("gloves");
-					int feet = rset.getInt("feet");
-					int skill_id = rset.getInt("skill_id");
-					int skill_lvl = rset.getInt("skill_lvl");
-					int shield = rset.getInt("shield");
-					int shield_skill_id = rset.getInt("shield_skill_id");
-					int enchant6skill = rset.getInt("enchant6skill");
-					_armorSets.put(chest, new L2ArmorSet(chest, legs, head, gloves, feet, skill_id, skill_lvl, shield, shield_skill_id, enchant6skill));
-				}
-				_log.config("ArmorSetsTable: Loaded " + (_armorSets.size() - cSets) + " Custom armor sets.");
-				rset.close();
-				statement.close();
-				con.close();
-			} catch (Exception e)
-			{
-				_log.severe("ArmorSetsTable: Error reading Custom ArmorSets table: " + e);
-			}
+			_log.severe("ArmorSetsTable: Error reading " + f.getName() + ": " + e);
 		}
 	}
+
+	private String getAttr(NamedNodeMap attrs, String name, String defaultValue)
+	{
+		Node node = attrs.getNamedItem(name);
+		if (node == null)
+			return defaultValue;
+		String val = node.getNodeValue();
+		if (val == null || val.isEmpty())
+			return defaultValue;
+		return val;
+	}
+
 	public boolean setExists(int chestId)
 	{
 		return _armorSets.containsKey(chestId);
 	}
+
 	public L2ArmorSet getSet(int chestId)
 	{
 		return _armorSets.get(chestId);

@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+  <item id="4224" name="Dream Armor">
+    <for>
+      <add val="68" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="8920" />
+    <set name="material" val="7" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="49200" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="68" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4225" name="Dream Stockings">
+    <for>
+      <add val="43" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="3960" />
+    <set name="material" val="7" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="30700" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="43" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4226" name="Dream Gloves">
+    <for>
+      <add val="17" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="650" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="12300" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="17" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4227" name="Dream Boots">
+    <for>
+      <add val="17" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1310" />
+    <set name="material" val="3" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="12300" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="17" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4228" name="Ubiquitous Armor">
+    <for>
+      <add val="68" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="8920" />
+    <set name="material" val="7" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="49200" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="68" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4229" name="Ubiquitous Stockings">
+    <for>
+      <add val="43" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="4096" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="3960" />
+    <set name="material" val="7" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="30700" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="43" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4230" name="Ubiquitous Gloves">
+    <for>
+      <add val="17" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="64" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="650" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="12300" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="17" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4231" name="Ubiquitous Boots">
+    <for>
+      <add val="17" order="0x10" stat="pDef" />
+    </for>
+    <set name="bodypart" val="32768" />
+    <set name="crystallizable" val="true" />
+    <set name="armor_type" val="none" />
+    <set name="weight" val="1310" />
+    <set name="material" val="3" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="12300" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="17" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
+  </item>
+  <item id="4234" name="Hatchling's Level 65 Armor">
+    <for>
+      <add val="50" order="0x10" stat="pDef" />
+      <add val="50" order="0x10" stat="mDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="4235" name="Hatchling's Level 75 Armor">
+    <for>
+      <add val="58" order="0x10" stat="pDef" />
+      <add val="58" order="0x10" stat="mDef" />
+    </for>
+    <set name="armor_type" val="none" />
+  </item>
+  <item id="4236" name="Gara Item">
+    <for>
+      <add val="58" order="0x10" stat="pDef" />
+      <add val="58" order="0x10" stat="mDef" />
+    </for>
+    <set name="bodypart" val="2048" />
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="160" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="19073000" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="58" />
+    <set name="m_def" val="58" />
+    <set name="mp_bonus" val="0" />
+  </item>
+</list>

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+
+  <npc id="50008" idTemplate="32226" name="Julia" title="Buffer">
+    <set name="usingServerSideName" val="true"/>
+    <set name="usingServerSideTitle" val="true"/>
+    <set name="level" val="80"/>
+    <set name="radius" val="13.00"/>
+    <set name="height" val="22.50"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Buffer"/>
+    <set name="exp" val="1"/>
+    <set name="sp" val="1"/>
+    <set name="hp" val="8000"/>
+    <set name="mp" val="8000"/>
+    <set name="hpRegen" val="3.95"/>
+    <set name="mpRegen" val="1.21"/>
+    <set name="pAtk" val="1"/>
+    <set name="pDef" val="1000"/>
+    <set name="mAtk" val="1"/>
+    <set name="mDef" val="1000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="30"/>
+    <set name="int" val="30"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="30"/>
+    <set name="con" val="30"/>
+    <set name="men" val="30"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="55"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="0" clanRange="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="50009" idTemplate="31228" name="Cat Special" title="Class Master">
+    <set name="usingServerSideName" val="true"/>
+    <set name="usingServerSideTitle" val="true"/>
+    <set name="level" val="80"/>
+    <set name="radius" val="9.00"/>
+    <set name="height" val="16.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2ClassMaster"/>
+    <set name="exp" val="1"/>
+    <set name="sp" val="1"/>
+    <set name="hp" val="8000"/>
+    <set name="mp" val="8000"/>
+    <set name="hpRegen" val="3.95"/>
+    <set name="mpRegen" val="1.21"/>
+    <set name="pAtk" val="1"/>
+    <set name="pDef" val="1000"/>
+    <set name="mAtk" val="1"/>
+    <set name="mDef" val="1000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="30"/>
+    <set name="int" val="30"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="30"/>
+    <set name="con" val="30"/>
+    <set name="men" val="30"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="55"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="0" clanRange="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="50131" idTemplate="12077" name="raidinfo" title="raid Status">
+    <set name="usingServerSideName" val="true"/>
+    <set name="usingServerSideTitle" val="true"/>
+    <set name="level" val="80"/>
+    <set name="radius" val="13.00"/>
+    <set name="height" val="11.50"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2RaidBossInfo"/>
+    <set name="exp" val="1"/>
+    <set name="sp" val="1"/>
+    <set name="hp" val="8000"/>
+    <set name="mp" val="8000"/>
+    <set name="hpRegen" val="3.95"/>
+    <set name="mpRegen" val="1.21"/>
+    <set name="pAtk" val="1"/>
+    <set name="pDef" val="1000"/>
+    <set name="mAtk" val="1"/>
+    <set name="mDef" val="1000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="30"/>
+    <set name="int" val="30"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="30"/>
+    <set name="con" val="30"/>
+    <set name="men" val="30"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="55"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="0" clanRange="0" canMove="true" seedable="true"/>
+  </npc>
+
+</list>

@@ -3794,7 +3794,7 @@ public abstract class L2Character extends L2Object
 	/**
 	 * Return True if the L2Character is casting.<BR><BR>
 	 */
-	public final boolean isCastingNow()
+	public synchronized final boolean isCastingNow()
 	{
 		return _castEndTime > GameTimeController.getGameTicks();
 	}
@@ -5520,10 +5520,23 @@ public abstract class L2Character extends L2Object
 		if (skill == null) return null;
 
 		// Remove the skill from the L2Character _skills
-		return removeSkill(skill.getId());
+		return removeSkill(skill.getId(), true);
+	}
+
+	public L2Skill removeSkill(L2Skill skill, boolean cancelEffect)
+	{
+		if (skill == null) return null;
+
+		// Remove the skill from the L2Character _skills
+		return removeSkill(skill.getId(), cancelEffect);
 	}
 
 	public L2Skill removeSkill(int skillId)
+	{
+		return removeSkill(skillId, true);
+	}
+
+	public L2Skill removeSkill(int skillId, boolean cancelEffect)
 	{
 		// Remove the skill from the L2Character _skills
 		L2Skill oldSkill = _skills.remove(skillId);
@@ -5539,13 +5552,17 @@ public abstract class L2Character extends L2Object
 						abortCast();
 				}
 			}
-			// for now, to support transformations, we have to let their
-			// effects stay when skill is removed
-			L2Effect e = getFirstEffect(oldSkill);
-			if (e == null || e.getEffectType() != EffectType.TRANSFORMATION)
+
+			if (cancelEffect)
 			{
-				removeStatsOwner(oldSkill);
-				stopSkillEffects(oldSkill.getId());
+				// for now, to support transformations, we have to let their
+				// effects stay when skill is removed
+				L2Effect e = getFirstEffect(oldSkill);
+				if (e == null || e.getEffectType() != EffectType.TRANSFORMATION)
+				{
+					removeStatsOwner(oldSkill);
+					stopSkillEffects(oldSkill.getId());
+				}
 			}
 
 			if (oldSkill instanceof L2SkillAgathion && this instanceof L2PcInstance && ((L2PcInstance)this).getAgathionId() > 0)

@@ -14,16 +14,21 @@
  */
 package net.sf.l2j.gameserver.model;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.File;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import net.sf.l2j.L2DatabaseFactory;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.actor.instance.L2PetInstance;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class L2PetDataTable
 {
@@ -48,64 +53,64 @@ public class L2PetDataTable
 
     public void loadPetsData()
     {
-    	java.sql.Connection con = null;
-
-    	try
+        try
         {
-    		con = L2DatabaseFactory.getInstance().getConnection();
-    		PreparedStatement statement = con.prepareStatement("SELECT typeID, level, expMax, hpMax, mpMax, patk, pdef, matk, mdef, acc, evasion, crit, speed, atk_speed, cast_speed, feedMax, feedbattle, feednormal, loadMax, hpregen, mpregen, owner_exp_taken FROM pets_stats");
-    		ResultSet rset = statement.executeQuery();
+            File f = new File(Config.DATAPACK_ROOT, "data/stats/pets.xml");
+            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(f);
 
-    		int petId, petLevel;
+            NodeList petNodes = doc.getFirstChild().getChildNodes();
+            for (int i = 0; i < petNodes.getLength(); i++)
+            {
+                Node petNode = petNodes.item(i);
+                if (!"pet".equalsIgnoreCase(petNode.getNodeName()))
+                    continue;
 
-    		while (rset.next())
-    		{
-    			petId = rset.getInt("typeID");
-    			petLevel = rset.getInt("level");
+                int petId = Integer.parseInt(petNode.getAttributes().getNamedItem("typeId").getNodeValue());
 
-    			//build the petdata for this level
-    			L2PetData petData = new L2PetData();
-    			petData.setPetID(petId);
-                petData.setPetLevel(petLevel);
-                petData.setPetMaxExp(rset.getInt("expMax"));
-                petData.setPetMaxHP(rset.getInt("hpMax"));
-                petData.setPetMaxMP(rset.getInt("mpMax"));
-                petData.setPetPAtk( rset.getInt("patk") );
-                petData.setPetPDef( rset.getInt("pdef") );
-                petData.setPetMAtk( rset.getInt("matk") );
-                petData.setPetMDef( rset.getInt("mdef") );
-                petData.setPetAccuracy( rset.getInt("acc") );
-                petData.setPetEvasion( rset.getInt("evasion") );
-                petData.setPetCritical( rset.getInt("crit") );
-                petData.setPetSpeed( rset.getInt("speed") );
-                petData.setPetAtkSpeed( rset.getInt("atk_speed") );
-                petData.setPetCastSpeed( rset.getInt("cast_speed") );
-                petData.setPetMaxFeed( rset.getInt("feedMax") );
-                petData.setPetFeedNormal( rset.getInt("feednormal") );
-                petData.setPetFeedBattle( rset.getInt("feedbattle") );
-                petData.setPetMaxLoad( rset.getInt("loadMax") );
-                petData.setPetRegenHP( rset.getInt("hpregen") );
-                petData.setPetRegenMP( rset.getInt("mpregen") );
-                petData.setPetRegenMP( rset.getInt("mpregen") );
-                petData.setOwnerExpTaken( rset.getFloat("owner_exp_taken") );
+                NodeList statNodes = petNode.getChildNodes();
+                for (int j = 0; j < statNodes.getLength(); j++)
+                {
+                    Node statNode = statNodes.item(j);
+                    if (!"stat".equalsIgnoreCase(statNode.getNodeName()))
+                        continue;
 
-                // if its the first data for this petid, we initialize its level ConcurrentHashMap
-                if (!_petTable.containsKey(petId))
-                    _petTable.put(petId, new ConcurrentHashMap<Integer, L2PetData>());
+                    NamedNodeMap attrs = statNode.getAttributes();
+                    int petLevel = Integer.parseInt(attrs.getNamedItem("level").getNodeValue());
 
-                _petTable.get(petId).put(petLevel,petData);
+                    L2PetData petData = new L2PetData();
+                    petData.setPetID(petId);
+                    petData.setPetLevel(petLevel);
+                    petData.setPetMaxExp(Long.parseLong(attrs.getNamedItem("expMax").getNodeValue()));
+                    petData.setPetMaxHP(Integer.parseInt(attrs.getNamedItem("hpMax").getNodeValue()));
+                    petData.setPetMaxMP(Integer.parseInt(attrs.getNamedItem("mpMax").getNodeValue()));
+                    petData.setPetPAtk(Integer.parseInt(attrs.getNamedItem("patk").getNodeValue()));
+                    petData.setPetPDef(Integer.parseInt(attrs.getNamedItem("pdef").getNodeValue()));
+                    petData.setPetMAtk(Integer.parseInt(attrs.getNamedItem("matk").getNodeValue()));
+                    petData.setPetMDef(Integer.parseInt(attrs.getNamedItem("mdef").getNodeValue()));
+                    petData.setPetAccuracy(Integer.parseInt(attrs.getNamedItem("acc").getNodeValue()));
+                    petData.setPetEvasion(Integer.parseInt(attrs.getNamedItem("evasion").getNodeValue()));
+                    petData.setPetCritical(Integer.parseInt(attrs.getNamedItem("crit").getNodeValue()));
+                    petData.setPetSpeed(Integer.parseInt(attrs.getNamedItem("speed").getNodeValue()));
+                    petData.setPetAtkSpeed(Integer.parseInt(attrs.getNamedItem("atk_speed").getNodeValue()));
+                    petData.setPetCastSpeed(Integer.parseInt(attrs.getNamedItem("cast_speed").getNodeValue()));
+                    petData.setPetMaxFeed(Integer.parseInt(attrs.getNamedItem("feedMax").getNodeValue()));
+                    petData.setPetFeedNormal(Integer.parseInt(attrs.getNamedItem("feednormal").getNodeValue()));
+                    petData.setPetFeedBattle(Integer.parseInt(attrs.getNamedItem("feedbattle").getNodeValue()));
+                    petData.setPetMaxLoad(Integer.parseInt(attrs.getNamedItem("loadMax").getNodeValue()));
+                    petData.setPetRegenHP(Integer.parseInt(attrs.getNamedItem("hpregen").getNodeValue()));
+                    petData.setPetRegenMP(Integer.parseInt(attrs.getNamedItem("mpregen").getNodeValue()));
+                    petData.setOwnerExpTaken(Float.parseFloat(attrs.getNamedItem("owner_exp_taken").getNodeValue()));
+
+                    if (!_petTable.containsKey(petId))
+                        _petTable.put(petId, new ConcurrentHashMap<Integer, L2PetData>());
+
+                    _petTable.get(petId).put(petLevel, petData);
+                }
             }
-
-    		rset.close();
-    		statement.close();
         }
         catch (Exception e)
         {
-            _log.warning("Could not load pets stats: "+ e);
-        }
-        finally
-        {
-            try { con.close(); } catch (Exception e) {}
+            _log.warning("Could not load pets stats: " + e);
         }
     }
 

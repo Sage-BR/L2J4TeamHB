@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+
+  <npc id="16013" idTemplate="16013" name="Trained Buffalo" title="">
+    <set name="level" val="67"/>
+    <set name="radius" val="22.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TamedBeast"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3626"/>
+    <set name="mp" val="1388"/>
+    <set name="hpRegen" val="23.70"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1169"/>
+    <set name="pDef" val="439"/>
+    <set name="mAtk" val="681"/>
+    <set name="mDef" val="356"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="22"/>
+    <set name="runSpd" val="187"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="pet_clan" clanRange="400" canMove="true" seedable="true"/>
+    <skills>
+      <skill id="122" level="11"/>
+      <skill id="1044" level="3"/>
+      <skill id="1045" level="5"/>
+      <skill id="1086" level="2"/>
+      <skill id="1206" level="15"/>
+      <skill id="1217" level="26"/>
+      <skill id="1240" level="3"/>
+      <skill id="1268" level="3"/>
+      <skill id="4285" level="4"/>
+      <skill id="4303" level="1"/>
+      <skill id="4416" level="4"/>
+    </skills>
+  </npc>
+
+  <npc id="16014" idTemplate="16014" name="Trained Buffalo" title="">
+    <set name="level" val="67"/>
+    <set name="radius" val="22.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TamedBeast"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3626"/>
+    <set name="mp" val="1388"/>
+    <set name="hpRegen" val="23.70"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1169"/>
+    <set name="pDef" val="439"/>
+    <set name="mAtk" val="681"/>
+    <set name="mDef" val="356"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="22"/>
+    <set name="runSpd" val="187"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="pet_clan" clanRange="400" canMove="true" seedable="true"/>
+    <skills>
+      <skill id="1013" level="25"/>
+      <skill id="1048" level="5"/>
+      <skill id="1059" level="3"/>
+      <skill id="1078" level="5"/>
+      <skill id="1085" level="3"/>
+      <skill id="1160" level="11"/>
+      <skill id="1204" level="2"/>
+      <skill id="1263" level="9"/>
+      <skill id="4285" level="4"/>
+      <skill id="4303" level="1"/>
+      <skill id="4416" level="4"/>
+    </skills>
+  </npc>
+
+  <npc id="16015" idTemplate="16015" name="Trained Cougar" title="">
+    <set name="level" val="69"/>
+    <set name="radius" val="34.00"/>
+    <set name="height" val="28.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TamedBeast"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3784"/>
+    <set name="mp" val="1458"/>
+    <set name="hpRegen" val="23.70"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1265"/>
+    <set name="pDef" val="460"/>
+    <set name="mAtk" val="746"/>
+    <set name="mDef" val="373"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="66"/>
+    <set name="runSpd" val="192"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="pet_clan" clanRange="400" canMove="true" seedable="true"/>
+    <skills>
+      <skill id="122" level="12"/>
+      <skill id="1044" level="3"/>
+      <skill id="1045" level="5"/>
+      <skill id="1086" level="2"/>
+      <skill id="1206" level="16"/>
+      <skill id="1217" level="28"/>
+      <skill id="1240" level="3"/>
+      <skill id="1268" level="3"/>
+      <skill id="4285" level="4"/>
+      <skill id="4303" level="1"/>
+      <skill id="4416" level="4"/>
+    </skills>
+  </npc>
+
+  <npc id="16016" idTemplate="16016" name="Trained Cougar" title="">
+    <set name="level" val="69"/>
+    <set name="radius" val="34.00"/>
+    <set name="height" val="28.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TamedBeast"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3784"/>
+    <set name="mp" val="1458"/>
+    <set name="hpRegen" val="23.70"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1265"/>
+    <set name="pDef" val="460"/>
+    <set name="mAtk" val="746"/>
+    <set name="mDef" val="373"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="66"/>
+    <set name="runSpd" val="192"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="pet_clan" clanRange="400" canMove="true" seedable="true"/>
+    <skills>
+      <skill id="1013" level="27"/>
+      <skill id="1048" level="5"/>
+      <skill id="1059" level="3"/>
+      <skill id="1078" level="6"/>
+      <skill id="1085" level="3"/>
+      <skill id="1160" level="12"/>
+      <skill id="1204" level="2"/>
+      <skill id="1263" level="10"/>
+      <skill id="4285" level="4"/>
+      <skill id="4303" level="1"/>
+      <skill id="4416" level="4"/>
+    </skills>
+  </npc>
+
+  <npc id="16017" idTemplate="16017" name="Trained Kookaburra" title="">
+    <set name="level" val="65"/>
+    <set name="radius" val="10.00"/>
+    <set name="height" val="33.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TamedBeast"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3465"/>
+    <set name="mp" val="1319"/>
+    <set name="hpRegen" val="23.70"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1077"/>
+    <set name="pDef" val="418"/>
+    <set name="mAtk" val="619"/>
+    <set name="mDef" val="340"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="25"/>
+    <set name="runSpd" val="209"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="pet_clan" clanRange="400" canMove="true" seedable="true"/>
+    <skills>
+      <skill id="122" level="10"/>
+      <skill id="1044" level="3"/>
+      <skill id="1045" level="5"/>
+      <skill id="1086" level="2"/>
+      <skill id="1206" level="14"/>
+      <skill id="1217" level="24"/>
+      <skill id="1240" level="3"/>
+      <skill id="1268" level="3"/>
+      <skill id="4285" level="4"/>
+      <skill id="4303" level="1"/>
+      <skill id="4416" level="4"/>
+    </skills>
+  </npc>
+
+  <npc id="16018" idTemplate="16018" name="Trained Kookaburra" title="">
+    <set name="level" val="65"/>
+    <set name="radius" val="10.00"/>
+    <set name="height" val="33.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TamedBeast"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3465"/>
+    <set name="mp" val="1319"/>
+    <set name="hpRegen" val="23.70"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1077"/>
+    <set name="pDef" val="418"/>
+    <set name="mAtk" val="619"/>
+    <set name="mDef" val="340"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="25"/>
+    <set name="runSpd" val="209"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" clan="pet_clan" clanRange="400" canMove="true" seedable="true"/>
+    <skills>
+      <skill id="1013" level="23"/>
+      <skill id="1048" level="5"/>
+      <skill id="1059" level="3"/>
+      <skill id="1078" level="5"/>
+      <skill id="1085" level="3"/>
+      <skill id="1160" level="10"/>
+      <skill id="1204" level="2"/>
+      <skill id="1263" level="8"/>
+      <skill id="4285" level="4"/>
+      <skill id="4303" level="1"/>
+      <skill id="4416" level="4"/>
+    </skills>
+  </npc>
+
+  <npc id="16019" idTemplate="16019" name="Tiny Baby Buffalo" title="">
+    <set name="level" val="99"/>
+    <set name="radius" val="20.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Monster"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="400000"/>
+    <set name="mp" val="9999"/>
+    <set name="hpRegen" val="13.43"/>
+    <set name="mpRegen" val="3.09"/>
+    <set name="pAtk" val="9000"/>
+    <set name="pDef" val="5000"/>
+    <set name="mAtk" val="6000"/>
+    <set name="mDef" val="6000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="300"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="88"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16020" idTemplate="16020" name="Tame Tiny Baby Buffalo" title="">
+    <set name="level" val="99"/>
+    <set name="radius" val="20.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Monster"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="400000"/>
+    <set name="mp" val="9999"/>
+    <set name="hpRegen" val="13.43"/>
+    <set name="mpRegen" val="3.09"/>
+    <set name="pAtk" val="9000"/>
+    <set name="pDef" val="5000"/>
+    <set name="mAtk" val="6000"/>
+    <set name="mDef" val="6000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="300"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="88"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16021" idTemplate="16021" name="Tiny Baby Cougar" title="">
+    <set name="level" val="99"/>
+    <set name="radius" val="20.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Monster"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="400000"/>
+    <set name="mp" val="9999"/>
+    <set name="hpRegen" val="13.43"/>
+    <set name="mpRegen" val="3.09"/>
+    <set name="pAtk" val="9000"/>
+    <set name="pDef" val="5000"/>
+    <set name="mAtk" val="6000"/>
+    <set name="mDef" val="6000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="300"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="88"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16022" idTemplate="16022" name="Tame Tiny Baby Cougar" title="">
+    <set name="level" val="99"/>
+    <set name="radius" val="20.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Monster"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="400000"/>
+    <set name="mp" val="9999"/>
+    <set name="hpRegen" val="13.43"/>
+    <set name="mpRegen" val="3.09"/>
+    <set name="pAtk" val="9000"/>
+    <set name="pDef" val="5000"/>
+    <set name="mAtk" val="6000"/>
+    <set name="mDef" val="6000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="300"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="88"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16023" idTemplate="16023" name="Tiny Baby Kookaburra" title="">
+    <set name="level" val="99"/>
+    <set name="radius" val="20.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Monster"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="400000"/>
+    <set name="mp" val="9999"/>
+    <set name="hpRegen" val="13.43"/>
+    <set name="mpRegen" val="3.09"/>
+    <set name="pAtk" val="9000"/>
+    <set name="pDef" val="5000"/>
+    <set name="mAtk" val="6000"/>
+    <set name="mDef" val="6000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="300"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="88"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16024" idTemplate="16024" name="Tame Tiny Baby Kookaburra" title="">
+    <set name="level" val="99"/>
+    <set name="radius" val="20.00"/>
+    <set name="height" val="31.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Monster"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="400000"/>
+    <set name="mp" val="9999"/>
+    <set name="hpRegen" val="13.43"/>
+    <set name="mpRegen" val="3.09"/>
+    <set name="pAtk" val="9000"/>
+    <set name="pDef" val="5000"/>
+    <set name="mAtk" val="6000"/>
+    <set name="mDef" val="6000"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="300"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="88"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16025" idTemplate="16025" name="Great Wolf" title="">
+    <set name="level" val="70"/>
+    <set name="radius" val="32.00"/>
+    <set name="height" val="23.56"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Npc"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="2444"/>
+    <set name="mp" val="2444"/>
+    <set name="hpRegen" val="0.00"/>
+    <set name="mpRegen" val="0.00"/>
+    <set name="pAtk" val="500"/>
+    <set name="pDef" val="500"/>
+    <set name="mAtk" val="500"/>
+    <set name="mDef" val="500"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="253"/>
+    <set name="str" val="10"/>
+    <set name="int" val="10"/>
+    <set name="dex" val="10"/>
+    <set name="wit" val="10"/>
+    <set name="con" val="10"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="80"/>
+    <set name="runSpd" val="120"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16026" idTemplate="16026" name="Beastly Agathion" title="">
+    <set name="level" val="70"/>
+    <set name="radius" val="32.00"/>
+    <set name="height" val="23.56"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Npc"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="2444"/>
+    <set name="mp" val="2444"/>
+    <set name="hpRegen" val="0.00"/>
+    <set name="mpRegen" val="0.00"/>
+    <set name="pAtk" val="500"/>
+    <set name="pDef" val="500"/>
+    <set name="mAtk" val="500"/>
+    <set name="mDef" val="500"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="253"/>
+    <set name="str" val="10"/>
+    <set name="int" val="10"/>
+    <set name="dex" val="10"/>
+    <set name="wit" val="10"/>
+    <set name="con" val="10"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="80"/>
+    <set name="runSpd" val="120"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16027" idTemplate="16027" name="Rainbow Agathion" title="">
+    <set name="level" val="70"/>
+    <set name="radius" val="32.00"/>
+    <set name="height" val="23.56"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Npc"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="2444"/>
+    <set name="mp" val="2444"/>
+    <set name="hpRegen" val="0.00"/>
+    <set name="mpRegen" val="0.00"/>
+    <set name="pAtk" val="500"/>
+    <set name="pDef" val="500"/>
+    <set name="mAtk" val="500"/>
+    <set name="mDef" val="500"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="253"/>
+    <set name="str" val="10"/>
+    <set name="int" val="10"/>
+    <set name="dex" val="10"/>
+    <set name="wit" val="10"/>
+    <set name="con" val="10"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="80"/>
+    <set name="runSpd" val="120"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16028" idTemplate="16028" name="Lord Agathion" title="">
+    <set name="level" val="70"/>
+    <set name="radius" val="32.00"/>
+    <set name="height" val="23.56"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Npc"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="2444"/>
+    <set name="mp" val="2444"/>
+    <set name="hpRegen" val="0.00"/>
+    <set name="mpRegen" val="0.00"/>
+    <set name="pAtk" val="500"/>
+    <set name="pDef" val="500"/>
+    <set name="mAtk" val="500"/>
+    <set name="mDef" val="500"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="253"/>
+    <set name="str" val="10"/>
+    <set name="int" val="10"/>
+    <set name="dex" val="10"/>
+    <set name="wit" val="10"/>
+    <set name="con" val="10"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="80"/>
+    <set name="runSpd" val="120"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16029" idTemplate="16029" name="Fortress Agasion" title="">
+    <set name="level" val="70"/>
+    <set name="radius" val="32.00"/>
+    <set name="height" val="23.56"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Npc"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="2444"/>
+    <set name="mp" val="2444"/>
+    <set name="hpRegen" val="0.00"/>
+    <set name="mpRegen" val="0.00"/>
+    <set name="pAtk" val="500"/>
+    <set name="pDef" val="500"/>
+    <set name="mAtk" val="500"/>
+    <set name="mDef" val="500"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="253"/>
+    <set name="str" val="10"/>
+    <set name="int" val="10"/>
+    <set name="dex" val="10"/>
+    <set name="wit" val="10"/>
+    <set name="con" val="10"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="80"/>
+    <set name="runSpd" val="120"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+  <npc id="16030" idTemplate="16030" name="Great Wolf" title="">
+    <set name="level" val="70"/>
+    <set name="radius" val="32.00"/>
+    <set name="height" val="23.56"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2Pet"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="2444"/>
+    <set name="mp" val="2444"/>
+    <set name="hpRegen" val="0.00"/>
+    <set name="mpRegen" val="0.00"/>
+    <set name="pAtk" val="500"/>
+    <set name="pDef" val="500"/>
+    <set name="mAtk" val="500"/>
+    <set name="mDef" val="500"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="253"/>
+    <set name="str" val="10"/>
+    <set name="int" val="10"/>
+    <set name="dex" val="10"/>
+    <set name="wit" val="10"/>
+    <set name="con" val="10"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="1200"/>
+    <set name="walkSpd" val="80"/>
+    <set name="runSpd" val="120"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="BALANCED" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="false"/>
+    <petdata food1="2515" food2="0" autoFeedLimit="0.55" hungryLimit="0.5" unsummonLimit="0.4">
+      <stat level="70" maxMeal="7108" exp="143823252" expType="1" mealInBattle="59" mealInNormal="11" pAtk="176" pDef="82" mAtk="117" mDef="54" hp="1931" mp="861" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="71" maxMeal="7388" exp="157840062" expType="1" mealInBattle="61" mealInNormal="12" pAtk="181" pDef="84" mAtk="121" mDef="55" hp="1969" mp="881" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="72" maxMeal="7688" exp="176117249" expType="1" mealInBattle="64" mealInNormal="12" pAtk="186" pDef="85" mAtk="124" mDef="55" hp="2006" mp="902" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="73" maxMeal="7956" exp="198983024" expType="1" mealInBattle="66" mealInNormal="13" pAtk="192" pDef="86" mAtk="128" mDef="56" hp="2043" mp="923" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="74" maxMeal="8196" exp="226778887" expType="1" mealInBattle="68" mealInNormal="13" pAtk="197" pDef="87" mAtk="132" mDef="57" hp="2079" mp="944" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="75" maxMeal="8428" exp="259859867" expType="1" mealInBattle="70" mealInNormal="14" pAtk="202" pDef="88" mAtk="135" mDef="58" hp="2114" mp="964" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="76" maxMeal="8704" exp="298594764" expType="1" mealInBattle="72" mealInNormal="14" pAtk="207" pDef="89" mAtk="139" mDef="59" hp="2148" mp="986" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="77" maxMeal="8916" exp="352320714" expType="1" mealInBattle="74" mealInNormal="14" pAtk="212" pDef="91" mAtk="142" mDef="60" hp="2182" mp="1007" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="78" maxMeal="9124" exp="412836202" expType="1" mealInBattle="76" mealInNormal="15" pAtk="217" pDef="92" mAtk="146" mDef="60" hp="2214" mp="1028" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="79" maxMeal="9340" exp="480562077" expType="1" mealInBattle="77" mealInNormal="15" pAtk="222" pDef="93" mAtk="149" mDef="61" hp="2245" mp="1050" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="80" maxMeal="9552" exp="555934039" expType="1" mealInBattle="79" mealInNormal="15" pAtk="227" pDef="94" mAtk="152" mDef="62" hp="2275" mp="1071" hpRegen="8" mpRegen="3" ssCount="1" spsCount="1"/>
+      <stat level="81" maxMeal="9552" exp="639402879" expType="1" mealInBattle="79" mealInNormal="15" pAtk="228" pDef="95" mAtk="153" mDef="63" hp="2304" mp="1073" hpRegen="9" mpRegen="4" ssCount="1" spsCount="1"/>
+    </petdata>
+  </npc>
+
+</list>

@@ -592,6 +592,12 @@ public abstract class L2Summon extends L2PlayableInstance
 		return null;
 	}
 
+	@Override
+	public boolean isInvul()
+	{
+		return _isInvul || _isTeleporting || (getOwner() != null && getOwner().isInvul());
+	}
+
 	/**
 	 * Return the L2Party object of its L2PcInstance owner or null.<BR><BR>
 	 */

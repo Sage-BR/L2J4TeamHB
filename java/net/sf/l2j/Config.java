@@ -365,6 +365,7 @@ public final class Config
     public static int		GENERAL_THREAD_CORE_SIZE;
     public static int		AI_MAX_THREAD;
     public static int		PACKET_LIFETIME;
+    public static boolean	DEADLOCK_DETECTOR;
     public static int		FLOODPROTECTOR_INITIALSIZE;
     public static boolean	ALLOW_DISCARDITEM;
     public static int		AUTODESTROY_ITEM_AFTER;
@@ -479,7 +480,6 @@ public final class Config
     public static boolean	CUSTOM_SPAWNLIST_TABLE;
     public static boolean	SAVE_GMSPAWN_ON_CUSTOM;
     public static boolean	DELETE_GMSPAWN_ON_CUSTOM;
-    public static boolean	CUSTOM_NPC_TABLE;
     public static boolean	CUSTOM_ITEM_TABLES;
     public static boolean	CUSTOM_ARMORSETS_TABLE;
     public static boolean	CUSTOM_TELEPORT_TABLE;
@@ -1492,6 +1492,7 @@ public final class Config
                 GENERAL_THREAD_CORE_SIZE					= Integer.parseInt(General.getProperty("GeneralThreadCoreSize", "4"));
                 AI_MAX_THREAD								= Integer.parseInt(General.getProperty("AiMaxThread", "10"));
                 PACKET_LIFETIME								= Integer.parseInt(General.getProperty("PacketLifeTime", "0"));
+                DEADLOCK_DETECTOR							= Boolean.parseBoolean(General.getProperty("DeadLockDetector", "False"));
                 FLOODPROTECTOR_INITIALSIZE					= Integer.parseInt(General.getProperty("FloodProtectorInitialSize", "50"));
                 ALLOW_DISCARDITEM							= Boolean.parseBoolean(General.getProperty("AllowDiscardItem", "True"));
                 AUTODESTROY_ITEM_AFTER						= Integer.parseInt(General.getProperty("AutoDestroyDroppedItemAfter", "0"));
@@ -1618,7 +1619,6 @@ public final class Config
                 CUSTOM_SPAWNLIST_TABLE						= Boolean.valueOf(General.getProperty("CustomSpawnlistTable", "false"));
                 SAVE_GMSPAWN_ON_CUSTOM						= Boolean.valueOf(General.getProperty("SaveGmSpawnOnCustom", "false"));
                 DELETE_GMSPAWN_ON_CUSTOM					= Boolean.valueOf(General.getProperty("DeleteGmSpawnOnCustom", "false"));
-                CUSTOM_NPC_TABLE							= Boolean.valueOf(General.getProperty("CustomNpcTable", "false"));
                 CUSTOM_ITEM_TABLES							= Boolean.valueOf(General.getProperty("CustomItemTables", "false"));
                 CUSTOM_ARMORSETS_TABLE						= Boolean.valueOf(General.getProperty("CustomArmorSetsTable", "false"));
                 CUSTOM_TELEPORT_TABLE						= Boolean.valueOf(General.getProperty("CustomTeleportTable", "false"));

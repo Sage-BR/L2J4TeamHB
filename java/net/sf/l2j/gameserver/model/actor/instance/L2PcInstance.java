@@ -573,6 +573,7 @@ public final class L2PcInstance extends L2PlayableInstance
 
 	// Used for protection after teleport
 	private long _protectEndTime = 0;
+	public boolean isSpawnProtected() { return (_protectEndTime > 0); }
 
 	// protects a char from agro mobs when getting up from fake death
 	private long _recentFakeDeathEndTime = 0;
@@ -6940,8 +6941,6 @@ public final class L2PcInstance extends L2PlayableInstance
 					
 				}
 			}
-			_reuseTimeStamps.clear();
-			
 			statement.close();
 		}
 		catch (Exception e)
@@ -7005,7 +7004,7 @@ public final class L2PcInstance extends L2PlayableInstance
 		if (store)
 			return removeSkill(skill);
 		else
-			return super.removeSkill(skill);
+			return super.removeSkill(skill, true);
 	}
 
 	public L2Skill removeSkill(L2Skill skill, boolean store, boolean cancelEffects)
@@ -7228,8 +7227,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		L2Object[] targets = new L2Character[]{this};
 		Connection con = null;
 		
-		long delaytime = System.currentTimeMillis() - this.getLastAccess();
-
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
@@ -7268,9 +7265,11 @@ public final class L2PcInstance extends L2PlayableInstance
 				else
 					skill.useSkill(this, targets);
 
-				if (reuseDelay > 10)
+				double remainingTime = systime - System.currentTimeMillis();
+
+				if (remainingTime > 10)
 				{
-					disableSkill(skillId, (long)reuseDelay);
+					disableSkill(skillId, (long)remainingTime);
 					addTimeStamp(new TimeStamp(skillId, (long)reuseDelay, (long)systime));
 				}
 
@@ -7303,11 +7302,12 @@ public final class L2PcInstance extends L2PlayableInstance
 				double reuseDelay = rset.getDouble("reuse_delay");
 				double systime = rset.getDouble("systime");
 
-				reuseDelay = reuseDelay - delaytime;
+				double remainingTime = systime - System.currentTimeMillis();
 
-				if (reuseDelay <= 0) continue;
+				if (remainingTime < 10)
+					continue;
 
-				disableSkill(skillId, (long)reuseDelay);
+				disableSkill(skillId, (long)remainingTime);
 				addTimeStamp(new TimeStamp(skillId, (long)reuseDelay, (long)systime));
 			}
 			rset.close();
@@ -7755,7 +7755,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	 * @param dontMove used to prevent movement, if not in range
 	 *
 	 */
-	public void useMagic(L2Skill skill, boolean forceUse, boolean dontMove)
+	public synchronized void useMagic(L2Skill skill, boolean forceUse, boolean dontMove)
 	{
         // Check if the skill is active
         if (skill.isPassive())
@@ -9434,6 +9434,7 @@ public final class L2PcInstance extends L2PlayableInstance
          * 1. Call store() before modifying _classIndex to avoid skill effects rollover.
          * 2. Register the correct _classId against applied 'classIndex'.
          */
+        _reuseTimeStamps.clear();
         store();
 
         if (classIndex == 0)

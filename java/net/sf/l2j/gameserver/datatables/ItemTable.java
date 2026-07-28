@@ -168,40 +168,10 @@ public class ItemTable
 
 	}
 
-	private static ItemTable _instance;
-
-	/** Table of SQL request in order to obtain items from tables [etcitem], [armor], [weapon] */
-    private static final String[] SQL_ITEM_SELECTS  =
-    {
-        "SELECT item_id, name, crystallizable, item_type, weight, consume_type, material," +
-        " crystal_type, duration, price, crystal_count, sellable, dropable, destroyable, tradeable FROM etcitem",
-
-        "SELECT item_id, name, bodypart, crystallizable, armor_type, weight," +
-        	" material, crystal_type, avoid_modify, duration, p_def, m_def, mp_bonus," +
-        	" price, crystal_count, sellable, dropable, destroyable, tradeable, skill FROM armor",
-
-        "SELECT item_id, name, bodypart, crystallizable, weight, soulshots, spiritshots," +
-        	" material, crystal_type, p_dam, rnd_dam, weaponType, critical, hit_modify, avoid_modify," +
-        	" shield_def, shield_def_rate, atk_speed, mp_consume, m_dam, duration, price, crystal_count," +
-        	" sellable, dropable, destroyable, tradeable, skill,enchant4_skill_id,enchant4_skill_lvl, onCast_skill_id, onCast_skill_lvl," +
-        	" onCast_skill_chance, onCrit_skill_id, onCrit_skill_lvl, onCrit_skill_chance, change_weaponId FROM weapon"
-     };
+	private static ItemTable _instance;    /** All item templates (etcitem, armor, weapon) are now loaded exclusively from XML. */
+    private static final String[] SQL_ITEM_SELECTS  = {};
     
-    private static final String[] SQL_CUSTOM_ITEM_SELECTS  =
-    {
-        "SELECT item_id, name, crystallizable, item_type, weight, consume_type, material," +
-        " crystal_type, duration, price, crystal_count, sellable, dropable, destroyable, tradeable FROM custom_etcitem",
-
-        "SELECT item_id, name, bodypart, crystallizable, armor_type, weight," +
-        	" material, crystal_type, avoid_modify, duration, p_def, m_def, mp_bonus," +
-        	" price, crystal_count, sellable, dropable, destroyable, tradeable, skill FROM custom_armor",
-
-        "SELECT item_id, name, bodypart, crystallizable, weight, soulshots, spiritshots," +
-        	" material, crystal_type, p_dam, rnd_dam, weaponType, critical, hit_modify, avoid_modify," +
-        	" shield_def, shield_def_rate, atk_speed, mp_consume, m_dam, duration, price, crystal_count," +
-        	" sellable, dropable, destroyable, tradeable, skill,enchant4_skill_id,enchant4_skill_lvl, onCast_skill_id, onCast_skill_lvl," +
-        	" onCast_skill_chance, onCrit_skill_id, onCrit_skill_lvl, onCrit_skill_chance, change_weaponId FROM custom_weapon"
-     };
+    private static final String[] SQL_CUSTOM_ITEM_SELECTS  = {};
     
     /** List of etcItem */
     private static final Map<Integer, Item> itemData    = new ConcurrentHashMap<Integer, Item>();
@@ -258,11 +228,6 @@ public class ItemTable
 						Item newItem = readItem(rset);
 						itemData.put(newItem.id, newItem);
 					}
-					else if (selectQuery.endsWith("armor"))
-					{
-						Item newItem = readArmor(rset);
-						armorData.put(newItem.id, newItem);
-					}
 					else if (selectQuery.endsWith("weapon"))
 					{
 						Item newItem = readWeapon(rset);
@@ -310,15 +275,6 @@ public class ItemTable
 								itemData.remove(newItem.id);
 							
 							itemData.put(newItem.id, newItem);
-						}
-						else if (selectQuery.endsWith("armor"))
-						{
-							Item newItem = readArmor(rset);
-							
-							if (armorData.containsKey(newItem.id))
-								armorData.remove(newItem.id);
-							
-							armorData.put(newItem.id, newItem);
 						}
 						else if (selectQuery.endsWith("weapon"))
 						{

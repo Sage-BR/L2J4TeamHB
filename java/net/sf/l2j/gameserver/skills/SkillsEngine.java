@@ -56,9 +56,9 @@ public class SkillsEngine {
 
 	private SkillsEngine()
 	{
-		//hashFiles("data/stats/etcitem", _etcitemFiles);
-		hashFiles("data/stats/armor", _armorFiles);
-		hashFiles("data/stats/weapon", _weaponFiles);
+		hashFiles("data/stats/itens/etcitem", _etcitemFiles);
+		hashFiles("data/stats/itens/armor", _armorFiles);
+		hashFiles("data/stats/itens/weapon", _weaponFiles);
 		hashFiles("data/stats/skills", _skillFiles);
 	}
 
@@ -73,13 +73,20 @@ public class SkillsEngine {
 		File[] files = dir.listFiles();
 		for (File f : files)
 		{
-			if (f.getName().endsWith(".xml"))
-			    if (!f.getName().startsWith("custom"))
+			if (f.isFile() && f.getName().endsWith(".xml"))
 				hash.add(f);
 		}
-		File customfile = new File(Config.DATAPACK_ROOT, dirname+"/custom.xml");
-		if (customfile.exists())
-		    hash.add(customfile);
+		// Load custom files from /custom/ subdirectory
+		File customDir = new File(dir, "custom");
+		if (customDir.exists() && customDir.isDirectory())
+		{
+			File[] customFiles = customDir.listFiles();
+			for (File f : customFiles)
+			{
+				if (f.isFile() && f.getName().endsWith(".xml"))
+					hash.add(f);
+			}
+		}
 	}
 
 	public List<L2Skill> loadSkills(File file)

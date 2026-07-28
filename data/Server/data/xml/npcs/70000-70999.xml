@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+
+  <npc id="70010" idTemplate="31606" name="Catrina" title="TvT Event Manager">
+    <set name="usingServerSideName" val="true"/>
+    <set name="usingServerSideTitle" val="true"/>
+    <set name="level" val="70"/>
+    <set name="radius" val="8.00"/>
+    <set name="height" val="15.00"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2TvTEventNpc"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="3862"/>
+    <set name="mp" val="1493"/>
+    <set name="hpRegen" val="11.85"/>
+    <set name="mpRegen" val="2.78"/>
+    <set name="pAtk" val="1314"/>
+    <set name="pDef" val="470"/>
+    <set name="mAtk" val="780"/>
+    <set name="mDef" val="382"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="278"/>
+    <set name="str" val="40"/>
+    <set name="int" val="21"/>
+    <set name="dex" val="30"/>
+    <set name="wit" val="20"/>
+    <set name="con" val="43"/>
+    <set name="men" val="10"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="28"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+</list>

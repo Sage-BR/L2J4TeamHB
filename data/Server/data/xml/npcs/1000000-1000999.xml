@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+
+  <npc id="1000003" idTemplate="32226" name="Shiela" title="NPC Buffer">
+    <set name="usingServerSideName" val="true"/>
+    <set name="usingServerSideTitle" val="true"/>
+    <set name="level" val="70"/>
+    <set name="radius" val="13.00"/>
+    <set name="height" val="22.50"/>
+    <set name="rHand" val="0"/>
+    <set name="lHand" val="0"/>
+    <set name="type" val="L2NpcBuffer"/>
+    <set name="exp" val="0"/>
+    <set name="sp" val="0"/>
+    <set name="hp" val="751"/>
+    <set name="mp" val="331"/>
+    <set name="hpRegen" val="2.37"/>
+    <set name="mpRegen" val="1.53"/>
+    <set name="pAtk" val="88"/>
+    <set name="pDef" val="119"/>
+    <set name="mAtk" val="37"/>
+    <set name="mDef" val="112"/>
+    <set name="crit" val="38"/>
+    <set name="atkSpd" val="282"/>
+    <set name="str" val="80"/>
+    <set name="int" val="80"/>
+    <set name="dex" val="80"/>
+    <set name="wit" val="80"/>
+    <set name="con" val="80"/>
+    <set name="men" val="80"/>
+    <set name="corpseTime" val="7"/>
+    <set name="walkSpd" val="30"/>
+    <set name="runSpd" val="132"/>
+    <set name="attackRange" val="40"/>
+    <set name="dropHerbGroup" val="0"/>
+    <ai type="DEFAULT" ssCount="0" ssRate="0" spsCount="0" spsRate="0" aggro="0" canMove="true" seedable="true"/>
+  </npc>
+
+</list>

@@ -67,6 +67,7 @@ public class Heal implements ISkillHandler
 		L2PcInstance player = null;
 		if (activeChar instanceof L2PcInstance)
 			player = (L2PcInstance)activeChar;
+		boolean clearSpiritShot = false;
 
         for (int index = 0; index < targets.length; index++)
         {
@@ -99,12 +100,12 @@ public class Heal implements ISkillHandler
                     if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
                     {
                         hp *= 1.5;
-                        weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+                        clearSpiritShot = true;
                     }
                     else if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_SPIRITSHOT)
                     {
                         hp *= 1.3;
-                        weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+                        clearSpiritShot = true;
                     }
                 }
                 // If there is no weapon equipped, check for an active summon.
@@ -115,12 +116,12 @@ public class Heal implements ISkillHandler
                     if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
                     {
                         hp *= 1.5;
-                        activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+                        clearSpiritShot = true;
                     }
                     else if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_SPIRITSHOT)
                     {
                         hp *= 1.3;
-                        activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+                        clearSpiritShot = true;
                     }
                 }
                 else if (activeChar instanceof L2NpcInstance)
@@ -144,6 +145,16 @@ public class Heal implements ISkillHandler
 
             if (target instanceof L2DoorInstance || target instanceof L2SiegeFlagInstance)
             	hp = 0;
+
+            if (target.getCurrentHp() + hp >= target.getMaxHp())
+            {
+            	hp = target.getMaxHp() - target.getCurrentHp();
+            }
+
+            if (hp < 0)
+            {
+            	hp = 0;
+            }
 			target.setCurrentHp(hp + target.getCurrentHp());
 			target.setLastHealAmount((int)hp);
 			StatusUpdate su = new StatusUpdate(target.getObjectId());
@@ -175,7 +186,19 @@ public class Heal implements ISkillHandler
                 }
 			}
 		}
-
+		if (clearSpiritShot)
+		{
+			if (activeChar instanceof L2Summon)
+			{
+				L2Summon activeSummon = (L2Summon) activeChar;
+				activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+			}
+			else
+			{
+				if (weaponInst != null)
+					weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+			}
+		}
 	}
 
 	public SkillType[] getSkillIds()

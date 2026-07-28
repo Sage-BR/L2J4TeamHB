@@ -115,6 +115,7 @@ import net.sf.l2j.gameserver.taskmanager.KnownListUpdateTaskManager;
 import net.sf.l2j.gameserver.taskmanager.TaskManager;
 import net.sf.l2j.gameserver.util.DynamicExtension;
 import net.sf.l2j.gameserver.util.FloodProtector;
+import net.sf.l2j.util.DeadLockDetector;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 import net.sf.l2j.status.Status;
 
@@ -132,6 +133,7 @@ public class GameServer
 {
 	private static final Logger _log = Logger.getLogger(GameServer.class.getName());
 	private final SelectorThread<L2GameClient> _selectorThread;
+	private final DeadLockDetector _deadDetectThread;
 	private SkillTable _skillTable;
 	private ItemTable _itemTable;
 	private NpcTable _npcTable;
@@ -162,6 +164,11 @@ public class GameServer
     {
     	return _selectorThread;
     }
+
+	public DeadLockDetector getDeadLockDetectorThread()
+	{
+		return _deadDetectThread;
+	}
 
 	public ClanHallManager getCHManager(){
 		return _cHManager;
@@ -438,6 +445,10 @@ public class GameServer
         FloodProtector.getInstance();
         TvTManager.getInstance();
         KnownListUpdateTaskManager.getInstance();
+		if (Config.DEADLOCK_DETECTOR)
+			_deadDetectThread = new DeadLockDetector(20, DeadLockDetector.RESTART);
+		else
+			_deadDetectThread = null;
 		System.gc();
 		long usedHeap = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576;
 		long totalMem = Runtime.getRuntime().maxMemory() / 1048576;
