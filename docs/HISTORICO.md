@@ -94,3 +94,40 @@ Commits aplicados manualmente no servidor, baseados em análise do repositório 
 - `data/Server/data/stats/pets.xml` (novo) — 13 pet types, 984 `<stat>` rows extraídos de `data/DB2.sql`
 - `L2PetDataTable.java`: `loadPetsData()` reescrito — DOM parser XML via `DocumentBuilderFactory` ao invés de JDBC; imports SQL removidos
 - `docs/migracao-sql-xml.md`: Pet Stats corrigido (XML standalone), nova seção `L2PetDataTable.java`, `pets.xml` adicionado à estrutura
+
+## 2026-07-28 — Sessão 13: Ramp-ignore-NSWE + GeoDataPatcher + Stuck Recovery
+
+### Workaround em código (GeoEngine.java)
+
+- `GeoEngine.java` — `nCanMoveNext` BlockMultilayer: substituído `checkMove()` opaco por `getNsweNearest()` + `checkNSWE()`. Nova lógica em 3 camadas:
+  1. NSWE padrão via `getNsweNearest` → se permite, move
+  2. NSWE bloqueia + diferença altura entre células ≤ 96 → **ignora NSWE** (rampa corrompida, não parede)
+  3. NSWE bloqueia + diferença altura > 96 → bloqueia (parede legítima)
+- Threshold aumentado de 32 para 96 baseado em logs reais (diffs observados: 48–88 em células de rampa; paredes reais têm 200+)
+- Log melhorado: `[GEO] nCanMoveNext RAMP-IGNORE-NSWE` e `BLOCKED` agora mostram `srcH`, `dstH`, `safeH` e `diff`
+
+### Stuck Recovery + DB Save
+
+- `L2PcInstance.java` — `checkGeometryStuck()`: detecta Z do player muito distante do terreno (±30 unidades), escaneia 300 unidades para cima/baixo procurando chão, teleporta para o terreno ou para a town como fallback. Rate-limited a cada 5s. Agora salva `storeCharBase()` no banco de dados após cada teleport.
+- `ValidatePosition.java` — Detecção de stuck melhorada: salva `originalClientZ` antes do Z override, usa `originalClientZ` (se próximo do realZ) com threshold reduzido de 80 para 30 unidades.
+
+### GeoDataPatcher — Correção permanente do .l2j
+
+- `java/Dev/SpecialMods/GeoDataPatcher.java` (novo) — Patcher binário que lê `.l2j`, varre células com NSWE bloqueando movimento onde altura é compatível, e corrige flags para 15 (todas direções livres).
+  - Parseia blocos Flat (1 layer), Complex (1 layer) e Multilayer (múltiplas camadas)
+  - `findNearestHeight()` — para células Multilayer, escaneia **todas as camadas** do vizinho e retorna a altura mais próxima da camada atual (evita falso negativo comparando chão vs teto)
+  - Threshold 96 (configurável via `-t`)
+  - Suporta dry-run via `-o <output>`
+
+- `16_19.l2j` — Aplicado patch permanente: 1.308.720 células corrigidas (935k Complex + 374k Multilayer)
+
+- `data/Server/GeoDataPatcher.bat` (novo) — Menu interativo para Windows com:
+  - `[1]` Consertar UM arquivo (digitar região)
+  - `[2]` Consertar TODOS (bulk)
+  - `[3]` Listar arquivos .l2j disponíveis
+  - `[4]` Configurar threshold (32/64/96/128/personalizado)
+  - `[5]` Alternar modo Dry-Run (testa sem modificar)
+  - `[6]` Fazer backup manual dos geodata
+  - `[7]` Restaurar backup (lista disponíveis ou restaura o mais recente)
+  - `[8]` Compilar GeoDataPatcher.java
+  - Backup automático antes de qualquer patch; restore com um clique

@@ -981,11 +981,42 @@ public class GeoEngine extends GeoData
 		}
 		else if (block instanceof BlockMultilayer)
 		{
-			BlockMultilayer bm = (BlockMultilayer)block;
-			double result = bm.checkMove(cellX, cellY, z, tx - x, ty - y);
-			if (result == Double.MIN_VALUE && Config.MOVE_DEBUG)
-				_log.info("[GEO] nCanMoveNext BLOCKED (multilevel): from=("+x+","+y+","+z+") to=("+tx+","+ty+")");
-			return result;
+			// Use getNsweNearest + getHeightNearest (padrão L2j4Team-main)
+			// em vez do checkMove() opaco da JAR que tem bug de seleção de layer.
+			byte nswe = block.getNsweNearest(x, y, z);
+			if (!checkNSWE((short)(nswe & 0xFF), x, y, tx, ty))
+			{
+				// NSWE bloqueou. Verifica se é rampa (dado corrompido) ou parede real.
+				// O threshold de 96 cobre rampas íngremes (diff 48-88 observados)
+				// mas ainda bloqueia paredes reais (diff tipicamente 200+).
+				short srcH = nGetHeight(x, y, z);
+				short dstH = nGetHeight(tx, ty, z);
+				
+				// Correcao de descida/subida de rampa: quando dstH > srcH significa que
+				// getHeightNearest retornou a layer acima (teto da rampa) em vez do chão.
+				// Tenta buscar uma layer abaixo de srcH no destino para a descida real.
+				if (dstH > srcH + 16)
+				{
+					short dstHBelow = nGetHeight(tx, ty, srcH - 1);
+					if (dstHBelow < dstH)
+						dstH = dstHBelow;
+				}
+				
+				if (Math.abs(dstH - srcH) <= 96)
+				{
+					// Se dstH ainda está acima do z atual do personagem, retornar srcH
+					// para nao jogar o personagem para dentro da geometria acima.
+					// O sistema de movimento vai ajustar progressivamente.
+					short safeH = (dstH > z) ? srcH : dstH;
+					if (Config.MOVE_DEBUG)
+						_log.info("[GEO] nCanMoveNext RAMP-IGNORE-NSWE: from=("+x+","+y+","+z+") to=("+tx+","+ty+") NSWE="+nswe+" srcH="+srcH+" dstH="+dstH+" safeH="+safeH);
+					return safeH;
+				}
+				if(Config.MOVE_DEBUG)
+					_log.info("[GEO] nCanMoveNext BLOCKED (multilevel): from=("+x+","+y+","+z+") to=("+tx+","+ty+") NSWE="+nswe+" srcH="+srcH+" dstH="+dstH+" diff="+Math.abs(dstH - srcH));
+				return Double.MIN_VALUE;
+			}
+			return nGetHeight(tx, ty, z);
 		}
 		return z;
 	}

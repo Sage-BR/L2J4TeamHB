@@ -69,6 +69,9 @@ public class ValidatePosition extends L2GameClientPacket
 		if (Config.MOVE_DEBUG)
 			_log.info("[MOVE] ValidatePosition IN  client=("+_x+","+_y+","+_z+") server=("+realX0+","+realY0+","+realZ0+") heading="+_heading+" moving="+activeChar.isMoving()+" flying="+activeChar.isFlying());
 
+        // Salva Z original do cliente (antes do Z override) para deteccao de stuck
+        final int originalClientZ = _z;
+        
         if (Config.GEODATA > 0 
         		&& !activeChar.isFlying()
         		&& GeoData.getInstance().hasGeo(_x, _y))
@@ -162,12 +165,14 @@ public class ValidatePosition extends L2GameClientPacket
 
         // Brproject: terrain height snap — if client Z is slightly below walkable terrain
         // after all validations, correct it. Prevents "below ground" artifacts when routing
-        // through geodata gaps (columns, bridges, etc).
+        // through geodata gaps (columns, bridges, ramps, etc).
         if (Config.GEODATA > 0 && !activeChar.isFlying())
         {
-            int terrainZ = GeoData.getInstance().getSpawnHeight(_x, _y, _z - 50, _z + 50, activeChar.getObjectId());
+            // Use a wider scan window to ensure we find the ramp layer even when
+            // the client is several units offset from the geo surface.
+            int terrainZ = GeoData.getInstance().getSpawnHeight(_x, _y, _z - 80, _z + 80, activeChar.getObjectId());
             int heightDiff = terrainZ - _z;
-            if (heightDiff > 5 && heightDiff < 50)
+            if (heightDiff > 5 && heightDiff < 80)
             {
                 if (Config.MOVE_DEBUG)
                     _log.info("[MOVE] TERRAIN SNAP: client_z="+_z+" terrainZ="+terrainZ+" diff="+heightDiff+" at ("+_x+","+_y+")");
@@ -176,7 +181,21 @@ public class ValidatePosition extends L2GameClientPacket
             }
             else if (Config.MOVE_DEBUG && heightDiff != 0)
             {
-                _log.info("[MOVE] TERRAIN no-snap: heightDiff="+heightDiff+" (outside 5-50 range) client_z="+_z+" terrainZ="+terrainZ+" at ("+_x+","+_y+")");
+                _log.info("[MOVE] TERRAIN no-snap: heightDiff="+heightDiff+" (outside 5-80 range) client_z="+_z+" terrainZ="+terrainZ+" at ("+_x+","+_y+")");
+            }
+            
+            // --- GeomStuck: safety net for characters inside walls/ramps/floors ---
+            // Usa o Z original do cliente (antes do override) para detectar quando o cliente
+            // esta reportando uma posicao muito diferente do terreno. Isso pega casos onde
+            // o personagem spawnou dentro de geometria (rampa/parede) mesmo depois do Z override.
+            // Nota: diferencas de 30+ indicam que o cliente esta flutuando sobre o terreno
+            // (colision height + geo gap). Com threshold 30, diffs como 39 sao detectados.
+            int checkZ = (Math.abs(originalClientZ - realZ) <= 30) ? originalClientZ : realZ;
+            int serverTerrainZ = GeoData.getInstance().getSpawnHeight(realX, realY, checkZ - 500, checkZ + 500, activeChar.getObjectId());
+            if (Math.abs(checkZ - serverTerrainZ) > 30 && !activeChar.isFalling(originalClientZ))
+            {
+                if (activeChar.checkGeometryStuck() && Config.MOVE_DEBUG)
+                    _log.info("[MOVE] GEOMETRY STUCK RECOVERY: player=("+realX+","+realY+","+realZ+") clientZ="+originalClientZ+" terrainZ="+serverTerrainZ);
             }
         }
 

@@ -432,6 +432,10 @@ public final class L2PcInstance extends L2PlayableInstance
 	private Point3D _lastServerPosition = new Point3D(0, 0, 0);
 	private long _fallingTimestamp = 0;
 	private static final long FALLING_VALIDATION_DELAY = 1000;
+	
+	/** Geometry stuck detection: timestamp of last check, prevents spam teleports */
+	private long _lastStuckCheck = 0;
+	private static final long STUCK_CHECK_INTERVAL = 5000; // check at most every 5s
 
 	/** The number of recommandation obtained by the L2PcInstance */
 	private int _recomHave; // how much I was recommended by others
@@ -10065,6 +10069,85 @@ public final class L2PcInstance extends L2PlayableInstance
 	public void stopFalling()
 	{
 		_fallingTimestamp = 0;
+	}
+	
+	/**
+	 * Detecta se o personagem está preso dentro de geometria (parede, rampa, chão)
+	 * e tenta corrigir a posição automaticamente.
+	 * 
+	 * Fluxo:
+	 * 1. Compara Z atual com altura do terreno via GeoData.
+	 * 2. Se diferença > 80 unidades, escaneia para cima até 300 unidades
+	 *    procurando um Z válido (getSpawnHeight).
+	 * 3. Se encontrar, teleporta o player para o terreno.
+	 * 4. Se não encontrar (dentro de parede), teleporta para o spawn da town.
+	 * 
+	 * @return true se a posição foi corrigida
+	 */
+	public boolean checkGeometryStuck()
+	{
+		if (isDead() || isFlying() || isInBoat() || isTeleporting() || isAlikeDead())
+			return false;
+		
+		long now = System.currentTimeMillis();
+		if (now < _lastStuckCheck + STUCK_CHECK_INTERVAL)
+			return false; // rate-limited
+		_lastStuckCheck = now;
+		
+		if (!GeoData.getInstance().hasGeo(getX(), getY()))
+			return false;
+		
+		int x = getX();
+		int y = getY();
+		int z = getZ();
+		
+		// Encontra altura do terreno num range amplo (500 unidades)
+		short terrainZ = GeoData.getInstance().getSpawnHeight(x, y, z - 500, z + 500, getObjectId());
+		int heightDiff = Math.abs(z - terrainZ);
+		
+		// Se está razoavelmente perto do terreno, não precisa fazer nada
+		if (heightDiff <= 80)
+			return false;
+		
+		// Tenta escanear para cima (caso clássico: dentro de rampa ou abaixo do chão)
+		for (int offset = 16; offset <= 300; offset += 16)
+		{
+			int scanZ = z + offset;
+			short scanTerrain = GeoData.getInstance().getSpawnHeight(x, y, scanZ - 50, scanZ + 50, getObjectId());
+			if (Math.abs(scanTerrain - scanZ) <= 50)
+			{
+				// Encontrou terreno válido acima — teleporta
+				if (Config.MOVE_DEBUG)
+					_log.info("[GEOM] Stuck recovery (upward): ("+x+","+y+","+z+") -> terrainZ="+scanTerrain+" offset="+offset);
+				teleToLocation(x, y, scanTerrain, false);
+				sendPacket(new ValidateLocation(this));
+				storeCharBase(); // salva nova posicao no banco
+				return true;
+			}
+		}
+		
+		// Se não encontrou acima, tenta escanear para baixo
+		for (int offset = -16; offset >= -300; offset -= 16)
+		{
+			int scanZ = z + offset;
+			short scanTerrain = GeoData.getInstance().getSpawnHeight(x, y, scanZ - 50, scanZ + 50, getObjectId());
+			if (Math.abs(scanTerrain - scanZ) <= 50)
+			{
+				if (Config.MOVE_DEBUG)
+					_log.info("[GEOM] Stuck recovery (downward): ("+x+","+y+","+z+") -> terrainZ="+scanTerrain+" offset="+offset);
+				teleToLocation(x, y, scanTerrain, false);
+				sendPacket(new ValidateLocation(this));
+				storeCharBase(); // salva nova posicao no banco
+				return true;
+			}
+		}
+		
+		// Totalmente preso — teleporta para town como último recurso
+		if (Config.MOVE_DEBUG)
+			_log.warning("[GEOM] Stuck CRITICAL: ("+x+","+y+","+z+") terrainZ="+terrainZ+" diff="+heightDiff+" — teleporting to town");
+		teleToLocation(MapRegionTable.TeleportWhereType.Town);
+		storeCharBase(); // salva nova posicao no banco
+		return true;
 	}
 
 	@Override
