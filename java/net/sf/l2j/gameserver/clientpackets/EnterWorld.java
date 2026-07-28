@@ -74,7 +74,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.FloodProtector;
 
-import net.sf.l2j.protection.hwid.HwidManager;
 
 import java.util.List;
 import java.util.Map;
@@ -112,15 +111,6 @@ public class EnterWorld extends L2GameClientPacket
             return;
         }
 
-        if (!getClient().isHwidAuthed() || getClient().getHwidSession() == null)
-        {
-            _log.warning("HWID not validated: " + getClient().getAccountName());
-            getClient().closeNow();
-            return;
-        }
-
-        HwidManager.getInstance().onEnterWorld(getClient());
-        
         // Register in flood protector
         FloodProtector.getInstance().registerNewPlayer(activeChar.getObjectId());
 

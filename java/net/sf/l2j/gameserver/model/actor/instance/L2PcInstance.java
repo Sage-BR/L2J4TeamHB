@@ -3405,14 +3405,6 @@ public final class L2PcInstance extends L2PlayableInstance
 		_client = client;
 	}
 
-	public String getHWID()
-	{
-		if (getClient() == null || getClient().getHwidSession() == null)
-			return "";
-
-		return getClient().getHwidSession().getMac();
-	}
-
 	/**
 	 * Close the active connection with the client.<BR><BR>
 	 */

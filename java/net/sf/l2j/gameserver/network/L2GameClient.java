@@ -27,8 +27,7 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.LoginServerThread;
-import net.sf.l2j.protection.hwid.HwidDAO;
-import net.sf.l2j.protection.hwid.HwidSession;
+
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.LoginServerThread.SessionKey;
 import net.sf.l2j.gameserver.communitybbs.Manager.RegionBBSManager;
@@ -79,11 +78,6 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 
 	// Crypt
 	private GameCrypt _crypt;
-
-	// HWID
-	private final HwidDAO dao = new HwidDAO();
-	private boolean _hwidAuthed = false;
-	private HwidSession _hwidSession;
 
 	// Flood protection
 	public byte packetsSentInSec = 0;
@@ -593,26 +587,6 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 				LoginServerThread.getInstance().sendLogout(L2GameClient.this.getAccountName());
 			}
 		}
-	}
-
-	public void setHwidAuthed(boolean val)
-	{
-		_hwidAuthed = val;
-	}
-
-	public boolean isHwidAuthed()
-	{
-		return _hwidAuthed;
-	}
-
-	public void setHwidSession(HwidSession session)
-	{
-		_hwidSession = session;
-	}
-
-	public HwidSession getHwidSession()
-	{
-		return _hwidSession;
 	}
 
 	class AutoSaveTask implements Runnable
