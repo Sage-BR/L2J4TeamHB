@@ -43,6 +43,11 @@ Migrar todos os dados de NPCs (`npc`, `npcskills`, `pets_stats`, `skill_learn`, 
 - SQL: `armor_sets` (78 sets) → XML `data/Server/data/stats/armorsets.xml`
 - Custom armorsets: `data/Server/data/stats/custom_armorsets.xml` (vazio, suporte a `Config.CUSTOM_ARMORSETS_TABLE`)
 
+### Weapon Stats (11 arquivos + custom/)
+- SQL: `weapon` + `custom_weapon`
+- XML: tags `<set>` com dados estruturais em `data/Server/data/stats/itens/weapon/*.xml` (10 arquivos, IDs 0-10999 + custom/ subdir)
+- `SkillsEngine.java:61`: `hashFiles("data/stats/itens/weapon", _weaponFiles)` — carrega XML base + pasta `custom/` automaticamente
+
 ### EtcItem (7387 itens)
 - SQL: `etcitem` (7387 registros)
 - XML: tags `<set>` com dados estruturais em `data/Server/data/stats/itens/etcitem/*.xml` (11 arquivos, IDs 0-10999)
@@ -65,10 +70,7 @@ Migrar todos os dados de NPCs (`npc`, `npcskills`, `pets_stats`, `skill_learn`, 
 - Carregado via SQL em `restoreNpcData()` — mantido como legado
 - Motivo: volume alto de dados, edição frequente por admins
 
-### Custom weapon
-- Tabela: `custom_weapon`
-- Ainda não migrada para XML
-- Aguardando decisão
+
 
 ---
 
@@ -87,6 +89,12 @@ data/Server/data/stats/
 │   │   ├── 10400-10499.xml (novo, custom)
 │   │   ├── 10500-10599.xml (novo, custom)
 │   │   └── 10600-10699.xml (novo, custom)
+│   ├── weapon/
+│   │   ├── 0000-0999.xml
+│   │   ├── 1000-1999.xml
+│   │   ├── ...
+│   │   ├── 10000-10999.xml
+│   │   └── custom/ (custom weapons)
 │   └── etcitem/
 │       ├── 0-999.xml (novo)
 │       ├── 1000-1999.xml (novo)
@@ -165,7 +173,6 @@ Chaves sem equivalente XML (`armor`, `faction_id`, `faction_range`, `isUndead`, 
 
 ## 🔮 Próximos Passos Possíveis
 
-- Migrar `custom_weapon` do SQL para XML
 - Migrar `droplist` do SQL para XML (27405 registros, 2335 NPCs)
 - Adicionar parser/suporte para `<drops>` no `loadNpcsFromXml()`
 - Criar script de injeção de drops nos XMLs
