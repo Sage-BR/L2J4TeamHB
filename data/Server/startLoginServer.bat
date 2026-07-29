@@ -1,13 +1,16 @@
 @echo off
 title L2J4Team LoginServer Console
+
+:: Limpa possivel processo Java orfao de sessoes anteriores
+for /f "skip=1" %%p in ('wmic process where "name='java.exe' and commandline like '%%net.sf.l2j.loginserver.L2LoginServer%%'" get processid 2^>nul') do (
+    if %%p neq 0 taskkill /f /pid %%p >nul 2>&1
+)
+
 :start
 echo Starting L2J4Team Login Server.
 echo.
-start "L2J4Team LoginServer" /wait java -Xms32m -Xmx64m -server -XX:+UseSerialGC -cp "%~dp0lib\*;%~dp0l2jserver.jar" net.sf.l2j.loginserver.L2LoginServer
+java -Xms32m -Xmx64m -server -XX:+UseSerialGC -cp "%~dp0lib\*;%~dp0l2jserver.jar" net.sf.l2j.loginserver.L2LoginServer
 set "EXIT_CODE=%ERRORLEVEL%"
-
-:: Limpa possivel processo Java orfao
-taskkill /f /fi "WINDOWTITLE eq L2J4Team LoginServer" /im java.exe >nul 2>&1
 
 if %EXIT_CODE%==2 goto restart
 if %EXIT_CODE%==1 goto error
