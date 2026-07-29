@@ -101,7 +101,7 @@ public class ValidatePosition extends L2GameClientPacket
         }
 
         activeChar.setLastClientPosition(_x, _y, _z);
-        activeChar.setLastServerPosition(activeChar.getX(), activeChar.getY(), activeChar.getZ());
+        activeChar.setLastServerPosition(realX0, realY0, realZ0);
 
         // If falling, skip position validation to avoid "jumping" (L2J HorridoJoho pattern).
         if (GeoData.getInstance().hasGeo(realX, realY) && activeChar.isFalling(_z))
@@ -190,10 +190,12 @@ public class ValidatePosition extends L2GameClientPacket
             // (colision height + geo gap). Com threshold 30, diffs como 39 sao detectados.
             int checkZ = (Math.abs(originalClientZ - realZ) <= 30) ? originalClientZ : realZ;
             int serverTerrainZ = GeoData.getInstance().getSpawnHeight(realX, realY, checkZ - 500, checkZ + 500, activeChar.getObjectId());
-            if (Math.abs(checkZ - serverTerrainZ) > 30 && !activeChar.isFalling(originalClientZ))
+            final int verticalDrop = Math.max(0, realZ0 - activeChar.getZ());
+            final int verticalDropThreshold = Math.max(160, activeChar.getTemplate().collisionHeight * 3);
+            if ((Math.abs(checkZ - serverTerrainZ) > 30 || verticalDrop >= verticalDropThreshold) && !activeChar.isFalling(originalClientZ))
             {
                 if (activeChar.checkGeometryStuck() && Config.MOVE_DEBUG)
-                    _log.info("[MOVE] GEOMETRY STUCK RECOVERY: player=("+realX+","+realY+","+realZ+") clientZ="+originalClientZ+" terrainZ="+serverTerrainZ);
+                    _log.info("[MOVE] GEOMETRY STUCK RECOVERY: player=("+realX+","+realY+","+realZ+") clientZ="+originalClientZ+" terrainZ="+serverTerrainZ+" verticalDrop="+verticalDrop+"/"+verticalDropThreshold);
             }
         }
 

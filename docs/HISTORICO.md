@@ -19,6 +19,13 @@ Commits aplicados manualmente no servidor, baseados em análise do repositório 
 
 ## Commits Aplicados
 
+## 2026-07-29 — Sessão 14: Prevenção real de queda sob estruturas
+
+- `L2Character.java` — `updatePosition()` passou a usar `traceTerrainZ()` com probe elevado (`super.getZ() + 2 * GeoStructure.CELL_HEIGHT`), seguindo a linha das refs para evitar que o servidor grude o player na layer inferior antes da validação final.
+- `ValidatePosition.java` — `lastServerPosition` agora preserva o último ponto estável real; o gatilho de stuck ficou como fallback e não mais como mecanismo principal de correção.
+- `L2PcInstance.java` — `checkGeometryStuck()` foi reescrito para procurar uma recuperação segura em posição vizinha, sem aceitar correção para baixo da estrutura.
+- Fluxo de movimento — separação mais clara entre prevenção e fallback: movimento horizontal/vertical tratado no update do servidor, sync no packet `ValidatePosition` e recovery só quando a prevenção não for suficiente.
+
 ## 2026-07-24 — Sessão 9: Correções de bugs (auditoria local)
 
 - `L2AttackableAI.java` — `doAttack` só executa se `canSeeTarget`, senão move para perto

@@ -38,6 +38,7 @@ import net.sf.l2j.gameserver.datatables.DoorTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportWhereType;
+import net.sf.l2j.gameserver.geoengine.geodata.GeoStructure;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
@@ -3934,7 +3935,7 @@ public abstract class L2Character extends L2Object
 			else
 			{
 				super.getPosition().setXYZ(m._xDestination, m._yDestination,
-					GeoData.getInstance().traceTerrainZ(m._xMoveFrom, m._yMoveFrom, super.getZ(), m._xDestination, m._yDestination));
+					GeoData.getInstance().traceTerrainZ(m._xMoveFrom, m._yMoveFrom, super.getZ() + (2 * GeoStructure.CELL_HEIGHT), m._xDestination, m._yDestination));
 			}
 
 			return true;
@@ -3952,10 +3953,11 @@ public abstract class L2Character extends L2Object
 			int nextX = m._xMoveFrom + (int)(elapsed * m._xSpeedTicks);
 			int nextY = m._yMoveFrom + (int)(elapsed * m._ySpeedTicks);
 
-			// Trace terrain Z along movement path (L2J HorridoJoho pattern).
+			// Trace terrain Z along movement path using an elevated probe to avoid
+			// locking the character into the lower layer when the client already drifted.
 			if (Config.GEODATA > 0 && !isFlying() && !isInsideZone(ZONE_WATER))
 			{
-				int tracedZ = GeoData.getInstance().traceTerrainZ(m._xMoveFrom, m._yMoveFrom, super.getZ(), nextX, nextY);
+				int tracedZ = GeoData.getInstance().traceTerrainZ(m._xMoveFrom, m._yMoveFrom, super.getZ() + (2 * GeoStructure.CELL_HEIGHT), nextX, nextY);
 				super.getPosition().setXYZ(nextX, nextY, tracedZ);
 			}
 			else

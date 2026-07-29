@@ -96,6 +96,7 @@ import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2Macro;
 import net.sf.l2j.gameserver.model.L2ManufactureList;
 import net.sf.l2j.gameserver.model.L2Object;
+import net.sf.l2j.gameserver.model.Location;
 import net.sf.l2j.gameserver.model.L2Party;
 import net.sf.l2j.gameserver.model.L2Radar;
 import net.sf.l2j.gameserver.model.L2RecipeList;
@@ -10017,6 +10018,62 @@ public final class L2PcInstance extends L2PlayableInstance
 		return (int)Math.sqrt(dx*dx + dy*dy + dz*dz);
 	}
 
+	public Point3D getLastServerPosition()
+	{
+		return _lastServerPosition;
+	}
+
+	private Location findGeometryRecoveryLocation(int originX, int originY, int originZ, int currentZ)
+	{
+		if (!GeoData.getInstance().hasGeo(originX, originY))
+			return null;
+
+		final int[] radii =
+		{
+			16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256
+		};
+
+		for (int radius : radii)
+		{
+			final int[] deltas =
+			{
+				radius, 0,
+				-radius, 0,
+				0, radius,
+				0, -radius,
+				radius, radius,
+				radius, -radius,
+				-radius, radius,
+				-radius, -radius
+			};
+
+			for (int i = 0; i < deltas.length; i += 2)
+			{
+				final int candidateX = originX + deltas[i];
+				final int candidateY = originY + deltas[i + 1];
+
+				if (!GeoData.getInstance().hasGeo(candidateX, candidateY))
+					continue;
+
+				final short candidateZ = GeoData.getInstance().getSpawnHeight(candidateX, candidateY, originZ - 500, originZ + 500, getObjectId());
+
+				// Never move the character below the current structure. For stuck recovery we
+				// only accept the same level or an upper layer that is close enough to be safe.
+				if (candidateZ < currentZ - 10)
+					continue;
+				if (candidateZ - currentZ > 320)
+					continue;
+
+				final Location reachCheck = GeoData.getInstance().moveCheck(originX, originY, originZ, candidateX, candidateY, candidateZ);
+				if (reachCheck.getX() != candidateX || reachCheck.getY() != candidateY)
+					continue;
+
+				return new Location(candidateX, candidateY, candidateZ);
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Checks if the character is falling based on Z difference.
 	 * @param z the client Z
@@ -10073,11 +10130,10 @@ public final class L2PcInstance extends L2PlayableInstance
 	 * e tenta corrigir a posição automaticamente.
 	 * 
 	 * Fluxo:
-	 * 1. Compara Z atual com altura do terreno via GeoData.
-	 * 2. Se diferença > 80 unidades, escaneia para cima até 300 unidades
-	 *    procurando um Z válido (getSpawnHeight).
-	 * 3. Se encontrar, teleporta o player para o terreno.
-	 * 4. Se não encontrar (dentro de parede), teleporta para o spawn da town.
+	 * 1. Compara Z atual com a altura do terreno via GeoData.
+	 * 2. Usa o último server position estável como âncora quando a queda parece suspeita.
+	 * 3. Procura um ponto vizinho caminhável sem aceitar correção para baixo.
+	 * 4. Se não encontrar uma saída segura, teleporta para a town.
 	 * 
 	 * @return true se a posição foi corrigida
 	 */
@@ -10097,46 +10153,39 @@ public final class L2PcInstance extends L2PlayableInstance
 		int x = getX();
 		int y = getY();
 		int z = getZ();
+		Point3D lastServerPos = getLastServerPosition();
+		int anchorX = x;
+		int anchorY = y;
+		int anchorZ = z;
+
+		if (lastServerPos != null && getLastServerDistance(x, y, z) <= 512)
+		{
+			anchorX = lastServerPos.getX();
+			anchorY = lastServerPos.getY();
+			anchorZ = lastServerPos.getZ();
+		}
 		
 		// Encontra altura do terreno num range amplo (500 unidades)
 		short terrainZ = GeoData.getInstance().getSpawnHeight(x, y, z - 500, z + 500, getObjectId());
 		int heightDiff = Math.abs(z - terrainZ);
 		
-		// Se está razoavelmente perto do terreno, não precisa fazer nada
-		if (heightDiff <= 80)
+		// Se a posição atual já está compatível com o terreno e não houve queda
+		// relevante em relação ao último ponto estável, não faz nada.
+		if (heightDiff <= 80 && (anchorZ - z) <= 80)
 			return false;
-		
-		// Tenta escanear para cima (caso clássico: dentro de rampa ou abaixo do chão)
-		for (int offset = 16; offset <= 300; offset += 16)
+
+		Location recovery = findGeometryRecoveryLocation(anchorX, anchorY, anchorZ, z);
+		if (recovery == null && (anchorX != x || anchorY != y || anchorZ != z))
+			recovery = findGeometryRecoveryLocation(x, y, z, z);
+
+		if (recovery != null)
 		{
-			int scanZ = z + offset;
-			short scanTerrain = GeoData.getInstance().getSpawnHeight(x, y, scanZ - 50, scanZ + 50, getObjectId());
-			if (Math.abs(scanTerrain - scanZ) <= 50)
-			{
-				// Encontrou terreno válido acima — teleporta
-				if (Config.MOVE_DEBUG)
-					_log.info("[GEOM] Stuck recovery (upward): ("+x+","+y+","+z+") -> terrainZ="+scanTerrain+" offset="+offset);
-				teleToLocation(x, y, scanTerrain, false);
-				sendPacket(new ValidateLocation(this));
-				storeCharBase(); // salva nova posicao no banco
-				return true;
-			}
-		}
-		
-		// Se não encontrou acima, tenta escanear para baixo
-		for (int offset = -16; offset >= -300; offset -= 16)
-		{
-			int scanZ = z + offset;
-			short scanTerrain = GeoData.getInstance().getSpawnHeight(x, y, scanZ - 50, scanZ + 50, getObjectId());
-			if (Math.abs(scanTerrain - scanZ) <= 50)
-			{
-				if (Config.MOVE_DEBUG)
-					_log.info("[GEOM] Stuck recovery (downward): ("+x+","+y+","+z+") -> terrainZ="+scanTerrain+" offset="+offset);
-				teleToLocation(x, y, scanTerrain, false);
-				sendPacket(new ValidateLocation(this));
-				storeCharBase(); // salva nova posicao no banco
-				return true;
-			}
+			if (Config.MOVE_DEBUG)
+				_log.info("[GEOM] Stuck recovery: ("+x+","+y+","+z+") -> ("+recovery.getX()+","+recovery.getY()+","+recovery.getZ()+") anchor=("+anchorX+","+anchorY+","+anchorZ+") terrainZ="+terrainZ+" diff="+heightDiff);
+			teleToLocation(recovery.getX(), recovery.getY(), recovery.getZ(), false);
+			sendPacket(new ValidateLocation(this));
+			storeCharBase(); // salva nova posicao no banco
+			return true;
 		}
 		
 		// Totalmente preso — teleporta para town como último recurso
