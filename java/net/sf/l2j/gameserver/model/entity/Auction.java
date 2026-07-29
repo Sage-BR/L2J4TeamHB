@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,9 +32,6 @@ import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 public class Auction
 {
@@ -55,7 +53,7 @@ public class Auction
 	private int _currentBid						= 0;
 	private int _startingBid					= 0;
 
-	private Map<Integer, Bidder> _bidders        = new ConcurrentHashMap<Integer, Bidder>();
+	private Map<Integer, Bidder> _bidders        = new ConcurrentHashMap<>();
 	private static final String[] ItemTypeName =
 	{
 	             "ClanHall"
@@ -107,7 +105,8 @@ public class Auction
     public class AutoEndTask implements Runnable
     {
         public AutoEndTask(){}
-        public void run()
+        @Override
+		public void run()
         {
             try
             {
@@ -216,8 +215,11 @@ public class Auction
         if (_endDate <= currentTime){
         	_endDate = currentTime + 7*24*60*60*1000;
         	saveAuctionDate();
-        }else
-        	taskDelay = _endDate - currentTime;
+        }
+		else
+		{
+			taskDelay = _endDate - currentTime;
+		}
         ThreadPoolManager.getInstance().scheduleGeneral(new AutoEndTask(), taskDelay);
     }
 	public static String getItemTypeName(ItemTypeEnum value)
@@ -249,7 +251,9 @@ public class Auction
 	{
 	    int requiredAdena = bid;
 	    if (getHighestBidderName().equals(bidder.getClan().getLeaderName()))
-	    		requiredAdena = bid - getHighestBidderMaxBid();
+		{
+			requiredAdena = bid - getHighestBidderMaxBid();
+		}
 		if ((getHighestBidderId() >0 && bid > getHighestBidderMaxBid())
 				|| (getHighestBidderId() == 0 && bid >= getStartingBid()))
 	    {
@@ -266,7 +270,9 @@ public class Auction
 	private void returnItem(String Clan, int itemId, int quantity, boolean penalty)
 	{
         if (penalty)
-            quantity *= 0.9; //take 10% tax fee if needed
+		{
+			quantity *= 0.9; //take 10% tax fee if needed
+		}
         ClanTable.getInstance().getClanByName(Clan).getWarehouse().addItem("Outbidded", _adenaId, quantity, null, null);
 	}
 	/** Take Item in WHC */
@@ -314,14 +320,18 @@ public class Auction
                 statement.execute();
                 statement.close();
                 if (L2World.getInstance().getPlayer(_highestBidderName) != null)
-                    L2World.getInstance().getPlayer(_highestBidderName).sendMessage("You have been out bidded");
+				{
+					L2World.getInstance().getPlayer(_highestBidderName).sendMessage("You have been out bidded");
+				}
             }
             _highestBidderId = bidder.getClanId();
             _highestBidderMaxBid = bid;
             _highestBidderName = bidder.getClan().getLeaderName();
             if (_bidders.get(_highestBidderId) == null)
-                _bidders.put(_highestBidderId, new Bidder(_highestBidderName, bidder.getClan().getName(), bid, Calendar.getInstance().getTimeInMillis()));
-            else
+			{
+				_bidders.put(_highestBidderId, new Bidder(_highestBidderName, bidder.getClan().getName(), bid, Calendar.getInstance().getTimeInMillis()));
+			}
+			else
             {
                 _bidders.get(_highestBidderId).setBid(bid);
                 _bidders.get(_highestBidderId).setTimeBid(Calendar.getInstance().getTimeInMillis());
@@ -364,11 +374,15 @@ public class Auction
         for (Bidder b : _bidders.values())
         {
           if (ClanTable.getInstance().getClanByName(b.getClanName()).getHasHideout() == 0)
-        	  returnItem(b.getClanName(), 57, 9*b.getBid()/10, false); // 10 % tax
-          else
+		{
+			returnItem(b.getClanName(), 57, 9*b.getBid()/10, false); // 10 % tax
+		  }
+		else
           {
         	  if (L2World.getInstance().getPlayer(b.getName()) != null)
-        		  L2World.getInstance().getPlayer(b.getName()).sendMessage("Congratulation you have won ClanHall!");
+			{
+				L2World.getInstance().getPlayer(b.getName()).sendMessage("Congratulation you have won ClanHall!");
+			  }
           }
           ClanTable.getInstance().getClanByName(b.getClanName()).setAuctionBiddedAt(0, true);
         }
@@ -514,5 +528,5 @@ public class Auction
 	public final String getSellerName() { return _sellerName; }
     public final String getSellerClanName() { return _sellerClanName; }
 	public final int getStartingBid() { return _startingBid; }
-    public final Map<Integer, Bidder> getBidders(){ return _bidders; };
+    public final Map<Integer, Bidder> getBidders(){ return _bidders; }
 }

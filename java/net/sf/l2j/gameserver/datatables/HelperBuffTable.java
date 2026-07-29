@@ -24,7 +24,6 @@ import net.sf.l2j.gameserver.templates.L2HelperBuff;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class represents the Newbie Helper Buff list

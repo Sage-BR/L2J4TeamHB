@@ -37,7 +37,6 @@ import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowInfoUpdate;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Fort
 {

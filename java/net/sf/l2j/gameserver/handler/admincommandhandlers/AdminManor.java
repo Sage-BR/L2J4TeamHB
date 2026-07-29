@@ -28,7 +28,6 @@ import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Admin comand handler for Manor System

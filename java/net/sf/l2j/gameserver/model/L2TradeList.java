@@ -29,7 +29,6 @@ import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.templates.L2Item;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  * This class ...

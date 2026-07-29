@@ -39,8 +39,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class handles following admin commands:

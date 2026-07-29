@@ -23,7 +23,6 @@ import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  *

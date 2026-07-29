@@ -49,7 +49,6 @@ import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  * Caches script engines and provides functionality for executing and managing scripts.<BR>
@@ -712,7 +711,6 @@ public final class L2ScriptEngineManager
 		return _currentLoadingScript;
 	}
 	
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder
 	{
 		protected static final L2ScriptEngineManager _instance = new L2ScriptEngineManager();

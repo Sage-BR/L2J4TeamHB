@@ -29,7 +29,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PlayableInstance;
 import net.sf.l2j.util.Point3D;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  * This class ...
@@ -194,6 +193,11 @@ public final class L2World
     public final Map<Integer,L2Object> getAllVisibleObjects()
     {
         return _allObjects;
+    }
+
+    public final Collection<L2Object> getObjects()
+    {
+        return _allObjects.values();
     }
     
 

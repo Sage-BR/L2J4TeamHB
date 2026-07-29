@@ -23,7 +23,6 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.PostBBSManager;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author Maktakien

@@ -41,7 +41,6 @@ import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 public class RaidBossSpawnManager {
 

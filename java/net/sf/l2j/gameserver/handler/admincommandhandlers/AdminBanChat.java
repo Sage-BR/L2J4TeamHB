@@ -100,12 +100,10 @@ public class AdminBanChat implements IAdminCommandHandler {
 	private class SchedChatUnban implements Runnable
 	{
 		L2PcInstance _player;
-		L2PcInstance _banner;
 
 		protected SchedChatUnban(L2PcInstance player, L2PcInstance banner)
 		{
 			_player = player;
-			_banner = banner;
 		}
 
 		public void run()

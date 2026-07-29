@@ -30,7 +30,6 @@ import net.sf.l2j.Server;
 import net.sf.l2j.util.Rnd;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Status extends Thread
 {

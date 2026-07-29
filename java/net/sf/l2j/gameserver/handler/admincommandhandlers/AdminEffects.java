@@ -485,8 +485,6 @@ public class AdminEffects implements IAdminCommandHandler
 						else
 							activeChar.sendPacket(new SystemMessage(SystemMessageId.NOTHING_HAPPENED));
 					}
-					else
-						activeChar.sendPacket(new SystemMessage(SystemMessageId.INCORRECT_TARGET));
 				}
 				else if (!command.contains("menu"))
 					activeChar.sendMessage("Usage: //social <social_id> [player_name|radius]");
@@ -552,8 +550,6 @@ public class AdminEffects implements IAdminCommandHandler
 						else
 							activeChar.sendPacket(new SystemMessage(SystemMessageId.NOTHING_HAPPENED));
 					}
-					else
-						activeChar.sendPacket(new SystemMessage(SystemMessageId.INCORRECT_TARGET));
 				}
 				else if (!command.contains("menu"))
 					activeChar.sendMessage("Usage: //abnormal <abnormal_mask> [player_name|radius]");
@@ -588,8 +584,6 @@ public class AdminEffects implements IAdminCommandHandler
 						activeChar.sendMessage(obj.getName()+" performs MSU "+skill+"/"+level+" by your request.");
 					}
 				}
-				else
-					activeChar.sendPacket(new SystemMessage(SystemMessageId.INCORRECT_TARGET));
 			}
 			catch(Exception e)
 			{

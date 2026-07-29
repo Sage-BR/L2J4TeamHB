@@ -35,7 +35,6 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 public final class L2AuctioneerInstance extends L2FolkInstance
 {

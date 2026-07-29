@@ -33,7 +33,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Multisell list manager

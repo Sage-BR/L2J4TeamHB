@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,15 +16,14 @@ package net.sf.l2j.gameserver.model;
 
 import net.sf.l2j.gameserver.templates.StatsSet;
 
-import java.util.Set;
 
 /**
- * 
+ *
  * @author Rayan RPG
  * @since 927
  *
  */
-public class L2NpcWalkerNode 
+public class L2NpcWalkerNode
 {
 	private int _routeId;
 	private int _npcId;
@@ -34,14 +33,14 @@ public class L2NpcWalkerNode
 	private int _moveY;
 	private int _moveZ;
 	private int _delay;
-	
+
 	private boolean _running;
 
 	public void setRunning(boolean val)
 	{
 		_running = val;
 	}
-	
+
 	public void setRouteId(int id)
 	{
 		_routeId = id;
@@ -121,24 +120,24 @@ public class L2NpcWalkerNode
 	{
 		return _delay;
 	}
-	
+
 	public boolean getRunning()
 	{
 		return _running;
 	}
-	
+
 	/**
 	 * Constructor of L2NpcWalker.<BR><BR>
 	 */
 	public L2NpcWalkerNode()
 	{}
-	
+
 	/**
 	 * Constructor of L2NpcWalker.<BR><BR>
 	 * @param set The StatsSet object to transfert data to the method
 	 */
 	public L2NpcWalkerNode(StatsSet set)
-	{		
+	{
 		_npcId       = set.getInteger("npc_id");
 		_movePoint   = set.getString("move_point");
 		_chatText    = set.getString("chatText");

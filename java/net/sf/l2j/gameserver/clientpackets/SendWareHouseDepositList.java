@@ -32,7 +32,6 @@ import net.sf.l2j.gameserver.templates.L2EtcItemType;
 import net.sf.l2j.gameserver.util.IllegalPlayerAction;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.List;
 
 /**
  * This class ...

@@ -15,7 +15,6 @@
 package net.sf.l2j.loginserver;
 
 import java.nio.channels.SocketChannel;
-import java.net.InetAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

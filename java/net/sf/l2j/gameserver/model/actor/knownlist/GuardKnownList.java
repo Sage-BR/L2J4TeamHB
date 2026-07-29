@@ -25,7 +25,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2GuardInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2MonsterInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.Set;
 
 public class GuardKnownList extends AttackableKnownList
 {

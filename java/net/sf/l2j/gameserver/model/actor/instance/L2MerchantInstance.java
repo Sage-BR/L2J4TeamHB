@@ -32,7 +32,6 @@ import net.sf.l2j.gameserver.serverpackets.ShopPreviewList;
 import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.List;
 
 /**
  * This class ...

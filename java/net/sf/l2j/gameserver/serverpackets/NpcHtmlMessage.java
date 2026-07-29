@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.clientpackets.RequestBypassToServer;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.List;
 
 /**
  *

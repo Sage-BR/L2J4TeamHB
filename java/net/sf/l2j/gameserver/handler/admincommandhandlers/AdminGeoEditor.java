@@ -21,8 +21,6 @@ import net.sf.l2j.gameserver.geoeditorcon.GeoEditorListener;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author  Luno, Dezmond

@@ -46,7 +46,6 @@ import net.sf.l2j.util.Point3D;
 import net.sf.l2j.util.Rnd;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class manages AI of L2Character.<BR><BR>

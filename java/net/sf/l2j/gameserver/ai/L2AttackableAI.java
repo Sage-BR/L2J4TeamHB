@@ -53,7 +53,6 @@ import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class manages AI of L2Attackable.<BR><BR>

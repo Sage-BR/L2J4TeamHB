@@ -57,7 +57,6 @@ import org.xml.sax.SAXException;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class RecipeController
 {
@@ -399,7 +398,6 @@ public class RecipeController
 		protected double _manaRequired;
 		protected int _price;
 		protected int _totalItems;
-		protected int _materialsRefPrice;
 		protected int _delay;
 
 		public RecipeItemMaker(L2PcInstance pPlayer, L2RecipeList pRecipeList, L2PcInstance pTarget)
@@ -498,7 +496,6 @@ public class RecipeController
 			// calculate reference price
 			for (TempItem i : _items)
 			{
-				_materialsRefPrice += i.getReferencePrice() * i.getQuantity();
 				_totalItems += i.getQuantity();
 			}
 			// initial mana check requires MP as written on recipe
@@ -777,8 +774,6 @@ public class RecipeController
 		{ // no object id stored, this will be only "list" of items with it's owner
 			private int _itemId;
 			private int _quantity;
-			private int _ownerId;
-			private int _referencePrice;
 			private String _itemName;
 
 			/**
@@ -790,9 +785,7 @@ public class RecipeController
 				super();
 				_itemId = item.getItemId();
 				_quantity = quantity;
-				_ownerId = item.getOwnerId();
 				_itemName = item.getItem().getName();
-				_referencePrice = item.getReferencePrice();
 			}
 
 			/**
@@ -811,25 +804,12 @@ public class RecipeController
 				_quantity = quantity;
 			}
 
-			public int getReferencePrice()
-			{
-				return _referencePrice;
-			}
-
 			/**
 			 * @return Returns the itemId.
 			 */
 			public int getItemId()
 			{
 				return _itemId;
-			}
-
-			/**
-			 * @return Returns the ownerId.
-			 */
-			public int getOwnerId()
-			{
-				return _ownerId;
 			}
 
 			/**

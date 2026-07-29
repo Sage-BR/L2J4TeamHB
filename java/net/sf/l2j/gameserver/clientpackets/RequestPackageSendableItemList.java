@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.clientpackets;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.serverpackets.PackageSendableList;
 
-import java.util.List;
 
 /**
  * Format: (c)d

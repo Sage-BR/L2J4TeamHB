@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,6 +16,7 @@ package net.sf.l2j.gameserver.model.actor.instance;
 
 import static net.sf.l2j.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -30,8 +31,6 @@ import net.sf.l2j.gameserver.serverpackets.StopMove;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Point3D;
 import net.sf.l2j.util.Rnd;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 // While a tamed beast behaves a lot like a pet (ingame) and does have
 // an owner, in all other aspects, it acts like a mob.
@@ -76,7 +75,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     	// Eating food extends the duration by 20secs, to a max of 20minutes
     	_remainingTime = _remainingTime + DURATION_INCREASE_INTERVAL;
     	if (_remainingTime > MAX_DURATION)
-    		_remainingTime = MAX_DURATION;
+		{
+			_remainingTime = MAX_DURATION;
+		}
     }
 
     public Point3D getHome()
@@ -120,7 +121,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
         	// start the duration checks
 	    	// start the buff tasks
         	if (_durationCheckTask != null)
-        		_durationCheckTask.cancel(true);
+			{
+				_durationCheckTask.cancel(true);
+			}
         	_durationCheckTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new CheckDuration(this), DURATION_CHECK_INTERVAL, DURATION_CHECK_INTERVAL);
     	}
     }
@@ -129,7 +132,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 	public boolean doDie(L2Character killer)
     {
     	if (!super.doDie(killer))
-    		return false;
+		{
+			return false;
+		}
 
     	getAI().stopFollow();
     	_buffTask.cancel(true);
@@ -137,7 +142,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 
     	// clean up variables
     	if (_owner != null)
-    		_owner.setTrainedBeast(null);
+		{
+			_owner.setTrainedBeast(null);
+		}
     	_buffTask = null;
     	_durationCheckTask = null;
     	_owner = null;
@@ -171,12 +178,16 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     		{
 	    		// if the skill is a buff, check if the owner has it already [  owner.getEffect(L2Skill skill) ]
     			if (skill.getSkillType() == L2Skill.SkillType.BUFF)
-    				totalBuffsAvailable++;
+				{
+					totalBuffsAvailable++;
+				}
     		}
 
 	    	// start the buff tasks
     		if (_buffTask !=null)
-    			_buffTask.cancel(true);
+			{
+				_buffTask.cancel(true);
+			}
     		_buffTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new CheckOwnerBuffs(this, totalBuffsAvailable), BUFF_INTERVAL, BUFF_INTERVAL);
     	}
     	else
@@ -200,7 +211,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 
     	// clean up variables
     	if (_owner != null)
-    		_owner.setTrainedBeast(null);
+		{
+			_owner.setTrainedBeast(null);
+		}
     	setTarget(null);
     	_buffTask = null;
     	_durationCheckTask = null;
@@ -229,12 +242,11 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 			return;
 		}
 		// if the owner is dead, do nothing...
-		if (_owner.isDead())
-			return;
-
 		// if the tamed beast is currently in the middle of casting, let it complete its skill...
-		if(isCastingNow())
+		if(_owner.isDead() || isCastingNow())
+		{
 			return;
+		}
 
 		float HPRatio = ((float) _owner.getCurrentHp())/_owner.getMaxHp();
 
@@ -259,7 +271,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
 		{
 			int chance = 1;
 			if (HPRatio < 0.25 )
+			{
 				chance = 2;
+			}
 
 	    	// if the owner has a lot of HP, then debuff the enemy with a random debuff among the available skills
 			ConcurrentHashMap<Integer, L2Skill> skills = (ConcurrentHashMap<Integer, L2Skill>) getTemplate().getSkills();
@@ -316,7 +330,8 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     		_tamedBeast = tamedBeast;
     	}
 
-    	public void run()
+    	@Override
+		public void run()
     	{
     		int foodTypeSkillId = _tamedBeast.getFoodType();
     		L2PcInstance owner = _tamedBeast.getOwner();
@@ -327,9 +342,13 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     		// Find which food item needs to be consumed.
     		L2ItemInstance item = null;
     		if (foodTypeSkillId == 2188)
-    			item = owner.getInventory().getItemByItemId(6643);
-    		else if (foodTypeSkillId == 2189)
-    			item = owner.getInventory().getItemByItemId(6644);
+			{
+				item = owner.getInventory().getItemByItemId(6643);
+			}
+			else if (foodTypeSkillId == 2189)
+			{
+				item = owner.getInventory().getItemByItemId(6644);
+			}
 
     		// if the owner has enough food, call the item handler (use the food and triffer all necessary actions)
     		if (item != null && item.getCount() >= 1)
@@ -348,7 +367,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     			// if the owner has no food, the beast immediately despawns, except when it was only
     			// newly spawned.  Newly spawned beasts can last up to 5 minutes
     			if (_tamedBeast.getRemainingTime() < MAX_DURATION - 300000)
-    				_tamedBeast.setRemainingTime(-1);
+				{
+					_tamedBeast.setRemainingTime(-1);
+				}
     		}
 
     		/* There are too many conflicting reports about whether distance from home should
@@ -359,7 +380,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     		*/
 
     		if (_tamedBeast.getRemainingTime() <= 0)
-    			_tamedBeast.doDespawn();
+			{
+				_tamedBeast.doDespawn();
+			}
     	}
     }
 
@@ -374,7 +397,8 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     		_numBuffs = numBuffs;
     	}
 
-    	public void run()
+    	@Override
+		public void run()
     	{
     		L2PcInstance owner = _tamedBeast.getOwner();
 
@@ -391,11 +415,11 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     			return;
     		}
     		// if the owner is dead, do nothing...
-    		if (owner.isDead())
-    			return;
     		// if the tamed beast is currently casting a spell, do not interfere (do not attempt to cast anything new yet).
-    		if (isCastingNow())
-    			return;
+    		if (owner.isDead() || isCastingNow())
+			{
+				return;
+			}
 
     		int totalBuffsOnOwner = 0;
     		int i=0;
@@ -411,7 +435,9 @@ public final class L2TamedBeastInstance extends L2FeedableBeastInstance
     			if (skill.getSkillType() == L2Skill.SkillType.BUFF)
     			{
     				if (i==rand)
-    					buffToGive = skill;
+					{
+						buffToGive = skill;
+					}
     				i++;
     				if(owner.getFirstEffect(skill) != null)
     				{

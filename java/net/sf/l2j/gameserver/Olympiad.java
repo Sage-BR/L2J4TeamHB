@@ -64,9 +64,6 @@ import net.sf.l2j.util.L2ArrayList;
 import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class Olympiad
 {
@@ -1767,7 +1764,6 @@ public class Olympiad
 
     		String[] msg = new String[_olympiadInstances.size()];
     		int count = 0;
-    		int match = 1;
     		int showbattle = 0;
 
     		for (L2OlympiadGame instance : _olympiadInstances.values())
@@ -1775,7 +1771,6 @@ public class Olympiad
     			if (instance._gamestarted == true) { showbattle = 1; } else { showbattle = 0; }
     			msg[count] = "<"+showbattle+"><"+instance._stadiumID+"> In Progress " + instance.getTitle();
     			count++;
-    			match++;
     		}
 
     		return msg;
@@ -1849,11 +1844,6 @@ public class Olympiad
             	clearPlayers();
             	return;
             }
-    	}
-    	
-    	public boolean isAborted()
-    	{
-    	    return _aborted;
     	}
     	
         protected void clearPlayers()
@@ -2373,22 +2363,6 @@ public class Olympiad
      		}
      	}
 
-    	protected boolean makePlayersVisible()
-    	{
-            _sm = new SystemMessage(SystemMessageId.STARTS_THE_GAME);
-            try {
-            	for (L2PcInstance player : _players)
-            	{
-            		player.getAppearance().setVisible();
-            		player.broadcastUserInfo();
-            		player.sendPacket(_sm);
-            		if (player.getPet() != null)
-            			player.getPet().updateAbnormalEffect();
-            	}
-            } catch (NullPointerException e) { _aborted = true; return false; }
-            return true;
-    	}
-
     	protected boolean makeCompetitionStart()
     	{
     	    if (_aborted) return false;
@@ -2440,21 +2414,6 @@ public class Olympiad
         {
             if (_spectators != null && _spectators.contains(spec))
                 _spectators.remove(spec);
-        }
-        
-        protected void clearSpectators()
-        { 
-            if (_spectators != null)
-            {
-                for (L2PcInstance pc : _spectators)
-                {
-                    try {
-                    	if(!pc.inObserverMode()) continue;
-                    	pc.leaveOlympiadObserverMode();
-                    } catch (NullPointerException e) {}
-                }
-                _spectators.clear();
-            }
         }
         
         private void broadcastMessage(SystemMessage sm, boolean toAll)

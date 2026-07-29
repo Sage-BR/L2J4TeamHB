@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,7 +27,7 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
  */
 public class L2ControllableMobInstance extends L2MonsterInstance
 {
-	private boolean _isInvul;
+	private boolean _isControllableInvul;
 	private L2ControllableMobAI _aiBackup;	// to save ai, avoiding beeing detached
 
 	protected class ControllableAIAcessor extends AIAccessor
@@ -81,30 +81,38 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 	@Override
 	public boolean isInvul()
     {
-		return _isInvul;
+		return _isControllableInvul;
 	}
 
 	public void setInvul(boolean isInvul)
     {
-		_isInvul = isInvul;
+		_isControllableInvul = isInvul;
 	}
 
 	@Override
 	public void reduceCurrentHp(double i, L2Character attacker, boolean awake)
     {
 		if (isInvul() || isDead())
+		{
 			return;
+		}
 
 		if (awake)
+		{
 			stopSleeping(null);
-		
+		}
+
 		if (isImmobileUntilAttacked())
+		{
 			stopImmobileUntilAttacked(null);
+		}
 
 		i = getCurrentHp() - i;
 
 		if (i < 0)
+		{
 			i = 0;
+		}
 
 		setCurrentHp(i);
 
@@ -112,7 +120,10 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 		{
 			// first die (and calculate rewards), if currentHp < 0,
 			// then overhit may be calculated
-			if (Config.DEBUG) _log.fine("char is dead.");
+			if (Config.DEBUG)
+			{
+				_log.fine("char is dead.");
+			}
 
 			stopMove(null);
 
@@ -128,7 +139,9 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 	public boolean doDie(L2Character killer)
     {
 		if (!super.doDie(killer))
+		{
 			return false;
+		}
 
 		removeAI();
 		return true;

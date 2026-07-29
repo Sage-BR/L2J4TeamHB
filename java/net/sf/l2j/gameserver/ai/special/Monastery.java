@@ -124,7 +124,7 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 				{
 					final L2PlayableInstance target = (L2PlayableInstance) (obj instanceof L2PcInstance ? obj : ((L2Summon) obj).getOwner());
 					
-					if (target.getActiveWeaponInstance() == null || (target instanceof L2PcInstance && ((L2PcInstance) target).isSilentMoving()) || (target instanceof L2Summon && ((L2Summon) target).getOwner().isSilentMoving()))
+					if (target.getActiveWeaponInstance() == null || (target instanceof L2PcInstance player && player.isSilentMoving()) || (target instanceof L2Summon summon && summon.getOwner().isSilentMoving()))
 					{
 						continue;
 					}

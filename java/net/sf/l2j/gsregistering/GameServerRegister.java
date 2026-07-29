@@ -28,7 +28,6 @@ import net.sf.l2j.Server;
 import net.sf.l2j.gameserver.LoginServerThread;
 import net.sf.l2j.loginserver.GameServerTable;
 
-import java.util.List;
 
 public class GameServerRegister
 {

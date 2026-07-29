@@ -71,10 +71,10 @@ public class MysteryPotion implements IItemHandler
 		public void run()
 		{
 			try	{
-				if (!(_playable instanceof L2PcInstance))
+				if (!(_playable instanceof L2PcInstance player))
 					return;
 
-				((L2PcInstance)_playable).stopAbnormalEffect(BIGHEAD_EFFECT);
+				player.stopAbnormalEffect(BIGHEAD_EFFECT);
 			}
 			catch (Throwable t) {}
 		}

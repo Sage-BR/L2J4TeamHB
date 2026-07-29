@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.admincommandhandlers;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,8 +39,6 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 
-import java.util.List;
-import java.util.Set;
 /**
  * This class handles following admin commands:
  * - admin = shows menu
@@ -88,23 +85,18 @@ public class AdminEventEngine implements IAdminCommandHandler {
          else if (command.startsWith("admin_event_see"))
         {
             String eventName = command.substring(16);
-            try {
-                NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
+            try (FileInputStream fis = new FileInputStream("data/events/" + eventName);
+                 BufferedInputStream bis = new BufferedInputStream(fis);
+                 BufferedReader inbr = new BufferedReader(new InputStreamReader(bis)))
+                {
+                    StringBuilder replyMSG = new StringBuilder("<html><body>");
+                    replyMSG.append("<center><font color=\"LEVEL\">" + eventName + "</font><font color=\"FF0000\"> bY " + inbr.readLine() + "</font></center><br>");
 
-                DataInputStream in =
-                    new DataInputStream(
-                      new BufferedInputStream(
-                        new FileInputStream ("data/events/" + eventName)));
-                  BufferedReader inbr =
-                    new BufferedReader(new InputStreamReader(in));
-
-                StringBuilder replyMSG = new StringBuilder("<html><body>");
-                replyMSG.append("<center><font color=\"LEVEL\">" + eventName + "</font><font color=\"FF0000\"> bY " + inbr.readLine() + "</font></center><br>");
-
-                replyMSG.append("<br>" + inbr.readLine());
-                replyMSG.append("</body></html>");
-                adminReply.setHtml(replyMSG.toString());
-                activeChar.sendPacket(adminReply);
+                    replyMSG.append("<br>" + inbr.readLine());
+                    replyMSG.append("</body></html>");
+                    NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
+                    adminReply.setHtml(replyMSG.toString());
+                    activeChar.sendPacket(adminReply);
                 }
                 catch (Exception e) {
                     

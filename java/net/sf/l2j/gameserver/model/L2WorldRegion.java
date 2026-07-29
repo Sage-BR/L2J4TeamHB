@@ -34,7 +34,6 @@ import net.sf.l2j.gameserver.model.zone.type.L2PeaceZone;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  * This class ...

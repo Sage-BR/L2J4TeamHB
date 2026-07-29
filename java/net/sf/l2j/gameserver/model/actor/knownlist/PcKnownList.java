@@ -45,7 +45,6 @@ import net.sf.l2j.gameserver.serverpackets.SpawnItem;
 import net.sf.l2j.gameserver.serverpackets.StaticObject;
 import net.sf.l2j.gameserver.serverpackets.VehicleInfo;
 
-import java.util.List;
 
 public class PcKnownList extends PlayableKnownList
 {
@@ -266,7 +265,7 @@ public class PcKnownList extends PlayableKnownList
             if (!super.removeKnownObject(object)) return false;
         // Send Server-Client Packet DeleteObject to the L2PcInstance
         getActiveChar().sendPacket(new DeleteObject(object));
-       if (Config.CHECK_KNOWN && object instanceof L2NpcInstance) getActiveChar().sendMessage("Removed NPC: "+((L2NpcInstance)object).getName());
+	   if (Config.CHECK_KNOWN && object instanceof L2NpcInstance npc) getActiveChar().sendMessage("Removed NPC: "+npc.getName());
         return true;
     }
 

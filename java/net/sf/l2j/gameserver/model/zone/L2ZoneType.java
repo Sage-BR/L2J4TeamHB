@@ -24,7 +24,6 @@ import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Abstract base class for any zone type

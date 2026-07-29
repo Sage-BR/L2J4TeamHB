@@ -214,8 +214,6 @@ import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * This class represents all player characters in the world.
@@ -3403,6 +3401,13 @@ public final class L2PcInstance extends L2PlayableInstance
 	public void setClient(L2GameClient client)
 	{
 		_client = client;
+	}
+
+	public String getHWID()
+	{
+		if (getClient() == null || getClient().getHwidSession() == null)
+			return "";
+		return getClient().getHwidSession().getMac();
 	}
 
 	/**
@@ -7665,8 +7670,8 @@ public final class L2PcInstance extends L2PlayableInstance
 			return false;
 
 		// Check if the attacker is in olympia and olympia start
-		if (attacker instanceof L2PcInstance && ((L2PcInstance)attacker).isInOlympiadMode() ){
-			if (isInOlympiadMode() && isOlympiadStart() && ((L2PcInstance)attacker).getOlympiadGameId()==getOlympiadGameId())
+		if (attacker instanceof L2PcInstance attackerPlayer && attackerPlayer.isInOlympiadMode() ){
+			if (isInOlympiadMode() && isOlympiadStart() && attackerPlayer.getOlympiadGameId()==getOlympiadGameId())
 				return true;
 			else
 				return false;
@@ -7684,14 +7689,14 @@ public final class L2PcInstance extends L2PlayableInstance
 			return true;
 
 		// Check if the attacker is a L2PcInstance
-		if (attacker instanceof L2PcInstance)
+		if (attacker instanceof L2PcInstance attackerPlayer)
 		{
 			// is AutoAttackable if both players are in the same duel and the duel is still going on
 			if ( getDuelState() == Duel.DUELSTATE_DUELLING
-					&& getDuelId() == ((L2PcInstance)attacker).getDuelId() )
+					&& getDuelId() == attackerPlayer.getDuelId() )
 				return true;
 			// Check if the L2PcInstance is in an arena or a siege area
-			if (isInsideZone(ZONE_PVP) && ((L2PcInstance)attacker).isInsideZone(ZONE_PVP))
+			if (isInsideZone(ZONE_PVP) && attackerPlayer.isInsideZone(ZONE_PVP))
 				return true;
 
 			if (getClan() != null)
@@ -7700,21 +7705,21 @@ public final class L2PcInstance extends L2PlayableInstance
 				if (siege != null)
 				{
 					// Check if a siege is in progress and if attacker and the L2PcInstance aren't in the Defender clan
-					if (siege.checkIsDefender(((L2PcInstance)attacker).getClan()) &&
+					if (siege.checkIsDefender(attackerPlayer.getClan()) &&
 							siege.checkIsDefender(getClan()))
 						return false;
 
 					// Check if a siege is in progress and if attacker and the L2PcInstance aren't in the Attacker clan
-					if (siege.checkIsAttacker(((L2PcInstance)attacker).getClan()) &&
+					if (siege.checkIsAttacker(attackerPlayer.getClan()) &&
 							siege.checkIsAttacker(getClan()))
 						return false;
 				}
 
 				// Check if clan is at war
-				if (getClan() != null && ((L2PcInstance)attacker).getClan() != null
-				                           && (getClan().isAtWarWith(((L2PcInstance)attacker).getClanId())
+				if (getClan() != null && attackerPlayer.getClan() != null
+				                           && (getClan().isAtWarWith(attackerPlayer.getClanId())
 				                           && getWantsPeace() == 0
-				                           && ((L2PcInstance)attacker).getWantsPeace() == 0
+				                           && attackerPlayer.getWantsPeace() == 0
 				                           && !isAcademyMember()))
 				return true;
 			}
@@ -11059,12 +11064,10 @@ public final class L2PcInstance extends L2PlayableInstance
     private class JailTask implements Runnable
     {
         L2PcInstance _player;
-        protected long _startedAt;
 
         protected JailTask(L2PcInstance player)
         {
             _player = player;
-            _startedAt = System.currentTimeMillis();
         }
 
         public void run()

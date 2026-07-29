@@ -40,8 +40,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author FBIagent

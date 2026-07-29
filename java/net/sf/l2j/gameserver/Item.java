@@ -24,7 +24,6 @@ package net.sf.l2j.gameserver;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
-import java.util.Set;
 
 /**
  * This class ...
@@ -35,8 +34,7 @@ public class Item
 {
 	public int id;
 	
-	@SuppressWarnings("unchecked")
-    public Enum type;
+	public Enum<?> type;
 	
 	public String name;
 	

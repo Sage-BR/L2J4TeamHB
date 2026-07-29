@@ -21,7 +21,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
@@ -62,7 +61,6 @@ public class GeoEngine extends GeoData
     private final static byte _s = 4;
     private final static byte _n = 8;
 	private static Map<Short, MappedByteBuffer> _geodata = new ConcurrentHashMap<Short, MappedByteBuffer>();
-	private static Map<Short, IntBuffer> _geodataIndex = new ConcurrentHashMap<Short, IntBuffer>();
 	private static Map<Short, ABlock[]> _geoBlocks = new ConcurrentHashMap<Short, ABlock[]>();
 	private static BufferedOutputStream _geoBugsOut;
 
@@ -607,7 +605,6 @@ public class GeoEngine extends GeoData
 	private static void nInitGeodata()
 	{
 		int _geoLoadedCount = 0;
-		LineNumberReader lnr = null;
 		try
 		{
 			_log.info("Geo Engine: - Loading Geodata...");
@@ -619,22 +616,19 @@ public class GeoEngine extends GeoData
 				return;
 			}
 
-			lnr = new LineNumberReader(new BufferedReader(new FileReader(Data)));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load geo_index File.");
-		}
-		String line;
-		try
-		{
-			while ((line = lnr.readLine()) != null) {
-				if (line.trim().length() == 0)
-					continue;
-				StringTokenizer st = new StringTokenizer(line, "_");
-				byte rx = Byte.parseByte(st.nextToken());
-				byte ry = Byte.parseByte(st.nextToken());
-				if (loadGeodataFile(rx,ry))
-					_geoLoadedCount++;
+			try (LineNumberReader lnr = new LineNumberReader(new BufferedReader(new FileReader(Data))))
+			{
+				String line;
+				while ((line = lnr.readLine()) != null)
+				{
+					if (line.trim().length() == 0)
+						continue;
+					StringTokenizer st = new StringTokenizer(line, "_");
+					byte rx = Byte.parseByte(st.nextToken());
+					byte ry = Byte.parseByte(st.nextToken());
+					if (loadGeodataFile(rx,ry))
+						_geoLoadedCount++;
+				}
 			}
 			if (_geoLoadedCount == 0)
 			{
@@ -643,9 +637,11 @@ public class GeoEngine extends GeoData
 			}
 			else
 				_log.info("Geo Engine: - Loaded " + _geoLoadedCount + " geodata archives.");
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
-			throw new Error("Failed to Read geo_index File.");
+			throw new Error("Failed to Load geo_index File.");
 		}
 		try
 		{
@@ -682,9 +678,7 @@ public class GeoEngine extends GeoData
 		if (!Geo.exists())
 			return false;
 		int size, index = 0, block = 0, flor = 0;
-		try {
-	        // Create a read-only memory-mapped file
-	        FileChannel roChannel = new RandomAccessFile(Geo, "r").getChannel();
+		try (RandomAccessFile raf = new RandomAccessFile(Geo, "r"); FileChannel roChannel = raf.getChannel()) {
 			size = (int)roChannel.size();
 			MappedByteBuffer geo;
 			if (Config.FORCE_GEODATA) //Force O/S to Loads this buffer's content into physical memory.

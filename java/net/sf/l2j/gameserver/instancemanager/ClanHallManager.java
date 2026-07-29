@@ -26,7 +26,6 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  *

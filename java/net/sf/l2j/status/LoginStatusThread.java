@@ -31,7 +31,6 @@ import net.sf.l2j.loginserver.GameServerTable;
 import net.sf.l2j.loginserver.L2LoginServer;
 import net.sf.l2j.loginserver.LoginController;
 
-import java.util.List;
 
 public class LoginStatusThread extends Thread
 {

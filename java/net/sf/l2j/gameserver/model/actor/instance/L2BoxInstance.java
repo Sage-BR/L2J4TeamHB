@@ -64,10 +64,6 @@ public class L2BoxInstance extends L2NpcInstance {
 		public int count;
 		public int enchant;
 		public String name;
-		public L2BoxItem()
-		{
-			//
-		}
 		public L2BoxItem(int _itemid, int _count, String _name, int _id, int _enchant)
 		{
 			itemid = _itemid;
@@ -79,11 +75,11 @@ public class L2BoxInstance extends L2NpcInstance {
 		public int compareTo(L2BoxItem o)
 		{
 			int r = name.compareToIgnoreCase(o.name);
-			if (r != 0)
-				return r;
-			if (id < o.id)
-				return -1;
-			return 1;
+			if (r == 0)
+				r = Integer.compare(enchant, o.enchant);
+			if (r == 0)
+				r = Integer.compare(id, o.id);
+			return r;
 		}
 	}
 

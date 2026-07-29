@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.serverpackets.MyTargetSelected;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.Set;
 
 /**
  * This class manages all Castle Siege Artefacts.<BR><BR>

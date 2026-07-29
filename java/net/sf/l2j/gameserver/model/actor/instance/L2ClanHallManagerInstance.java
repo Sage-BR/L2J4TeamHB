@@ -35,8 +35,6 @@ import net.sf.l2j.gameserver.serverpackets.WareHouseDepositList;
 import net.sf.l2j.gameserver.serverpackets.WareHouseWithdrawalList;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.List;
-import java.util.Set;
 
 public class L2ClanHallManagerInstance extends L2MerchantInstance
 {

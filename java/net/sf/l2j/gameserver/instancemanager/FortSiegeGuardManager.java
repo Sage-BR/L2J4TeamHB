@@ -139,7 +139,6 @@ public class FortSiegeGuardManager {
     {
         try
         {
-            int     hiredCount  = 0;
             //hiredMax    = MercTicketManager.getInstance().getMaxAllowedMerc(_fort.getFortId());  
             boolean isHired     = (getFort().getOwnerId() > 0) ? true : false;
             loadSiegeGuard(); 
@@ -150,7 +149,6 @@ public class FortSiegeGuardManager {
                     spawn.init();
                     if (isHired)
                     {
-                        hiredCount++; 
                         //if (hiredCount > hiredMax)
                         //    return;
                     }

@@ -46,7 +46,6 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.FloodProtector;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.List;
 
 /**
  * This class ...
@@ -55,7 +54,7 @@ import java.util.List;
  */
 public final class L2VillageMasterInstance extends L2FolkInstance
 {
-    private static Logger _log = Logger.getLogger(L2VillageMasterInstance.class.getName());
+    private static Logger _villageMasterLog = Logger.getLogger(L2VillageMasterInstance.class.getName());
 
     /**
      * @param template
@@ -276,7 +275,7 @@ public final class L2VillageMasterInstance extends L2FolkInstance
                     
                     if (!FloodProtector.getInstance().tryPerformAction(player.getObjectId(), FloodProtector.PROTECTED_SUBCLASS))
                     {
-                    	_log.warning("Player "+player.getName()+" has performed a subclass change too fast");
+	                    	_villageMasterLog.warning("Player "+player.getName()+" has performed a subclass change too fast");
                     	return;
                     }
                     
@@ -422,7 +421,7 @@ public final class L2VillageMasterInstance extends L2FolkInstance
                 	
                 	if (!FloodProtector.getInstance().tryPerformAction(player.getObjectId(), FloodProtector.PROTECTED_SUBCLASS))
                     {
-                    	_log.warning("Player "+player.getName()+" has performed a subclass change too fast");
+	                    	_villageMasterLog.warning("Player "+player.getName()+" has performed a subclass change too fast");
                     	return;
                     }
                 	

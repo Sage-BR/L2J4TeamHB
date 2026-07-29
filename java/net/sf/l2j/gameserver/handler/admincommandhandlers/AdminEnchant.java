@@ -28,7 +28,6 @@ import net.sf.l2j.gameserver.serverpackets.InventoryUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 
-import java.util.Set;
 
 /**
  * This class handles following admin commands:

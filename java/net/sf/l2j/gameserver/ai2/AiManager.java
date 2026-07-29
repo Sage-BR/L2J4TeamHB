@@ -15,12 +15,10 @@
 package net.sf.l2j.gameserver.ai2;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.jar.JarFile;
 import java.util.logging.Logger;
 
 
@@ -70,8 +68,6 @@ public class AiManager
 		try
 		{
 			//TODO redo all the SpecificAiManger loading it's completely messed up:
-			@SuppressWarnings("unused")
-			JarFile jar = new JarFile("./l2jserver.jar");
 			URL url = Class.class.getResource("/net/sf/l2j/gameserver/ai/managers");
 			//jar.getJarEntry("/net/sf/l2j/gameserver/ai/managers").get;
 			if(url == null)
@@ -178,7 +174,7 @@ public class AiManager
 			}
 			}
 		}
-		catch (IOException e1)
+		catch (Exception e1)
 		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

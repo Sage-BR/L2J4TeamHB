@@ -24,7 +24,6 @@ import net.sf.l2j.gameserver.templates.L2WeaponType;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class ...

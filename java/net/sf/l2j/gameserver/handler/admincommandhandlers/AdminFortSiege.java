@@ -27,7 +27,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.List;
 
 /**
  * This class handles all siege commands:

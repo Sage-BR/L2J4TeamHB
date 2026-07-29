@@ -23,7 +23,6 @@ import net.sf.l2j.gameserver.serverpackets.ExManagePartyRoomMember;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author Gnacik

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,9 +42,13 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 		String pom = "";
 
 		if (val == 0)
+		{
 			pom = "" + npcId;
+		}
 		else
+		{
 			pom = npcId + "-" + val;
+		}
 
 		return "data/html/default/" + pom + ".htm";
 	}
@@ -68,9 +72,11 @@ public class L2TransformManagerInstance extends L2MerchantInstance
      * @param player
      */
     public void showTransformSkillList(L2PcInstance player)
-    {        
+    {
         if (player.isTransformed())
-        	return;
+		{
+			return;
+		}
 
         L2TransformSkillLearn[] skills = SkillTreeTable.getInstance().getAvailableTransformSkills(player);
         AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.skillType.Usual);
@@ -80,7 +86,9 @@ public class L2TransformManagerInstance extends L2MerchantInstance
         {
             L2Skill sk = SkillTable.getInstance().getInfo(s.getId(), s.getLevel());
             if (sk == null)
-                continue;
+			{
+				continue;
+			}
 
             counts++;
 

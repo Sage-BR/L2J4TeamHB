@@ -27,15 +27,13 @@ public class NpcBufferTable
 {
 	private class NpcBufferSkills
 	{
-		private int _npcId = 0;
 		private Map<Integer, Integer> _skillId = new ConcurrentHashMap<Integer, Integer>();
 		private Map<Integer, Integer> _skillLevels = new ConcurrentHashMap<Integer, Integer>();
 		private Map<Integer, Integer> _skillFeeIds = new ConcurrentHashMap<Integer, Integer>();
 		private Map<Integer, Integer> _skillFeeAmounts = new ConcurrentHashMap<Integer, Integer>();
 
-		public NpcBufferSkills(int npcId)
+		public NpcBufferSkills()
 		{
-			_npcId = npcId;
 		}
 
 		public void addSkill(int skillId, int skillLevel, int skillFeeId, int skillFeeAmount, int buffGroup)
@@ -59,10 +57,6 @@ public class NpcBufferTable
 			return new int[] {skillId, skillLevel, skillFeeId, skillFeeAmount};
 		}
 
-		public int getNpcId()
-		{
-			return _npcId;
-		}
 	}
 	
 	
@@ -98,7 +92,7 @@ public class NpcBufferTable
 					if (lastNpcId != 0)
 						_buffers.put(lastNpcId, skills);
 
-					skills = new NpcBufferSkills(npcId);
+					skills = new NpcBufferSkills();
 					skills.addSkill(skillId, skillLevel, skillFeeId, skillFeeAmount, buffGroup);
 				}
 				else

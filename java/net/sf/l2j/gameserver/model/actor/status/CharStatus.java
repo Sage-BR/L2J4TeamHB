@@ -36,7 +36,6 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.util.Rnd;
 
-import java.util.List;
 
 public class CharStatus
 {

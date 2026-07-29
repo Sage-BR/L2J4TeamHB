@@ -3,22 +3,21 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model;
 
+import java.util.ArrayList;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.util.Rnd;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -34,7 +33,7 @@ public class L2DropCategory
 	public L2DropCategory(int categoryType)
 	{
 		_categoryType = categoryType;
-		_drops = new ArrayList<L2DropData>(0);
+		_drops = new ArrayList<>(0);
 		_categoryChance = 0;
 		_categoryBalancedChance = 0;
 	}
@@ -42,13 +41,13 @@ public class L2DropCategory
 	public void addDropData(L2DropData drop, boolean raid)
 	{
         boolean found = false;
-        
+
 	    if (drop.isQuestDrop()) {
 	    //if (_questDrops == null)
 	    //	_questDrops = new ArrayList<L2DropData>(0);
 	    //_questDrops.add(drop);
-	    } 
-	    else 
+	    }
+	    else
 	    {
             if (Config.CUSTOM_DROPLIST_TABLE)
             {
@@ -73,7 +72,7 @@ public class L2DropCategory
                     }
                 }
             }
-	        
+
             if (!found)
             {
                 _drops.add(drop);
@@ -105,17 +104,25 @@ public class L2DropCategory
     public int getCategoryChance()
     {
     	if (getCategoryType() >= 0)
-    		return _categoryChance;
-    	else
-    		return L2DropData.MAX_CHANCE;
+		{
+			return _categoryChance;
+		}
+		else
+		{
+			return L2DropData.MAX_CHANCE;
+		}
     }
 
     public int getCategoryBalancedChance()
     {
     	if (getCategoryType() >= 0)
-    		return _categoryBalancedChance;
-    	else
-    		return L2DropData.MAX_CHANCE;
+		{
+			return _categoryBalancedChance;
+		}
+		else
+		{
+			return L2DropData.MAX_CHANCE;
+		}
     }
 
     public int getCategoryType()
@@ -136,7 +143,7 @@ public class L2DropCategory
      */
     public synchronized L2DropData dropSeedAllowedDropsOnly()
     {
-    	ArrayList<L2DropData> drops = new ArrayList<L2DropData>();
+    	ArrayList<L2DropData> drops = new ArrayList<>();
     	int subCatChance = 0;
     	for (L2DropData drop : getAllDrops())
         {
@@ -200,8 +207,10 @@ public class L2DropCategory
         {
         	sum += Math.min((drop.getChance()*(raid?Config.RATE_DROP_ITEMS_BY_RAID : Config.RATE_DROP_ITEMS)),L2DropData.MAX_CHANCE);
 
-        	if (sum >= randomIndex)       // drop this item and exit the function
-        		return drop;
+        	if (sum >= randomIndex)
+			{ // drop this item and exit the function
+				return drop;
+			}
         }
         return null;
     }

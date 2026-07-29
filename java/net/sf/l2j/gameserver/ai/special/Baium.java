@@ -49,7 +49,6 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
-import java.util.Set;
 
 /**
  * Baium AI Note1: if the server gets rebooted while players are still fighting Baium, there is no lock, but players also lose their ability to wake baium up. However, should another person enter the room and wake him up, the players who had stayed inside may join the raid. This can be helpful for
@@ -473,18 +472,18 @@ public class Baium extends Quest implements Runnable
 			 */
 			for (final L2Object obj : objs)
 			{
-				if (obj instanceof L2Character)
+				if (obj instanceof L2Character character)
 				{
-					if (((L2Character) obj).getZ() < npc.getZ() - 100 && ((L2Character) obj).getZ() > npc.getZ() + 100 || !GeoData.getInstance().canSeeTarget(obj, npc))
+					if (character.getZ() < npc.getZ() - 100 && character.getZ() > npc.getZ() + 100 || !GeoData.getInstance().canSeeTarget(obj, npc))
 					{
 						continue;
 					}
 				}
-				if (obj instanceof L2PcInstance)
+				if (obj instanceof L2PcInstance player)
 				{
-					if (Util.checkIfInRange(9000, npc, obj, true) && !((L2Character) obj).isDead())
+					if (Util.checkIfInRange(9000, npc, obj, true) && !player.isDead())
 					{
-						result.add((L2PcInstance) obj);
+						result.add(player);
 					}
 				}
 				if (obj instanceof L2Summon)

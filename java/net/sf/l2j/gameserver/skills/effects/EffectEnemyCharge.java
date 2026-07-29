@@ -25,7 +25,6 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.serverpackets.FlyToLocation.FlyType;
 import net.sf.l2j.gameserver.skills.Env;
 
-import java.util.Set;
 
 public class EffectEnemyCharge extends L2Effect
 {

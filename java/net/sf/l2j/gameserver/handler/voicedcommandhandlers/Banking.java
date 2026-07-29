@@ -28,6 +28,7 @@ public class Banking implements IVoicedCommandHandler
 {
 	private static String[] _voicedCommands = { "bank", "withdraw", "deposit" };
 
+	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar,
 	        String target)
 	{
@@ -66,6 +67,7 @@ public class Banking implements IVoicedCommandHandler
 		return true;
 	}
 
+	@Override
 	public String[] getVoicedCommandList()
 	{
 		return _voicedCommands;

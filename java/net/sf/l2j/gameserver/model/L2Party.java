@@ -14,6 +14,7 @@
  */
 package net.sf.l2j.gameserver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.l2j.Config;
@@ -45,9 +46,6 @@ import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoom;
 import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 import net.sf.l2j.util.Rnd;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class ...
@@ -693,14 +691,14 @@ public class L2Party {
                     {
                         long addexp = Math.round(member.calcStat(Stats.EXPSP_RATE, xpReward * preCalculation, null, null));
                         int addsp = (int)member.calcStat(Stats.EXPSP_RATE, spReward * preCalculation, null, null);
-                        if (target != null && member instanceof L2PcInstance)
+                        if (target != null && member instanceof L2PcInstance player)
                         {
-                            if (((L2PcInstance)member).getSkillLevel(467) > 0)
+                            if (player.getSkillLevel(467) > 0)
                             {
-                                L2Skill skill = SkillTable.getInstance().getInfo(467,((L2PcInstance)member).getSkillLevel(467));
+                                L2Skill skill = SkillTable.getInstance().getInfo(467, player.getSkillLevel(467));
                                 
                                 if (skill.getExpNeeded() <= addexp)
-                                    ((L2PcInstance)member).absorbSoul(skill,target);
+                                    player.absorbSoul(skill,target);
                             }
                         }
                         member.addExpAndSp(addexp,addsp);

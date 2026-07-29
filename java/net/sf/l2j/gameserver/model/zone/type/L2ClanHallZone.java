@@ -23,7 +23,6 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.serverpackets.AgitDecoInfo;
 
-import java.util.Set;
 
 /**
  * A clan hall zone
@@ -69,7 +68,7 @@ public class L2ClanHallZone extends L2ZoneType
 	@Override
 	protected void onEnter(L2Character character)
 	{
-		if (character instanceof L2PcInstance)
+		if (character instanceof L2PcInstance player)
 		{
 			// Set as in clan hall
 			character.setInsideZone(L2Character.ZONE_CLANHALL, true);
@@ -79,7 +78,7 @@ public class L2ClanHallZone extends L2ZoneType
 
 			// Send decoration packet
 			AgitDecoInfo deco = new AgitDecoInfo(clanHall);
-			((L2PcInstance)character).sendPacket(deco);
+			player.sendPacket(deco);
 
 		}
 	}
@@ -109,10 +108,10 @@ public class L2ClanHallZone extends L2ZoneType
 	{
 		for (L2Character temp : _characterList.values())
 		{
-			if (!(temp instanceof L2PcInstance)) continue;
-			if (((L2PcInstance)temp).getClanId() == owningClanId) continue;
+			if (!(temp instanceof L2PcInstance player)) continue;
+			if (player.getClanId() == owningClanId) continue;
 
-			((L2PcInstance)temp).teleToLocation(MapRegionTable.TeleportWhereType.Town);
+			player.teleToLocation(MapRegionTable.TeleportWhereType.Town);
 		}
 	}
 

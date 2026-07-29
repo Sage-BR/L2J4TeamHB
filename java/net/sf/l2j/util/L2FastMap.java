@@ -17,7 +17,6 @@ package net.sf.l2j.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *

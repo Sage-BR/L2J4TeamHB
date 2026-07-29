@@ -35,7 +35,6 @@ import net.sf.l2j.gameserver.serverpackets.ServerClose;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.util.Broadcast;
 
-import java.util.Set;
 
 /**
  *

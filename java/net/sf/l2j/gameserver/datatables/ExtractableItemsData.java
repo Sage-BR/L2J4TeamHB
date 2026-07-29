@@ -32,7 +32,6 @@ import net.sf.l2j.gameserver.model.L2ExtractableProductItem;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ExtractableItemsData
 {

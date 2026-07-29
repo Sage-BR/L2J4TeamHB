@@ -26,7 +26,6 @@ import net.sf.l2j.gameserver.serverpackets.FlyToLocation.FlyType;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.Set;
 
 /**
  * This class handles warp effects, disappear and quickly turn up in a near location. If geodata enabled and

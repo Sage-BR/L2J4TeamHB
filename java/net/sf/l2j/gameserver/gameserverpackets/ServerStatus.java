@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.gameserverpackets;
 import java.io.IOException;
 import java.util.Vector;
 
-import java.util.List;
 
 /**
  * @author -Wooden-

@@ -39,7 +39,6 @@ import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.Point3D;
 import net.sf.l2j.util.Rnd;
 
-import java.util.Set;
 
 public class CursedWeapon
 {

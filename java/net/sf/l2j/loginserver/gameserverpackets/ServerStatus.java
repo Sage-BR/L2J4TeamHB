@@ -20,7 +20,6 @@ import net.sf.l2j.loginserver.GameServerTable;
 import net.sf.l2j.loginserver.GameServerTable.GameServerInfo;
 import net.sf.l2j.loginserver.clientpackets.ClientBasePacket;
 
-import java.util.List;
 
 /**
  * @author -Wooden-

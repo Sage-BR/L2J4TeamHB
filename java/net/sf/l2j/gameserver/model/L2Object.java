@@ -27,8 +27,6 @@ import net.sf.l2j.gameserver.network.L2GameClient;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.GetItem;
 
-import java.util.Set;
-import java.util.Map;
 
 /**
  * Mother class of all objects in the world wich ones is it possible

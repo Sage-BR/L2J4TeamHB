@@ -31,7 +31,6 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
 
 /**
   * @author Kerberos

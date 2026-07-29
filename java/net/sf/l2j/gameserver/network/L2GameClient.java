@@ -32,6 +32,9 @@ import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.LoginServerThread.SessionKey;
 import net.sf.l2j.gameserver.communitybbs.Manager.RegionBBSManager;
 import net.sf.l2j.gameserver.datatables.SkillTable;
+import Guard.ConfigProtection;
+import Guard.crypt.GameCrypt;
+import Guard.hwidmanager.HwidSession;
 import net.sf.l2j.gameserver.model.CharSelectInfoPackage;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -43,7 +46,6 @@ import org.mmocore.network.MMOClient;
 import org.mmocore.network.MMOConnection;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Represents a client connected on Game Server
@@ -78,6 +80,9 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 
 	// Crypt
 	private GameCrypt _crypt;
+	private String _hwid;
+	private boolean _hwidAuthed = false;
+	private HwidSession _hwidSession;
 
 	// Flood protection
 	public byte packetsSentInSec = 0;
@@ -89,6 +94,8 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 		state = GameClientState.CONNECTED;
 		_connectionStartTime = System.currentTimeMillis();
         _crypt = new GameCrypt();
+        if (ConfigProtection.ALLOW_GUARD_SYSTEM)
+            _crypt.setProtected(true);
         
         if (Config.CHAR_STORE_INTERVAL > 0)
         {
@@ -124,6 +131,51 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 		return _connectionStartTime;
 	}
 
+	public void setGameGuardOk(boolean val)
+    {
+        _isAuthedGG = val;
+    }
+
+    public boolean isAuthedGG()
+    {
+        return _isAuthedGG;
+    }
+
+    public boolean isGameGuardOk()
+    {
+        return _isAuthedGG;
+    }
+
+    public void setHWID(String hwid)
+    {
+        _hwid = hwid;
+    }
+
+    public String getHWID()
+    {
+        return _hwid;
+    }
+
+    public void setHwidAuthed(boolean val)
+    {
+        _hwidAuthed = val;
+    }
+
+    public boolean isHwidAuthed()
+    {
+        return _hwidAuthed;
+    }
+
+    public void setHwidSession(HwidSession session)
+    {
+        _hwidSession = session;
+    }
+
+	public HwidSession getHwidSession()
+	{
+		return _hwidSession;
+	}
+	
 	@Override
 	public boolean decrypt(ByteBuffer buf, int size)
 	{
@@ -157,16 +209,6 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 	{
 		return _activeCharLock;
 	}
-
-	public void setGameGuardOk(boolean val)
-	{
-		_isAuthedGG = val;
-	}
-    
-    public boolean isAuthedGG()
-    {
-        return _isAuthedGG;
-    }
 
 	public void setAccountName(String pAccountName)
 	{
@@ -555,7 +597,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>>
 	            L2PcInstance player = L2GameClient.this.getActiveChar();
 				if (player != null)  // this should only happen on connection loss
 				{
-					dao.restartAndDisconnection(player);
+					saveCharToDisk(player);
 
 	                // we store all data from players who are disconnected while in an event in order to restore it in the next login
 	                if (player.atEvent)

@@ -34,7 +34,6 @@ import net.sf.l2j.gameserver.model.base.Experience;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.Set;
 
 public class AdminLevel implements IAdminCommandHandler
 {

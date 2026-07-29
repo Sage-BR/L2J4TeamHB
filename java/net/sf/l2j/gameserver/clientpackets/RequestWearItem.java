@@ -38,7 +38,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.Set;
 
 /**
  * This class ...

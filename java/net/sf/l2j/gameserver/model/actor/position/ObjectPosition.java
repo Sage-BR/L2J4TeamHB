@@ -24,8 +24,6 @@ import net.sf.l2j.gameserver.model.L2WorldRegion;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.util.Point3D;
 
-import java.util.Set;
-import java.util.Map;
 
 public class ObjectPosition
 {

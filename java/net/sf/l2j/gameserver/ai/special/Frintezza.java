@@ -49,7 +49,6 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Frintezza AI

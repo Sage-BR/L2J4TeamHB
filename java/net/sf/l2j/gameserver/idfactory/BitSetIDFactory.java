@@ -31,7 +31,6 @@ import java.util.logging.Logger;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.util.PrimeFinder;
 
-import java.util.Set;
 
 /**
  * This class ..

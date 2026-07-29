@@ -41,7 +41,6 @@ import net.sf.l2j.gameserver.serverpackets.NpcSay;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.Set;
 
 public final class L2CastleTeleporterInstance extends L2FolkInstance
 {

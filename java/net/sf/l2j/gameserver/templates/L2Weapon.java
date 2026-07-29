@@ -38,7 +38,6 @@ import net.sf.l2j.gameserver.skills.funcs.Func;
 import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class is dedicated to the management of weapons.

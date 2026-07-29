@@ -29,7 +29,6 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class manages the spawn and respawn of a group of L2NpcInstance that are in the same are and have the same type.

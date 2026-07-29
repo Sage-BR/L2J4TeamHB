@@ -27,7 +27,6 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.Rnd;
 
-import java.util.Set;
 
 /**
  * This class manages all RaidBoss.

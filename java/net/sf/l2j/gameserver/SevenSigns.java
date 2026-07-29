@@ -39,7 +39,6 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Broadcast;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  *  Seven Signs Engine

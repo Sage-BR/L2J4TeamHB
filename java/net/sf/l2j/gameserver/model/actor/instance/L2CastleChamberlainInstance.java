@@ -45,8 +45,6 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * Castle Chamberlains implementation used for: - tax rate control - regional

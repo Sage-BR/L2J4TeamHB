@@ -20,7 +20,6 @@ import java.util.NoSuchElementException;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2Object;
 
-import java.util.Set;
 
 /**
  * This class is a highly optimized hashtable, where

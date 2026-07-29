@@ -36,7 +36,6 @@ import net.sf.l2j.gameserver.model.entity.Fort;
 import net.sf.l2j.gameserver.model.zone.type.L2ArenaZone;
 import net.sf.l2j.gameserver.model.zone.type.L2ClanHallZone;
 
-import java.util.Map;
 
 /**
  * This class ...

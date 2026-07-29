@@ -34,7 +34,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.taskmanager.AttackStanceTaskManager;
 
 
-import java.util.List;
+
+import Guard.network.ProtectionManager;
 
 /**
  * This class ...
@@ -125,6 +126,7 @@ public final class RequestRestart extends L2GameClientPacket
         // detach the client from the char so that the connection isnt closed in the deleteMe
         player.setClient(null);
 
+        ProtectionManager.OffMessage(player);
         TvTEvent.onLogout(player);
         RegionBBSManager.getInstance().changeCommunityBoard();
 

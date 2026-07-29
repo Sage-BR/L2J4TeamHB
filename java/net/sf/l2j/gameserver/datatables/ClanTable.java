@@ -37,7 +37,6 @@ import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.Util;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  * This class ...

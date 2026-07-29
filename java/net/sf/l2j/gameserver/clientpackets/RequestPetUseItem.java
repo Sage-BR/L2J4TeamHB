@@ -28,7 +28,6 @@ import net.sf.l2j.gameserver.serverpackets.PetInfo;
 import net.sf.l2j.gameserver.serverpackets.PetItemList;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.List;
 
 public final class RequestPetUseItem extends L2GameClientPacket
 {

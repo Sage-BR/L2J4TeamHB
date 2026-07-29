@@ -23,8 +23,6 @@ import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class handles the admin commands that acts on the login

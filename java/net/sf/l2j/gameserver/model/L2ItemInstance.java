@@ -42,8 +42,6 @@ import net.sf.l2j.gameserver.templates.L2EtcItem;
 import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class manages items.
@@ -432,8 +430,7 @@ public final class L2ItemInstance extends L2Object
 	 * Returns the type of item
 	 * @return Enum
 	 */
-	@SuppressWarnings("unchecked")
-    public Enum getItemType()
+	public Enum<?> getItemType()
 	{
 		return _item.getItemType();
 	}

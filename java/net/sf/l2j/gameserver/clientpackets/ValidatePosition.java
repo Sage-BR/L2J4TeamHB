@@ -19,13 +19,11 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.TaskPriority;
-import net.sf.l2j.gameserver.Universe;
 import net.sf.l2j.gameserver.geoeditorcon.GeoEditorListener;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.PartyMemberPosition;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocationInVehicle;
-import net.sf.l2j.gameserver.model.L2Character;
 
 /**
  * This class ...

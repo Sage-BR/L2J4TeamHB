@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.base.Race;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author mkizub

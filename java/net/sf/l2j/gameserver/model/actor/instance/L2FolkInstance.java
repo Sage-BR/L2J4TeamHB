@@ -30,7 +30,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.ExEnchantSkillList.EnchantSkillType;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.List;
 
 public class L2FolkInstance extends L2NpcInstance
 {

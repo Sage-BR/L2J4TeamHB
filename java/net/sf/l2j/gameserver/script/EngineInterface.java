@@ -31,7 +31,6 @@ import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.L2World;
 
-import java.util.ArrayList;
 
 /**
  * @author Luis Arias

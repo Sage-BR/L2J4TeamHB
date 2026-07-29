@@ -22,7 +22,6 @@ import net.sf.l2j.gameserver.pathfinding.geonodes.GeoPathFinding;
 import net.sf.l2j.gameserver.pathfinding.utils.BinaryNodeHeap;
 import net.sf.l2j.gameserver.pathfinding.utils.FastNodeList;
 
-import java.util.Map;
 
 /**
  *
@@ -36,15 +35,8 @@ public abstract class PathFinding
 	{
 		if (_instance == null)
 		{
-			if (true /*Config.GEODATA_PATHFINDING*/)
-			{
-				//Smaler Memory Usage, Higher Cpu Usage (CalculatedOnTheFly)
-				return GeoPathFinding.getInstance();
-			}
-			else // WORLD_PATHFINDING
-			{
-				//Higher Memoru Usage, Lower Cpu Usage (PreCalculated)
-			}
+			//Smaler Memory Usage, Higher Cpu Usage (CalculatedOnTheFly)
+			_instance = GeoPathFinding.getInstance();
 		}
 		return _instance;
 	}

@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model;
 import java.util.List;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 
 /**

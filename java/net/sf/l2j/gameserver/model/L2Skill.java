@@ -66,7 +66,6 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class...
@@ -2971,10 +2970,14 @@ public abstract class L2Skill
                 if(target instanceof L2Summon)
                 {
                     L2Summon targetSummon = (L2Summon)target;
-                    if (activeChar instanceof L2PcInstance && activeChar.getPet() != targetSummon && !targetSummon.isDead()
-                            && (targetSummon.getOwner().getPvpFlag() != 0 || targetSummon.getOwner().getKarma() > 0)
-                            || (targetSummon.getOwner().isInsideZone(L2Character.ZONE_PVP) && ((L2PcInstance)activeChar).isInsideZone(L2Character.ZONE_PVP)))
-                       return new L2Character[]{targetSummon};
+                    if (activeChar instanceof L2PcInstance activePlayer)
+                    {
+                        if ((activePlayer.getPet() != targetSummon && !targetSummon.isDead()
+                                && (targetSummon.getOwner().getPvpFlag() != 0 || targetSummon.getOwner().getKarma() > 0))
+                                || (targetSummon.getOwner().isInsideZone(L2Character.ZONE_PVP)
+                                        && activePlayer.isInsideZone(L2Character.ZONE_PVP)))
+                            return new L2Character[]{targetSummon};
+                    }
                 }
                 return null;
             }

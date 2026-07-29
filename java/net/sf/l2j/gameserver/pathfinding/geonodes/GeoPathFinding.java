@@ -255,10 +255,9 @@ public class GeoPathFinding extends PathFinding
 		return new Node(new GeoNodeLoc(node_x,node_y,last_z), idx2);
 	}
 
-	private GeoPathFinding()
+private GeoPathFinding()
 	{
 		int _pnLoadedCount = 0;
-		LineNumberReader lnr = null;
 		try
 		{
 			_log.info("PathFinding Engine: - Loading Path Nodes...");
@@ -266,24 +265,21 @@ public class GeoPathFinding extends PathFinding
 			if (!Data.exists())
 				return;
 
-			lnr = new LineNumberReader(new BufferedReader(new FileReader(Data)));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load pn_index File.");
-		}
-		String line;
-		try
-		{
-			while ((line = lnr.readLine()) != null) {
-				if (line.trim().length() == 0)
-					continue;
-				StringTokenizer st = new StringTokenizer(line, "_");
-				byte rx = Byte.parseByte(st.nextToken());
-				byte ry = Byte.parseByte(st.nextToken());
-			if (LoadPathNodeFile(rx,ry))
-				_pnLoadedCount++;
-		}
-		if (_pnLoadedCount == 0)
+			try (LineNumberReader lnr = new LineNumberReader(new BufferedReader(new FileReader(Data))))
+			{
+				String line;
+				while ((line = lnr.readLine()) != null)
+				{
+					if (line.trim().length() == 0)
+						continue;
+					StringTokenizer st = new StringTokenizer(line, "_");
+					byte rx = Byte.parseByte(st.nextToken());
+					byte ry = Byte.parseByte(st.nextToken());
+					if (LoadPathNodeFile(rx,ry))
+						_pnLoadedCount++;
+				}
+			}
+			if (_pnLoadedCount == 0)
 		{
 			_log.info("PathFinding Engine: - No pathnode files found.");
 			if (Config.GEODATA == 2)
@@ -310,10 +306,8 @@ public class GeoPathFinding extends PathFinding
 		if (!Pn.exists())
 			return false;
 		int node = 0,size, index = 0;
-		try {
-	        // Create a read-only memory-mapped file
-	        FileChannel roChannel = new RandomAccessFile(Pn, "r").getChannel();
-			size = (int)roChannel.size();
+		try (RandomAccessFile raf = new RandomAccessFile(Pn, "r"); FileChannel roChannel = raf.getChannel()) {
+	        size = (int)roChannel.size();
 			MappedByteBuffer nodes;
 			if (Config.FORCE_GEODATA) //Force O/S to Loads this buffer's content into physical memory.
 				//it is not guarantee, because the underlying operating system may have paged out some of the buffer's data
@@ -334,7 +328,7 @@ public class GeoPathFinding extends PathFinding
 			_pathNodesIndex.put(regionoffset, indexs);
 			_pathNodes.put(regionoffset, nodes);
 			return true;
-		} catch (Exception e)
+	    } catch (Exception e)
 		{
 			e.printStackTrace();
 			_log.warning("Failed to Load PathNode File: "+fname+"\n");

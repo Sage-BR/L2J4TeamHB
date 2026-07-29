@@ -44,7 +44,6 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 public class Hero
 {

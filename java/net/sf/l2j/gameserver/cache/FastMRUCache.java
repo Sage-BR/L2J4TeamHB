@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FastMRUCache<K,V>
 {
-	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_CAPACITY = 50;
 	private static final int DEFAULT_FORGET_TIME = 300000;
 

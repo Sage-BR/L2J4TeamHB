@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 
-import java.util.Set;
 
 /**
  * extension loader for l2j

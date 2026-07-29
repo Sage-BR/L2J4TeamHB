@@ -25,8 +25,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import java.util.Map;
 
 /**

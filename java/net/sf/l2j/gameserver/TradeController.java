@@ -31,7 +31,6 @@ import net.sf.l2j.gameserver.model.L2TradeList.L2TradeItem;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class ...

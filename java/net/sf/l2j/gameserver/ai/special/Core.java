@@ -1,6 +1,6 @@
 /*
- * L2jFrozen Project - www.l2jfrozen.com 
- * 
+ * L2jFrozen Project - www.l2jfrozen.com
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -20,6 +20,7 @@
  */
 package net.sf.l2j.gameserver.ai.special;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.l2j.Config;
@@ -33,9 +34,6 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.Rnd;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Core AI
@@ -51,21 +49,21 @@ public class Core extends Quest implements Runnable
 	private static final int SUSCEPTOR = 29011;
 	// private static final int PERUM = 29012;
 	// private static final int PREMO = 29013;
-	
+
 	// CORE Status Tracking :
 	private static final byte ALIVE = 0; // Core is spawned.
 	private static final byte DEAD = 1; // Core has been killed.
-	
+
 	private static boolean _FirstAttacked;
-	
+
 	List<L2Attackable> Minions = new ArrayList<>();
-	
+
 	// private static final Logger LOGGER = Logger.getLogger(Core.class);
-	
+
 	public Core(final int id, final String name, final String descr)
 	{
 		super(id, name, descr);
-		
+
 		final int[] mobs =
 		{
 			CORE,
@@ -73,18 +71,18 @@ public class Core extends Quest implements Runnable
 			DOOM_WRAITH,
 			SUSCEPTOR
 		};
-		
+
 		for (final int mob : mobs)
 		{
 			addEventId(mob, Quest.QuestEventType.ON_KILL);
 			addEventId(mob, Quest.QuestEventType.ON_ATTACK);
 		}
-		
+
 		_FirstAttacked = false;
 		final StatsSet info = GrandBossManager.getInstance().getStatsSet(CORE);
-		
+
 		final Integer status = GrandBossManager.getInstance().getBossStatus(CORE);
-		
+
 		if (status == DEAD)
 		{
 			// load the unlock date and time for Core from DB
@@ -97,7 +95,7 @@ public class Core extends Quest implements Runnable
 			{
 				// the time has already expired while the server was offline. Immediately spawn Core.
 				final L2GrandBossInstance core = (L2GrandBossInstance) addSpawn(CORE, 17726, 108915, -6480, 0, false, 0);
-				
+
 				GrandBossManager.getInstance().setBossStatus(CORE, ALIVE);
 				spawnBoss(core);
 			}
@@ -114,36 +112,36 @@ public class Core extends Quest implements Runnable
 			 * addSpawn(CORE,loc_x,loc_y,loc_z,heading,false,0); core.setCurrentHpMp(hp,mp);
 			 */
 			final L2GrandBossInstance core = (L2GrandBossInstance) addSpawn(CORE, 17726, 108915, -6480, 0, false, 0);
-			
+
 			spawnBoss(core);
 		}
 	}
-	
+
 	@Override
 	public void saveGlobalData()
 	{
 		final String val = "" + _FirstAttacked;
 		saveGlobalQuestVar("Core_Attacked", val);
 	}
-	
+
 	@SuppressWarnings("unused")
 	@Override
 	public String onAdvEvent(final String event, final L2NpcInstance npc, final L2PcInstance player)
 	{
 		final Integer status = GrandBossManager.getInstance().getBossStatus(CORE);
-		
+
 		if (event.equalsIgnoreCase("core_unlock"))
 		{
 			final L2GrandBossInstance core = (L2GrandBossInstance) addSpawn(CORE, 17726, 108915, -6480, 0, false, 0);
-			
+
 			GrandBossManager.getInstance().setBossStatus(CORE, ALIVE);
 			spawnBoss(core);
 		}
 		else if (status == null)
 		{
-			
+
 			_log.warning("GrandBoss with Id " + CORE + " has not valid status into GrandBossManager");
-			
+
 		}
 		else if (event.equalsIgnoreCase("spawn_minion") && status == ALIVE)
 		{
@@ -151,9 +149,8 @@ public class Core extends Quest implements Runnable
 		}
 		else if (event.equalsIgnoreCase("despawn_minions"))
 		{
-			for (int i = 0; i < Minions.size(); i++)
+			for (final L2Attackable mob : Minions)
 			{
-				final L2Attackable mob = Minions.get(i);
 				if (mob != null)
 				{
 					mob.decayMe();
@@ -163,7 +160,7 @@ public class Core extends Quest implements Runnable
 		}
 		return super.onAdvEvent(event, npc, player);
 	}
-	
+
 	@Override
 	public String onAttack(final L2NpcInstance npc, final L2PcInstance attacker, final int damage, final boolean isPet)
 	{
@@ -185,7 +182,7 @@ public class Core extends Quest implements Runnable
 		}
 		return super.onAttack(npc, attacker, damage, isPet);
 	}
-	
+
 	@Override
 	public String onKill(final L2NpcInstance npc, final L2PcInstance killer, final boolean isPet)
 	{
@@ -199,10 +196,10 @@ public class Core extends Quest implements Runnable
 			npc.broadcastPacket(new CreatureSay(objId, 0, name, "System is being shut down..."));
 			npc.broadcastPacket(new CreatureSay(objId, 0, name, "......"));
 			_FirstAttacked = false;
-			
+
 			if (!npc.getSpawn().is_customBossInstance())
 			{
-				
+
 				addSpawn(31842, 16502, 110165, -6394, 0, false, 900000);
 				addSpawn(31842, 18948, 110166, -6397, 0, false, 900000);
 				GrandBossManager.getInstance().setBossStatus(CORE, DEAD);
@@ -214,25 +211,25 @@ public class Core extends Quest implements Runnable
 				info.set("respawn_time", (System.currentTimeMillis() + respawnTime));
 				GrandBossManager.getInstance().setStatsSet(CORE, info);
 				startQuestTimer("despawn_minions", 20000, null, null);
-				
+
 			}
-			
+
 		}
 		else
 		{
-			
+
 			final Integer status = GrandBossManager.getInstance().getBossStatus(CORE);
-			
+
 			if (status == ALIVE && Minions.contains(npc))
 			{
 				Minions.remove(npc);
 				startQuestTimer("spawn_minion", Config.CORE_RESP_MINION * 1000, npc, null);
 			}
 		}
-		
+
 		return super.onKill(npc, killer, isPet);
 	}
-	
+
 	public void spawnBoss(final L2GrandBossInstance npc)
 	{
 		GrandBossManager.getInstance().addBoss(npc);
@@ -252,7 +249,7 @@ public class Core extends Quest implements Runnable
 			Minions.add((L2Attackable) addSpawn(SUSCEPTOR, x, 110300, npc.getZ(), 280 + Rnd.get(40), false, 0));
 		}
 	}
-	
+
 	@Override
 	public void run()
 	{

@@ -37,7 +37,6 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MultiSellChoose extends L2GameClientPacket
 {

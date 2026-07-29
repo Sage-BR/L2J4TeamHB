@@ -29,7 +29,6 @@ import net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager;
 import net.sf.l2j.gameserver.model.L2Character;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Set;
 
 /**
  * This class ...

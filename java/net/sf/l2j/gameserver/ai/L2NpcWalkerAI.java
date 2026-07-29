@@ -3,16 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.ai;
+
+import java.util.ArrayList;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.ThreadPoolManager;
@@ -21,9 +23,6 @@ import net.sf.l2j.gameserver.model.L2CharPosition;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2NpcWalkerNode;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcWalkerInstance;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 {
@@ -58,7 +57,9 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 		super(accessor);
 
 		if(!Config.ALLOW_NPC_WALKERS)
+		{
 			return;
+		}
 
 		 _route = NpcWalkerRoutesTable.getInstance().getRouteForNpc(getActor().getNpcId());
 
@@ -67,6 +68,7 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(this, 1000, 1000);
 	}
 
+	@Override
 	public void run()
 	{
 		onEvtThink();
@@ -76,7 +78,9 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
     protected void onEvtThink()
 	{
 		if(!Config.ALLOW_NPC_WALKERS)
+		{
 			return;
+		}
 
 		if(isWalkingToNextPoint())
 		{
@@ -85,7 +89,9 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 		}
 
 		if(_nextMoveTime < System.currentTimeMillis())
+		{
 			walkToLocation();
+		}
 	}
 
 	/**
@@ -134,7 +140,9 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 			{
 				delay = DEFAULT_MOVE_DELAY;
 				if(Config.DEVELOPER)
+				{
 					_log.warning("Wrong Delay Set in Npc Walker Functions = " + delay + " secs, using default delay: " + DEFAULT_MOVE_DELAY + " secs instead.");
+				}
 			}
 
 			_nextMoveTime = System.currentTimeMillis() + delay;
@@ -145,9 +153,13 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 	private void walkToLocation()
 	{
 		if(_currentPos < (_route.size() - 1))
+		{
 			_currentPos++;
+		}
 		else
+		{
 			_currentPos = 0;
+		}
 
 		boolean moveType = _route.get(_currentPos).getRunning();
 
@@ -156,9 +168,13 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 		 * true - Running
 		 */
 		if(moveType)
+		{
 			getActor().setRunning();
+		}
 		else
+		{
 			getActor().setWalking();
+		}
 
 		//now we define destination
 		int destinationX = _route.get(_currentPos).getMoveX();
@@ -167,7 +183,7 @@ public class L2NpcWalkerAI extends L2CharacterAI implements Runnable
 
 		//notify AI of MOVE_TO
 		setWalkingToNextPoint(true);
-	
+
 		setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(destinationX, destinationY, destinationZ, 0));
 	}
 

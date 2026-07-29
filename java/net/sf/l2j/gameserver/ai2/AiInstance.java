@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,10 +17,9 @@ package net.sf.l2j.gameserver.ai2;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.l2j.gameserver.TaskPriority;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -35,19 +34,21 @@ public class AiInstance
 	public AiInstance(AiPlugingParameters params)
 	{
 		if(params.isConverted())
+		{
 			throw new IllegalArgumentException("AiPluginingParameters of an Ai instance must be converted");
+		}
 		_pluginigParams = params;
 		//TODO:update the params (bottom-up)
-		_eventHandlers = new ConcurrentHashMap<AiEventType,EventHandlerSet>();
+		_eventHandlers = new ConcurrentHashMap<>();
 		AiManager.getInstance().addAiInstance(this);
 	}
-	
+
 	public AiInstance(AiInstance instance, AiPlugingParameters params)
 	{
 		this(params);
 		this.copyHanlders(instance);
 	}
-	
+
 	public void copyHanlders(AiInstance instance)
 	{
 		//then copy all the hanlders from 'instance'
@@ -94,17 +95,20 @@ public class AiInstance
 			_event = event;
 		}
 
+		@Override
 		public void run()
 		{
 			for(EventHandler handler : _set.getHandlers())
+			{
 				handler.runImpl(_ai, _event);
+			}
 			AiInstance.this.launchNextEvent(_ai);
 		}
 	}
 
 	/**
 	 * @param _aiParams
-	 * 
+	 *
 	 */
 	public void launchNextEvent(AiParameters aiParams)
 	{
@@ -118,7 +122,9 @@ public class AiInstance
 	public void triggerEvent(AiEvent event, AiParameters aiParams)
 	{
 		if(aiParams.isEventInhibited(event.getType()))
+		{
 			return;
+		}
 		boolean restart = false;
 		synchronized(aiParams)
 		{
@@ -129,7 +135,9 @@ public class AiInstance
 			}
 			aiParams.queueEvents(event);
 			if(restart)
+			{
 				this.launchNextEvent(aiParams);
+			}
 		}
 	}
 

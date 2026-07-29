@@ -36,7 +36,6 @@ import org.w3c.dom.Node;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author mkizub

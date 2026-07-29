@@ -26,8 +26,6 @@ import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.util.L2ArrayList;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author DaRkRaGe

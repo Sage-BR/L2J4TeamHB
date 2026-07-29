@@ -40,7 +40,6 @@ import net.sf.l2j.gameserver.serverpackets.ChairSit;
 import net.sf.l2j.gameserver.serverpackets.RecipeShopManageList;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.Set;
 /**
  * This class ...
  *

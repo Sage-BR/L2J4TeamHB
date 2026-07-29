@@ -29,7 +29,6 @@ import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
-import java.util.List;
 
 /**
  * This class handles following admin commands:

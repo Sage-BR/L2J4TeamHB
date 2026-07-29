@@ -32,25 +32,25 @@ public class Recall implements ISkillHandler
 	//private static Logger _log = Logger.getLogger(Recall.class.getName());
 	private static final SkillType[] SKILL_IDS = {SkillType.RECALL};
 
- 	public void useSkill(@SuppressWarnings("unused") L2Character activeChar, @SuppressWarnings("unused") L2Skill skill, L2Object[] targets)
+	public void useSkill(@SuppressWarnings("unused") L2Character activeChar, @SuppressWarnings("unused") L2Skill skill, L2Object[] targets)
 	{
-        if (activeChar instanceof L2PcInstance)
+        if (activeChar instanceof L2PcInstance player)
         {
         	// Thanks nbd
-        	if (!TvTEvent.onEscapeUse(((L2PcInstance)activeChar).getObjectId()))
+        	if (!TvTEvent.onEscapeUse(player.getObjectId()))
         	{
-        		((L2PcInstance)activeChar).sendPacket(ActionFailed.STATIC_PACKET);
+        		player.sendPacket(ActionFailed.STATIC_PACKET);
         		return;
         	}
 
-            if (((L2PcInstance)activeChar).isInOlympiadMode())
+            if (player.isInOlympiadMode())
             {
-                ((L2PcInstance)activeChar).sendPacket(new SystemMessage(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT));
+                player.sendPacket(new SystemMessage(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT));
                 return;
             }
         }
 
-		try
+        try
         {
 			for (int index = 0; index < targets.length; index++)
 			{

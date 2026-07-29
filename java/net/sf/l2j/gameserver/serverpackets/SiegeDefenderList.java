@@ -22,7 +22,6 @@ import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2SiegeClan;
 import net.sf.l2j.gameserver.model.entity.Castle;
 
-import java.util.List;
 /**
  * Populates the Siege Defender List in the SiegeInfo Window<BR>
  * <BR>

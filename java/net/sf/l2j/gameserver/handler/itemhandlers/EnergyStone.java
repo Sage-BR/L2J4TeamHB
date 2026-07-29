@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.handler.itemhandlers;
 
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.handler.IItemHandler;
-import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;

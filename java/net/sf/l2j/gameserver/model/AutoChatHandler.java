@@ -34,7 +34,6 @@ import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Auto Chat Handler
@@ -585,11 +584,6 @@ public class AutoChatHandler implements SpawnListener
                 // If global chat isn't enabled for the parent instance,
                 // then handle the chat task locally.
                 if (!chatInst.isGlobal()) setActive(true);
-            }
-
-            protected AutoChatDefinition(AutoChatInstance chatInst, L2NpcInstance npcInst)
-            {
-                this(chatInst, npcInst, null, -1);
             }
 
             protected String[] getChatTexts()

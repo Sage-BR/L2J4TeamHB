@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.entity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -35,7 +34,6 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.EventData;
 
-import java.util.List;
 
 /**
  * This class ...
@@ -133,30 +131,24 @@ public class L2Event
 
     public static void showEventHtml(L2PcInstance player, String objectid)
     {
-        try
-        {
-            NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
+        try (FileInputStream fis = new FileInputStream("data/events/" + eventName);
+             BufferedInputStream bis = new BufferedInputStream(fis);
+             BufferedReader inbr = new BufferedReader(new InputStreamReader(bis)))
+            {
+                StringBuilder replyMSG = new StringBuilder("<html><body>");
+                replyMSG.append("<center><font color=\"LEVEL\">" + eventName
+                    + "</font><font color=\"FF0000\"> bY " + inbr.readLine() + "</font></center><br>");
 
-            DataInputStream in = new DataInputStream(
-                                                     new BufferedInputStream(
-                                                                             new FileInputStream(
-                                                                                                 "data/events/"
-                                                                                                     + eventName)));
-            BufferedReader inbr = new BufferedReader(new InputStreamReader(in));
+                replyMSG.append("<br>" + inbr.readLine());
+                if (L2Event.participatingPlayers.contains(player.getName())) replyMSG.append("<br><center>You are already in the event players list !!</center></body></html>");
+                else replyMSG.append("<br><center><button value=\"Participate !! \" action=\"bypass -h npc_"
+                    + objectid
+                    + "_event_participate\" width=90 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center></body></html>");
 
-            StringBuilder replyMSG = new StringBuilder("<html><body>");
-            replyMSG.append("<center><font color=\"LEVEL\">" + eventName
-                + "</font><font color=\"FF0000\"> bY " + inbr.readLine() + "</font></center><br>");
-
-            replyMSG.append("<br>" + inbr.readLine());
-            if (L2Event.participatingPlayers.contains(player.getName())) replyMSG.append("<br><center>You are already in the event players list !!</center></body></html>");
-            else replyMSG.append("<br><center><button value=\"Participate !! \" action=\"bypass -h npc_"
-                + objectid
-                + "_event_participate\" width=90 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center></body></html>");
-
-            adminReply.setHtml(replyMSG.toString());
-            player.sendPacket(adminReply);
-        }
+                NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
+                adminReply.setHtml(replyMSG.toString());
+                player.sendPacket(adminReply);
+            }
         catch (Exception e)
         {
             e.printStackTrace();

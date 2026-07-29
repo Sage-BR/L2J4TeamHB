@@ -42,7 +42,6 @@ public class GeoDataPatcher
     private static final int REGION_BLOCKS = REGION_BLOCKS_X * REGION_BLOCKS_Y;
     private static final int BLOCK_CELLS_X = 8;
     private static final int BLOCK_CELLS_Y = 8;
-    private static final int BLOCK_CELLS = BLOCK_CELLS_X * BLOCK_CELLS_Y;
     private static final int REGION_CELLS_X = REGION_BLOCKS_X * BLOCK_CELLS_X;
     private static final int REGION_CELLS_Y = REGION_BLOCKS_Y * BLOCK_CELLS_Y;
     

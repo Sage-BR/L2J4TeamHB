@@ -51,16 +51,17 @@ public class JarClassLoader extends ClassLoader {
     private byte[] loadClassData(String name) throws IOException {
     	byte[] classData = null;
     	for (String jarFile : _jars) {
-    		try {
-    			File file = new File(jarFile);
-    			ZipFile zipFile = new ZipFile(file);
+    		try (ZipFile zipFile = new ZipFile(new File(jarFile)))
+    		{
     			String fileName = name.replace('.', '/') + ".class";
     			ZipEntry entry = zipFile.getEntry(fileName);
     			if (entry == null)
     				continue;
     			classData = new byte[(int)entry.getSize()];
-    			DataInputStream zipStream = new DataInputStream(zipFile.getInputStream(entry));
-    			zipStream.readFully(classData, 0, (int) entry.getSize());
+    			try (DataInputStream zipStream = new DataInputStream(zipFile.getInputStream(entry)))
+    			{
+    				zipStream.readFully(classData, 0, (int) entry.getSize());
+    			}
     			break;
     		} catch (IOException e) {
     			_log.log(Level.WARNING, jarFile + ":" + e.toString(), e);

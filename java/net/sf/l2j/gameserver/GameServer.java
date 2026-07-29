@@ -123,6 +123,7 @@ import org.mmocore.network.SelectorConfig;
 import org.mmocore.network.SelectorThread;
 
 import Dev.SpecialMods.XMLDocumentFactory;
+import Guard.Protection;
 
 /**
  * This class ...
@@ -456,7 +457,7 @@ public class GameServer
 		if (Config.GEODATA > 0)
 		{
 			File geoDir = new File("./data/geodata/");
-			File[] files = geoDir.listFiles((d, name) -> name.endsWith(".l2j"));
+			File[] files = geoDir.listFiles((_, name) -> name.endsWith(".l2j"));
 			if (files != null)
 			{
 				for (File f : files)
@@ -563,6 +564,7 @@ public class GameServer
 		// Initialize config
 		Config.load();
 		L2DatabaseFactory.getInstance();
+		Protection.Init();
 		gameServer = new GameServer();
 
 		if ( Config.IS_TELNET_ENABLED ) {

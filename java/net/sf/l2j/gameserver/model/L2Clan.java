@@ -47,7 +47,6 @@ import net.sf.l2j.gameserver.util.Util;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class ...

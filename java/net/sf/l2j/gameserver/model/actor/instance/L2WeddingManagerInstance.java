@@ -31,7 +31,6 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.Set;
 
 public class L2WeddingManagerInstance extends L2NpcInstance
 {

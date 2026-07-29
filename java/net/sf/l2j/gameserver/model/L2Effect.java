@@ -34,7 +34,6 @@ import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
 import net.sf.l2j.gameserver.skills.funcs.Lambda;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * This class ...

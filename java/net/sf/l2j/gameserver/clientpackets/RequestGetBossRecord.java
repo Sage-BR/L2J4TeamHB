@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.instancemanager.RaidBossPointsManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ExGetBossRecord;
 
-import java.util.List;
 /**
  * Format: (ch) d
  * @author  -Wooden-

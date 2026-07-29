@@ -56,7 +56,6 @@ public final class RequestRestartPoint extends L2GameClientPacket
 			activeChar = _activeChar;
 		}
 
-		@SuppressWarnings("synthetic-access")
 		public void run()
 		{
 			Location loc = null;

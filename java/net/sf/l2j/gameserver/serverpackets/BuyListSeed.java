@@ -19,7 +19,6 @@ import java.util.Collection;
 import net.sf.l2j.gameserver.model.L2TradeList;
 import net.sf.l2j.gameserver.model.L2TradeList.L2TradeItem;
 
-import java.util.List;
 
 /**
  * Format: c ddh[hdddhhd]

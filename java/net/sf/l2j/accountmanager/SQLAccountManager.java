@@ -29,8 +29,6 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.Server;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class SQL Account Manager

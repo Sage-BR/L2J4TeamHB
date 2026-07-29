@@ -500,33 +500,33 @@ public class L2CubicInstance
    		   	for (L2Character tgMob : knownTarget)
    			{
    		   		// get the mobs which have aggro on the owner or his/her summon
-        		if (tgMob instanceof L2Attackable)
+				if (tgMob instanceof L2Attackable attackable)
 				{
-        			if (((L2Attackable)tgMob).isDead()) continue;
-        			if (((L2Attackable)tgMob).getAggroListRP().get(_owner) != null)
-        				potentialTarget.add(tgMob);
-        			if (_owner.getPet() != null)
-        				if (((L2Attackable)tgMob).getAggroListRP().get(_owner.getPet()) != null)
-        					potentialTarget.add(tgMob);
+					if (attackable.isDead()) continue;
+					if (attackable.getAggroListRP().get(_owner) != null)
+						potentialTarget.add(tgMob);
+					if (_owner.getPet() != null)
+						if (attackable.getAggroListRP().get(_owner.getPet()) != null)
+							potentialTarget.add(tgMob);
 				}
         		// get enemy pvp targets
         		else if ((_owner.getPvpFlag() > 0 && !_owner.isInsideZone(L2Character.ZONE_PEACE)) || _owner.isInsideZone(L2Character.ZONE_SIEGE) || _owner.isInsideZone(L2Character.ZONE_PVP))
 				{
         			enemy = null;
-					if (tgMob instanceof L2Summon)
+					if (tgMob instanceof L2Summon summon)
 					{
-						if (!((L2Summon)tgMob).isDead())
-							enemy = ((L2Summon)tgMob).getOwner();
+						if (!summon.isDead())
+							enemy = summon.getOwner();
 					}
-					else if (tgMob instanceof L2Trap)
+					else if (tgMob instanceof L2Trap trap)
 					{
-						if (!((L2Trap)tgMob).isDead())
-							enemy = ((L2Trap)tgMob).getOwner();
+						if (!trap.isDead())
+							enemy = trap.getOwner();
 					}
-					else if (tgMob instanceof L2PcInstance)
+					else if (tgMob instanceof L2PcInstance player)
 					{
-						if (!((L2PcInstance)tgMob).isDead())
-							enemy = (L2PcInstance) tgMob;
+						if (!player.isDead())
+							enemy = player;
 					}
 			
 					if (enemy != null)

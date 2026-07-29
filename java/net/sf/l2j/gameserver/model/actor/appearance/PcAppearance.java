@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.model.actor.appearance;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.Set;
 
 public class PcAppearance
 {

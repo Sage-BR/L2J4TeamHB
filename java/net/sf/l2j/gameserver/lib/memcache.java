@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.lib;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import java.util.Set;
 
 @Deprecated
 public class memcache

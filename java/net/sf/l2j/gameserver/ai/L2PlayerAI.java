@@ -33,7 +33,6 @@ import net.sf.l2j.gameserver.model.L2Skill.SkillTargetType;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2StaticObjectInstance;
 
-import java.util.Set;
 
 public class L2PlayerAI extends L2CharacterAI
 {

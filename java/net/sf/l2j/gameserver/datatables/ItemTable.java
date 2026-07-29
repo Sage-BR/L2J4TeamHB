@@ -49,8 +49,6 @@ import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class ...
@@ -413,78 +411,6 @@ public class ItemTable
                 item.set.set("type2", L2Item.TYPE2_PET_STRIDER);
 
             item.set.set("bodypart", L2Item.SLOT_R_HAND);
-        }
-
-        return item;
-	}
-
-    /**
-     * Returns object Item from the record of the database
-     * @param rset : ResultSet designating a record of the [armor] table of database
-     * @return Item : object created from the database record
-	 * @throws SQLException
-     */
-    private Item readArmor(ResultSet rset) throws SQLException
-	{
-        Item item   = new Item();
-        item.set    = new StatsSet();
-        item.type   = _armorTypes.get(rset.getString("armor_type"));
-        item.id     = rset.getInt("item_id");
-        item.name   = rset.getString("name");
-
-        item.set.set("item_id", item.id);
-        item.set.set("name", item.name);
-        int bodypart = _slots.get(rset.getString("bodypart"));
-        item.set.set("bodypart", bodypart);
-        item.set.set("crystallizable", Boolean.valueOf(rset.getString("crystallizable")));
-        item.set.set("crystal_count", rset.getInt("crystal_count"));
-        item.set.set("sellable", Boolean.valueOf(rset.getString("sellable")));
-        item.set.set("dropable", Boolean.valueOf(rset.getString("dropable")));
-        item.set.set("destroyable", Boolean.valueOf(rset.getString("destroyable")));
-        item.set.set("tradeable", Boolean.valueOf(rset.getString("tradeable")));
-        item.set.set("skill", rset.getString("skill"));
-
-        if (bodypart == L2Item.SLOT_NECK ||
-                bodypart == L2Item.SLOT_HAIR ||
-                bodypart == L2Item.SLOT_HAIR2 ||
-                bodypart == L2Item.SLOT_HAIRALL ||
-            (bodypart & L2Item.SLOT_L_EAR) != 0 ||
-            (bodypart & L2Item.SLOT_L_FINGER) != 0)
-		{
-            item.set.set("type1", L2Item.TYPE1_WEAPON_RING_EARRING_NECKLACE);
-            item.set.set("type2", L2Item.TYPE2_ACCESSORY);
-		}
-        else
-        {
-            item.set.set("type1", L2Item.TYPE1_SHIELD_ARMOR);
-            item.set.set("type2", L2Item.TYPE2_SHIELD_ARMOR);
-		}
-
-        item.set.set("weight", rset.getInt("weight"));
-        item.set.set("material", _materials.get(rset.getString("material")));
-        item.set.set("crystal_type", _crystalTypes.get(rset.getString("crystal_type")));
-        item.set.set("avoid_modify", rset.getInt("avoid_modify"));
-        item.set.set("duration", rset.getInt("duration"));
-        item.set.set("p_def", rset.getInt("p_def"));
-        item.set.set("m_def", rset.getInt("m_def"));
-        item.set.set("mp_bonus", rset.getInt("mp_bonus"));
-        item.set.set("price", rset.getInt("price"));
-
-        if (item.type == L2ArmorType.PET)
-        {
-            item.set.set("type1", L2Item.TYPE1_SHIELD_ARMOR);
-            if (item.set.getInteger("bodypart") == L2Item.SLOT_WOLF)
-                item.set.set("type2", L2Item.TYPE2_PET_WOLF);
-            else if (item.set.getInteger("bodypart") == L2Item.SLOT_GREATWOLF)
-                item.set.set("type2", L2Item.TYPE2_PET_GREATWOLF);
-            else if (item.set.getInteger("bodypart") == L2Item.SLOT_HATCHLING)
-                item.set.set("type2", L2Item.TYPE2_PET_HATCHLING);
-            else if (item.set.getInteger("bodypart") == L2Item.SLOT_BABYPET)
-                item.set.set("type2", L2Item.TYPE2_PET_BABY);
-            else
-                item.set.set("type2", L2Item.TYPE2_PET_STRIDER);
-
-            item.set.set("bodypart", L2Item.SLOT_CHEST);
         }
 
         return item;

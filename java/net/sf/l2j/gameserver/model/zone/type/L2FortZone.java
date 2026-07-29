@@ -25,7 +25,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * A castle zone
@@ -79,8 +78,8 @@ public class L2FortZone extends L2ZoneType
 			character.setInsideZone(L2Character.ZONE_PVP, true);
 			character.setInsideZone(L2Character.ZONE_SIEGE, true);
 
-			if (character instanceof L2PcInstance)
-				((L2PcInstance)character).sendPacket(new SystemMessage(SystemMessageId.ENTERED_COMBAT_ZONE));
+			if (character instanceof L2PcInstance player)
+				player.sendPacket(new SystemMessage(SystemMessageId.ENTERED_COMBAT_ZONE));
 		}
 	}
 
@@ -92,13 +91,13 @@ public class L2FortZone extends L2ZoneType
 			character.setInsideZone(L2Character.ZONE_PVP, false);
 			character.setInsideZone(L2Character.ZONE_SIEGE, false);
 
-			if (character instanceof L2PcInstance)
+			if (character instanceof L2PcInstance player)
 			{
-				((L2PcInstance)character).sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
+				player.sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
 
 				// Set pvp flag
-				if (((L2PcInstance)character).getPvpFlag() == 0)
-					((L2PcInstance)character).startPvPFlag();
+				if (player.getPvpFlag() == 0)
+					player.startPvPFlag();
 			}
 		}
 		if (character instanceof L2SiegeSummonInstance)
@@ -135,8 +134,8 @@ public class L2FortZone extends L2ZoneType
 					character.setInsideZone(L2Character.ZONE_PVP, false);
 					character.setInsideZone(L2Character.ZONE_SIEGE, false);
 
-					if (character instanceof L2PcInstance)
-						((L2PcInstance)character).sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
+					if (character instanceof L2PcInstance player)
+						player.sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
 					if (character instanceof L2SiegeSummonInstance)
 					{
 						((L2SiegeSummonInstance)character).unSummon(((L2SiegeSummonInstance)character).getOwner());
@@ -155,10 +154,10 @@ public class L2FortZone extends L2ZoneType
 	{
 		for (L2Character temp : _characterList.values())
 		{
-			if(!(temp instanceof L2PcInstance)) continue;
-			if (((L2PcInstance)temp).getClanId() == owningClanId) continue;
+			if (!(temp instanceof L2PcInstance player)) continue;
+			if (player.getClanId() == owningClanId) continue;
 
-			((L2PcInstance)temp).teleToLocation(MapRegionTable.TeleportWhereType.Town);
+			player.teleToLocation(MapRegionTable.TeleportWhereType.Town);
 		}
 	}
 
@@ -170,8 +169,8 @@ public class L2FortZone extends L2ZoneType
 	{
 		for (L2Character temp : _characterList.values())
 		{
-			if (temp instanceof L2PcInstance)
-				((L2PcInstance)temp).sendMessage(message);
+			if (temp instanceof L2PcInstance player)
+				player.sendMessage(message);
 		}
 	}
 
@@ -185,8 +184,8 @@ public class L2FortZone extends L2ZoneType
 
 		for (L2Character temp : _characterList.values())
 		{
-			if (temp instanceof L2PcInstance)
-				players.add((L2PcInstance)temp);
+			if (temp instanceof L2PcInstance player)
+				players.add(player);
 		}
 
 		return players;

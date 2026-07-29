@@ -38,7 +38,6 @@ import net.sf.l2j.gameserver.serverpackets.StaticObject;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.serverpackets.VehicleInfo;
 
-import java.util.List;
 
 public class RequestRecordInfo extends L2GameClientPacket
 {
@@ -53,7 +52,6 @@ public class RequestRecordInfo extends L2GameClientPacket
 		// trigger
 	}
 
-	@SuppressWarnings("cast")
     @Override
 	protected void runImpl()
 	{

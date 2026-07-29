@@ -46,8 +46,6 @@ import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author Luis Arias

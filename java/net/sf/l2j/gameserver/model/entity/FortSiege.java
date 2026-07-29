@@ -49,7 +49,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class FortSiege
 {

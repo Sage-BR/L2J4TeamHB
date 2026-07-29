@@ -36,7 +36,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.util.Rnd;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Class For Castle Manor Manager Load manor data from DB Update/Reload/Delete

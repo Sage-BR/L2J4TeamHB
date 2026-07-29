@@ -53,8 +53,6 @@ import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
-import java.util.List;
-import java.util.Set;
 
 public abstract class L2Summon extends L2PlayableInstance
 {
@@ -359,14 +357,14 @@ public abstract class L2Summon extends L2PlayableInstance
 			for (L2Character TgMob : KnownTarget)
 			{
 				// get the mobs which have aggro on the this instance
-				if (TgMob instanceof L2Attackable)
+				if (TgMob instanceof L2Attackable attackable)
 				{
-					if (((L2Attackable) TgMob).isDead())
+					if (attackable.isDead())
 						continue;
 					
-					AggroInfo info = ((L2Attackable) TgMob).getAggroListRP().get(this);
+					AggroInfo info = attackable.getAggroListRP().get(this);
 					if (info != null)
-						((L2Attackable) TgMob).addDamageHate(owner, info._damage, info._hate);
+						attackable.addDamageHate(owner, info._damage, info._hate);
 				}
 			}
 		}

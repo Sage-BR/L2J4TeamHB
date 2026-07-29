@@ -49,7 +49,6 @@ import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class ...

@@ -20,7 +20,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PlayableInstance;
 import net.sf.l2j.gameserver.serverpackets.ShowMiniMap;
 
-import java.util.Map;
 
 /**
  * This class provides handling for items that should display a map 

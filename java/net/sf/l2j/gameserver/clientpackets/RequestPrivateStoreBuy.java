@@ -28,7 +28,6 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.List;
 
 /**
  * This class ...

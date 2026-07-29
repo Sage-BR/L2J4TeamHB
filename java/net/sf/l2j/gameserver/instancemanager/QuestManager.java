@@ -3,24 +3,23 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.instancemanager;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.model.quest.Quest;
 import net.sf.l2j.gameserver.scripting.ScriptManager;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 public class QuestManager extends ScriptManager<Quest>
 {
@@ -41,7 +40,7 @@ public class QuestManager extends ScriptManager<Quest>
 
     // =========================================================
     // Data Field
-    private Map<String, Quest> _quests = new ConcurrentHashMap<String, Quest>();
+    private Map<String, Quest> _quests = new ConcurrentHashMap<>();
 
     // =========================================================
     // Constructor
@@ -60,7 +59,7 @@ public class QuestManager extends ScriptManager<Quest>
     	}
     	return q.reload();
     }
-    
+
     /**
      * Reloads a the quest given by questId.<BR>
      * <B>NOTICE: Will only work if the quest name is equal the quest folder name</B>
@@ -76,12 +75,12 @@ public class QuestManager extends ScriptManager<Quest>
     	}
     	return q.reload();
     }
-    
+
     public final void report()
     {
         _log.info("Loaded: " + getQuests().size() + " quests");
     }
-    
+
     public final void save()
     {
     	for (Quest q: getQuests().values())
@@ -102,11 +101,13 @@ public class QuestManager extends ScriptManager<Quest>
     	for (Quest q: getQuests().values())
     	{
     		if (q.getQuestIntId() == questId)
-    			return q;
+			{
+				return q;
+			}
     	}
     	return null;
     }
-    
+
 
     public final void addQuest(Quest newQuest)
     {
@@ -115,33 +116,36 @@ public class QuestManager extends ScriptManager<Quest>
             throw new IllegalArgumentException("Quest argument cannot be null");
         }
     	Quest old = this.getQuests().get(newQuest.getName());
-        
+
         // FIXME: unloading the old quest at this point is a tad too late.
         // the new quest has already initialized itself and read the data, starting
         // an unpredictable number of tasks with that data.  The old quest will now
         // save data which will never be read.
-        // However, requesting the newQuest to re-read the data is not necessarily a 
+        // However, requesting the newQuest to re-read the data is not necessarily a
         // good option, since the newQuest may have already started timers, spawned NPCs
-        // or taken any other action which it might re-take by re-reading the data. 
+        // or taken any other action which it might re-take by re-reading the data.
         // the current solution properly closes the running tasks of the old quest but
         // ignores the data; perhaps the least of all evils...
         if (old != null)
         {
             old.unload();
             _log.info("Replaced: ("+old.getName()+") with a new version ("+newQuest.getName()+")");
-            
+
         }
         this.getQuests().put(newQuest.getName(), newQuest);
     }
-    
+
     public final boolean removeQuest(Quest q)
     {
         return this.getQuests().remove(q.getName()) != null;
     }
-    
+
     public final ConcurrentHashMap<String, Quest> getQuests()
     {
-        if (_quests == null) _quests = new ConcurrentHashMap<String, Quest>();
+        if (_quests == null)
+		{
+			_quests = new ConcurrentHashMap<>();
+		}
         return (ConcurrentHashMap<String, Quest>) _quests;
     }
 

@@ -58,7 +58,6 @@ import net.sf.l2j.util.Util;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class LoginServerThread extends Thread
 {

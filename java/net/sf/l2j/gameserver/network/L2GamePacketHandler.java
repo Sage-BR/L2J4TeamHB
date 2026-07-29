@@ -15,7 +15,6 @@
 package net.sf.l2j.gameserver.network;
 
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Logger;
 
@@ -31,8 +30,6 @@ import org.mmocore.network.IPacketHandler;
 import org.mmocore.network.MMOConnection;
 import org.mmocore.network.ReceivablePacket;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * Stateful Packet Handler<BR>

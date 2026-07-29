@@ -30,7 +30,6 @@ import net.sf.l2j.gameserver.skills.Stats;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This cl contains all generic data of a L2Spawn object.<BR><BR>

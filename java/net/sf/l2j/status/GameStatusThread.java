@@ -78,8 +78,6 @@ import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.util.DynamicExtension;
 
-import java.util.List;
-import java.util.Set;
 
 public class GameStatusThread extends Thread
 {
@@ -199,7 +197,6 @@ public class GameStatusThread extends Thread
     }
 
     @Override
-	@SuppressWarnings("deprecation")
     public void run()
     {
         String _usrCommand = "";
@@ -1023,7 +1020,6 @@ public class GameStatusThread extends Thread
         return format.format(cal.getTime());
     }
     
-    @SuppressWarnings("deprecation")
     public String getServerStatus()
     {
         int playerCount = 0, objectCount = 0;
@@ -1044,7 +1040,7 @@ public class GameStatusThread extends Thread
         int summonCount=0;
         int AICount=0;
 
-        Collection<L2Object> objs = L2World.getInstance().getAllVisibleObjects().values();
+        Collection<L2Object> objs = L2World.getInstance().getObjects();
         //synchronized (L2World.getInstance().getAllVisibleObjects())
         {
         	for (L2Object obj : objs)

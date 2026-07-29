@@ -30,7 +30,6 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author mkizub

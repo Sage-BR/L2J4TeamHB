@@ -52,7 +52,6 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Siege
 {

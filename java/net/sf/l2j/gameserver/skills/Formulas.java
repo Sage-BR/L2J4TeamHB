@@ -49,7 +49,6 @@ import net.sf.l2j.gameserver.templates.L2WeaponType;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
-import java.util.Set;
 
 /**
  * Global calculations, can be modified by server admins
@@ -1541,9 +1540,9 @@ public final class Formulas
 	/** Returns true in case when ATTACK is canceled due to hit */
 	public final boolean calcAtkBreak(L2Character target, double dmg)
 	{
-	    if (target instanceof L2PcInstance)
+	    if (target instanceof L2PcInstance player)
         {
-            if (((L2PcInstance)target).getForceBuff() != null)
+            if (player.getForceBuff() != null)
                 return true;
         }
 	    

@@ -41,7 +41,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2SiegeGuardInstance;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
-import java.util.Set;
 
 /**
  * This class manages AI of L2Attackable.<BR><BR>
@@ -84,7 +83,7 @@ public class L2SiegeGuardAI extends L2CharacterAI implements Runnable
         _selfAnalysis.init();
         _attackTimeout = Integer.MAX_VALUE;
         _globalAggro = -10; // 10 seconds timeout of ATTACK after respawn
-        _attackRange = ((L2Attackable) _actor).getPhysicalAttackRange();
+		_attackRange = _actor.getPhysicalAttackRange();
     }
 
     public void run()

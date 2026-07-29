@@ -136,8 +136,7 @@ public class L2WarehouseItem
      * Returns the second type
      * @return int
      */
-    @SuppressWarnings("unchecked")
-    public final Enum getItemType()
+    public final Enum<?> getItemType()
     {
         return _item.getItemType();
     }

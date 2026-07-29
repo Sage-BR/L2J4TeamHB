@@ -23,7 +23,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 import net.sf.l2j.gameserver.pathfinding.geonodes.GeoPathFinding;
 
-import java.util.Map;
 
 public class AdminPathNode implements IAdminCommandHandler
 {

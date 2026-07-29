@@ -22,8 +22,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2DoorInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.entity.Castle;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.Map;
 
 /**
  * This class handles following admin commands:

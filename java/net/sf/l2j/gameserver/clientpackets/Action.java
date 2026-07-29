@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -56,21 +56,33 @@ public final class Action extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (Config.DEBUG) _log.fine("Action:" + _actionId);
-		if (Config.DEBUG) _log.fine("oid:" + _objectId);
+		if (Config.DEBUG)
+		{
+			_log.fine("Action:" + _actionId);
+		}
+		if (Config.DEBUG)
+		{
+			_log.fine("oid:" + _objectId);
+		}
 
 		// Get the current L2PcInstance of the player
 		L2PcInstance activeChar = getClient().getActiveChar();
 
 		if (activeChar == null)
+		{
 			return;
+		}
 
 		L2Object obj;
 
 		if (activeChar.getTargetId() == _objectId)
+		{
 			obj = activeChar.getTarget();
+		}
 		else
+		{
 			obj = L2World.getInstance().findObject(_objectId);
+		}
 
 		// If object requested does not exist, add warn msg into logs
 		if (obj == null)
@@ -91,9 +103,13 @@ public final class Action extends L2GameClientPacket
 					break;
 				case 1:
 					if (obj instanceof L2Character && ((L2Character)obj).isAlikeDead())
+					{
 						obj.onAction(activeChar);
+					}
 					else
+					{
 						obj.onActionShift(getClient());
+					}
 					break;
 				default:
 					// Ivalid action detected (probably client cheating), log this
@@ -103,8 +119,10 @@ public final class Action extends L2GameClientPacket
 			}
 		}
 		else
+		{ // Actions prohibited when in trade
 			// Actions prohibited when in trade
-			getClient().sendPacket(ActionFailed.STATIC_PACKET);
+						getClient().sendPacket(ActionFailed.STATIC_PACKET);
+		}
 	}
 
 	/* (non-Javadoc)

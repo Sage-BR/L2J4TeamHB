@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -301,10 +300,6 @@ public class ThreadPoolManager
 			return t;
 		}
 
-		public ThreadGroup getGroup()
-		{
-			return _group;
-		}
     }
 
 	public void shutdown()

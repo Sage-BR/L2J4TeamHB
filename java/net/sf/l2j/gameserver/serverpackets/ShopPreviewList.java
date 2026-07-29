@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.model.L2TradeList;
 import net.sf.l2j.gameserver.model.L2TradeList.L2TradeItem;
 import net.sf.l2j.gameserver.templates.L2Item;
 
-import java.util.List;
 
 public class ShopPreviewList extends L2GameServerPacket
 {

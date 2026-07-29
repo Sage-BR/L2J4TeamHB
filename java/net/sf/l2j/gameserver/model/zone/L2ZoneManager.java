@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.model.zone;
 import net.sf.l2j.gameserver.model.L2Character;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class manages all zones for a given world region

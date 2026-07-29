@@ -36,7 +36,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 
-import java.util.List;
 
 /**
  * This class handles following admin commands: - show_spawns = shows menu -

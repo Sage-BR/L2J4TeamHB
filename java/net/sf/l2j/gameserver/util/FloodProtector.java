@@ -3,24 +3,22 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.util;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Flood protector
@@ -65,7 +63,7 @@ public class FloodProtector
 	private FloodProtector()
 	{
 		_log.info("Initializing FloodProtector");
-		_floodClient = new ConcurrentHashMap<Integer, Integer[]>(Config.FLOODPROTECTOR_INITIALSIZE);
+		_floodClient = new ConcurrentHashMap<>(Config.FLOODPROTECTOR_INITIALSIZE);
 	}
 
 	/**
@@ -78,7 +76,9 @@ public class FloodProtector
 		// create a new array
 		Integer[] array = new Integer[REUSEDELAY.length];
 		for (int i=0; i<array.length; i++)
+		{
 			array[i] = 0;
+		}
 
 		// register the player with an empty array
 		_floodClient.put(playerObjId, array);
@@ -113,7 +113,10 @@ public class FloodProtector
 	public boolean tryPerformAction(int playerObjId, int action)
 	{
 		Integer[] value = _floodClient.get(playerObjId);
-		if (value == null) return false;
+		if (value == null)
+		{
+			return false;
+		}
 
 		if (value[action] < GameTimeController.getGameTicks())
 		{

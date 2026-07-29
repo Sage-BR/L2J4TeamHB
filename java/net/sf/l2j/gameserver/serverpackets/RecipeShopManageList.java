@@ -19,7 +19,6 @@ import net.sf.l2j.gameserver.model.L2ManufactureList;
 import net.sf.l2j.gameserver.model.L2RecipeList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.List;
 
 /**
  * dd d(dd) d(ddd)

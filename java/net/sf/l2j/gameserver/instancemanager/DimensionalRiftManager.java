@@ -248,7 +248,7 @@ public class DimensionalRiftManager
     {
         for(Byte b : _rooms.keySet())
         {
-            for(int i : _rooms.get(b).keySet())
+            for(Byte i : _rooms.get(b).keySet())
             {
                 _rooms.get(b).get(i).getSpawns().clear();
             }

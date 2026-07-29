@@ -28,7 +28,6 @@ import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.network.L2GameClient;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class ...

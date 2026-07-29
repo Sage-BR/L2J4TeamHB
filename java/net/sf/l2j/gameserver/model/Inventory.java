@@ -36,7 +36,6 @@ import net.sf.l2j.gameserver.templates.L2Weapon;
 import net.sf.l2j.gameserver.templates.L2WeaponType;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class manages inventory

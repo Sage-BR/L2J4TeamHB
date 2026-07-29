@@ -16,7 +16,6 @@ package net.sf.l2j.loginserver.crypt;
 
 import java.io.IOException;
 
-import java.util.Set;
 
 /**
  * This file is based on the Blowfish Engine that is part of

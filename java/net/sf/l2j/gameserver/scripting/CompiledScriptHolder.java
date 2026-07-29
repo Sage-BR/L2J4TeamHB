@@ -25,7 +25,6 @@ import java.io.Serializable;
 
 import javax.script.CompiledScript;
 
-import java.util.Set;
 
 /**
  * @author KenM

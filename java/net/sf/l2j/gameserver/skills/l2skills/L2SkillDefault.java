@@ -20,7 +20,6 @@ import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
-import java.util.Set;
 
 public class L2SkillDefault extends L2Skill {
 

@@ -182,7 +182,7 @@ public class BlockMultilayer extends ABlock
 		
 		// Find nearest layer without allocating arrays, reading from buffer
 		int nearestAddr = addr;
-		int nearestDist = Math.abs((int)decodeHeight(_geo.getShort(addr) & 0xFFFF) - z);
+		int nearestDist = Math.abs(decodeHeight(_geo.getShort(addr) & 0xFFFF) - z);
 		
 		for (int i = 1; i < layers; i++)
 		{

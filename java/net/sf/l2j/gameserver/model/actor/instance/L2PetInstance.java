@@ -54,7 +54,6 @@ import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.L2Weapon;
 
-import java.util.Set;
 
 /**
  *

@@ -37,7 +37,6 @@ import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Auto Spawn Handler

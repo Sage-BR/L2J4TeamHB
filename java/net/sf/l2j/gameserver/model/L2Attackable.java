@@ -60,7 +60,6 @@ import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class manages all NPC that can be attacked.<BR><BR>
@@ -538,7 +537,6 @@ public class L2Attackable extends L2NpcInstance
 
         	if (!getMustRewardExpSP()) return;
 
-        	int rewardCount = 0;
         	int damage;
         	L2Character attacker, ddealer;
         	RewardInfo reward;
@@ -576,7 +574,6 @@ public class L2Attackable extends L2NpcInstance
         				if (reward == null)
         				{
         					reward = new RewardInfo(ddealer, damage);
-        					rewardCount++;
         				}
         				else
         				{
@@ -667,14 +664,14 @@ public class L2Attackable extends L2NpcInstance
                             {
                                 long addexp = Math.round(attacker.calcStat(Stats.EXPSP_RATE, exp, null, null));
                                 int addsp = (int)attacker.calcStat(Stats.EXPSP_RATE, sp, null, null);
-                                if (attacker instanceof L2PcInstance)
+                                if (attacker instanceof L2PcInstance player)
                                 {
-                                    if (((L2PcInstance)attacker).getSkillLevel(467) > 0)
+                                    if (player.getSkillLevel(467) > 0)
                                     {
-                                        L2Skill skill = SkillTable.getInstance().getInfo(467,((L2PcInstance)attacker).getSkillLevel(467));
+                                        L2Skill skill = SkillTable.getInstance().getInfo(467, player.getSkillLevel(467));
                                         if (skill.getExpNeeded() <= addexp)
                                         {
-                                            ((L2PcInstance)attacker).absorbSoul(skill,this);
+                                            player.absorbSoul(skill,this);
                                         }
                                     }
                                 }

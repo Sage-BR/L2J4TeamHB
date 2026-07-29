@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import net.sf.l2j.gameserver.model.PartyMatchWaitingList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
-import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
 
 import java.util.ArrayList;
 

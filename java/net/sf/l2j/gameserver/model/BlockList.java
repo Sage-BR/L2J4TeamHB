@@ -31,7 +31,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * This class ...

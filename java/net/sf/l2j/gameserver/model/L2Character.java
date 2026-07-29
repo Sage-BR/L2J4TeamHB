@@ -114,7 +114,6 @@ import net.sf.l2j.util.Rnd;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 /**
  * Mother class of all character objects of the world (PC, NPC...)<BR><BR>
  *
@@ -4277,7 +4276,7 @@ public abstract class L2Character extends L2Object
             					// Too close to start and wrong Z — complete stop.
             					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
             					if (this instanceof L2PcInstance)
-            						((L2PcInstance)this).sendPacket(new ValidateLocation((L2Character)this));
+						((L2PcInstance)this).sendPacket(new ValidateLocation(this));
             					return;
             				}
             			}

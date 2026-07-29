@@ -73,10 +73,10 @@ import net.sf.l2j.gameserver.serverpackets.SkillCoolTime;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.util.FloodProtector;
+import Guard.hwidmanager.HWIDManager;
+import Guard.network.ProtectionManager;
 
 
-import java.util.List;
-import java.util.Map;
 /**
  * Enter World Packet Handler<p>
  * <p>
@@ -103,6 +103,13 @@ public class EnterWorld extends L2GameClientPacket
     protected void runImpl()
     {
         L2PcInstance activeChar = getClient().getActiveChar();
+
+        if (!getClient().isHwidAuthed())
+        {
+            _log.warning("HWID not validated for: " + getClient().getAccountName());
+            getClient().closeNow();
+            return;
+        }
 
         if (activeChar == null)
         {
@@ -185,6 +192,13 @@ public class EnterWorld extends L2GameClientPacket
         
         // Send gg check (even if we are not going to check for reply)
         activeChar.queryGameGuard();
+        ProtectionManager.SendSpecialSting(getClient());
+        
+        // Register HWID in database
+        if (getClient().getHWID() != null && !getClient().getHWID().isEmpty())
+        {
+        	HWIDManager.updateHWIDInfo(getClient());
+        }
         
         // Send Shortcuts
         sendPacket(new ShortCutInit(activeChar));

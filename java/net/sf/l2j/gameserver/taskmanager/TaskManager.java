@@ -44,7 +44,6 @@ import net.sf.l2j.gameserver.taskmanager.tasks.TaskShutdown;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * @author Layane

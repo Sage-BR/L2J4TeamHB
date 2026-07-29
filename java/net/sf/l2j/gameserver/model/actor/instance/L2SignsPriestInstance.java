@@ -29,7 +29,6 @@ import net.sf.l2j.gameserver.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.List;
 
 /**
  * Dawn/Dusk Seven Signs Priest Instance

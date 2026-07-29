@@ -14,9 +14,7 @@
  */
 package net.sf.l2j.gameserver.clientpackets;
 
-import java.util.logging.Logger;
 
-import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GameTimeController;
 import net.sf.l2j.gameserver.network.L2GameClient;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
@@ -30,7 +28,6 @@ import org.mmocore.network.ReceivablePacket;
  */
 public abstract class L2GameClientPacket extends ReceivablePacket<L2GameClient>
 {
-	private static final Logger _log = Logger.getLogger(L2GameClientPacket.class.getName());
 
 	@Override
 	protected boolean read()

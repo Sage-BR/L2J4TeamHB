@@ -30,8 +30,6 @@ import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.templates.L2EtcItemType;
 
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class manage all items on ground

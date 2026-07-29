@@ -26,8 +26,6 @@ import net.sf.l2j.gameserver.templates.L2PcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
-import java.util.Set;
 
 /**
  * This class ...

@@ -20,7 +20,6 @@ import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
-import java.util.Set;
 
 public class L2SkillAgathion extends L2Skill 
 {

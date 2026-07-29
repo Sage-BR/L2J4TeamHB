@@ -25,7 +25,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
-import java.util.Set;
 
 public class L2SkillElemental extends L2Skill {
 

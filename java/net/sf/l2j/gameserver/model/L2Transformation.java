@@ -19,7 +19,6 @@ import java.util.concurrent.ScheduledFuture;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.Set;
 
 /**
  *

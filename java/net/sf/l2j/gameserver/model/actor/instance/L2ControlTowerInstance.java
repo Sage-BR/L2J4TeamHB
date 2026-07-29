@@ -27,7 +27,6 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class L2ControlTowerInstance extends L2NpcInstance {
 

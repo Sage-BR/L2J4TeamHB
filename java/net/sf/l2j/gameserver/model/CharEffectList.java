@@ -27,7 +27,6 @@ import net.sf.l2j.gameserver.skills.effects.EffectCharge;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class CharEffectList
 {

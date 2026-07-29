@@ -32,9 +32,6 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.L2ArrayList;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  *

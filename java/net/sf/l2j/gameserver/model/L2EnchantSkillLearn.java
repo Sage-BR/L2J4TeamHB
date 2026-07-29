@@ -25,13 +25,13 @@ import java.util.ArrayList;
  *
  * @version $Revision: 1.2.4.2 $ $Date: 2005/03/27 15:29:33 $
  */
-@SuppressWarnings("unchecked")
 public final class L2EnchantSkillLearn
 {
     private final int _id;
     private final int _baseLvl;
     
-    private List<EnchantSkillDetail>[] _enchantDetails = new List[0];
+    @SuppressWarnings("unchecked")
+    private List<EnchantSkillDetail>[] _enchantDetails = (List<EnchantSkillDetail>[]) new List<?>[0];
 
     public L2EnchantSkillLearn(int id, int baseLvl)
     {
@@ -55,7 +55,6 @@ public final class L2EnchantSkillLearn
         return _baseLvl;
     }
     
-    @SuppressWarnings("unchecked")
     public void addEnchantDetail(EnchantSkillDetail esd)
     {
         int enchantType = L2EnchantSkillLearn.getEnchantType(esd.getLevel());
@@ -68,7 +67,8 @@ public final class L2EnchantSkillLearn
         {
             if (enchantType >= _enchantDetails.length)
             {
-                List<EnchantSkillDetail>[] newArray = new List[enchantType+1];
+                @SuppressWarnings("unchecked")
+                List<EnchantSkillDetail>[] newArray = (List<EnchantSkillDetail>[]) new List<?>[enchantType + 1];
                 System.arraycopy(_enchantDetails, 0, newArray, 0, _enchantDetails.length);
                 _enchantDetails = newArray;
                 _enchantDetails[enchantType] = new ArrayList<EnchantSkillDetail>();

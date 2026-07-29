@@ -17,8 +17,6 @@ package net.sf.l2j.gameserver.templates;
 import java.util.Map;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
-import java.util.Set;
 
 
 /**

@@ -25,7 +25,6 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.Set;
 
 public class PcStatus extends PlayableStatus
 {

@@ -26,7 +26,6 @@ import net.sf.l2j.gameserver.model.L2Spawn;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2RaidBossInstance;
 
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...

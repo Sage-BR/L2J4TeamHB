@@ -27,7 +27,6 @@ import net.sf.l2j.gameserver.skills.funcs.Func;
 import net.sf.l2j.gameserver.skills.funcs.FuncTemplate;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * This class contains all informations concerning the item (weapon, armor, etc).<BR>
@@ -143,8 +142,7 @@ public abstract class L2Item
 	private final boolean _destroyable;
 	private final boolean _tradeable;
 
-	@SuppressWarnings("unchecked")
-    protected final Enum  _type;
+	protected final Enum<?> _type;
 
 	protected FuncTemplate[] _funcTemplates;
 	protected EffectTemplate[] _effectTemplates;
@@ -197,8 +195,7 @@ public abstract class L2Item
 	 * Returns the itemType.
 	 * @return Enum
 	 */
-	@SuppressWarnings("unchecked")
-    public Enum  getItemType()
+	public Enum<?> getItemType()
 	{
 		return _type;
 	}

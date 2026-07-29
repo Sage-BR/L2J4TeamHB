@@ -33,7 +33,6 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.util.Rnd;
 
-import java.util.Set;
 
 /**
  * This class manages all Guards in the world.

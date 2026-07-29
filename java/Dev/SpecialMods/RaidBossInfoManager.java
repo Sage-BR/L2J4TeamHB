@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 
-import java.util.List;
 
 public class RaidBossInfoManager
 {

@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.serverpackets;
 
 import java.util.Map;
 
-import java.util.List;
 
 /**
  * Format: ch ddd [ddd]
