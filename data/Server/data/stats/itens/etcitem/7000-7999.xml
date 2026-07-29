@@ -1194,7 +1194,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7068' name="Special Bait 2">
@@ -1213,7 +1213,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7069' name="Special Bait 3">
@@ -1232,7 +1232,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7070' name="Special Bait 4">
@@ -1251,7 +1251,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7071' name="Special Fish 1">
@@ -11416,7 +11416,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7611' name="Icy Air Fishing Lure">
@@ -11435,7 +11435,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7612' name="Earth Fishing Lure">
@@ -11454,7 +11454,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7613' name="Flaming Fishing Lure">
@@ -11473,7 +11473,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7614' name="Chest Caught by Wind Fishing Lure">
@@ -14570,7 +14570,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7808' name="Purple Colored Lure - For Beginners">
@@ -14589,7 +14589,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7809' name="Yellow Colored Lure - For Beginners">
@@ -14608,7 +14608,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='7832' name="Apprentice Adventurer's Weapon Exchange Coupon">

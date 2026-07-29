@@ -4,7 +4,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -29,7 +29,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -54,7 +54,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -79,7 +79,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -104,7 +104,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -129,7 +129,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -154,7 +154,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -179,7 +179,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -204,7 +204,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="268435456"/>
+  <set name="bodypart" val="4194304"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -229,7 +229,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="6"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -254,7 +254,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="7"/>
+  <set name="bodypart" val="48"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -304,7 +304,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="4180"/>
@@ -329,7 +329,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="4180"/>
@@ -354,7 +354,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="4180"/>
@@ -379,7 +379,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="4180"/>
@@ -404,7 +404,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -429,7 +429,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -454,7 +454,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -479,7 +479,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -504,7 +504,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -529,7 +529,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -554,7 +554,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -579,7 +579,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -604,7 +604,7 @@
   <for>
     <add val='0' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>

@@ -5,7 +5,7 @@
       <add val="24" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -31,7 +31,7 @@
       <add val="32" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="1" />
+    <set name="bodypart" val="8"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -57,7 +57,7 @@
       <add val="16" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -83,7 +83,7 @@
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="bodypart" val="2048" />
+    <set name="bodypart" val="1024"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="light" />
     <set name="weight" val="4180" />
@@ -109,7 +109,7 @@
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="bodypart" val="2048" />
+    <set name="bodypart" val="1024"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="light" />
     <set name="weight" val="4180" />
@@ -133,7 +133,7 @@
   <item id="10139" name="Agathion Bracelet">
     <for>
     </for>
-    <set name="bodypart" val="67108864" />
+    <set name="bodypart" val="2097152"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -159,7 +159,7 @@
       <add val="49" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -183,7 +183,7 @@
   <item id="10141" name="White Talisman - Yeti Transform">
     <for>
     </for>
-    <set name="bodypart" val="268435456" />
+    <set name="bodypart" val="4194304"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -207,7 +207,7 @@
   <item id="10142" name="White Talisman - Buffalo Transform">
     <for>
     </for>
-    <set name="bodypart" val="268435456" />
+    <set name="bodypart" val="4194304"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -231,7 +231,7 @@
   <item id="10158" name="Grey Talisman of Upper Grade Fishing">
     <for>
     </for>
-    <set name="bodypart" val="268435456" />
+    <set name="bodypart" val="4194304"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -257,7 +257,7 @@
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="bodypart" val="2048" />
+    <set name="bodypart" val="1024"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="light" />
     <set name="weight" val="4180" />
@@ -281,7 +281,7 @@
   <item id="10169" name="Enchanter Circlet (Kamael only)">
     <for>
     </for>
-    <set name="bodypart" val="16384" />
+    <set name="bodypart" val="524288"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="10" />
@@ -313,7 +313,7 @@
   <item id="10175" name="Gobblin Circlet (Event)">
     <for>
     </for>
-    <set name="bodypart" val="16384" />
+    <set name="bodypart" val="524288"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="10" />
@@ -337,7 +337,7 @@
   <item id="10176" name="Half Face Mask (Event)">
     <for>
     </for>
-    <set name="bodypart" val="16384" />
+    <set name="bodypart" val="524288"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="10" />
@@ -361,7 +361,7 @@
   <item id="10177" name="Black Half-Mask (Event)">
     <for>
     </for>
-    <set name="bodypart" val="16384" />
+    <set name="bodypart" val="524288"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="10" />

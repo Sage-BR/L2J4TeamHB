@@ -10,7 +10,7 @@
     <for>
       <add val="21" order="0x10" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -36,7 +36,7 @@
       <add val="24" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -62,7 +62,7 @@
       <add val="27" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -95,7 +95,7 @@
       <add val="34" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -128,7 +128,7 @@
       <add val="39" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -154,7 +154,7 @@
       <add val="42" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -180,7 +180,7 @@
       <add val="45" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -213,7 +213,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -239,7 +239,7 @@
       <add val="48" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -266,7 +266,7 @@
       <add val="31" order="0x60" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -292,7 +292,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -325,7 +325,7 @@
       <add val="54" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -352,7 +352,7 @@
       <add val="25" order="0x60" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -378,7 +378,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -404,7 +404,7 @@
       <add val="54" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -430,7 +430,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -456,7 +456,7 @@
       <add val="54" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -482,7 +482,7 @@
       <add val="54" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -508,7 +508,7 @@
       <add val="60" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -534,7 +534,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -560,7 +560,7 @@
       <add val="54" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -587,7 +587,7 @@
       <add val="20" order="0x60" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -613,7 +613,7 @@
       <add val="60" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -639,7 +639,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -665,7 +665,7 @@
       <add val="51" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="3" />
+    <set name="bodypart" val="6"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -690,7 +690,7 @@
     <for>
       <add val="9" order="0x10" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -715,7 +715,7 @@
     <for>
       <add val="11" order="0x10" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -740,7 +740,7 @@
     <for>
       <add val="12" order="0x10" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -765,7 +765,7 @@
     <for>
       <add val="14" order="0x10" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -791,7 +791,7 @@
       <add val="18" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -817,7 +817,7 @@
       <add val="20" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -843,7 +843,7 @@
       <add val="22" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -869,7 +869,7 @@
       <add val="24" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -895,7 +895,7 @@
       <add val="26" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -921,7 +921,7 @@
       <add val="28" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -947,7 +947,7 @@
       <add val="30" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -973,7 +973,7 @@
       <add val="32" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -999,7 +999,7 @@
       <add val="34" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1025,7 +1025,7 @@
       <add val="32" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1052,7 +1052,7 @@
       <add val="21" order="0x60" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1078,7 +1078,7 @@
       <add val="16" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1111,7 +1111,7 @@
       <add val="36" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1138,7 +1138,7 @@
       <add val="17" order="0x60" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1164,7 +1164,7 @@
       <add val="34" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1190,7 +1190,7 @@
       <add val="36" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1216,7 +1216,7 @@
       <add val="34" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1242,7 +1242,7 @@
       <add val="36" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1268,7 +1268,7 @@
       <add val="36" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />
@@ -1294,7 +1294,7 @@
       <add val="40" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
-    <set name="bodypart" val="7" />
+    <set name="bodypart" val="48"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="150" />

@@ -7559,7 +7559,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8485' name="Prize-Winning Night Fishing Lure">
@@ -7578,7 +7578,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8486' name="Prize-Winning Novice Fishing Lure">
@@ -7597,7 +7597,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8487' name="Recipe: Destroyer Hammer (60%)">
@@ -7787,7 +7787,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8497' name="Dion's Luminous Lure">
@@ -7806,7 +7806,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8498' name="Giran's Luminous Lure">
@@ -7825,7 +7825,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8499' name="Oren's Luminous Lure">
@@ -7844,7 +7844,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8500' name="Aden's Luminous Lure">
@@ -7863,7 +7863,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8501' name="Innadril's Luminous Lure">
@@ -7882,7 +7882,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8502' name="Goddard's Luminous Lure">
@@ -7901,7 +7901,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8503' name="Rune's Luminous Lure">
@@ -7920,7 +7920,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8504' name="Schuttgart's Luminous Lure">
@@ -7939,7 +7939,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8505' name="Green Luminous Lure - Low Grade">
@@ -7958,7 +7958,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8506' name="Green Luminous Lure">
@@ -7977,7 +7977,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8507' name="Green Colored Lure - High Grade">
@@ -7996,7 +7996,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8508' name="Purple Luminous Lure - Low Grade">
@@ -8015,7 +8015,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8509' name="Purple Luminous Lure">
@@ -8034,7 +8034,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8510' name="Purple Luminous Lure - High Grade">
@@ -8053,7 +8053,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8511' name="Yellow Luminous Lure - Low Grade">
@@ -8072,7 +8072,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8512' name="Yellow Luminous Lure">
@@ -8091,7 +8091,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8513' name="Yellow Luminous Lure - High Grade">
@@ -8110,7 +8110,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8514' name="Remnants of Old Dwarves' Dreams">
@@ -8623,7 +8623,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='8549' name="Bruin Lizardman Blood">

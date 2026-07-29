@@ -8946,7 +8946,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6520' name="Green Colored Lure">
@@ -8965,7 +8965,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6521' name="Green Colored Lure - High Grade">
@@ -8984,7 +8984,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6522' name="Purple Colored Lure - Low Grade">
@@ -9003,7 +9003,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6523' name="Purple Colored Lure">
@@ -9022,7 +9022,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6524' name="Purple Colored Lure - High Grade">
@@ -9041,7 +9041,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6525' name="Yellow Colored Lure - Low Grade">
@@ -9060,7 +9060,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6526' name="Yellow Colored Lure">
@@ -9079,7 +9079,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6527' name="Yellow Colored Lure - High Grade">
@@ -9098,7 +9098,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6528' name="Event bait">
@@ -9117,7 +9117,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='6535' name="Fishing Shot: non-grade">

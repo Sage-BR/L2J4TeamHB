@@ -4,7 +4,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="heavy"/>
   <set name="weight" val="7570"/>
@@ -30,7 +30,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="4096"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="heavy"/>
   <set name="weight" val="3210"/>
@@ -56,7 +56,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="1024"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="heavy"/>
   <set name="weight" val="530"/>
@@ -82,7 +82,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="heavy"/>
   <set name="weight" val="520"/>
@@ -108,7 +108,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="heavy"/>
   <set name="weight" val="1090"/>
@@ -134,7 +134,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="light"/>
   <set name="weight" val="4180"/>
@@ -160,7 +160,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="4096"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="light"/>
   <set name="weight" val="1370"/>
@@ -186,7 +186,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="1024"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="light"/>
   <set name="weight" val="530"/>
@@ -212,7 +212,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="light"/>
   <set name="weight" val="520"/>
@@ -238,7 +238,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="light"/>
   <set name="weight" val="1090"/>
@@ -264,7 +264,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="magic"/>
   <set name="weight" val="1780"/>
@@ -290,7 +290,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="4096"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="magic"/>
   <set name="weight" val="860"/>
@@ -316,7 +316,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="1024"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="magic"/>
   <set name="weight" val="530"/>
@@ -342,7 +342,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="magic"/>
   <set name="weight" val="520"/>
@@ -368,7 +368,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="magic"/>
   <set name="weight" val="1090"/>
@@ -393,7 +393,7 @@
 <item id='9577' name="Cotton Shirt">
   <for>
    </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -418,7 +418,7 @@
 <item id='9578' name="Linen Shirt">
   <for>
    </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -443,7 +443,7 @@
 <item id='9579' name="Silk Shirt">
   <for>
    </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -468,7 +468,7 @@
 <item id='9580' name="Leather Shirt">
   <for>
    </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -493,7 +493,7 @@
 <item id='9581' name="Scale Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -518,7 +518,7 @@
 <item id='9582' name="Mithril Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -543,7 +543,7 @@
 <item id='9583' name="Striped Cotton Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -568,7 +568,7 @@
 <item id='9584' name="Striped Linen Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -593,7 +593,7 @@
 <item id='9585' name="Striped Silk Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -618,7 +618,7 @@
 <item id='9586' name="Striped Leather Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -643,7 +643,7 @@
 <item id='9587' name="Striped Scale Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -668,7 +668,7 @@
 <item id='9588' name="Striped Mithril Shirt">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="130"/>
@@ -693,7 +693,7 @@
 <item id='9589' name="Iron Bracelet">
   <for>
   </for>
-  <set name="bodypart" val="33554432"/>
+  <set name="bodypart" val="524288"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -718,7 +718,7 @@
 <item id='9590' name="Bronze Bracelet">
   <for>
   </for>
-  <set name="bodypart" val="33554432"/>
+  <set name="bodypart" val="524288"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -743,7 +743,7 @@
 <item id='9591' name="Steel Bracelet">
   <for>
   </for>
-  <set name="bodypart" val="33554432"/>
+  <set name="bodypart" val="524288"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -768,7 +768,7 @@
 <item id='9592' name="Mithril Bracelet">
   <for>
   </for>
-  <set name="bodypart" val="33554432"/>
+  <set name="bodypart" val="524288"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>

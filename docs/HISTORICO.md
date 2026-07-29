@@ -19,6 +19,15 @@ Commits aplicados manualmente no servidor, baseados em análise do repositório 
 
 ## Commits Aplicados
 
+## 2026-07-29 — Sessão 15: Fix seleção de layer errada em geodata Multilayer (teleport entre andares)
+
+- `BlockMultilayer.java` — **Bug raiz:** `getHeightNearest()` e `getNsweNearest()` comparavam o valor **raw empacotado** `(height << 1 | NSWE)` diretamente com `worldZ` **decodificado**, causando seleção errada de layer em células multicamada.
+- **Efeito colateral:** Jogador no andar de baixo (Z=-3109) era teleportado para o andar de cima (Z=-2544) ao andar — o servidor retornava a altura da layer superior como `geoHeight`.
+- **Correção:** Adicionado `decodeHeight()` antes da comparação com `worldZ` em ambas as funções. Nota: `checkMove()` no mesmo arquivo já usava `decodeHeight()` corretamente — o bug era uma inconsistência.
+- **Exemplo numérico:** Para célula com layers -2544 e -3109, jogador em -3109:
+  - Antes (bug): `Math.abs(-12264 - (-3109)) = 9155` vs `Math.abs(-16364 - (-3109)) = 13255` → layer errada
+  - Depois (fix): `Math.abs(-2544 - (-3109)) = 565` vs `Math.abs(-3109 - (-3109)) = 0` → layer correta
+
 ## 2026-07-29 — Sessão 14: Prevenção real de queda sob estruturas
 
 - `L2Character.java` — `updatePosition()` passou a usar `traceTerrainZ()` com probe elevado (`super.getZ() + 2 * GeoStructure.CELL_HEIGHT`), seguindo a linha das refs para evitar que o servidor grude o player na layer inferior antes da validação final.

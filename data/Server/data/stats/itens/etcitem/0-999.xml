@@ -16,7 +16,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='57' name="Adena">

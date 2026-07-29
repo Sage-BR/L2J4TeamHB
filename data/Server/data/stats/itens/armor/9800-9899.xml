@@ -3,7 +3,7 @@
 <item id='9820' name="Shadow Item: Clan Oath Helm">
   <for>
   </for>
-  <set name="bodypart" val="1024"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="210"/>
@@ -28,7 +28,7 @@
 <item id='9821' name="Shadow Item: Clan Oath Armor">
   <for>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="3290"/>
@@ -53,7 +53,7 @@
 <item id='9822' name="Shadow Item: Clan Oath Gauntlets">
   <for>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="210"/>
@@ -78,7 +78,7 @@
 <item id='9823' name="Shadow Item: Clan Oath Sabaton">
   <for>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="430"/>
@@ -103,7 +103,7 @@
 <item id='9824' name="Shadow Item: Clan Oath Brigandine">
   <for>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="1800"/>
@@ -128,7 +128,7 @@
 <item id='9825' name="Shadow Item: Clan Oath Leather Gloves">
   <for>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="210"/>
@@ -153,7 +153,7 @@
 <item id='9826' name="Shadow Item: Clan Oath Boots">
   <for>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="430"/>
@@ -178,7 +178,7 @@
 <item id='9827' name="Shadow Item: Clan Oath Aketon">
   <for>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="820"/>
@@ -203,7 +203,7 @@
 <item id='9828' name="Shadow Item: Clan Oath Padded Gloves">
   <for>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="210"/>
@@ -228,7 +228,7 @@
 <item id='9829' name="Shadow Item: Clan Oath Sandals">
   <for>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="430"/>
@@ -254,7 +254,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="1024"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="570"/>
@@ -280,7 +280,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="9780"/>
@@ -306,7 +306,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="580"/>
@@ -332,7 +332,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="1130"/>
@@ -358,7 +358,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="5400"/>
@@ -384,7 +384,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
    </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="580"/>
@@ -410,7 +410,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
    </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="1130"/>
@@ -436,7 +436,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
    </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="2450"/>
@@ -462,7 +462,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
    </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="580"/>
@@ -488,7 +488,7 @@
   <for>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="32768"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="1130"/>
@@ -513,7 +513,7 @@
 <item id='9883' name="Teddy Bear Hat - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -538,7 +538,7 @@
 <item id='9884' name="Piggy Hat - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -563,7 +563,7 @@
 <item id='9885' name="Jester Hat - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -588,7 +588,7 @@
 <item id='9886' name="Wizard Hat - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -613,7 +613,7 @@
 <item id='9887' name="Dapper Hat - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -638,7 +638,7 @@
 <item id='9888' name="Romantic Chapeau - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -663,7 +663,7 @@
 <item id='9889' name="Iron Circlet - Big Head">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -688,7 +688,7 @@
 <item id='9890' name="Teddy Bear Hat - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -713,7 +713,7 @@
 <item id='9891' name="Piggy Hat - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -738,7 +738,7 @@
 <item id='9892' name="Jester Hat - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -763,7 +763,7 @@
 <item id='9893' name="Wizard Hat - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -788,7 +788,7 @@
 <item id='9894' name="Dapper Hat - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -813,7 +813,7 @@
 <item id='9895' name="Romantic Chapeau - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -838,7 +838,7 @@
 <item id='9896' name="Iron Circlet - Firework">
   <for>
   </for>
-  <set name="bodypart" val="16384"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="10"/>
@@ -863,7 +863,7 @@
 <item id='9899' name="Weight Loss Ring">
   <for>
   </for>
-  <set name="bodypart" val="7"/>
+  <set name="bodypart" val="48"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>

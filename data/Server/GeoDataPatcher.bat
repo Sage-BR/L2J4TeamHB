@@ -5,10 +5,10 @@ setlocal enabledelayedexpansion
 :: Garante que esta no diretorio do .bat (essencial para duplo-clique)
 cd /d "%~dp0"
 
-:: Caminhos
-set "GEODATA_DIR=data\geodata"
+:: Caminhos (absolutos para funcionar apos cd)
+for %%i in ("%~dp0..\..") do set "PROJECT_ROOT=%%~fi"
+set "GEODATA_DIR=%~dp0data\geodata"
 set "BACKUP_DIR=%GEODATA_DIR%\backup"
-set "PROJECT_ROOT=..\.."
 set "CLASSES_DIR=%PROJECT_ROOT%\classes"
 set "PATCHER_CLASS=Dev.SpecialMods.GeoDataPatcher"
 set "JAVA_CMD=java"
@@ -98,7 +98,7 @@ if not exist "%fpath%" (
 
 echo.
 echo %C_YELLOW%Iniciando backup antes do patch...%C_RESET%
-call :do_backup_silent
+call :do_backup_silent "%fpath%"
 
 echo.
 echo %C_GREEN%Aplicando GeoDataPatcher em: %fpath%%C_RESET%
@@ -113,10 +113,10 @@ if /i "%DRY_RUN%"=="true" (
 )
 
 if !ERRORLEVEL! neq 0 (
-    echo %C_RED%Erro ao executar o GeoDataPatcher (codigo: !ERRORLEVEL!)%C_RESET%
+    echo %C_RED%Erro ao executar o GeoDataPatcher - codigo: !ERRORLEVEL!%C_RESET%
 ) else (
     echo.
-    echo %C_GREEN%Operacao concluida! Verifique o resultado acima.%C_RESET%
+    echo %C_GREEN%Operacao concluida. Verifique o resultado acima.%C_RESET%
 )
 echo.
 pause
@@ -250,7 +250,11 @@ set "backup_name=%date:/=-%_%time::=-%"
 set "backup_name=%backup_name: =0%"
 set "backup_path=%BACKUP_DIR%\%backup_name%"
 mkdir "%backup_path%" 2>nul
-xcopy "%GEODATA_DIR%\*.l2j" "%backup_path%\" /q 2>nul
+if "%~1"=="" (
+    xcopy "%GEODATA_DIR%\*.l2j" "%backup_path%\" /q 2>nul
+) else (
+    xcopy "%~1" "%backup_path%\" /q 2>nul
+)
 echo %C_DIM%  Backup salvo em: %backup_path%%C_RESET%
 goto :eof
 
@@ -326,13 +330,13 @@ echo.
 cd /d "%PROJECT_ROOT%"
 if not exist "%CLASSES_DIR%" mkdir "%CLASSES_DIR%" 2>nul
 echo %C_DIM%Compilando GeoDataPatcher.java...%C_RESET%
-javac -cp "%~dp0l2jserver.jar;java" -d "%CLASSES_DIR%" java/Dev/SpecialMods/GeoDataPatcher.java
+javac -d "%CLASSES_DIR%" java/Dev/SpecialMods/GeoDataPatcher.java
 if !ERRORLEVEL! equ 0 (
     echo.
-    echo %C_GREEN%Compilacao bem-sucedida!%C_RESET%
+    echo %C_GREEN%Compilacao bem-sucedida.%C_RESET%
 ) else (
     echo.
-    echo %C_RED%Erro na compilacao (codigo: !ERRORLEVEL!)%C_RESET%
+    echo %C_RED%Erro na compilacao - codigo: !ERRORLEVEL!%C_RESET%
 )
 echo.
 pause

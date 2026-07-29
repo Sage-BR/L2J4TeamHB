@@ -4,7 +4,7 @@
   <for>
     <add val='9' order='0x10' stat='pDef'/>
   </for>
-  <set name="bodypart" val="64"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="60"/>

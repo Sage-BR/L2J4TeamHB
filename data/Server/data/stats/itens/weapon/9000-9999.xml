@@ -1,10 +1,10 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <list>
 <item id='9000' name="Shadow Item: Stormbringer*Stormbringer">
   <set name="weapon_type" val="dual"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="780"/>
   <set name="soulshots" val="3"/>
@@ -38,7 +38,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="650"/>
   <set name="soulshots" val="1"/>
@@ -72,7 +72,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="540"/>
   <set name="soulshots" val="1"/>
@@ -106,7 +106,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="320"/>
   <set name="soulshots" val="1"/>
@@ -140,7 +140,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="460"/>
   <set name="soulshots" val="1"/>
@@ -174,7 +174,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="1"/>
@@ -208,7 +208,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="330"/>
   <set name="soulshots" val="1"/>
@@ -242,7 +242,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="480"/>
   <set name="soulshots" val="1"/>
@@ -276,7 +276,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="580"/>
   <set name="soulshots" val="3"/>
@@ -311,7 +311,7 @@
   <set name="weapon_type" val="dual"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="720"/>
   <set name="soulshots" val="1"/>
@@ -345,7 +345,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="650"/>
   <set name="soulshots" val="1"/>
@@ -380,7 +380,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="450"/>
   <set name="soulshots" val="1"/>
@@ -414,7 +414,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="640"/>
   <set name="soulshots" val="1"/>
@@ -448,7 +448,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="310"/>
   <set name="soulshots" val="1"/>
@@ -482,7 +482,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="320"/>
   <set name="soulshots" val="1"/>
@@ -516,7 +516,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="460"/>
   <set name="soulshots" val="1"/>
@@ -550,7 +550,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="560"/>
   <set name="soulshots" val="2"/>
@@ -585,7 +585,7 @@
   <set name="weapon_type" val="dual"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="700"/>
   <set name="soulshots" val="1"/>
@@ -619,7 +619,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="540"/>
   <set name="soulshots" val="1"/>
@@ -653,7 +653,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="640"/>
   <set name="soulshots" val="1"/>
@@ -687,7 +687,7 @@
   <set name="weapon_type" val="dual"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="693"/>
   <set name="soulshots" val="1"/>
@@ -721,7 +721,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="613"/>
   <set name="soulshots" val="1"/>
@@ -755,7 +755,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="280"/>
   <set name="soulshots" val="1"/>
@@ -789,7 +789,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="527"/>
   <set name="soulshots" val="1"/>
@@ -823,7 +823,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="1"/>
@@ -857,7 +857,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="317"/>
   <set name="soulshots" val="1"/>
@@ -891,7 +891,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="450"/>
   <set name="soulshots" val="1"/>
@@ -925,7 +925,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="553"/>
   <set name="soulshots" val="2"/>
@@ -960,7 +960,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="613"/>
   <set name="soulshots" val="1"/>
@@ -995,7 +995,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="440"/>
   <set name="soulshots" val="1"/>
@@ -1029,7 +1029,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="460"/>
   <set name="soulshots" val="0"/>
@@ -1063,7 +1063,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="447"/>
   <set name="soulshots" val="0"/>
@@ -1097,7 +1097,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="410"/>
   <set name="soulshots" val="0"/>
@@ -1131,7 +1131,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="403"/>
   <set name="soulshots" val="0"/>
@@ -1165,7 +1165,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="397"/>
   <set name="soulshots" val="0"/>
@@ -1199,7 +1199,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="400"/>
   <set name="soulshots" val="0"/>
@@ -1233,7 +1233,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1380"/>
   <set name="soulshots" val="3"/>
@@ -1267,7 +1267,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2180"/>
   <set name="soulshots" val="2"/>
@@ -1301,7 +1301,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="900"/>
   <set name="soulshots" val="1"/>
@@ -1336,7 +1336,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="1"/>
@@ -1371,7 +1371,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="2"/>
@@ -1405,7 +1405,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2100"/>
   <set name="soulshots" val="2"/>
@@ -1441,7 +1441,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2100"/>
   <set name="soulshots" val="2"/>
@@ -1477,7 +1477,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1870"/>
   <set name="soulshots" val="3"/>
@@ -1513,7 +1513,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1500"/>
   <set name="soulshots" val="2"/>
@@ -1548,7 +1548,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1500"/>
   <set name="soulshots" val="2"/>
@@ -1583,7 +1583,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1500"/>
   <set name="soulshots" val="2"/>
@@ -1618,7 +1618,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2080"/>
   <set name="soulshots" val="2"/>
@@ -1654,7 +1654,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1850"/>
   <set name="soulshots" val="4"/>
@@ -1690,7 +1690,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1470"/>
   <set name="soulshots" val="2"/>
@@ -1725,7 +1725,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1470"/>
   <set name="soulshots" val="2"/>
@@ -1760,7 +1760,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2060"/>
   <set name="soulshots" val="2"/>
@@ -1796,7 +1796,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1840"/>
   <set name="soulshots" val="4"/>
@@ -1832,7 +1832,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1450"/>
   <set name="soulshots" val="3"/>
@@ -1867,7 +1867,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2020"/>
   <set name="soulshots" val="3"/>
@@ -1903,7 +1903,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1820"/>
   <set name="soulshots" val="6"/>
@@ -1939,7 +1939,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1440"/>
   <set name="soulshots" val="3"/>
@@ -1974,7 +1974,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2010"/>
   <set name="soulshots" val="3"/>
@@ -2010,7 +2010,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1810"/>
   <set name="soulshots" val="6"/>
@@ -2046,7 +2046,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1430"/>
   <set name="soulshots" val="3"/>
@@ -2081,7 +2081,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1430"/>
   <set name="soulshots" val="3"/>
@@ -2116,7 +2116,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1430"/>
   <set name="soulshots" val="3"/>
@@ -2153,7 +2153,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="429"/>
   <set name="soulshots" val="3"/>
@@ -2188,7 +2188,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="2"/>
@@ -2224,7 +2224,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="2"/>
@@ -2262,7 +2262,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="2"/>
@@ -2300,7 +2300,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="594"/>
   <set name="soulshots" val="2"/>
@@ -2336,7 +2336,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1790"/>
   <set name="soulshots" val="5"/>
@@ -2372,7 +2372,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1790"/>
   <set name="soulshots" val="5"/>
@@ -2410,7 +2410,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1790"/>
   <set name="soulshots" val="5"/>
@@ -2448,7 +2448,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1790"/>
   <set name="soulshots" val="5"/>
@@ -2486,7 +2486,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2521,7 +2521,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2558,7 +2558,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2599,7 +2599,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2640,7 +2640,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2675,7 +2675,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2712,7 +2712,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2749,7 +2749,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2786,7 +2786,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2821,7 +2821,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2858,7 +2858,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2898,7 +2898,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2935,7 +2935,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -2970,7 +2970,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -3007,7 +3007,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -3047,7 +3047,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1420"/>
   <set name="soulshots" val="3"/>
@@ -3087,7 +3087,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3123,7 +3123,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3161,7 +3161,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3203,7 +3203,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3241,7 +3241,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3277,7 +3277,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3315,7 +3315,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3357,7 +3357,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1770"/>
   <set name="soulshots" val="5"/>
@@ -3399,7 +3399,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3434,7 +3434,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3471,7 +3471,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3508,7 +3508,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3545,7 +3545,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3580,7 +3580,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3617,7 +3617,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3654,7 +3654,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3695,7 +3695,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3730,7 +3730,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3767,7 +3767,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3804,7 +3804,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3841,7 +3841,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3876,7 +3876,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3913,7 +3913,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -3950,7 +3950,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="420"/>
   <set name="soulshots" val="3"/>
@@ -3985,7 +3985,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -4020,7 +4020,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -4057,7 +4057,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -4097,7 +4097,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1400"/>
   <set name="soulshots" val="3"/>
@@ -4134,7 +4134,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="3"/>
@@ -4170,7 +4170,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="3"/>
@@ -4208,7 +4208,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="3"/>
@@ -4246,7 +4246,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1980"/>
   <set name="soulshots" val="3"/>
@@ -4286,7 +4286,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1760"/>
   <set name="soulshots" val="5"/>
@@ -4322,7 +4322,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1760"/>
   <set name="soulshots" val="5"/>
@@ -4360,7 +4360,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1760"/>
   <set name="soulshots" val="5"/>
@@ -4398,7 +4398,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1760"/>
   <set name="soulshots" val="5"/>
@@ -4440,7 +4440,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1380"/>
   <set name="soulshots" val="3"/>
@@ -4475,7 +4475,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1380"/>
   <set name="soulshots" val="3"/>
@@ -4512,7 +4512,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1380"/>
   <set name="soulshots" val="3"/>
@@ -4549,7 +4549,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1380"/>
   <set name="soulshots" val="3"/>
@@ -4586,7 +4586,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1950"/>
   <set name="soulshots" val="3"/>
@@ -4622,7 +4622,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1950"/>
   <set name="soulshots" val="3"/>
@@ -4660,7 +4660,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1950"/>
   <set name="soulshots" val="3"/>
@@ -4698,7 +4698,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1950"/>
   <set name="soulshots" val="3"/>
@@ -4736,7 +4736,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="6"/>
@@ -4772,7 +4772,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="6"/>
@@ -4810,7 +4810,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="6"/>
@@ -4852,7 +4852,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="6"/>
@@ -4894,7 +4894,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1370"/>
   <set name="soulshots" val="1"/>
@@ -4929,7 +4929,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1370"/>
   <set name="soulshots" val="1"/>
@@ -4966,7 +4966,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1370"/>
   <set name="soulshots" val="1"/>
@@ -5003,7 +5003,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1370"/>
   <set name="soulshots" val="1"/>
@@ -5044,7 +5044,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5080,7 +5080,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5118,7 +5118,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5156,7 +5156,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5194,7 +5194,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1720"/>
   <set name="soulshots" val="2"/>
@@ -5230,7 +5230,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1720"/>
   <set name="soulshots" val="2"/>
@@ -5268,7 +5268,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1720"/>
   <set name="soulshots" val="2"/>
@@ -5309,7 +5309,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1720"/>
   <set name="soulshots" val="2"/>
@@ -5351,7 +5351,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1350"/>
   <set name="soulshots" val="1"/>
@@ -5386,7 +5386,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1350"/>
   <set name="soulshots" val="1"/>
@@ -5423,7 +5423,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1350"/>
   <set name="soulshots" val="1"/>
@@ -5460,7 +5460,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1350"/>
   <set name="soulshots" val="1"/>
@@ -5497,7 +5497,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5533,7 +5533,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5573,7 +5573,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5611,7 +5611,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1930"/>
   <set name="soulshots" val="1"/>
@@ -5652,7 +5652,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1700"/>
   <set name="soulshots" val="2"/>
@@ -5688,7 +5688,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1700"/>
   <set name="soulshots" val="2"/>
@@ -5726,7 +5726,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1700"/>
   <set name="soulshots" val="2"/>
@@ -5764,7 +5764,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1700"/>
   <set name="soulshots" val="2"/>
@@ -5806,7 +5806,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1330"/>
   <set name="soulshots" val="1"/>
@@ -5841,7 +5841,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1330"/>
   <set name="soulshots" val="1"/>
@@ -5884,7 +5884,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1330"/>
   <set name="soulshots" val="1"/>
@@ -5924,7 +5924,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1330"/>
   <set name="soulshots" val="1"/>
@@ -5965,7 +5965,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1900"/>
   <set name="soulshots" val="1"/>
@@ -6001,7 +6001,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1900"/>
   <set name="soulshots" val="1"/>
@@ -6039,7 +6039,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1900"/>
   <set name="soulshots" val="1"/>
@@ -6077,7 +6077,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1900"/>
   <set name="soulshots" val="1"/>
@@ -6115,7 +6115,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1670"/>
   <set name="soulshots" val="1"/>
@@ -6151,7 +6151,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="501"/>
   <set name="soulshots" val="1"/>
@@ -6190,7 +6190,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1670"/>
   <set name="soulshots" val="1"/>
@@ -6234,7 +6234,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1670"/>
   <set name="soulshots" val="1"/>
@@ -6270,7 +6270,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1320"/>
   <set name="soulshots" val="1"/>
@@ -6305,7 +6305,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1320"/>
   <set name="soulshots" val="1"/>
@@ -6345,7 +6345,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1320"/>
   <set name="soulshots" val="1"/>
@@ -6385,7 +6385,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1320"/>
   <set name="soulshots" val="1"/>
@@ -6429,7 +6429,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1840"/>
   <set name="soulshots" val="1"/>
@@ -6465,7 +6465,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1840"/>
   <set name="soulshots" val="1"/>
@@ -6506,7 +6506,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1840"/>
   <set name="soulshots" val="1"/>
@@ -6550,7 +6550,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1840"/>
   <set name="soulshots" val="1"/>
@@ -6594,7 +6594,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1660"/>
   <set name="soulshots" val="1"/>
@@ -6630,7 +6630,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1660"/>
   <set name="soulshots" val="1"/>
@@ -6675,7 +6675,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1660"/>
   <set name="soulshots" val="1"/>
@@ -6716,7 +6716,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1660"/>
   <set name="soulshots" val="1"/>
@@ -6760,7 +6760,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -6795,7 +6795,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -6835,7 +6835,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -6875,7 +6875,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -6918,7 +6918,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1820"/>
   <set name="soulshots" val="1"/>
@@ -6954,7 +6954,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1820"/>
   <set name="soulshots" val="1"/>
@@ -6995,7 +6995,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1820"/>
   <set name="soulshots" val="1"/>
@@ -7036,7 +7036,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1820"/>
   <set name="soulshots" val="1"/>
@@ -7077,7 +7077,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1640"/>
   <set name="soulshots" val="1"/>
@@ -7113,7 +7113,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1640"/>
   <set name="soulshots" val="1"/>
@@ -7158,7 +7158,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1640"/>
   <set name="soulshots" val="1"/>
@@ -7199,7 +7199,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1640"/>
   <set name="soulshots" val="1"/>
@@ -7240,7 +7240,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -7275,7 +7275,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -7315,7 +7315,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -7355,7 +7355,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -7395,7 +7395,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7431,7 +7431,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7472,7 +7472,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7513,7 +7513,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7554,7 +7554,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1600"/>
   <set name="soulshots" val="1"/>
@@ -7590,7 +7590,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1600"/>
   <set name="soulshots" val="1"/>
@@ -7635,7 +7635,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1600"/>
   <set name="soulshots" val="1"/>
@@ -7676,7 +7676,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1600"/>
   <set name="soulshots" val="1"/>
@@ -7720,7 +7720,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1280"/>
   <set name="soulshots" val="1"/>
@@ -7756,7 +7756,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1280"/>
   <set name="soulshots" val="1"/>
@@ -7797,7 +7797,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1280"/>
   <set name="soulshots" val="1"/>
@@ -7838,7 +7838,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="384"/>
   <set name="soulshots" val="1"/>
@@ -7874,7 +7874,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7911,7 +7911,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7953,7 +7953,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -7995,7 +7995,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="540"/>
   <set name="soulshots" val="1"/>
@@ -8032,7 +8032,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1580"/>
   <set name="soulshots" val="1"/>
@@ -8069,7 +8069,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1580"/>
   <set name="soulshots" val="1"/>
@@ -8115,7 +8115,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1580"/>
   <set name="soulshots" val="1"/>
@@ -8157,7 +8157,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1580"/>
   <set name="soulshots" val="1"/>
@@ -8199,7 +8199,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="1280"/>
   <set name="soulshots" val="1"/>
@@ -8237,7 +8237,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="1"/>
@@ -8273,7 +8273,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="1580"/>
   <set name="soulshots" val="1"/>
@@ -8312,7 +8312,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1390"/>
   <set name="soulshots" val="0"/>
@@ -8347,7 +8347,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -8383,7 +8383,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -8419,7 +8419,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -8454,7 +8454,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -8491,7 +8491,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -8526,7 +8526,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2010"/>
   <set name="soulshots" val="1"/>
@@ -8561,7 +8561,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -8597,7 +8597,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1080"/>
   <set name="soulshots" val="1"/>
@@ -8633,7 +8633,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1550"/>
   <set name="soulshots" val="1"/>
@@ -8669,7 +8669,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="2"/>
+  <set name="bodypart" val="256"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1370"/>
   <set name="soulshots" val="0"/>
@@ -8703,7 +8703,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="0"/>
@@ -8737,7 +8737,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="0"/>
@@ -8771,7 +8771,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="0"/>
@@ -8805,7 +8805,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="0"/>
@@ -8839,7 +8839,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="0"/>
@@ -8873,7 +8873,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="300"/>
   <set name="soulshots" val="0"/>
@@ -8907,7 +8907,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1530"/>
   <set name="soulshots" val="0"/>
@@ -8941,7 +8941,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1530"/>
   <set name="soulshots" val="0"/>
@@ -8975,7 +8975,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1530"/>
   <set name="soulshots" val="0"/>
@@ -9009,7 +9009,7 @@
   <set name="weapon_type" val="pet"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="18"/>
+  <set name="bodypart" val="-104"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="100"/>
   <set name="soulshots" val="1"/>
@@ -9043,7 +9043,7 @@
   <set name="weapon_type" val="pet"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="18"/>
+  <set name="bodypart" val="-104"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="100"/>
   <set name="soulshots" val="1"/>
@@ -9077,7 +9077,7 @@
   <set name="weapon_type" val="pet"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="18"/>
+  <set name="bodypart" val="-104"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="100"/>
   <set name="soulshots" val="1"/>
@@ -9111,7 +9111,7 @@
   <set name="weapon_type" val="pet"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="18"/>
+  <set name="bodypart" val="-104"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="100"/>
   <set name="soulshots" val="1"/>
@@ -9145,7 +9145,7 @@
   <set name="weapon_type" val="pet"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="18"/>
+  <set name="bodypart" val="-104"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="100"/>
   <set name="soulshots" val="1"/>
@@ -9179,7 +9179,7 @@
   <set name="weapon_type" val="pet"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="18"/>
+  <set name="bodypart" val="-104"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="100"/>
   <set name="soulshots" val="1"/>
@@ -9213,7 +9213,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1300"/>
   <set name="soulshots" val="1"/>
@@ -9247,7 +9247,7 @@
   <set name="weapon_type" val="dual"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2150"/>
   <set name="soulshots" val="1"/>
@@ -9281,7 +9281,7 @@
   <set name="weapon_type" val="none"/>
   <set name="type1" val="1"/>
   <set name="type2" val="1"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="500"/>
   <set name="soulshots" val="1"/>
@@ -9310,7 +9310,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="473"/>
   <set name="soulshots" val="2"/>
@@ -9344,7 +9344,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="667"/>
   <set name="soulshots" val="2"/>
@@ -9379,7 +9379,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="590"/>
   <set name="soulshots" val="2"/>
@@ -9414,7 +9414,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="467"/>
   <set name="soulshots" val="3"/>
@@ -9448,7 +9448,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="660"/>
   <set name="soulshots" val="3"/>
@@ -9483,7 +9483,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="587"/>
   <set name="soulshots" val="3"/>
@@ -9518,7 +9518,7 @@
   <set name="weapon_type" val="rapier"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="457"/>
   <set name="soulshots" val="1"/>
@@ -9552,7 +9552,7 @@
   <set name="weapon_type" val="ancient"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="643"/>
   <set name="soulshots" val="1"/>
@@ -9587,7 +9587,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="false"/>
   <set name="weight" val="573"/>
   <set name="soulshots" val="1"/>
@@ -9622,7 +9622,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -9663,7 +9663,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -9704,7 +9704,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="456"/>
   <set name="soulshots" val="1"/>
@@ -9740,7 +9740,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -9781,7 +9781,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -9822,7 +9822,7 @@
   <set name="weapon_type" val="bigsword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="522"/>
   <set name="soulshots" val="1"/>
@@ -9858,7 +9858,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -9893,7 +9893,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -9928,7 +9928,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -9969,7 +9969,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -10015,7 +10015,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -10057,7 +10057,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -10099,7 +10099,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -10139,7 +10139,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -10179,7 +10179,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1520"/>
   <set name="soulshots" val="1"/>
@@ -10219,7 +10219,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2010"/>
   <set name="soulshots" val="1"/>
@@ -10260,7 +10260,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2010"/>
   <set name="soulshots" val="1"/>
@@ -10303,7 +10303,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="603"/>
   <set name="soulshots" val="1"/>
@@ -10338,7 +10338,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -10380,7 +10380,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -10421,7 +10421,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1740"/>
   <set name="soulshots" val="1"/>
@@ -10466,7 +10466,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1080"/>
   <set name="soulshots" val="1"/>
@@ -10507,7 +10507,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1080"/>
   <set name="soulshots" val="1"/>
@@ -10549,7 +10549,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1080"/>
   <set name="soulshots" val="1"/>
@@ -10585,7 +10585,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1550"/>
   <set name="soulshots" val="1"/>
@@ -10630,7 +10630,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1550"/>
   <set name="soulshots" val="1"/>
@@ -10675,7 +10675,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1550"/>
   <set name="soulshots" val="1"/>
@@ -10716,7 +10716,7 @@
   <set name="weapon_type" val="sword"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1530"/>
   <set name="soulshots" val="2"/>
@@ -10750,7 +10750,7 @@
   <set name="weapon_type" val="pole"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="2120"/>
   <set name="soulshots" val="2"/>
@@ -10784,7 +10784,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1850"/>
   <set name="soulshots" val="2"/>
@@ -10819,7 +10819,7 @@
   <set name="weapon_type" val="dagger"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1110"/>
   <set name="soulshots" val="2"/>
@@ -10853,7 +10853,7 @@
   <set name="weapon_type" val="dualfist"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1560"/>
   <set name="soulshots" val="2"/>
@@ -10888,7 +10888,7 @@
   <set name="weapon_type" val="bow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1880"/>
   <set name="soulshots" val="2"/>
@@ -10923,7 +10923,7 @@
   <set name="weapon_type" val="blunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="1"/>
+  <set name="bodypart" val="128"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1800"/>
   <set name="soulshots" val="2"/>
@@ -10958,7 +10958,7 @@
   <set name="weapon_type" val="bigblunt"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1050"/>
   <set name="soulshots" val="2"/>
@@ -10993,7 +10993,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1850"/>
   <set name="soulshots" val="2"/>
@@ -11028,7 +11028,7 @@
   <set name="weapon_type" val="crossbow"/>
   <set name="type1" val="0"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="3"/>
+  <set name="bodypart" val="16384"/>
   <set name="crystallizable" val="true"/>
   <set name="weight" val="1850"/>
   <set name="soulshots" val="2"/>

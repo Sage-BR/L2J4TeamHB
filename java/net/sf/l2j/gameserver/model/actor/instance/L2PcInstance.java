@@ -6505,9 +6505,17 @@ public final class L2PcInstance extends L2PlayableInstance
 				player.stopHpMpRegeneration();
 			}
 
-			// Restore pet if exists in the world
-			player.setPet(L2World.getInstance().getPet(player.getObjectId()));
-			if(player.getPet() != null) player.getPet().setOwner(player);
+			// Restore pet only if the world entry still matches a valid control item.
+			L2Summon restoredPet = L2World.getInstance().getPet(player.getObjectId());
+			if (restoredPet != null && player.getInventory().getItemByObjectId(restoredPet.getControlItemId()) != null)
+			{
+				player.setPet(restoredPet);
+				restoredPet.setOwner(player);
+			}
+			else if (restoredPet != null)
+			{
+				L2World.getInstance().removePet(player.getObjectId());
+			}
 
 			// Update the overloaded status of the L2PcInstance
 			player.refreshOverloaded();
@@ -6646,55 +6654,6 @@ public final class L2PcInstance extends L2PlayableInstance
 	}
 
 	/**
-	 * Store recipe book data for this L2PcInstance, if not on an active sub-class.
-	 */
-	private void storeRecipeBook()
-	{
-		// If the player is on a sub-class don't even attempt to store a recipe book.
-		if (isSubClassActive())
-			return;
-		if (getCommonRecipeBook().length == 0 && getDwarvenRecipeBook().length == 0)
-			return;
-
-		Connection con = null;
-
-		try {
-			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement statement = con.prepareStatement("DELETE FROM character_recipebook WHERE charId=?");
-			statement.setInt(1, getObjectId());
-			statement.execute();
-			statement.close();
-
-			L2RecipeList[] recipes = getCommonRecipeBook();
-
-			for (int count = 0; count < recipes.length; count++)
-			{
-				statement = con.prepareStatement("INSERT INTO character_recipebook (charId, id, type) values(?,?,0)");
-				statement.setInt(1, getObjectId());
-				statement.setInt(2, recipes[count].getId());
-				statement.execute();
-				statement.close();
-			}
-
-			recipes = getDwarvenRecipeBook();
-			for (int count = 0; count < recipes.length; count++)
-			{
-				statement = con.prepareStatement("INSERT INTO character_recipebook (charId, id, type) values(?,?,1)");
-				statement.setInt(1, getObjectId());
-				statement.setInt(2, recipes[count].getId());
-				statement.execute();
-				statement.close();
-			}
-		}
-		catch (Exception e) {
-			_log.warning("Could not store recipe book data: " + e);
-		}
-		finally {
-			try { con.close(); } catch (Exception e) {}
-		}
-	}
-
-	/**
 	 * Restore recipe book data for this L2PcInstance.
 	 */
 	private void restoreRecipeBook()
@@ -6731,12 +6690,8 @@ public final class L2PcInstance extends L2PlayableInstance
 	/**
 	 * Update L2PcInstance stats in the characters table of the database.<BR><BR>
 	 */
-	public synchronized void store()
+	public void store()
 	{
-		//update client coords, if these look like true
-        if (isInsideRadius(getClientX(), getClientY(), 1000, true))
-            setXYZ(getClientX(), getClientY(), getClientZ());
-
 		storeCharBase();
 		storeCharSub();
 		storeEffect();
@@ -6746,78 +6701,68 @@ public final class L2PcInstance extends L2PlayableInstance
 
 	private void storeCharBase()
 	{
+		storeCharBase(captureBaseSnapshot(true));
+	}
+
+	private void storeCharBase(StoreBaseSnapshot snapshot)
+	{
 		Connection con = null;
 
 		try
 		{
-			// Get the exp, level, and sp of base class to store in base table
-			int currentClassIndex = getClassIndex();
-			_classIndex = 0;
-			long exp     = getStat().getExp();
-			int level   = getStat().getLevel();
-			int sp      = getStat().getSp();
-			_classIndex = currentClassIndex;
-
 			con = L2DatabaseFactory.getInstance().getConnection();
-			// Update base class
 			PreparedStatement statement = con.prepareStatement(UPDATE_CHARACTER);
-			
-			statement.setInt(1, level);
-			statement.setInt(2, getMaxHp());
-			statement.setDouble(3, getCurrentHp());
-			statement.setInt(4, getMaxCp());
-			statement.setDouble(5, getCurrentCp());
-			statement.setInt(6, getMaxMp());
-			statement.setDouble(7, getCurrentMp());
-			statement.setInt(8, getAppearance().getFace());
-			statement.setInt(9, getAppearance().getHairStyle());
-			statement.setInt(10, getAppearance().getHairColor());
-			statement.setInt(11, getHeading());
-			statement.setInt(12, _observerMode ? _obsX : getX());
-			statement.setInt(13, _observerMode ? _obsY : getY());
-			statement.setInt(14, _observerMode ? _obsZ : getZ());
-			statement.setLong(15, exp);
-			statement.setLong(16, getExpBeforeDeath());
-			statement.setInt(17, sp);
-			statement.setInt(18, getKarma());
-			statement.setInt(19, getPvpKills());
-			statement.setInt(20, getPkKills());
-			statement.setInt(21, getRecomHave());
-			statement.setInt(22, getRecomLeft());
-			statement.setInt(23, getClanId());
-			statement.setInt(24, getRace().ordinal());
-			statement.setInt(25, getClassId().getId());
-			statement.setLong(26, getDeleteTimer());
-			statement.setString(27, getTitle());
-			statement.setInt(28, getAccessLevel().getLevel());
-			statement.setInt(29, isOnline());
-            statement.setInt(30, isIn7sDungeon() ? 1 : 0);
-			statement.setInt(31, getClanPrivileges());
-			statement.setInt(32, getWantsPeace());
-			statement.setInt(33, getBaseClass());
 
-			long totalOnlineTime = _onlineTime;
-
-			if (_onlineBeginTime > 0)
-				totalOnlineTime += (System.currentTimeMillis()-_onlineBeginTime)/1000;
-
-            statement.setLong(34, totalOnlineTime);
-            statement.setInt(35, isInJail() ? 1 : 0);
-            statement.setLong(36, getJailTimer());
-            statement.setInt(37, getNewbie());
-            statement.setInt(38, isNoble() ? 1 : 0);
-            statement.setLong(39, getPowerGrade());
-            statement.setInt(40, getPledgeType());
-            statement.setLong(41,getLastRecomUpdate());
-            statement.setInt(42,getLvlJoinedAcademy());
-            statement.setLong(43,getApprentice());
-            statement.setLong(44,getSponsor());
-            statement.setInt(45, getAllianceWithVarkaKetra());
-			statement.setLong(46, getClanJoinExpiryTime());
-			statement.setLong(47, getClanCreateExpiryTime());
-			statement.setString(48, getName());
-			statement.setLong(49, getDeathPenaltyBuffLevel());
-            statement.setInt(50, getObjectId());
+			statement.setInt(1, snapshot.level);
+			statement.setInt(2, snapshot.maxHp);
+			statement.setDouble(3, snapshot.currentHp);
+			statement.setInt(4, snapshot.maxCp);
+			statement.setDouble(5, snapshot.currentCp);
+			statement.setInt(6, snapshot.maxMp);
+			statement.setDouble(7, snapshot.currentMp);
+			statement.setInt(8, snapshot.face);
+			statement.setInt(9, snapshot.hairStyle);
+			statement.setInt(10, snapshot.hairColor);
+			statement.setInt(11, snapshot.heading);
+			statement.setInt(12, snapshot.x);
+			statement.setInt(13, snapshot.y);
+			statement.setInt(14, snapshot.z);
+			statement.setLong(15, snapshot.exp);
+			statement.setLong(16, snapshot.expBeforeDeath);
+			statement.setInt(17, snapshot.sp);
+			statement.setInt(18, snapshot.karma);
+			statement.setInt(19, snapshot.pvpKills);
+			statement.setInt(20, snapshot.pkKills);
+			statement.setInt(21, snapshot.recomHave);
+			statement.setInt(22, snapshot.recomLeft);
+			statement.setInt(23, snapshot.clanId);
+			statement.setInt(24, snapshot.race);
+			statement.setInt(25, snapshot.classId);
+			statement.setLong(26, snapshot.deleteTimer);
+			statement.setString(27, snapshot.title);
+			statement.setInt(28, snapshot.accessLevel);
+			statement.setInt(29, snapshot.online);
+			statement.setInt(30, snapshot.in7sDungeon);
+			statement.setInt(31, snapshot.clanPrivileges);
+			statement.setInt(32, snapshot.wantsPeace);
+			statement.setInt(33, snapshot.baseClass);
+			statement.setLong(34, snapshot.totalOnlineTime);
+			statement.setInt(35, snapshot.inJail);
+			statement.setLong(36, snapshot.jailTimer);
+			statement.setInt(37, snapshot.newbie);
+			statement.setInt(38, snapshot.noble);
+			statement.setLong(39, snapshot.powerGrade);
+			statement.setInt(40, snapshot.pledgeType);
+			statement.setLong(41, snapshot.lastRecomUpdate);
+			statement.setInt(42, snapshot.lvlJoinedAcademy);
+			statement.setLong(43, snapshot.apprentice);
+			statement.setLong(44, snapshot.sponsor);
+			statement.setInt(45, snapshot.allianceWithVarkaKetra);
+			statement.setLong(46, snapshot.clanJoinExpiryTime);
+			statement.setLong(47, snapshot.clanCreateExpiryTime);
+			statement.setString(48, snapshot.name);
+			statement.setLong(49, snapshot.deathPenaltyBuffLevel);
+			statement.setInt(50, snapshot.objectId);
 
 			statement.execute();
 			statement.close();
@@ -6826,38 +6771,46 @@ public final class L2PcInstance extends L2PlayableInstance
 		finally { try { con.close(); } catch (Exception e) {} }
 	}
 
-    private void storeCharSub()
-    {
-        Connection con = null;
+	private void storeCharSub()
+	{
+		storeCharSub(captureSubSnapshot());
+	}
 
-        try
-        {
-            con = L2DatabaseFactory.getInstance().getConnection();
-            PreparedStatement statement = con.prepareStatement(UPDATE_CHAR_SUBCLASS);
-            
-            if (getTotalSubClasses() > 0)
-            {
-            	for (SubClass subClass : getSubClasses().values())
-            	{
-                    statement.setLong(1, subClass.getExp());
-                    statement.setInt(2, subClass.getSp());
-                    statement.setInt(3, subClass.getLevel());
-                    statement.setInt(4, subClass.getClassId());
-                    statement.setInt(5, getObjectId());
-                    statement.setInt(6, subClass.getClassIndex());
+	private void storeCharSub(StoreSubSnapshot snapshot)
+	{
+		Connection con = null;
 
-                    statement.execute();
-                }
-            	statement.close();
-            }
-        }
-        catch (Exception e) {
-        	_log.warning("Could not store sub class data for " + getName() + ": "+ e);
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement = con.prepareStatement(UPDATE_CHAR_SUBCLASS);
+
+			for (StoreSubSnapshot.SubClassSnapshot subClass : snapshot.subClasses)
+			{
+				statement.setLong(1, subClass.exp);
+				statement.setInt(2, subClass.sp);
+				statement.setInt(3, subClass.level);
+				statement.setInt(4, subClass.classId);
+				statement.setInt(5, snapshot.objectId);
+				statement.setInt(6, subClass.classIndex);
+
+				statement.execute();
+			}
+
+			statement.close();
 		}
-        finally { try { con.close(); } catch (Exception e) {} }
-    }
-    
-    private void storeEffect()
+		catch (Exception e) {
+			_log.warning("Could not store sub class data for " + getName() + ": "+ e);
+		}
+		finally { try { con.close(); } catch (Exception e) {} }
+	}
+	
+	private void storeEffect()
+	{
+		storeEffect(captureEffectSnapshot());
+	}
+
+	private void storeEffect(EffectStoreSnapshot snapshot)
 	{
 		if (!Config.STORE_SKILL_COOLTIME)
 			return;
@@ -6867,81 +6820,43 @@ public final class L2PcInstance extends L2PlayableInstance
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			
-			// Delete all current stored effects for char to avoid dupe
 			PreparedStatement statement = con.prepareStatement(DELETE_SKILL_SAVE);
 			
-			statement.setInt(1, getObjectId());
-			statement.setInt(2, getClassIndex());
+			statement.setInt(1, snapshot.objectId);
+			statement.setInt(2, snapshot.classIndex);
 			statement.execute();
 			statement.close();
 			
-			int buff_index = 0;
-			
-			// Store all effect data along with calulated remaining
-			// reuse delays for matching skills. 'restore_type'= 0.
 			statement = con.prepareStatement(ADD_SKILL_SAVE);
 			
-			List<L2Skill> storedSkills = new ArrayList<L2Skill>();
-			
-			for (L2Effect effect : getAllEffects())
+			for (EffectStoreRow effect : snapshot.activeEffects)
 			{
-				L2Skill skill = effect.getSkill();
-				
-				if (storedSkills.contains(skill))
-					continue;
-				
-				storedSkills.add(skill);
-				
-				if (effect != null && !effect.isHerbEffect() && effect.getInUse() && !skill.isToggle())
-				{
-					int skillId = skill.getId();
-					buff_index++;
-					
-					statement.setInt(1, getObjectId());
-					statement.setInt(2, skillId);
-					statement.setInt(3, skill.getLevel());
-					statement.setInt(4, effect.getCount());
-					statement.setInt(5, effect.getTime());
-					
-					if (_reuseTimeStamps.containsKey(skillId))
-					{
-						TimeStamp t = _reuseTimeStamps.remove(skillId);
-						statement.setLong(6, t.hasNotPassed() ? t.getReuse() : 0);
-						statement.setDouble(7, t.hasNotPassed() ? t.getStamp() : 0);
-					}
-					else
-					{
-						statement.setLong(6, 0);
-						statement.setDouble(7, 0);
-					}
-					
-					statement.setInt(8, 0);
-					statement.setInt(9, getClassIndex());
-					statement.setInt(10, buff_index);
-					statement.execute();
-				}
+				statement.setInt(1, snapshot.objectId);
+				statement.setInt(2, effect.skillId);
+				statement.setInt(3, effect.skillLevel);
+				statement.setInt(4, effect.effectCount);
+				statement.setInt(5, effect.effectTime);
+				statement.setLong(6, effect.reuse);
+				statement.setDouble(7, effect.stamp);
+				statement.setInt(8, 0);
+				statement.setInt(9, snapshot.classIndex);
+				statement.setInt(10, effect.buffIndex);
+				statement.execute();
 			}
 			
-			// Store the reuse delays of remaining skills which
-			// lost effect but still under reuse delay. 'restore_type' 1.
-			for (TimeStamp t : _reuseTimeStamps.values())
+			for (ReuseStoreRow reuse : snapshot.remainingReuseTimestamps)
 			{
-				if (t.hasNotPassed())
-				{
-					buff_index++;
-					statement.setInt(1, getObjectId());
-					statement.setInt(2, t.getSkill());
-					statement.setInt(3, -1);
-					statement.setInt(4, -1);
-					statement.setInt(5, -1);
-					statement.setLong(6, t.getReuse());
-					statement.setDouble(7, t.getStamp());
-					statement.setInt(8, 1);
-					statement.setInt(9, getClassIndex());
-					statement.setInt(10, buff_index);
-					statement.execute();
-					
-				}
+				statement.setInt(1, snapshot.objectId);
+				statement.setInt(2, reuse.skillId);
+				statement.setInt(3, -1);
+				statement.setInt(4, -1);
+				statement.setInt(5, -1);
+				statement.setLong(6, reuse.reuse);
+				statement.setDouble(7, reuse.stamp);
+				statement.setInt(8, 1);
+				statement.setInt(9, snapshot.classIndex);
+				statement.setInt(10, reuse.buffIndex);
+				statement.execute();
 			}
 			statement.close();
 		}
@@ -6958,6 +6873,364 @@ public final class L2PcInstance extends L2PlayableInstance
 			catch (Exception e)
 			{
 			}
+		}
+	}
+
+	private void storeRecipeBook()
+	{
+		storeRecipeBook(captureRecipeSnapshot());
+	}
+
+	private void storeRecipeBook(RecipeStoreSnapshot snapshot)
+	{
+		if (snapshot.subClassActive)
+			return;
+		if (snapshot.commonRecipes.length == 0 && snapshot.dwarvenRecipes.length == 0)
+			return;
+
+		Connection con = null;
+
+		try {
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement = con.prepareStatement("DELETE FROM character_recipebook WHERE charId=?");
+			statement.setInt(1, snapshot.objectId);
+			statement.execute();
+			statement.close();
+
+			L2RecipeList[] recipes = snapshot.commonRecipes;
+
+			for (int count = 0; count < recipes.length; count++)
+			{
+				statement = con.prepareStatement("INSERT INTO character_recipebook (charId, id, type) values(?,?,0)");
+				statement.setInt(1, snapshot.objectId);
+				statement.setInt(2, recipes[count].getId());
+				statement.execute();
+				statement.close();
+			}
+
+			recipes = snapshot.dwarvenRecipes;
+			for (int count = 0; count < recipes.length; count++)
+			{
+				statement = con.prepareStatement("INSERT INTO character_recipebook (charId, id, type) values(?,?,1)");
+				statement.setInt(1, snapshot.objectId);
+				statement.setInt(2, recipes[count].getId());
+				statement.execute();
+				statement.close();
+			}
+		}
+		catch (Exception e) {
+			_log.warning("Could not store recipe book data: " + e);
+		}
+		finally {
+			try { con.close(); } catch (Exception e) {}
+		}
+	}
+
+	private synchronized StoreBaseSnapshot captureBaseSnapshot(boolean updateClientCoords)
+	{
+		if (updateClientCoords && isInsideRadius(getClientX(), getClientY(), 1000, true))
+			setXYZ(getClientX(), getClientY(), getClientZ());
+
+		int currentClassIndex = getClassIndex();
+		_classIndex = 0;
+		long exp = getStat().getExp();
+		int level = getStat().getLevel();
+		int sp = getStat().getSp();
+		_classIndex = currentClassIndex;
+
+		long totalOnlineTime = _onlineTime;
+
+		if (_onlineBeginTime > 0)
+			totalOnlineTime += (System.currentTimeMillis() - _onlineBeginTime) / 1000;
+
+		int x = _observerMode ? _obsX : getX();
+		int y = _observerMode ? _obsY : getY();
+		int z = _observerMode ? _obsZ : getZ();
+
+		return new StoreBaseSnapshot(level, getMaxHp(), getCurrentHp(), getMaxCp(), getCurrentCp(), getMaxMp(), getCurrentMp(),
+				getAppearance().getFace(), getAppearance().getHairStyle(), getAppearance().getHairColor(), getHeading(),
+				x, y, z, exp, getExpBeforeDeath(), sp, getKarma(), getPvpKills(), getPkKills(), getRecomHave(),
+				getRecomLeft(), getClanId(), getRace().ordinal(), getClassId().getId(), getDeleteTimer(), getTitle(),
+				getAccessLevel().getLevel(), isOnline(), isIn7sDungeon() ? 1 : 0, getClanPrivileges(), getWantsPeace(),
+				getBaseClass(), totalOnlineTime, isInJail() ? 1 : 0, getJailTimer(), getNewbie(), isNoble() ? 1 : 0,
+				getPowerGrade(), getPledgeType(), getLastRecomUpdate(), getLvlJoinedAcademy(), getApprentice(),
+				getSponsor(), getAllianceWithVarkaKetra(), getClanJoinExpiryTime(), getClanCreateExpiryTime(), getName(),
+				getDeathPenaltyBuffLevel(), getObjectId());
+	}
+
+	private synchronized StoreSubSnapshot captureSubSnapshot()
+	{
+		List<StoreSubSnapshot.SubClassSnapshot> subClasses = new ArrayList<StoreSubSnapshot.SubClassSnapshot>();
+
+		for (SubClass subClass : getSubClasses().values())
+			subClasses.add(new StoreSubSnapshot.SubClassSnapshot(subClass.getClassIndex(), subClass.getExp(), subClass.getSp(), subClass.getLevel(), subClass.getClassId()));
+
+		return new StoreSubSnapshot(getObjectId(), subClasses);
+	}
+
+	private synchronized EffectStoreSnapshot captureEffectSnapshot()
+	{
+		if (!Config.STORE_SKILL_COOLTIME)
+			return new EffectStoreSnapshot(getObjectId(), getClassIndex(), new ArrayList<EffectStoreRow>(), new ArrayList<ReuseStoreRow>());
+
+		List<EffectStoreRow> activeEffects = new ArrayList<EffectStoreRow>();
+		List<ReuseStoreRow> remainingReuseTimestamps = new ArrayList<ReuseStoreRow>();
+		List<L2Skill> storedSkills = new ArrayList<L2Skill>();
+		int buffIndex = 0;
+
+		for (L2Effect effect : getAllEffects())
+		{
+			if (effect == null)
+				continue;
+
+			L2Skill skill = effect.getSkill();
+			if (skill == null || storedSkills.contains(skill))
+				continue;
+
+			storedSkills.add(skill);
+
+			if (!effect.isHerbEffect() && effect.getInUse() && !skill.isToggle())
+			{
+				int skillId = skill.getId();
+				long reuse = 0;
+				double stamp = 0;
+				TimeStamp t = _reuseTimeStamps.remove(skillId);
+				if (t != null && t.hasNotPassed())
+				{
+					reuse = t.getReuse();
+					stamp = t.getStamp();
+				}
+
+				activeEffects.add(new EffectStoreRow(skillId, skill.getLevel(), effect.getCount(), effect.getTime(), reuse, stamp, ++buffIndex));
+			}
+		}
+
+		for (TimeStamp t : _reuseTimeStamps.values())
+		{
+			if (t.hasNotPassed())
+				remainingReuseTimestamps.add(new ReuseStoreRow(t.getSkill(), t.getReuse(), t.getStamp(), ++buffIndex));
+		}
+
+		return new EffectStoreSnapshot(getObjectId(), getClassIndex(), activeEffects, remainingReuseTimestamps);
+	}
+
+	private synchronized RecipeStoreSnapshot captureRecipeSnapshot()
+	{
+		return new RecipeStoreSnapshot(getObjectId(), isSubClassActive(), getCommonRecipeBook(), getDwarvenRecipeBook());
+	}
+
+	private static final class StoreBaseSnapshot
+	{
+		private final int level;
+		private final int maxHp;
+		private final double currentHp;
+		private final int maxCp;
+		private final double currentCp;
+		private final int maxMp;
+		private final double currentMp;
+		private final int face;
+		private final int hairStyle;
+		private final int hairColor;
+		private final int heading;
+		private final int x;
+		private final int y;
+		private final int z;
+		private final long exp;
+		private final long expBeforeDeath;
+		private final int sp;
+		private final int karma;
+		private final int pvpKills;
+		private final int pkKills;
+		private final int recomHave;
+		private final int recomLeft;
+		private final int clanId;
+		private final int race;
+		private final int classId;
+		private final long deleteTimer;
+		private final String title;
+		private final int accessLevel;
+		private final int online;
+		private final int in7sDungeon;
+		private final int clanPrivileges;
+		private final int wantsPeace;
+		private final int baseClass;
+		private final long totalOnlineTime;
+		private final int inJail;
+		private final long jailTimer;
+		private final int newbie;
+		private final int noble;
+		private final long powerGrade;
+		private final int pledgeType;
+		private final long lastRecomUpdate;
+		private final int lvlJoinedAcademy;
+		private final long apprentice;
+		private final long sponsor;
+		private final int allianceWithVarkaKetra;
+		private final long clanJoinExpiryTime;
+		private final long clanCreateExpiryTime;
+		private final String name;
+		private final long deathPenaltyBuffLevel;
+		private final int objectId;
+
+		private StoreBaseSnapshot(int pLevel, int pMaxHp, double pCurrentHp, int pMaxCp, double pCurrentCp, int pMaxMp, double pCurrentMp,
+				int pFace, int pHairStyle, int pHairColor, int pHeading, int pX, int pY, int pZ, long pExp, long pExpBeforeDeath,
+				int pSp, int pKarma, int pPvpKills, int pPkKills, int pRecomHave, int pRecomLeft, int pClanId, int pRace,
+				int pClassId, long pDeleteTimer, String pTitle, int pAccessLevel, int pOnline, int pIn7sDungeon,
+				int pClanPrivileges, int pWantsPeace, int pBaseClass, long pTotalOnlineTime, int pInJail, long pJailTimer,
+				int pNewbie, int pNoble, long pPowerGrade, int pPledgeType, long pLastRecomUpdate, int pLvlJoinedAcademy,
+				long pApprentice, long pSponsor, int pAllianceWithVarkaKetra, long pClanJoinExpiryTime,
+				long pClanCreateExpiryTime, String pName, long pDeathPenaltyBuffLevel, int pObjectId)
+		{
+			this.level = pLevel;
+			this.maxHp = pMaxHp;
+			this.currentHp = pCurrentHp;
+			this.maxCp = pMaxCp;
+			this.currentCp = pCurrentCp;
+			this.maxMp = pMaxMp;
+			this.currentMp = pCurrentMp;
+			this.face = pFace;
+			this.hairStyle = pHairStyle;
+			this.hairColor = pHairColor;
+			this.heading = pHeading;
+			this.x = pX;
+			this.y = pY;
+			this.z = pZ;
+			this.exp = pExp;
+			this.expBeforeDeath = pExpBeforeDeath;
+			this.sp = pSp;
+			this.karma = pKarma;
+			this.pvpKills = pPvpKills;
+			this.pkKills = pPkKills;
+			this.recomHave = pRecomHave;
+			this.recomLeft = pRecomLeft;
+			this.clanId = pClanId;
+			this.race = pRace;
+			this.classId = pClassId;
+			this.deleteTimer = pDeleteTimer;
+			this.title = pTitle;
+			this.accessLevel = pAccessLevel;
+			this.online = pOnline;
+			this.in7sDungeon = pIn7sDungeon;
+			this.clanPrivileges = pClanPrivileges;
+			this.wantsPeace = pWantsPeace;
+			this.baseClass = pBaseClass;
+			this.totalOnlineTime = pTotalOnlineTime;
+			this.inJail = pInJail;
+			this.jailTimer = pJailTimer;
+			this.newbie = pNewbie;
+			this.noble = pNoble;
+			this.powerGrade = pPowerGrade;
+			this.pledgeType = pPledgeType;
+			this.lastRecomUpdate = pLastRecomUpdate;
+			this.lvlJoinedAcademy = pLvlJoinedAcademy;
+			this.apprentice = pApprentice;
+			this.sponsor = pSponsor;
+			this.allianceWithVarkaKetra = pAllianceWithVarkaKetra;
+			this.clanJoinExpiryTime = pClanJoinExpiryTime;
+			this.clanCreateExpiryTime = pClanCreateExpiryTime;
+			this.name = pName;
+			this.deathPenaltyBuffLevel = pDeathPenaltyBuffLevel;
+			this.objectId = pObjectId;
+		}
+	}
+
+	private static final class StoreSubSnapshot
+	{
+		private final int objectId;
+		private final List<SubClassSnapshot> subClasses;
+
+		private StoreSubSnapshot(int pObjectId, List<SubClassSnapshot> pSubClasses)
+		{
+			this.objectId = pObjectId;
+			this.subClasses = pSubClasses;
+		}
+
+		private static final class SubClassSnapshot
+		{
+			private final int classIndex;
+			private final long exp;
+			private final int sp;
+			private final int level;
+			private final int classId;
+
+			private SubClassSnapshot(int pClassIndex, long pExp, int pSp, int pLevel, int pClassId)
+			{
+				this.classIndex = pClassIndex;
+				this.exp = pExp;
+				this.sp = pSp;
+				this.level = pLevel;
+				this.classId = pClassId;
+			}
+		}
+	}
+
+	private static final class EffectStoreRow
+	{
+		private final int skillId;
+		private final int skillLevel;
+		private final int effectCount;
+		private final int effectTime;
+		private final long reuse;
+		private final double stamp;
+		private final int buffIndex;
+
+		private EffectStoreRow(int pSkillId, int pSkillLevel, int pEffectCount, int pEffectTime, long pReuse, double pStamp, int pBuffIndex)
+		{
+			this.skillId = pSkillId;
+			this.skillLevel = pSkillLevel;
+			this.effectCount = pEffectCount;
+			this.effectTime = pEffectTime;
+			this.reuse = pReuse;
+			this.stamp = pStamp;
+			this.buffIndex = pBuffIndex;
+		}
+	}
+
+	private static final class ReuseStoreRow
+	{
+		private final int skillId;
+		private final long reuse;
+		private final double stamp;
+		private final int buffIndex;
+
+		private ReuseStoreRow(int pSkillId, long pReuse, double pStamp, int pBuffIndex)
+		{
+			this.skillId = pSkillId;
+			this.reuse = pReuse;
+			this.stamp = pStamp;
+			this.buffIndex = pBuffIndex;
+		}
+	}
+
+	private static final class EffectStoreSnapshot
+	{
+		private final int objectId;
+		private final int classIndex;
+		private final List<EffectStoreRow> activeEffects;
+		private final List<ReuseStoreRow> remainingReuseTimestamps;
+
+		private EffectStoreSnapshot(int pObjectId, int pClassIndex, List<EffectStoreRow> pActiveEffects, List<ReuseStoreRow> pRemainingReuseTimestamps)
+		{
+			this.objectId = pObjectId;
+			this.classIndex = pClassIndex;
+			this.activeEffects = pActiveEffects;
+			this.remainingReuseTimestamps = pRemainingReuseTimestamps;
+		}
+	}
+
+	private static final class RecipeStoreSnapshot
+	{
+		private final int objectId;
+		private final boolean subClassActive;
+		private final L2RecipeList[] commonRecipes;
+		private final L2RecipeList[] dwarvenRecipes;
+
+		private RecipeStoreSnapshot(int pObjectId, boolean pSubClassActive, L2RecipeList[] pCommonRecipes, L2RecipeList[] pDwarvenRecipes)
+		{
+			this.objectId = pObjectId;
+			this.subClassActive = pSubClassActive;
+			this.commonRecipes = pCommonRecipes;
+			this.dwarvenRecipes = pDwarvenRecipes;
 		}
 	}
 

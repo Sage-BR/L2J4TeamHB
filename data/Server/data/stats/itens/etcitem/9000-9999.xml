@@ -3303,7 +3303,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='9633' name="Bone Bolt">
@@ -3322,7 +3322,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='9634' name="Steel Bolt">
@@ -3341,7 +3341,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='9635' name="Silver Bolt">
@@ -3360,7 +3360,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='9636' name="Mithril Bolt">
@@ -3379,7 +3379,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='9637' name="Shining Bolt">
@@ -3398,7 +3398,7 @@
   <set name="tradeable" val="true"/>
   <set name="type1" val="4"/>
   <set name="type2" val="0"/>
-  <set name="bodypart" val="4"/>
+  <set name="bodypart" val="256"/>
   <set name="stackable" val="true"/>
 </item>
 <item id='9647' name="Scroll of Escape: Isle of Souls">

@@ -3,7 +3,7 @@
 <item id='9605' name="Agathion Seal Bracelet - Rainbow Clan Hall">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -28,7 +28,7 @@
 <item id='9606' name="Agathion Seal Bracelet - Wild Beast Reserve">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -53,7 +53,7 @@
 <item id='9607' name="Agathion Seal Bracelet - Gludio">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -78,7 +78,7 @@
 <item id='9608' name="Agathion Seal Bracelet - Dion">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -103,7 +103,7 @@
 <item id='9609' name="Agathion Seal Bracelet - Giran">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -128,7 +128,7 @@
 <item id='9610' name="Agathion Seal Bracelet - Oren">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -153,7 +153,7 @@
 <item id='9611' name="Agathion Seal Bracelet - Aden">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -178,7 +178,7 @@
 <item id='9612' name="Agathion Seal Bracelet - Innadril">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -203,7 +203,7 @@
 <item id='9613' name="Agathion Seal Bracelet - Goddard">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -228,7 +228,7 @@
 <item id='9614' name="Agathion Seal Bracelet - Rune">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -253,7 +253,7 @@
 <item id='9615' name="Agathion Seal Bracelet - Schuttgart">
   <for>
   </for>
-  <set name="bodypart" val="67108864"/>
+  <set name="bodypart" val="1048576"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>
@@ -454,7 +454,7 @@
    <add val='33' order='0x10' stat='pDef'/>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="1024"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="70"/>
@@ -481,7 +481,7 @@
    <add val='53' order='0x10' stat='pDef'/>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="2048"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="4720"/>
@@ -508,7 +508,7 @@
    <add val='29' order='0x10' stat='pDef'/>
    <enchant val='0' order='0x0C' stat='pDef'/>
   </for>
-  <set name="bodypart" val="4096"/>
+  <set name="bodypart" val="512"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="1700"/>
@@ -535,7 +535,7 @@
    <add val='36' order='0x10' stat='mDef'/>
    <enchant val='0' order='0x0C' stat='mDef'/>
   </for>
-  <set name="bodypart" val="7"/>
+  <set name="bodypart" val="48"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>

@@ -75,7 +75,7 @@ public class ValidatePosition extends L2GameClientPacket
         		&& GeoData.getInstance().hasGeo(_x, _y))
         {
         	// check Z coordinate sent by client
-        	short geoHeight = GeoData.getInstance().getSpawnHeight(_x, _y, activeChar.getZ()-30, activeChar.getZ()+30, activeChar.getObjectId());
+        	short geoHeight = GeoData.getInstance().getHeight(_x, _y, _z);
         	if (Math.abs(geoHeight - _z) > 15)
         	{
         		if (Config.MOVE_DEBUG)
@@ -166,11 +166,11 @@ public class ValidatePosition extends L2GameClientPacket
         // through geodata gaps (columns, bridges, ramps, etc).
         if (Config.GEODATA > 0 && !activeChar.isFlying())
         {
-            // Use a wider scan window to ensure we find the ramp layer even when
-            // the client is several units offset from the geo surface.
-            int terrainZ = GeoData.getInstance().getSpawnHeight(_x, _y, _z - 80, _z + 80, activeChar.getObjectId());
+            // Keep the terrain snap anchored to the client Z so we do not jump
+            // to another floor in multilayer geodata.
+            int terrainZ = GeoData.getInstance().getHeight(_x, _y, _z);
             int heightDiff = terrainZ - _z;
-            if (heightDiff > 5 && heightDiff < 80)
+            if (heightDiff > 5 && heightDiff < 40)
             {
                 if (Config.MOVE_DEBUG)
                     _log.info("[MOVE] TERRAIN SNAP: client_z="+_z+" terrainZ="+terrainZ+" diff="+heightDiff+" at ("+_x+","+_y+")");
@@ -188,8 +188,8 @@ public class ValidatePosition extends L2GameClientPacket
             // o personagem spawnou dentro de geometria (rampa/parede) mesmo depois do Z override.
             // Nota: diferencas de 30+ indicam que o cliente esta flutuando sobre o terreno
             // (colision height + geo gap). Com threshold 30, diffs como 39 sao detectados.
-            int checkZ = (Math.abs(originalClientZ - realZ) <= 30) ? originalClientZ : realZ;
-            int serverTerrainZ = GeoData.getInstance().getSpawnHeight(realX, realY, checkZ - 500, checkZ + 500, activeChar.getObjectId());
+            int checkZ = originalClientZ;
+            int serverTerrainZ = GeoData.getInstance().getHeight(realX, realY, checkZ);
             final int verticalDrop = Math.max(0, realZ0 - activeChar.getZ());
             final int verticalDropThreshold = Math.max(160, activeChar.getTemplate().collisionHeight * 3);
             if ((Math.abs(checkZ - serverTerrainZ) > 30 || verticalDrop >= verticalDropThreshold) && !activeChar.isFalling(originalClientZ))

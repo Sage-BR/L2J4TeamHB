@@ -69,22 +69,22 @@ public class L2SyncMap<K extends Object, V extends Object> implements Map<K, V>
     }
     
     /**
-     * This method use specific locking strategy: map which have lowest hashCode() will be locked first
+     * Keeps a stable lock ordering without depending on map contents.
      * @see java.util.Map#putAll(java.util.Map)
      */
     public void putAll(Map<? extends K, ? extends V> map) {
     	if (map == null || this == map) return;
-    	if (this.hashCode() <= map.hashCode())
-    		synchronized (this) {
-    			synchronized (map) {
-    				_map.putAll(map);
-    			}
-    		}
-    	else {
-    		synchronized (map) {
-    			synchronized(this) {
-    				_map.putAll(map);
-    			}
+    	Object first = this;
+    	Object second = map;
+
+    	if (System.identityHashCode(first) > System.identityHashCode(second)) {
+    		first = map;
+    		second = this;
+    	}
+
+    	synchronized (first) {
+    		synchronized (second) {
+    			_map.putAll(map);
     		}
     	}
     }

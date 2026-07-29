@@ -68,12 +68,12 @@ public class BlockMultilayer extends ABlock
 			return (short)worldZ;
 		
 		int nearestAddr = addr;
-		int nearestDist = Math.abs(_geo.getShort(addr) - worldZ);
+		int nearestDist = Math.abs(decodeHeight(_geo.getShort(addr) & 0xFFFF) - worldZ);
 		
 		for (int i = 1; i < layers; i++)
 		{
 			int layerAddr = addr + i * 2;
-			int dist = Math.abs(_geo.getShort(layerAddr) - worldZ);
+			int dist = Math.abs(decodeHeight(_geo.getShort(layerAddr) & 0xFFFF) - worldZ);
 			if (dist < nearestDist)
 			{
 				nearestDist = dist;
@@ -94,12 +94,12 @@ public class BlockMultilayer extends ABlock
 			return GeoStructure.CELL_FLAG_ALL;
 		
 		int nearestAddr = addr;
-		int nearestDist = Math.abs(_geo.getShort(addr) - worldZ);
+		int nearestDist = Math.abs(decodeHeight(_geo.getShort(addr) & 0xFFFF) - worldZ);
 		
 		for (int i = 1; i < layers; i++)
 		{
 			int layerAddr = addr + i * 2;
-			int dist = Math.abs(_geo.getShort(layerAddr) - worldZ);
+			int dist = Math.abs(decodeHeight(_geo.getShort(layerAddr) & 0xFFFF) - worldZ);
 			if (dist < nearestDist)
 			{
 				nearestDist = dist;

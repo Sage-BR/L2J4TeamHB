@@ -4,7 +4,7 @@
     <for>
       <add val="68" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="2048" />
+    <set name="bodypart" val="1024"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="heavy" />
     <set name="weight" val="8920" />
@@ -29,7 +29,7 @@
     <for>
       <add val="43" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="4096" />
+    <set name="bodypart" val="2048"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="heavy" />
     <set name="weight" val="3960" />
@@ -54,7 +54,7 @@
     <for>
       <add val="17" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="64" />
+    <set name="bodypart" val="512"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="650" />
@@ -79,7 +79,7 @@
     <for>
       <add val="17" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="32768" />
+    <set name="bodypart" val="4096"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="1310" />
@@ -104,7 +104,7 @@
     <for>
       <add val="68" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="2048" />
+    <set name="bodypart" val="1024"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="heavy" />
     <set name="weight" val="8920" />
@@ -129,7 +129,7 @@
     <for>
       <add val="43" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="4096" />
+    <set name="bodypart" val="2048"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="heavy" />
     <set name="weight" val="3960" />
@@ -154,7 +154,7 @@
     <for>
       <add val="17" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="64" />
+    <set name="bodypart" val="512"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="650" />
@@ -179,7 +179,7 @@
     <for>
       <add val="17" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="32768" />
+    <set name="bodypart" val="4096"/>
     <set name="crystallizable" val="true" />
     <set name="armor_type" val="none" />
     <set name="weight" val="1310" />
@@ -219,7 +219,7 @@
       <add val="58" order="0x10" stat="pDef" />
       <add val="58" order="0x10" stat="mDef" />
     </for>
-    <set name="bodypart" val="2048" />
+    <set name="bodypart" val="1024"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="light" />
     <set name="weight" val="160" />
