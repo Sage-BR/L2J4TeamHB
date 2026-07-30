@@ -19,6 +19,28 @@ Commits aplicados manualmente no servidor, baseados em análise do repositório 
 
 ## Commits Aplicados
 
+## 2026-07-30 — Sessão 16: Alinhamento completo com VERGE SOURCE 2.2 (geodata + movimento)
+
+### Diagnóstico
+
+Três bugs interconectados causavam rollbacks massivos, teleports e personagens travando:
+
+1. **GeoDataPatcher corrompia arquivos .l2j** — Usava formato `(height << 4) | NSWE` mas o formato L2J correto é `(height << 1) | NSWE`. Resultado: heights multiplicados por 8 (ex: `-1192` virava `-9536`).
+2. **ValidatePosition tinha lógica demais** — Z override por geoHeight, terrain snap e geometry stuck recovery competiam com o GeoEngine, causando rollbacks constantes.
+3. **Geodata files no disco estavam corrompidos** — Pelo patcher antigo com formato errado.
+
+### Correções aplicadas
+
+- **GeoDataPatcher.java** — `unpackHeight()` e `packData()` corrigidos para formato `(height << 1) | NSWE` (compatível com L2J e VERGE).
+- **ValidatePosition.java** — Reescrito para padrão VERGE: lógica simples de desync vs velocidade. Removidos Z override, terrain snap e geometry stuck recovery. Restaurados `setLastClientPosition`/`setLastServerPosition`.
+- **data/Server/data/geodata/*.l2j** — Restaurados arquivos originais do git (commit `a66569ab5`) antes da corrupção do patcher.
+- **BlockMultilayer.java / BlockComplex.java** — `decodeHeight()` mantido com `>> 1` (formato L2J correto, já era).
+
+### Próximos passos necessários
+
+- Re-executar o GeoDataPatcher **corrigido** sobre os arquivos restaurados para corrigir NSWE flags.
+- Revisar `nCanMoveNext` RAMP-IGNORE-NSWE — com geodata correto, pode não ser mais necessário.
+
 ## 2026-07-29 — Sessão 15: Fix seleção de layer errada em geodata Multilayer (teleport entre andares)
 
 - `BlockMultilayer.java` — **Bug raiz:** `getHeightNearest()` e `getNsweNearest()` comparavam o valor **raw empacotado** `(height << 1 | NSWE)` diretamente com `worldZ` **decodificado**, causando seleção errada de layer em células multicamada.

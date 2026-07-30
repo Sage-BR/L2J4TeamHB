@@ -26,9 +26,9 @@ import net.sf.l2j.gameserver.serverpackets.ValidateLocation;
 import net.sf.l2j.gameserver.serverpackets.ValidateLocationInVehicle;
 
 /**
- * This class ...
- *
- * @version $Revision: 1.13.4.7 $ $Date: 2005/03/27 15:29:30 $
+ * Aligned with VERGE SOURCE 2.2 pattern: simple desync check vs speed.
+ * No Z override, no terrain snap, no geometry stuck recovery.
+ * The geodata movement system (GeoEngine) handles height/NSWE validation.
  */
 public class ValidatePosition extends L2GameClientPacket
 {
@@ -72,9 +72,17 @@ public class ValidatePosition extends L2GameClientPacket
 			return;
 		}
 
+		// Disable validation during fall to avoid "jumping" (VERGE pattern).
+		if (activeChar.isFalling(_z))
+		{
+			return;
+		}
+
+		// Store original server position for reference.
 		int realX0 = activeChar.getX();
 		int realY0 = activeChar.getY();
 		int realZ0 = activeChar.getZ();
+
 		if (Config.MOVE_DEBUG)
 		{
 			_log.info("[MOVE] ValidatePosition IN  client=(" + _x + "," + _y
@@ -84,207 +92,84 @@ public class ValidatePosition extends L2GameClientPacket
 			        + activeChar.isFlying());
 		}
 
-		// Salva Z original do cliente (antes do Z override) para deteccao de
-	// stuck
-		final int originalClientZ = _z;
-
-		if (Config.GEODATA > 0 && !activeChar.isFlying()
-		        && GeoData.getInstance().hasGeo(_x, _y))
-		{
-			// check Z coordinate sent by client
-			short geoHeight = GeoData.getInstance().getHeight(_x, _y, _z);
-			if (Math.abs(geoHeight - _z) > 15)
-			{
-				if (Config.MOVE_DEBUG)
-				{
-					_log.info("[MOVE] Z override by geoHeight: client_z=" + _z
-					        + " geoHeight=" + geoHeight + " diff="
-					        + (geoHeight - _z) + " at (" + _x + "," + _y + ")");
-				}
-				// causes mild flashing in the middle of a drop from a castle
-				// wall for example
-				_z = geoHeight;
-				// System.out.println("Spawnheight validation
-				// diff="+Math.abs(geoHeight - _z));
-			}
-		}
-		// --- CoordSynchronize unificado (padrão Brproject: threshold 64 +
-		// speed 2x, sem broadcast MoveToLocation) ---
+		// Store client-reported position for desync calculation.
 		activeChar.setClientX(_x);
 		activeChar.setClientY(_y);
 		activeChar.setClientZ(_z);
 		activeChar.setClientHeading(_heading);
-		int realX = activeChar.getX();
-		int realY = activeChar.getY();
-		int realZ = activeChar.getZ();
 
-		if (_x == 0 && _y == 0)
-		{
-			if (realX != 0)
-			{ // in this case this seems like a client error
-				return;
-			}
-		}
-
+		// Save last positions for stuck detection and other systems.
 		activeChar.setLastClientPosition(_x, _y, _z);
 		activeChar.setLastServerPosition(realX0, realY0, realZ0);
 
-		// If falling, skip position validation to avoid "jumping" (L2J
-		// HorridoJoho pattern).
-		if (GeoData.getInstance().hasGeo(realX, realY)
-		        && activeChar.isFalling(_z))
+		// VERGE pattern: simple speed-based desync check.
+		// For boats: send back if desync > 500.
+		// For regular movement: send back if desync > actualSpeed.
+		// This is the ONLY validation needed — geodata movement handles
+		// height/NSWE at the GeoEngine level.
+		double actualSpeed;
+		double dist;
+
+		boolean isInBoat = activeChar.isInBoat();
+		if (isInBoat)
 		{
-			if (Config.MOVE_DEBUG)
-			{
-				_log.info("[MOVE] ValidatePosition SKIP (isFalling) client=("
-				        + _x + "," + _y + "," + _z + ") server=(" + realX + ","
-				        + realY + "," + realZ + ")");
-			}
-			return;
-		}
+			actualSpeed = 500;
+			dist = Math.sqrt(Math.pow(_x - realX0, 2) + Math.pow(_y - realY0, 2));
 
-		// Sync thresholds aligned with Brproject (ValidatePosition.java).
-		// - MAX_DISTANCE_DIFF: absolute cap on 3D divergence between client and
-		// server.
-		// - MAX_SPEED_CHECK: multiplier over the character's move speed used as
-		// per-tick travel cap.
-		// Above either limit, the server authoritatively rejects the client
-		// position and
-		// sends ValidateLocation so the client snaps back. This prevents
-		// "fast/jumpy" movement
-		// and out-of-range attacks caused by trusting large client predictions.
-		final double MAX_DISTANCE_DIFF = 64.0;
-		final double MAX_SPEED_CHECK = 2.0;
-
-		double dx = _x - realX;
-		double dy = _y - realY;
-		double dz = _z - realZ;
-		double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-		if (distance > MAX_DISTANCE_DIFF)
-		{
-			// Emergency: too far — force server authoritative position
-			if (Config.MOVE_DEBUG)
-			{
-				_log.info("[MOVE] ROLLBACK (distance>" + MAX_DISTANCE_DIFF
-				        + "): client=(" + _x + "," + _y + "," + _z
-				        + ") server=(" + realX + "," + realY + "," + realZ
-				        + ") distance=" + distance);
-			}
-			if (activeChar.isInBoat())
+			if (dist > actualSpeed)
 			{
 				sendPacket(new ValidateLocationInVehicle(activeChar));
+				return;
 			}
-			else
-			{
-				activeChar.sendPacket(new ValidateLocation(activeChar));
-			}
+			dist = 0; // skip ground logic below
 		}
 		else
 		{
-			double moveSpeed = activeChar.getStat().getMoveSpeed();
-			double maxMovePerTick = moveSpeed * MAX_SPEED_CHECK;
-			double planarMove = Math.sqrt(dx * dx + dy * dy);
-			if (planarMove > maxMovePerTick)
+			actualSpeed = activeChar.getStat().getMoveSpeed();
+			if (actualSpeed <= 0)
 			{
-				// Speed check failed — reject client prediction (no setXYZ)
-				if (Config.MOVE_DEBUG)
-				{
-					_log.info("[MOVE] ROLLBACK (speed check): planarMove="
-					        + planarMove + " > max=" + maxMovePerTick
-					        + " (speed=" + moveSpeed + " x" + MAX_SPEED_CHECK
-					        + ") client=(" + _x + "," + _y + "," + _z
-					        + ") server=(" + realX + "," + realY + "," + realZ
-					        + ")");
-				}
-				if (activeChar.isInBoat())
-				{
-					sendPacket(new ValidateLocationInVehicle(activeChar));
-				}
-				else
-				{
-					activeChar.sendPacket(new ValidateLocation(activeChar));
-				}
+				// Cannot move (overloaded etc), skip validation.
+				return;
+			}
+
+			// For ground movement use 2D distance; for flying use 3D.
+			if (activeChar.isFlying())
+			{
+				dist = Math.sqrt(Math.pow(_x - realX0, 2) + Math.pow(_y - realY0, 2)
+			        + Math.pow(_z - realZ0, 2));
 			}
 			else
 			{
-				// Trust client position (Brproject pattern — no geo-collision
-				// check per tick)
+				dist = Math.sqrt(Math.pow(_x - realX0, 2) + Math.pow(_y - realY0, 2));
+			}
+
+			if (dist > actualSpeed)
+			{
+				// Desync too large — send ValidateLocation to snap client back.
+				if (Config.MOVE_DEBUG)
+				{
+					_log.info("[MOVE] ROLLBACK (desync>" + actualSpeed
+					        + "): client=(" + _x + "," + _y + "," + _z
+					        + ") server=(" + realX0 + "," + realY0 + ","
+					        + realZ0 + ") distance=" + dist);
+				}
+				activeChar.sendPacket(new ValidateLocation(activeChar));
+			}
+			else
+			{
+				// Trust client position — setXYZ directly (VERGE pattern).
 				if (Config.MOVE_DEBUG)
 				{
 					_log.info("[MOVE] ValidatePosition ACCEPTED: client=(" + _x
-					        + "," + _y + "," + _z + ") server=(" + realX + ","
-					        + realY + "," + realZ + ") distance=" + distance
-					        + " planarMove=" + planarMove + "/"
-					        + maxMovePerTick);
+					        + "," + _y + "," + _z + ") server=(" + realX0 + ","
+					        + realY0 + "," + realZ0 + ") distance=" + dist
+					        + " speed=" + actualSpeed);
 				}
 				activeChar.setXYZ(_x, _y, _z);
 			}
 		}
 
-		// --- fim sincronização ---
-
-		// Brproject: terrain height snap — if client Z is slightly below
-		// walkable terrain
-		// after all validations, correct it. Prevents "below ground" artifacts
-		// when routing
-		// through geodata gaps (columns, bridges, ramps, etc).
-		if (Config.GEODATA > 0 && !activeChar.isFlying())
-		{
-			// Keep the terrain snap anchored to the client Z so we do not jump
-			// to another floor in multilayer geodata.
-			int terrainZ = GeoData.getInstance().getHeight(_x, _y, _z);
-			int heightDiff = terrainZ - _z;
-			if (heightDiff > 5 && heightDiff < 40)
-			{
-				if (Config.MOVE_DEBUG)
-				{
-					_log.info("[MOVE] TERRAIN SNAP: client_z=" + _z
-					        + " terrainZ=" + terrainZ + " diff=" + heightDiff
-					        + " at (" + _x + "," + _y + ")");
-				}
-				activeChar.setXYZ(_x, _y, terrainZ);
-				activeChar.sendPacket(new ValidateLocation(activeChar));
-			}
-			else if (Config.MOVE_DEBUG && heightDiff != 0)
-			{
-				_log.info("[MOVE] TERRAIN no-snap: heightDiff=" + heightDiff
-				        + " (outside 5-80 range) client_z=" + _z + " terrainZ="
-				        + terrainZ + " at (" + _x + "," + _y + ")");
-			}
-
-			// --- GeomStuck: safety net for characters inside
-			// walls/ramps/floors ---
-			// Usa o Z original do cliente (antes do override) para detectar
-			// quando o cliente
-			// esta reportando uma posicao muito diferente do terreno. Isso pega
-			// casos onde
-			// o personagem spawnou dentro de geometria (rampa/parede) mesmo
-			// depois do Z override.
-			// Nota: diferencas de 30+ indicam que o cliente esta flutuando
-			// sobre o terreno
-			// (colision height + geo gap). Com threshold 30, diffs como 39 sao
-			// detectados.
-			int checkZ = originalClientZ;
-			int serverTerrainZ = GeoData.getInstance().getHeight(realX, realY, checkZ);
-			final int verticalDrop = Math.max(0, realZ0 - activeChar.getZ());
-			final int verticalDropThreshold = Math.max(160, activeChar.getTemplate().collisionHeight
-			        * 3);
-			if ((Math.abs(checkZ - serverTerrainZ) > 30
-			        || verticalDrop >= verticalDropThreshold)
-			        && !activeChar.isFalling(originalClientZ))
-			{
-				if (activeChar.checkGeometryStuck() && Config.MOVE_DEBUG)
-				{
-					_log.info("[MOVE] GEOMETRY STUCK RECOVERY: player=(" + realX
-					        + "," + realY + "," + realZ + ") clientZ="
-					        + originalClientZ + " terrainZ=" + serverTerrainZ
-					        + " verticalDrop=" + verticalDrop + "/"
-					        + verticalDropThreshold);
-				}
-			}
-		}
-
+		// Broadcast party member position (standard L2J).
 		if (activeChar.getParty() != null)
 		{
 			activeChar.getParty().broadcastToPartyMembers(activeChar, new PartyMemberPosition(activeChar));

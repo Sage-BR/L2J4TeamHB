@@ -99,11 +99,12 @@ public class GeoDataPatcher
 	}
 
 	/**
-	 * Unpack height from (height << 4 | NSWE), arithmetic shift preserves sign
+	 * Unpack height from L2J format (height << 1 | NSWE).
+	 * Format: bits 4-15 = height (signed 12-bit shifted left 1), bits 0-3 = NSWE.
 	 */
 	private static int unpackHeight(int packed)
 	{
-		return (short) packed >> 4;
+		return (short) (packed & 0xFFF0) >> 1;
 	}
 
 	private static int unpackNSWE(int packed)
@@ -111,9 +112,12 @@ public class GeoDataPatcher
 		return packed & 0x0F;
 	}
 
+	/**
+	 * Pack height and NSWE into L2J format (height << 1 | NSWE).
+	 */
 	private static int packData(int height, int nswe)
 	{
-		return ((height << 4) | (nswe & 0x0F)) & 0xFFFF;
+		return ((height << 1) | (nswe & 0x0F)) & 0xFFFF;
 	}
 
 	// ─── Multi-layer neighbor height lookup ────────────────────────────
