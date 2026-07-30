@@ -19,8 +19,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="36"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -44,8 +44,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="43"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -69,8 +69,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="47"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -94,8 +94,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="50"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -119,8 +119,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="62"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -144,8 +144,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="68"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -169,8 +169,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="53"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -195,7 +195,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="22"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -220,7 +220,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="27"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -245,7 +245,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="29"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -270,7 +270,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="32"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -295,7 +295,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="39"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -320,7 +320,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="33"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -345,7 +345,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="43"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -369,8 +369,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="9"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -394,8 +394,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="9"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -419,8 +419,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="13"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -444,8 +444,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="15"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -469,8 +469,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="17"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -495,8 +495,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="19"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -520,8 +520,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="13"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -545,8 +545,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="16"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -570,8 +570,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="19"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -595,8 +595,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="23"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -621,8 +621,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="29"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -647,8 +647,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="33"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -673,8 +673,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="37"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -698,8 +698,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="9"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -723,8 +723,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="13"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -748,8 +748,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="15"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -773,8 +773,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="17"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -799,7 +799,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="2"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -824,7 +824,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="3"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -849,7 +849,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="4"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -874,7 +874,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="4"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -899,7 +899,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="5"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -924,8 +924,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="95"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -951,7 +951,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="61"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -976,8 +976,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="224"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -1002,8 +1002,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="29"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -1028,8 +1028,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="32"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -1054,8 +1054,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="24"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -1080,8 +1080,8 @@
   <set name="destroyable" val="true"/>
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
-  <set name="type1" val="2"/>
-  <set name="type2" val="2"/>
+  <set name="type1" val="1"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="36"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>

@@ -19,7 +19,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -44,7 +44,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -69,7 +69,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -94,7 +94,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -119,7 +119,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -144,7 +144,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -169,7 +169,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -194,7 +194,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
@@ -219,7 +219,7 @@
   <set name="tradeable" val="true"/>
   <set name="skill" val="0-0;"/>
   <set name="type1" val="1"/>
-  <set name="type2" val="3"/>
+  <set name="type2" val="1"/>
   <set name="p_def" val="0"/>
   <set name="m_def" val="0"/>
   <set name="mp_bonus" val="0"/>
