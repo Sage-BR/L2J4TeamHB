@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,6 +21,7 @@ import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
@@ -29,15 +30,13 @@ import net.sf.l2j.gameserver.model.actor.instance.L2BoatInstance;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 public class BoatManager
 {
 	private static final Logger _log = Logger.getLogger(BoatManager.class.getName());
-	
+
 	// =========================================================
 	private static BoatManager _instance;
-	
+
 	public static final BoatManager getInstance()
 	{
 		if (_instance == null)
@@ -48,22 +47,22 @@ public class BoatManager
 		}
 		return _instance;
 	}
-	
+
 	// =========================================================
-	
+
 	// =========================================================
 	// Data Field
-	private Map<Integer, L2BoatInstance> _staticItems = new ConcurrentHashMap<Integer, L2BoatInstance>();
-	
+	private Map<Integer, L2BoatInstance> _staticItems = new ConcurrentHashMap<>();
+
 	@SuppressWarnings("unused")
 	private boolean _initialized;
-	
+
 	// =========================================================
 	// Constructor
 	public BoatManager()
 	{
 	}
-	
+
 	// =========================================================
 	// Method - Private
 	private final void load()
@@ -79,12 +78,14 @@ public class BoatManager
 		{
 			File doorData = new File(Config.DATAPACK_ROOT, "data/boat.csv");
 			lnr = new LineNumberReader(new BufferedReader(new FileReader(doorData)));
-			
+
 			String line = null;
 			while ((line = lnr.readLine()) != null)
 			{
 				if (line.trim().length() == 0 || line.startsWith("#"))
+				{
 					continue;
+				}
 				L2BoatInstance boat = parseLine(line);
 				boat.spawn();
 				_staticItems.put(boat.getObjectId(), boat);
@@ -116,7 +117,7 @@ public class BoatManager
 			}
 		}
 	}
-	
+
 	/**
 	 * @param line
 	 * @return
@@ -125,32 +126,32 @@ public class BoatManager
 	{
 		L2BoatInstance boat;
 		StringTokenizer st = new StringTokenizer(line, ";");
-		
+
 		String name = st.nextToken();
 		int id = Integer.parseInt(st.nextToken());
 		int xspawn = Integer.parseInt(st.nextToken());
 		int yspawn = Integer.parseInt(st.nextToken());
 		int zspawn = Integer.parseInt(st.nextToken());
 		int heading = Integer.parseInt(st.nextToken());
-		
+
 		StatsSet npcDat = new StatsSet();
 		npcDat.set("npcId", id);
 		npcDat.set("level", 0);
 		npcDat.set("jClass", "boat");
-		
+
 		npcDat.set("baseSTR", 0);
 		npcDat.set("baseCON", 0);
 		npcDat.set("baseDEX", 0);
 		npcDat.set("baseINT", 0);
 		npcDat.set("baseWIT", 0);
 		npcDat.set("baseMEN", 0);
-		
+
 		npcDat.set("baseShldDef", 0);
 		npcDat.set("baseShldRate", 0);
 		npcDat.set("baseAccCombat", 38);
 		npcDat.set("baseEvasRate", 38);
 		npcDat.set("baseCritRate", 38);
-		
+
 		// npcDat.set("name", "");
 		npcDat.set("collision_radius", 0);
 		npcDat.set("collision_height", 0);
@@ -183,7 +184,7 @@ public class BoatManager
 		boat.setXYZ(xspawn, yspawn, zspawn);
 		boat.setId(id);
 		// boat.spawnMe();
-		
+
 		int IdWaypoint1 = Integer.parseInt(st.nextToken());
 		int IdWTicket1 = Integer.parseInt(st.nextToken());
 		int ntx1 = Integer.parseInt(st.nextToken());
@@ -210,7 +211,7 @@ public class BoatManager
 		boat.setTrajet2(IdWaypoint1, IdWTicket1, ntx1, nty1, ntz1, npc1, mess10_1, mess5_1, mess1_1, mess0_1, messb_1);
 		return boat;
 	}
-	
+
 	// =========================================================
 	// Property - Public
 	/**
@@ -220,7 +221,9 @@ public class BoatManager
 	public L2BoatInstance getBoat(int boatId)
 	{
 		if (_staticItems == null)
-			_staticItems = new ConcurrentHashMap<Integer, L2BoatInstance>();
+		{
+			_staticItems = new ConcurrentHashMap<>();
+		}
 		return _staticItems.get(boatId);
 	}
 }

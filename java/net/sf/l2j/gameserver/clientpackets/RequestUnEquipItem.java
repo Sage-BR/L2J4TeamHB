@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,14 +32,15 @@ import net.sf.l2j.gameserver.templates.L2Item;
 public class RequestUnEquipItem extends L2GameClientPacket
 {
 	private static final String _C__11_REQUESTUNEQUIPITEM = "[C] 11 RequestUnequipItem";
+
 	private static Logger _log = Logger.getLogger(RequestUnEquipItem.class.getName());
 
 	// cd
 	private int _slot;
 
 	/**
-	 * packet type id 0x11
-	 * format:		cd
+	 * packet type id 0x11 format: cd
+	 *
 	 * @param decrypt
 	 */
 	@Override
@@ -52,47 +53,47 @@ public class RequestUnEquipItem extends L2GameClientPacket
 	protected void runImpl()
 	{
 		if (Config.DEBUG)
-            _log.fine("request unequip slot " + _slot);
+		{
+			_log.fine("request unequip slot " + _slot);
+		}
 
 		L2PcInstance activeChar = getClient().getActiveChar();
 
 		if (activeChar == null)
-		    return;
-
-		L2ItemInstance item = activeChar.getInventory().getPaperdollItemByL2ItemId(_slot);
-		if (item != null && item.isWear())
 		{
-			// Wear-items are not to be unequipped
 			return;
 		}
+
+		L2ItemInstance item = activeChar.getInventory().getPaperdollItemByL2ItemId(_slot);
 		// Prevent of unequiping a cursed weapon
-		if (_slot == L2Item.SLOT_LR_HAND && activeChar.isCursedWeaponEquipped())
+		if ((item != null && item.isWear()) || (_slot == L2Item.SLOT_LR_HAND && activeChar.isCursedWeaponEquipped()))
 		{
 			// Message ?
 			return;
 		}
 
 		// Prevent player from unequipping items in special conditions
-       	if (activeChar.isStunned() || activeChar.isSleeping()
-       			|| activeChar.isParalyzed() || activeChar.isAlikeDead())
-        {
-            activeChar.sendMessage("Your status does not allow you to do that.");
-            return;
-        }
-        if (activeChar.isAttackingNow() || activeChar.isCastingNow())
-        	return;
+		if (activeChar.isStunned() || activeChar.isSleeping()
+		        || activeChar.isParalyzed() || activeChar.isAlikeDead())
+		{
+			activeChar.sendMessage("Your status does not allow you to do that.");
+			return;
+		}
+		if (activeChar.isAttackingNow() || activeChar.isCastingNow())
+		{
+			return;
+		}
 
-		L2ItemInstance[] unequiped =
-			activeChar.getInventory().unEquipItemInBodySlotAndRecord(_slot);
+		L2ItemInstance[] unequiped = activeChar.getInventory().unEquipItemInBodySlotAndRecord(_slot);
 
 		// show the update in the inventory
 		InventoryUpdate iu = new InventoryUpdate();
 
-		for (int i = 0; i < unequiped.length; i++)
+		for (L2ItemInstance element : unequiped)
 		{
-            activeChar.checkSSMatch(null, unequiped[i]);
+			activeChar.checkSSMatch(null, element);
 
-			iu.addModifiedItem(unequiped[i]);
+			iu.addModifiedItem(element);
 		}
 
 		activeChar.sendPacket(iu);
@@ -100,28 +101,31 @@ public class RequestUnEquipItem extends L2GameClientPacket
 		activeChar.abortAttack();
 		activeChar.broadcastUserInfo();
 
-		// this can be 0 if the user pressed the right mousebutton twice very fast
+		// this can be 0 if the user pressed the right mousebutton twice very
+		// fast
 		if (unequiped.length > 0)
 		{
 
-            SystemMessage sm = null;
-            if (unequiped[0].getEnchantLevel() > 0)
-            {
-            	sm = new SystemMessage(SystemMessageId.EQUIPMENT_S1_S2_REMOVED);
-            	sm.addNumber(unequiped[0].getEnchantLevel());
-            	sm.addItemName(unequiped[0]);
-            }
-            else
-            {
-	            sm = new SystemMessage(SystemMessageId.S1_DISARMED);
-	            sm.addItemName(unequiped[0]);
-            }
-            activeChar.sendPacket(sm);
-            sm = null;
+			SystemMessage sm = null;
+			if (unequiped[0].getEnchantLevel() > 0)
+			{
+				sm = new SystemMessage(SystemMessageId.EQUIPMENT_S1_S2_REMOVED);
+				sm.addNumber(unequiped[0].getEnchantLevel());
+				sm.addItemName(unequiped[0]);
+			}
+			else
+			{
+				sm = new SystemMessage(SystemMessageId.S1_DISARMED);
+				sm.addItemName(unequiped[0]);
+			}
+			activeChar.sendPacket(sm);
+			sm = null;
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

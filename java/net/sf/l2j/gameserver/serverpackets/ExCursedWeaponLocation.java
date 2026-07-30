@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,11 +21,12 @@ import net.sf.l2j.util.Point3D;
 /**
  * Format: (ch) d[ddddd]
  *
- * @author  -Wooden-
+ * @author -Wooden-
  */
 public class ExCursedWeaponLocation extends L2GameServerPacket
 {
 	private static final String _S__FE_46_EXCURSEDWEAPONLOCATION = "[S] FE:47 ExCursedWeaponLocation";
+
 	private List<CursedWeaponInfo> _cursedWeaponInfo;
 
 	public ExCursedWeaponLocation(List<CursedWeaponInfo> cursedWeaponInfo)
@@ -42,10 +43,10 @@ public class ExCursedWeaponLocation extends L2GameServerPacket
 		writeC(0xfe);
 		writeH(0x47);
 
-		if(!_cursedWeaponInfo.isEmpty())
+		if (!_cursedWeaponInfo.isEmpty())
 		{
 			writeD(_cursedWeaponInfo.size());
-			for(CursedWeaponInfo w : _cursedWeaponInfo)
+			for (CursedWeaponInfo w : _cursedWeaponInfo)
 			{
 				writeD(w.id);
 				writeD(w.activated);
@@ -74,8 +75,10 @@ public class ExCursedWeaponLocation extends L2GameServerPacket
 	public static class CursedWeaponInfo
 	{
 		public Point3D pos;
+
 		public int id;
-		public int activated; //0 - not activated ? 1 - activated
+
+		public int activated; // 0 - not activated ? 1 - activated
 
 		public CursedWeaponInfo(Point3D p, int ID, int status)
 		{

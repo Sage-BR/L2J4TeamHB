@@ -28,51 +28,54 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 public class L2ControllableMobInstance extends L2MonsterInstance
 {
 	private boolean _isControllableInvul;
-	private L2ControllableMobAI _aiBackup;	// to save ai, avoiding beeing detached
+
+	private L2ControllableMobAI _aiBackup; // to save ai, avoiding beeing
+	                                       // detached
 
 	protected class ControllableAIAcessor extends AIAccessor
-    {
+	{
 		@Override
 		public void detachAI()
-        {
-			// do nothing, AI of controllable mobs can't be detached automatically
+		{
+			// do nothing, AI of controllable mobs can't be detached
+			// automatically
 		}
 	}
 
 	@Override
 	public boolean isAggressive()
-    {
+	{
 		return true;
 	}
 
 	@Override
 	public int getAggroRange()
-    {
+	{
 		// force mobs to be aggro
 		return 500;
 	}
 
 	public L2ControllableMobInstance(int objectId, L2NpcTemplate template)
-    {
+	{
 		super(objectId, template);
 	}
 
 	@Override
 	public L2CharacterAI getAI()
-    {
+	{
 		if (_ai == null)
 		{
-			synchronized(this)
+			synchronized (this)
 			{
 				if (_ai == null && _aiBackup == null)
-                {
+				{
 					_ai = new L2ControllableMobAI(new ControllableAIAcessor());
-					_aiBackup = (L2ControllableMobAI)_ai;
+					_aiBackup = (L2ControllableMobAI) _ai;
 				}
 				else
-                {
+				{
 					_ai = _aiBackup;
-                }
+				}
 			}
 		}
 		return _ai;
@@ -80,18 +83,18 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 
 	@Override
 	public boolean isInvul()
-    {
+	{
 		return _isControllableInvul;
 	}
 
 	public void setInvul(boolean isInvul)
-    {
+	{
 		_isControllableInvul = isInvul;
 	}
 
 	@Override
 	public void reduceCurrentHp(double i, L2Character attacker, boolean awake)
-    {
+	{
 		if (isInvul() || isDead())
 		{
 			return;
@@ -137,7 +140,7 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 
 	@Override
 	public boolean doDie(L2Character killer)
-    {
+	{
 		if (!super.doDie(killer))
 		{
 			return false;
@@ -149,7 +152,7 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 
 	@Override
 	public void deleteMe()
-    {
+	{
 		removeAI();
 		super.deleteMe();
 	}
@@ -158,11 +161,11 @@ public class L2ControllableMobInstance extends L2MonsterInstance
 	 * Definitively remove AI
 	 */
 	protected void removeAI()
-    {
+	{
 		synchronized (this)
-        {
+		{
 			if (_aiBackup != null)
-            {
+			{
 				_aiBackup.setIntention(CtrlIntention.AI_INTENTION_IDLE);
 				_aiBackup = null;
 				_ai = null;

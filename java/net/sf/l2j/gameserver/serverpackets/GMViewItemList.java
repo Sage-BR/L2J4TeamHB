@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,12 +23,15 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
  */
 public class GMViewItemList extends L2GameServerPacket
 {
-	//private static Logger _log = Logger.getLogger(GMViewItemList.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(GMViewItemList.class.getName());
 	private static final String _S__AD_GMVIEWITEMLIST = "[S] 9a GMViewItemList";
-	private L2ItemInstance[] _items;
-	private L2PcInstance _cha;
-	private String _playerName;
 
+	private L2ItemInstance[] _items;
+
+	private L2PcInstance _cha;
+
+	private String _playerName;
 
 	public GMViewItemList(L2PcInstance cha)
 	{
@@ -49,13 +52,15 @@ public class GMViewItemList extends L2GameServerPacket
 		for (L2ItemInstance temp : _items)
 		{
 			if (temp == null || temp.getItem() == null)
+			{
 				continue;
+			}
 
 			writeH(temp.getItem().getType1());
 
 			writeD(temp.getObjectId());
 			writeD(temp.getItemId());
-            writeD(temp.getLocationSlot()); // T1
+			writeD(temp.getLocationSlot()); // T1
 			writeD(temp.getCount());
 			writeH(temp.getItem().getType2());
 			writeH(temp.getCustomType1());
@@ -64,24 +69,30 @@ public class GMViewItemList extends L2GameServerPacket
 			writeH(temp.getEnchantLevel());
 			writeH(temp.getCustomType2());
 			if (temp.isAugmented())
+			{
 				writeD(temp.getAugmentation().getAugmentationId());
+			}
 			else
+			{
 				writeD(0x00);
+			}
 			writeD(temp.getMana());
-            
+
 			// T1
-            writeD(temp.getAttackAttrElement());
-            writeD(temp.getAttackAttrElementVal()); 
-            writeD(temp.getDefAttrFire());
-            writeD(temp.getDefAttrWater()); 
-            writeD(temp.getDefAttrWind());
-            writeD(temp.getDefAttrEarth());
-            writeD(temp.getDefAttrHoly()); 
-            writeD(temp.getDefAttrUnholy());
+			writeD(temp.getAttackAttrElement());
+			writeD(temp.getAttackAttrElementVal());
+			writeD(temp.getDefAttrFire());
+			writeD(temp.getDefAttrWater());
+			writeD(temp.getDefAttrWind());
+			writeD(temp.getDefAttrEarth());
+			writeD(temp.getDefAttrHoly());
+			writeD(temp.getDefAttrUnholy());
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,44 +16,61 @@ package net.sf.l2j.gameserver.communitybbs.BB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
 import net.sf.l2j.gameserver.communitybbs.Manager.TopicBBSManager;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-
 public class Forum
 {
-	//type
+	// type
 	public static final int ROOT = 0;
+
 	public static final int NORMAL = 1;
+
 	public static final int CLAN = 2;
+
 	public static final int MEMO = 3;
+
 	public static final int MAIL = 4;
-	//perm
+
+	// perm
 	public static final int INVISIBLE = 0;
+
 	public static final int ALL = 1;
+
 	public static final int CLANMEMBERONLY = 2;
+
 	public static final int OWNERONLY = 3;
 
 	private static Logger _log = Logger.getLogger(Forum.class.getName());
+
 	private List<Forum> _children;
-	private Map<Integer,Topic> _topic;
+
+	private Map<Integer, Topic> _topic;
+
 	private int _forumId;
+
 	private String _forumName;
-	//private int _ForumParent;
+
+	// private int _ForumParent;
 	private int _forumType;
+
 	private int _forumPost;
+
 	private int _forumPerm;
+
 	private Forum _fParent;
+
 	private int _ownerID;
+
 	private boolean _loaded = false;
+
 	/**
 	 * @param i
 	 */
@@ -61,11 +78,12 @@ public class Forum
 	{
 		_forumId = Forumid;
 		_fParent = FParent;
-		_children = new ArrayList<Forum>();
-		_topic = new ConcurrentHashMap<Integer,Topic>();
+		_children = new ArrayList<>();
+		_topic = new ConcurrentHashMap<>();
 
-		/*load();
-		getChildren();	*/
+		/*
+		 * load(); getChildren();
+		 */
 		ForumsBBSManager.getInstance().addForum(this);
 
 	}
@@ -80,14 +98,14 @@ public class Forum
 	{
 		_forumName = name;
 		_forumId = ForumsBBSManager.getInstance().getANewID();
-		//_ForumParent = parent.getID();
+		// _ForumParent = parent.getID();
 		_forumType = type;
 		_forumPost = 0;
 		_forumPerm = perm;
 		_fParent = parent;
 		_ownerID = OwnerID;
-		_children = new ArrayList<Forum>();
-		_topic = new ConcurrentHashMap<Integer,Topic>();
+		_children = new ArrayList<>();
+		_topic = new ConcurrentHashMap<>();
 		parent._children.add(this);
 		ForumsBBSManager.getInstance().addForum(this);
 		_loaded = true;
@@ -109,7 +127,8 @@ public class Forum
 			if (result.next())
 			{
 				_forumName = result.getString("forum_name");
-				//_ForumParent = Integer.parseInt(result.getString("forum_parent"));
+				// _ForumParent =
+				// Integer.parseInt(result.getString("forum_parent"));
 				_forumPost = Integer.parseInt(result.getString("forum_post"));
 				_forumType = Integer.parseInt(result.getString("forum_type"));
 				_forumPerm = Integer.parseInt(result.getString("forum_perm"));
@@ -142,11 +161,11 @@ public class Forum
 
 			while (result.next())
 			{
-				Topic t = new Topic(Topic.ConstructorType.RESTORE,Integer.parseInt(result.getString("topic_id")),Integer.parseInt(result.getString("topic_forum_id")),result.getString("topic_name"),Long.parseLong(result.getString("topic_date")),result.getString("topic_ownername"),Integer.parseInt(result.getString("topic_ownerid")),Integer.parseInt(result.getString("topic_type")),Integer.parseInt(result.getString("topic_reply")));
-				_topic.put(t.getID(),t);
-				if(t.getID() > TopicBBSManager.getInstance().getMaxID(this))
+				Topic t = new Topic(Topic.ConstructorType.RESTORE, Integer.parseInt(result.getString("topic_id")), Integer.parseInt(result.getString("topic_forum_id")), result.getString("topic_name"), Long.parseLong(result.getString("topic_date")), result.getString("topic_ownername"), Integer.parseInt(result.getString("topic_ownerid")), Integer.parseInt(result.getString("topic_type")), Integer.parseInt(result.getString("topic_reply")));
+				_topic.put(t.getID(), t);
+				if (t.getID() > TopicBBSManager.getInstance().getMaxID(this))
 				{
-					TopicBBSManager.getInstance().setMaxID(t.getID(),this);
+					TopicBBSManager.getInstance().setMaxID(t.getID(), this);
 				}
 			}
 			result.close();
@@ -210,7 +229,7 @@ public class Forum
 
 	public int getTopicSize()
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
@@ -218,9 +237,10 @@ public class Forum
 		}
 		return _topic.size();
 	}
+
 	public Topic gettopic(int j)
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
@@ -228,19 +248,21 @@ public class Forum
 		}
 		return _topic.get(j);
 	}
+
 	public void addtopic(Topic t)
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
 			_loaded = true;
 		}
-		_topic.put(t.getID(),t);
+		_topic.put(t.getID(), t);
 	}
+
 	/**
-	* @return
-	*/
+	 * @return
+	 */
 	public int getID()
 	{
 		return _forumId;
@@ -248,7 +270,7 @@ public class Forum
 
 	public String getName()
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
@@ -256,9 +278,10 @@ public class Forum
 		}
 		return _forumName;
 	}
+
 	public int getType()
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
@@ -266,13 +289,14 @@ public class Forum
 		}
 		return _forumType;
 	}
+
 	/**
 	 * @param name
 	 * @return
 	 */
 	public Forum getChildByName(String name)
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
@@ -287,6 +311,7 @@ public class Forum
 		}
 		return null;
 	}
+
 	/**
 	 * @param id
 	 */
@@ -295,6 +320,7 @@ public class Forum
 		_topic.remove(id);
 
 	}
+
 	/**
 	 *
 	 */
@@ -338,14 +364,13 @@ public class Forum
 	 */
 	public void vload()
 	{
-		if(_loaded == false)
+		if (!_loaded)
 		{
 			load();
 			getChildren();
 			_loaded = true;
 		}
 	}
-
 
 	/**
 	 * @return

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,6 +16,7 @@ package net.sf.l2j.gameserver.model.actor.knownlist;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
@@ -25,65 +26,88 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PlayableInstance;
 import net.sf.l2j.gameserver.util.Util;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 public class ObjectKnownList
 {
-    // =========================================================
-    // Data Field
-    private L2Object _activeObject;
-    private Map<Integer, L2Object> _knownObjects;
+	// =========================================================
+	// Data Field
+	private L2Object _activeObject;
 
-    // =========================================================
-    // Constructor
-    public ObjectKnownList(L2Object activeObject)
-    {
-        _activeObject = activeObject;
-    }
+	private Map<Integer, L2Object> _knownObjects;
 
-    // =========================================================
-    // Method - Public
-    public boolean addKnownObject(L2Object object) { return addKnownObject(object, null); }
-    public boolean addKnownObject(L2Object object, L2Character dropper)
-    {
-        if (object == null) return false;
+	// =========================================================
+	// Constructor
+	public ObjectKnownList(L2Object activeObject)
+	{
+		_activeObject = activeObject;
+	}
 
-        // Check if already know object
-        if (knowsObject(object))
-            return false;
+	// =========================================================
+	// Method - Public
+	public boolean addKnownObject(L2Object object)
+	{
+		return addKnownObject(object, null);
+	}
 
-        // Check if object is not inside distance to watch object
-        if (!Util.checkIfInShortRadius(getDistanceToWatchObject(object), getActiveObject(), object, true)) return false;
+	public boolean addKnownObject(L2Object object, L2Character dropper)
+	{
 
-        return (getKnownObjects().put(object.getObjectId(), object) == null);
-    }
 
-    public final boolean knowsObject(L2Object object) { return getActiveObject() == object || getKnownObjects().containsKey(object.getObjectId()); }
+		// Check if already know object
+		// Check if object is not inside distance to watch object
+		if ((object == null) || knowsObject(object) || !Util.checkIfInShortRadius(getDistanceToWatchObject(object), getActiveObject(), object, true))
+		{
+			return false;
+		}
 
-    /** Remove all L2Object from _knownObjects */
-    public void removeAllKnownObjects() { getKnownObjects().clear(); }
+		return (getKnownObjects().put(object.getObjectId(), object) == null);
+	}
 
-    public boolean removeKnownObject(L2Object object)
-    {
-    	if (object == null) return false;
-    	return (getKnownObjects().remove(object.getObjectId()) != null);
-    }
+	public final boolean knowsObject(L2Object object)
+	{
+		return getActiveObject() == object
+		        || getKnownObjects().containsKey(object.getObjectId());
+	}
 
-    // used only in Config.MOVE_BASED_KNOWNLIST and does not support guards seeing
-    // moving monsters
-    public final void findObjects()
-    {
-    	L2WorldRegion region = getActiveObject().getWorldRegion();
-    	if (region == null) return;
-    	
-    	if (getActiveObject() instanceof L2PlayableInstance)
-    	{
-    		for (L2WorldRegion regi : region.getSurroundingRegions()) // offer members of this and surrounding regions
-    		{
-    			Collection<L2Object> vObj = regi.getVisibleObjects().values();
-    	    	//synchronized (KnownListUpdateTaskManager.getInstance().getSync())
+	/** Remove all L2Object from _knownObjects */
+	public void removeAllKnownObjects()
+	{
+		getKnownObjects().clear();
+	}
+
+	public boolean removeKnownObject(L2Object object)
+	{
+		if (object == null)
+		{
+			return false;
+		}
+		return (getKnownObjects().remove(object.getObjectId()) != null);
+	}
+
+	// used only in Config.MOVE_BASED_KNOWNLIST and does not support guards
+	// seeing
+	// moving monsters
+	public final void findObjects()
+	{
+		L2WorldRegion region = getActiveObject().getWorldRegion();
+		if (region == null)
+		{
+			return;
+		}
+
+		if (getActiveObject() instanceof L2PlayableInstance)
+		{
+			for (L2WorldRegion regi : region.getSurroundingRegions()) // offer
+			                                                          // members
+			                                                          // of this
+			                                                          // and
+			                                                          // surrounding
+			                                                          // regions
+			{
+				Collection<L2Object> vObj = regi.getVisibleObjects().values();
+				// synchronized
+				// (KnownListUpdateTaskManager.getInstance().getSync())
 				{
-					//synchronized (regi.getVisibleObjects())
+					// synchronized (regi.getVisibleObjects())
 					{
 						for (L2Object _object : vObj)
 						{
@@ -91,50 +115,67 @@ public class ObjectKnownList
 							{
 								addKnownObject(_object);
 								if (_object instanceof L2Character)
+								{
 									_object.getKnownList().addKnownObject(getActiveObject());
+								}
 							}
 						}
 					}
 				}
-    		}
-    	}
-    	else if (getActiveObject() instanceof L2Character)
-    	{
-    		for (L2WorldRegion regi : region.getSurroundingRegions()) // offer members of this and surrounding regions
-    		{
-    			if (regi.isActive()) {
-    				Collection<L2PlayableInstance> vPls = regi.getVisiblePlayable().values();
-    		    	//synchronized (KnownListUpdateTaskManager.getInstance().getSync())
+			}
+		}
+		else if (getActiveObject() instanceof L2Character)
+		{
+			for (L2WorldRegion regi : region.getSurroundingRegions()) // offer
+			                                                          // members
+			                                                          // of this
+			                                                          // and
+			                                                          // surrounding
+			                                                          // regions
+			{
+				if (regi.isActive())
+				{
+					Collection<L2PlayableInstance> vPls = regi.getVisiblePlayable().values();
+					// synchronized
+					// (KnownListUpdateTaskManager.getInstance().getSync())
 					{
-						//synchronized (regi.getVisiblePlayable())
+						// synchronized (regi.getVisiblePlayable())
 						{
 							for (L2Object _object : vPls)
+							{
 								if (_object != getActiveObject())
+								{
 									addKnownObject(_object);
+								}
+							}
 						}
 					}
-    			}
-    		}
-    	}
-    }
-    
-    // Remove invisible and too far L2Object from _knowObject and if necessary from _knownPlayers of the L2Character
-    public void forgetObjects(boolean fullCheck)
-    {
-    	//synchronized (KnownListUpdateTaskManager.getInstance().getSync())
+				}
+			}
+		}
+	}
+
+	// Remove invisible and too far L2Object from _knowObject and if necessary
+	// from _knownPlayers of the L2Character
+	public void forgetObjects(boolean fullCheck)
+	{
+		// synchronized (KnownListUpdateTaskManager.getInstance().getSync())
 		{
 			// Go through knownObjects
 			Collection<L2Object> objs = getKnownObjects().values();
-			//synchronized (getKnownObjects())
+			// synchronized (getKnownObjects())
 			{
 				for (L2Object object : objs)
 				{
 					if (!fullCheck && !(object instanceof L2PlayableInstance))
+					{
 						continue;
-					
+					}
+
 					// Remove all objects invisible or too far
 					if (!object.isVisible()
 					        || !Util.checkIfInShortRadius(getDistanceToForgetObject(object), getActiveObject(), object, true))
+					{
 						if (object instanceof L2BoatInstance
 						        && getActiveObject() instanceof L2PcInstance)
 						{
@@ -158,27 +199,40 @@ public class ObjectKnownList
 						{
 							removeKnownObject(object);
 						}
+					}
 				}
 			}
 		}
-    }
+	}
 
-    // =========================================================
-    // Property - Public
-    public L2Object getActiveObject()
-    {
-        return _activeObject;
-    }
+	// =========================================================
+	// Property - Public
+	public L2Object getActiveObject()
+	{
+		return _activeObject;
+	}
 
-    public int getDistanceToForgetObject(L2Object object) { return 0; }
+	public int getDistanceToForgetObject(L2Object object)
+	{
+		return 0;
+	}
 
-    public int getDistanceToWatchObject(L2Object object) { return 0; }
+	public int getDistanceToWatchObject(L2Object object)
+	{
+		return 0;
+	}
 
-    /** Return the _knownObjects containing all L2Object known by the L2Character. */
-    public final Map<Integer, L2Object> getKnownObjects()
-    {
-        if (_knownObjects == null) _knownObjects = new ConcurrentHashMap<Integer, L2Object>();
-        return _knownObjects;
-    }
+	/**
+	 * Return the _knownObjects containing all L2Object known by the
+	 * L2Character.
+	 */
+	public final Map<Integer, L2Object> getKnownObjects()
+	{
+		if (_knownObjects == null)
+		{
+			_knownObjects = new ConcurrentHashMap<>();
+		}
+		return _knownObjects;
+	}
 
 }

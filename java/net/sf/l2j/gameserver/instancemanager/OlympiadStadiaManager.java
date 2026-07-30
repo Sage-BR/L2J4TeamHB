@@ -3,76 +3,89 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.instancemanager;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.zone.type.L2OlympiadStadiumZone;
 
-import java.util.ArrayList;
-
 public class OlympiadStadiaManager
 {
-    protected static final Logger _log = Logger.getLogger(OlympiadStadiaManager.class.getName());
+	protected static final Logger _log = Logger.getLogger(OlympiadStadiaManager.class.getName());
 
-    // =========================================================
-    private static OlympiadStadiaManager _instance;
-    public static final OlympiadStadiaManager getInstance()
-    {
-        if (_instance == null)
-        {
-            _log.info("Initializing OlympiadStadiaManager");
-            _instance = new OlympiadStadiaManager();
-        }
-        return _instance;
-    }
-    // =========================================================
+	// =========================================================
+	private static OlympiadStadiaManager _instance;
 
-    // =========================================================
-    // Data Field
-    private ArrayList<L2OlympiadStadiumZone> _olympiadStadias;
+	public static final OlympiadStadiaManager getInstance()
+	{
+		if (_instance == null)
+		{
+			_log.info("Initializing OlympiadStadiaManager");
+			_instance = new OlympiadStadiaManager();
+		}
+		return _instance;
+	}
+	// =========================================================
 
-    // =========================================================
-    // Constructor
-    public OlympiadStadiaManager()
-    {
-    }
+	// =========================================================
+	// Data Field
+	private ArrayList<L2OlympiadStadiumZone> _olympiadStadias;
 
-    // =========================================================
-    // Property - Public
+	// =========================================================
+	// Constructor
+	public OlympiadStadiaManager()
+	{
+	}
 
-    public void addStadium(L2OlympiadStadiumZone arena)
-    {
-    	if (_olympiadStadias == null)
-    		_olympiadStadias = new ArrayList<L2OlympiadStadiumZone>();
+	// =========================================================
+	// Property - Public
 
-    	_olympiadStadias.add(arena);
-    }
+	public void addStadium(L2OlympiadStadiumZone arena)
+	{
+		if (_olympiadStadias == null)
+		{
+			_olympiadStadias = new ArrayList<>();
+		}
 
-    public final L2OlympiadStadiumZone getStadium(L2Character character)
-    {
-    	for (L2OlympiadStadiumZone temp : _olympiadStadias)
-    		if (temp.isCharacterInZone(character)) return temp;
+		_olympiadStadias.add(arena);
+	}
 
-    	return null;
-    }
+	public final L2OlympiadStadiumZone getStadium(L2Character character)
+	{
+		for (L2OlympiadStadiumZone temp : _olympiadStadias)
+		{
+			if (temp.isCharacterInZone(character))
+			{
+				return temp;
+			}
+		}
 
-    @Deprecated
-    public final L2OlympiadStadiumZone getOlympiadStadiumById(int olympiadStadiumId)
-    {
-    	for (L2OlympiadStadiumZone temp : _olympiadStadias)
-    		if (temp.getStadiumId() == olympiadStadiumId) return temp;
-        return null;
-    }
+		return null;
+	}
+
+	@Deprecated
+	public final L2OlympiadStadiumZone getOlympiadStadiumById(
+	        int olympiadStadiumId)
+	{
+		for (L2OlympiadStadiumZone temp : _olympiadStadias)
+		{
+			if (temp.getStadiumId() == olympiadStadiumId)
+			{
+				return temp;
+			}
+		}
+		return null;
+	}
 
 }

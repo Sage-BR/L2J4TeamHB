@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,16 +24,19 @@ import net.sf.l2j.gameserver.templates.L2Item;
 
 /**
  * Fromat(ch) dd
- * @author  -Wooden-
+ *
+ * @author -Wooden-
  */
 public class RequestConfirmRefinerItem extends L2GameClientPacket
 {
 	private static final String _C__D0_2A_REQUESTCONFIRMREFINERITEM = "[C] D0:2A RequestConfirmRefinerItem";
 
 	private static final int GEMSTONE_D = 2130;
+
 	private static final int GEMSTONE_C = 2131;
 
 	private int _targetItemObjId;
+
 	private int _refinerItemObjId;
 
 	/**
@@ -51,20 +54,24 @@ public class RequestConfirmRefinerItem extends L2GameClientPacket
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#runImpl()
 	 */
 	@Override
-	protected
-	void runImpl()
+	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		L2ItemInstance targetItem = (L2ItemInstance)L2World.getInstance().findObject(_targetItemObjId);
-		L2ItemInstance refinerItem = (L2ItemInstance)L2World.getInstance().findObject(_refinerItemObjId);
+		L2ItemInstance targetItem = (L2ItemInstance) L2World.getInstance().findObject(_targetItemObjId);
+		L2ItemInstance refinerItem = (L2ItemInstance) L2World.getInstance().findObject(_refinerItemObjId);
 
-		if (targetItem == null || refinerItem == null) return;
+		if (targetItem == null || refinerItem == null)
+		{
+			return;
+		}
 
 		int itemGrade = targetItem.getItem().getItemGrade();
 		int refinerItemId = refinerItem.getItem().getItemId();
 
 		// is the item a life stone?
-		if (refinerItemId < 8723 || (refinerItemId > 8762 && refinerItemId < 9573) || refinerItemId > 9576)
+		if (refinerItemId < 8723
+		        || (refinerItemId > 8762 && refinerItemId < 9573)
+		        || refinerItemId > 9576)
 		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.THIS_IS_NOT_A_SUITABLE_ITEM));
 			return;
@@ -76,8 +83,8 @@ public class RequestConfirmRefinerItem extends L2GameClientPacket
 			return;
 		}
 
-		int gemstoneCount=0;
-		int gemstoneItemId=0;
+		int gemstoneCount = 0;
+		int gemstoneItemId = 0;
 		int lifeStoneLevel = getLifeStoneLevel(refinerItemId);
 		SystemMessage sm = new SystemMessage(SystemMessageId.REQUIRES_S1_S2);
 		switch (itemGrade)
@@ -132,9 +139,18 @@ public class RequestConfirmRefinerItem extends L2GameClientPacket
 	private int getLifeStoneGrade(int itemId)
 	{
 		itemId -= 8723;
-        if (itemId < 10 || itemId == 850) return 0; // normal grade
-        if (itemId < 20 || itemId == 851) return 1; // mid grade
-        if (itemId < 30 || itemId == 852) return 2; // high grade
+		if (itemId < 10 || itemId == 850)
+		{
+			return 0; // normal grade
+		}
+		if (itemId < 20 || itemId == 851)
+		{
+			return 1; // mid grade
+		}
+		if (itemId < 30 || itemId == 852)
+		{
+			return 2; // high grade
+		}
 		return 3; // top grade
 	}
 
@@ -142,7 +158,10 @@ public class RequestConfirmRefinerItem extends L2GameClientPacket
 	{
 		itemId -= 10 * getLifeStoneGrade(itemId);
 		itemId -= 8722;
-		if (itemId > 823) return 10;
+		if (itemId > 823)
+		{
+			return 10;
+		}
 		return itemId;
 	}
 

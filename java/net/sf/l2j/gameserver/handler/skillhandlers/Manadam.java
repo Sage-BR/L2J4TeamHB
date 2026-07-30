@@ -19,8 +19,8 @@ import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.L2Skill;
-import net.sf.l2j.gameserver.model.L2Summon;
 import net.sf.l2j.gameserver.model.L2Skill.SkillType;
+import net.sf.l2j.gameserver.model.L2Summon;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
@@ -35,110 +35,117 @@ import net.sf.l2j.gameserver.skills.Formulas;
  */
 public class Manadam implements ISkillHandler
 {
-private static final SkillType[] SKILL_IDS = { SkillType.MANADAM };
+	private static final SkillType[] SKILL_IDS = { SkillType.MANADAM };
 
-public void useSkill(@SuppressWarnings("unused")
-L2Character activeChar, L2Skill skill, L2Object[] targets)
-{
-	L2Character target = null;
-
-	if (activeChar.isAlikeDead())
-		return;
-
-	boolean ss = false;
-	boolean bss = false;
-
-	L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
-
-	if (weaponInst != null)
+	@Override
+	public void useSkill(@SuppressWarnings("unused")
+	L2Character activeChar, L2Skill skill, L2Object[] targets)
 	{
-		if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
-		{
-			bss = true;
-			weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
-		} else if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_SPIRITSHOT)
-		{
-			ss = true;
-			weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
-		}
-	}
-	// If there is no weapon equipped, check for an active summon.
-	else if (activeChar instanceof L2Summon)
-	{
-		L2Summon activeSummon = (L2Summon) activeChar;
-			
-		if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
-		{
-			bss = true;
-			activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
-		}
-		else if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_SPIRITSHOT)
-		{
-			ss = true;
-			activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
-		}
-	}
-	else if (activeChar instanceof L2NpcInstance)
-	{
-		bss = ((L2NpcInstance)activeChar).isUsingShot(false);
-		ss = ((L2NpcInstance)activeChar).isUsingShot(true);
-	}
-	for (int index = 0; index < targets.length; index++)
-	{
-		target = (L2Character) targets[index];
+		L2Character target = null;
 
-		if (target.reflectSkill(skill))
-			target = activeChar;
-
-		boolean acted = Formulas.getInstance().calcMagicAffected(activeChar, target, skill);
-		if (target.isInvul() || !acted)
+		if (activeChar.isAlikeDead())
 		{
-			activeChar.sendPacket(new SystemMessage(SystemMessageId.MISSED_TARGET));
+			return;
 		}
-		else
-		{
-			double damage = Formulas.getInstance().calcManaDam(activeChar, target, skill, ss, bss);
 
-			double mp = (damage > target.getCurrentMp() ? target.getCurrentMp() : damage);
-			target.reduceCurrentMp(mp);
-			if (damage > 0)
+		boolean ss = false;
+		boolean bss = false;
+
+		L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
+
+		if (weaponInst != null)
+		{
+			if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
 			{
-				if (target.isSleeping())
+				bss = true;
+				weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+			}
+			else if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_SPIRITSHOT)
+			{
+				ss = true;
+				weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+			}
+		}
+		// If there is no weapon equipped, check for an active summon.
+		else if (activeChar instanceof L2Summon)
+		{
+			L2Summon activeSummon = (L2Summon) activeChar;
+
+			if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
+			{
+				bss = true;
+				activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+			}
+			else if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_SPIRITSHOT)
+			{
+				ss = true;
+				activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+			}
+		}
+		else if (activeChar instanceof L2NpcInstance)
+		{
+			bss = ((L2NpcInstance) activeChar).isUsingShot(false);
+			ss = ((L2NpcInstance) activeChar).isUsingShot(true);
+		}
+		for (L2Object target2 : targets)
+		{
+			target = (L2Character) target2;
+
+			if (target.reflectSkill(skill))
+			{
+				target = activeChar;
+			}
+
+			boolean acted = Formulas.getInstance().calcMagicAffected(activeChar, target, skill);
+			if (target.isInvul() || !acted)
+			{
+				activeChar.sendPacket(new SystemMessage(SystemMessageId.MISSED_TARGET));
+			}
+			else
+			{
+				double damage = Formulas.getInstance().calcManaDam(activeChar, target, skill, ss, bss);
+
+				double mp = (damage > target.getCurrentMp() ? target.getCurrentMp() : damage);
+				target.reduceCurrentMp(mp);
+				if (damage > 0)
 				{
-					target.stopSleeping(null);
+					if (target.isSleeping())
+					{
+						target.stopSleeping(null);
+					}
+					else if (target.isImmobileUntilAttacked())
+					{
+						target.stopImmobileUntilAttacked(null);
+					}
 				}
-				else if (target.isImmobileUntilAttacked())
+
+				if (target instanceof L2PcInstance)
 				{
-					target.stopImmobileUntilAttacked(null);
+					StatusUpdate sump = new StatusUpdate(target.getObjectId());
+					sump.addAttribute(StatusUpdate.CUR_MP, (int) target.getCurrentMp());
+					// [L2J_JP EDIT START - TSL]
+					target.sendPacket(sump);
+
+					SystemMessage sm = new SystemMessage(SystemMessageId.S2_MP_HAS_BEEN_DRAINED_BY_S1);
+					sm.addCharName(activeChar);
+					sm.addNumber((int) mp);
+					target.sendPacket(sm);
 				}
-			}
 
-			if (target instanceof L2PcInstance)
-			{
-				StatusUpdate sump = new StatusUpdate(target.getObjectId());
-				sump.addAttribute(StatusUpdate.CUR_MP, (int) target.getCurrentMp());
-				// [L2J_JP EDIT START - TSL]
-				target.sendPacket(sump);
-
-				SystemMessage sm = new SystemMessage(SystemMessageId.S2_MP_HAS_BEEN_DRAINED_BY_S1);
-				sm.addCharName(activeChar);
-				sm.addNumber((int) mp);
-				target.sendPacket(sm);
+				if (activeChar instanceof L2PcInstance)
+				{
+					SystemMessage sm2 = new SystemMessage(SystemMessageId.YOUR_OPPONENTS_MP_WAS_REDUCED_BY_S1);
+					sm2.addNumber((int) mp);
+					activeChar.sendPacket(sm2);
+				}
+				// [L2J_JP EDIT END - TSL]
 			}
-
-			if (activeChar instanceof L2PcInstance)
-			{
-				SystemMessage sm2 = new SystemMessage(SystemMessageId.YOUR_OPPONENTS_MP_WAS_REDUCED_BY_S1);
-				sm2.addNumber((int) mp);
-				activeChar.sendPacket(sm2);
-			}
-			// [L2J_JP EDIT END - TSL]
 		}
 	}
-}
 
-public SkillType[] getSkillIds()
-{
-	return SKILL_IDS;
-}
+	@Override
+	public SkillType[] getSkillIds()
+	{
+		return SKILL_IDS;
+	}
 }

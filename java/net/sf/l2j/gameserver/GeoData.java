@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,100 +24,107 @@ import net.sf.l2j.util.Point3D;
 
 /**
  *
- * @author  -Nemesiss-
+ * @author -Nemesiss-
  */
 public class GeoData
 {
 	private static Logger _log = Logger.getLogger(GeoData.class.getName());
+
 	private static GeoData _instance;
 
 	public static GeoData getInstance()
-    {
-        if(_instance == null)
-        {
-        	if (Config.GEODATA > 0)
-        		_instance = GeoEngine.getInstance();
-        	else
-        	{
-        		_instance = new GeoData();
-        		_log.info("Geodata Engine: Disabled.");
-        	}
-        }
-        return _instance;
-    }
+	{
+		if (_instance == null)
+		{
+			if (Config.GEODATA > 0)
+			{
+				_instance = GeoEngine.getInstance();
+			}
+			else
+			{
+				_instance = new GeoData();
+				_log.info("Geodata Engine: Disabled.");
+			}
+		}
+		return _instance;
+	}
 
-    // Public Methods
-    /**
-     * @param x
-     * @param y
-     * @return Geo Block Type
-     */
-    public short getType  (int x, int y)
-    {
-        return 0;
-    }
-    /**
-     * @param x
-     * @param y
-     * @param z
-     * @return Nearles Z
-     */
-    public short getHeight(int x, int y, int z)
-    {
-        return (short)z;
-    }
-    /**
-     * @param x
-     * @param y
-     * @param zmin
-     * @param zmax
-     * @param spawnid
-     * @return
-     */
-    public short getSpawnHeight(int x, int y, int zmin, int zmax, int spawnid)
-    {
-        return (short)zmin;
-    }
-    /**
-     * @param x
-     * @param y
-     * @param z
-     * @param tx
-     * @param ty
-     * @return Terrain Z at (tx,ty) traced from (x,y,z) stepping cell by cell.
-     */
-    public short traceTerrainZ(int x, int y, int z, int tx, int ty)
-    {
-        return (short)z;
-    }
-    /**
-     * @param x
-     * @param y
-     * @return
-     */
-    public String geoPosition(int x, int y)
-    {
-    	return "";
-    }
+	// Public Methods
+	/**
+	 * @param x
+	 * @param y
+	 * @return Geo Block Type
+	 */
+	public short getType(int x, int y)
+	{
+		return 0;
+	}
 
-    /**
-     * @param cha
-     * @param target
-     * @return True if cha can see target (LOS)
-     */
-    public boolean canSeeTarget(L2Object cha, L2Object target)
-    {
-    	//If geo is off do simple check :]
-    	//Don't allow casting on players on different dungeon lvls etc
-        return (Math.abs(target.getZ() - cha.getZ()) < 1000);
-    }
-    
-    public boolean canSeeTarget(L2Object cha, Point3D worldPosition)
-    {
-        //If geo is off do simple check :]
-        //Don't allow casting on players on different dungeon lvls etc
-        return Math.abs(worldPosition.getZ() - cha.getZ()) < 1000;
-    }
+	/**
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return Nearles Z
+	 */
+	public short getHeight(int x, int y, int z)
+	{
+		return (short) z;
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param zmin
+	 * @param zmax
+	 * @param spawnid
+	 * @return
+	 */
+	public short getSpawnHeight(int x, int y, int zmin, int zmax, int spawnid)
+	{
+		return (short) zmin;
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param tx
+	 * @param ty
+	 * @return Terrain Z at (tx,ty) traced from (x,y,z) stepping cell by cell.
+	 */
+	public short traceTerrainZ(int x, int y, int z, int tx, int ty)
+	{
+		return (short) z;
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public String geoPosition(int x, int y)
+	{
+		return "";
+	}
+
+	/**
+	 * @param cha
+	 * @param target
+	 * @return True if cha can see target (LOS)
+	 */
+	public boolean canSeeTarget(L2Object cha, L2Object target)
+	{
+		// If geo is off do simple check :]
+		// Don't allow casting on players on different dungeon lvls etc
+		return (Math.abs(target.getZ() - cha.getZ()) < 1000);
+	}
+
+	public boolean canSeeTarget(L2Object cha, Point3D worldPosition)
+	{
+		// If geo is off do simple check :]
+		// Don't allow casting on players on different dungeon lvls etc
+		return Math.abs(worldPosition.getZ() - cha.getZ()) < 1000;
+	}
 
 	public boolean canSeeTarget(int x, int y, int z, int tx, int ty, int tz)
 	{
@@ -125,88 +132,97 @@ public class GeoData
 		// Don't allow casting on players on different dungeon lvls etc
 		return (Math.abs(z - tz) < 1000);
 	}
-    /**
-     * @param cha
-     * @param target
-     * @return True if cha can see target (LOS) and send usful info to PC
-     */
-    public boolean canSeeTargetDebug(L2PcInstance gm, L2Object target)
-    {
-        return true;
-    }
-    /**
-     * @param x
-     * @param y
-     * @param z
-     * @return Geo NSWE (0-15)
-     */
-    public short getNSWE(int x, int y, int z)
-    {
-        return 15;
-    }
-    /**
-     * @param x
-     * @param y
-     * @param z
-     * @param tx
-     * @param ty
-     * @param tz
-     * @return Last Location (x,y,z) where player can walk - just befor wall
-     */
-    public Location moveCheck(int x, int y, int z, int tx, int ty, int tz)
-    {
-        return new Location(tx,ty,tz);
-    }
-    /**
-     * @param gm
-     * @param comment
-     */
-    public void addGeoDataBug(L2PcInstance gm, String comment)
-    {
-    	//Do Nothing
-    }
-    public static void unloadGeodata(byte rx, byte ry)
+
+	/**
+	 * @param cha
+	 * @param target
+	 * @return True if cha can see target (LOS) and send usful info to PC
+	 */
+	public boolean canSeeTargetDebug(L2PcInstance gm, L2Object target)
+	{
+		return true;
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return Geo NSWE (0-15)
+	 */
+	public short getNSWE(int x, int y, int z)
+	{
+		return 15;
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param tx
+	 * @param ty
+	 * @param tz
+	 * @return Last Location (x,y,z) where player can walk - just befor wall
+	 */
+	public Location moveCheck(int x, int y, int z, int tx, int ty, int tz)
+	{
+		return new Location(tx, ty, tz);
+	}
+
+	/**
+	 * @param gm
+	 * @param comment
+	 */
+	public void addGeoDataBug(L2PcInstance gm, String comment)
+	{
+		// Do Nothing
+	}
+
+	public static void unloadGeodata(byte rx, byte ry)
 	{
 
 	}
 
-    public static boolean loadGeodataFile(byte rx, byte ry)
-    {
-    	return false;
-    }
-    
-    public boolean hasGeo(int x, int y)
-    {
-    	return false;
-    }
+	public static boolean loadGeodataFile(byte rx, byte ry)
+	{
+		return false;
+	}
 
-    /**
-     * @param x
-     * @param y
-     * @param z
-     * @param tx
-     * @param ty
-     * @param tz
-     * @return True if (x,y,z) can reach (tx,ty,tz) without being blocked by geodata.
-     */
-    public boolean canMoveToTarget(int x, int y, int z, int tx, int ty, int tz)
-    {
-    	Location loc = moveCheck(x, y, z, tx, ty, tz);
-    	return loc.getX() == tx && loc.getY() == ty;
-    }
+	public boolean hasGeo(int x, int y)
+	{
+		return false;
+	}
 
-    /**
-     * Returns the last valid position before an obstacle (or the target if clear).
-     * @param x
-     * @param y
-     * @param z
-     * @param tx
-     * @param ty
-     * @param tz
-     * @return Last valid Location on the path from (x,y,z) toward (tx,ty,tz).
-     */
-    public Location getValidLocation(int x, int y, int z, int tx, int ty, int tz)
-    {
-    	return moveCheck(x, y, z, tx, ty, tz);
-    }
+	/**
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param tx
+	 * @param ty
+	 * @param tz
+	 * @return True if (x,y,z) can reach (tx,ty,tz) without being blocked by
+	 *         geodata.
+	 */
+	public boolean canMoveToTarget(int x, int y, int z, int tx, int ty, int tz)
+	{
+		Location loc = moveCheck(x, y, z, tx, ty, tz);
+		return loc.getX() == tx && loc.getY() == ty;
+	}
+
+	/**
+	 * Returns the last valid position before an obstacle (or the target if
+	 * clear).
+	 *
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param tx
+	 * @param ty
+	 * @param tz
+	 * @return Last valid Location on the path from (x,y,z) toward (tx,ty,tz).
+	 */
+	public Location getValidLocation(int x, int y, int z, int tx, int ty,
+	        int tz)
+	{
+		return moveCheck(x, y, z, tx, ty, tz);
+	}
 }

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,35 +24,44 @@ import net.sf.l2j.gameserver.model.L2Character;
 public final class RequestTargetCanceld extends L2GameClientPacket
 {
 	private static final String _C__37_REQUESTTARGETCANCELD = "[C] 37 RequestTargetCanceld";
-	//private static Logger _log = Logger.getLogger(RequestTargetCanceld.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestTargetCanceld.class.getName());
 
-    private int _unselect;
+	private int _unselect;
 
 	@Override
 	protected void readImpl()
 	{
-        _unselect = readH();
+		_unselect = readH();
 	}
 
 	@Override
 	protected void runImpl()
 	{
 		L2Character activeChar = getClient().getActiveChar();
-        if (activeChar != null)
-        {
-            if (_unselect == 0)
-            {
-            	if (activeChar.isCastingNow() && activeChar.canAbortCast())
-            		activeChar.abortCast();
-            	else if (activeChar.getTarget() != null)
-            		activeChar.setTarget(null);
-            }
-            else if (activeChar.getTarget() != null)
-            	activeChar.setTarget(null);
-        }
+		if (activeChar != null)
+		{
+			if (_unselect == 0)
+			{
+				if (activeChar.isCastingNow() && activeChar.canAbortCast())
+				{
+					activeChar.abortCast();
+				}
+				else if (activeChar.getTarget() != null)
+				{
+					activeChar.setTarget(null);
+				}
+			}
+			else if (activeChar.getTarget() != null)
+			{
+				activeChar.setTarget(null);
+			}
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

@@ -31,26 +31,32 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 public final class Action extends L2GameClientPacket
 {
 	private static final String ACTION__C__04 = "[C] 04 Action";
+
 	private static Logger _log = Logger.getLogger(Action.class.getName());
 
 	// cddddc
 	private int _objectId;
+
 	@SuppressWarnings("unused")
 	private int _originX;
+
 	@SuppressWarnings("unused")
 	private int _originY;
+
 	@SuppressWarnings("unused")
 	private int _originZ;
+
 	private int _actionId;
 
 	@Override
 	protected void readImpl()
 	{
-		_objectId  = readD();   // Target object Identifier
-		_originX   = readD();
-		_originY   = readD();
-		_originZ   = readD();
-		_actionId  = readC();   // Action identifier : 0-Simple click, 1-Shift click
+		_objectId = readD(); // Target object Identifier
+		_originX = readD();
+		_originY = readD();
+		_originZ = readD();
+		_actionId = readC(); // Action identifier : 0-Simple click, 1-Shift
+		                     // click
 	}
 
 	@Override
@@ -88,13 +94,17 @@ public final class Action extends L2GameClientPacket
 		if (obj == null)
 		{
 			// pressing e.g. pickup many times quickly would get you here
-			// _log.warning("Character: " + activeChar.getName() + " request action with non existent ObjectID:" + _objectId);
+			// _log.warning("Character: " + activeChar.getName() + " request
+			// action with non existent ObjectID:" + _objectId);
 			getClient().sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
 
-		// Check if the target is valid, if the player haven't a shop or isn't the requester of a transaction (ex : FriendInvite, JoinAlly, JoinParty...)
-		if (activeChar.getPrivateStoreType()==0 && activeChar.getActiveRequester()==null)
+		// Check if the target is valid, if the player haven't a shop or isn't
+		// the requester of a transaction (ex : FriendInvite, JoinAlly,
+		// JoinParty...)
+		if (activeChar.getPrivateStoreType() == 0
+		        && activeChar.getActiveRequester() == null)
 		{
 			switch (_actionId)
 			{
@@ -102,7 +112,8 @@ public final class Action extends L2GameClientPacket
 					obj.onAction(activeChar);
 					break;
 				case 1:
-					if (obj instanceof L2Character && ((L2Character)obj).isAlikeDead())
+					if (obj instanceof L2Character
+					        && ((L2Character) obj).isAlikeDead())
 					{
 						obj.onAction(activeChar);
 					}
@@ -112,20 +123,24 @@ public final class Action extends L2GameClientPacket
 					}
 					break;
 				default:
-					// Ivalid action detected (probably client cheating), log this
-					_log.warning("Character: " + activeChar.getName() + " requested invalid action: " + _actionId);
+					// Ivalid action detected (probably client cheating), log
+					// this
+					_log.warning("Character: " + activeChar.getName()
+					        + " requested invalid action: " + _actionId);
 					getClient().sendPacket(ActionFailed.STATIC_PACKET);
 					break;
 			}
 		}
 		else
 		{ // Actions prohibited when in trade
-			// Actions prohibited when in trade
-						getClient().sendPacket(ActionFailed.STATIC_PACKET);
+		  // Actions prohibited when in trade
+			getClient().sendPacket(ActionFailed.STATIC_PACKET);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

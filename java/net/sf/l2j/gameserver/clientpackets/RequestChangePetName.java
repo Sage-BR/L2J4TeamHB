@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,7 +25,6 @@ import net.sf.l2j.gameserver.serverpackets.NpcInfo;
 import net.sf.l2j.gameserver.serverpackets.PetInfo;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-
 /**
  * This class ...
  *
@@ -34,7 +33,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 public final class RequestChangePetName extends L2GameClientPacket
 {
 	private static final String REQUESTCHANGEPETNAME__C__89 = "[C] 89 RequestChangePetName";
-	//private static Logger _log = Logger.getLogger(RequestChangePetName.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestChangePetName.class.getName());
 
 	private String _name;
 
@@ -49,11 +49,15 @@ public final class RequestChangePetName extends L2GameClientPacket
 	{
 		L2Character activeChar = getClient().getActiveChar();
 		if (activeChar == null)
+		{
 			return;
+		}
 
 		final L2Summon pet = activeChar.getPet();
 		if (pet == null)
+		{
 			return;
+		}
 
 		if (pet.getName() != null)
 		{
@@ -67,7 +71,8 @@ public final class RequestChangePetName extends L2GameClientPacket
 		}
 		else if ((_name.length() < 3) || (_name.length() > 16))
 		{
-			// SystemMessage sm = new SystemMessage(SystemMessage.NAMING_PETNAME_UP_TO_8CHARS);
+			// SystemMessage sm = new
+			// SystemMessage(SystemMessage.NAMING_PETNAME_UP_TO_8CHARS);
 			activeChar.sendMessage("Your pet's name can be up to 16 characters.");
 			return;
 		}
@@ -80,7 +85,8 @@ public final class RequestChangePetName extends L2GameClientPacket
 		pet.setName(_name);
 		pet.broadcastPacket(new NpcInfo(pet, activeChar));
 		activeChar.sendPacket(new PetInfo(pet));
-		// The PetInfo packet wipes the PartySpelled (list of active spells' icons).  Re-add them
+		// The PetInfo packet wipes the PartySpelled (list of active spells'
+		// icons). Re-add them
 		pet.updateEffectIcons(true);
 
 		// set the flag on the control item to say that the pet has a name

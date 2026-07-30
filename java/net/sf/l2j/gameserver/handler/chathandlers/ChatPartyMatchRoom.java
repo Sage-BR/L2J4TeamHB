@@ -23,29 +23,30 @@ import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 /**
  * A chat handler
  *
- * @author  Gnacik
+ * @author Gnacik
  */
 public class ChatPartyMatchRoom implements IChatHandler
 {
-	private static final int[] COMMAND_IDS =
-	{
-		14
-	};
+	private static final int[] COMMAND_IDS = { 14 };
 
 	/**
 	 * Handle chat type 'partymatchroom'
-	 * @see net.sf.l2j.gameserver.handler.IChatHandler#handleChat(int, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance, java.lang.String)
+	 *
+	 * @see net.sf.l2j.gameserver.handler.IChatHandler#handleChat(int,
+	 *      net.sf.l2j.gameserver.model.actor.instance.L2PcInstance,
+	 *      java.lang.String)
 	 */
 	@Override
-	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
+	public void handleChat(int type, L2PcInstance activeChar, String target,
+	        String text)
 	{
 		if (activeChar.isInPartyMatchRoom())
 		{
 			PartyMatchRoom _room = PartyMatchRoomList.getInstance().getPlayerRoom(activeChar);
-			if(_room != null)
+			if (_room != null)
 			{
 				CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
-				for(L2PcInstance _member : _room.getPartyMembers())
+				for (L2PcInstance _member : _room.getPartyMembers())
 				{
 					_member.sendPacket(cs);
 				}
@@ -55,6 +56,7 @@ public class ChatPartyMatchRoom implements IChatHandler
 
 	/**
 	 * Returns the chat types registered to this handler
+	 *
 	 * @see net.sf.l2j.gameserver.handler.IChatHandler#getChatTypeList()
 	 */
 	@Override

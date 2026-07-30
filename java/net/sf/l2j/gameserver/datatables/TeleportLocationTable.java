@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,13 +17,12 @@ package net.sf.l2j.gameserver.datatables;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2TeleportLocation;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -49,11 +48,12 @@ public class TeleportLocationTable
 
 	private TeleportLocationTable()
 	{
-	    reloadAll();
+		reloadAll();
 	}
+
 	public void reloadAll()
 	{
-		_teleports = new ConcurrentHashMap<Integer, L2TeleportLocation>();
+		_teleports = new ConcurrentHashMap<>();
 
 		java.sql.Connection con = null;
 		try
@@ -72,7 +72,7 @@ public class TeleportLocationTable
 				teleport.setLocY(rset.getInt("loc_y"));
 				teleport.setLocZ(rset.getInt("loc_z"));
 				teleport.setPrice(rset.getInt("price"));
-				teleport.setIsForNoble(rset.getInt("fornoble")==1);
+				teleport.setIsForNoble(rset.getInt("fornoble") == 1);
 
 				_teleports.put(teleport.getTeleId(), teleport);
 			}
@@ -80,17 +80,24 @@ public class TeleportLocationTable
 			rset.close();
 			statement.close();
 
-			_log.config("TeleportLocationTable: Loaded " + _teleports.size() + " Teleport Location Templates.");
+			_log.config("TeleportLocationTable: Loaded " + _teleports.size()
+			        + " Teleport Location Templates.");
 		}
 		catch (Exception e)
 		{
-			_log.warning("error while creating teleport table "+e);
+			_log.warning("error while creating teleport table " + e);
 		}
 		finally
 		{
-			try { con.close(); } catch (Exception e) {}
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
-		
+
 		if (Config.CUSTOM_TELEPORT_TABLE)
 		{
 			try
@@ -115,16 +122,22 @@ public class TeleportLocationTable
 				statement.close();
 				_cTeleCount = _teleports.size() - _cTeleCount;
 				if (_cTeleCount > 0)
-					_log.config("TeleportLocationTable: Loaded " + _cTeleCount + " Custom Teleport Location Templates.");
-			} catch (Exception e)
+				{
+					_log.config("TeleportLocationTable: Loaded " + _cTeleCount
+					        + " Custom Teleport Location Templates.");
+				}
+			}
+			catch (Exception e)
 			{
 				_log.warning("error while creating custom teleport table " + e);
-			} finally
+			}
+			finally
 			{
 				try
 				{
 					con.close();
-				} catch (Exception e)
+				}
+				catch (Exception e)
 				{
 				}
 			}
@@ -132,7 +145,8 @@ public class TeleportLocationTable
 	}
 
 	/**
-	 * @param template id
+	 * @param template
+	 *            id
 	 * @return
 	 */
 	public L2TeleportLocation getTemplate(int id)

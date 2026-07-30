@@ -1,21 +1,22 @@
 /*
- * L2jFrozen Project - www.l2jfrozen.com 
- * 
+ * L2jFrozen Project - www.l2jfrozen.com
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.ai.special;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import net.sf.l2j.gameserver.ai.CtrlIntention;
@@ -35,49 +36,38 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
-import java.util.ArrayList;
-
-
 public class Monastery extends L2AttackableAIScript implements Runnable
 {
-	static final int[] mobs1 =
-	{
-		22124,
-		22125,
-		22126,
-		22127,
-		22129
-	};
-	static final int[] mobs2 =
-	{
-		22134,
-		22135
-	};
+	static final int[] mobs1 = { 22124, 22125, 22126, 22127, 22129 };
+
+	static final int[] mobs2 = { 22134, 22135 };
+
 	// TODO: npcstring
-	static final String[] text =
-	{
-		"You cannot carry a weapon without authorization!",
-		"name, why would you choose the path of darkness?!",
-		"name! How dare you defy the will of Einhasad!"
-	};
-	
+	static final String[] text = {
+	        "You cannot carry a weapon without authorization!",
+	        "name, why would you choose the path of darkness?!",
+	        "name! How dare you defy the will of Einhasad!" };
+
 	public Monastery(final int questId, final String name, final String descr)
 	{
 		super(questId, name, descr);
 		registerMobs(mobs1, QuestEventType.ON_AGGRO_RANGE_ENTER, QuestEventType.ON_SPAWN, QuestEventType.ON_SPELL_FINISHED);
 		registerMobs(mobs2, QuestEventType.ON_SPELL_FINISHED);
 	}
-	
+
 	@Override
-	public String onAggroRangeEnter(final L2NpcInstance npc, final L2PcInstance player, final boolean isPet)
+	public String onAggroRangeEnter(final L2NpcInstance npc,
+	        final L2PcInstance player, final boolean isPet)
 	{
-		if (Util.contains(mobs1, npc.getNpcId()) && !npc.isInCombat() && npc.getTarget() == null)
+		if (Util.contains(mobs1, npc.getNpcId()) && !npc.isInCombat()
+		        && npc.getTarget() == null)
 		{
-			if (player.getActiveWeaponInstance() != null && !player.isSilentMoving())
+			if (player.getActiveWeaponInstance() != null
+			        && !player.isSilentMoving())
 			{
 				npc.setTarget(player);
 				npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 0, npc.getName(), text[0]));
-				
+
 				switch (npc.getNpcId())
 				{
 					case 22124:
@@ -97,11 +87,13 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 				}
 			}
 			else if (((L2Attackable) npc).getMostHated() == null)
+			{
 				return null;
+			}
 		}
 		return super.onAggroRangeEnter(npc, player, isPet);
 	}
-	
+
 	@Override
 	public String onSpawn(final L2NpcInstance npc)
 	{
@@ -113,8 +105,11 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 			{
 				if (obj instanceof L2PcInstance || obj instanceof L2PetInstance)
 				{
-					if (Util.checkIfInRange(npc.getAggroRange(), npc, obj, true) && !((L2Character) obj).isDead())
+					if (Util.checkIfInRange(npc.getAggroRange(), npc, obj, true)
+					        && !((L2Character) obj).isDead())
+					{
 						result.add((L2PlayableInstance) obj);
+					}
 				}
 			}
 			if (!result.isEmpty() && result.size() != 0)
@@ -123,13 +118,18 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 				for (final Object obj : characters)
 				{
 					final L2PlayableInstance target = (L2PlayableInstance) (obj instanceof L2PcInstance ? obj : ((L2Summon) obj).getOwner());
-					
-					if (target.getActiveWeaponInstance() == null || (target instanceof L2PcInstance player && player.isSilentMoving()) || (target instanceof L2Summon summon && summon.getOwner().isSilentMoving()))
+
+					if (target.getActiveWeaponInstance() == null
+					        || (target instanceof L2PcInstance player
+					                && player.isSilentMoving())
+					        || (target instanceof L2Summon summon
+					                && summon.getOwner().isSilentMoving()))
 					{
 						continue;
 					}
-					
-					if (target.getActiveWeaponInstance() != null && !npc.isInCombat() && npc.getTarget() == null)
+
+					if (target.getActiveWeaponInstance() != null
+					        && !npc.isInCombat() && npc.getTarget() == null)
 					{
 						npc.setTarget(target);
 						npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 0, npc.getName(), text[0]));
@@ -155,12 +155,13 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 				}
 			}
 		}
-		
+
 		return super.onSpawn(npc);
 	}
-	
+
 	@Override
-	public String onSpellFinished(final L2NpcInstance npc, final L2PcInstance player, final L2Skill skill)
+	public String onSpellFinished(final L2NpcInstance npc,
+	        final L2PcInstance player, final L2Skill skill)
 	{
 		if (Util.contains(mobs1, npc.getNpcId()) && skill.getId() == 4589)
 		{
@@ -168,24 +169,25 @@ public class Monastery extends L2AttackableAIScript implements Runnable
 			((L2Attackable) npc).addDamageHate(player, 0, 999);
 			npc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, player);
 		}
-		
+
 		if (Util.contains(mobs2, npc.getNpcId()))
 		{
 			if (skill.getSkillType() == SkillType.AGGDAMAGE)
 			{
-				npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 0, npc.getName(), text[Rnd.get(2) + 1].replace("name", player.getName())));
+				npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 0, npc.getName(), text[Rnd.get(2)
+				        + 1].replace("name", player.getName())));
 				((L2Attackable) npc).addDamageHate(player, 0, 999);
 				npc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, player);
-				
+
 			}
 		}
-		
+
 		return super.onSpellFinished(npc, player, skill);
 	}
-	
+
 	@Override
 	public void run()
 	{
 	}
-	
+
 }

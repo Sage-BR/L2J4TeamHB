@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,11 +24,13 @@ import net.sf.l2j.gameserver.templates.L2Item;
 
 /**
  * Format:(ch) d
- * @author  -Wooden-
+ *
+ * @author -Wooden-
  */
 public final class RequestConfirmTargetItem extends L2GameClientPacket
 {
 	private static final String _C__D0_29_REQUESTCONFIRMTARGETITEM = "[C] D0:29 RequestConfirmTargetItem";
+
 	private int _itemObjId;
 
 	/**
@@ -48,9 +50,12 @@ public final class RequestConfirmTargetItem extends L2GameClientPacket
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		L2ItemInstance item = (L2ItemInstance)L2World.getInstance().findObject(_itemObjId);
+		L2ItemInstance item = (L2ItemInstance) L2World.getInstance().findObject(_itemObjId);
 
-		if (item == null) return;
+		if (item == null)
+		{
+			return;
+		}
 
 		if (activeChar.getLevel() < 46)
 		{
@@ -67,9 +72,10 @@ public final class RequestConfirmTargetItem extends L2GameClientPacket
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.ONCE_AN_ITEM_IS_AUGMENTED_IT_CANNOT_BE_AUGMENTED_AGAIN));
 			return;
 		}
-		//TODO: can do better? : currently: using isdestroyable() as a check for hero / cursed weapons
-		else if (itemGrade < L2Item.CRYSTAL_C || itemType != L2Item.TYPE2_WEAPON || !item.isDestroyable() ||
-				item.isShadowItem())
+		// TODO: can do better? : currently: using isdestroyable() as a check
+		// for hero / cursed weapons
+		else if (itemGrade < L2Item.CRYSTAL_C || itemType != L2Item.TYPE2_WEAPON
+		        || !item.isDestroyable() || item.isShadowItem())
 		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.THIS_IS_NOT_A_SUITABLE_ITEM));
 			return;

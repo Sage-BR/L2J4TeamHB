@@ -16,7 +16,6 @@ package net.sf.l2j.gameserver.taskmanager.tasks;
 
 import java.util.Calendar;
 import java.util.Map;
-
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
@@ -30,8 +29,9 @@ import net.sf.l2j.gameserver.taskmanager.TaskTypes;
 
 public class TaskRaidPointsReset extends Task
 {
-	private static final Logger _log	= Logger.getLogger(TaskRaidPointsReset.class.getName());
-	public static final	String	NAME	= "raid_points_reset";
+	private static final Logger _log = Logger.getLogger(TaskRaidPointsReset.class.getName());
+
+	public static final String NAME = "raid_points_reset";
 
 	@Override
 	public String getName()
@@ -89,9 +89,13 @@ public class TaskRaidPointsReset extends Task
 								break;
 							default:
 								if (entry.getValue() <= 50)
+								{
 									reputation = Config.RAID_RANKING_UP_TO_50TH;
+								}
 								else
+								{
 									reputation = Config.RAID_RANKING_UP_TO_100TH;
+								}
 								break;
 						}
 						// original c.addReputationScore(reputation, true);

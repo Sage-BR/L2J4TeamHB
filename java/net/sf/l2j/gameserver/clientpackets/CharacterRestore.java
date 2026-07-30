@@ -24,10 +24,11 @@ import net.sf.l2j.gameserver.serverpackets.CharSelectionInfo;
 public final class CharacterRestore extends L2GameClientPacket
 {
 	private static final String _C__62_CHARACTERRESTORE = "[C] 62 CharacterRestore";
-	//private static Logger _log = Logger.getLogger(CharacterRestore.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(CharacterRestore.class.getName());
 
 	// cd
-    private int _charSlot;
+	private int _charSlot;
 
 	@Override
 	protected void readImpl()
@@ -38,16 +39,21 @@ public final class CharacterRestore extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-	    try
-	    {
-		getClient().markRestoredChar(_charSlot);
-	    } catch (Exception e){}
+		try
+		{
+			getClient().markRestoredChar(_charSlot);
+		}
+		catch (Exception e)
+		{
+		}
 		CharSelectionInfo cl = new CharSelectionInfo(getClient().getAccountName(), getClient().getSessionId().playOkID1, 0);
 		sendPacket(cl);
 		getClient().setCharSelection(cl.getCharInfo());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

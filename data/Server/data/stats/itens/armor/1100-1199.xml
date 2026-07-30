@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="1100" name="Cotton Tunic">
+  <item id='1100' name="Cotton Tunic">
     <for>
       <add val="21" order="0x10" stat="pDef" />
       <add val="38" order="0x60" stat="maxMp" />
@@ -26,7 +26,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="38" />
   </item>
-  <item id="1101" name="Tunic of Devotion">
+<item id='1101' name="Tunic of Devotion">
     <for>
       <add stat="pDef" order="0x10" val="30" />
       <add val="67" order="0x60" stat="maxMp" />
@@ -52,7 +52,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="67" />
   </item>
-  <item id="1102" name="Tunic of Magic">
+<item id='1102' name="Tunic of Magic">
     <for>
       <add val="34" order="0x10" stat="pDef" />
       <add val="86" order="0x60" stat="maxMp" />
@@ -78,7 +78,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="86" />
   </item>
-  <item id="1103" name="Cotton Stockings">
+<item id='1103' name="Cotton Stockings">
     <for>
       <add val="13" order="0x10" stat="pDef" />
       <add val="23" order="0x60" stat="maxMp" />
@@ -104,7 +104,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="23" />
   </item>
-  <item id="1104" name="Stockings of Devotion">
+<item id='1104' name="Stockings of Devotion">
     <for>
       <add val="19" order="0x10" stat="pDef" />
       <add val="42" order="0x60" stat="maxMp" />
@@ -130,7 +130,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="42" />
   </item>
-  <item id="1105" name="Stockings of Magic">
+<item id='1105' name="Stockings of Magic">
     <for>
       <add val="21" order="0x10" stat="pDef" />
       <add val="54" order="0x60" stat="maxMp" />
@@ -156,7 +156,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="54" />
   </item>
-  <item id="1119" name="Short Leather Gloves">
+<item id='1119' name="Short Leather Gloves">
     <for>
       <add val="11" order="0x10" stat="pDef" />
     </for>
@@ -181,20 +181,58 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1120" name="Paagrio Hand">
+<item id='1120' name="Paagrio Hand">
     <for>
       <add val="34" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
+    <set name="bodypart" val="1024"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="1600" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="161000" />
+    <set name="crystal_count" val="64" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="34" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="1121" name="Apprentice's Shoes">
+<item id='1121' name="Apprentice's Shoes">
     <for>
       <add val="8" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="4096"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="1320" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="7" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="8" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="1122" name="Cotton Shoes">
+<item id='1122' name="Cotton Shoes">
     <for>
       <add val="11" order="0x10" stat="pDef" />
     </for>
@@ -219,7 +257,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1123" name="Blue Buckskin Boots">
+<item id='1123' name="Blue Buckskin Boots">
     <for>
       <add val="22" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -245,7 +283,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1124" name="Boots of Power">
+<item id='1124' name="Boots of Power">
     <for>
       <add val="27" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -271,7 +309,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1125" name="Assault Boots">
+<item id='1125' name="Assault Boots">
     <for>
       <add val="29" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -297,7 +335,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1126" name="Crimson Boots">
+<item id='1126' name="Crimson Boots">
     <for>
       <add val="34" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -323,7 +361,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1127" name="Forgotten Boots">
+<item id='1127' name="Forgotten Boots">
     <for>
       <add val="36" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -349,7 +387,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1128" name="Adamantite Boots">
+<item id='1128' name="Adamantite Boots">
     <for>
       <add val="39" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -375,7 +413,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1129" name="Crude Leather Shoes">
+<item id='1129' name="Crude Leather Shoes">
     <for>
       <add val="11" order="0x10" stat="pDef" />
     </for>
@@ -400,19 +438,57 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1146" name="Squire's Shirt">
+<item id='1146' name="Squire's Shirt">
     <for>
       <add val="33" order="0x10" stat="pDef" />
     </for>
-    <set name="armor_type" val="none" />
+    <set name="bodypart" val="1024"/>
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="3301" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="26" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="33" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="1147" name="Squire's Pants">
+<item id='1147' name="Squire's Pants">
     <for>
       <add val="20" order="0x10" stat="pDef" />
     </for>
-    <set name="armor_type" val="none" />
+    <set name="bodypart" val="2048"/>
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="1750" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="6" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="20" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="1148" name="Hard Leather Helmet">
+<item id='1148' name="Hard Leather Helmet">
     <for>
       <add val="26" order="0x10" stat="pDef" />
     </for>
@@ -437,7 +513,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="1149" name="Shining Circlet">
+<item id='1149' name="Shining Circlet">
     <for>
       <add val="54" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />

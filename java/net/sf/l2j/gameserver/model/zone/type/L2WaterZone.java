@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,30 +36,35 @@ public class L2WaterZone extends L2ZoneType
 
 		if (character instanceof L2PcInstance)
 		{
-		    if (((L2PcInstance) character).isMounted())
-		        ((L2PcInstance) character).dismount();
+			if (((L2PcInstance) character).isMounted())
+			{
+				((L2PcInstance) character).dismount();
+			}
 
-		    if (((L2PcInstance) character).isTransformed()
-		            && !((L2PcInstance) character).isCursedWeaponEquipped())
-		    {
-		        character.stopTransformation(null);
-		    	//((L2PcInstance) character).untransform();
-		    }
-		    // TODO: update to only send speed status when that packet is known
-		    else
-		        ((L2PcInstance) character).broadcastUserInfo();
+			if (((L2PcInstance) character).isTransformed()
+			        && !((L2PcInstance) character).isCursedWeaponEquipped())
+			{
+				character.stopTransformation(null);
+				// ((L2PcInstance) character).untransform();
+			}
+			// TODO: update to only send speed status when that packet is known
+			else
+			{
+				((L2PcInstance) character).broadcastUserInfo();
+			}
 		}
 		else if (character instanceof L2NpcInstance)
 		{
 			Collection<L2PcInstance> plrs = character.getKnownList().getKnownPlayers().values();
-			//synchronized (character.getKnownList().getKnownPlayers())
+			// synchronized (character.getKnownList().getKnownPlayers())
 			{
 				for (L2PcInstance player : plrs)
+				{
 					player.sendPacket(new NpcInfo((L2NpcInstance) character, player));
+				}
 			}
 		}
 
-		
 		/*
 		 * if (character instanceof L2PcInstance) {
 		 * ((L2PcInstance)character).sendMessage("You entered water!"); }
@@ -71,32 +76,38 @@ public class L2WaterZone extends L2ZoneType
 	{
 		character.setInsideZone(L2Character.ZONE_WATER, false);
 
-		/*if (character instanceof L2PcInstance)
-		{
-			((L2PcInstance)character).sendMessage("You exited water!");
-		}*/
-		
+		/*
+		 * if (character instanceof L2PcInstance) {
+		 * ((L2PcInstance)character).sendMessage("You exited water!"); }
+		 */
+
 		// TODO: update to only send speed status when that packet is known
 		if (character instanceof L2PcInstance)
-        {
-		    ((L2PcInstance) character).broadcastUserInfo();
-        }
-        else if (character instanceof L2NpcInstance)
-        {
-        	Collection<L2PcInstance> plrs = character.getKnownList().getKnownPlayers().values();
-        	//synchronized (character.getKnownList().getKnownPlayers())
-        	{
-            for (L2PcInstance player : plrs)
-                    player.sendPacket(new NpcInfo((L2NpcInstance)character, player));
-        	}
-        }
+		{
+			((L2PcInstance) character).broadcastUserInfo();
+		}
+		else if (character instanceof L2NpcInstance)
+		{
+			Collection<L2PcInstance> plrs = character.getKnownList().getKnownPlayers().values();
+			// synchronized (character.getKnownList().getKnownPlayers())
+			{
+				for (L2PcInstance player : plrs)
+				{
+					player.sendPacket(new NpcInfo((L2NpcInstance) character, player));
+				}
+			}
+		}
 	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 	public int getWaterZ()
 	{

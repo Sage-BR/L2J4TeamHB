@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,7 +31,8 @@ public final class RequestJoinAlly extends L2GameClientPacket
 {
 
 	private static final String _C__82_REQUESTJOINALLY = "[C] 82 RequestJoinAlly";
-	//private static Logger _log = Logger.getLogger(RequestJoinAlly.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestJoinAlly.class.getName());
 
 	private int _id;
 
@@ -47,7 +48,7 @@ public final class RequestJoinAlly extends L2GameClientPacket
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 		{
-		    return;
+			return;
 		}
 
 		L2Object ob = L2World.getInstance().findObject(_id);
@@ -58,19 +59,15 @@ public final class RequestJoinAlly extends L2GameClientPacket
 			return;
 		}
 
-		if(activeChar.getClan() == null)
+		if (activeChar.getClan() == null)
 		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_ARE_NOT_A_CLAN_MEMBER));
 			return;
 		}
 
-		L2PcInstance target = (L2PcInstance)ob;
+		L2PcInstance target = (L2PcInstance) ob;
 		L2Clan clan = activeChar.getClan();
-		if (!clan.checkAllyJoinCondition(activeChar, target))
-		{
-			return;
-		}
-		if (!activeChar.getRequest().setRequest(target, this))
+		if (!clan.checkAllyJoinCondition(activeChar, target) || !activeChar.getRequest().setRequest(target, this))
 		{
 			return;
 		}
@@ -91,4 +88,3 @@ public final class RequestJoinAlly extends L2GameClientPacket
 		return _C__82_REQUESTJOINALLY;
 	}
 }
-

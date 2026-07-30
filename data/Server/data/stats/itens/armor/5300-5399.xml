@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="5300" name="Sealed Boots of The Underworld">
+  <item id='5300' name="Sealed Boots of The Underworld">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -26,7 +26,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5301" name="Sealed Tallum Leather Armor">
+<item id='5301' name="Sealed Tallum Leather Armor">
     <for>
       <add val="209" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -52,7 +52,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5302" name="Sealed Gust Bracer">
+<item id='5302' name="Sealed Gust Bracer">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -78,7 +78,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5303" name="Sealed Gust Boots">
+<item id='5303' name="Sealed Gust Boots">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -104,7 +104,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5304" name="Sealed Tallum Tunic">
+<item id='5304' name="Sealed Tallum Tunic">
     <for>
       <add val="86" order="0x10" stat="pDef" />
       <add val="409" order="0x60" stat="maxMp" />
@@ -131,7 +131,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="409" />
   </item>
-  <item id="5305" name="Sealed Tallum Stockings">
+<item id='5305' name="Sealed Tallum Stockings">
     <for>
       <add val="53" order="0x10" stat="pDef" />
       <add val="256" order="0x60" stat="maxMp" />
@@ -158,7 +158,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="256" />
   </item>
-  <item id="5306" name="Sealed Gloves of Black Ore">
+<item id='5306' name="Sealed Gloves of Black Ore">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -184,7 +184,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5307" name="Sealed Red Flame Boots">
+<item id='5307' name="Sealed Red Flame Boots">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -210,7 +210,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5308" name="Sealed Dark Crystal Robe">
+<item id='5308' name="Sealed Dark Crystal Robe">
     <for>
       <add val="139" order="0x10" stat="pDef" />
       <add val="665" order="0x60" stat="maxMp" />
@@ -237,7 +237,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="665" />
   </item>
-  <item id="5309" name="Sealed Phoenix Gloves's_gloves">
+<item id='5309' name="Sealed Phoenix Gloves's_gloves">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -263,7 +263,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5310" name="Sealed Phoenix Boots's_boots">
+<item id='5310' name="Sealed Phoenix Boots's_boots">
     <for>
       <add val="45" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -289,7 +289,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5311" name="Sealed Armor of Nightmare">
+<item id='5311' name="Sealed Armor of Nightmare">
     <for>
       <add val="293" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -315,7 +315,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5312" name="Sealed Helm of Nightmare">
+<item id='5312' name="Sealed Helm of Nightmare">
     <for>
       <add val="73" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -341,7 +341,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5313" name="Sealed Gloves of Nightmare">
+<item id='5313' name="Sealed Gloves of Nightmare">
     <for>
       <add val="49" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -367,7 +367,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5314" name="Sealed Boots of Nightmare">
+<item id='5314' name="Sealed Boots of Nightmare">
     <for>
       <add val="49" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -393,7 +393,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5316" name="Sealed Majestic Plate Armor">
+<item id='5316' name="Sealed Majestic Plate Armor">
     <for>
       <add val="293" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -419,7 +419,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5317" name="Sealed Majestic Circlet">
+<item id='5317' name="Sealed Majestic Circlet">
     <for>
       <add val="73" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -445,7 +445,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5318" name="Sealed Majestic Gloves">
+<item id='5318' name="Sealed Majestic Gloves">
     <for>
       <add val="49" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -471,7 +471,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5319" name="Sealed Majestic Boots">
+<item id='5319' name="Sealed Majestic Boots">
     <for>
       <add val="49" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -497,7 +497,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5320" name="Sealed Leather Armor of Nightmare">
+<item id='5320' name="Sealed Leather Armor of Nightmare">
     <for>
       <add val="220" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -523,7 +523,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5321" name="Sealed Dark Legion Gloves">
+<item id='5321' name="Sealed Dark Legion Gloves">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -549,7 +549,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5322" name="Sealed Dark Legion Boots">
+<item id='5322' name="Sealed Dark Legion Boots">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -575,7 +575,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5323" name="Sealed Majestic Leather Armor">
+<item id='5323' name="Sealed Majestic Leather Armor">
     <for>
       <add val="220" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -601,7 +601,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5324" name="Sealed Gloves of Phantom">
+<item id='5324' name="Sealed Gloves of Phantom">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -627,7 +627,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5325" name="Sealed Boots of Phantom">
+<item id='5325' name="Sealed Boots of Phantom">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -653,7 +653,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5326" name="Sealed Robe of Nightmare">
+<item id='5326' name="Sealed Robe of Nightmare">
     <for>
       <add val="147" order="0x10" stat="pDef" />
       <add val="718" order="0x60" stat="maxMp" />
@@ -680,7 +680,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="718" />
   </item>
-  <item id="5327" name="Sealed Cerberus Gloves">
+<item id='5327' name="Sealed Cerberus Gloves">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -706,7 +706,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5328" name="Sealed Cerberus Boots">
+<item id='5328' name="Sealed Cerberus Boots">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -732,7 +732,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="5329" name="Sealed Majestic Robe">
+<item id='5329' name="Sealed Majestic Robe">
     <for>
       <add val="147" order="0x10" stat="pDef" />
       <add val="718" order="0x60" stat="maxMp" />
@@ -759,18 +759,56 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="718" />
   </item>
-  <item id="5330" name="Sealed Dasparion's Gloves">
+<item id='5330' name="Sealed Dasparion's Gloves">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
+    <set name="bodypart" val="512"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="550" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="5331" name="Sealed Dasparion's Boots">
+<item id='5331' name="Sealed Dasparion's Boots">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
+    <set name="bodypart" val="4096"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="1100" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1630000" />
+    <set name="crystal_count" val="140" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="48" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
 </list>

@@ -3,16 +3,16 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 package net.sf.l2j.gameserver.clientpackets;
 
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
@@ -29,40 +29,47 @@ import net.sf.l2j.gameserver.serverpackets.SiegeDefenderList;
  */
 public final class RequestSiegeDefenderList extends L2GameClientPacket
 {
-    private static final String _C__a3_RequestSiegeDefenderList = "[C] a3 RequestSiegeDefenderList";
-    //private static Logger _log = Logger.getLogger(RequestJoinParty.class.getName());
+	private static final String _C__a3_RequestSiegeDefenderList = "[C] a3 RequestSiegeDefenderList";
+	// private static Logger _log =
+	// Logger.getLogger(RequestJoinParty.class.getName());
 
-    private int _castleId;
+	private int _castleId;
 
-    @Override
+	@Override
 	protected void readImpl()
-    {
-        _castleId = readD();
-    }
+	{
+		_castleId = readD();
+	}
 
-    @Override
+	@Override
 	protected void runImpl()
-    {
-        if (_castleId < 100 )
-        {
-            Castle castle = CastleManager.getInstance().getCastleById(_castleId);
-            if (castle == null) return;
-            SiegeDefenderList sdl = new SiegeDefenderList(castle);
-            sendPacket(sdl);
-        }
-        else
-        {
-            Fort fort = FortManager.getInstance().getFortById(_castleId);
-            if (fort == null) return;
-            FortSiegeDefenderList sdl = new FortSiegeDefenderList(fort);
-            sendPacket(sdl);
-        }
+	{
+		if (_castleId < 100)
+		{
+			Castle castle = CastleManager.getInstance().getCastleById(_castleId);
+			if (castle == null)
+			{
+				return;
+			}
+			SiegeDefenderList sdl = new SiegeDefenderList(castle);
+			sendPacket(sdl);
+		}
+		else
+		{
+			Fort fort = FortManager.getInstance().getFortById(_castleId);
+			if (fort == null)
+			{
+				return;
+			}
+			FortSiegeDefenderList sdl = new FortSiegeDefenderList(fort);
+			sendPacket(sdl);
+		}
 
-    }
+	}
 
-    @Override
+	@Override
 	public String getType()
-    {
-        return _C__a3_RequestSiegeDefenderList;
-    }
+	{
+		return _C__a3_RequestSiegeDefenderList;
+	}
 }

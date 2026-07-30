@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,18 +21,18 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.LeaveWorld;
 
 /**
- * This class handles following admin commands:
- * - character_disconnect = disconnects target player
+ * This class handles following admin commands: - character_disconnect =
+ * disconnects target player
  *
  * @version $Revision: 1.2.4.4 $ $Date: 2005/04/11 10:06:00 $
  */
-public class AdminDisconnect implements IAdminCommandHandler {
+public class AdminDisconnect implements IAdminCommandHandler
+{
 
-	private static final String[] ADMIN_COMMANDS =
-	{
-		"admin_character_disconnect"
-	};
+	private static final String[] ADMIN_COMMANDS = {
+	        "admin_character_disconnect" };
 
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.equals("admin_character_disconnect"))
@@ -42,6 +42,7 @@ public class AdminDisconnect implements IAdminCommandHandler {
 		return true;
 	}
 
+	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
@@ -52,9 +53,13 @@ public class AdminDisconnect implements IAdminCommandHandler {
 		L2Object target = activeChar.getTarget();
 		L2PcInstance player = null;
 		if (target instanceof L2PcInstance)
-			player = (L2PcInstance)target;
+		{
+			player = (L2PcInstance) target;
+		}
 		else
+		{
 			return;
+		}
 
 		if (player == activeChar)
 		{
@@ -62,9 +67,10 @@ public class AdminDisconnect implements IAdminCommandHandler {
 		}
 		else
 		{
-			activeChar.sendMessage("Character " + player.getName() + " disconnected from server.");
+			activeChar.sendMessage("Character " + player.getName()
+			        + " disconnected from server.");
 
-			//Logout Character
+			// Logout Character
 			LeaveWorld ql = new LeaveWorld();
 			player.sendPacket(ql);
 

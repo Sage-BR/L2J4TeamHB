@@ -3,16 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model.zone.type;
+
+import java.util.ArrayList;
 
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.L2Character;
@@ -21,20 +23,19 @@ import net.sf.l2j.gameserver.model.entity.Castle;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.util.Rnd;
 
-import java.util.ArrayList;
-
 /**
- * A castle teleporter zone
- * used for Mass Gatekeepers
+ * A castle teleporter zone used for Mass Gatekeepers
  *
- * @author  Kerberos
+ * @author Kerberos
  */
 public class L2CastleTeleportZone extends L2ZoneType
 {
 	private int[] _spawnLoc;
+
 	private int _castleId;
+
 	private Castle _castle;
-	
+
 	public L2CastleTeleportZone(int id)
 	{
 		super(id);
@@ -73,56 +74,78 @@ public class L2CastleTeleportZone extends L2ZoneType
 		{
 			_spawnLoc[4] = Integer.parseInt(value);
 		}
-		else super.setParameter(name, value);
+		else
+		{
+			super.setParameter(name, value);
+		}
 	}
 
 	@Override
-	protected void onEnter(L2Character character) {}
+	protected void onEnter(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onExit(L2Character character) {}
+	protected void onExit(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 	/**
 	 * Returns all players within this zone
+	 *
 	 * @return
 	 */
 	public ArrayList<L2PcInstance> getAllPlayers()
 	{
-		ArrayList<L2PcInstance> players = new ArrayList<L2PcInstance>();
+		ArrayList<L2PcInstance> players = new ArrayList<>();
 
 		for (L2Character temp : _characterList.values())
 		{
 			if (temp instanceof L2PcInstance)
-				players.add((L2PcInstance)temp);
+			{
+				players.add((L2PcInstance) temp);
+			}
 		}
 
 		return players;
 	}
 
-    public void oustAllPlayers()
-    {
-        if (_characterList == null) return;
-        if (_characterList.isEmpty()) return;
-        for (L2Character character : _characterList.values())
-        {
-            if (character == null) continue;
-            if (character instanceof L2PcInstance)
-            {
-                L2PcInstance player = (L2PcInstance) character;
-                if (player.isOnline() == 1)
-                	player.teleToLocation(Rnd.get(_spawnLoc[0], _spawnLoc[1]), Rnd.get(_spawnLoc[2], _spawnLoc[3]), _spawnLoc[4]);
-            }
-        }
-    }
+	public void oustAllPlayers()
+	{
+		if ((_characterList == null) || _characterList.isEmpty())
+		{
+			return;
+		}
+		for (L2Character character : _characterList.values())
+		{
+			if (character == null)
+			{
+				continue;
+			}
+			if (character instanceof L2PcInstance)
+			{
+				L2PcInstance player = (L2PcInstance) character;
+				if (player.isOnline() == 1)
+				{
+					player.teleToLocation(Rnd.get(_spawnLoc[0], _spawnLoc[1]), Rnd.get(_spawnLoc[2], _spawnLoc[3]), _spawnLoc[4]);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Get the spawn locations
+	 *
 	 * @return
 	 */
 	public int[] getSpawn()

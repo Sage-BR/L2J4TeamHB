@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,12 +19,14 @@ import net.sf.l2j.gameserver.model.L2Clan.SubPledge;
 
 /**
  *
- * @author  -Wooden-
+ * @author -Wooden-
  */
 public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 {
 	private static final String _S__FE_3F_PLEDGERECEIVESUBPLEDGECREATED = "[S] FE:40 PledgeReceiveSubPledgeCreated";
+
 	private SubPledge _subPledge;
+
 	private L2Clan _clan;
 
 	/**
@@ -46,17 +48,22 @@ public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 		writeH(0x40);
 
 		writeD(0x01);
-        writeD(_subPledge.getId());
-        writeS(_subPledge.getName());
-        writeS(getLeaderName());
+		writeD(_subPledge.getId());
+		writeS(_subPledge.getName());
+		writeS(getLeaderName());
 	}
-	
+
 	private String getLeaderName()
 	{
-		if (_subPledge.getId() == L2Clan.SUBUNIT_ACADEMY || _subPledge.getLeaderId() == 0)
+		if (_subPledge.getId() == L2Clan.SUBUNIT_ACADEMY
+		        || _subPledge.getLeaderId() == 0)
+		{
 			return "";
+		}
 		else
-			return _clan.getClanMember(_subPledge.getLeaderId()).getName(); 
+		{
+			return _clan.getClanMember(_subPledge.getLeaderId()).getName();
+		}
 	}
 
 	/**

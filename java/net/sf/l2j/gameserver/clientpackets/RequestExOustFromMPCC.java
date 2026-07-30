@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,13 +22,15 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 /**
  * @author -Wooden-
  *
- * D0 0F 00 5A 00 77 00 65 00 72 00 67 00 00 00
+ *         D0 0F 00 5A 00 77 00 65 00 72 00 67 00 00 00
  *
  */
 public final class RequestExOustFromMPCC extends L2GameClientPacket
 {
-	//private static Logger _log = Logger.getLogger(RequestExOustFromMPCC.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestExOustFromMPCC.class.getName());
 	private static final String _C__D0_0F_REQUESTEXOUSTFROMMPCC = "[C] D0:0F RequestExOustFromMPCC";
+
 	private String _name;
 
 	@Override
@@ -37,7 +39,9 @@ public final class RequestExOustFromMPCC extends L2GameClientPacket
 		_name = readS();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#runImpl()
 	 */
 	@Override
@@ -46,9 +50,10 @@ public final class RequestExOustFromMPCC extends L2GameClientPacket
 		L2PcInstance target = L2World.getInstance().getPlayer(_name);
 		L2PcInstance activeChar = getClient().getActiveChar();
 
-		if (target != null && target.isInParty() && activeChar.isInParty() && activeChar.getParty().isInCommandChannel()
-				&& target.getParty().isInCommandChannel()
-				&& activeChar.getParty().getCommandChannel().getChannelLeader().equals(activeChar))
+		if (target != null && target.isInParty() && activeChar.isInParty()
+		        && activeChar.getParty().isInCommandChannel()
+		        && target.getParty().isInCommandChannel()
+		        && activeChar.getParty().getCommandChannel().getChannelLeader().equals(activeChar))
 		{
 			target.getParty().getCommandChannel().removeParty(target.getParty());
 
@@ -61,11 +66,13 @@ public final class RequestExOustFromMPCC extends L2GameClientPacket
 		}
 		else
 		{
-    		activeChar.sendMessage("Incorrect Target");
+			activeChar.sendMessage("Incorrect Target");
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
 	@Override

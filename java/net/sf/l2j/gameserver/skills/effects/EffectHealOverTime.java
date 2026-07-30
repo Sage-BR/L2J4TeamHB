@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -35,29 +35,30 @@ class EffectHealOverTime extends L2Effect
 
 	/** Notify started */
 	@Override
-	public void onStart() {
-		getEffected().sendPacket(new ExRegMax(calc(), getTotalCount() * getPeriod(), getPeriod()));
+	public void onStart()
+	{
+		getEffected().sendPacket(new ExRegMax(calc(), getTotalCount()
+		        * getPeriod(), getPeriod()));
 	}
 
 	@Override
 	public boolean onActionTime()
 	{
-		if(getEffected().isDead())
+		if (getEffected().isDead() || (getEffected() instanceof L2DoorInstance))
+		{
 			return false;
-
-		if(getEffected() instanceof L2DoorInstance)
-			return false;
+		}
 
 		double hp = getEffected().getCurrentHp();
 		double maxhp = getEffected().getMaxHp();
 		hp += calc();
-		if(hp > maxhp)
+		if (hp > maxhp)
 		{
 			hp = maxhp;
 		}
 		getEffected().setCurrentHp(hp);
 		StatusUpdate suhp = new StatusUpdate(getEffected().getObjectId());
-		suhp.addAttribute(StatusUpdate.CUR_HP, (int)hp);
+		suhp.addAttribute(StatusUpdate.CUR_HP, (int) hp);
 		getEffected().sendPacket(suhp);
 		return true;
 	}

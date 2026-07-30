@@ -30,12 +30,13 @@ import net.sf.l2j.server.gameserver.model.PartyMatchRoomList;
 public final class RequestWithDrawalParty extends L2GameClientPacket
 {
 	private static final String _C__2B_REQUESTWITHDRAWALPARTY = "[C] 2B RequestWithDrawalParty";
-	//private static Logger _log = Logger.getLogger(RequestWithDrawalParty.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestWithDrawalParty.class.getName());
 
 	@Override
 	protected void readImpl()
 	{
-		//trigger
+		// trigger
 	}
 
 	@Override
@@ -49,7 +50,8 @@ public final class RequestWithDrawalParty extends L2GameClientPacket
 
 		if (player.isInParty())
 		{
-			if (player.getParty().isInDimensionalRift() && !player.getParty().getDimensionalRift().getRevivedAtWaitingRoom().contains(player))
+			if (player.getParty().isInDimensionalRift()
+			        && !player.getParty().getDimensionalRift().getRevivedAtWaitingRoom().contains(player))
 			{
 				player.sendMessage("You can't exit party when you are in Dimensional Rift.");
 			}
@@ -57,10 +59,10 @@ public final class RequestWithDrawalParty extends L2GameClientPacket
 			{
 				player.getParty().removePartyMember(player);
 
-				if(player.isInPartyMatchRoom())
+				if (player.isInPartyMatchRoom())
 				{
 					PartyMatchRoom _room = PartyMatchRoomList.getInstance().getPlayerRoom(player);
-					if(_room != null)
+					if (_room != null)
 					{
 						player.sendPacket(new PartyMatchDetail(player, _room));
 						player.sendPacket(new ExPartyRoomMember(player, _room, 0));
@@ -69,7 +71,7 @@ public final class RequestWithDrawalParty extends L2GameClientPacket
 						_room.deleteMember(player);
 					}
 					player.setPartyRoom(0);
-					//player.setPartyMatching(0);
+					// player.setPartyMatching(0);
 					player.broadcastUserInfo();
 				}
 			}

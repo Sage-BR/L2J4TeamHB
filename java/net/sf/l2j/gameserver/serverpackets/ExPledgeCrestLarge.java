@@ -3,39 +3,40 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.serverpackets;
 
 /**
- * Format: (ch) ddd b
- * d: ?
- * d: crest ID
- * d: crest size
- * b: raw data
+ * Format: (ch) ddd b d: ? d: crest ID d: crest size b: raw data
+ *
  * @author -Wooden-
  *
  */
 public class ExPledgeCrestLarge extends L2GameServerPacket
 {
 	private static final String _S__FE_28_EXPLEDGECRESTLARGE = "[S] FE:1b ExPledgeCrestLarge";
+
 	private int _crestId;
+
 	private byte[] _data;
 
 	public ExPledgeCrestLarge(int crestId, byte[] data)
 	{
 		_crestId = crestId;
-        _data = data;
+		_data = data;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
@@ -44,7 +45,7 @@ public class ExPledgeCrestLarge extends L2GameServerPacket
 		writeC(0xfe);
 		writeH(0x1b);
 
-		writeD(0x00); //???
+		writeD(0x00); // ???
 		writeD(_crestId);
 		writeD(_data.length);
 
@@ -52,7 +53,9 @@ public class ExPledgeCrestLarge extends L2GameServerPacket
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
 	@Override

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +26,7 @@ import net.sf.l2j.util.Rnd;
 /**
  * another type of damage zone with skills
  *
- * @author  kerberos
+ * @author kerberos
  */
 public class L2PoisonZone extends L2ZoneType
 {
@@ -63,7 +63,10 @@ public class L2PoisonZone extends L2ZoneType
 		{
 			_initialDelay = Integer.parseInt(value);
 		}
-		else super.setParameter(name, value);
+		else
+		{
+			super.setParameter(name, value);
+		}
 	}
 
 	@Override
@@ -89,6 +92,7 @@ public class L2PoisonZone extends L2ZoneType
 	{
 		return _skillId;
 	}
+
 	protected Collection<L2Character> getCharacterList()
 	{
 		return _characterList.values();
@@ -97,32 +101,40 @@ public class L2PoisonZone extends L2ZoneType
 	class ApplySkill implements Runnable
 	{
 		private L2PoisonZone _poisonZone;
+
 		ApplySkill(L2PoisonZone zone)
 		{
 			_poisonZone = zone;
 		}
 
+		@Override
 		public void run()
 		{
 			for (L2Character temp : _poisonZone.getCharacterList())
 			{
 				if (temp != null && !temp.isDead())
 				{
-                    L2Effect[] effects = temp.getAllEffects();
-                    for (L2Effect e : effects)
-                    {
-                    	if (e.getSkill().getId() != getSkillId())
-                    		e.getSkill().getEffects(temp, temp);
-                    }
+					L2Effect[] effects = temp.getAllEffects();
+					for (L2Effect e : effects)
+					{
+						if (e.getSkill().getId() != getSkillId())
+						{
+							e.getSkill().getEffects(temp, temp);
+						}
+					}
 				}
 			}
 		}
 	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 }

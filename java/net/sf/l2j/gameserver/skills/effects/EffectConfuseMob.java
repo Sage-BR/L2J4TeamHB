@@ -3,17 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.skills.effects;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,14 +26,13 @@ import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.util.Rnd;
 
-import java.util.ArrayList;
-
 /**
  * @author littlecrow
  *
- * Implementation of the Confusion Effect
+ *         Implementation of the Confusion Effect
  */
-final class EffectConfuseMob extends L2Effect {
+final class EffectConfuseMob extends L2Effect
+{
 
 	public EffectConfuseMob(Env env, EffectTemplate template)
 	{
@@ -47,35 +47,40 @@ final class EffectConfuseMob extends L2Effect {
 
 	/** Notify started */
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		getEffected().startConfused();
 		onActionTime();
 	}
 
 	/** Notify exited */
 	@Override
-	public void onExit() {
+	public void onExit()
+	{
 		getEffected().stopConfused(this);
 	}
 
-    @Override
+	@Override
 	public boolean onActionTime()
-    {
-		List<L2Character> targetList = new ArrayList<L2Character>();
+	{
+		List<L2Character> targetList = new ArrayList<>();
 
 		// Getting the possible targets
 
 		Collection<L2Object> objs = getEffected().getKnownList().getKnownObjects().values();
-		//synchronized (getEffected().getKnownList().getKnownObjects())
+		// synchronized (getEffected().getKnownList().getKnownObjects())
 		{
 			for (L2Object obj : objs)
 			{
 				if ((obj instanceof L2Attackable) && (obj != getEffected()))
+				{
 					targetList.add((L2Character) obj);
+				}
 			}
 		}
 		// if there is no target, exit function
-		if (targetList.size()==0){
+		if (targetList.size() == 0)
+		{
 			return true;
 		}
 
@@ -84,11 +89,10 @@ final class EffectConfuseMob extends L2Effect {
 		L2Object target = targetList.get(nextTargetIdx);
 
 		// Attacking the target
-		//getEffected().setTarget(target);
+		// getEffected().setTarget(target);
 		getEffected().setTarget(target);
-		getEffected().getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK,target);
+		getEffected().getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, target);
 
-    	return true;
-    }
+		return true;
+	}
 }
-

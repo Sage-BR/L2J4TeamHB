@@ -23,157 +23,167 @@ import net.sf.l2j.gameserver.scripting.ScriptManager;
 
 public class QuestManager extends ScriptManager<Quest>
 {
-    protected static final Logger _log = Logger.getLogger(QuestManager.class.getName());
+	protected static final Logger _log = Logger.getLogger(QuestManager.class.getName());
 
-    // =========================================================
-    private static QuestManager _instance;
-    public static final QuestManager getInstance()
-    {
-        if (_instance == null)
-        {
-    		_log.info("Initializing QuestManager");
-            _instance = new QuestManager();
-        }
-        return _instance;
-    }
-    // =========================================================
+	// =========================================================
+	private static QuestManager _instance;
 
-    // =========================================================
-    // Data Field
-    private Map<String, Quest> _quests = new ConcurrentHashMap<>();
+	public static final QuestManager getInstance()
+	{
+		if (_instance == null)
+		{
+			_log.info("Initializing QuestManager");
+			_instance = new QuestManager();
+		}
+		return _instance;
+	}
+	// =========================================================
 
-    // =========================================================
-    // Constructor
-    public QuestManager()
-    {
-    }
+	// =========================================================
+	// Data Field
+	private Map<String, Quest> _quests = new ConcurrentHashMap<>();
 
-    // =========================================================
-    // Method - Public
-    public final boolean reload(String questFolder)
-    {
-    	Quest q = getQuest(questFolder);
-    	if (q == null)
-    	{
-            return false;
-    	}
-    	return q.reload();
-    }
+	// =========================================================
+	// Constructor
+	public QuestManager()
+	{
+	}
 
-    /**
-     * Reloads a the quest given by questId.<BR>
-     * <B>NOTICE: Will only work if the quest name is equal the quest folder name</B>
-     * @param questId The id of the quest to be reloaded
-     * @return true if reload was succesful, false otherwise
-     */
-    public final boolean reload(int questId)
-    {
-    	Quest q = this.getQuest(questId);
-    	if (q == null)
-    	{
-    		return false;
-    	}
-    	return q.reload();
-    }
+	// =========================================================
+	// Method - Public
+	public final boolean reload(String questFolder)
+	{
+		Quest q = getQuest(questFolder);
+		if (q == null)
+		{
+			return false;
+		}
+		return q.reload();
+	}
 
-    public final void report()
-    {
-        _log.info("Loaded: " + getQuests().size() + " quests");
-    }
+	/**
+	 * Reloads a the quest given by questId.<BR>
+	 * <B>NOTICE: Will only work if the quest name is equal the quest folder
+	 * name</B>
+	 *
+	 * @param questId
+	 *            The id of the quest to be reloaded
+	 * @return true if reload was succesful, false otherwise
+	 */
+	public final boolean reload(int questId)
+	{
+		Quest q = this.getQuest(questId);
+		if (q == null)
+		{
+			return false;
+		}
+		return q.reload();
+	}
 
-    public final void save()
-    {
-    	for (Quest q: getQuests().values())
-        {
-    		q.saveGlobalData();
-        }
-    }
+	public final void report()
+	{
+		_log.info("Loaded: " + getQuests().size() + " quests");
+	}
 
-    // =========================================================
-    // Property - Public
-    public final Quest getQuest(String name)
-    {
+	public final void save()
+	{
+		for (Quest q : getQuests().values())
+		{
+			q.saveGlobalData();
+		}
+	}
+
+	// =========================================================
+	// Property - Public
+	public final Quest getQuest(String name)
+	{
 		return getQuests().get(name);
-    }
+	}
 
-    public final Quest getQuest(int questId)
-    {
-    	for (Quest q: getQuests().values())
-    	{
-    		if (q.getQuestIntId() == questId)
+	public final Quest getQuest(int questId)
+	{
+		for (Quest q : getQuests().values())
+		{
+			if (q.getQuestIntId() == questId)
 			{
 				return q;
 			}
-    	}
-    	return null;
-    }
+		}
+		return null;
+	}
 
+	public final void addQuest(Quest newQuest)
+	{
+		if (newQuest == null)
+		{
+			throw new IllegalArgumentException("Quest argument cannot be null");
+		}
+		Quest old = this.getQuests().get(newQuest.getName());
 
-    public final void addQuest(Quest newQuest)
-    {
-        if (newQuest == null)
-        {
-            throw new IllegalArgumentException("Quest argument cannot be null");
-        }
-    	Quest old = this.getQuests().get(newQuest.getName());
+		// FIXME: unloading the old quest at this point is a tad too late.
+		// the new quest has already initialized itself and read the data,
+		// starting
+		// an unpredictable number of tasks with that data. The old quest will
+		// now
+		// save data which will never be read.
+		// However, requesting the newQuest to re-read the data is not
+		// necessarily a
+		// good option, since the newQuest may have already started timers,
+		// spawned NPCs
+		// or taken any other action which it might re-take by re-reading the
+		// data.
+		// the current solution properly closes the running tasks of the old
+		// quest but
+		// ignores the data; perhaps the least of all evils...
+		if (old != null)
+		{
+			old.unload();
+			_log.info("Replaced: (" + old.getName() + ") with a new version ("
+			        + newQuest.getName() + ")");
 
-        // FIXME: unloading the old quest at this point is a tad too late.
-        // the new quest has already initialized itself and read the data, starting
-        // an unpredictable number of tasks with that data.  The old quest will now
-        // save data which will never be read.
-        // However, requesting the newQuest to re-read the data is not necessarily a
-        // good option, since the newQuest may have already started timers, spawned NPCs
-        // or taken any other action which it might re-take by re-reading the data.
-        // the current solution properly closes the running tasks of the old quest but
-        // ignores the data; perhaps the least of all evils...
-        if (old != null)
-        {
-            old.unload();
-            _log.info("Replaced: ("+old.getName()+") with a new version ("+newQuest.getName()+")");
+		}
+		this.getQuests().put(newQuest.getName(), newQuest);
+	}
 
-        }
-        this.getQuests().put(newQuest.getName(), newQuest);
-    }
+	public final boolean removeQuest(Quest q)
+	{
+		return this.getQuests().remove(q.getName()) != null;
+	}
 
-    public final boolean removeQuest(Quest q)
-    {
-        return this.getQuests().remove(q.getName()) != null;
-    }
-
-    public final ConcurrentHashMap<String, Quest> getQuests()
-    {
-        if (_quests == null)
+	public final ConcurrentHashMap<String, Quest> getQuests()
+	{
+		if (_quests == null)
 		{
 			_quests = new ConcurrentHashMap<>();
 		}
-        return (ConcurrentHashMap<String, Quest>) _quests;
-    }
+		return (ConcurrentHashMap<String, Quest>) _quests;
+	}
 
-    /**
-     * @see net.sf.l2j.gameserver.scripting.ScriptManager#getAllManagedScripts()
-     */
-    @Override
-    public Iterable<Quest> getAllManagedScripts()
-    {
-        return _quests.values();
-    }
+	/**
+	 * @see net.sf.l2j.gameserver.scripting.ScriptManager#getAllManagedScripts()
+	 */
+	@Override
+	public Iterable<Quest> getAllManagedScripts()
+	{
+		return _quests.values();
+	}
 
-    /**
-     * @see net.sf.l2j.gameserver.scripting.ScriptManager#unload(net.sf.l2j.gameserver.scripting.ManagedScript)
-     */
-    @Override
-    public boolean unload(Quest ms)
-    {
-        ms.saveGlobalData();
-        return this.removeQuest(ms);
-    }
+	/**
+	 * @see net.sf.l2j.gameserver.scripting.ScriptManager#unload(net.sf.l2j.gameserver.scripting.ManagedScript)
+	 */
+	@Override
+	public boolean unload(Quest ms)
+	{
+		ms.saveGlobalData();
+		return this.removeQuest(ms);
+	}
 
-    /**
-     * @see net.sf.l2j.gameserver.scripting.ScriptManager#getScriptManagerName()
-     */
-    @Override
-    public String getScriptManagerName()
-    {
-        return "QuestManager";
-    }
+	/**
+	 * @see net.sf.l2j.gameserver.scripting.ScriptManager#getScriptManagerName()
+	 */
+	@Override
+	public String getScriptManagerName()
+	{
+		return "QuestManager";
+	}
 }

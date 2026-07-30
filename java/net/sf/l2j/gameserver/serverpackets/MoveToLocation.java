@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,9 +17,9 @@ package net.sf.l2j.gameserver.serverpackets;
 import net.sf.l2j.gameserver.model.L2Character;
 
 /**
- * 0000: 01  7a 73 10 4c  b2 0b 00 00  a3 fc 00 00  e8 f1 ff    .zs.L...........
- * 0010: ff  bd 0b 00 00  b3 fc 00 00  e8 f1 ff ff             .............
-
+ * 0000: 01 7a 73 10 4c b2 0b 00 00 a3 fc 00 00 e8 f1 ff .zs.L........... 0010:
+ * ff bd 0b 00 00 b3 fc 00 00 e8 f1 ff ff .............
+ *
  *
  * ddddddd
  *
@@ -28,6 +28,7 @@ import net.sf.l2j.gameserver.model.L2Character;
 public final class MoveToLocation extends L2GameServerPacket
 {
 	private static final String _S__01_CHARMOVETOLOCATION = "[S] 2f MoveToLocation";
+
 	private int _charObjId, _x, _y, _z, _xDst, _yDst, _zDst;
 
 	public MoveToLocation(L2Character cha)
@@ -57,7 +58,9 @@ public final class MoveToLocation extends L2GameServerPacket
 		writeD(_z);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

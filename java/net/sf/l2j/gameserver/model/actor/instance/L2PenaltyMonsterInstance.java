@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -35,8 +35,9 @@ public class L2PenaltyMonsterInstance extends L2MonsterInstance
 	@Override
 	public L2Character getMostHated()
 	{
-		return _ptk; //zawsze attakuje tylko 1 osobe chodzby nie wiem co xD
+		return _ptk; // zawsze attakuje tylko 1 osobe chodzby nie wiem co xD
 	}
+
 	@Deprecated
 	public void notifyPlayerDead()
 	{
@@ -55,8 +56,7 @@ public class L2PenaltyMonsterInstance extends L2MonsterInstance
 	{
 		if (Rnd.nextInt(100) <= 80)
 		{
-			CreatureSay cs = new CreatureSay(getObjectId(), Say2.ALL, getName(),
-												"mmm your bait was delicious");
+			CreatureSay cs = new CreatureSay(getObjectId(), Say2.ALL, getName(), "mmm your bait was delicious");
 			this.broadcastPacket(cs);
 		}
 		_ptk = ptk;
@@ -69,12 +69,13 @@ public class L2PenaltyMonsterInstance extends L2MonsterInstance
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
+		{
 			return false;
+		}
 
 		if (Rnd.nextInt(100) <= 75)
 		{
-			CreatureSay cs = new CreatureSay(getObjectId(), Say2.ALL, getName(),
-												"I will tell fishes not to take your bait");
+			CreatureSay cs = new CreatureSay(getObjectId(), Say2.ALL, getName(), "I will tell fishes not to take your bait");
 			this.broadcastPacket(cs);
 		}
 		return true;

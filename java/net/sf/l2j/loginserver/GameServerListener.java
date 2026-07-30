@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,21 +16,21 @@ package net.sf.l2j.loginserver;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author  KenM
+ * @author KenM
  */
 public class GameServerListener extends FloodProtectedListener
 {
 	private static Logger _log = Logger.getLogger(GameServerListener.class.getName());
-	private static List<GameServerThread> _gameServers = new ArrayList<GameServerThread>();
+
+	private static List<GameServerThread> _gameServers = new ArrayList<>();
 
 	public GameServerListener() throws IOException
 	{
@@ -45,7 +45,8 @@ public class GameServerListener extends FloodProtectedListener
 	{
 		if (Config.DEBUG)
 		{
-			_log.info("Received gameserver connection from: "+s.getInetAddress().getHostAddress());
+			_log.info("Received gameserver connection from: "
+			        + s.getInetAddress().getHostAddress());
 		}
 		GameServerThread gst = new GameServerThread(s);
 		_gameServers.add(gst);

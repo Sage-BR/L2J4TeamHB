@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -35,30 +35,38 @@ public class Remedy implements IItemHandler
 {
 	private static int[] ITEM_IDS = { 1831, 1832, 1833, 1834, 3889 };
 
+	@Override
 	public void useItem(L2PlayableInstance playable, L2ItemInstance item)
 	{
 		L2PcInstance activeChar;
 		if (playable instanceof L2PcInstance)
-			activeChar = (L2PcInstance)playable;
+		{
+			activeChar = (L2PcInstance) playable;
+		}
 		else if (playable instanceof L2PetInstance)
-			activeChar = ((L2PetInstance)playable).getOwner();
+		{
+			activeChar = ((L2PetInstance) playable).getOwner();
+		}
 		else
+		{
 			return;
+		}
 
 		if (activeChar.isInOlympiadMode())
-        {
-            activeChar.sendPacket(new SystemMessage(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT));
-            return;
-        }
+		{
+			activeChar.sendPacket(new SystemMessage(SystemMessageId.THIS_ITEM_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT));
+			return;
+		}
 
-	    int itemId = item.getItemId();
-	    if (itemId == 1831) // antidote
+		int itemId = item.getItemId();
+		if (itemId == 1831) // antidote
 		{
 			L2Effect[] effects = activeChar.getAllEffects();
 			for (L2Effect e : effects)
 			{
-				 if (e.getSkill().getSkillType() == L2Skill.SkillType.POISON && e.getSkill().getLevel() <= 3)
-				 {
+				if (e.getSkill().getSkillType() == L2Skill.SkillType.POISON
+				        && e.getSkill().getLevel() <= 3)
+				{
 					e.exit();
 					break;
 				}
@@ -68,12 +76,13 @@ public class Remedy implements IItemHandler
 			activeChar.broadcastPacket(MSU);
 			playable.destroyItem("Consume", item.getObjectId(), 1, null, false);
 		}
-	    else if (itemId == 1832) // advanced antidote
+		else if (itemId == 1832) // advanced antidote
 		{
 			L2Effect[] effects = activeChar.getAllEffects();
 			for (L2Effect e : effects)
 			{
-				if (e.getSkill().getSkillType() == L2Skill.SkillType.POISON && e.getSkill().getLevel() <= 7)
+				if (e.getSkill().getSkillType() == L2Skill.SkillType.POISON
+				        && e.getSkill().getLevel() <= 7)
 				{
 					e.exit();
 					break;
@@ -89,8 +98,9 @@ public class Remedy implements IItemHandler
 			L2Effect[] effects = activeChar.getAllEffects();
 			for (L2Effect e : effects)
 			{
-				 if (e.getSkill().getSkillType() == L2Skill.SkillType.BLEED && e.getSkill().getLevel() <= 3)
-				 {
+				if (e.getSkill().getSkillType() == L2Skill.SkillType.BLEED
+				        && e.getSkill().getLevel() <= 3)
+				{
 					e.exit();
 					break;
 				}
@@ -105,7 +115,8 @@ public class Remedy implements IItemHandler
 			L2Effect[] effects = activeChar.getAllEffects();
 			for (L2Effect e : effects)
 			{
-				if (e.getSkill().getSkillType() == L2Skill.SkillType.BLEED && e.getSkill().getLevel() <= 7)
+				if (e.getSkill().getSkillType() == L2Skill.SkillType.BLEED
+				        && e.getSkill().getLevel() <= 7)
 				{
 					e.exit();
 					break;
@@ -116,21 +127,29 @@ public class Remedy implements IItemHandler
 			activeChar.broadcastPacket(MSU);
 			playable.destroyItem("Consume", item.getObjectId(), 1, null, false);
 		}
-        else if (itemId == 3889) // potion of recovery
-        {
-            L2Effect[] effects = activeChar.getAllEffects();
-            for (L2Effect e : effects) {
-                if (e.getSkill().getId() == 4082)
-                    e.exit();
-            }
-            activeChar.setIsImmobilized(false);
-            if (activeChar.getFirstEffect(L2Effect.EffectType.ROOT) == null) activeChar.stopRooting(null);
-            MagicSkillUse MSU = new MagicSkillUse(playable, playable, 2042, 1, 0, 0);
-            activeChar.sendPacket(MSU);
-            activeChar.broadcastPacket(MSU);
-            playable.destroyItem("Consume", item.getObjectId(), 1, null, false);
-       }
+		else if (itemId == 3889) // potion of recovery
+		{
+			L2Effect[] effects = activeChar.getAllEffects();
+			for (L2Effect e : effects)
+			{
+				if (e.getSkill().getId() == 4082)
+				{
+					e.exit();
+				}
+			}
+			activeChar.setIsImmobilized(false);
+			if (activeChar.getFirstEffect(L2Effect.EffectType.ROOT) == null)
+			{
+				activeChar.stopRooting(null);
+			}
+			MagicSkillUse MSU = new MagicSkillUse(playable, playable, 2042, 1, 0, 0);
+			activeChar.sendPacket(MSU);
+			activeChar.broadcastPacket(MSU);
+			playable.destroyItem("Consume", item.getObjectId(), 1, null, false);
+		}
 	}
+
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

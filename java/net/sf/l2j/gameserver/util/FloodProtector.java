@@ -28,6 +28,7 @@ import net.sf.l2j.gameserver.GameTimeController;
 public class FloodProtector
 {
 	private static final Logger _log = Logger.getLogger(FloodProtector.class.getName());
+
 	private static FloodProtector _instance;
 
 	public static final FloodProtector getInstance()
@@ -41,22 +42,30 @@ public class FloodProtector
 
 	// =========================================================
 	// Data Field
-	private ConcurrentHashMap<Integer,Integer[]> _floodClient;
+	private ConcurrentHashMap<Integer, Integer[]> _floodClient;
 
 	// =========================================================
 
 	// reuse delays for protected actions (in game ticks 1 tick = 100ms)
-	private static final int[] REUSEDELAY = new int[]{ 4, 42, 42, 16, 100, 20, 10, 20 };
+	private static final int[] REUSEDELAY = new int[] { 4, 42, 42, 16, 100, 20,
+	        10, 20 };
 
 	// protected actions
-	public static final int PROTECTED_USEITEM		= 0;
-	public static final int PROTECTED_ROLLDICE		= 1;
-	public static final int PROTECTED_FIREWORK		= 2;
-	public static final int PROTECTED_ITEMPETSUMMON	= 3;
-	public static final int PROTECTED_HEROVOICE		= 4;
-	public static final int PROTECTED_SUBCLASS		= 5;
-	public static final int PROTECTED_DROPITEM		= 6;
-	public static final int PROTECTED_ENCHANTITEM	= 7;
+	public static final int PROTECTED_USEITEM = 0;
+
+	public static final int PROTECTED_ROLLDICE = 1;
+
+	public static final int PROTECTED_FIREWORK = 2;
+
+	public static final int PROTECTED_ITEMPETSUMMON = 3;
+
+	public static final int PROTECTED_HEROVOICE = 4;
+
+	public static final int PROTECTED_SUBCLASS = 5;
+
+	public static final int PROTECTED_DROPITEM = 6;
+
+	public static final int PROTECTED_ENCHANTITEM = 7;
 
 	// =========================================================
 	// Constructor
@@ -67,15 +76,16 @@ public class FloodProtector
 	}
 
 	/**
-	 * Add a new player to the flood protector
-	 * (should be done for all players when they enter the world)
+	 * Add a new player to the flood protector (should be done for all players
+	 * when they enter the world)
+	 *
 	 * @param playerObjId
 	 */
 	public void registerNewPlayer(int playerObjId)
 	{
 		// create a new array
 		Integer[] array = new Integer[REUSEDELAY.length];
-		for (int i=0; i<array.length; i++)
+		for (int i = 0; i < array.length; i++)
 		{
 			array[i] = 0;
 		}
@@ -85,8 +95,9 @@ public class FloodProtector
 	}
 
 	/**
-	 * Remove a player from the flood protector
-	 * (should be done if player loggs off)
+	 * Remove a player from the flood protector (should be done if player loggs
+	 * off)
+	 *
 	 * @param playerObjId
 	 */
 	public void removePlayer(int playerObjId)
@@ -96,6 +107,7 @@ public class FloodProtector
 
 	/**
 	 * Return the size of the flood protector
+	 *
 	 * @return size
 	 */
 	public int getSize()
@@ -120,7 +132,8 @@ public class FloodProtector
 
 		if (value[action] < GameTimeController.getGameTicks())
 		{
-			value[action] = GameTimeController.getGameTicks()+REUSEDELAY[action];
+			value[action] = GameTimeController.getGameTicks()
+			        + REUSEDELAY[action];
 			return true;
 		}
 		return false;

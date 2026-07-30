@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,15 +22,20 @@ import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 /**
  * A Town zone
  *
- * @author  durgus
+ * @author durgus
  */
 public class L2TownZone extends L2ZoneType
 {
 	private String _townName;
+
 	private int _townId;
+
 	private int _redirectTownId;
+
 	private int _taxById;
+
 	private boolean _isPeaceZone;
+
 	private int[] _spawnLoc;
 
 	public L2TownZone(int id)
@@ -82,7 +87,10 @@ public class L2TownZone extends L2ZoneType
 		{
 			_isPeaceZone = Boolean.parseBoolean(value);
 		}
-		else super.setParameter(name, value);
+		else
+		{
+			super.setParameter(name, value);
+		}
 	}
 
 	@Override
@@ -91,14 +99,21 @@ public class L2TownZone extends L2ZoneType
 		if (character instanceof L2PcInstance)
 		{
 			// PVP possible during siege, now for siege participants only
-			// Could also check if this town is in siege, or if any siege is going on
-			if (((L2PcInstance)character).getSiegeState() != 0 && Config.ZONE_TOWN == 1)
+			// Could also check if this town is in siege, or if any siege is
+			// going on
+			if (((L2PcInstance) character).getSiegeState() != 0
+			        && Config.ZONE_TOWN == 1)
+			{
 				return;
+			}
 
-			//((L2PcInstance)character).sendMessage("You entered "+_townName);
+			// ((L2PcInstance)character).sendMessage("You entered "+_townName);
 		}
 
-		if (_isPeaceZone && Config.ZONE_TOWN != 2) character.setInsideZone(L2Character.ZONE_PEACE, true);
+		if (_isPeaceZone && Config.ZONE_TOWN != 2)
+		{
+			character.setInsideZone(L2Character.ZONE_PEACE, true);
+		}
 
 	}
 
@@ -106,21 +121,29 @@ public class L2TownZone extends L2ZoneType
 	protected void onExit(L2Character character)
 	{
 		// TODO: there should be no exit if there was possibly no enter
-		if (_isPeaceZone) character.setInsideZone(L2Character.ZONE_PEACE, false);
+		if (_isPeaceZone)
+		{
+			character.setInsideZone(L2Character.ZONE_PEACE, false);
+		}
 
 		// if (character instanceof L2PcInstance)
-			//((L2PcInstance)character).sendMessage("You left "+_townName);
+		// ((L2PcInstance)character).sendMessage("You left "+_townName);
 
 	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 	/**
 	 * Returns this town zones name
+	 *
 	 * @return
 	 */
 	@Deprecated
@@ -131,6 +154,7 @@ public class L2TownZone extends L2ZoneType
 
 	/**
 	 * Returns this zones town id (if any)
+	 *
 	 * @return
 	 */
 	public int getTownId()
@@ -140,6 +164,7 @@ public class L2TownZone extends L2ZoneType
 
 	/**
 	 * Gets the id for this town zones redir town
+	 *
 	 * @return
 	 */
 	@Deprecated
@@ -150,21 +175,23 @@ public class L2TownZone extends L2ZoneType
 
 	/**
 	 * Returns this zones spawn location
+	 *
 	 * @return
 	 */
 	public final int[] getSpawnLoc()
-    {
-    	return _spawnLoc;
-    }
+	{
+		return _spawnLoc;
+	}
 
 	/**
 	 * Returns this town zones castle id
+	 *
 	 * @return
 	 */
 	public final int getTaxById()
-    {
-    	return _taxById;
-    }
+	{
+		return _taxById;
+	}
 
 	public final boolean isPeaceZone()
 	{

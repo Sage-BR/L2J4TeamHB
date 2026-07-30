@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,34 +18,37 @@ import net.sf.l2j.gameserver.model.PartyMatchWaitingList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
 /**
- * 
+ *
  * @author Gnacik
  *
  */
-public final class RequestExitPartyMatchingWaitingRoom extends L2GameClientPacket
+public final class RequestExitPartyMatchingWaitingRoom
+        extends L2GameClientPacket
 {
 	private static final String _C__D0_17_REQUESTEXITPARTYMATCHINGWAITINGROOM = "[C] D0:17 RequestExitPartyMatchingWaitingRoom";
-	
-    @Override
+
+	@Override
 	protected void readImpl()
-    {
-    }
+	{
+	}
 
-    @Override
+	@Override
 	protected void runImpl()
-    {
-    	L2PcInstance _activeChar = getClient().getActiveChar();
-    	
-    	if (_activeChar == null)
-    		return;
-    	
-    	PartyMatchWaitingList.getInstance().removePlayer(_activeChar);
-    }
+	{
+		L2PcInstance _activeChar = getClient().getActiveChar();
 
-    @Override
-    public String getType()
-    {
-        return _C__D0_17_REQUESTEXITPARTYMATCHINGWAITINGROOM;
-    }
+		if (_activeChar == null)
+		{
+			return;
+		}
+
+		PartyMatchWaitingList.getInstance().removePlayer(_activeChar);
+	}
+
+	@Override
+	public String getType()
+	{
+		return _C__D0_17_REQUESTEXITPARTYMATCHINGWAITINGROOM;
+	}
 
 }

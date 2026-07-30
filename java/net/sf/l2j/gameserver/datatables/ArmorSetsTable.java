@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,22 +16,21 @@
 package net.sf.l2j.gameserver.datatables;
 
 import java.io.File;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-
-import net.sf.l2j.Config;
-import net.sf.l2j.gameserver.model.L2ArmorSet;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import Dev.SpecialMods.XMLDocumentFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
+import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.model.L2ArmorSet;
 
 public class ArmorSetsTable
 {
 	private static Logger _log = Logger.getLogger(ArmorSetsTable.class.getName());
+
 	private static ArmorSetsTable _instance;
 
 	private ConcurrentHashMap<Integer, L2ArmorSet> _armorSets;
@@ -39,13 +38,15 @@ public class ArmorSetsTable
 	public static ArmorSetsTable getInstance()
 	{
 		if (_instance == null)
+		{
 			_instance = new ArmorSetsTable();
+		}
 		return _instance;
 	}
 
 	private ArmorSetsTable()
 	{
-		_armorSets = new ConcurrentHashMap<Integer, L2ArmorSet>();
+		_armorSets = new ConcurrentHashMap<>();
 		loadData();
 	}
 
@@ -60,7 +61,8 @@ public class ArmorSetsTable
 		File f = new File(Config.DATAPACK_ROOT, filePath);
 		if (!f.exists())
 		{
-			_log.config("ArmorSetsTable: " + f.getAbsolutePath() + " not found.");
+			_log.config("ArmorSetsTable: " + f.getAbsolutePath()
+			        + " not found.");
 			return;
 		}
 
@@ -73,7 +75,9 @@ public class ArmorSetsTable
 			for (Node n = listNode.getFirstChild(); n != null; n = n.getNextSibling())
 			{
 				if (!n.getNodeName().equalsIgnoreCase("armorset"))
+				{
 					continue;
+				}
 
 				NamedNodeMap attrs = n.getAttributes();
 				int chest = Integer.parseInt(attrs.getNamedItem("chest").getNodeValue());
@@ -91,11 +95,13 @@ public class ArmorSetsTable
 				count++;
 			}
 
-			_log.config("ArmorSetsTable: Loaded " + count + " armor sets from " + f.getName() + ".");
+			_log.config("ArmorSetsTable: Loaded " + count + " armor sets from "
+			        + f.getName() + ".");
 		}
 		catch (Exception e)
 		{
-			_log.severe("ArmorSetsTable: Error reading " + f.getName() + ": " + e);
+			_log.severe("ArmorSetsTable: Error reading " + f.getName() + ": "
+			        + e);
 		}
 	}
 
@@ -103,10 +109,14 @@ public class ArmorSetsTable
 	{
 		Node node = attrs.getNamedItem(name);
 		if (node == null)
+		{
 			return defaultValue;
+		}
 		String val = node.getNodeValue();
 		if (val == null || val.isEmpty())
+		{
 			return defaultValue;
+		}
 		return val;
 	}
 

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,44 +20,57 @@ import java.nio.ByteBuffer;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.logging.Logger;
 
+import org.mmocore.network.MMOClient;
+import org.mmocore.network.MMOConnection;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.loginserver.crypt.LoginCrypt;
 import net.sf.l2j.loginserver.crypt.ScrambledKeyPair;
 import net.sf.l2j.loginserver.serverpackets.L2LoginServerPacket;
 import net.sf.l2j.loginserver.serverpackets.LoginFail;
-import net.sf.l2j.loginserver.serverpackets.PlayFail;
 import net.sf.l2j.loginserver.serverpackets.LoginFail.LoginFailReason;
+import net.sf.l2j.loginserver.serverpackets.PlayFail;
 import net.sf.l2j.loginserver.serverpackets.PlayFail.PlayFailReason;
 import net.sf.l2j.util.Rnd;
 import net.sf.l2j.util.Util;
 
-import org.mmocore.network.MMOClient;
-import org.mmocore.network.MMOConnection;
-
 /**
  * Represents a client connected into the LoginServer
  *
- * @author  KenM
+ * @author KenM
  */
 public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 {
 	private static Logger _log = Logger.getLogger(L2LoginClient.class.getName());
 
-	public static enum LoginClientState { CONNECTED, AUTHED_GG, AUTHED_LOGIN};
+	public static enum LoginClientState
+	{
+		CONNECTED,
+		AUTHED_GG,
+		AUTHED_LOGIN
+	}
 
 	private LoginClientState _state;
 
 	// Crypt
 	private LoginCrypt _loginCrypt;
+
 	private ScrambledKeyPair _scrambledPair;
+
 	private byte[] _blowfishKey;
 
 	private String _account;
+
 	private int _accessLevel;
+
 	private int _lastServer;
+
 	private boolean _usesInternalIP;
+
 	private SessionKey _sessionKey;
+
 	private int _sessionId;
+
 	private boolean _joinedGS;
 
 	private long _connectionStartTime;
@@ -90,7 +103,8 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 	}
 
 	/**
-	 * @see com.l2jserver.mmocore.interfaces.MMOClient#decrypt(java.nio.ByteBuffer, int)
+	 * @see com.l2jserver.mmocore.interfaces.MMOClient#decrypt(java.nio.ByteBuffer,
+	 *      int)
 	 */
 	@Override
 	public boolean decrypt(ByteBuffer buf, int size)
@@ -111,7 +125,7 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 		{
 			byte[] dump = new byte[size];
 			System.arraycopy(buf.array(), buf.position(), dump, 0, size);
-			_log.warning("Wrong checksum from client: "+toString());
+			_log.warning("Wrong checksum from client: " + toString());
 			closeNow();
 		}
 
@@ -119,7 +133,8 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 	}
 
 	/**
-	 * @see com.l2jserver.mmocore.interfaces.MMOClient#encrypt(java.nio.ByteBuffer, int)
+	 * @see com.l2jserver.mmocore.interfaces.MMOClient#encrypt(java.nio.ByteBuffer,
+	 *      int)
 	 */
 	@Override
 	public boolean encrypt(ByteBuffer buf, int size)
@@ -249,7 +264,7 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 	{
 		if (Config.DEBUG)
 		{
-			_log.info("DISCONNECTED: "+toString());
+			_log.info("DISCONNECTED: " + toString());
 		}
 
 		if (getState() != LoginClientState.AUTHED_LOGIN)
@@ -268,11 +283,15 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 		InetAddress address = getConnection().getSocket().getInetAddress();
 		if (getState() == LoginClientState.AUTHED_LOGIN)
 		{
-			return "["+getAccount()+" ("+(address == null ? "disconnected" : address.getHostAddress())+")]";
+			return "[" + getAccount() + " ("
+			        + (address == null ? "disconnected" : address.getHostAddress())
+			        + ")]";
 		}
 		else
 		{
-			return "["+(address == null ? "disconnected" : address.getHostAddress())+"]";
+			return "["
+			        + (address == null ? "disconnected" : address.getHostAddress())
+			        + "]";
 		}
 	}
 }

@@ -65,29 +65,39 @@ public final class NioNetStackList<E>
 		protected E _value;
 	}
 
-	private final class NioNetStackNodeBuf {
+	private final class NioNetStackNodeBuf
+	{
 
-	    private final NioNetStackNode head = new NioNetStackNode();  // or _head, first, dummyHead, etc.
-	    private NioNetStackNode tail = new NioNetStackNode();        // or _tail
+		private final NioNetStackNode head = new NioNetStackNode(); // or _head,
+		                                                            // first,
+		                                                            // dummyHead,
+		                                                            // etc.
 
-	    NioNetStackNodeBuf() {
-	        head._next = tail;
-	    }
+		private NioNetStackNode tail = new NioNetStackNode(); // or _tail
 
-	    final void addLast(final NioNetStackNode node) {
-	        node._next = null;
-	        node._value = null;
-	        tail._next = node;
-	        tail = node;
-	    }
+		NioNetStackNodeBuf()
+		{
+			head._next = tail;
+		}
 
-	    final NioNetStackNode removeFirst() {
-	        if (head._next == tail) {
-	            return new NioNetStackNode(); // or null / throw exception — your choice
-	        }
-	        final NioNetStackNode old = head._next;
-	        head._next = old._next;
-	        return old;
-	    }
+		final void addLast(final NioNetStackNode node)
+		{
+			node._next = null;
+			node._value = null;
+			tail._next = node;
+			tail = node;
+		}
+
+		final NioNetStackNode removeFirst()
+		{
+			if (head._next == tail)
+			{
+				return new NioNetStackNode(); // or null / throw exception —
+				                              // your choice
+			}
+			final NioNetStackNode old = head._next;
+			head._next = old._next;
+			return old;
+		}
 	}
 }

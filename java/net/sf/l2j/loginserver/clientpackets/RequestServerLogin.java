@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,20 +17,20 @@ package net.sf.l2j.loginserver.clientpackets;
 import net.sf.l2j.Config;
 import net.sf.l2j.loginserver.LoginController;
 import net.sf.l2j.loginserver.SessionKey;
-import net.sf.l2j.loginserver.serverpackets.PlayOk;
 import net.sf.l2j.loginserver.serverpackets.LoginFail.LoginFailReason;
 import net.sf.l2j.loginserver.serverpackets.PlayFail.PlayFailReason;
+import net.sf.l2j.loginserver.serverpackets.PlayOk;
 
 /**
- * Fromat is ddc
- * d: first part of session id
- * d: second part of session id
- * c: server ID
+ * Fromat is ddc d: first part of session id d: second part of session id c:
+ * server ID
  */
 public class RequestServerLogin extends L2LoginClientPacket
 {
 	private int _skey1;
+
 	private int _skey2;
+
 	private int _serverId;
 
 	/**

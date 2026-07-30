@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,11 +16,13 @@ package net.sf.l2j.gameserver.serverpackets;
 
 /**
  * Format: ch ddcdc
- * @author  KenM
+ *
+ * @author KenM
  */
 public class ExPCCafePointInfo extends L2GameServerPacket
 {
 	private static final String _S__FE_31_EXPCCAFEPOINTINFO = "[S] FE:32 ExPCCafePointInfo";
+
 	private int _unk1, _unk2, _unk3, _unk4, _unk5 = 0;
 
 	public ExPCCafePointInfo(int val1, int val2, int val3, int val4, int val5)
@@ -41,7 +43,8 @@ public class ExPCCafePointInfo extends L2GameServerPacket
 		writeD(_unk2); // points inc display
 		writeC(_unk3); // period(0=don't show window,1=acquisition,2=use points)
 		writeD(_unk4); // period hours left
-		writeC(_unk5); // points inc display color(0=yellow,1=cyan-blue,2=red,all other black)
+		writeC(_unk5); // points inc display
+		               // color(0=yellow,1=cyan-blue,2=red,all other black)
 	}
 
 	/**

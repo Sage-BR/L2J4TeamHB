@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,106 +21,17 @@ import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.clientpackets.RequestBypassToServer;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-
 /**
  *
- * the HTML parser in the client knowns these standard and non-standard tags and attributes
- * VOLUMN
- * UNKNOWN
- * UL
- * U
- * TT
- * TR
- * TITLE
- * TEXTCODE
- * TEXTAREA
- * TD
- * TABLE
- * SUP
- * SUB
- * STRIKE
- * SPIN
- * SELECT
- * RIGHT
- * PRE
- * P
- * OPTION
- * OL
- * MULTIEDIT
- * LI
- * LEFT
- * INPUT
- * IMG
- * I
- * HTML
- * H7
- * H6
- * H5
- * H4
- * H3
- * H2
- * H1
- * FONT
- * EXTEND
- * EDIT
- * COMMENT
- * COMBOBOX
- * CENTER
- * BUTTON
- * BR
- * BODY
- * BAR
- * ADDRESS
- * A
- * SEL
- * LIST
- * VAR
- * FORE
- * READONL
- * ROWS
- * VALIGN
- * FIXWIDTH
- * BORDERCOLORLI
- * BORDERCOLORDA
- * BORDERCOLOR
- * BORDER
- * BGCOLOR
- * BACKGROUND
- * ALIGN
- * VALU
- * READONLY
- * MULTIPLE
- * SELECTED
- * TYP
- * TYPE
- * MAXLENGTH
- * CHECKED
- * SRC
- * Y
- * X
- * QUERYDELAY
- * NOSCROLLBAR
- * IMGSRC
- * B
- * FG
- * SIZE
- * FACE
- * COLOR
- * DEFFON
- * DEFFIXEDFONT
- * WIDTH
- * VALUE
- * TOOLTIP
- * NAME
- * MIN
- * MAX
- * HEIGHT
- * DISABLED
- * ALIGN
- * MSG
- * LINK
- * HREF
- * ACTION
+ * the HTML parser in the client knowns these standard and non-standard tags and
+ * attributes VOLUMN UNKNOWN UL U TT TR TITLE TEXTCODE TEXTAREA TD TABLE SUP SUB
+ * STRIKE SPIN SELECT RIGHT PRE P OPTION OL MULTIEDIT LI LEFT INPUT IMG I HTML
+ * H7 H6 H5 H4 H3 H2 H1 FONT EXTEND EDIT COMMENT COMBOBOX CENTER BUTTON BR BODY
+ * BAR ADDRESS A SEL LIST VAR FORE READONL ROWS VALIGN FIXWIDTH BORDERCOLORLI
+ * BORDERCOLORDA BORDERCOLOR BORDER BGCOLOR BACKGROUND ALIGN VALU READONLY
+ * MULTIPLE SELECTED TYP TYPE MAXLENGTH CHECKED SRC Y X QUERYDELAY NOSCROLLBAR
+ * IMGSRC B FG SIZE FACE COLOR DEFFON DEFFIXEDFONT WIDTH VALUE TOOLTIP NAME MIN
+ * MAX HEIGHT DISABLED ALIGN MSG LINK HREF ACTION
  *
  *
  * @version $Revision: 1.3.2.1.2.3 $ $Date: 2005/03/27 15:29:57 $
@@ -128,16 +39,21 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public final class NpcHtmlMessage extends L2GameServerPacket
 {
 	// d S
-	// d is usually 0, S is the html text starting with <html> and ending with </html>
+	// d is usually 0, S is the html text starting with <html> and ending with
+	// </html>
 	//
 	private static final String _S__1B_NPCHTMLMESSAGE = "[S] 19 NpcHtmlMessage";
+
 	private static Logger _log = Logger.getLogger(RequestBypassToServer.class.getName());
+
 	private int _npcObjId;
+
 	private String _html;
+
 	private int _itemId = 0;
-	
+
 	/**
-	 * 
+	 *
 	 * @param npcObjId
 	 * @param text
 	 * @param itemId
@@ -166,12 +82,14 @@ public final class NpcHtmlMessage extends L2GameServerPacket
 	public void runImpl()
 	{
 		if (Config.BYPASS_VALIDATION)
+		{
 			buildBypassCache(getClient().getActiveChar());
+		}
 	}
 
 	public void setHtml(String text)
 	{
-        if(text.length() > 8192)
+		if (text.length() > 8192)
 		{
 			_log.warning("Html is too long! this will crash the client!");
 			_html = "<html><body>Html was too long</body></html>";
@@ -182,17 +100,18 @@ public final class NpcHtmlMessage extends L2GameServerPacket
 
 	public boolean setFile(String path)
 	{
-        String content = HtmCache.getInstance().getHtm(path);
+		String content = HtmCache.getInstance().getHtm(path);
 
 		if (content == null)
 		{
-			setHtml("<html><body>My Text is missing:<br>"+path+"</body></html>");
-			_log.warning("missing html page "+path);
+			setHtml("<html><body>My Text is missing:<br>" + path
+			        + "</body></html>");
+			_log.warning("missing html page " + path);
 			return false;
 		}
 
-        setHtml(content);
-        return true;
+		setHtml(content);
+		return true;
 	}
 
 	public void replace(String pattern, String value)
@@ -202,27 +121,35 @@ public final class NpcHtmlMessage extends L2GameServerPacket
 
 	private final void buildBypassCache(L2PcInstance activeChar)
 	{
-        if (activeChar == null)
-            return;
+		if (activeChar == null)
+		{
+			return;
+		}
 
-        activeChar.clearBypass();
+		activeChar.clearBypass();
 		int len = _html.length();
-		for(int i=0; i<len; i++)
+		for (int i = 0; i < len; i++)
 		{
 			int start = _html.indexOf("bypass -h", i);
 			int finish = _html.indexOf("\"", start);
 
-			if(start < 0 || finish < 0)
+			if (start < 0 || finish < 0)
+			{
 				break;
+			}
 
 			start += 10;
 			i = start;
-			int finish2 = _html.indexOf("$",start);
+			int finish2 = _html.indexOf("$", start);
 			if (finish2 < finish && finish2 > 0)
-                activeChar.addBypass2(_html.substring(start, finish2).trim());
+			{
+				activeChar.addBypass2(_html.substring(start, finish2).trim());
+			}
 			else
-                activeChar.addBypass(_html.substring(start, finish).trim());
-			//System.err.println("["+_html.substring(start, finish)+"]");
+			{
+				activeChar.addBypass(_html.substring(start, finish).trim());
+			// System.err.println("["+_html.substring(start, finish)+"]");
+			}
 		}
 	}
 
@@ -236,7 +163,9 @@ public final class NpcHtmlMessage extends L2GameServerPacket
 		writeD(_itemId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

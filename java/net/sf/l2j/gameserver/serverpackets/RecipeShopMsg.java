@@ -24,6 +24,7 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public class RecipeShopMsg extends L2GameServerPacket
 {
 	private static final String _S__DB_RecipeShopMsg = "[S] e1 RecipeShopMsg";
+
 	private L2PcInstance _activeChar;
 
 	public RecipeShopMsg(L2PcInstance player)
@@ -36,10 +37,12 @@ public class RecipeShopMsg extends L2GameServerPacket
 	{
 		writeC(0xe1);
 		writeD(_activeChar.getObjectId());
-		writeS(_activeChar.getCreateList().getStoreName());//_activeChar.getTradeList().getSellStoreName());
+		writeS(_activeChar.getCreateList().getStoreName());// _activeChar.getTradeList().getSellStoreName());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

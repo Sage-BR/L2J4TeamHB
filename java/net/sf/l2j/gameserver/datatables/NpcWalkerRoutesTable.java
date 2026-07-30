@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,54 +16,54 @@ package net.sf.l2j.gameserver.datatables;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2NpcWalkerNode;
 
-import java.util.ArrayList;
-
 /**
  * Main Table to Load Npc Walkers Routes and Chat SQL Table.<br>
- * 
+ *
  * @author Rayan RPG for L2Emu Project
- * 
- * @since 927 
+ *
+ * @since 927
  *
  */
-public class NpcWalkerRoutesTable 
+public class NpcWalkerRoutesTable
 {
 	private final static Logger _log = Logger.getLogger(SpawnTable.class.getName());
 
-	private static NpcWalkerRoutesTable  _instance;
+	private static NpcWalkerRoutesTable _instance;
 
 	private ArrayList<L2NpcWalkerNode> _routes;
 
 	public static NpcWalkerRoutesTable getInstance()
 	{
-		if(_instance == null)
+		if (_instance == null)
 		{
-				_instance = new NpcWalkerRoutesTable();
-				_log.info("Initializing Walkers Routes Table.");
+			_instance = new NpcWalkerRoutesTable();
+			_log.info("Initializing Walkers Routes Table.");
 		}
-		
+
 		return _instance;
 	}
 
 	private NpcWalkerRoutesTable()
 	{
 	}
-	//FIXME: NPE while loading. :S
+
+	// FIXME: NPE while loading. :S
 	public void load()
 	{
-		 _routes = new ArrayList<L2NpcWalkerNode>();
+		_routes = new ArrayList<>();
 		java.sql.Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT route_id, npc_id, move_point, chatText, move_x, move_y, move_z, delay, running FROM walker_routes ORDER By move_point ASC");
 			ResultSet rset = statement.executeQuery();
-			L2NpcWalkerNode  route;
+			L2NpcWalkerNode route;
 			while (rset.next())
 			{
 				route = new L2NpcWalkerNode();
@@ -71,27 +71,28 @@ public class NpcWalkerRoutesTable
 				route.setNpcId(rset.getInt("npc_id"));
 				route.setMovePoint(rset.getString("move_point"));
 				route.setChatText(rset.getString("chatText"));
-				
+
 				route.setMoveX(rset.getInt("move_x"));
 				route.setMoveY(rset.getInt("move_y"));
 				route.setMoveZ(rset.getInt("move_z"));
 				route.setDelay(rset.getInt("delay"));
 				route.setRunning(rset.getBoolean("running"));
 
-			
 				_routes.add(route);
 			}
 
 			rset.close();
 			statement.close();
 
-			_log.info("WalkerRoutesTable: Loaded "+_routes.size()+" Npc Walker Routes.");
+			_log.info("WalkerRoutesTable: Loaded " + _routes.size()
+			        + " Npc Walker Routes.");
 			rset.close();
 			statement.close();
 		}
-		catch (Exception e) 
+		catch (Exception e)
 		{
-			_log.severe("WalkerRoutesTable: Error while loading Npc Walkers Routes: "+e.getMessage());
+			_log.severe("WalkerRoutesTable: Error while loading Npc Walkers Routes: "
+			        + e.getMessage());
 		}
 		finally
 		{
@@ -99,22 +100,24 @@ public class NpcWalkerRoutesTable
 			{
 				con.close();
 			}
-			catch (Exception e) {}
+			catch (Exception e)
+			{
+			}
 		}
 	}
-	
+
 	public ArrayList<L2NpcWalkerNode> getRouteForNpc(int id)
 	{
-		ArrayList<L2NpcWalkerNode> _return = new ArrayList<L2NpcWalkerNode>();
-		
-		 for (L2NpcWalkerNode n : _routes) {
-	         if(n.getNpcId() == id)
-	         {
-	        	 _return.add(n);
-	         }
-	     }
+		ArrayList<L2NpcWalkerNode> _return = new ArrayList<>();
+
+		for (L2NpcWalkerNode n : _routes)
+		{
+			if (n.getNpcId() == id)
+			{
+				_return.add(n);
+			}
+		}
 		return _return;
-		
-		
+
 	}
 }

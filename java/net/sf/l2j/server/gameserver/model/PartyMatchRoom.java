@@ -3,17 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.server.gameserver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.l2j.gameserver.instancemanager.TownManager;
@@ -22,8 +23,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.ExManagePartyRoomMember;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.ArrayList;
-
 /**
  * @author Gnacik
  *
@@ -31,15 +30,23 @@ import java.util.ArrayList;
 public class PartyMatchRoom
 {
 	private int _id;
+
 	private String _title;
+
 	private int _loot;
+
 	private int _location;
+
 	private int _minlvl;
+
 	private int _maxlvl;
+
 	private int _maxmem;
-	private final List<L2PcInstance> _members = new ArrayList<L2PcInstance>();
-	
-	public PartyMatchRoom(int id, String title, int loot, int minlvl, int maxlvl, int maxmem, L2PcInstance owner)
+
+	private final List<L2PcInstance> _members = new ArrayList<>();
+
+	public PartyMatchRoom(int id, String title, int loot, int minlvl,
+	        int maxlvl, int maxmem, L2PcInstance owner)
 	{
 		_id = id;
 		_title = title;
@@ -55,12 +62,12 @@ public class PartyMatchRoom
 	{
 		return _members;
 	}
-	
+
 	public void addMember(L2PcInstance player)
 	{
 		_members.add(player);
 	}
-	
+
 	public void deleteMember(L2PcInstance player)
 	{
 		if (player != getOwner())
@@ -78,10 +85,10 @@ public class PartyMatchRoom
 			deleteMember(player);
 		}
 	}
-	
+
 	public void notifyMembersAboutExit(L2PcInstance player)
 	{
-		for(L2PcInstance _member : getPartyMembers())
+		for (L2PcInstance _member : getPartyMembers())
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_LEFT_PARTY_ROOM);
 			sm.addCharName(player);
@@ -89,7 +96,7 @@ public class PartyMatchRoom
 			_member.sendPacket(new ExManagePartyRoomMember(player, this, 2));
 		}
 	}
-	
+
 	public void changeLeader(L2PcInstance newLeader)
 	{
 		// Get current leader
@@ -97,28 +104,28 @@ public class PartyMatchRoom
 		// Remove new leader
 		_members.remove(newLeader);
 		// Move him to first position
-		_members.set(0,newLeader);
+		_members.set(0, newLeader);
 		// Add old leader as normal member
 		_members.add(oldLeader);
 		// Broadcast change
-		for(L2PcInstance member : getPartyMembers())
+		for (L2PcInstance member : getPartyMembers())
 		{
 			member.sendPacket(new ExManagePartyRoomMember(newLeader, this, 1));
 			member.sendPacket(new ExManagePartyRoomMember(oldLeader, this, 1));
 			member.sendPacket(SystemMessageId.PARTY_ROOM_LEADER_CHANGED);
 		}
 	}
-	
+
 	public int getId()
 	{
 		return _id;
 	}
-	
+
 	public int getLootType()
 	{
 		return _loot;
 	}
-	
+
 	public int getMinLvl()
 	{
 		return _minlvl;
@@ -133,7 +140,7 @@ public class PartyMatchRoom
 	{
 		return _location;
 	}
-	
+
 	public int getMembers()
 	{
 		return _members.size();
@@ -154,7 +161,7 @@ public class PartyMatchRoom
 		return _members.get(0);
 	}
 
-	/* SET  */
+	/* SET */
 
 	public void setMinLvl(int minlvl)
 	{
@@ -170,7 +177,7 @@ public class PartyMatchRoom
 	{
 		_location = loc;
 	}
-	
+
 	public void setLootType(int loot)
 	{
 		_loot = loot;

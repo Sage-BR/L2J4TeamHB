@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,7 +17,6 @@ package net.sf.l2j.gameserver.pathfinding.geonodes;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 
-
 /**
  *
  * @author -Nemesiss-
@@ -25,7 +24,9 @@ import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 public class GeoNodeLoc extends AbstractNodeLoc
 {
 	private final short _x;
+
 	private final short _y;
+
 	private final short _z;
 
 	public GeoNodeLoc(short x, short y, short z)
@@ -41,7 +42,7 @@ public class GeoNodeLoc extends AbstractNodeLoc
 	@Override
 	public int getX()
 	{
-		return   L2World.MAP_MIN_X  + _x * 128 + 48 ;
+		return L2World.MAP_MIN_X + _x * 128 + 48;
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class GeoNodeLoc extends AbstractNodeLoc
 	@Override
 	public int getY()
 	{
-		return  L2World.MAP_MIN_Y + _y * 128 + 48 ;
+		return L2World.MAP_MIN_Y + _y * 128 + 48;
 	}
 
 	/**

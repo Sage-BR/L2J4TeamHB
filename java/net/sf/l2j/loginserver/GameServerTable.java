@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,38 +29,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
-
-
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.loginserver.gameserverpackets.ServerStatus;
 import net.sf.l2j.util.Rnd;
 
-import java.util.concurrent.ConcurrentHashMap;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-
 /**
  *
- * @author  KenM
+ * @author KenM
  */
 public class GameServerTable
 {
 	private static Logger _log = Logger.getLogger(GameServerTable.class.getName());
+
 	private static GameServerTable _instance;
 
 	// Server Names Config
-	private static Map<Integer, String> _serverNames = new ConcurrentHashMap<Integer, String>();
+	private static Map<Integer, String> _serverNames = new ConcurrentHashMap<>();
 
 	// Game Server Table
-	private Map<Integer, GameServerInfo> _gameServerTable = new ConcurrentHashMap<Integer, GameServerInfo>();
+	private Map<Integer, GameServerInfo> _gameServerTable = new ConcurrentHashMap<>();
 
 	// RSA Config
 	private static final int KEYS_SIZE = 10;
+
 	private KeyPair[] _keyPairs;
 
 	public static void load() throws SQLException, GeneralSecurityException
@@ -80,22 +79,26 @@ public class GameServerTable
 		return _instance;
 	}
 
-	public GameServerTable() throws SQLException, NoSuchAlgorithmException, InvalidAlgorithmParameterException
+	public GameServerTable() throws SQLException, NoSuchAlgorithmException,
+	        InvalidAlgorithmParameterException
 	{
 		loadServerNames();
-		_log.info("Loaded "+_serverNames.size()+" server names");
+		_log.info("Loaded " + _serverNames.size() + " server names");
 
 		loadRegisteredGameServers();
-		_log.info("Loaded "+_gameServerTable.size()+" registered Game Servers");
+		_log.info("Loaded " + _gameServerTable.size()
+		        + " registered Game Servers");
 
 		loadRSAKeys();
-		_log.info("Cached "+_keyPairs.length+" RSA keys for Game Server communication.");
+		_log.info("Cached " + _keyPairs.length
+		        + " RSA keys for Game Server communication.");
 	}
 
-	private void loadRSAKeys() throws NoSuchAlgorithmException, InvalidAlgorithmParameterException
+	private void loadRSAKeys()
+	        throws NoSuchAlgorithmException, InvalidAlgorithmParameterException
 	{
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-		RSAKeyGenParameterSpec spec = new RSAKeyGenParameterSpec(512,RSAKeyGenParameterSpec.F4);
+		RSAKeyGenParameterSpec spec = new RSAKeyGenParameterSpec(512, RSAKeyGenParameterSpec.F4);
 		keyGen.initialize(spec);
 
 		_keyPairs = new KeyPair[KEYS_SIZE];
@@ -116,18 +119,18 @@ public class GameServerTable
 			{
 				if (e == XMLStreamConstants.START_ELEMENT)
 				{
-					if(xpp.getLocalName().toString().equals("server"))
+					if (xpp.getLocalName().toString().equals("server"))
 					{
-						Integer id = Integer.valueOf(xpp.getAttributeValue(null,"id").toString());
-						String name = xpp.getAttributeValue(null,"name").toString();
-						_serverNames.put(id,name);
+						Integer id = Integer.valueOf(xpp.getAttributeValue(null, "id").toString());
+						String name = xpp.getAttributeValue(null, "name").toString();
+						_serverNames.put(id, name);
 					}
 				}
 			}
 		}
 		catch (FileNotFoundException e)
 		{
-            _log.warning("servername.xml could not be loaded: file not found");
+			_log.warning("servername.xml could not be loaded: file not found");
 		}
 		catch (XMLStreamException xppe)
 		{
@@ -135,7 +138,13 @@ public class GameServerTable
 		}
 		finally
 		{
-			try { in.close(); } catch (Exception e) {}
+			try
+			{
+				in.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
@@ -180,7 +189,7 @@ public class GameServerTable
 		// avoid two servers registering with the same "free" id
 		synchronized (_gameServerTable)
 		{
-			for (Entry<Integer,String> entry : _serverNames.entrySet())
+			for (Entry<Integer, String> entry : _serverNames.entrySet())
 			{
 				if (!_gameServerTable.containsKey(entry.getKey()))
 				{
@@ -229,12 +238,24 @@ public class GameServerTable
 		}
 		catch (SQLException e)
 		{
-			_log.warning("SQL error while saving gameserver: "+e);
+			_log.warning("SQL error while saving gameserver: " + e);
 		}
 		finally
 		{
-			try { statement.close();} catch (Exception e) {}
-			try { con.close();} catch (Exception e) {}
+			try
+			{
+				statement.close();
+			}
+			catch (Exception e)
+			{
+			}
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
@@ -261,7 +282,9 @@ public class GameServerTable
 	private String hexToString(byte[] hex)
 	{
 		if (hex == null)
+		{
 			return "null";
+		}
 		return new BigInteger(hex).toString(16);
 	}
 
@@ -269,24 +292,34 @@ public class GameServerTable
 	{
 		// auth
 		private int _id;
+
 		private byte[] _hexId;
+
 		private boolean _isAuthed;
 
 		// status
 		private GameServerThread _gst;
+
 		private int _status;
 
 		// network
 		private String _internalIp;
+
 		private String _externalIp;
+
 		private String _externalHost;
+
 		private int _port;
 
 		// config
 		private boolean _isPvp = true;
+
 		private boolean _isTestServer;
+
 		private boolean _isShowingClock;
+
 		private boolean _isShowingBrackets;
+
 		private int _maxPlayers;
 
 		public GameServerInfo(int id, byte[] hexId, GameServerThread gst)
@@ -350,7 +383,9 @@ public class GameServerTable
 		public int getCurrentPlayerCount()
 		{
 			if (_gst == null)
+			{
 				return 0;
+			}
 			return _gst.getPlayerCount();
 		}
 

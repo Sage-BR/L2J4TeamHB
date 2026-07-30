@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,8 +24,8 @@ import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.L2Skill;
-import net.sf.l2j.gameserver.model.L2Summon;
 import net.sf.l2j.gameserver.model.L2Skill.SkillType;
+import net.sf.l2j.gameserver.model.L2Summon;
 import net.sf.l2j.gameserver.model.actor.instance.L2CubicInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -42,245 +42,287 @@ import net.sf.l2j.gameserver.skills.Formulas;
 
 public class Mdam implements ISkillHandler
 {
-    //private static Logger _log = Logger.getLogger(Mdam.class.getName());
+	// private static Logger _log = Logger.getLogger(Mdam.class.getName());
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.handler.IItemHandler#useItem(net.sf.l2j.gameserver.model.L2PcInstance, net.sf.l2j.gameserver.model.L2ItemInstance)
-     */
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.handler.IItemHandler#useItem(net.sf.l2j.gameserver.
+	 * model.L2PcInstance, net.sf.l2j.gameserver.model.L2ItemInstance)
+	 */
 	protected static final Logger _log = Logger.getLogger(Mdam.class.getName());
-	
-	private static final SkillType[] SKILL_IDS = {SkillType.MDAM, SkillType.DEATHLINK};
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.handler.IItemHandler#useItem(net.sf.l2j.gameserver.model.L2PcInstance, net.sf.l2j.gameserver.model.L2ItemInstance)
-     */
-    public void useSkill(L2Character activeChar, L2Skill skill, L2Object[] targets)
-    {
-        if (activeChar.isAlikeDead()) return;
+	private static final SkillType[] SKILL_IDS = { SkillType.MDAM,
+	        SkillType.DEATHLINK };
 
-        boolean ss = false;
-        boolean bss = false;
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.handler.IItemHandler#useItem(net.sf.l2j.gameserver.
+	 * model.L2PcInstance, net.sf.l2j.gameserver.model.L2ItemInstance)
+	 */
+	@Override
+	public void useSkill(L2Character activeChar, L2Skill skill,
+	        L2Object[] targets)
+	{
+		if (activeChar.isAlikeDead())
+		{
+			return;
+		}
 
-        L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
+		boolean ss = false;
+		boolean bss = false;
 
-        /* if (activeChar instanceof L2PcInstance)
-        {
-            if (weaponInst == null)
-            {
-                SystemMessage sm2 = new SystemMessage(SystemMessage.S1_S2);
-                sm2.addString("You must equip a weapon before casting a spell.");
-                activeChar.sendPacket(sm2);
-                return;
-            }
-        } */
+		L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
 
-        if (weaponInst != null)
-        {
-            if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
-            {
-                bss = true;
-                weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
-            }
-            else if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_SPIRITSHOT)
-            {
-                ss = true;
-                weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
-            }
-        }
-        // If there is no weapon equipped, check for an active summon.
-        else if (activeChar instanceof L2Summon)
-        {
-            L2Summon activeSummon = (L2Summon) activeChar;
+		/*
+		 * if (activeChar instanceof L2PcInstance) { if (weaponInst == null) {
+		 * SystemMessage sm2 = new SystemMessage(SystemMessage.S1_S2);
+		 * sm2.addString("You must equip a weapon before casting a spell.");
+		 * activeChar.sendPacket(sm2); return; } }
+		 */
 
-            if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
-            {
-                bss = true;
-                activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
-            }
-            else if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_SPIRITSHOT)
-            {
-                ss = true;
-                activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
-            }
-        }
-        else if (activeChar instanceof L2NpcInstance)
-        {
-        	bss = ((L2NpcInstance)activeChar).isUsingShot(false);
-        	ss = ((L2NpcInstance)activeChar).isUsingShot(true);
-        }
+		if (weaponInst != null)
+		{
+			if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
+			{
+				bss = true;
+				weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+			}
+			else if (weaponInst.getChargedSpiritshot() == L2ItemInstance.CHARGED_SPIRITSHOT)
+			{
+				ss = true;
+				weaponInst.setChargedSpiritshot(L2ItemInstance.CHARGED_NONE);
+			}
+		}
+		// If there is no weapon equipped, check for an active summon.
+		else if (activeChar instanceof L2Summon)
+		{
+			L2Summon activeSummon = (L2Summon) activeChar;
 
-        for (int index = 0; index < targets.length; index++)
-        {
-            L2Character target = (L2Character) targets[index];
+			if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_BLESSED_SPIRITSHOT)
+			{
+				bss = true;
+				activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+			}
+			else if (activeSummon.getChargedSpiritShot() == L2ItemInstance.CHARGED_SPIRITSHOT)
+			{
+				ss = true;
+				activeSummon.setChargedSpiritShot(L2ItemInstance.CHARGED_NONE);
+			}
+		}
+		else if (activeChar instanceof L2NpcInstance)
+		{
+			bss = ((L2NpcInstance) activeChar).isUsingShot(false);
+			ss = ((L2NpcInstance) activeChar).isUsingShot(true);
+		}
 
-            if (activeChar instanceof L2PcInstance && target instanceof L2PcInstance
-                && target.isFakeDeath())
-            {
-                target.stopFakeDeath(null);
-            }
-            else if (target.isDead())
-            {
-                continue;
-            }
-            //			if (skill != null)
-            //			if (skill.isOffensive())
-            //			{
+		for (L2Object target2 : targets)
+		{
+			L2Character target = (L2Character) target2;
 
-            //				boolean acted;
-            //				if (skill.getSkillType() == L2Skill.SkillType.DOT || skill.getSkillType() == L2Skill.SkillType.MDOT)
-            //				    acted = Formulas.getInstance().calcSkillSuccess(
-            //						activeChar, target, skill);
-            //				else
-            //				    acted = Formulas.getInstance().calcMagicAffected(
-            //						activeChar, target, skill);
-            //				if (!acted) {
-            //					activeChar.sendPacket(new SystemMessage(SystemMessage.MISSED_TARGET));
-            //					continue;
-            //				}
-            //
-            //			}
+			if (activeChar instanceof L2PcInstance
+			        && target instanceof L2PcInstance && target.isFakeDeath())
+			{
+				target.stopFakeDeath(null);
+			}
+			else if (target.isDead())
+			{
+				continue;
+			}
+			// if (skill != null)
+			// if (skill.isOffensive())
+			// {
 
-            boolean mcrit = Formulas.getInstance().calcMCrit(activeChar.getMCriticalHit(target, skill));
+			// boolean acted;
+			// if (skill.getSkillType() == L2Skill.SkillType.DOT ||
+			// skill.getSkillType() == L2Skill.SkillType.MDOT)
+			// acted = Formulas.getInstance().calcSkillSuccess(
+			// activeChar, target, skill);
+			// else
+			// acted = Formulas.getInstance().calcMagicAffected(
+			// activeChar, target, skill);
+			// if (!acted) {
+			// activeChar.sendPacket(new
+			// SystemMessage(SystemMessage.MISSED_TARGET));
+			// continue;
+			// }
+			//
+			// }
 
-            int damage = (int) Formulas.getInstance().calcMagicDam(activeChar, target, skill, ss, bss,
-                                                                   mcrit);
+			boolean mcrit = Formulas.getInstance().calcMCrit(activeChar.getMCriticalHit(target, skill));
 
-            if (damage > 5000 && activeChar instanceof L2PcInstance)
-            {
-                String name = "";
-                if (target instanceof L2RaidBossInstance) name = "RaidBoss ";
-                if (target instanceof L2NpcInstance)
-                    name += target.getName() + "(" + ((L2NpcInstance) target).getTemplate().npcId + ")";
-                if (target instanceof L2PcInstance)
-                    name = target.getName() + "(" + target.getObjectId() + ") ";
-                name += target.getLevel() + " lvl";
-                Log.add(activeChar.getName() + "(" + activeChar.getObjectId() + ") "
-                    + activeChar.getLevel() + " lvl did damage " + damage + " with skill "
-                    + skill.getName() + "(" + skill.getId() + ") to " + name, "damage_mdam");
-            }
+			int damage = (int) Formulas.getInstance().calcMagicDam(activeChar, target, skill, ss, bss, mcrit);
 
-            // Why are we trying to reduce the current target HP here?
-            // Why not inside the below "if" condition, after the effects processing as it should be?
-            // It doesn't seem to make sense for me. I'm moving this line inside the "if" condition, right after the effects processing...
-            // [changed by nexus - 2006-08-15]
-            //target.reduceCurrentHp(damage, activeChar);
+			if (damage > 5000 && activeChar instanceof L2PcInstance)
+			{
+				String name = "";
+				if (target instanceof L2RaidBossInstance)
+				{
+					name = "RaidBoss ";
+				}
+				if (target instanceof L2NpcInstance)
+				{
+					name += target.getName() + "("
+					        + ((L2NpcInstance) target).getTemplate().npcId
+					        + ")";
+				}
+				if (target instanceof L2PcInstance)
+				{
+					name = target.getName() + "(" + target.getObjectId() + ") ";
+				}
+				name += target.getLevel() + " lvl";
+				Log.add(activeChar.getName() + "(" + activeChar.getObjectId()
+				        + ") " + activeChar.getLevel() + " lvl did damage "
+				        + damage + " with skill " + skill.getName() + "("
+				        + skill.getId() + ") to " + name, "damage_mdam");
+			}
 
-            if (damage > 0)
-            {
-                // Manage attack or cast break of the target (calculating rate, sending message...)
-                if (!target.isRaid() && Formulas.getInstance().calcAtkBreak(target, damage))
-                {
-                    target.breakAttack();
-                    target.breakCast();
-                }
+			// Why are we trying to reduce the current target HP here?
+			// Why not inside the below "if" condition, after the effects
+			// processing as it should be?
+			// It doesn't seem to make sense for me. I'm moving this line inside
+			// the "if" condition, right after the effects processing...
+			// [changed by nexus - 2006-08-15]
+			// target.reduceCurrentHp(damage, activeChar);
 
-                activeChar.sendDamageMessage(target, damage, mcrit, false, false);
+			if (damage > 0)
+			{
+				// Manage attack or cast break of the target (calculating rate,
+				// sending message...)
+				if (!target.isRaid()
+				        && Formulas.getInstance().calcAtkBreak(target, damage))
+				{
+					target.breakAttack();
+					target.breakCast();
+				}
 
-                if (skill.hasEffects())
-                {
-                	if (target.reflectSkill(skill))
-                	{
-                		activeChar.stopSkillEffects(skill.getId());
-    					skill.getEffects(target, activeChar);
-    					SystemMessage sm = new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT);
+				activeChar.sendDamageMessage(target, damage, mcrit, false, false);
+
+				if (skill.hasEffects())
+				{
+					if (target.reflectSkill(skill))
+					{
+						activeChar.stopSkillEffects(skill.getId());
+						skill.getEffects(target, activeChar);
+						SystemMessage sm = new SystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT);
 						sm.addSkillName(skill);
 						activeChar.sendPacket(sm);
-                	}
-                	else
-                	{
-                		// activate attacked effects, if any
-                        target.stopSkillEffects(skill.getId());
-                        if (Formulas.getInstance().calcSkillSuccess(activeChar, target, skill, false, ss, bss))
-                            skill.getEffects(activeChar, target);
-                        else
-                        {
-                            SystemMessage sm = new SystemMessage(SystemMessageId.S1_WAS_UNAFFECTED_BY_S2);
-                            sm.addCharName(target);
-                            sm.addSkillName(skill);
-                            activeChar.sendPacket(sm);
-                        }
-                	}
-                }
+					}
+					else
+					{
+						// activate attacked effects, if any
+						target.stopSkillEffects(skill.getId());
+						if (Formulas.getInstance().calcSkillSuccess(activeChar, target, skill, false, ss, bss))
+						{
+							skill.getEffects(activeChar, target);
+						}
+						else
+						{
+							SystemMessage sm = new SystemMessage(SystemMessageId.S1_WAS_UNAFFECTED_BY_S2);
+							sm.addCharName(target);
+							sm.addSkillName(skill);
+							activeChar.sendPacket(sm);
+						}
+					}
+				}
 
-                target.reduceCurrentHp(damage, activeChar);
-            }
-            // Possibility of a lethal strike
-            Formulas.getInstance().calcLethalHit(activeChar, target, skill);
-        }
-        // self Effect :]
-        L2Effect effect = activeChar.getFirstEffect(skill.getId());
-        if (effect != null && effect.isSelfEffect())
-        {
-        	//Replace old effect with new one.
-        	effect.exit();
-        }
-        skill.getEffectsSelf(activeChar);
+				target.reduceCurrentHp(damage, activeChar);
+			}
+			// Possibility of a lethal strike
+			Formulas.getInstance().calcLethalHit(activeChar, target, skill);
+		}
+		// self Effect :]
+		L2Effect effect = activeChar.getFirstEffect(skill.getId());
+		if (effect != null && effect.isSelfEffect())
+		{
+			// Replace old effect with new one.
+			effect.exit();
+		}
+		skill.getEffectsSelf(activeChar);
 
-        if (skill.isSuicideAttack())
-		activeChar.doDie(activeChar);
+		if (skill.isSuicideAttack())
+		{
+			activeChar.doDie(activeChar);
+		}
 
-    }
-    
-    public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill, L2Object[] targets)
-    {
-        for (int index = 0; index < targets.length; index++)
-        {
-            L2Character target = (L2Character) targets[index];
-     
-            if (target instanceof L2PcInstance && target.isAlikeDead() && target.isFakeDeath())
-            {
-                target.stopFakeDeath(null);
-            }
-            else if (target.isAlikeDead())
-            {
-                continue;
-            }
+	}
 
-            boolean mcrit = Formulas.getInstance().calcMCrit(activeCubic.getMCriticalHit(target, skill));
-            int damage = (int) Formulas.getInstance().calcMagicDam(activeCubic, target, skill, mcrit);
+	public void useCubicSkill(L2CubicInstance activeCubic, L2Skill skill,
+	        L2Object[] targets)
+	{
+		for (L2Object target2 : targets)
+		{
+			L2Character target = (L2Character) target2;
 
-            // if target is reflecting the skill then no damage is done
-            if(target.reflectSkill(skill))
-            	damage = 0;
+			if (target instanceof L2PcInstance && target.isAlikeDead()
+			        && target.isFakeDeath())
+			{
+				target.stopFakeDeath(null);
+			}
+			else if (target.isAlikeDead())
+			{
+				continue;
+			}
 
-            if (Config.DEBUG)
-    			_log.info("L2SkillMdam: useCubicSkill() -> damage = " + damage);
-    
-            if (damage > 0)
-            {
-                // Manage attack or cast break of the target (calculating rate, sending message...)
-                if (!target.isRaid() && Formulas.getInstance().calcAtkBreak(target, damage))
-                {
-                    target.breakAttack();
-                    target.breakCast();
-                }
+			boolean mcrit = Formulas.getInstance().calcMCrit(activeCubic.getMCriticalHit(target, skill));
+			int damage = (int) Formulas.getInstance().calcMagicDam(activeCubic, target, skill, mcrit);
 
-                activeCubic.getOwner().sendDamageMessage(target, damage, mcrit, false, false);
-    
-                if (skill.hasEffects())
-                {
-                    // activate attacked effects, if any
-                    target.stopSkillEffects(skill.getId());
-                    if (target.getFirstEffect(skill) != null)
-                        target.removeEffect(target.getFirstEffect(skill));
-                    if (Formulas.getInstance().calcCubicSkillSuccess(activeCubic, target, skill)) 
-                        skill.getEffects(activeCubic, target);
-                    else
-                    {
-                        SystemMessage sm = new SystemMessage(SystemMessageId.S1_WAS_UNAFFECTED_BY_S2);
-                        sm.addCharName(target);
-                        sm.addSkillName(skill.getDisplayId());
-                        activeCubic.getOwner().sendPacket(sm);
-                    }
-                }
-                
-                target.reduceCurrentHp(damage, activeCubic.getOwner());
-            }
-        }
-    }
+			// if target is reflecting the skill then no damage is done
+			if (target.reflectSkill(skill))
+			{
+				damage = 0;
+			}
 
-    public SkillType[] getSkillIds()
-    {
-        return SKILL_IDS;
-    }
+			if (Config.DEBUG)
+			{
+				_log.info("L2SkillMdam: useCubicSkill() -> damage = " + damage);
+			}
+
+			if (damage > 0)
+			{
+				// Manage attack or cast break of the target (calculating rate,
+				// sending message...)
+				if (!target.isRaid()
+				        && Formulas.getInstance().calcAtkBreak(target, damage))
+				{
+					target.breakAttack();
+					target.breakCast();
+				}
+
+				activeCubic.getOwner().sendDamageMessage(target, damage, mcrit, false, false);
+
+				if (skill.hasEffects())
+				{
+					// activate attacked effects, if any
+					target.stopSkillEffects(skill.getId());
+					if (target.getFirstEffect(skill) != null)
+					{
+						target.removeEffect(target.getFirstEffect(skill));
+					}
+					if (Formulas.getInstance().calcCubicSkillSuccess(activeCubic, target, skill))
+					{
+						skill.getEffects(activeCubic, target);
+					}
+					else
+					{
+						SystemMessage sm = new SystemMessage(SystemMessageId.S1_WAS_UNAFFECTED_BY_S2);
+						sm.addCharName(target);
+						sm.addSkillName(skill.getDisplayId());
+						activeCubic.getOwner().sendPacket(sm);
+					}
+				}
+
+				target.reduceCurrentHp(damage, activeCubic.getOwner());
+			}
+		}
+	}
+
+	@Override
+	public SkillType[] getSkillIds()
+	{
+		return SKILL_IDS;
+	}
 }

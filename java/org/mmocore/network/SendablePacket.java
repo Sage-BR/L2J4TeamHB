@@ -19,7 +19,7 @@ package org.mmocore.network;
  * @param <T>
  */
 public abstract class SendablePacket<T extends MMOClient<?>>
-	extends AbstractPacket<T>
+        extends AbstractPacket<T>
 {
 	protected final void putInt(final int value)
 	{

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,47 +22,65 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 public class PetStatus extends SummonStatus
 {
-    // =========================================================
-    // Data Field
-    private int _currentFed               = 0; //Current Fed of the L2PetInstance
+	// =========================================================
+	// Data Field
+	private int _currentFed = 0; // Current Fed of the L2PetInstance
 
-    // =========================================================
-    // Constructor
-    public PetStatus(L2PetInstance activeChar)
-    {
-        super(activeChar);
-    }
+	// =========================================================
+	// Constructor
+	public PetStatus(L2PetInstance activeChar)
+	{
+		super(activeChar);
+	}
 
-    // =========================================================
-    // Method - Public
-    @Override
-	public final void reduceHp(double value, L2Character attacker) { reduceHp(value, attacker, true); }
-    @Override
-	public final void reduceHp(double value, L2Character attacker, boolean awake)
-    {
-        if (getActiveChar().isDead()) return;
+	// =========================================================
+	// Method - Public
+	@Override
+	public final void reduceHp(double value, L2Character attacker)
+	{
+		reduceHp(value, attacker, true);
+	}
 
-        super.reduceHp(value, attacker, awake);
+	@Override
+	public final void reduceHp(double value, L2Character attacker,
+	        boolean awake)
+	{
+		if (getActiveChar().isDead())
+		{
+			return;
+		}
 
-        if (attacker != null)
-        {
-            SystemMessage sm = new SystemMessage(SystemMessageId.PET_RECEIVED_S2_DAMAGE_BY_S1);
-            sm.addCharName(attacker);
-            sm.addNumber((int)value);
-            getActiveChar().getOwner().sendPacket(sm);
+		super.reduceHp(value, attacker, awake);
 
-            getActiveChar().getAI().notifyEvent(CtrlEvent.EVT_ATTACKED, attacker);
-        }
-    }
+		if (attacker != null)
+		{
+			SystemMessage sm = new SystemMessage(SystemMessageId.PET_RECEIVED_S2_DAMAGE_BY_S1);
+			sm.addCharName(attacker);
+			sm.addNumber((int) value);
+			getActiveChar().getOwner().sendPacket(sm);
 
-    // =========================================================
-    // Method - Private
+			getActiveChar().getAI().notifyEvent(CtrlEvent.EVT_ATTACKED, attacker);
+		}
+	}
 
-    // =========================================================
-    // Property - Public
-    @Override
-	public L2PetInstance getActiveChar() { return (L2PetInstance)super.getActiveChar(); }
+	// =========================================================
+	// Method - Private
 
-    public int getCurrentFed() { return _currentFed; }
-    public void setCurrentFed(int value) { _currentFed = value; }
+	// =========================================================
+	// Property - Public
+	@Override
+	public L2PetInstance getActiveChar()
+	{
+		return (L2PetInstance) super.getActiveChar();
+	}
+
+	public int getCurrentFed()
+	{
+		return _currentFed;
+	}
+
+	public void setCurrentFed(int value)
+	{
+		_currentFed = value;
+	}
 }

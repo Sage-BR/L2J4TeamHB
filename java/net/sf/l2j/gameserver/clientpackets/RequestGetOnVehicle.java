@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,42 +27,50 @@ import net.sf.l2j.util.Point3D;
  */
 public final class RequestGetOnVehicle extends L2GameClientPacket
 {
-    private static final String _C__5C_GETONVEHICLE = "[C] 5C GetOnVehicle";
+	private static final String _C__5C_GETONVEHICLE = "[C] 5C GetOnVehicle";
 
-    private int _id, _x, _y, _z;
+	private int _id, _x, _y, _z;
 
-    @Override
+	@Override
 	protected void readImpl()
-    {
-        _id = readD();
-        _x = readD();
-        _y = readD();
-        _z = readD();
-    }
+	{
+		_id = readD();
+		_x = readD();
+		_y = readD();
+		_z = readD();
+	}
 
-    @Override
+	@Override
 	protected void runImpl()
-    {
-        L2PcInstance activeChar = getClient().getActiveChar();
-        if (activeChar == null) return;
+	{
+		L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null)
+		{
+			return;
+		}
 
-        L2BoatInstance boat = BoatManager.getInstance().getBoat(_id);
-        if (boat == null) return;
+		L2BoatInstance boat = BoatManager.getInstance().getBoat(_id);
+		if (boat == null)
+		{
+			return;
+		}
 
-        GetOnVehicle Gon = new GetOnVehicle(activeChar,boat,_x,_y,_z);
-        activeChar.setInBoatPosition(new Point3D(_x,_y,_z));
-        activeChar.getPosition().setXYZ(boat.getPosition().getX(),boat.getPosition().getY(),boat.getPosition().getZ());
-        activeChar.broadcastPacket(Gon);
-        activeChar.revalidateZone(true);
+		GetOnVehicle Gon = new GetOnVehicle(activeChar, boat, _x, _y, _z);
+		activeChar.setInBoatPosition(new Point3D(_x, _y, _z));
+		activeChar.getPosition().setXYZ(boat.getPosition().getX(), boat.getPosition().getY(), boat.getPosition().getZ());
+		activeChar.broadcastPacket(Gon);
+		activeChar.revalidateZone(true);
 
-    }
+	}
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
-     */
-    @Override
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
+	 */
+	@Override
 	public String getType()
-    {
-        return _C__5C_GETONVEHICLE;
-    }
+	{
+		return _C__5C_GETONVEHICLE;
+	}
 }

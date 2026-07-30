@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,6 +16,7 @@
 package net.sf.l2j.gameserver.model;
 
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,23 +28,25 @@ import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.gameserver.skills.funcs.FuncAdd;
 import net.sf.l2j.gameserver.skills.funcs.LambdaConst;
 
-import java.util.ArrayList;
-
 /**
  * Used to store an augmentation and its boni
  *
- * @author  durgus
+ * @author durgus
  */
 public final class L2Augmentation
 {
 	private static final Logger _log = Logger.getLogger(L2Augmentation.class.getName());
 
 	private L2ItemInstance _item;
+
 	private int _effectsId = 0;
+
 	private augmentationStatBoni _boni = null;
+
 	private L2Skill _skill = null;
 
-	public L2Augmentation(L2ItemInstance item, int effects, L2Skill skill, boolean save)
+	public L2Augmentation(L2ItemInstance item, int effects, L2Skill skill,
+	        boolean save)
 	{
 		_item = item;
 		_effectsId = effects;
@@ -51,10 +54,14 @@ public final class L2Augmentation
 		_skill = skill;
 
 		// write to DB if save is true
-		if (save) saveAugmentationData();
+		if (save)
+		{
+			saveAugmentationData();
+		}
 	}
 
-	public L2Augmentation(L2ItemInstance item, int effects, int skill, int skillLevel, boolean save)
+	public L2Augmentation(L2ItemInstance item, int effects, int skill,
+	        int skillLevel, boolean save)
 	{
 		this(item, effects, SkillTable.getInstance().getInfo(skill, skillLevel), save);
 	}
@@ -65,18 +72,20 @@ public final class L2Augmentation
 	public class augmentationStatBoni
 	{
 		private Stats _stats[];
+
 		private float _values[];
+
 		private boolean _active;
 
 		public augmentationStatBoni(int augmentationId)
 		{
 			_active = false;
-			ArrayList <AugmentationData.AugStat> as = AugmentationData.getInstance().getAugStatsById(augmentationId);
+			ArrayList<AugmentationData.AugStat> as = AugmentationData.getInstance().getAugStatsById(augmentationId);
 
 			_stats = new Stats[as.size()];
 			_values = new float[as.size()];
 
-			int i=0;
+			int i = 0;
 			for (AugmentationData.AugStat aStat : as)
 			{
 				_stats[i] = aStat.getStat();
@@ -88,10 +97,15 @@ public final class L2Augmentation
 		public void applyBonus(L2PcInstance player)
 		{
 			// make sure the bonuses are not applied twice..
-			if (_active) return;
+			if (_active)
+			{
+				return;
+			}
 
-			for (int i=0; i < _stats.length; i++)
+			for (int i = 0; i < _stats.length; i++)
+			{
 				player.addStatFunc(new FuncAdd(_stats[i], 0x40, this, new LambdaConst(_values[i])));
+			}
 
 			_active = true;
 		}
@@ -99,7 +113,10 @@ public final class L2Augmentation
 		public void removeBonus(L2PcInstance player)
 		{
 			// make sure the bonuses are not removed twice
-			if (!_active) return;
+			if (!_active)
+			{
+				return;
+			}
 
 			player.removeStatsOwner(this);
 
@@ -121,7 +138,8 @@ public final class L2Augmentation
 			{
 				statement.setInt(3, _skill.getId());
 				statement.setInt(4, _skill.getLevel());
-			} else
+			}
+			else
 			{
 				statement.setInt(3, 0);
 				statement.setInt(4, 0);
@@ -129,16 +147,30 @@ public final class L2Augmentation
 
 			statement.executeUpdate();
 			statement.close();
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, "Could not save augmentation for item: "+_item.getObjectId()+" from DB:", e);
-		} finally {
-			try { con.close(); } catch (Exception e) {}
+		}
+		catch (Exception e)
+		{
+			_log.log(Level.SEVERE, "Could not save augmentation for item: "
+			        + _item.getObjectId() + " from DB:", e);
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
 	public void deleteAugmentationData()
 	{
-		if (!_item.isAugmented()) return;
+		if (!_item.isAugmented())
+		{
+			return;
+		}
 
 		// delete the augmentation from the database
 		java.sql.Connection con = null;
@@ -149,15 +181,27 @@ public final class L2Augmentation
 			statement.setInt(1, _item.getObjectId());
 			statement.executeUpdate();
 			statement.close();
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, "Could not delete augmentation for item: "+_item.getObjectId()+" from DB:", e);
-		} finally {
-			try { con.close(); } catch (Exception e) {}
+		}
+		catch (Exception e)
+		{
+			_log.log(Level.SEVERE, "Could not delete augmentation for item: "
+			        + _item.getObjectId() + " from DB:", e);
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
 	/**
 	 * Get the augmentation "id" used in serverpackets.
+	 *
 	 * @return augmentationId
 	 */
 	public int getAugmentationId()
@@ -172,12 +216,13 @@ public final class L2Augmentation
 
 	/**
 	 * Applies the bonuses to the player.
+	 *
 	 * @param player
 	 */
 	public void applyBonus(L2PcInstance player)
 	{
-	    _boni.applyBonus(player);
-	
+		_boni.applyBonus(player);
+
 		// add the skill if any
 		if (_skill != null)
 		{
@@ -185,15 +230,16 @@ public final class L2Augmentation
 			player.sendSkillList();
 		}
 	}
-	
+
 	/**
 	 * Removes the augmentation bonuses from the player.
+	 *
 	 * @param player
 	 */
 	public void removeBonus(L2PcInstance player)
 	{
-	    _boni.removeBonus(player);
-		
+		_boni.removeBonus(player);
+
 		// remove the skill if any
 		if (_skill != null)
 		{

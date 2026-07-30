@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +26,7 @@ import net.sf.l2j.gameserver.serverpackets.UserInfo;
 
 /**
  * Itemhandler for Character Appearance Change Potions
- * 
+ *
  * @author Tempy
  */
 public class CharChangePotions implements IItemHandler
@@ -35,27 +35,34 @@ public class CharChangePotions implements IItemHandler
 	        5238, 5239, 5240, 5241, // Hair Color
 	        5242, 5243, 5244, 5245, 5246, 5247, 5248 // Hair Style
 	};
-	
+
+	@Override
 	public void useItem(L2PlayableInstance playable, L2ItemInstance item)
 	{
 		int itemId = item.getItemId();
-		
+
 		L2PcInstance activeChar;
-		
+
 		if (playable instanceof L2PcInstance)
+		{
 			activeChar = (L2PcInstance) playable;
+		}
 		else if (playable instanceof L2PetInstance)
+		{
 			activeChar = ((L2PetInstance) playable).getOwner();
+		}
 		else
+		{
 			return;
-		
+		}
+
 		if (activeChar.isAllSkillsDisabled())
 		{
 			ActionFailed af = ActionFailed.STATIC_PACKET;
 			activeChar.sendPacket(af);
 			return;
 		}
-		
+
 		switch (itemId)
 		{
 			case 5235:
@@ -78,7 +85,9 @@ public class CharChangePotions implements IItemHandler
 				break;
 			case 5241:
 				if (activeChar.getRace() == Race.Kamael)
+				{
 					return;
+				}
 				activeChar.getAppearance().setHairColor(3);
 				break;
 			case 5242:
@@ -103,22 +112,23 @@ public class CharChangePotions implements IItemHandler
 				activeChar.getAppearance().setHairStyle(6);
 				break;
 		}
-		
+
 		// Create a summon effect!
 		MagicSkillUse MSU = new MagicSkillUse(playable, activeChar, 2003, 1, 1, 0);
 		activeChar.broadcastPacket(MSU);
-		
+
 		// Update the changed stat for the character in the DB.
 		activeChar.store();
-		
+
 		// Remove the item from inventory.
 		activeChar.destroyItem("Consume", item.getObjectId(), 1, null, false);
-		
+
 		// Broadcast the changes to the char and all those nearby.
 		UserInfo ui = new UserInfo(activeChar);
 		activeChar.broadcastPacket(ui);
 	}
-	
+
+	@Override
 	public int[] getItemIds()
 	{
 		return ITEM_IDS;

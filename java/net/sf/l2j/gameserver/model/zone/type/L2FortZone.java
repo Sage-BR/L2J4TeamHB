@@ -3,16 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model.zone.type;
+
+import java.util.ArrayList;
 
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.instancemanager.FortManager;
@@ -24,17 +26,17 @@ import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.ArrayList;
-
 /**
  * A castle zone
  *
- * @author  durgus
+ * @author durgus
  */
 public class L2FortZone extends L2ZoneType
 {
 	private int _fortId;
+
 	private Fort _fort;
+
 	private int[] _spawnLoc;
 
 	public L2FortZone(int id)
@@ -67,7 +69,10 @@ public class L2FortZone extends L2ZoneType
 		{
 			_spawnLoc[2] = Integer.parseInt(value);
 		}
-		else super.setParameter(name, value);
+		else
+		{
+			super.setParameter(name, value);
+		}
 	}
 
 	@Override
@@ -79,7 +84,9 @@ public class L2FortZone extends L2ZoneType
 			character.setInsideZone(L2Character.ZONE_SIEGE, true);
 
 			if (character instanceof L2PcInstance player)
+			{
 				player.sendPacket(new SystemMessage(SystemMessageId.ENTERED_COMBAT_ZONE));
+			}
 		}
 	}
 
@@ -97,20 +104,26 @@ public class L2FortZone extends L2ZoneType
 
 				// Set pvp flag
 				if (player.getPvpFlag() == 0)
+				{
 					player.startPvPFlag();
+				}
 			}
 		}
 		if (character instanceof L2SiegeSummonInstance)
 		{
-			((L2SiegeSummonInstance)character).unSummon(((L2SiegeSummonInstance)character).getOwner());
+			((L2SiegeSummonInstance) character).unSummon(((L2SiegeSummonInstance) character).getOwner());
 		}
 	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 	public void updateZoneStatusForCharactersInside()
 	{
@@ -122,7 +135,9 @@ public class L2FortZone extends L2ZoneType
 				{
 					onEnter(character);
 				}
-				catch (NullPointerException e) {}
+				catch (NullPointerException e)
+				{
+				}
 			}
 		}
 		else
@@ -135,27 +150,34 @@ public class L2FortZone extends L2ZoneType
 					character.setInsideZone(L2Character.ZONE_SIEGE, false);
 
 					if (character instanceof L2PcInstance player)
+					{
 						player.sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
+					}
 					if (character instanceof L2SiegeSummonInstance)
 					{
-						((L2SiegeSummonInstance)character).unSummon(((L2SiegeSummonInstance)character).getOwner());
+						((L2SiegeSummonInstance) character).unSummon(((L2SiegeSummonInstance) character).getOwner());
 					}
 				}
-				catch (NullPointerException e) {}
+				catch (NullPointerException e)
+				{
+				}
 			}
 		}
 	}
 
 	/**
 	 * Removes all foreigners from the fort
+	 *
 	 * @param owningClanId
 	 */
 	public void banishForeigners(int owningClanId)
 	{
 		for (L2Character temp : _characterList.values())
 		{
-			if (!(temp instanceof L2PcInstance player)) continue;
-			if (player.getClanId() == owningClanId) continue;
+			if (!(temp instanceof L2PcInstance player) || (player.getClanId() == owningClanId))
+			{
+				continue;
+			}
 
 			player.teleToLocation(MapRegionTable.TeleportWhereType.Town);
 		}
@@ -163,6 +185,7 @@ public class L2FortZone extends L2ZoneType
 
 	/**
 	 * Sends a message to all players in this zone
+	 *
 	 * @param message
 	 */
 	public void announceToPlayers(String message)
@@ -170,22 +193,27 @@ public class L2FortZone extends L2ZoneType
 		for (L2Character temp : _characterList.values())
 		{
 			if (temp instanceof L2PcInstance player)
+			{
 				player.sendMessage(message);
+			}
 		}
 	}
 
 	/**
 	 * Returns all players within this zone
+	 *
 	 * @return
 	 */
 	public ArrayList<L2PcInstance> getAllPlayers()
 	{
-		ArrayList<L2PcInstance> players = new ArrayList<L2PcInstance>();
+		ArrayList<L2PcInstance> players = new ArrayList<>();
 
 		for (L2Character temp : _characterList.values())
 		{
 			if (temp instanceof L2PcInstance player)
+			{
 				players.add(player);
+			}
 		}
 
 		return players;
@@ -193,6 +221,7 @@ public class L2FortZone extends L2ZoneType
 
 	/**
 	 * Get the forts defender spawn
+	 *
 	 * @return
 	 */
 	public int[] getSpawn()

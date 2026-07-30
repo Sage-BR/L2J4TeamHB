@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,85 +32,119 @@ import net.sf.l2j.util.Rnd;
  */
 public final class L2GrandBossInstance extends L2MonsterInstance
 {
-    private static final int BOSS_MAINTENANCE_INTERVAL = 20000;
+	private static final int BOSS_MAINTENANCE_INTERVAL = 20000;
 
-     /**
-     * Constructor for L2GrandBossInstance. This represent all grandbosses.
-     * 
-     * @param objectId ID of the instance
-     * @param template L2NpcTemplate of the instance
-     */
+	/**
+	 * Constructor for L2GrandBossInstance. This represent all grandbosses.
+	 *
+	 * @param objectId
+	 *            ID of the instance
+	 * @param template
+	 *            L2NpcTemplate of the instance
+	 */
 	public L2GrandBossInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
 	}
+
 	@Override
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
+		{
 			return false;
+		}
 		L2PcInstance player = null;
-		
+
 		if (killer instanceof L2PcInstance)
+		{
 			player = (L2PcInstance) killer;
+		}
 		else if (killer instanceof L2Summon)
+		{
 			player = ((L2Summon) killer).getOwner();
-		
+		}
+
 		if (player != null)
 		{
 			if (Config.ANNOUNCE_GRANDBOS_KILL)
 			{
 				if (player.getClan() != null)
-					Broadcast.gameAnnounceToOnlinePlayers("Boss: "+getName() +" was killed by " + player.getName()+ " of the clan: " + player.getClan().getName());
+				{
+					Broadcast.gameAnnounceToOnlinePlayers("Boss: " + getName()
+					        + " was killed by " + player.getName()
+					        + " of the clan: " + player.getClan().getName());
+				}
 				else
-					Broadcast.gameAnnounceToOnlinePlayers("Boss: "+getName() +" was killed by " + player.getName());
+				{
+					Broadcast.gameAnnounceToOnlinePlayers("Boss: " + getName()
+					        + " was killed by " + player.getName());
+				}
 			}
 			broadcastPacket(new SystemMessage(SystemMessageId.RAID_WAS_SUCCESSFUL));
 			if (player.getParty() != null)
 			{
 				for (L2PcInstance member : player.getParty().getPartyMembers())
 				{
-					RaidBossPointsManager.addPoints(member, getNpcId(), (getLevel() / 2) + Rnd.get(-5, 5));
-					if(member.isNoble());
-						
+					RaidBossPointsManager.addPoints(member, getNpcId(), (getLevel()
+					        / 2) + Rnd.get(-5, 5));
+					if (member.isNoble())
+					{
+
+					}
+
 				}
 			}
 			else
 			{
-				RaidBossPointsManager.addPoints(player, getNpcId(), (getLevel() / 2) + Rnd.get(-5, 5));
-				if(player.isNoble());
-					
+				RaidBossPointsManager.addPoints(player, getNpcId(), (getLevel()
+				        / 2) + Rnd.get(-5, 5));
+				if (player.isNoble())
+				{
+
+				}
+
 			}
 		}
 		return true;
 	}
-    @Override
-	protected int getMaintenanceInterval() { return BOSS_MAINTENANCE_INTERVAL; }
 
-    @Override
+	@Override
+	protected int getMaintenanceInterval()
+	{
+		return BOSS_MAINTENANCE_INTERVAL;
+	}
+
+	@Override
 	public void onSpawn()
 	{
 		super.onSpawn();
 		if (!this.getSpawn().is_customBossInstance())
+		{
 			GrandBossManager.getInstance().addBoss(this);
+		}
 	}
 
-    /**
-     * Reduce the current HP of the L2Attackable, update its _aggroList and launch the doDie Task if necessary.<BR><BR>
-     *
-     */
-    @Override
-	public void reduceCurrentHp(double damage, L2Character attacker, boolean awake)
-    {
-        super.reduceCurrentHp(damage, attacker, awake);
-    }
+	/**
+	 * Reduce the current HP of the L2Attackable, update its _aggroList and
+	 * launch the doDie Task if necessary.<BR>
+	 * <BR>
+	 *
+	 */
+	@Override
+	public void reduceCurrentHp(double damage, L2Character attacker,
+	        boolean awake)
+	{
+		super.reduceCurrentHp(damage, attacker, awake);
+	}
 
-    @Override
+	@Override
 	public boolean isRaid()
-    {
-        return true;
-    }
-    public void healFull()
+	{
+		return true;
+	}
+
+	public void healFull()
 	{
 		super.setCurrentHp(super.getMaxHp());
 		super.setCurrentMp(super.getMaxMp());

@@ -1,24 +1,21 @@
 /*
  * $Header: L2ObjectMap.java, 22/07/2005 13:17:51 luisantonioa Exp $
  *
- * $Author: luisantonioa $
- * $Date: 22/07/2005 13:17:51 $
- * $Revision: 1 $
- * $Log: L2ObjectMap.java,v $
- * Revision 1  22/07/2005 13:17:51  luisantonioa
- * Added copyright notice
+ * $Author: luisantonioa $ $Date: 22/07/2005 13:17:51 $ $Revision: 1 $ $Log:
+ * L2ObjectMap.java,v $ Revision 1 22/07/2005 13:17:51 luisantonioa Added
+ * copyright notice
  *
  *
-* This program is free software: you can redistribute it and/or modify it under
+ * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,7 +26,6 @@ import java.util.Iterator;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2Object;
 
-
 /**
  * This class ...
  *
@@ -39,30 +35,31 @@ import net.sf.l2j.gameserver.model.L2Object;
 public abstract class L2ObjectMap<T extends L2Object> implements Iterable<T>
 {
 
-    public abstract int size();
+	public abstract int size();
 
-    public abstract boolean isEmpty();
+	public abstract boolean isEmpty();
 
-    public abstract void clear();
+	public abstract void clear();
 
-    public abstract void put(T obj);
+	public abstract void put(T obj);
 
-    public abstract void remove(T obj);
+	public abstract void remove(T obj);
 
-    public abstract T get(int id);
+	public abstract T get(int id);
 
-    public abstract boolean contains(T obj);
+	public abstract boolean contains(T obj);
 
-    public abstract Iterator<T> iterator();
+	@Override
+	public abstract Iterator<T> iterator();
 
-    public static L2ObjectMap<L2Object> createL2ObjectMap()
-    {
-        switch (Config.MAP_TYPE)
-        {
-            case WorldObjectMap:
-                return new WorldObjectMap<L2Object>();
-            default:
-                return new WorldObjectTree<L2Object>();
-        }
-    }
+	public static L2ObjectMap<L2Object> createL2ObjectMap()
+	{
+		switch (Config.MAP_TYPE)
+		{
+			case WorldObjectMap:
+				return new WorldObjectMap<>();
+			default:
+				return new WorldObjectTree<>();
+		}
+	}
 }

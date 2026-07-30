@@ -1,21 +1,22 @@
 /*
- * L2jFrozen Project - www.l2jfrozen.com 
- * 
+ * L2jFrozen Project - www.l2jfrozen.com
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.ai.special;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import net.sf.l2j.Config;
@@ -41,47 +42,66 @@ import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.Rnd;
 
-import java.util.ArrayList;
-
 /**
  * Valakas AI
+ *
  * @author Kerberos
  */
 public class Valakas extends Quest implements Runnable
 {
 	private int i_ai0 = 0;
+
 	private int i_ai1 = 0;
+
 	private int i_ai2 = 0;
+
 	private int i_ai3 = 0;
+
 	private int i_ai4 = 0;
+
 	private int i_quest0 = 0;
-	private long lastAttackTime = 0; // time to tracking valakas when was last time attacked
+
+	private long lastAttackTime = 0; // time to tracking valakas when was last
+	                                 // time attacked
+
 	private int i_quest2 = 0; // hate value for 1st player
+
 	private int i_quest3 = 0; // hate value for 2nd player
+
 	private int i_quest4 = 0; // hate value for 3rd player
+
 	private L2Character c_quest2 = null; // 1st most hated target
+
 	private L2Character c_quest3 = null; // 2nd most hated target
+
 	private L2Character c_quest4 = null; // 3rd most hated target
-	
+
 	private static final int VALAKAS = 29028;
-	
+
 	// Valakas Status Tracking :
-	private static final byte DORMANT = 0; // Valakas is spawned and no one has entered yet. Entry is unlocked
-	private static final byte WAITING = 1; // Valakas is spawend and someone has entered, triggering a 30 minute window for additional people to enter
+	private static final byte DORMANT = 0; // Valakas is spawned and no one has
+	                                       // entered yet. Entry is unlocked
+
+	private static final byte WAITING = 1; // Valakas is spawend and someone has
+	                                       // entered, triggering a 30 minute
+	                                       // window for additional people to
+	                                       // enter
 	// before he unleashes his attack. Entry is unlocked
-	private static final byte FIGHTING = 2; // Valakas is engaged in battle, annihilating his foes. Entry is locked
-	private static final byte DEAD = 3; // Valakas has been killed. Entry is locked
-	
+
+	private static final byte FIGHTING = 2; // Valakas is engaged in battle,
+	                                        // annihilating his foes. Entry is
+	                                        // locked
+
+	private static final byte DEAD = 3; // Valakas has been killed. Entry is
+	                                    // locked
+
 	private static L2BossZone _Zone;
-	
+
 	// Boss: Valakas
 	public Valakas(final int id, final String name, final String descr)
 	{
 		super(id, name, descr);
-		final int[] mob =
-		{
-			VALAKAS
-		};
+		final int[] mob = { VALAKAS };
 		this.registerMobs(mob);
 		i_ai0 = 0;
 		i_ai1 = 0;
@@ -92,16 +112,20 @@ public class Valakas extends Quest implements Runnable
 		lastAttackTime = System.currentTimeMillis();
 		_Zone = GrandBossManager.getInstance().getZone(212852, -114842, -1632);
 		final StatsSet info = GrandBossManager.getInstance().getStatsSet(VALAKAS);
-		
+
 		final Integer status = GrandBossManager.getInstance().getBossStatus(VALAKAS);
-		
+
 		if (status == DEAD)
 		{
 			// load the unlock date and time for valakas from DB
-			final long temp = (info.getLong("respawn_time") - System.currentTimeMillis());
-			// if valakas is locked until a certain time, mark it so and start the unlock timer
-			// the unlock time has not yet expired. Mark valakas as currently locked. Setup a timer
-			// to fire at the correct time (calculate the time between now and the unlock time,
+			final long temp = (info.getLong("respawn_time")
+			        - System.currentTimeMillis());
+			// if valakas is locked until a certain time, mark it so and start
+			// the unlock timer
+			// the unlock time has not yet expired. Mark valakas as currently
+			// locked. Setup a timer
+			// to fire at the correct time (calculate the time between now and
+			// the unlock time,
 			// setup a timer to fire after that many msec)
 			if (temp > 0)
 			{
@@ -112,7 +136,7 @@ public class Valakas extends Quest implements Runnable
 				// the time has already expired while the server was offline.
 				// the status needs to be changed to DORMANT
 				GrandBossManager.getInstance().setBossStatus(VALAKAS, DORMANT);
-				
+
 			}
 		}
 		else if (status == FIGHTING)
@@ -122,15 +146,14 @@ public class Valakas extends Quest implements Runnable
 			final int loc_y = -114890;
 			final int loc_z = -1595;
 			final int heading = 0;
-			
+
 			final int hp = info.getInteger("currentHP");
 			final int mp = info.getInteger("currentMP");
 			final L2GrandBossInstance valakas = (L2GrandBossInstance) addSpawn(VALAKAS, loc_x, loc_y, loc_z, heading, false, 0);
 			GrandBossManager.getInstance().addBoss(valakas);
 			final L2NpcInstance _valakas = valakas;
-			
-			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-			{
+
+			ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 				@Override
 				public void run()
 				{
@@ -144,25 +167,27 @@ public class Valakas extends Quest implements Runnable
 					}
 				}
 			}, 100L);
-			
+
 			startQuestTimer("launch_random_skill", 60000, valakas, null, true);
 			// Start repeating timer to check for inactivity
 			startQuestTimer("check_activity_and_do_actions", 60000, valakas, null, true);
-			
+
 		}
 		else if (status == WAITING)
 		{
-			
+
 			// Start timer to lock entry after 30 minutes and spawn valakas
-			startQuestTimer("lock_entry_and_spawn_valakas", (Config.VALAKAS_WAIT_TIME * 60000), null, null);
-			
-		}// if it was dormant, just leave it as it was:
-			// the valakas NPC is not spawned yet and his instance is not loaded
-		
+			startQuestTimer("lock_entry_and_spawn_valakas", (Config.VALAKAS_WAIT_TIME
+			        * 60000), null, null);
+
+		} // if it was dormant, just leave it as it was:
+		  // the valakas NPC is not spawned yet and his instance is not loaded
+
 	}
-	
+
 	@Override
-	public String onAdvEvent(final String event, final L2NpcInstance npc, final L2PcInstance player)
+	public String onAdvEvent(final String event, final L2NpcInstance npc,
+	        final L2PcInstance player)
 	{
 		if (npc != null)
 		{
@@ -184,16 +209,25 @@ public class Valakas extends Quest implements Runnable
 						}
 					}
 				}
-				
+
 				final Integer status = GrandBossManager.getInstance().getBossStatus(VALAKAS);
-				
+
 				temp = (System.currentTimeMillis() - lastAttackTime);
-				
-				if (status == FIGHTING && !npc.getSpawn().is_customBossInstance() // if it's a custom spawn, dnt despawn it for inactivity
-					&& (temp > (Config.VALAKAS_DESPAWN_TIME * 60000))) // 15 mins by default
+
+				if (status == FIGHTING
+				        && !npc.getSpawn().is_customBossInstance() // if it's a
+				                                                   // custom
+				                                                   // spawn, dnt
+				                                                   // despawn it
+				                                                   // for
+				                                                   // inactivity
+				        && (temp > (Config.VALAKAS_DESPAWN_TIME * 60000))) // 15
+				                                                           // mins
+				                                                           // by
+				                                                           // default
 				{
 					npc.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-					
+
 					// delete the actual boss
 					final L2GrandBossInstance _boss_instance = GrandBossManager.getInstance().deleteBoss(VALAKAS);
 					_boss_instance.decayMe();
@@ -204,7 +238,7 @@ public class Valakas extends Quest implements Runnable
 					i_quest2 = 0;
 					i_quest3 = 0;
 					i_quest4 = 0;
-					
+
 				}
 				else if (npc.getCurrentHp() > ((npc.getMaxHp() * 1) / 4))
 				{
@@ -239,9 +273,13 @@ public class Valakas extends Quest implements Runnable
 			else if (event.equalsIgnoreCase("launch_random_skill"))
 			{
 				if (!npc.isInvul())
+				{
 					getRandomSkill(npc);
+				}
 				else
+				{
 					npc.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				}
 			}
 			else if (event.equalsIgnoreCase("1004"))
 			{
@@ -328,23 +366,24 @@ public class Valakas extends Quest implements Runnable
 			else if (event.equalsIgnoreCase("1117"))
 			{
 				npc.broadcastPacket(new SpecialCamera(npc.getObjectId(), 1700, 10, 0, 3000, 250));
-				
+
 				if (!npc.getSpawn().is_customBossInstance())
 				{
-					
+
 					addSpawn(31759, 212852, -114842, -1632, 0, false, 900000);
 					final int radius = 1500;
 					for (int i = 0; i < 20; i++)
 					{
 						final int x = (int) (radius * Math.cos(i * .331)); // .331~2pi/19
 						final int y = (int) (radius * Math.sin(i * .331));
-						addSpawn(31759, 212852 + x, -114842 + y, -1632, 0, false, 900000);
+						addSpawn(31759, 212852 + x, -114842
+						        + y, -1632, 0, false, 900000);
 					}
 					startQuestTimer("remove_players", 900000, null, null);
-					
+
 				}
 				cancelQuestTimer("check_activity_and_do_actions", npc, null);
-				
+
 			}
 		}
 		else
@@ -355,14 +394,13 @@ public class Valakas extends Quest implements Runnable
 				final int loc_y = -114890;
 				final int loc_z = -1595;
 				final int heading = 0;
-				
+
 				final L2GrandBossInstance valakas = (L2GrandBossInstance) addSpawn(VALAKAS, loc_x, loc_y, loc_z, heading, false, 0);
 				GrandBossManager.getInstance().addBoss(valakas);
-				
+
 				lastAttackTime = System.currentTimeMillis();
 				final L2NpcInstance _valakas = valakas;
-				ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-				{
+				ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
 					@Override
 					public void run()
 					{
@@ -379,7 +417,8 @@ public class Valakas extends Quest implements Runnable
 			}
 			else if (event.equalsIgnoreCase("valakas_unlock"))
 			{
-				// L2GrandBossInstance valakas = (L2GrandBossInstance) addSpawn(VALAKAS, -105200, -253104, -15264, 32768, false, 0);
+				// L2GrandBossInstance valakas = (L2GrandBossInstance)
+				// addSpawn(VALAKAS, -105200, -253104, -15264, 32768, false, 0);
 				// GrandBossManager.getInstance().addBoss(valakas);
 				GrandBossManager.getInstance().setBossStatus(VALAKAS, DORMANT);
 			}
@@ -390,9 +429,10 @@ public class Valakas extends Quest implements Runnable
 		}
 		return super.onAdvEvent(event, npc, player);
 	}
-	
+
 	@Override
-	public String onAttack(final L2NpcInstance npc, final L2PcInstance attacker, final int damage, final boolean isPet)
+	public String onAttack(final L2NpcInstance npc, final L2PcInstance attacker,
+	        final int damage, final boolean isPet)
 	{
 		if (npc.isInvul())
 		{
@@ -400,7 +440,10 @@ public class Valakas extends Quest implements Runnable
 		}
 		lastAttackTime = System.currentTimeMillis();
 		/*
-		 * if (!Config.ALLOW_DIRECT_TP_TO_BOSS_ROOM && GrandBossManager.getInstance().getBossStatus(VALAKAS) != FIGHTING && !npc.getSpawn().is_customBossInstance()) { attacker.teleToLocation(150037, -57255, -2976); }
+		 * if (!Config.ALLOW_DIRECT_TP_TO_BOSS_ROOM &&
+		 * GrandBossManager.getInstance().getBossStatus(VALAKAS) != FIGHTING &&
+		 * !npc.getSpawn().is_customBossInstance()) {
+		 * attacker.teleToLocation(150037, -57255, -2976); }
 		 */
 		if (attacker.getMountType() == 1)
 		{
@@ -454,10 +497,10 @@ public class Valakas extends Quest implements Runnable
 					}
 				}
 			}
-			
+
 		}
 		int i1 = 0;
-		
+
 		if (attacker == c_quest2)
 		{
 			if (((damage * 1000) + 1000) > i_quest2)
@@ -557,7 +600,7 @@ public class Valakas extends Quest implements Runnable
 			i_quest4 = (damage * 1000) + Rnd.get(3000);
 			c_quest4 = attacker;
 		}
-		
+
 		if (i1 == 2)
 		{
 			if (i_quest2 > i_quest4)
@@ -620,30 +663,34 @@ public class Valakas extends Quest implements Runnable
 		getRandomSkill(npc);
 		return super.onAttack(npc, attacker, damage, isPet);
 	}
-	
+
 	@Override
-	public String onKill(final L2NpcInstance npc, final L2PcInstance killer, final boolean isPet)
+	public String onKill(final L2NpcInstance npc, final L2PcInstance killer,
+	        final boolean isPet)
 	{
 		npc.broadcastPacket(new SpecialCamera(npc.getObjectId(), 1700, 2000, 130, -1, 0));
 		npc.broadcastPacket(new PlaySound(1, "B03_D", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
 		startQuestTimer("1111", 500, npc, null);
-		
+
 		if (!npc.getSpawn().is_customBossInstance())
 		{
 			GrandBossManager.getInstance().setBossStatus(VALAKAS, DEAD);
-			
-			final long respawnTime = (long) (Config.VALAKAS_RESP_FIRST + Rnd.get(Config.VALAKAS_RESP_SECOND)) * 3600000;
-			
+
+			final long respawnTime = (long) (Config.VALAKAS_RESP_FIRST
+			        + Rnd.get(Config.VALAKAS_RESP_SECOND)) * 3600000;
+
 			this.startQuestTimer("valakas_unlock", respawnTime, null, null);
-			// also save the respawn time so that the info is maintained past reboots
+			// also save the respawn time so that the info is maintained past
+			// reboots
 			final StatsSet info = GrandBossManager.getInstance().getStatsSet(VALAKAS);
-			info.set("respawn_time", (System.currentTimeMillis() + respawnTime));
+			info.set("respawn_time", (System.currentTimeMillis()
+			        + respawnTime));
 			GrandBossManager.getInstance().setStatsSet(VALAKAS, info);
 		}
-		
+
 		return super.onKill(npc, killer, isPet);
 	}
-	
+
 	public void getRandomSkill(final L2NpcInstance npc)
 	{
 		if (npc.isInvul() || npc.isCastingNow())
@@ -656,17 +703,32 @@ public class Valakas extends Quest implements Runnable
 		int i2 = 0;
 		L2Character c2 = null;
 		if (c_quest2 == null)
+		{
 			i_quest2 = 0;
-		else if (!Util.checkIfInRange(5000, npc, c_quest2, true) || c_quest2.isDead())
+		}
+		else if (!Util.checkIfInRange(5000, npc, c_quest2, true)
+		        || c_quest2.isDead())
+		{
 			i_quest2 = 0;
+		}
 		if (c_quest3 == null)
+		{
 			i_quest3 = 0;
-		else if (!Util.checkIfInRange(5000, npc, c_quest3, true) || c_quest3.isDead())
+		}
+		else if (!Util.checkIfInRange(5000, npc, c_quest3, true)
+		        || c_quest3.isDead())
+		{
 			i_quest3 = 0;
+		}
 		if (c_quest4 == null)
+		{
 			i_quest4 = 0;
-		else if (!Util.checkIfInRange(5000, npc, c_quest4, true) || c_quest4.isDead())
+		}
+		else if (!Util.checkIfInRange(5000, npc, c_quest4, true)
+		        || c_quest4.isDead())
+		{
 			i_quest4 = 0;
+		}
 		if (i_quest2 > i_quest3)
 		{
 			i1 = 2;
@@ -686,17 +748,25 @@ public class Valakas extends Quest implements Runnable
 			c2 = c_quest4;
 		}
 		if (i2 == 0)
+		{
 			c2 = getRandomTarget(npc);
+		}
 		if (i2 > 0)
 		{
 			if (Rnd.get(100) < 70)
 			{
 				if (i1 == 2)
+				{
 					i_quest2 = 500;
+				}
 				else if (i1 == 3)
+				{
 					i_quest3 = 500;
+				}
 				else if (i1 == 4)
+				{
 					i_quest4 = 500;
+				}
 			}
 			if (npc.getCurrentHp() > ((npc.getMaxHp() * 1) / 4))
 			{
@@ -732,10 +802,18 @@ public class Valakas extends Quest implements Runnable
 					}
 					else
 					{
-						if (Rnd.get(2) == 0) // TODO: replace me with direction, to check if player standing on left or right side of valakas
-							skill = SkillTable.getInstance().getInfo(4681, 1); // left hand
+						if (Rnd.get(2) == 0)
+						{ // TODO: replace me with direction,
+							// to check if player standing on
+													                     // left or right side of valakas
+														skill = SkillTable.getInstance().getInfo(4681, 1); // left
+														                                                   // hand
+						}
 						else
-							skill = SkillTable.getInstance().getInfo(4682, 1); // right hand
+						{
+							skill = SkillTable.getInstance().getInfo(4682, 1); // right
+							                                                   // hand
+						}
 					}
 				}
 				else if (Rnd.get(100) < 20)
@@ -785,10 +863,18 @@ public class Valakas extends Quest implements Runnable
 					}
 					else
 					{
-						if (Rnd.get(2) == 0) // TODO: replace me with direction, to check if player standing on left or right side of valakas
-							skill = SkillTable.getInstance().getInfo(4681, 1); // left hand
+						if (Rnd.get(2) == 0)
+						{ // TODO: replace me with direction,
+							// to check if player standing on
+													                     // left or right side of valakas
+														skill = SkillTable.getInstance().getInfo(4681, 1); // left
+														                                                   // hand
+						}
 						else
-							skill = SkillTable.getInstance().getInfo(4682, 1); // right hand
+						{
+							skill = SkillTable.getInstance().getInfo(4682, 1); // right
+							                                                   // hand
+						}
 					}
 				}
 				else if (Rnd.get(100) < 5)
@@ -838,10 +924,18 @@ public class Valakas extends Quest implements Runnable
 					}
 					else
 					{
-						if (Rnd.get(2) == 0) // TODO: replace me with direction, to check if player standing on left or right side of valakas
-							skill = SkillTable.getInstance().getInfo(4681, 1); // left hand
+						if (Rnd.get(2) == 0)
+						{ // TODO: replace me with direction,
+							// to check if player standing on
+													                     // left or right side of valakas
+														skill = SkillTable.getInstance().getInfo(4681, 1); // left
+														                                                   // hand
+						}
 						else
-							skill = SkillTable.getInstance().getInfo(4682, 1); // right hand
+						{
+							skill = SkillTable.getInstance().getInfo(4682, 1); // right
+							                                                   // hand
+						}
 					}
 				}
 				else if (Rnd.get(100) < 0)
@@ -891,10 +985,18 @@ public class Valakas extends Quest implements Runnable
 					}
 					else
 					{
-						if (Rnd.get(2) == 0) // TODO: replace me with direction, to check if player standing on left or right side of valakas
-							skill = SkillTable.getInstance().getInfo(4681, 1); // left hand
+						if (Rnd.get(2) == 0)
+						{ // TODO: replace me with direction,
+							// to check if player standing on
+													                     // left or right side of valakas
+														skill = SkillTable.getInstance().getInfo(4681, 1); // left
+														                                                   // hand
+						}
 						else
-							skill = SkillTable.getInstance().getInfo(4682, 1); // right hand
+						{
+							skill = SkillTable.getInstance().getInfo(4682, 1); // right
+							                                                   // hand
+						}
 					}
 				}
 				else if (Rnd.get(100) < 0)
@@ -912,23 +1014,30 @@ public class Valakas extends Quest implements Runnable
 			}
 		}
 		if (skill != null)
+		{
 			callSkillAI(npc, c2, skill);
+		}
 	}
-	
-	public void callSkillAI(final L2NpcInstance npc, L2Character c2, final L2Skill skill)
+
+	public void callSkillAI(final L2NpcInstance npc, L2Character c2,
+	        final L2Skill skill)
 	{
 		final QuestTimer timer = getQuestTimer("launch_random_skill", npc, null);
-		
+
 		if (npc == null)
 		{
 			if (timer != null)
+			{
 				timer.cancel();
+			}
 			return;
 		}
-		
+
 		if (npc.isInvul())
+		{
 			return;
-		
+		}
+
 		if (c2 == null || c2.isDead() || timer == null)
 		{
 			c2 = getRandomTarget(npc); // just in case if hate AI fail
@@ -943,7 +1052,7 @@ public class Valakas extends Quest implements Runnable
 		{
 			return;
 		}
-		
+
 		if (Util.checkIfInRange(skill.getCastRange(), npc, target, true))
 		{
 			timer.cancel();
@@ -951,7 +1060,7 @@ public class Valakas extends Quest implements Runnable
 			// npc.setIsCastingNow(true);
 			npc.setTarget(target);
 			npc.doCast(skill);
-			
+
 		}
 		else
 		{
@@ -959,7 +1068,7 @@ public class Valakas extends Quest implements Runnable
 			// npc.setIsCastingNow(false);
 		}
 	}
-	
+
 	public void broadcastSpawn(final L2NpcInstance npc)
 	{
 		final Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
@@ -978,7 +1087,7 @@ public class Valakas extends Quest implements Runnable
 		}
 		return;
 	}
-	
+
 	public L2Character getRandomTarget(final L2NpcInstance npc)
 	{
 		final ArrayList<L2Character> result = new ArrayList<>();
@@ -988,8 +1097,13 @@ public class Valakas extends Quest implements Runnable
 			{
 				if (obj instanceof L2PcInstance || obj instanceof L2Summon)
 				{
-					if (Util.checkIfInRange(5000, npc, obj, true) && !((L2Character) obj).isDead() && (obj instanceof L2PcInstance) && !((L2PcInstance) obj).isGM())
+					if (Util.checkIfInRange(5000, npc, obj, true)
+					        && !((L2Character) obj).isDead()
+					        && (obj instanceof L2PcInstance)
+					        && !((L2PcInstance) obj).isGM())
+					{
 						result.add((L2Character) obj);
+					}
 				}
 			}
 		}
@@ -1000,9 +1114,10 @@ public class Valakas extends Quest implements Runnable
 		}
 		return null;
 	}
-	
+
 	@Override
-	public String onSpellFinished(final L2NpcInstance npc, final L2PcInstance player, final L2Skill skill)
+	public String onSpellFinished(final L2NpcInstance npc,
+	        final L2PcInstance player, final L2Skill skill)
 	{
 		if (npc.isInvul())
 		{
@@ -1014,14 +1129,15 @@ public class Valakas extends Quest implements Runnable
 		}
 		return super.onSpellFinished(npc, player, skill);
 	}
-	
+
 	@Override
-	public String onAggroRangeEnter(final L2NpcInstance npc, final L2PcInstance player, final boolean isPet)
+	public String onAggroRangeEnter(final L2NpcInstance npc,
+	        final L2PcInstance player, final boolean isPet)
 	{
 		int i1 = 0;
-		
+
 		final Integer status = GrandBossManager.getInstance().getBossStatus(VALAKAS);
-		
+
 		if (status == FIGHTING || npc.getSpawn().is_customBossInstance())
 		{
 			if (npc.getCurrentHp() > ((npc.getMaxHp() * 1) / 4))
@@ -1529,17 +1645,21 @@ public class Valakas extends Quest implements Runnable
 			i_quest4 = ((1 * 1000) + Rnd.get(3000));
 			c_quest4 = player;
 		}
-		if (status == FIGHTING || npc.getSpawn().is_customBossInstance() && !npc.isInvul())
+		if (status == FIGHTING
+		        || npc.getSpawn().is_customBossInstance() && !npc.isInvul())
 		{
 			getRandomSkill(npc);
 		}
 		else
+		{
 			return null;
+		}
 		return super.onAggroRangeEnter(npc, player, isPet);
 	}
-	
+
 	@Override
-	public String onSkillUse(final L2NpcInstance npc, final L2PcInstance caster, final L2Skill skill)
+	public String onSkillUse(final L2NpcInstance npc, final L2PcInstance caster,
+	        final L2Skill skill)
 	{
 		if (npc.isInvul())
 		{
@@ -1548,10 +1668,10 @@ public class Valakas extends Quest implements Runnable
 		npc.setTarget(caster);
 		return super.onSkillUse(npc, caster, skill);
 	}
-	
+
 	@Override
 	public void run()
 	{
 	}
-	
+
 }

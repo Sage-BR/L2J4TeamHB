@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,10 +27,9 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 import net.sf.l2j.util.Rnd;
 
-
 /**
- * This class manages all RaidBoss.
- * In a group mob, there are one master called RaidBoss and several slaves called Minions.
+ * This class manages all RaidBoss. In a group mob, there are one master called
+ * RaidBoss and several slaves called Minions.
  *
  * @version $Revision: 1.20.4.6 $ $Date: 2005/04/06 16:13:39 $
  */
@@ -41,30 +40,41 @@ public class L2RaidBossInstance extends L2MonsterInstance
 	private RaidBossSpawnManager.StatusEnum _raidStatus;
 
 	/**
-	 * Constructor of L2RaidBossInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
+	 * Constructor of L2RaidBossInstance (use L2Character and L2NpcInstance
+	 * constructor).<BR>
+	 * <BR>
 	 *
-	 * <B><U> Actions</U> :</B><BR><BR>
-	 * <li>Call the L2Character constructor to set the _template of the L2RaidBossInstance (copy skills from template to object and link _calculators to NPC_STD_CALCULATOR) </li>
+	 * <B><U> Actions</U> :</B><BR>
+	 * <BR>
+	 * <li>Call the L2Character constructor to set the _template of the
+	 * L2RaidBossInstance (copy skills from template to object and link
+	 * _calculators to NPC_STD_CALCULATOR)</li>
 	 * <li>Set the name of the L2RaidBossInstance</li>
-	 * <li>Create a RandomAnimation Task that will be launched after the calculated delay if the server allow it </li><BR><BR>
+	 * <li>Create a RandomAnimation Task that will be launched after the
+	 * calculated delay if the server allow it</li><BR>
+	 * <BR>
 	 *
-	 * @param objectId Identifier of the object to initialized
-	 * @param L2NpcTemplate Template to apply to the NPC
+	 * @param objectId
+	 *            Identifier of the object to initialized
+	 * @param L2NpcTemplate
+	 *            Template to apply to the NPC
 	 */
 	public L2RaidBossInstance(int objectId, L2NpcTemplate template)
 	{
 		super(objectId, template);
-		
+
 	}
+
 	@Override
 	public boolean isRaid()
 	{
 		return true;
 	}
+
 	@Override
 	public void onSpawn()
 	{
-	
+
 		super.onSpawn();
 	}
 
@@ -78,37 +88,51 @@ public class L2RaidBossInstance extends L2MonsterInstance
 	public boolean doDie(L2Character killer)
 	{
 		if (!super.doDie(killer))
+		{
 			return false;
+		}
 
 		L2PcInstance player = null;
 		if (killer instanceof L2PcInstance)
+		{
 			player = (L2PcInstance) killer;
+		}
 		else if (killer instanceof L2Summon)
+		{
 			player = ((L2Summon) killer).getOwner();
+		}
 		if (Config.ANNOUNCE_RAIDBOS_KILL)
 		{
 			if (player.getClan() != null)
-				Broadcast.gameAnnounceToOnlinePlayers("Boss: " + getName() + " was killed by " + player.getName()+ " of the clan: " + player.getClan().getName());
+			{
+				Broadcast.gameAnnounceToOnlinePlayers("Boss: " + getName()
+				        + " was killed by " + player.getName()
+				        + " of the clan: " + player.getClan().getName());
+			}
 			else
-				Broadcast.gameAnnounceToOnlinePlayers("Boss: " + getName() + " was killed by " + player.getName());
+			{
+				Broadcast.gameAnnounceToOnlinePlayers("Boss: " + getName()
+				        + " was killed by " + player.getName());
+			}
 		}
 		if (player != null)
 		{
-			
+
 			broadcastPacket(new SystemMessage(SystemMessageId.RAID_WAS_SUCCESSFUL));
 			if (player.getParty() != null)
 			{
 				for (L2PcInstance member : player.getParty().getPartyMembers())
 				{
-					RaidBossPointsManager.addPoints(member, this.getNpcId(), (this.getLevel() / 2) + Rnd.get(-5, 5));
-					
+					RaidBossPointsManager.addPoints(member, this.getNpcId(), (this.getLevel()
+					        / 2) + Rnd.get(-5, 5));
+
 				}
 			}
 			else
 			{
-				RaidBossPointsManager.addPoints(player, this.getNpcId(), (this.getLevel() / 2) + Rnd.get(-5, 5));
-			
-					
+				RaidBossPointsManager.addPoints(player, this.getNpcId(), (this.getLevel()
+				        / 2) + Rnd.get(-5, 5));
+
 			}
 		}
 
@@ -119,37 +143,43 @@ public class L2RaidBossInstance extends L2MonsterInstance
 	/**
 	 * Spawn all minions at a regular interval Also if boss is too far from home
 	 * location at the time of this check, teleport it home
-	 * 
+	 *
 	 */
 	@Override
 	protected void manageMinions()
 	{
 		if (_minionList != null)
+		{
 			_minionList.spawnMinions();
+		}
 
-		 _minionMaintainTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new Runnable() {
+		_minionMaintainTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new Runnable() {
+			@Override
 			public void run()
 			{
 				checkAndReturnToSpawn();
 
 				if (_minionList != null)
+				{
 					_minionList.maintainMinions();
+				}
 			}
-		}, 60000, getMaintenanceInterval()+Rnd.get(5000));
+		}, 60000, getMaintenanceInterval() + Rnd.get(5000));
 	}
 
 	protected void checkAndReturnToSpawn()
 	{
-		if (isDead() || isMovementDisabled())
-			return;
-
 		// Gordon does not have permanent spawn
-		if (getNpcId() == 29095)
+		if (isDead() || isMovementDisabled() || (getNpcId() == 29095))
+		{
 			return;
+		}
 
 		final L2Spawn spawn = getSpawn();
 		if (spawn == null)
+		{
 			return;
+		}
 
 		final int spawnX = spawn.getLocx();
 		final int spawnY = spawn.getLocy();
@@ -158,27 +188,32 @@ public class L2RaidBossInstance extends L2MonsterInstance
 		if (!isInCombat() && !isMovementDisabled())
 		{
 			if (!isInsideRadius(spawnX, spawnY, spawnZ, Math.max(Config.MAX_DRIFT_RANGE, 200), true, false))
+			{
 				teleToLocation(spawnX, spawnY, spawnZ, false);
+			}
 		}
 	}
 
 	/**
-     * Reduce the current HP of the L2Attackable, update its _aggroList and launch the doDie Task if necessary.<BR><BR>
-     *
-     */
+	 * Reduce the current HP of the L2Attackable, update its _aggroList and
+	 * launch the doDie Task if necessary.<BR>
+	 * <BR>
+	 *
+	 */
 	@Override
-    public void reduceCurrentHp(double damage, L2Character attacker, boolean awake)
-    {
-        super.reduceCurrentHp(damage, attacker, awake);
-    }
+	public void reduceCurrentHp(double damage, L2Character attacker,
+	        boolean awake)
+	{
+		super.reduceCurrentHp(damage, attacker, awake);
+	}
 
-    public void healFull()
-    {
-        super.setCurrentHp(super.getMaxHp());
-        super.setCurrentMp(super.getMaxMp());
-    }
+	public void healFull()
+	{
+		super.setCurrentHp(super.getMaxHp());
+		super.setCurrentMp(super.getMaxMp());
+	}
 
-    public void setRaidStatus (RaidBossSpawnManager.StatusEnum status)
+	public void setRaidStatus(RaidBossSpawnManager.StatusEnum status)
 	{
 		_raidStatus = status;
 	}
@@ -187,5 +222,5 @@ public class L2RaidBossInstance extends L2MonsterInstance
 	{
 		return _raidStatus;
 	}
-	
+
 }

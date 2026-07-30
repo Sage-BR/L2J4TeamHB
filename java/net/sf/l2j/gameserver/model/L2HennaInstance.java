@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,28 +17,38 @@ package net.sf.l2j.gameserver.model;
 import net.sf.l2j.gameserver.templates.L2Henna;
 
 /**
- * This class represents a Non-Player-Character in the world. it can be
- * a monster or a friendly character.
- * it also uses a template to fetch some static values.
- * the templates are hardcoded in the client, so we can rely on them.
+ * This class represents a Non-Player-Character in the world. it can be a
+ * monster or a friendly character. it also uses a template to fetch some static
+ * values. the templates are hardcoded in the client, so we can rely on them.
  *
  * @version $Revision$ $Date$
  */
 
 public class L2HennaInstance
 {
-	//private static Logger _log = Logger.getLogger(L2HennaInstance.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(L2HennaInstance.class.getName());
 
 	private L2Henna _template;
+
 	private int _symbolId;
+
 	private int _itemIdDye;
+
 	private int _price;
+
 	private int _statINT;
+
 	private int _statSTR;
+
 	private int _statCON;
+
 	private int _statMEM;
+
 	private int _statDEX;
+
 	private int _statWIT;
+
 	private int _amountDyeRequire;
 
 	public L2HennaInstance(L2Henna template)
@@ -56,21 +66,58 @@ public class L2HennaInstance
 		_statWIT = _template.statWIT;
 	}
 
-	public String getName(){
+	public String getName()
+	{
 		String res = "";
-		if (_statINT>0)res = res + "INT +"+_statINT;
-		else if (_statSTR>0)res = res + "STR +"+_statSTR;
-		else if (_statCON>0)res = res + "CON +"+_statCON;
-		else if (_statMEM>0)res = res + "MEN +"+_statMEM;
-		else if (_statDEX>0)res = res + "DEX +"+_statDEX;
-		else if (_statWIT>0)res = res + "WIT +"+_statWIT;
+		if (_statINT > 0)
+		{
+			res = res + "INT +" + _statINT;
+		}
+		else if (_statSTR > 0)
+		{
+			res = res + "STR +" + _statSTR;
+		}
+		else if (_statCON > 0)
+		{
+			res = res + "CON +" + _statCON;
+		}
+		else if (_statMEM > 0)
+		{
+			res = res + "MEN +" + _statMEM;
+		}
+		else if (_statDEX > 0)
+		{
+			res = res + "DEX +" + _statDEX;
+		}
+		else if (_statWIT > 0)
+		{
+			res = res + "WIT +" + _statWIT;
+		}
 
-		if (_statINT<0)res = res + ", INT "+_statINT;
-		else if (_statSTR<0)res = res + ", STR "+_statSTR;
-		else if (_statCON<0)res = res + ", CON "+_statCON;
-		else if (_statMEM<0)res = res + ", MEN "+_statMEM;
-		else if (_statDEX<0)res = res + ", DEX "+_statDEX;
-		else if (_statWIT<0)res = res + ", WIT "+_statWIT;
+		if (_statINT < 0)
+		{
+			res = res + ", INT " + _statINT;
+		}
+		else if (_statSTR < 0)
+		{
+			res = res + ", STR " + _statSTR;
+		}
+		else if (_statCON < 0)
+		{
+			res = res + ", CON " + _statCON;
+		}
+		else if (_statMEM < 0)
+		{
+			res = res + ", MEN " + _statMEM;
+		}
+		else if (_statDEX < 0)
+		{
+			res = res + ", DEX " + _statDEX;
+		}
+		else if (_statWIT < 0)
+		{
+			res = res + ", WIT " + _statWIT;
+		}
 
 		return res;
 	}
@@ -80,10 +127,10 @@ public class L2HennaInstance
 		return _template;
 	}
 
-    public int getSymbolId()
-    {
-        return _symbolId;
-    }
+	public int getSymbolId()
+	{
+		return _symbolId;
+	}
 
 	public void setSymbolId(int SymbolId)
 	{
@@ -91,9 +138,9 @@ public class L2HennaInstance
 	}
 
 	public int getItemIdDye()
-    {
-        return _itemIdDye;
-    }
+	{
+		return _itemIdDye;
+	}
 
 	public void setItemIdDye(int ItemIdDye)
 	{

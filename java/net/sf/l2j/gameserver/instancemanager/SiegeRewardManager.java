@@ -1,17 +1,16 @@
-/* This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+/*
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  * http://www.gnu.org/copyleft/gpl.html
  */
@@ -38,20 +37,24 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public class SiegeRewardManager
 {
 	private static SiegeRewardManager _instance;
+
 	static Logger _log = Logger.getLogger(SiegeRewardManager.class.getName());
 
 	public static boolean ACTIVATED_SYSTEM;
+
 	public static boolean REWARD_ACTIVE_MEMBERS_ONLY;
 
 	private final List<RewardInfoz> _list;
+
 	private final List<RewardInfozCl> _cllist;
+
 	private final Map<Integer, List<ToReward>> _toReward;
 
 	public SiegeRewardManager()
 	{
-		_list = new ArrayList<RewardInfoz>();
-		_cllist = new ArrayList<RewardInfozCl>();
-		_toReward = new HashMap<Integer, List<ToReward>>();
+		_list = new ArrayList<>();
+		_cllist = new ArrayList<>();
+		_toReward = new HashMap<>();
 		_log.info("SiegeRewardManager: Activated.");
 	}
 
@@ -101,7 +104,7 @@ public class SiegeRewardManager
 				{
 					try
 					{
-						_toReward.put(charId, new ArrayList<ToReward>());
+						_toReward.put(charId, new ArrayList<>());
 					}
 					finally
 					{
@@ -109,7 +112,9 @@ public class SiegeRewardManager
 					}
 				}
 				else
+				{
 					_toReward.get(charId).add(tr);
+				}
 			}
 
 			rs.close();
@@ -199,7 +204,8 @@ public class SiegeRewardManager
 		}
 		finally
 		{
-			_log.info("SiegeRewardManager Loaded: " + _list.size() + " and " + _cllist.size() + " Reword Item(s).");
+			_log.info("SiegeRewardManager Loaded: " + _list.size() + " and "
+			        + _cllist.size() + " Reword Item(s).");
 		}
 	}
 
@@ -252,20 +258,24 @@ public class SiegeRewardManager
 				castleName = tr.castleName;
 				tr.rewarded = true;
 			}
-			activeChar.sendMessage("Congratulations! You have been rewarded for the " + castleName + " siege victory!");
+			activeChar.sendMessage("Congratulations! You have been rewarded for the "
+			        + castleName + " siege victory!");
 		}
 	}
 
 	public class ToReward
 	{
 		String castleName;
+
 		int charId, itemId, count;
+
 		boolean rewarded;
 	}
 
 	public class RewardInfoz
 	{
 		private final int _itemId;
+
 		private final int _itemCount;
 
 		public RewardInfoz(String... strings)
@@ -288,6 +298,7 @@ public class SiegeRewardManager
 	public class RewardInfozCl
 	{
 		private final int _itemId;
+
 		private final int _itemCount;
 
 		public RewardInfozCl(String... strings)
@@ -318,20 +329,28 @@ public class SiegeRewardManager
 				if (clan.getLeader() != member)
 				{
 					for (RewardInfoz tr : _list)
+					{
 						activeChar.addItem("SiegeReward", tr.getItemId(), tr.getItemCount(), activeChar, true);
+					}
 
-					activeChar.sendMessage("Congratulations! You have been rewarded for the " + castleName + " siege victory!");
+					activeChar.sendMessage("Congratulations! You have been rewarded for the "
+					        + castleName + " siege victory!");
 				}
 				else
 				{
 					for (RewardInfozCl trCl : _cllist)
+					{
 						activeChar.addItem("SiegeReward", trCl.getItemId(), trCl.getItemCount(), activeChar, true);
+					}
 
-					activeChar.sendMessage("Congratulations! You have been rewarded for the " + castleName + " siege victory!");
+					activeChar.sendMessage("Congratulations! You have been rewarded for the "
+					        + castleName + " siege victory!");
 				}
 			}
 			else if (!member.isOnline() && clan.getLeader() != member)
+			{
 				storeDataBase(member.getObjectId(), castleName);
+			}
 		}
 	}
 }

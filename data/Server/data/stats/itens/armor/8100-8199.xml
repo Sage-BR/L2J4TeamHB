@@ -1,24 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="8177" name="Raid Challenger's Circlet">
+  <item id='8177' name="Raid Challenger's Circlet">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="8178" name="Raid Explorer's Circlet">
+<item id='8178' name="Raid Explorer's Circlet">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="8179" name="Raid Master's Circlet">
+<item id='8179' name="Raid Master's Circlet">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="8180" name="Circlet of Ice Fairy Sirra">
+<item id='8180' name="Circlet of Ice Fairy Sirra">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -43,7 +100,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8181" name="Circlet of Academy">
+<item id='8181' name="Circlet of Academy">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -68,7 +125,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8182" name="Circlet of Rune">
+<item id='8182' name="Circlet of Rune">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -93,7 +150,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8183" name="Circlet of Schuttgart">
+<item id='8183' name="Circlet of Schuttgart">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -118,7 +175,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8184" name="Party Hat">
+<item id='8184' name="Party Hat">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -143,7 +200,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8185" name="Feathered Hat">
+<item id='8185' name="Feathered Hat">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -168,13 +225,32 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8186" name="Artisan's Goggle">
+<item id='8186' name="Artisan's Goggle">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="8187" name="Red Horn of Victory">
+<item id='8187' name="Red Horn of Victory">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -199,7 +275,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8188" name="Little Angel Wing">
+<item id='8188' name="Little Angel Wing">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -224,7 +300,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8189" name="Fairy's Antenna">
+<item id='8189' name="Fairy's Antenna">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -249,11 +325,30 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="8191" name="Frintezza's Necklace">
+<item id='8191' name="Frintezza's Necklace">
     <for>
       <add val="95" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
+    <set name="bodypart" val="8"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="95" />
+    <set name="mp_bonus" val="42" />
   </item>
 </list>

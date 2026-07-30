@@ -3,53 +3,56 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model.zone;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-
 /**
- * Abstract base class for any zone type
- * Handles basic operations
+ * Abstract base class for any zone type Handles basic operations
  *
- * @author  durgus
+ * @author durgus
  */
 public abstract class L2ZoneType
 {
-    private final int _id;
+	private final int _id;
+
 	protected List<L2ZoneForm> _zone;
+
 	protected ConcurrentHashMap<Integer, L2Character> _characterList;
 
 	/** Parameters to affect specific characters */
 	private boolean _checkAffected;
 
 	private int _minLvl;
+
 	private int _maxLvl;
+
 	private int[] _race;
+
 	private int[] _class;
+
 	private char _classType;
 
 	protected L2ZoneType(int id)
 	{
-        _id = id;
-		_characterList = new ConcurrentHashMap<Integer, L2Character>();
+		_id = id;
+		_characterList = new ConcurrentHashMap<>();
 
 		_checkAffected = false;
 
@@ -63,15 +66,16 @@ public abstract class L2ZoneType
 	}
 
 	/**
-     * @return Returns the id.
-     */
-    public int getId()
-    {
-        return _id;
-    }
+	 * @return Returns the id.
+	 */
+	public int getId()
+	{
+		return _id;
+	}
 
-    /**
+	/**
 	 * Setup new parameters for this zone
+	 *
 	 * @param type
 	 * @param value
 	 */
@@ -100,11 +104,13 @@ public abstract class L2ZoneType
 			}
 			else
 			{
-				int[] temp = new int[_race.length+1];
+				int[] temp = new int[_race.length + 1];
 
-				int i=0;
+				int i = 0;
 				for (; i < _race.length; i++)
+				{
 					temp[i] = _race[i];
+				}
 
 				temp[i] = Integer.parseInt(value);
 
@@ -122,11 +128,13 @@ public abstract class L2ZoneType
 			}
 			else
 			{
-				int[] temp = new int[_class.length+1];
+				int[] temp = new int[_class.length + 1];
 
-				int i=0;
+				int i = 0;
 				for (; i < _class.length; i++)
+				{
 					temp[i] = _class[i];
+				}
 
 				temp[i] = Integer.parseInt(value);
 
@@ -149,24 +157,34 @@ public abstract class L2ZoneType
 
 	/**
 	 * Checks if the given character is affected by this zone
+	 *
 	 * @param character
 	 * @return
 	 */
 	private boolean isAffected(L2Character character)
 	{
 		// Check lvl
-		if (character.getLevel() < _minLvl || character.getLevel() > _maxLvl) return false;
+		if (character.getLevel() < _minLvl || character.getLevel() > _maxLvl)
+		{
+			return false;
+		}
 
 		if (character instanceof L2PcInstance)
 		{
 			// Check class type
 			if (_classType != 0)
 			{
-				if (((L2PcInstance)character).isMageClass())
+				if (((L2PcInstance) character).isMageClass())
 				{
-					if (_classType == 1) return false;
+					if (_classType == 1)
+					{
+						return false;
+					}
 				}
-				else if (_classType == 2) return false;
+				else if (_classType == 2)
+				{
+					return false;
+				}
 			}
 
 			// Check race
@@ -174,16 +192,19 @@ public abstract class L2ZoneType
 			{
 				boolean ok = false;
 
-				for (int i=0; i < _race.length; i++)
+				for (int element : _race)
 				{
-					if (((L2PcInstance)character).getRace().ordinal() == _race[i])
+					if (((L2PcInstance) character).getRace().ordinal() == element)
 					{
 						ok = true;
 						break;
 					}
 				}
 
-				if (!ok) return false;
+				if (!ok)
+				{
+					return false;
+				}
 			}
 
 			// Check class
@@ -191,16 +212,19 @@ public abstract class L2ZoneType
 			{
 				boolean ok = false;
 
-				for (int i=0; i < _class.length; i++)
+				for (int element : _class)
 				{
-					if (((L2PcInstance)character).getClassId().ordinal() == _class[i])
+					if (((L2PcInstance) character).getClassId().ordinal() == element)
 					{
 						ok = true;
 						break;
 					}
 				}
 
-				if (!ok) return false;
+				if (!ok)
+				{
+					return false;
+				}
 			}
 		}
 		return true;
@@ -208,6 +232,7 @@ public abstract class L2ZoneType
 
 	/**
 	 * Set the zone for this L2ZoneType Instance
+	 *
 	 * @param zone
 	 */
 	public void setZone(L2ZoneForm zone)
@@ -217,12 +242,13 @@ public abstract class L2ZoneType
 
 	/**
 	 * Returns this zones zone form
+	 *
 	 * @param zone
 	 * @return
 	 */
 	public L2ZoneForm getZone()
 	{
-		for (L2ZoneForm zone: getZones())
+		for (L2ZoneForm zone : getZones())
 		{
 			return zone;
 		}
@@ -231,20 +257,28 @@ public abstract class L2ZoneType
 
 	public final List<L2ZoneForm> getZones()
 	{
-		if (_zone == null) _zone = new ArrayList<L2ZoneForm>();
+		if (_zone == null)
+		{
+			_zone = new ArrayList<>();
+		}
 		return _zone;
 	}
+
 	/**
 	 * Checks if the given coordinates are within the zone
+	 *
 	 * @param x
 	 * @param y
 	 * @param z
 	 */
 	public boolean isInsideZone(int x, int y, int z)
 	{
-		for (L2ZoneForm zone: getZones())
+		for (L2ZoneForm zone : getZones())
 		{
-			if (zone.isInsideZone(x, y, z)) return true;
+			if (zone.isInsideZone(x, y, z))
+			{
+				return true;
+			}
 		}
 		return false;
 	}
@@ -274,7 +308,10 @@ public abstract class L2ZoneType
 		// If the character can't be affected by this zone return
 		if (_checkAffected)
 		{
-			if (!isAffected(character)) return;
+			if (!isAffected(character))
+			{
+				return;
+			}
 		}
 
 		// If the object is inside the zone...
@@ -299,8 +336,9 @@ public abstract class L2ZoneType
 	}
 
 	/**
-	 * Force fully removes a character from the zone
-	 * Should use during teleport / logoff
+	 * Force fully removes a character from the zone Should use during teleport
+	 * / logoff
+	 *
 	 * @param character
 	 */
 	public void removeCharacter(L2Character character)
@@ -311,27 +349,36 @@ public abstract class L2ZoneType
 			onExit(character);
 		}
 	}
+
 	public ConcurrentHashMap<Integer, L2Character> getCharactersInside()
 	{
 		return _characterList;
 	}
+
 	/**
 	 * Broadcasts packet to all players inside the zone
+	 *
 	 * @param packet
 	 */
 	public void broadcastPacket(final L2GameServerPacket packet)
 	{
 		if (_characterList.isEmpty())
+		{
 			return;
-		
+		}
+
 		for (final L2Character character : _characterList.values())
 		{
 			if (character instanceof L2PcInstance)
+			{
 				character.sendPacket(packet);
+			}
 		}
 	}
+
 	/**
 	 * Will scan the zones char list for the character
+	 *
 	 * @param character
 	 * @return
 	 */
@@ -341,9 +388,11 @@ public abstract class L2ZoneType
 	}
 
 	protected abstract void onEnter(L2Character character);
+
 	protected abstract void onExit(L2Character character);
+
 	protected abstract void onDieInside(L2Character character);
+
 	protected abstract void onReviveInside(L2Character character);
 
 }
-

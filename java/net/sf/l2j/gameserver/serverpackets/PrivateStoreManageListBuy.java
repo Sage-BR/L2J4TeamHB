@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,16 +26,20 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public class PrivateStoreManageListBuy extends L2GameServerPacket
 {
 	private static final String _S__D0_PRIVATESELLLISTBUY = "[S] bd PrivateStoreManageListBuy";
+
 	private L2PcInstance _activeChar;
+
 	private int _playerAdena;
+
 	private L2ItemInstance[] _itemList;
+
 	private TradeList.TradeItem[] _buyList;
 
 	public PrivateStoreManageListBuy(L2PcInstance player)
 	{
 		_activeChar = player;
 		_playerAdena = _activeChar.getAdena();
-		_itemList = _activeChar.getInventory().getUniqueItems(false,true);
+		_itemList = _activeChar.getInventory().getUniqueItems(false, true);
 		_buyList = _activeChar.getBuyList().getItems();
 	}
 
@@ -43,16 +47,17 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 	protected final void writeImpl()
 	{
 		writeC(0xbd);
-		//section 1
+		// section 1
 		writeD(_activeChar.getObjectId());
 		writeD(_playerAdena);
 
-		//section2
+		// section2
 		writeD(_itemList.length); // inventory items for potential buy
 		for (L2ItemInstance item : _itemList)
 		{
 			writeD(item.getItemId());
-			writeH(0); //show enchant lvl as 0, as you can't buy enchanted weapons
+			writeH(0); // show enchant lvl as 0, as you can't buy enchanted
+			           // weapons
 			writeD(item.getCount());
 			writeD(item.getReferencePrice());
 			writeH(0x00);
@@ -70,8 +75,8 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 			writeD(item.getDefAttrUnholy());
 		}
 
-		//section 3
-		writeD(_buyList.length); //count for all items already added for buy
+		// section 3
+		writeD(_buyList.length); // count for all items already added for buy
 		for (TradeList.TradeItem item : _buyList)
 		{
 			writeD(item.getItem().getItemId());
@@ -81,22 +86,24 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 			writeH(0x00);
 			writeD(item.getItem().getBodyPart());
 			writeH(item.getItem().getType2());
-			writeD(item.getPrice());//your price
-			writeD(item.getItem().getReferencePrice());//fixed store price
-			
+			writeD(item.getPrice());// your price
+			writeD(item.getItem().getReferencePrice());// fixed store price
+
 			// T1
-            writeD(item.getAttackAttrElement());
-            writeD(item.getAttackAttrElementVal());
-            writeD(item.getDefAttrFire());
-            writeD(item.getDefAttrWater());
-            writeD(item.getDefAttrWind());
-            writeD(item.getDefAttrEarth());
-            writeD(item.getDefAttrHoly());
-            writeD(item.getDefAttrUnholy());
+			writeD(item.getAttackAttrElement());
+			writeD(item.getAttackAttrElementVal());
+			writeD(item.getDefAttrFire());
+			writeD(item.getDefAttrWater());
+			writeD(item.getDefAttrWind());
+			writeD(item.getDefAttrEarth());
+			writeD(item.getDefAttrHoly());
+			writeD(item.getDefAttrUnholy());
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

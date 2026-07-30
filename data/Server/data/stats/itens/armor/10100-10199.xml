@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="10122" name="Red Crescent Earring">
+  <item id='10122' name="Red Crescent Earring">
     <for>
       <add val="24" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
@@ -26,7 +26,7 @@
     <set name="m_def" val="24" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10123" name="Necklace of Devotion">
+<item id='10123' name="Necklace of Devotion">
     <for>
       <add val="32" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
@@ -52,7 +52,7 @@
     <set name="m_def" val="32" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10124" name="Ring of Devotion">
+<item id='10124' name="Ring of Devotion">
     <for>
       <add val="16" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
@@ -78,7 +78,7 @@
     <set name="m_def" val="16" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10126" name="Dynasty Leather Armor">
+<item id='10126' name="Dynasty Leather Armor">
     <for>
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -104,7 +104,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10127" name="Dynasty Leather Armor">
+<item id='10127' name="Dynasty Leather Armor">
     <for>
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -130,7 +130,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10139" name="Agathion Bracelet">
+<item id='10139' name="Agathion Bracelet">
     <for>
     </for>
     <set name="bodypart" val="2097152"/>
@@ -154,7 +154,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10140" name="Blessed Ring of Escape">
+<item id='10140' name="Blessed Ring of Escape">
     <for>
       <add val="49" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
@@ -180,7 +180,7 @@
     <set name="m_def" val="49" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10141" name="White Talisman - Yeti Transform">
+<item id='10141' name="White Talisman - Yeti Transform">
     <for>
     </for>
     <set name="bodypart" val="4194304"/>
@@ -204,7 +204,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10142" name="White Talisman - Buffalo Transform">
+<item id='10142' name="White Talisman - Buffalo Transform">
     <for>
     </for>
     <set name="bodypart" val="4194304"/>
@@ -228,7 +228,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10158" name="Grey Talisman of Upper Grade Fishing">
+<item id='10158' name="Grey Talisman of Upper Grade Fishing">
     <for>
     </for>
     <set name="bodypart" val="4194304"/>
@@ -252,7 +252,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10168" name="Dynasty Leather Armor">
+<item id='10168' name="Dynasty Leather Armor">
     <for>
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -278,7 +278,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10169" name="Enchanter Circlet (Kamael only)">
+<item id='10169' name="Enchanter Circlet (Kamael only)">
     <for>
     </for>
     <set name="bodypart" val="524288"/>
@@ -302,15 +302,34 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10170" name="Baylor's Earring">
+<item id='10170' name="Baylor's Earring">
     <for>
       <add val="71" order="0x10" stat="mDef" />
       <add val="31" order="0x10" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
+    <set name="bodypart" val="6"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="487" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="71" />
+    <set name="mp_bonus" val="31" />
   </item>
-  <item id="10175" name="Gobblin Circlet (Event)">
+<item id='10175' name="Gobblin Circlet (Event)">
     <for>
     </for>
     <set name="bodypart" val="524288"/>
@@ -334,7 +353,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10176" name="Half Face Mask (Event)">
+<item id='10176' name="Half Face Mask (Event)">
     <for>
     </for>
     <set name="bodypart" val="524288"/>
@@ -358,7 +377,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="10177" name="Black Half-Mask (Event)">
+<item id='10177' name="Black Half-Mask (Event)">
     <for>
     </for>
     <set name="bodypart" val="524288"/>

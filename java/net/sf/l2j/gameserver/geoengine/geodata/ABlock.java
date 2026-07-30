@@ -6,7 +6,7 @@ public abstract class ABlock
 	 * @return true if this block contains valid geodata.
 	 */
 	public abstract boolean hasGeoPos();
-	
+
 	/**
 	 * @param geoX
 	 * @param geoY
@@ -14,7 +14,7 @@ public abstract class ABlock
 	 * @return height of the nearest layer to worldZ at (geoX, geoY)
 	 */
 	public abstract short getHeightNearest(int geoX, int geoY, int worldZ);
-	
+
 	/**
 	 * @param geoX
 	 * @param geoY
@@ -22,7 +22,7 @@ public abstract class ABlock
 	 * @return NSWE of the nearest layer to worldZ at (geoX, geoY)
 	 */
 	public abstract byte getNsweNearest(int geoX, int geoY, int worldZ);
-	
+
 	/**
 	 * @param geoX
 	 * @param geoY

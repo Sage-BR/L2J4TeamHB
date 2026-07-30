@@ -3,17 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.serverpackets;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,8 +22,6 @@ import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2MerchantInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
-
-import java.util.ArrayList;
 
 /**
  * This class ...
@@ -32,11 +31,16 @@ import java.util.ArrayList;
 public class SellList extends L2GameServerPacket
 {
 	private static final String _S__10_SELLLIST = "[S] 06 SellList";
+
 	private static Logger _log = Logger.getLogger(SellList.class.getName());
+
 	private final L2PcInstance _activeChar;
+
 	private final L2MerchantInstance _lease;
+
 	private int _money;
-	private List<L2ItemInstance> _selllist = new ArrayList<L2ItemInstance>();
+
+	private List<L2ItemInstance> _selllist = new ArrayList<>();
 
 	public SellList(L2PcInstance player)
 	{
@@ -60,14 +64,27 @@ public class SellList extends L2GameServerPacket
 		{
 			for (L2ItemInstance item : _activeChar.getInventory().getItems())
 			{
-				if (!item.isEquipped() &&                                                      // Not equipped
-                        item.getItem().isSellable() &&                                         // Item is sellable
-                        (_activeChar.getPet() == null ||                                             // Pet not summoned or
-                                item.getObjectId() != _activeChar.getPet().getControlItemId()))      // Pet is summoned and not the item that summoned the pet
+				if (!item.isEquipped() && // Not equipped
+				        item.getItem().isSellable() && // Item is sellable
+				        (_activeChar.getPet() == null || // Pet not summoned or
+				                item.getObjectId() != _activeChar.getPet().getControlItemId())) // Pet
+				                                                                                // is
+				                                                                                // summoned
+				                                                                                // and
+				                                                                                // not
+				                                                                                // the
+				                                                                                // item
+				                                                                                // that
+				                                                                                // summoned
+				                                                                                // the
+				                                                                                // pet
 				{
 					_selllist.add(item);
 					if (Config.DEBUG)
-						_log.fine("item added to selllist: " + item.getItem().getName());
+					{
+						_log.fine("item added to selllist: "
+						        + item.getItem().getName());
+					}
 				}
 			}
 		}
@@ -93,21 +110,23 @@ public class SellList extends L2GameServerPacket
 			writeH(item.getEnchantLevel());
 			writeH(0x00);
 			writeH(0x00);
-			writeD(item.getItem().getReferencePrice()/2);
-            
+			writeD(item.getItem().getReferencePrice() / 2);
+
 			// T1
-            writeD(item.getAttackAttrElement());
-            writeD(item.getAttackAttrElementVal());
-            writeD(item.getDefAttrFire());
-            writeD(item.getDefAttrWater());
-            writeD(item.getDefAttrWind());
-            writeD(item.getDefAttrEarth());
-            writeD(item.getDefAttrHoly());
-            writeD(item.getDefAttrUnholy());
+			writeD(item.getAttackAttrElement());
+			writeD(item.getAttackAttrElementVal());
+			writeD(item.getDefAttrFire());
+			writeD(item.getDefAttrWater());
+			writeD(item.getDefAttrWind());
+			writeD(item.getDefAttrEarth());
+			writeD(item.getDefAttrHoly());
+			writeD(item.getDefAttrUnholy());
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

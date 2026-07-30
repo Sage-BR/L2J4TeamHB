@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -82,45 +82,45 @@ public class SkillHandler
 
 	private SkillHandler()
 	{
-		_datatable = new TreeMap<SkillType, ISkillHandler>();
+		_datatable = new TreeMap<>();
 		registerSkillHandler(new Blow());
 		registerSkillHandler(new Pdam());
 		registerSkillHandler(new Mdam());
 		registerSkillHandler(new CpDam());
 		registerSkillHandler(new Manadam());
 		registerSkillHandler(new Heal());
-        registerSkillHandler(new CombatPointHeal());
+		registerSkillHandler(new CombatPointHeal());
 		registerSkillHandler(new ManaHeal());
 		registerSkillHandler(new BalanceLife());
 		registerSkillHandler(new Charge());
 		registerSkillHandler(new Continuous());
 		registerSkillHandler(new Resurrect());
 		registerSkillHandler(new ShiftTarget());
-        registerSkillHandler(new Spoil());
-        registerSkillHandler(new Sweep());
-        registerSkillHandler(new StrSiegeAssault());
-        registerSkillHandler(new SummonFriend());
-        registerSkillHandler(new SummonTreasureKey());
-        registerSkillHandler(new Disablers());
+		registerSkillHandler(new Spoil());
+		registerSkillHandler(new Sweep());
+		registerSkillHandler(new StrSiegeAssault());
+		registerSkillHandler(new SummonFriend());
+		registerSkillHandler(new SummonTreasureKey());
+		registerSkillHandler(new Disablers());
 		registerSkillHandler(new Recall());
-        registerSkillHandler(new SiegeFlag());
-        registerSkillHandler(new TakeCastle());
-        registerSkillHandler(new TakeFort());
-        registerSkillHandler(new Unlock());
-        registerSkillHandler(new DrainSoul());
-        registerSkillHandler(new Craft());
+		registerSkillHandler(new SiegeFlag());
+		registerSkillHandler(new TakeCastle());
+		registerSkillHandler(new TakeFort());
+		registerSkillHandler(new Unlock());
+		registerSkillHandler(new DrainSoul());
+		registerSkillHandler(new Craft());
 		registerSkillHandler(new Fishing());
 		registerSkillHandler(new FishingSkill());
-        registerSkillHandler(new BeastFeed());
-        registerSkillHandler(new DeluxeKey());
-        registerSkillHandler(new Sow());
-        registerSkillHandler(new Soul());
-        registerSkillHandler(new Harvest());
-        registerSkillHandler(new GetPlayer());
-        registerSkillHandler(new TransformDispel());
-        registerSkillHandler(new Trap());
-        registerSkillHandler(new GiveSp());
-        _log.config("SkillHandler: Loaded " + _datatable.size() + " handlers.");
+		registerSkillHandler(new BeastFeed());
+		registerSkillHandler(new DeluxeKey());
+		registerSkillHandler(new Sow());
+		registerSkillHandler(new Soul());
+		registerSkillHandler(new Harvest());
+		registerSkillHandler(new GetPlayer());
+		registerSkillHandler(new TransformDispel());
+		registerSkillHandler(new Trap());
+		registerSkillHandler(new GiveSp());
+		_log.config("SkillHandler: Loaded " + _datatable.size() + " handlers.");
 	}
 
 	public void registerSkillHandler(ISkillHandler handler)
@@ -137,11 +137,11 @@ public class SkillHandler
 		return _datatable.get(skillType);
 	}
 
-    /**
-     * @return
-     */
-    public int size()
-    {
-        return _datatable.size();
-    }
+	/**
+	 * @return
+	 */
+	public int size()
+	{
+		return _datatable.size();
+	}
 }

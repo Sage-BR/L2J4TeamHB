@@ -3,21 +3,19 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model;
 
-import java.util.List;
-
 import java.util.ArrayList;
-
+import java.util.List;
 
 /**
  * This class ...
@@ -26,60 +24,63 @@ import java.util.ArrayList;
  */
 public class L2ManufactureList
 {
-    private List<L2ManufactureItem> _list;
-    private boolean _confirmed;
-    private String _manufactureStoreName;
+	private List<L2ManufactureItem> _list;
 
-    public L2ManufactureList()
-    {
-        _list = new ArrayList<L2ManufactureItem>();
-        _confirmed = false;
-    }
+	private boolean _confirmed;
 
-    public int size()
-    {
-        return _list.size();
-    }
+	private String _manufactureStoreName;
 
-    public void setConfirmedTrade(boolean x)
-    {
-        _confirmed = x;
-    }
+	public L2ManufactureList()
+	{
+		_list = new ArrayList<>();
+		_confirmed = false;
+	}
 
-    public boolean hasConfirmed()
-    {
-        return _confirmed;
-    }
+	public int size()
+	{
+		return _list.size();
+	}
 
-    /**
-     * @param _manufactureStoreName The _manufactureStoreName to set.
-     */
-    public void setStoreName(String manufactureStoreName)
-    {
-        _manufactureStoreName = manufactureStoreName;
-    }
+	public void setConfirmedTrade(boolean x)
+	{
+		_confirmed = x;
+	}
 
-    /**
-     * @return Returns the _manufactureStoreName.
-     */
-    public String getStoreName()
-    {
-        return _manufactureStoreName;
-    }
+	public boolean hasConfirmed()
+	{
+		return _confirmed;
+	}
 
-    public void add(L2ManufactureItem item)
-    {
-        _list.add(item);
-    }
+	/**
+	 * @param _manufactureStoreName
+	 *            The _manufactureStoreName to set.
+	 */
+	public void setStoreName(String manufactureStoreName)
+	{
+		_manufactureStoreName = manufactureStoreName;
+	}
 
-    public List<L2ManufactureItem> getList()
-    {
-        return _list;
-    }
+	/**
+	 * @return Returns the _manufactureStoreName.
+	 */
+	public String getStoreName()
+	{
+		return _manufactureStoreName;
+	}
 
-    public void setList(List<L2ManufactureItem> list)
-    {
-        _list = list;
-    }
+	public void add(L2ManufactureItem item)
+	{
+		_list.add(item);
+	}
+
+	public List<L2ManufactureItem> getList()
+	{
+		return _list;
+	}
+
+	public void setList(List<L2ManufactureItem> list)
+	{
+		_list = list;
+	}
 
 }

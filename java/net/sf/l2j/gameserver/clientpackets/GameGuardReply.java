@@ -17,9 +17,13 @@ public class GameGuardReply extends L2GameClientPacket
 	{
 		L2GameClient client = getClient();
 		if (_dx == 104)
+		{
 			client.setGameGuardOk(true);
+		}
 		else
+		{
 			client.setGameGuardOk(false);
+		}
 	}
 
 	@Override

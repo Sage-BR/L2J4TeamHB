@@ -3,28 +3,28 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.serverpackets.MagicSkillLaunched;
 import net.sf.l2j.gameserver.serverpackets.MagicSkillUse;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.Map;
-
 /**
  *
- * @author  kombat
+ * @author kombat
  */
 public class ChanceSkillList extends ConcurrentHashMap<L2Skill, ChanceCondition>
 {
@@ -52,21 +52,27 @@ public class ChanceSkillList extends ConcurrentHashMap<L2Skill, ChanceCondition>
 		int event;
 		if (ownerWasHit)
 		{
-			event = ChanceCondition.EVT_ATTACKED | ChanceCondition.EVT_ATTACKED_HIT;
+			event = ChanceCondition.EVT_ATTACKED
+			        | ChanceCondition.EVT_ATTACKED_HIT;
 			if (wasCrit)
+			{
 				event |= ChanceCondition.EVT_ATTACKED_CRIT;
+			}
 		}
 		else
 		{
 			event = ChanceCondition.EVT_HIT;
 			if (wasCrit)
+			{
 				event |= ChanceCondition.EVT_CRIT;
+			}
 		}
 
 		onEvent(event, target);
 	}
 
-	public void onSkillHit(L2Character target, boolean ownerWasHit, boolean wasMagic, boolean wasOffensive)
+	public void onSkillHit(L2Character target, boolean ownerWasHit,
+	        boolean wasMagic, boolean wasOffensive)
 	{
 		int event;
 		if (ownerWasHit)
@@ -111,15 +117,19 @@ public class ChanceSkillList extends ConcurrentHashMap<L2Skill, ChanceCondition>
 			L2Object[] targets = skill.getTargetList(_owner, false, target);
 
 			_owner.broadcastPacket(new MagicSkillLaunched(_owner, skill.getDisplayId(), skill.getLevel(), targets));
-			_owner.broadcastPacket(new MagicSkillUse(_owner, (L2Character)targets[0], skill.getDisplayId(), skill.getLevel(), 0, 0));
+			_owner.broadcastPacket(new MagicSkillUse(_owner, (L2Character) targets[0], skill.getDisplayId(), skill.getLevel(), 0, 0));
 
 			// Launch the magic skill and calculate its effects
 			if (handler != null)
+			{
 				handler.useSkill(_owner, skill, targets);
+			}
 			else
+			{
 				skill.useSkill(_owner, targets);
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 		}
 	}

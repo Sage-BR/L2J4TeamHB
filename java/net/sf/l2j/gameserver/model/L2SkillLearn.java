@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,17 +23,22 @@ public final class L2SkillLearn
 {
 	// these two build the primary key
 	private final int _id;
+
 	private final int _level;
 
 	// not needed, just for easier debug
 	private final String _name;
 
 	private final int _spCost;
+
 	private final int _minLevel;
+
 	private final int _costid;
+
 	private final int _costcount;
 
-	public L2SkillLearn(int id, int lvl, int minLvl, String name, int cost, int costid, int costcount)
+	public L2SkillLearn(int id, int lvl, int minLvl, String name, int cost,
+	        int costid, int costcount)
 	{
 		_id = id;
 		_level = lvl;
@@ -83,10 +88,12 @@ public final class L2SkillLearn
 	{
 		return _spCost;
 	}
+
 	public int getIdCost()
 	{
 		return _costid;
 	}
+
 	public int getCostCount()
 	{
 		return _costcount;

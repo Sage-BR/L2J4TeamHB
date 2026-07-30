@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,7 +24,7 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 public final class ObserverReturn extends L2GameClientPacket
 {
 	private static final String OBSRETURN__C__04 = "[C] b8 ObserverReturn";
-	//private static Logger _log = Logger.getLogger(Action.class.getName());
+	// private static Logger _log = Logger.getLogger(Action.class.getName());
 
 	@Override
 	protected void readImpl()
@@ -36,12 +36,20 @@ public final class ObserverReturn extends L2GameClientPacket
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
+		{
 			return;
-		if (activeChar.inObserverMode()) activeChar.leaveObserverMode();
-		//activeChar.teleToLocation(activeChar.getObsX(), activeChar.getObsY(), activeChar.getObsZ());
+		}
+		if (activeChar.inObserverMode())
+		{
+			activeChar.leaveObserverMode();
+		// activeChar.teleToLocation(activeChar.getObsX(), activeChar.getObsY(),
+		// activeChar.getObsZ());
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

@@ -21,7 +21,7 @@ import java.nio.ByteBuffer;
  * @param <T>
  */
 public abstract class ReceivablePacket<T extends MMOClient<?>>
-	extends AbstractPacket<T> implements Runnable
+        extends AbstractPacket<T> implements Runnable
 {
 	NioNetStringBuffer _sbuf;
 
@@ -54,8 +54,8 @@ public abstract class ReceivablePacket<T extends MMOClient<?>>
 	 * @param len
 	 *            : the given length of bytes to be read.
 	 */
-	protected final void readB(	final byte[] dst, final int offset,
-								final int len)
+	protected final void readB(final byte[] dst, final int offset,
+	        final int len)
 	{
 		_buf.get(dst, offset, len);
 	}
@@ -145,8 +145,8 @@ public abstract class ReceivablePacket<T extends MMOClient<?>>
 	 * @param client
 	 * @param sBuffer
 	 */
-	public void setBuffers(	ByteBuffer data, T client,
-							NioNetStringBuffer sBuffer)
+	public void setBuffers(ByteBuffer data, T client,
+	        NioNetStringBuffer sBuffer)
 	{
 		_buf = data;
 		_client = client;

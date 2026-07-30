@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,13 +16,12 @@ package net.sf.l2j.gameserver.communitybbs.BB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.PostBBSManager;
-
-import java.util.ArrayList;
 
 /**
  * @author Maktakien
@@ -31,37 +30,48 @@ import java.util.ArrayList;
 public class Post
 {
 	private static Logger _log = Logger.getLogger(Post.class.getName());
+
 	public class CPost
 	{
 		public int postId;
+
 		public String postOwner;
+
 		public int postOwnerId;
+
 		public long postDate;
+
 		public int postTopicId;
+
 		public int postForumId;
+
 		public String postTxt;
 	}
+
 	private List<CPost> _post;
+
 	/**
 	 * @param restore
 	 * @param t
 	 */
-	//public enum ConstructorType {REPLY, CREATE };
-	public Post(String _PostOwner,int _PostOwnerID,long date,int tid,int _PostForumID,String txt)
+	// public enum ConstructorType {REPLY, CREATE };
+	public Post(String _PostOwner, int _PostOwnerID, long date, int tid,
+	        int _PostForumID, String txt)
 	{
-			_post = new ArrayList<CPost>();
-			CPost cp = new CPost();
-			cp.postId = 0;
-			cp.postOwner = _PostOwner;
-			cp.postOwnerId = _PostOwnerID;
-			cp.postDate = date;
-			cp.postTopicId = tid;
-			cp.postForumId = _PostForumID;
-			cp.postTxt = txt;
-			_post.add(cp);
-			insertindb(cp);
+		_post = new ArrayList<>();
+		CPost cp = new CPost();
+		cp.postId = 0;
+		cp.postOwner = _PostOwner;
+		cp.postOwnerId = _PostOwnerID;
+		cp.postDate = date;
+		cp.postTopicId = tid;
+		cp.postForumId = _PostForumID;
+		cp.postTxt = txt;
+		_post.add(cp);
+		insertindb(cp);
 
 	}
+
 	public void insertindb(CPost cp)
 	{
 		java.sql.Connection con = null;
@@ -95,18 +105,19 @@ public class Post
 		}
 
 	}
+
 	public Post(Topic t)
 	{
-		_post = new ArrayList<CPost>();
+		_post = new ArrayList<>();
 		load(t);
 	}
 
 	public CPost getCPost(int id)
 	{
 		int i = 0;
-		for(CPost cp : _post)
+		for (CPost cp : _post)
 		{
-			if(i == id)
+			if (i == id)
 			{
 				return cp;
 			}
@@ -114,6 +125,7 @@ public class Post
 		}
 		return null;
 	}
+
 	public void deleteme(Topic t)
 	{
 		PostBBSManager.getInstance().delPostByTopic(t);
@@ -142,6 +154,7 @@ public class Post
 			}
 		}
 	}
+
 	/**
 	 * @param t
 	 */
@@ -155,7 +168,7 @@ public class Post
 			statement.setInt(1, t.getForumID());
 			statement.setInt(2, t.getID());
 			ResultSet result = statement.executeQuery();
-			while(result.next())
+			while (result.next())
 			{
 				CPost cp = new CPost();
 				cp.postId = Integer.parseInt(result.getString("post_id"));
@@ -172,7 +185,8 @@ public class Post
 		}
 		catch (Exception e)
 		{
-			_log.warning("data error on Post " + t.getForumID() + "/"+t.getID()+" : " + e);
+			_log.warning("data error on Post " + t.getForumID() + "/"
+			        + t.getID() + " : " + e);
 			e.printStackTrace();
 		}
 		finally
@@ -186,6 +200,7 @@ public class Post
 			}
 		}
 	}
+
 	/**
 	 * @param i
 	 */
@@ -223,7 +238,5 @@ public class Post
 	/**
 	 *
 	 */
-
-
 
 }

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,7 +21,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowMemberListDelete;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-
 /**
  * This class ...
  *
@@ -30,7 +29,8 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 public final class RequestWithdrawalPledge extends L2GameClientPacket
 {
 	private static final String _C__26_REQUESTWITHDRAWALPLEDGE = "[C] 26 RequestWithdrawalPledge";
-	//static Logger _log = Logger.getLogger(RequestWithdrawalPledge.class.getName());
+	// static Logger _log =
+	// Logger.getLogger(RequestWithdrawalPledge.class.getName());
 
 	@Override
 	protected void readImpl()
@@ -44,13 +44,13 @@ public final class RequestWithdrawalPledge extends L2GameClientPacket
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 		{
-		    return;
+			return;
 		}
 		if (activeChar.getClan() == null)
-        {
+		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_ARE_NOT_A_CLAN_MEMBER));
-            return;
-        }
+			return;
+		}
 		if (activeChar.isClanLeader())
 		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.CLAN_LEADER_CANNOT_WITHDRAW));
@@ -64,21 +64,25 @@ public final class RequestWithdrawalPledge extends L2GameClientPacket
 
 		L2Clan clan = activeChar.getClan();
 
-		clan.removeClanMember(activeChar.getObjectId(), System.currentTimeMillis() + Config.ALT_CLAN_JOIN_DAYS * 86400000L); //24*60*60*1000 = 86400000
+		clan.removeClanMember(activeChar.getObjectId(), System.currentTimeMillis()
+		        + Config.ALT_CLAN_JOIN_DAYS * 86400000L); // 24*60*60*1000 =
+		                                                  // 86400000
 
 		SystemMessage sm = new SystemMessage(SystemMessageId.S1_HAS_WITHDRAWN_FROM_THE_CLAN);
 		sm.addString(activeChar.getName());
-    	clan.broadcastToOnlineMembers(sm);
-    	sm = null;
+		clan.broadcastToOnlineMembers(sm);
+		sm = null;
 
-    	// Remove the Player From the Member list
-        clan.broadcastToOnlineMembers(new PledgeShowMemberListDelete(activeChar.getName()));
+		// Remove the Player From the Member list
+		clan.broadcastToOnlineMembers(new PledgeShowMemberListDelete(activeChar.getName()));
 
 		activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_HAVE_WITHDRAWN_FROM_CLAN));
 		activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_MUST_WAIT_BEFORE_JOINING_ANOTHER_CLAN));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

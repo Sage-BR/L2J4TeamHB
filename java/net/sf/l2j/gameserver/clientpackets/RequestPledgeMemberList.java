@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +26,8 @@ import net.sf.l2j.gameserver.serverpackets.PledgeShowMemberListAll;
 public final class RequestPledgeMemberList extends L2GameClientPacket
 {
 	private static final String _C__3C_REQUESTPLEDGEMEMBERLIST = "[C] 3C RequestPledgeMemberList";
-	//private static Logger _log = Logger.getLogger(RequestPledgeMemberList.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestPledgeMemberList.class.getName());
 
 	@Override
 	protected void readImpl()
@@ -38,7 +39,10 @@ public final class RequestPledgeMemberList extends L2GameClientPacket
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		if (activeChar == null) return;
+		if (activeChar == null)
+		{
+			return;
+		}
 
 		L2Clan clan = activeChar.getClan();
 		if (clan != null)
@@ -48,7 +52,9 @@ public final class RequestPledgeMemberList extends L2GameClientPacket
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

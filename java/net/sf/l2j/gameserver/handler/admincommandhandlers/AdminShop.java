@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,21 +24,20 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.BuyList;
 
-
 /**
- * This class handles following admin commands:
- * - gmshop = shows menu
- * - buy id = shows shop with respective id
+ * This class handles following admin commands: - gmshop = shows menu - buy id =
+ * shows shop with respective id
+ *
  * @version $Revision: 1.2.4.4 $ $Date: 2005/04/11 10:06:06 $
  */
-public class AdminShop implements IAdminCommandHandler {
+public class AdminShop implements IAdminCommandHandler
+{
 	private static Logger _log = Logger.getLogger(AdminShop.class.getName());
 
-	private static final String[] ADMIN_COMMANDS = {
-		"admin_buy",
-		"admin_gmshop"
-	};
+	private static final String[] ADMIN_COMMANDS = { "admin_buy",
+	        "admin_gmshop" };
 
+	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
 		if (command.startsWith("admin_buy"))
@@ -59,7 +58,9 @@ public class AdminShop implements IAdminCommandHandler {
 		return true;
 	}
 
-	public String[] getAdminCommandList() {
+	@Override
+	public String[] getAdminCommandList()
+	{
 		return ADMIN_COMMANDS;
 	}
 
@@ -72,7 +73,7 @@ public class AdminShop implements IAdminCommandHandler {
 		}
 		catch (Exception e)
 		{
-			_log.warning("admin buylist failed:"+command);
+			_log.warning("admin buylist failed:" + command);
 		}
 
 		L2TradeList list = TradeController.getInstance().getBuyList(val);
@@ -81,12 +82,16 @@ public class AdminShop implements IAdminCommandHandler {
 		{
 			activeChar.sendPacket(new BuyList(list, activeChar.getAdena()));
 			if (Config.DEBUG)
-				_log.fine("GM: "+activeChar.getName()+"("+activeChar.getObjectId()+") opened GM shop id "+val);
+			{
+				_log.fine("GM: " + activeChar.getName() + "("
+				        + activeChar.getObjectId() + ") opened GM shop id "
+				        + val);
+			}
 		}
 		else
 		{
-			_log.warning("no buylist with id:" +val);
+			_log.warning("no buylist with id:" + val);
 		}
-		activeChar.sendPacket( ActionFailed.STATIC_PACKET );
+		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}
 }

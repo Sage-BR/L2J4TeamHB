@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,106 +34,136 @@ import net.sf.l2j.gameserver.util.Broadcast;
  */
 public class Escape implements IUserCommandHandler
 {
-    private static final int[] COMMAND_IDS = { 52 };
+	private static final int[] COMMAND_IDS = { 52 };
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.handler.IUserCommandHandler#useUserCommand(int, net.sf.l2j.gameserver.model.L2PcInstance)
-     */
-    public boolean useUserCommand(@SuppressWarnings("unused") int id, L2PcInstance activeChar)
-    {
-    	// Thanks nbd
-    	if (!TvTEvent.onEscapeUse(activeChar.getObjectId()))
-    	{
-    		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
-    		return false;
-    	}
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.handler.IUserCommandHandler#useUserCommand(int,
+	 * net.sf.l2j.gameserver.model.L2PcInstance)
+	 */
+	@Override
+	public boolean useUserCommand(@SuppressWarnings("unused")
+	int id, L2PcInstance activeChar)
+	{
+		// Thanks nbd
+		if (!TvTEvent.onEscapeUse(activeChar.getObjectId()))
+		{
+			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
+			return false;
+		}
 
-        if (activeChar.isCastingNow() || activeChar.isMovementDisabled() || activeChar.isMuted() || activeChar.isAlikeDead() ||
-                activeChar.isInOlympiadMode())
-            return false;
+		if (activeChar.isCastingNow() || activeChar.isMovementDisabled()
+		        || activeChar.isMuted() || activeChar.isAlikeDead()
+		        || activeChar.isInOlympiadMode())
+		{
+			return false;
+		}
 
-        int unstuckTimer = (activeChar.getAccessLevel().isGm()? 5000 : Config.UNSTUCK_INTERVAL*1000 );
+		int unstuckTimer = (activeChar.getAccessLevel().isGm() ? 5000 : Config.UNSTUCK_INTERVAL
+		        * 1000);
 
-        // Check to see if the player is in a festival.
-        if (activeChar.isFestivalParticipant())
-        {
-            activeChar.sendMessage("You may not use an escape command in a festival.");
-            return false;
-        }
+		// Check to see if the player is in a festival.
+		if (activeChar.isFestivalParticipant())
+		{
+			activeChar.sendMessage("You may not use an escape command in a festival.");
+			return false;
+		}
 
-        // Check to see if player is in jail
-        if (activeChar.isInJail())
-        {
-            activeChar.sendMessage("You can not escape from jail.");
-            return false;
-        }
+		// Check to see if player is in jail
+		if (activeChar.isInJail())
+		{
+			activeChar.sendMessage("You can not escape from jail.");
+			return false;
+		}
 
-  
-        if (GrandBossManager.getInstance().getZone(activeChar) != null && !activeChar.isGM())
-        {
-            activeChar.sendMessage("You may not use an escape command in a Boss Zone.");
-            return false;
-        }
+		if (GrandBossManager.getInstance().getZone(activeChar) != null
+		        && !activeChar.isGM())
+		{
+			activeChar.sendMessage("You may not use an escape command in a Boss Zone.");
+			return false;
+		}
 
-        if(activeChar.getAccessLevel().isGm())
-        {
-        	activeChar.sendMessage("You use Fast Escape: 5 seconds.");
-        }
-        else if(Config.UNSTUCK_INTERVAL > 100)
-        {
-        	activeChar.sendMessage("You use Escape: " + unstuckTimer/60000 + " minutes.");
-        }
-        else activeChar.sendMessage("You use Escape: " + unstuckTimer/1000 + " seconds.");
+		if (activeChar.getAccessLevel().isGm())
+		{
+			activeChar.sendMessage("You use Fast Escape: 5 seconds.");
+		}
+		else if (Config.UNSTUCK_INTERVAL > 100)
+		{
+			activeChar.sendMessage("You use Escape: " + unstuckTimer / 60000
+			        + " minutes.");
+		}
+		else
+		{
+			activeChar.sendMessage("You use Escape: " + unstuckTimer / 1000
+			        + " seconds.");
+		}
 
-        activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-        //SoE Animation section
-        activeChar.setTarget(activeChar);
-        activeChar.disableAllSkills();
+		activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+		// SoE Animation section
+		activeChar.setTarget(activeChar);
+		activeChar.disableAllSkills();
 
-        MagicSkillUse msk = new MagicSkillUse(activeChar, 1050, 1, unstuckTimer, 0);
-        Broadcast.toSelfAndKnownPlayersInRadius(activeChar, msk, 810000/*900*/);
-        SetupGauge sg = new SetupGauge(0, unstuckTimer);
-        activeChar.sendPacket(sg);
-        //End SoE Animation section
+		MagicSkillUse msk = new MagicSkillUse(activeChar, 1050, 1, unstuckTimer, 0);
+		Broadcast.toSelfAndKnownPlayersInRadius(activeChar, msk, 810000/* 900 */);
+		SetupGauge sg = new SetupGauge(0, unstuckTimer);
+		activeChar.sendPacket(sg);
+		// End SoE Animation section
 
-        EscapeFinalizer ef = new EscapeFinalizer(activeChar);
-        // continue execution later
-        activeChar.setSkillCast(ThreadPoolManager.getInstance().scheduleGeneral(ef, unstuckTimer));
-        activeChar.setSkillCastEndTime(10+GameTimeController.getGameTicks()+unstuckTimer/GameTimeController.MILLIS_IN_TICK);
+		EscapeFinalizer ef = new EscapeFinalizer(activeChar);
+		// continue execution later
+		activeChar.setSkillCast(ThreadPoolManager.getInstance().scheduleGeneral(ef, unstuckTimer));
+		activeChar.setSkillCastEndTime(10 + GameTimeController.getGameTicks()
+		        + unstuckTimer / GameTimeController.MILLIS_IN_TICK);
 
-        return true;
-    }
+		return true;
+	}
 
-    static class EscapeFinalizer implements Runnable
-    {
-        private L2PcInstance _activeChar;
+	static class EscapeFinalizer implements Runnable
+	{
+		private L2PcInstance _activeChar;
 
-        EscapeFinalizer(L2PcInstance activeChar)
-        {
-            _activeChar = activeChar;
-        }
+		EscapeFinalizer(L2PcInstance activeChar)
+		{
+			_activeChar = activeChar;
+		}
 
-        public void run()
-        {
-            if (_activeChar.isDead())
-                return;
+		@Override
+		public void run()
+		{
+			if (_activeChar.isDead())
+			{
+				return;
+			}
 
-            _activeChar.setIsIn7sDungeon(false);
+			_activeChar.setIsIn7sDungeon(false);
 
-            _activeChar.enableAllSkills();
+			_activeChar.enableAllSkills();
 
-            try
-            {
-                _activeChar.teleToLocation(MapRegionTable.TeleportWhereType.Town);
-            } catch (Throwable e) { if (Config.DEBUG) e.printStackTrace(); }
-        }
-    }
+			try
+			{
+				_activeChar.teleToLocation(MapRegionTable.TeleportWhereType.Town);
+			}
+			catch (Throwable e)
+			{
+				if (Config.DEBUG)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.handler.IUserCommandHandler#getUserCommandList()
-     */
-    public int[] getUserCommandList()
-    {
-        return COMMAND_IDS;
-    }
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.handler.IUserCommandHandler#getUserCommandList()
+	 */
+	@Override
+	public int[] getUserCommandList()
+	{
+		return COMMAND_IDS;
+	}
 }

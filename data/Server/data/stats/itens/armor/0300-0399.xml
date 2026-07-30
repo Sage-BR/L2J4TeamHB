@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="347" name="Ring Mail Breastplate">
+  <item id='347' name="Ring Mail Breastplate">
     <for>
       <add val="77" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -26,7 +26,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="348" name="Scale Mail">
+<item id='348' name="Scale Mail">
     <for>
       <add val="87" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -52,7 +52,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="349" name="Compound Scale Mail">
+<item id='349' name="Compound Scale Mail">
     <for>
       <add val="95" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -78,7 +78,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="350" name="Dwarven Scale Mail">
+<item id='350' name="Dwarven Scale Mail">
     <for>
       <add val="95" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -104,7 +104,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="351" name="Blast Plate">
+<item id='351' name="Blast Plate">
     <for>
       <add val="97" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -130,7 +130,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="352" name="Brigandine Tunic">
+<item id='352' name="Brigandine Tunic">
     <for>
       <add val="103" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -156,7 +156,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="353" name="Half Plate Armor">
+<item id='353' name="Half Plate Armor">
     <for>
       <add val="111" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -182,7 +182,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="354" name="Chain Mail Shirt">
+<item id='354' name="Chain Mail Shirt">
     <for>
       <add val="120" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -208,7 +208,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="355" name="Dwarven Chain Mail Shirt">
+<item id='355' name="Dwarven Chain Mail Shirt">
     <for>
       <add val="129" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -234,7 +234,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="356" name="Full Plate Armor">
+<item id='356' name="Full Plate Armor">
     <for>
       <add stat="pDef" order="0x10" val="239" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -260,14 +260,33 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="357" name="Zubei's Breastplate">
+<item id='357' name="Zubei's Breastplate">
     <for>
       <add val="157" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="armor_type" val="none" />
+    <set name="bodypart" val="1024"/>
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="7970" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="2080000" />
+    <set name="crystal_count" val="277" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="157" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="358" name="Blue Wolf Breastplate">
+<item id='358' name="Blue Wolf Breastplate">
     <for>
       <add val="166" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -293,7 +312,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="359" name="Shining Dragon Armor">
+<item id='359' name="Shining Dragon Armor">
     <for>
       <add val="301" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -319,7 +338,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="360" name="Armor of Victory">
+<item id='360' name="Armor of Victory">
     <for>
       <add val="175" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -345,7 +364,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="361" name="Breastplate of Valor">
+<item id='361' name="Breastplate of Valor">
     <for>
       <add val="185" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -371,7 +390,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="362" name="Glorious Armor">
+<item id='362' name="Glorious Armor">
     <for>
       <add val="284" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -397,7 +416,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="363" name="Red Flame Armor">
+<item id='363' name="Red Flame Armor">
     <for>
       <add val="301" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -423,7 +442,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="364" name="Elven Crystal Breastplate">
+<item id='364' name="Elven Crystal Breastplate">
     <for>
       <add val="175" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -449,7 +468,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="365" name="Dark Crystal Breastplate">
+<item id='365' name="Dark Crystal Breastplate">
     <for>
       <add val="171" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -475,7 +494,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="366" name="Implosion Armor">
+<item id='366' name="Implosion Armor">
     <for>
       <add val="284" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -501,7 +520,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="367" name="Dark Dragon Armor">
+<item id='367' name="Dark Dragon Armor">
     <for>
       <add val="301" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -527,7 +546,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="368" name="Elven Vagian Armor">
+<item id='368' name="Elven Vagian Armor">
     <for>
       <add val="284" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -553,7 +572,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="369" name="Dark Vagian Armor">
+<item id='369' name="Dark Vagian Armor">
     <for>
       <add val="301" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -579,7 +598,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="370" name="Complete Set of Plate Armor">
+<item id='370' name="Complete Set of Plate Armor">
     <for>
       <add val="284" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -605,7 +624,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="371" name="Hell Plate">
+<item id='371' name="Hell Plate">
     <for>
       <add val="301" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -631,7 +650,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="372" name="Art of Plate">
+<item id='372' name="Art of Plate">
     <for>
       <add val="284" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -657,7 +676,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="373" name="Masterpiece Armor">
+<item id='373' name="Masterpiece Armor">
     <for>
       <add val="301" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -683,7 +702,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="374" name="Armor of Nightmare">
+<item id='374' name="Armor of Nightmare">
     <for>
       <add val="293" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -709,7 +728,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="375" name="Dragon Scale Mail">
+<item id='375' name="Dragon Scale Mail">
     <for>
       <add val="198" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -735,7 +754,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="376" name="Iron Plate Gaiters">
+<item id='376' name="Iron Plate Gaiters">
     <for>
       <add val="48" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -761,7 +780,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="377" name="Scale Gaiters">
+<item id='377' name="Scale Gaiters">
     <for>
       <add val="54" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -787,7 +806,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="378" name="Compound Scale Gaiters">
+<item id='378' name="Compound Scale Gaiters">
     <for>
       <add val="61" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -813,7 +832,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="379" name="Dwarven Scale Gaiters">
+<item id='379' name="Dwarven Scale Gaiters">
     <for>
       <add val="61" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -839,7 +858,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="380" name="Plate Gaiters">
+<item id='380' name="Plate Gaiters">
     <for>
       <add val="70" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -865,7 +884,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="381" name="Chain Gaiters">
+<item id='381' name="Chain Gaiters">
     <for>
       <add val="75" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -891,7 +910,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="382" name="Dwarven Chain Gaiters">
+<item id='382' name="Dwarven Chain Gaiters">
     <for>
       <add val="80" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -917,14 +936,33 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="383" name="Zubei's Gaiters">
+<item id='383' name="Zubei's Gaiters">
     <for>
       <add val="98" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="armor_type" val="none" />
+    <set name="bodypart" val="2048"/>
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="heavy" />
+    <set name="weight" val="3570" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1300000" />
+    <set name="crystal_count" val="173" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="98" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="384" name="Wolf Gaiters">
+<item id='384' name="Wolf Gaiters">
     <for>
       <add val="109" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -950,7 +988,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="385" name="Gaiters of Victory">
+<item id='385' name="Gaiters of Victory">
     <for>
       <add val="109" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -976,7 +1014,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="386" name="Gaiters of Valor">
+<item id='386' name="Gaiters of Valor">
     <for>
       <add val="116" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1002,7 +1040,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="387" name="Elven Crystal Gaiters">
+<item id='387' name="Elven Crystal Gaiters">
     <for>
       <add val="109" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1028,7 +1066,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="388" name="Dark Crystal Gaiters">
+<item id='388' name="Dark Crystal Gaiters">
     <for>
       <add val="107" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1054,7 +1092,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="389" name="Dragon Scale Gaiters">
+<item id='389' name="Dragon Scale Gaiters">
     <for>
       <add val="122" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1080,7 +1118,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="390" name="Cotton Shirt">
+<item id='390' name="Cotton Shirt">
     <for>
       <add val="50" order="0x10" stat="pDef" />
     </for>
@@ -1105,7 +1143,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="391" name="Puma Skin Shirt">
+<item id='391' name="Puma Skin Shirt">
     <for>
       <add val="58" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1131,7 +1169,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="392" name="Lion Skin Shirt">
+<item id='392' name="Lion Skin Shirt">
     <for>
       <add val="65" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1157,7 +1195,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="393" name="Mithril Banded Mail">
+<item id='393' name="Mithril Banded Mail">
     <for>
       <add val="73" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1183,7 +1221,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="394" name="Reinforced Leather Shirt">
+<item id='394' name="Reinforced Leather Shirt">
     <for>
       <add val="73" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1209,7 +1247,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="395" name="Manticore Skin Shirt">
+<item id='395' name="Manticore Skin Shirt">
     <for>
       <add val="77" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1235,7 +1273,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="396" name="Salamander Skin Mail">
+<item id='396' name="Salamander Skin Mail">
     <for>
       <add val="136" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1261,7 +1299,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="397" name="Mithril Shirt">
+<item id='397' name="Mithril Shirt">
     <for>
       <add stat="pDef" order="0x10" val="90" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1287,7 +1325,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="398" name="Plated Leather">
+<item id='398' name="Plated Leather">
     <for>
       <add val="94" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -1313,7 +1351,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="399" name="Rind Leather Armor">
+<item id='399' name="Rind Leather Armor">
     <for>
       <add val="97" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />

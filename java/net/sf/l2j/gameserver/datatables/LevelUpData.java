@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,13 +17,12 @@ package net.sf.l2j.gameserver.datatables;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2LvlupData;
 import net.sf.l2j.gameserver.model.base.ClassId;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class ...
@@ -33,20 +32,31 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class LevelUpData
 {
-    private static final String SELECT_ALL = "SELECT classid, defaulthpbase, defaulthpadd, defaulthpmod, defaultcpbase, defaultcpadd, defaultcpmod, defaultmpbase, defaultmpadd, defaultmpmod, class_lvl FROM lvlupgain";
-    private static final String CLASS_LVL = "class_lvl";
-    private static final String MP_MOD = "defaultmpmod";
-    private static final String MP_ADD = "defaultmpadd";
-    private static final String MP_BASE = "defaultmpbase";
-    private static final String HP_MOD = "defaulthpmod";
-    private static final String HP_ADD = "defaulthpadd";
-    private static final String HP_BASE = "defaulthpbase";
-    private static final String CP_MOD = "defaultcpmod";
-    private static final String CP_ADD = "defaultcpadd";
-    private static final String CP_BASE = "defaultcpbase";
-    private static final String CLASS_ID = "classid";
+	private static final String SELECT_ALL = "SELECT classid, defaulthpbase, defaulthpadd, defaulthpmod, defaultcpbase, defaultcpadd, defaultcpmod, defaultmpbase, defaultmpadd, defaultmpmod, class_lvl FROM lvlupgain";
 
-    private static Logger _log = Logger.getLogger(LevelUpData.class.getName());
+	private static final String CLASS_LVL = "class_lvl";
+
+	private static final String MP_MOD = "defaultmpmod";
+
+	private static final String MP_ADD = "defaultmpadd";
+
+	private static final String MP_BASE = "defaultmpbase";
+
+	private static final String HP_MOD = "defaulthpmod";
+
+	private static final String HP_ADD = "defaulthpadd";
+
+	private static final String HP_BASE = "defaulthpbase";
+
+	private static final String CP_MOD = "defaultcpmod";
+
+	private static final String CP_ADD = "defaultcpadd";
+
+	private static final String CP_BASE = "defaultcpbase";
+
+	private static final String CLASS_ID = "classid";
+
+	private static Logger _log = Logger.getLogger(LevelUpData.class.getName());
 
 	private static LevelUpData _instance;
 
@@ -63,7 +73,7 @@ public class LevelUpData
 
 	private LevelUpData()
 	{
-		_lvlTable = new ConcurrentHashMap<Integer, L2LvlupData>();
+		_lvlTable = new ConcurrentHashMap<>();
 		java.sql.Connection con = null;
 		try
 		{
@@ -80,9 +90,9 @@ public class LevelUpData
 				lvlDat.setClassHpBase(rset.getFloat(HP_BASE));
 				lvlDat.setClassHpAdd(rset.getFloat(HP_ADD));
 				lvlDat.setClassHpModifier(rset.getFloat(HP_MOD));
-                lvlDat.setClassCpBase(rset.getFloat(CP_BASE));
-                lvlDat.setClassCpAdd(rset.getFloat(CP_ADD));
-                lvlDat.setClassCpModifier(rset.getFloat(CP_MOD));
+				lvlDat.setClassCpBase(rset.getFloat(CP_BASE));
+				lvlDat.setClassCpAdd(rset.getFloat(CP_ADD));
+				lvlDat.setClassCpModifier(rset.getFloat(CP_MOD));
 				lvlDat.setClassMpBase(rset.getFloat(MP_BASE));
 				lvlDat.setClassMpAdd(rset.getFloat(MP_ADD));
 				lvlDat.setClassMpModifier(rset.getFloat(MP_MOD));
@@ -93,26 +103,35 @@ public class LevelUpData
 			rset.close();
 			statement.close();
 
-			_log.config("LevelUpData: Loaded " + _lvlTable.size() + " Character Level Up Templates.");
+			_log.config("LevelUpData: Loaded " + _lvlTable.size()
+			        + " Character Level Up Templates.");
 		}
 		catch (Exception e)
 		{
-			_log.warning("error while creating Lvl up data table "+e);
+			_log.warning("error while creating Lvl up data table " + e);
 		}
 		finally
 		{
-			try { con.close(); } catch (Exception e) {}
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
 	/**
-	 * @param template id
+	 * @param template
+	 *            id
 	 * @return
 	 */
 	public L2LvlupData getTemplate(int classId)
 	{
 		return _lvlTable.get(classId);
 	}
+
 	public L2LvlupData getTemplate(ClassId classId)
 	{
 		return _lvlTable.get(classId.getId());

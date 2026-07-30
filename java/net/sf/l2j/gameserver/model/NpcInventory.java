@@ -1,38 +1,38 @@
-/* This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+/*
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  * http://www.gnu.org/copyleft/gpl.html
  */
 package net.sf.l2j.gameserver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.l2j.gameserver.model.L2ItemInstance.ItemLocation;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 
-import java.util.ArrayList;
-
 public class NpcInventory extends Inventory
 {
-    public static final int ADENA_ID = 57;
-    public static final int ANCIENT_ADENA_ID = 5575;
+	public static final int ADENA_ID = 57;
+
+	public static final int ANCIENT_ADENA_ID = 5575;
 
 	private final L2NpcInstance _owner;
-	
-    public boolean sshotInUse = false;
-    public boolean bshotInUse = false;
+
+	public boolean sshotInUse = false;
+
+	public boolean bshotInUse = false;
 
 	public NpcInventory(L2NpcInstance owner)
 	{
@@ -43,29 +43,47 @@ public class NpcInventory extends Inventory
 	{
 		this.destroyAllItems("Reset", null, null);
 		if (_owner.getTemplate().ss > 0)
+		{
 			this.addItem("Reset", 1835, _owner.getTemplate().ss, null, null);
+		}
 		if (_owner.getTemplate().bss > 0)
+		{
 			this.addItem("Reset", 3947, _owner.getTemplate().bss, null, null);
+		}
 	}
-	
+
 	@Override
-	public L2NpcInstance getOwner() { return _owner; }
+	public L2NpcInstance getOwner()
+	{
+		return _owner;
+	}
+
 	@Override
-	protected ItemLocation getBaseLocation() { return ItemLocation.NPC; }
+	protected ItemLocation getBaseLocation()
+	{
+		return ItemLocation.NPC;
+	}
+
 	@Override
-	protected ItemLocation getEquipLocation() { return ItemLocation.NPC; }
+	protected ItemLocation getEquipLocation()
+	{
+		return ItemLocation.NPC;
+	}
 
 	/**
 	 * Returns the list of all items in inventory that have a given item id.
+	 *
 	 * @return L2ItemInstance[] : matching items from inventory
 	 */
 	public L2ItemInstance[] getAllItemsByItemId(int itemId)
 	{
-		List<L2ItemInstance> list = new ArrayList<L2ItemInstance>();
+		List<L2ItemInstance> list = new ArrayList<>();
 		for (L2ItemInstance item : _items)
 		{
 			if (item.getItemId() == itemId)
+			{
 				list.add(item);
+			}
 		}
 
 		return list.toArray(new L2ItemInstance[list.size()]);
@@ -83,10 +101,10 @@ public class NpcInventory extends Inventory
 	/**
 	 * Get back items in inventory from database
 	 */
-    @Override
+	@Override
 	public void restore()
-    {
-    	// not needed
-    }
-	
+	{
+		// not needed
+	}
+
 }

@@ -28,7 +28,7 @@
 <item id='9909' name="Agathion Seal Bracelet">
   <for>
   </for>
-  <set name="bodypart" val="1048576"/>
+  <set name="bodypart" val="2097152"/>
   <set name="crystallizable" val="true"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="150"/>

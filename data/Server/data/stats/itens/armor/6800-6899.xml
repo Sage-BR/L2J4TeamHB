@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="6834" name="Circlet of Innadrill">
+  <item id='6834' name="Circlet of Innadrill">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -25,7 +25,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6835" name="Circlet of Dion">
+<item id='6835' name="Circlet of Dion">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -50,7 +50,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6836" name="Circlet of Goddard">
+<item id='6836' name="Circlet of Goddard">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -75,7 +75,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6837" name="Circlet of Oren">
+<item id='6837' name="Circlet of Oren">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -100,7 +100,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6838" name="Circlet of Gludio">
+<item id='6838' name="Circlet of Gludio">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -125,7 +125,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6839" name="Circlet of Giran">
+<item id='6839' name="Circlet of Giran">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -150,7 +150,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6840" name="Circlet of Aden">
+<item id='6840' name="Circlet of Aden">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -175,13 +175,32 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6841" name="Crown of Lord">
+<item id='6841' name="Crown of Lord">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="false" />
+    <set name="dropable" val="false" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="6842" name="Wings of Destiny Circlet">
+<item id='6842' name="Wings of Destiny Circlet">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -206,7 +225,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6843" name="Cat Ear">
+<item id='6843' name="Cat Ear">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -231,19 +250,57 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6844" name="Lady's Hair Pin">
+<item id='6844' name="Lady's Hair Pin">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="500000" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="6845" name="Pirate's Eye Patch">
+<item id='6845' name="Pirate's Eye Patch">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="500000" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="6846" name="Monocle">
+<item id='6846' name="Monocle">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>

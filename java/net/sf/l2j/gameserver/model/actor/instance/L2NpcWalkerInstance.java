@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,10 +24,10 @@ import net.sf.l2j.gameserver.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Broadcast;
 
-
 /**
  * This class manages some npcs can walk in the city. <br>
- * It inherits all methods from L2NpcInstance. <br><br>
+ * It inherits all methods from L2NpcInstance. <br>
+ * <br>
  *
  * @original author Rayan RPG for L2Emu Project
  * @since 819
@@ -35,9 +35,14 @@ import net.sf.l2j.gameserver.util.Broadcast;
 public class L2NpcWalkerInstance extends L2NpcInstance
 {
 	/**
-	 * Constructor of L2NpcWalkerInstance (use L2Character and L2NpcInstance constructor).<BR><BR>
-	 * @param objectId given object id
-	 * @param template L2NpcTemplateForThisAi
+	 * Constructor of L2NpcWalkerInstance (use L2Character and L2NpcInstance
+	 * constructor).<BR>
+	 * <BR>
+	 *
+	 * @param objectId
+	 *            given object id
+	 * @param template
+	 *            L2NpcTemplateForThisAi
 	 */
 	public L2NpcWalkerInstance(int objectId, L2NpcTemplate template)
 	{
@@ -47,17 +52,21 @@ public class L2NpcWalkerInstance extends L2NpcInstance
 
 	/**
 	 * AI can't be deattached, npc must move always with the same AI instance.
-	 * @param newAI AI to set for this L2NpcWalkerInstance
+	 *
+	 * @param newAI
+	 *            AI to set for this L2NpcWalkerInstance
 	 */
 	@Override
-    public void setAI(L2CharacterAI newAI)
+	public void setAI(L2CharacterAI newAI)
 	{
-		if(!(_ai instanceof L2NpcWalkerAI))
+		if (!(_ai instanceof L2NpcWalkerAI))
+		{
 			_ai = newAI;
+		}
 	}
 
 	@Override
-    public void onSpawn()
+	public void onSpawn()
 	{
 		getAI().setHomeX(getX());
 		getAI().setHomeY(getY());
@@ -66,21 +75,25 @@ public class L2NpcWalkerInstance extends L2NpcInstance
 
 	/**
 	 * Sends a chat to all _knowObjects
-	 * @param chat message to say
+	 *
+	 * @param chat
+	 *            message to say
 	 */
 	public void broadcastChat(String chat)
 	{
 		Map<Integer, L2PcInstance> _knownPlayers = getKnownList().getKnownPlayers();
 
-		if(_knownPlayers == null)
+		if (_knownPlayers == null)
 		{
-			if(Config.DEVELOPER)
+			if (Config.DEVELOPER)
+			{
 				_log.info("broadcastChat _players == null");
+			}
 			return;
 		}
 
-		//we send message to known players only!
-		if(_knownPlayers.size() > 0)
+		// we send message to known players only!
+		if (_knownPlayers.size() > 0)
 		{
 			CreatureSay cs = new CreatureSay(getObjectId(), 0, getName(), chat);
 			Broadcast.toKnownPlayers(this, cs);
@@ -89,29 +102,36 @@ public class L2NpcWalkerInstance extends L2NpcInstance
 
 	/**
 	 * NPCs are immortal
-	 * @param i ignore it
-	 * @param attacker  ignore it
-	 * @param awake  ignore it
+	 *
+	 * @param i
+	 *            ignore it
+	 * @param attacker
+	 *            ignore it
+	 * @param awake
+	 *            ignore it
 	 */
 	@Override
-    public void reduceCurrentHp(double i, L2Character attacker, boolean awake)
-	{}
+	public void reduceCurrentHp(double i, L2Character attacker, boolean awake)
+	{
+	}
 
 	/**
 	 * NPCs are immortal
-	 * @param killer ignore it
+	 *
+	 * @param killer
+	 *            ignore it
 	 * @return false
 	 */
 	@Override
-    public boolean doDie(L2Character killer)
+	public boolean doDie(L2Character killer)
 	{
 		return false;
 	}
 
 	@Override
-    public L2NpcWalkerAI getAI()
+	public L2NpcWalkerAI getAI()
 	{
-		return (L2NpcWalkerAI)_ai;
+		return (L2NpcWalkerAI) _ai;
 	}
 
 	protected class L2NpcWalkerAIAccessor extends L2Character.AIAccessor
@@ -120,7 +140,8 @@ public class L2NpcWalkerInstance extends L2NpcInstance
 		 * AI can't be deattached.
 		 */
 		@Override
-        public void detachAI()
-		{}
+		public void detachAI()
+		{
+		}
 	}
 }

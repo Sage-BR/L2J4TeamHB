@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,7 +19,8 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
 public class PcWarehouse extends Warehouse
 {
-	//private static final Logger _log = Logger.getLogger(PcWarehouse.class.getName());
+	// private static final Logger _log =
+	// Logger.getLogger(PcWarehouse.class.getName());
 
 	private L2PcInstance _owner;
 
@@ -29,12 +30,33 @@ public class PcWarehouse extends Warehouse
 	}
 
 	@Override
-	public L2PcInstance getOwner() { return _owner; }
+	public L2PcInstance getOwner()
+	{
+		return _owner;
+	}
+
 	@Override
-	public ItemLocation getBaseLocation() { return ItemLocation.WAREHOUSE; }
-	public String getLocationId() { return "0"; }
-	public int getLocationId(@SuppressWarnings("unused") boolean dummy) { return 0; }
-	public void setLocationId(@SuppressWarnings("unused") L2PcInstance dummy) { return; }
+	public ItemLocation getBaseLocation()
+	{
+		return ItemLocation.WAREHOUSE;
+	}
+
+	public String getLocationId()
+	{
+		return "0";
+	}
+
+	public int getLocationId(@SuppressWarnings("unused")
+	boolean dummy)
+	{
+		return 0;
+	}
+
+	public void setLocationId(@SuppressWarnings("unused")
+	L2PcInstance dummy)
+	{
+		return;
+	}
 
 	@Override
 	public boolean validateCapacity(int slots)

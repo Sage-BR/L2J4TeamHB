@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,16 +17,16 @@ package net.sf.l2j.gameserver.datatables;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.L2Skill;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 public class SkillSpellbookTable
 {
 	private static Logger _log = Logger.getLogger(SkillTreeTable.class.getName());
+
 	private static SkillSpellbookTable _instance;
 
 	private static Map<Integer, Integer> _skillSpellbooks;
@@ -34,14 +34,16 @@ public class SkillSpellbookTable
 	public static SkillSpellbookTable getInstance()
 	{
 		if (_instance == null)
+		{
 			_instance = new SkillSpellbookTable();
+		}
 
 		return _instance;
 	}
 
 	private SkillSpellbookTable()
 	{
-		_skillSpellbooks = new ConcurrentHashMap<Integer, Integer>();
+		_skillSpellbooks = new ConcurrentHashMap<>();
 		java.sql.Connection con = null;
 
 		try
@@ -51,16 +53,19 @@ public class SkillSpellbookTable
 			ResultSet spbooks = statement.executeQuery();
 
 			while (spbooks.next())
-				_skillSpellbooks.put(spbooks.getInt("skill_id") , spbooks.getInt("item_id"));
+			{
+				_skillSpellbooks.put(spbooks.getInt("skill_id"), spbooks.getInt("item_id"));
+			}
 
 			spbooks.close();
 			statement.close();
 
-			_log.config("SkillSpellbookTable: Loaded " + _skillSpellbooks.size() + " Spellbooks.");
+			_log.config("SkillSpellbookTable: Loaded " + _skillSpellbooks.size()
+			        + " Spellbooks.");
 		}
 		catch (Exception e)
 		{
-			_log.warning("Error while loading spellbook data: " +  e);
+			_log.warning("Error while loading spellbook data: " + e);
 		}
 		finally
 		{
@@ -68,27 +73,40 @@ public class SkillSpellbookTable
 			{
 				con.close();
 			}
-			catch (Exception e) {}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
 	public int getBookForSkill(int skillId, int level)
 	{
-		if(skillId == L2Skill.SKILL_DIVINE_INSPIRATION && level != -1)
+		if (skillId == L2Skill.SKILL_DIVINE_INSPIRATION && level != -1)
 		{
-			switch(level)
+			switch (level)
 			{
-				case 1: return 8618;	// Ancient Book - Divine Inspiration (Modern Language Version)
-				case 2: return 8619;	// Ancient Book - Divine Inspiration (Original Language Version)
-				case 3: return 8620;	// Ancient Book - Divine Inspiration (Manuscript)
-				case 4: return 8621;	// Ancient Book - Divine Inspiration (Original Version)
-				default: return -1;
+				case 1:
+					return 8618; // Ancient Book - Divine Inspiration (Modern
+					             // Language Version)
+				case 2:
+					return 8619; // Ancient Book - Divine Inspiration (Original
+					             // Language Version)
+				case 3:
+					return 8620; // Ancient Book - Divine Inspiration
+					             // (Manuscript)
+				case 4:
+					return 8621; // Ancient Book - Divine Inspiration (Original
+					             // Version)
+				default:
+					return -1;
 			}
 		}
-		
+
 		if (!_skillSpellbooks.containsKey(skillId))
+		{
 			return -1;
-		
+		}
+
 		return _skillSpellbooks.get(skillId);
 	}
 
@@ -96,7 +114,7 @@ public class SkillSpellbookTable
 	{
 		return getBookForSkill(skill.getId(), -1);
 	}
-	
+
 	public int getBookForSkill(L2Skill skill, int level)
 	{
 		return getBookForSkill(skill.getId(), level);

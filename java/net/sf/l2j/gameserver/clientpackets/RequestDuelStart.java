@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,13 +25,17 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 /**
  * Format:(ch) Sd
- * @author  -Wooden-
+ *
+ * @author -Wooden-
  */
 public final class RequestDuelStart extends L2GameClientPacket
 {
 	private static final String _C__D0_27_REQUESTDUELSTART = "[C] D0:27 RequestDuelStart";
+
 	private static Logger _log = Logger.getLogger(RequestDuelStart.class.getName());
+
 	private String _player;
+
 	private int _partyDuel;
 
 	@Override
@@ -48,45 +52,43 @@ public final class RequestDuelStart extends L2GameClientPacket
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-        L2PcInstance targetChar = L2World.getInstance().getPlayer(_player);
-        if (activeChar == null)
-            return;
-        if (targetChar == null)
-        {
-        	activeChar.sendPacket(new SystemMessage(SystemMessageId.THERE_IS_NO_OPPONENT_TO_RECEIVE_YOUR_CHALLENGE_FOR_A_DUEL));
-        	return;
-        }
-        if (activeChar == targetChar)
-        {
-        	activeChar.sendPacket(new SystemMessage(SystemMessageId.THERE_IS_NO_OPPONENT_TO_RECEIVE_YOUR_CHALLENGE_FOR_A_DUEL));
-        	return;
-        }
+		L2PcInstance targetChar = L2World.getInstance().getPlayer(_player);
+		if (activeChar == null)
+		{
+			return;
+		}
+		if ((targetChar == null) || (activeChar == targetChar))
+		{
+			activeChar.sendPacket(new SystemMessage(SystemMessageId.THERE_IS_NO_OPPONENT_TO_RECEIVE_YOUR_CHALLENGE_FOR_A_DUEL));
+			return;
+		}
 
-        // Check if duel is possible
-        if (!activeChar.canDuel())
-        {
-        	activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_ARE_UNABLE_TO_REQUEST_A_DUEL_AT_THIS_TIME));
-        	return;
-        }
-        else if (!targetChar.canDuel())
-        {
-        	activeChar.sendPacket(targetChar.getNoDuelReason());
-        	return;
-        }
-        // Players may not be too far apart
-        else if (!activeChar.isInsideRadius(targetChar, 250, false, false))
-        {
-        	SystemMessage msg = new SystemMessage(SystemMessageId.S1_CANNOT_RECEIVE_A_DUEL_CHALLENGE_BECAUSE_S1_IS_TOO_FAR_AWAY);
-        	msg.addString(targetChar.getName());
-        	activeChar.sendPacket(msg);
-        	return;
-        }
+		// Check if duel is possible
+		if (!activeChar.canDuel())
+		{
+			activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_ARE_UNABLE_TO_REQUEST_A_DUEL_AT_THIS_TIME));
+			return;
+		}
+		else if (!targetChar.canDuel())
+		{
+			activeChar.sendPacket(targetChar.getNoDuelReason());
+			return;
+		}
+		// Players may not be too far apart
+		else if (!activeChar.isInsideRadius(targetChar, 250, false, false))
+		{
+			SystemMessage msg = new SystemMessage(SystemMessageId.S1_CANNOT_RECEIVE_A_DUEL_CHALLENGE_BECAUSE_S1_IS_TOO_FAR_AWAY);
+			msg.addString(targetChar.getName());
+			activeChar.sendPacket(msg);
+			return;
+		}
 
-        // Duel is a party duel
+		// Duel is a party duel
 		if (_partyDuel == 1)
 		{
 			// Player must be in a party & the party leader
-			if (!activeChar.isInParty() || !(activeChar.isInParty() && activeChar.getParty().isLeader(activeChar)))
+			if (!activeChar.isInParty() || !(activeChar.isInParty()
+			        && activeChar.getParty().isLeader(activeChar)))
 			{
 				activeChar.sendMessage("You have to be the leader of a party in order to request a party duel.");
 				return;
@@ -113,10 +115,14 @@ public final class RequestDuelStart extends L2GameClientPacket
 					return;
 				}
 			}
-			L2PcInstance partyLeader = null; // snatch party leader of targetChar's party
+			L2PcInstance partyLeader = null; // snatch party leader of
+			                                 // targetChar's party
 			for (L2PcInstance temp : targetChar.getParty().getPartyMembers())
 			{
-				if (partyLeader == null) partyLeader = temp;
+				if (partyLeader == null)
+				{
+					partyLeader = temp;
+				}
 				if (!temp.canDuel())
 				{
 					activeChar.sendPacket(new SystemMessage(SystemMessageId.THE_OPPOSING_PARTY_IS_CURRENTLY_UNABLE_TO_ACCEPT_A_CHALLENGE_TO_A_DUEL));
@@ -131,7 +137,10 @@ public final class RequestDuelStart extends L2GameClientPacket
 				partyLeader.sendPacket(new ExDuelAskStart(activeChar.getName(), _partyDuel));
 
 				if (Config.DEBUG)
-			        _log.fine(activeChar.getName() + " requested a duel with " + partyLeader.getName());
+				{
+					_log.fine(activeChar.getName() + " requested a duel with "
+					        + partyLeader.getName());
+				}
 
 				SystemMessage msg = new SystemMessage(SystemMessageId.S1S_PARTY_HAS_BEEN_CHALLENGED_TO_A_DUEL);
 				msg.addString(partyLeader.getName());
@@ -156,7 +165,10 @@ public final class RequestDuelStart extends L2GameClientPacket
 				targetChar.sendPacket(new ExDuelAskStart(activeChar.getName(), _partyDuel));
 
 				if (Config.DEBUG)
-			        _log.fine(activeChar.getName() + " requested a duel with " + targetChar.getName());
+				{
+					_log.fine(activeChar.getName() + " requested a duel with "
+					        + targetChar.getName());
+				}
 
 				SystemMessage msg = new SystemMessage(SystemMessageId.S1_HAS_BEEN_CHALLENGED_TO_A_DUEL);
 				msg.addString(targetChar.getName());

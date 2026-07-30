@@ -1,36 +1,32 @@
 /*
  * $Header: BlockList.java, 21/11/2005 14:53:53 luisantonioa Exp $
  *
- * $Author: luisantonioa $
- * $Date: 21/11/2005 14:53:53 $
- * $Revision: 1 $
- * $Log: BlockList.java,v $
- * Revision 1  21/11/2005 14:53:53  luisantonioa
- * Added copyright notice
+ * $Author: luisantonioa $ $Date: 21/11/2005 14:53:53 $ $Revision: 1 $ $Log:
+ * BlockList.java,v $ Revision 1 21/11/2005 14:53:53 luisantonioa Added
+ * copyright notice
  *
  *
-* This program is free software: you can redistribute it and/or modify it under
+ * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
-
-import java.util.HashSet;
 
 /**
  * This class ...
@@ -40,99 +36,104 @@ import java.util.HashSet;
 
 public class BlockList
 {
-    private final Set<String> _blockSet;
-    private boolean _blockAll;
+	private final Set<String> _blockSet;
 
-    public BlockList()
-    {
-        _blockSet    = new HashSet<String>();
-        _blockAll    = false;
-    }
+	private boolean _blockAll;
 
-    private synchronized void addToBlockList(L2PcInstance character)
-    {
-        if(character != null)
-        {
-            _blockSet.add(character.getName());
-        }
-    }
+	public BlockList()
+	{
+		_blockSet = new HashSet<>();
+		_blockAll = false;
+	}
 
-    private synchronized void removeFromBlockList(L2PcInstance character)
-    {
-        if(character != null)
-        {
-            _blockSet.remove(character.getName());
-        }
-    }
+	private synchronized void addToBlockList(L2PcInstance character)
+	{
+		if (character != null)
+		{
+			_blockSet.add(character.getName());
+		}
+	}
 
-    private boolean isInBlockList(L2PcInstance character)
-    {
-        return _blockSet.contains(character.getName());
-    }
+	private synchronized void removeFromBlockList(L2PcInstance character)
+	{
+		if (character != null)
+		{
+			_blockSet.remove(character.getName());
+		}
+	}
 
-    private boolean isBlockAll()
-    {
-        return _blockAll;
-    }
+	private boolean isInBlockList(L2PcInstance character)
+	{
+		return _blockSet.contains(character.getName());
+	}
 
-    public static boolean isBlocked(L2PcInstance listOwner, L2PcInstance character)
-    {
-        BlockList blockList = listOwner.getBlockList();
-        return blockList.isBlockAll() || blockList.isInBlockList(character);
-    }
+	private boolean isBlockAll()
+	{
+		return _blockAll;
+	}
 
-    private void setBlockAll(boolean state)
-    {
-        _blockAll = state;
-    }
+	public static boolean isBlocked(L2PcInstance listOwner,
+	        L2PcInstance character)
+	{
+		BlockList blockList = listOwner.getBlockList();
+		return blockList.isBlockAll() || blockList.isInBlockList(character);
+	}
 
-    private Set<String> getBlockList()
-    {
-        return _blockSet;
-    }
+	private void setBlockAll(boolean state)
+	{
+		_blockAll = state;
+	}
 
-    public static void addToBlockList(L2PcInstance listOwner, L2PcInstance character)
-    {
-        listOwner.getBlockList().addToBlockList(character);
+	private Set<String> getBlockList()
+	{
+		return _blockSet;
+	}
 
-        SystemMessage sm = new SystemMessage(SystemMessageId.S1_HAS_ADDED_YOU_TO_IGNORE_LIST);
-        sm.addString(listOwner.getName());
-        character.sendPacket(sm);
+	public static void addToBlockList(L2PcInstance listOwner,
+	        L2PcInstance character)
+	{
+		listOwner.getBlockList().addToBlockList(character);
 
-        sm = new SystemMessage(SystemMessageId.S1_WAS_ADDED_TO_YOUR_IGNORE_LIST);
-        sm.addString(character.getName());
-        listOwner.sendPacket(sm);
-    }
+		SystemMessage sm = new SystemMessage(SystemMessageId.S1_HAS_ADDED_YOU_TO_IGNORE_LIST);
+		sm.addString(listOwner.getName());
+		character.sendPacket(sm);
 
-    public static void removeFromBlockList(L2PcInstance listOwner, L2PcInstance character)
-    {
-        listOwner.getBlockList().removeFromBlockList(character);
+		sm = new SystemMessage(SystemMessageId.S1_WAS_ADDED_TO_YOUR_IGNORE_LIST);
+		sm.addString(character.getName());
+		listOwner.sendPacket(sm);
+	}
 
-        SystemMessage sm = new SystemMessage(SystemMessageId.S1_WAS_REMOVED_FROM_YOUR_IGNORE_LIST);
-        sm.addString(character.getName());
-        listOwner.sendPacket(sm);
-    }
+	public static void removeFromBlockList(L2PcInstance listOwner,
+	        L2PcInstance character)
+	{
+		listOwner.getBlockList().removeFromBlockList(character);
 
-    public static boolean isInBlockList(L2PcInstance listOwner, L2PcInstance character)
-    {
-        return listOwner.getBlockList().isInBlockList(character);
-    }
+		SystemMessage sm = new SystemMessage(SystemMessageId.S1_WAS_REMOVED_FROM_YOUR_IGNORE_LIST);
+		sm.addString(character.getName());
+		listOwner.sendPacket(sm);
+	}
 
-    public static boolean isBlockAll(L2PcInstance listOwner)
-    {
-        return listOwner.getBlockList().isBlockAll();
-    }
+	public static boolean isInBlockList(L2PcInstance listOwner,
+	        L2PcInstance character)
+	{
+		return listOwner.getBlockList().isInBlockList(character);
+	}
 
-    public static void setBlockAll(L2PcInstance listOwner, boolean newValue)
-    {
-        listOwner.getBlockList().setBlockAll(newValue);
-    }
+	public static boolean isBlockAll(L2PcInstance listOwner)
+	{
+		return listOwner.getBlockList().isBlockAll();
+	}
 
-    public static void sendListToOwner(L2PcInstance listOwner)
-    {
-        for (String playerName : listOwner.getBlockList().getBlockList())
-        {
-            listOwner.sendMessage(playerName);
-        }
-    }
+	public static void setBlockAll(L2PcInstance listOwner, boolean newValue)
+	{
+		listOwner.getBlockList().setBlockAll(newValue);
+	}
+
+	public static void sendListToOwner(L2PcInstance listOwner)
+	{
+		for (String playerName : listOwner.getBlockList().getBlockList())
+		{
+			listOwner.sendMessage(playerName);
+		}
+	}
 }

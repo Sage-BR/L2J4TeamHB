@@ -27,7 +27,7 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
 public class L2TransformManagerInstance extends L2MerchantInstance
 {
-    /**
+	/**
 	 * @param objectId
 	 * @param template
 	 */
@@ -67,62 +67,63 @@ public class L2TransformManagerInstance extends L2MerchantInstance
 		}
 	}
 
-    /**
-     * this displays TransformationSkillList to the player.
-     * @param player
-     */
-    public void showTransformSkillList(L2PcInstance player)
-    {
-        if (player.isTransformed())
+	/**
+	 * this displays TransformationSkillList to the player.
+	 *
+	 * @param player
+	 */
+	public void showTransformSkillList(L2PcInstance player)
+	{
+		if (player.isTransformed())
 		{
 			return;
 		}
 
-        L2TransformSkillLearn[] skills = SkillTreeTable.getInstance().getAvailableTransformSkills(player);
-        AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.skillType.Usual);
-        int counts = 0;
+		L2TransformSkillLearn[] skills = SkillTreeTable.getInstance().getAvailableTransformSkills(player);
+		AcquireSkillList asl = new AcquireSkillList(AcquireSkillList.skillType.Usual);
+		int counts = 0;
 
-        for (L2TransformSkillLearn s: skills)
-        {
-            L2Skill sk = SkillTable.getInstance().getInfo(s.getId(), s.getLevel());
-            if (sk == null)
+		for (L2TransformSkillLearn s : skills)
+		{
+			L2Skill sk = SkillTable.getInstance().getInfo(s.getId(), s.getLevel());
+			if (sk == null)
 			{
 				continue;
 			}
 
-            counts++;
+			counts++;
 
-            asl.addSkill(s.getId(), s.getLevel(), s.getLevel(), s.getSpCost(), 0);
-        }
+			asl.addSkill(s.getId(), s.getLevel(), s.getLevel(), s.getSpCost(), 0);
+		}
 
-        if (counts == 0)
-        {
-        	NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
-		    int minlevel = SkillTreeTable.getInstance().getMinLevelForNewTransformSkill(player);
+		if (counts == 0)
+		{
+			NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
+			int minlevel = SkillTreeTable.getInstance().getMinLevelForNewTransformSkill(player);
 
-		    if (minlevel > 0)
-            {
-                // No more skills to learn, come back when you level.
-		        SystemMessage sm = new SystemMessage(SystemMessageId.DO_NOT_HAVE_FURTHER_SKILLS_TO_LEARN);
-		        sm.addNumber(minlevel);
-		        player.sendPacket(sm);
-		    }
-            else
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.append("<html><head><body>");
-                sb.append("You've learned all skills.<br>");
-                sb.append("</body></html>");
-                html.setHtml(sb.toString());
-                player.sendPacket(html);
+			if (minlevel > 0)
+			{
+				// No more skills to learn, come back when you level.
+				SystemMessage sm = new SystemMessage(SystemMessageId.DO_NOT_HAVE_FURTHER_SKILLS_TO_LEARN);
+				sm.addNumber(minlevel);
+				player.sendPacket(sm);
+			}
+			else
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.append("<html><head><body>");
+				sb.append("You've learned all skills.<br>");
+				sb.append("</body></html>");
+				html.setHtml(sb.toString());
+				player.sendPacket(html);
 
-            }
-        }
-        else
-        {
-            player.sendPacket(asl);
-        }
+			}
+		}
+		else
+		{
+			player.sendPacket(asl);
+		}
 
-        player.sendPacket(ActionFailed.STATIC_PACKET);
-    }
+		player.sendPacket(ActionFailed.STATIC_PACKET);
+	}
 }

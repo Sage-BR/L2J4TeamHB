@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,12 +32,13 @@ public final class RequestJoinPledge extends L2GameClientPacket
 	private static final String _C__24_REQUESTJOINPLEDGE = "[C] 24 RequestJoinPledge";
 
 	private int _target;
+
 	private int _pledgeType;
 
 	@Override
 	protected void readImpl()
 	{
-		_target  = readD();
+		_target = readD();
 		_pledgeType = readD();
 	}
 
@@ -47,36 +48,34 @@ public final class RequestJoinPledge extends L2GameClientPacket
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 		{
-		    return;
+			return;
 		}
 
 		L2Object ob = L2World.getInstance().findObject(_target);
 		if (!(ob instanceof L2PcInstance))
 		{
-        	activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_HAVE_INVITED_THE_WRONG_TARGET));
-		    return;
+			activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_HAVE_INVITED_THE_WRONG_TARGET));
+			return;
 		}
 
 		L2PcInstance target = (L2PcInstance) ob;
-        L2Clan clan = activeChar.getClan();
-        if (!clan.checkClanJoinCondition(activeChar, target, _pledgeType))
-        {
-        	return;
-        }
-        if (!activeChar.getRequest().setRequest(target, this))
-        {
-        	return;
-        }
-    	AskJoinPledge ap = new AskJoinPledge(activeChar.getObjectId(), activeChar.getClan().getName());
-    	target.sendPacket(ap);
+		L2Clan clan = activeChar.getClan();
+		if (!clan.checkClanJoinCondition(activeChar, target, _pledgeType) || !activeChar.getRequest().setRequest(target, this))
+		{
+			return;
+		}
+		AskJoinPledge ap = new AskJoinPledge(activeChar.getObjectId(), activeChar.getClan().getName());
+		target.sendPacket(ap);
 	}
 
- 	public int getPledgeType()
- 	{
- 		return _pledgeType;
- 	}
+	public int getPledgeType()
+	{
+		return _pledgeType;
+	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

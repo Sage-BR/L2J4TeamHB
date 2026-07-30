@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,15 +23,15 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.zone.L2ZoneType;
 import net.sf.l2j.gameserver.serverpackets.AgitDecoInfo;
 
-
 /**
  * A clan hall zone
  *
- * @author  durgus
+ * @author durgus
  */
 public class L2ClanHallZone extends L2ZoneType
 {
 	private int _clanHallId;
+
 	private int[] _spawnLoc;
 
 	public L2ClanHallZone(int id)
@@ -62,7 +62,10 @@ public class L2ClanHallZone extends L2ZoneType
 		{
 			_spawnLoc[2] = Integer.parseInt(value);
 		}
-		else super.setParameter(name, value);
+		else
+		{
+			super.setParameter(name, value);
+		}
 	}
 
 	@Override
@@ -74,7 +77,10 @@ public class L2ClanHallZone extends L2ZoneType
 			character.setInsideZone(L2Character.ZONE_CLANHALL, true);
 
 			ClanHall clanHall = ClanHallManager.getInstance().getClanHallById(_clanHallId);
-			if (clanHall == null) return;
+			if (clanHall == null)
+			{
+				return;
+			}
 
 			// Send decoration packet
 			AgitDecoInfo deco = new AgitDecoInfo(clanHall);
@@ -95,21 +101,28 @@ public class L2ClanHallZone extends L2ZoneType
 	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 	/**
 	 * Removes all foreigners from the clan hall
+	 *
 	 * @param owningClanId
 	 */
 	public void banishForeigners(int owningClanId)
 	{
 		for (L2Character temp : _characterList.values())
 		{
-			if (!(temp instanceof L2PcInstance player)) continue;
-			if (player.getClanId() == owningClanId) continue;
+			if (!(temp instanceof L2PcInstance player) || (player.getClanId() == owningClanId))
+			{
+				continue;
+			}
 
 			player.teleToLocation(MapRegionTable.TeleportWhereType.Town);
 		}
@@ -117,6 +130,7 @@ public class L2ClanHallZone extends L2ZoneType
 
 	/**
 	 * Get the clan hall's spawn
+	 *
 	 * @return
 	 */
 	public Location getSpawn()

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="9100" name="Shadow Item: Magestic Boots">
+  <item id='9100' name="Shadow Item: Magestic Boots">
     <for>
       <add val="49" order="0x10" stat="pDef" />
     </for>
@@ -25,7 +25,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9101" name="Shadow Item: Magestic Robe">
+<item id='9101' name="Shadow Item: Magestic Robe">
     <for>
       <add val="147" order="0x10" stat="pDef" />
       <add val="718" order="0x60" stat="maxMp" />
@@ -51,7 +51,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="718" />
   </item>
-  <item id="9102" name="Shadow Item: Magestic Gauntlet">
+<item id='9102' name="Shadow Item: Magestic Gauntlet">
     <for>
       <add val="49" order="0x10" stat="pDef" />
     </for>
@@ -76,7 +76,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9103" name="Shadow Item: Magestic Boots">
+<item id='9103' name="Shadow Item: Magestic Boots">
     <for>
       <add val="49" order="0x10" stat="pDef" />
     </for>
@@ -101,7 +101,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9128" name="Shadow Item: Mithril Gauntlet">
+<item id='9128' name="Shadow Item: Mithril Gauntlet">
     <for>
       <add val="36" order="0x10" stat="pDef" />
     </for>
@@ -126,17 +126,36 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9138" name="Santa\'s Hat">
+<item id='9138' name="Santa\'s Hat">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="9145" name="Little Angel Wings - For Event">
+<item id='9145' name="Little Angel Wings - For Event">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
-    <set name="bodypart" val="512"/>
+    <set name="bodypart" val="65536"/>
     <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
     <set name="weight" val="10" />
@@ -157,7 +176,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9158" name="Gold Circlet - For Event">
+<item id='9158' name="Gold Circlet - For Event">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -182,7 +201,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9159" name="Silver Circlet - For Event">
+<item id='9159' name="Silver Circlet - For Event">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -207,13 +226,32 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9160" name="Medieval Leather Cap - For Event">
+<item id='9160' name="Medieval Leather Cap - For Event">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
+    <set name="bodypart" val="64"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="10" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="0" />
+    <set name="crystal_count" val="0" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="9177" name="Teddy Bear Hat - Blessed Scroll of Resurrection">
+<item id='9177' name="Teddy Bear Hat - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -238,7 +276,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9178" name="Piggy Hat - Blessed Scroll of Resurrection">
+<item id='9178' name="Piggy Hat - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -263,7 +301,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9179" name="Jester Hat - Blessed Scroll of Resurrection">
+<item id='9179' name="Jester Hat - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -288,7 +326,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9180" name="Wizard\'s Hat - Blessed Scroll of Resurrection">
+<item id='9180' name="Wizard\'s Hat - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -313,7 +351,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9181" name="Dapper Cap - Blessed Scroll of Resurrection">
+<item id='9181' name="Dapper Cap - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -338,7 +376,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9182" name="Romantic Chapeau - Blessed Scroll of Resurrection">
+<item id='9182' name="Romantic Chapeau - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -363,7 +401,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9183" name="Iron Circlet - Blessed Scroll of Resurrection">
+<item id='9183' name="Iron Circlet - Blessed Scroll of Resurrection">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -388,7 +426,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9184" name="Teddy Bear Hat - Blessed Scroll of Escape">
+<item id='9184' name="Teddy Bear Hat - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -413,7 +451,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9185" name="Piggy Hat - Blessed Scroll of Escape">
+<item id='9185' name="Piggy Hat - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -438,7 +476,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9186" name="Jester Hat - Blessed Scroll of Escape">
+<item id='9186' name="Jester Hat - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -463,7 +501,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9187" name="Wizard\'s Hat - Blessed Scroll of Escape">
+<item id='9187' name="Wizard\'s Hat - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -488,7 +526,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9188" name="Dapper Cap - Blessed Scroll of Escape">
+<item id='9188' name="Dapper Cap - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -513,7 +551,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9189" name="Romantic Chapeau - Blessed Scroll of Escape">
+<item id='9189' name="Romantic Chapeau - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -538,7 +576,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9190" name="Iron Circlet - Blessed Scroll of Escape">
+<item id='9190' name="Iron Circlet - Blessed Scroll of Escape">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -563,7 +601,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9191" name="Teddy Bear Hat - Big Head">
+<item id='9191' name="Teddy Bear Hat - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -588,7 +626,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9192" name="Piggy Hat - Big Head">
+<item id='9192' name="Piggy Hat - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -613,7 +651,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9193" name="Jester Hat - Big Head">
+<item id='9193' name="Jester Hat - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -638,7 +676,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9194" name="Wizard\'s Hat - Big Head">
+<item id='9194' name="Wizard\'s Hat - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -663,7 +701,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9195" name="Dapper Hat - Big Head">
+<item id='9195' name="Dapper Hat - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -688,7 +726,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9196" name="Romantic Chapeau - Big Head">
+<item id='9196' name="Romantic Chapeau - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -713,7 +751,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9197" name="Iron Circlet - Big Head">
+<item id='9197' name="Iron Circlet - Big Head">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -738,7 +776,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9198" name="Teddy Bear Hat - Firework">
+<item id='9198' name="Teddy Bear Hat - Firework">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>
@@ -763,7 +801,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="9199" name="Piggy Hat - Firework">
+<item id='9199' name="Piggy Hat - Firework">
     <for>
       <add val="0" order="0x10" stat="pDef" />
     </for>

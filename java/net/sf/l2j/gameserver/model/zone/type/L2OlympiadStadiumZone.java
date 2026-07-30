@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,7 +23,7 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 /**
  * An olympiad stadium
  *
- * @author  durgus
+ * @author durgus
  */
 public class L2OlympiadStadiumZone extends L2ZoneType
 {
@@ -41,7 +41,10 @@ public class L2OlympiadStadiumZone extends L2ZoneType
 		{
 			_stadiumId = Integer.parseInt(value);
 		}
-		else super.setParameter(name, value);
+		else
+		{
+			super.setParameter(name, value);
+		}
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class L2OlympiadStadiumZone extends L2ZoneType
 
 		if (character instanceof L2PcInstance)
 		{
-			((L2PcInstance)character).sendPacket(new SystemMessage(SystemMessageId.ENTERED_COMBAT_ZONE));
+			((L2PcInstance) character).sendPacket(new SystemMessage(SystemMessageId.ENTERED_COMBAT_ZONE));
 		}
 	}
 
@@ -62,18 +65,23 @@ public class L2OlympiadStadiumZone extends L2ZoneType
 
 		if (character instanceof L2PcInstance)
 		{
-			((L2PcInstance)character).sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
+			((L2PcInstance) character).sendPacket(new SystemMessage(SystemMessageId.LEFT_COMBAT_ZONE));
 		}
 	}
 
 	@Override
-	protected void onDieInside(L2Character character) {}
+	protected void onDieInside(L2Character character)
+	{
+	}
 
 	@Override
-	protected void onReviveInside(L2Character character) {}
+	protected void onReviveInside(L2Character character)
+	{
+	}
 
 	/**
 	 * Returns this zones stadium id (if any)
+	 *
 	 * @return
 	 */
 	public int getStadiumId()

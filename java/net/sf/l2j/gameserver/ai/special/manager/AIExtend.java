@@ -1,24 +1,24 @@
 /*
- * L2jFrozen Project - www.l2jfrozen.com 
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+ * L2jFrozen Project - www.l2jfrozen.com
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2, or (at your option) any later version.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  * http://www.gnu.org/copyleft/gpl.html
  */
 package net.sf.l2j.gameserver.ai.special.manager;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.NpcTable;
@@ -27,16 +27,15 @@ import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * @author programmos
  */
 public class AIExtend implements Runnable
 {
 	private static ConcurrentHashMap<Integer, AIExtend> _AI = new ConcurrentHashMap<>();
+
 	private int _idCharacter;
-	
+
 	/**
 	 * @param id
 	 */
@@ -48,46 +47,46 @@ public class AIExtend implements Runnable
 			_AI.put(id, this);
 		}
 	}
-	
+
 	public static enum Action
 	{
 		/** on spell finished action when npc finish casting skill */
 		ON_SPELL_FINISHED(true),
-		
+
 		/** a person came within the Npc/Mob's range */
 		ON_AGGRO_RANGE_ENTER(true),
-		
+
 		/** OnSpawn */
 		ON_SPAWN(true),
-		
+
 		/** OnSkillUse (MOB_TARGETED_BY_SKILL) */
 		ON_SKILL_USE(true),
-		
+
 		/** OnKill (MOBKILLED) */
 		ON_KILL(true),
-		
+
 		/** OnAttack (MOBGOTATTACKED) */
 		ON_ATTACK(true);
-		
+
 		private final boolean _isRegistred;
-		
+
 		Action(final boolean reg)
 		{
 			_isRegistred = reg;
 		}
-		
+
 		public boolean isRegistred()
 		{
 			return _isRegistred;
 		}
 	}
-	
+
 	public static void clearAllAI()
 	{
 		_AI.clear();
 		L2NpcTemplate.clearAI();
 	}
-	
+
 	/**
 	 * @return idCharacter
 	 */
@@ -95,18 +94,18 @@ public class AIExtend implements Runnable
 	{
 		return _idCharacter;
 	}
-	
+
 	public L2NpcTemplate addActionId(final int npcId, final Action actionType)
 	{
 		try
 		{
 			final L2NpcTemplate t = NpcTable.getInstance().getTemplate(npcId);
-			
+
 			if (t != null)
 			{
 				t.addAIEvent(actionType, this);
 			}
-			
+
 			return t;
 		}
 		catch (final Exception e)
@@ -115,42 +114,51 @@ public class AIExtend implements Runnable
 			return null;
 		}
 	}
-	
-	public String onAttack(final L2NpcInstance npc, final L2PcInstance attacker, final int damage, final boolean isPet)
+
+	public String onAttack(final L2NpcInstance npc, final L2PcInstance attacker,
+	        final int damage, final boolean isPet)
 	{
 		return null;
 	}
-	
-	public String onKill(final L2NpcInstance npc, final L2PcInstance killer, final boolean isPet)
+
+	public String onKill(final L2NpcInstance npc, final L2PcInstance killer,
+	        final boolean isPet)
 	{
 		return null;
 	}
-	
-	public String onSkillUse(final L2NpcInstance npc, final L2PcInstance caster, final L2Skill skill)
+
+	public String onSkillUse(final L2NpcInstance npc, final L2PcInstance caster,
+	        final L2Skill skill)
 	{
 		return null;
 	}
-	
-	public String onSpellFinished(final L2NpcInstance npc, final L2PcInstance player, final L2Skill skill)
+
+	public String onSpellFinished(final L2NpcInstance npc,
+	        final L2PcInstance player, final L2Skill skill)
 	{
 		return null;
 	}
-	
+
 	public String onSpawn(final L2NpcInstance npc)
 	{
 		return null;
 	}
-	
-	public String onAggroRangeEnter(final L2NpcInstance npc, final L2PcInstance player, final boolean isPet)
+
+	public String onAggroRangeEnter(final L2NpcInstance npc,
+	        final L2PcInstance player, final boolean isPet)
 	{
 		return null;
 	}
-	
+
 	/*
-	 * public String onDeath (L2Character killer, L2Character victim, QuestState qs) { if (killer instanceof L2NpcInstance) return onAdvEvent("", (L2NpcInstance)killer,qs.getPlayer()); else return onAdvEvent("", null,qs.getPlayer()); }
+	 * public String onDeath (L2Character killer, L2Character victim, QuestState
+	 * qs) { if (killer instanceof L2NpcInstance) return onAdvEvent("",
+	 * (L2NpcInstance)killer,qs.getPlayer()); else return onAdvEvent("",
+	 * null,qs.getPlayer()); }
 	 */
-	
-	public final boolean notifyAggroRangeEnter(final L2NpcInstance npc, final L2PcInstance player, final boolean isPet)
+
+	public final boolean notifyAggroRangeEnter(final L2NpcInstance npc,
+	        final L2PcInstance player, final boolean isPet)
 	{
 		try
 		{
@@ -159,13 +167,15 @@ public class AIExtend implements Runnable
 		catch (final Exception e)
 		{
 			if (Config.ENABLE_ALL_EXCEPTIONS)
+			{
 				e.printStackTrace();
-			
+			}
+
 			return false;
 		}
 		return true;
 	}
-	
+
 	public final boolean notifySpawn(final L2NpcInstance npc)
 	{
 		try
@@ -175,13 +185,16 @@ public class AIExtend implements Runnable
 		catch (final Exception e)
 		{
 			if (Config.ENABLE_ALL_EXCEPTIONS)
+			{
 				e.printStackTrace();
+			}
 			return false;
 		}
 		return true;
 	}
-	
-	public final boolean notifySkillUse(final L2NpcInstance npc, final L2PcInstance caster, final L2Skill skill)
+
+	public final boolean notifySkillUse(final L2NpcInstance npc,
+	        final L2PcInstance caster, final L2Skill skill)
 	{
 		try
 		{
@@ -190,14 +203,17 @@ public class AIExtend implements Runnable
 		catch (final Exception e)
 		{
 			if (Config.ENABLE_ALL_EXCEPTIONS)
+			{
 				e.printStackTrace();
+			}
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	public final boolean notifySpellFinished(final L2NpcInstance npc, final L2PcInstance player, final L2Skill skill)
+
+	public final boolean notifySpellFinished(final L2NpcInstance npc,
+	        final L2PcInstance player, final L2Skill skill)
 	{
 		try
 		{
@@ -206,13 +222,16 @@ public class AIExtend implements Runnable
 		catch (final Exception e)
 		{
 			if (Config.ENABLE_ALL_EXCEPTIONS)
+			{
 				e.printStackTrace();
+			}
 			return false;
 		}
 		return true;
 	}
-	
-	public final boolean notifyKill(final L2NpcInstance npc, final L2PcInstance killer, final boolean isPet)
+
+	public final boolean notifyKill(final L2NpcInstance npc,
+	        final L2PcInstance killer, final boolean isPet)
 	{
 		try
 		{
@@ -221,15 +240,18 @@ public class AIExtend implements Runnable
 		catch (final Exception e)
 		{
 			if (Config.ENABLE_ALL_EXCEPTIONS)
+			{
 				e.printStackTrace();
-			
+			}
+
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	public final boolean notifyAttack(final L2NpcInstance npc, final L2PcInstance attacker, final int damage, final boolean isPet)
+
+	public final boolean notifyAttack(final L2NpcInstance npc,
+	        final L2PcInstance attacker, final int damage, final boolean isPet)
 	{
 		try
 		{
@@ -238,21 +260,25 @@ public class AIExtend implements Runnable
 		catch (final Exception e)
 		{
 			if (Config.ENABLE_ALL_EXCEPTIONS)
+			{
 				e.printStackTrace();
-			
+			}
+
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/*
-	 * public final boolean notifyDeath(L2Character killer, L2Character victim, QuestState qs) { try { onDeath(killer, victim, qs); } catch (Exception e) { return false; } return true; }
+	 * public final boolean notifyDeath(L2Character killer, L2Character victim,
+	 * QuestState qs) { try { onDeath(killer, victim, qs); } catch (Exception e)
+	 * { return false; } return true; }
 	 */
-	
+
 	@Override
 	public void run()
 	{
 	}
-	
+
 }

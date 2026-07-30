@@ -3,18 +3,19 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.serverpackets;
 
 import net.sf.l2j.gameserver.model.L2Character;
+
 /**
  * This class ...
  *
@@ -22,36 +23,40 @@ import net.sf.l2j.gameserver.model.L2Character;
  */
 public class ValidateLocationInVehicle extends L2GameServerPacket
 {
-    private static final String _S__73_ValidateLocationInVehicle = "[S] 80 ValidateLocationInVehicle";
-    private L2Character _activeChar;
+	private static final String _S__73_ValidateLocationInVehicle = "[S] 80 ValidateLocationInVehicle";
 
-    /**
-     * 0x73 ValidateLocationInVehicle         hdd
-     * @param _characters
-     */
-    public ValidateLocationInVehicle(L2Character player)
-    {
-    	_activeChar = player;
-    }
+	private L2Character _activeChar;
 
-    @Override
+	/**
+	 * 0x73 ValidateLocationInVehicle hdd
+	 *
+	 * @param _characters
+	 */
+	public ValidateLocationInVehicle(L2Character player)
+	{
+		_activeChar = player;
+	}
+
+	@Override
 	protected final void writeImpl()
-    {
-        writeC(0x80);
-        writeD(_activeChar.getObjectId());
-        writeD(1343225858); //TODO verify vehicle object id ??
-        writeD(_activeChar.getX());
-        writeD(_activeChar.getY());
-        writeD(_activeChar.getZ());
-        writeD(_activeChar.getHeading());
-    }
+	{
+		writeC(0x80);
+		writeD(_activeChar.getObjectId());
+		writeD(1343225858); // TODO verify vehicle object id ??
+		writeD(_activeChar.getX());
+		writeD(_activeChar.getY());
+		writeD(_activeChar.getZ());
+		writeD(_activeChar.getHeading());
+	}
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
 	public String getType()
-    {
-        return _S__73_ValidateLocationInVehicle;
-    }
+	{
+		return _S__73_ValidateLocationInVehicle;
+	}
 }

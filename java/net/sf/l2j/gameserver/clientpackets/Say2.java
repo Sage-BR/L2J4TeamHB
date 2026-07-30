@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,49 +34,53 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 public final class Say2 extends L2GameClientPacket
 {
 	private static final String _C__38_SAY2 = "[C] 38 Say2";
+
 	private static Logger _log = Logger.getLogger(Say2.class.getName());
+
 	private static Logger _logChat = Logger.getLogger("chat");
 
 	public final static int ALL = 0;
-	public final static int SHOUT = 1; //!
+
+	public final static int SHOUT = 1; // !
+
 	public final static int TELL = 2;
-	public final static int PARTY = 3; //#
-	public final static int CLAN = 4;  //@
+
+	public final static int PARTY = 3; // #
+
+	public final static int CLAN = 4; // @
+
 	public final static int GM = 5;
+
 	public final static int PETITION_PLAYER = 6; // used for petition
-	public final static int PETITION_GM = 7; //* used for petition
-	public final static int TRADE = 8; //+
-	public final static int ALLIANCE = 9; //$
+
+	public final static int PETITION_GM = 7; // * used for petition
+
+	public final static int TRADE = 8; // +
+
+	public final static int ALLIANCE = 9; // $
+
 	public final static int ANNOUNCEMENT = 10;
-	public final static int PARTYROOM_ALL = 16; //(Red)
-	public final static int PARTYROOM_COMMANDER = 15; //(Yellow)
+
+	public final static int PARTYROOM_ALL = 16; // (Red)
+
+	public final static int PARTYROOM_COMMANDER = 15; // (Yellow)
+
 	public final static int HERO_VOICE = 17;
+
 	public final static int CRITICAL_ANNOUNCE = 18;
-	private final static String[] CHAT_NAMES = {
-	                                          "ALL  ",
-	                                          "SHOUT",
-	                                          "TELL ",
-	                                          "PARTY",
-	                                          "CLAN ",
-	                                          "GM   ",
-	                                          "PETITION_PLAYER",
-	                                          "PETITION_GM",
-	                                          "TRADE",
-	                                          "ALLIANCE",
-	                                          "ANNOUNCEMENT", //10
-	                                          "WILLCRASHCLIENT:)",
-	                                          "CRITICAL_ANNOUNCE",
-	                                          "FAKEALL?",
-	                                          "FAKEALL?",
-	                                          "FAKEALL?",
-	                                          "PARTYROOM_ALL",
-	                                          "PARTYROOM_COMMANDER",
-	                                          "HERO_VOICE"
-	};
+
+	private final static String[] CHAT_NAMES = { "ALL  ", "SHOUT", "TELL ",
+	        "PARTY", "CLAN ", "GM   ", "PETITION_PLAYER", "PETITION_GM",
+	        "TRADE", "ALLIANCE", "ANNOUNCEMENT", // 10
+	        "WILLCRASHCLIENT:)", "CRITICAL_ANNOUNCE", "FAKEALL?", "FAKEALL?",
+	        "FAKEALL?", "PARTYROOM_ALL", "PARTYROOM_COMMANDER", "HERO_VOICE" };
 
 	private String _text;
+
 	private int _type;
+
 	private String _target;
+
 	@Override
 	protected void readImpl()
 	{
@@ -96,11 +100,14 @@ public final class Say2 extends L2GameClientPacket
 	protected void runImpl()
 	{
 		if (Config.DEBUG)
-			_log.info("Say2: Msg Type = '" + _type + "' Text = '" + _text + "'.");
-
-		if(_type < 0 || _type >= CHAT_NAMES.length)
 		{
-			_log.warning("Say2: Invalid type: "+_type);
+			_log.info("Say2: Msg Type = '" + _type + "' Text = '" + _text
+			        + "'.");
+		}
+
+		if (_type < 0 || _type >= CHAT_NAMES.length)
+		{
+			_log.warning("Say2: Invalid type: " + _type);
 			return;
 		}
 
@@ -117,7 +124,8 @@ public final class Say2 extends L2GameClientPacket
 			return;
 		}
 
-		if (activeChar.isCursedWeaponEquipped() && (_type == TRADE || _type == SHOUT))
+		if (activeChar.isCursedWeaponEquipped()
+		        && (_type == TRADE || _type == SHOUT))
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.SHOUT_AND_TRADE_CHAT_CANNOT_BE_USED_WHILE_POSSESSING_CURSED_WEAPON);
 			activeChar.sendPacket(sm);
@@ -126,7 +134,8 @@ public final class Say2 extends L2GameClientPacket
 
 		if (activeChar.isChatBanned())
 		{
-			if (_type == ALL || _type == SHOUT || _type == TRADE || _type == HERO_VOICE)
+			if (_type == ALL || _type == SHOUT || _type == TRADE
+			        || _type == HERO_VOICE)
 			{
 				activeChar.sendMessage("You may not chat while a chat ban is in effect.");
 				return;
@@ -135,7 +144,8 @@ public final class Say2 extends L2GameClientPacket
 
 		if (activeChar.isInJail() && Config.JAIL_DISABLE_CHAT)
 		{
-			if (_type == TELL || _type == SHOUT || _type == TRADE || _type == HERO_VOICE)
+			if (_type == TELL || _type == SHOUT || _type == TRADE
+			        || _type == HERO_VOICE)
 			{
 				activeChar.sendMessage("You can not chat with players outside of the jail.");
 				return;
@@ -143,7 +153,9 @@ public final class Say2 extends L2GameClientPacket
 		}
 
 		if (_type == PETITION_PLAYER && activeChar.isGM())
+		{
 			_type = PETITION_GM;
+		}
 
 		if (Config.LOG_CHAT)
 		{
@@ -151,9 +163,15 @@ public final class Say2 extends L2GameClientPacket
 			record.setLoggerName("chat");
 
 			if (_type == TELL)
-				record.setParameters(new Object[]{CHAT_NAMES[_type], "[" + activeChar.getName() + " to "+_target+"]"});
+			{
+				record.setParameters(new Object[] { CHAT_NAMES[_type],
+				        "[" + activeChar.getName() + " to " + _target + "]" });
+			}
 			else
-				record.setParameters(new Object[]{CHAT_NAMES[_type], "[" + activeChar.getName() + "]"});
+			{
+				record.setParameters(new Object[] { CHAT_NAMES[_type],
+				        "[" + activeChar.getName() + "]" });
+			}
 
 			_logChat.log(record);
 		}
@@ -165,7 +183,9 @@ public final class Say2 extends L2GameClientPacket
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

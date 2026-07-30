@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,28 +17,31 @@ package net.sf.l2j.loginserver;
 import java.nio.ByteBuffer;
 import java.util.logging.Logger;
 
+import org.mmocore.network.IPacketHandler;
+import org.mmocore.network.ReceivablePacket;
+
 import net.sf.l2j.loginserver.L2LoginClient.LoginClientState;
 import net.sf.l2j.loginserver.clientpackets.AuthGameGuard;
 import net.sf.l2j.loginserver.clientpackets.RequestAuthLogin;
 import net.sf.l2j.loginserver.clientpackets.RequestServerList;
 import net.sf.l2j.loginserver.clientpackets.RequestServerLogin;
 
-import org.mmocore.network.IPacketHandler;
-import org.mmocore.network.ReceivablePacket;
-
 /**
  * Handler for packets received by Login Server
  *
- * @author  KenM
+ * @author KenM
  */
 public final class L2LoginPacketHandler implements IPacketHandler<L2LoginClient>
 {
-    protected static final Logger _log = Logger.getLogger(L2LoginPacketHandler.class.getName());
-    
+	protected static final Logger _log = Logger.getLogger(L2LoginPacketHandler.class.getName());
+
 	/**
-	 * @see com.l2jserver.mmocore.network.IPacketHandler#handlePacket(java.nio.ByteBuffer, com.l2jserver.mmocore.interfaces.MMOClient)
+	 * @see com.l2jserver.mmocore.network.IPacketHandler#handlePacket(java.nio.ByteBuffer,
+	 *      com.l2jserver.mmocore.interfaces.MMOClient)
 	 */
-	public ReceivablePacket<L2LoginClient> handlePacket(ByteBuffer buf, L2LoginClient client)
+	@Override
+	public ReceivablePacket<L2LoginClient> handlePacket(ByteBuffer buf,
+	        L2LoginClient client)
 	{
 		int opcode = buf.get() & 0xFF;
 
@@ -87,6 +90,6 @@ public final class L2LoginPacketHandler implements IPacketHandler<L2LoginClient>
 
 	private void debugOpcode(int opcode, LoginClientState state)
 	{
-		_log.info("Unknown Opcode: "+opcode+" for state: "+state.name());
+		_log.info("Unknown Opcode: " + opcode + " for state: " + state.name());
 	}
 }

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,7 +38,9 @@ class EffectDamOverTime extends L2Effect
 	public boolean onActionTime()
 	{
 		if (getEffected().isDead())
+		{
 			return false;
+		}
 
 		double damage = calc();
 
@@ -51,15 +53,18 @@ class EffectDamOverTime extends L2Effect
 				return false;
 			}
 
-            // For DOT skills that will not kill effected player.
-            if (!getSkill().killByDOT()) damage = getEffected().getCurrentHp() - 1;
+			// For DOT skills that will not kill effected player.
+			if (!getSkill().killByDOT())
+			{
+				damage = getEffected().getCurrentHp() - 1;
+			}
 		}
 
-        boolean awake = !(getEffected() instanceof L2Attackable)
-        					&& !(getSkill().getTargetType() == SkillTargetType.TARGET_SELF
-        							&& getSkill().isToggle());
+		boolean awake = !(getEffected() instanceof L2Attackable)
+		        && !(getSkill().getTargetType() == SkillTargetType.TARGET_SELF
+		                && getSkill().isToggle());
 
-        getEffected().reduceCurrentHp(damage, getEffector(),awake);
+		getEffected().reduceCurrentHp(damage, getEffector(), awake);
 
 		return true;
 	}

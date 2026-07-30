@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,12 +27,14 @@ public class ExOlympiadUserInfo extends L2GameServerPacket
 {
 	// chcdSddddd
 	private static final String _S__FE_29_OLYMPIADUSERINFO = "[S] FE:7a OlympiadUserInfo";
+
 	@SuppressWarnings("unused")
 	private static L2PcInstance _activeChar;
 
 	/**
 	 * @param _player
-	 * @param _side (1 = right, 2 = left)
+	 * @param _side
+	 *            (1 = right, 2 = left)
 	 */
 	public ExOlympiadUserInfo(L2PcInstance player)
 	{
@@ -42,18 +44,20 @@ public class ExOlympiadUserInfo extends L2GameServerPacket
 	@Override
 	protected final void writeImpl()
 	{
-		/*writeC(0xfe);
-		writeH(0x2c);
-		writeD(_activeChar.getObjectId());
-		writeS(_activeChar.getName());
-		writeD(_activeChar.getClassId().getId());
-		writeD((int)_activeChar.getCurrentHp());
-		writeD(_activeChar.getMaxHp());
-		writeD((int)_activeChar.getCurrentCp());
-		writeD(_activeChar.getMaxCp());*/
+		/*
+		 * writeC(0xfe); writeH(0x2c); writeD(_activeChar.getObjectId());
+		 * writeS(_activeChar.getName());
+		 * writeD(_activeChar.getClassId().getId());
+		 * writeD((int)_activeChar.getCurrentHp());
+		 * writeD(_activeChar.getMaxHp());
+		 * writeD((int)_activeChar.getCurrentCp());
+		 * writeD(_activeChar.getMaxCp());
+		 */
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

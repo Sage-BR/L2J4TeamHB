@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,12 +19,14 @@ import net.sf.l2j.gameserver.model.L2Clan;
 
 /**
  *
- * @author  -Wooden-
+ * @author -Wooden-
  */
 public class PledgeReceiveWarList extends L2GameServerPacket
 {
 	private static final String _S__FE_3E_PLEDGERECEIVEWARELIST = "[S] FE:3F PledgeReceiveWarList";
+
 	private L2Clan _clan;
+
 	private int _tab;
 
 	public PledgeReceiveWarList(L2Clan clan, int tab)
@@ -45,14 +47,17 @@ public class PledgeReceiveWarList extends L2GameServerPacket
 		writeD(_tab); // type : 0 = Declared, 1 = Under Attack
 		writeD(0x00); // page
 		writeD(_tab == 0 ? _clan.getWarList().size() : _clan.getAttackerList().size());
-		for(Integer i : _tab == 0 ? _clan.getWarList() : _clan.getAttackerList())
+		for (Integer i : _tab == 0 ? _clan.getWarList() : _clan.getAttackerList())
 		{
 			L2Clan clan = ClanTable.getInstance().getClan(i);
-			if (clan == null) continue;
+			if (clan == null)
+			{
+				continue;
+			}
 
 			writeS(clan.getName());
-			writeD(_tab); //??
-			writeD(_tab); //??
+			writeD(_tab); // ??
+			writeD(_tab); // ??
 		}
 	}
 

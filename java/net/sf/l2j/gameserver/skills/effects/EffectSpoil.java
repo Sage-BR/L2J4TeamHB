@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,12 +24,12 @@ import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Formulas;
 
 /**
- * 
+ *
  * @author Ahmed
- * 
- * This is the Effect support for spoil.
- * 
- * This was originally done by _drunk_
+ *
+ *         This is the Effect support for spoil.
+ *
+ *         This was originally done by _drunk_
  */
 public class EffectSpoil extends L2Effect
 {
@@ -37,40 +37,41 @@ public class EffectSpoil extends L2Effect
 	{
 		super(env, template);
 	}
-	
+
 	@Override
 	public EffectType getEffectType()
 	{
 		return EffectType.SPOIL;
 	}
-	
+
 	@Override
 	public void onStart()
 	{
-		
-		if (!(getEffector() instanceof L2PcInstance))
+
+		if (!(getEffector() instanceof L2PcInstance) || !(getEffected() instanceof L2MonsterInstance))
+		{
 			return;
-		
-		if (!(getEffected() instanceof L2MonsterInstance))
-			return;
-		
+		}
+
 		L2MonsterInstance target = (L2MonsterInstance) getEffected();
-		
+
 		if (target == null)
+		{
 			return;
-		
+		}
+
 		if (target.isSpoil())
 		{
 			getEffector().sendPacket(new SystemMessage(SystemMessageId.ALREADY_SPOILED));
 			return;
 		}
-		
+
 		// SPOIL SYSTEM by Lbaldi
 		boolean spoil = false;
-		if (target.isDead() == false)
+		if (!target.isDead())
 		{
 			spoil = Formulas.getInstance().calcMagicSuccess(getEffector(), target, getSkill());
-			
+
 			if (spoil)
 			{
 				target.setSpoil(true);
@@ -86,9 +87,9 @@ public class EffectSpoil extends L2Effect
 			}
 			target.getAI().notifyEvent(CtrlEvent.EVT_ATTACKED, getEffector());
 		}
-		
+
 	}
-	
+
 	@Override
 	public boolean onActionTime()
 	{

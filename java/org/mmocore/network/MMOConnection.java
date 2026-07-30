@@ -56,9 +56,8 @@ public class MMOConnection<T extends MMOClient<?>>
 
 	private T _client;
 
-	public MMOConnection(	final SelectorThread<T> selectorThread,
-							final Socket socket, final SelectionKey key,
-							boolean tcpNoDelay)
+	public MMOConnection(final SelectorThread<T> selectorThread,
+	        final Socket socket, final SelectionKey key, boolean tcpNoDelay)
 	{
 		_selectorThread = selectorThread;
 		_socket = socket;
@@ -73,7 +72,8 @@ public class MMOConnection<T extends MMOClient<?>>
 		try
 		{
 			_socket.setTcpNoDelay(tcpNoDelay);
-		} catch (SocketException e)
+		}
+		catch (SocketException e)
 		{
 			e.printStackTrace();
 		}
@@ -108,8 +108,9 @@ public class MMOConnection<T extends MMOClient<?>>
 			try
 			{
 				_selectionKey.interestOps(_selectionKey.interestOps()
-					| SelectionKey.OP_WRITE);
-			} catch (CancelledKeyException e)
+				        | SelectionKey.OP_WRITE);
+			}
+			catch (CancelledKeyException e)
 			{
 				// ignore
 			}
@@ -152,7 +153,8 @@ public class MMOConnection<T extends MMOClient<?>>
 		{
 			_primaryWriteBuffer = _selectorThread.getPooledBuffer();
 			_primaryWriteBuffer.put(buf);
-		} else
+		}
+		else
 		{
 			final ByteBuffer temp = _selectorThread.getPooledBuffer();
 			temp.put(buf);
@@ -166,7 +168,8 @@ public class MMOConnection<T extends MMOClient<?>>
 				temp.put(_primaryWriteBuffer);
 				_selectorThread.recycleBuffer(_primaryWriteBuffer);
 				_primaryWriteBuffer = temp;
-			} else
+			}
+			else
 			{
 				_primaryWriteBuffer.limit(remaining);
 				temp.put(_primaryWriteBuffer);
@@ -220,7 +223,9 @@ public class MMOConnection<T extends MMOClient<?>>
 	public final void closeNow()
 	{
 		if (_pendingClose)
+		{
 			return;
+		}
 
 		_pendingClose = true;
 		_selectorThread.closeConnection(this);
@@ -229,7 +234,9 @@ public class MMOConnection<T extends MMOClient<?>>
 	public final void closeLater()
 	{
 		if (_pendingClose)
+		{
 			return;
+		}
 
 		_pendingClose = true;
 		_selectorThread.closeConnection(this);
@@ -239,8 +246,7 @@ public class MMOConnection<T extends MMOClient<?>>
 	public final void close(final SendablePacket<T> sp)
 	{
 
-		close(new SendablePacket[]
-			{ sp });
+		close(new SendablePacket[] { sp });
 	}
 
 	public final void close(final SendablePacket<T>[] closeList)
@@ -266,8 +272,9 @@ public class MMOConnection<T extends MMOClient<?>>
 		try
 		{
 			_selectionKey.interestOps(_selectionKey.interestOps()
-				& ~SelectionKey.OP_WRITE);
-		} catch (CancelledKeyException e)
+			        & ~SelectionKey.OP_WRITE);
+		}
+		catch (CancelledKeyException e)
 		{
 			// ignore
 		}

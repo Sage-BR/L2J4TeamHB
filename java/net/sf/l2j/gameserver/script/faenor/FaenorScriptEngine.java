@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,6 +26,8 @@ import java.util.zip.ZipFile;
 import javax.script.ScriptContext;
 import javax.script.ScriptException;
 
+import org.w3c.dom.Node;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.script.Parser;
 import net.sf.l2j.gameserver.script.ParserNotCreatedException;
@@ -34,192 +36,194 @@ import net.sf.l2j.gameserver.script.ScriptEngine;
 import net.sf.l2j.gameserver.script.ScriptPackage;
 import net.sf.l2j.gameserver.scripting.L2ScriptEngineManager;
 
-import org.w3c.dom.Node;
-
-
 /**
  * @author Luis Arias
  *
  */
 public class FaenorScriptEngine extends ScriptEngine
 {
-    static Logger _log = Logger.getLogger(FaenorScriptEngine.class.getName());
-    public final static String PACKAGE_DIRECTORY = "data/faenor/";
-    public final static boolean DEBUG = true;
+	static Logger _log = Logger.getLogger(FaenorScriptEngine.class.getName());
 
-    private static FaenorScriptEngine _instance;
+	public final static String PACKAGE_DIRECTORY = "data/faenor/";
 
-    private LinkedList<ScriptDocument> _scripts;
+	public final static boolean DEBUG = true;
 
-    public static FaenorScriptEngine getInstance()
-    {
-        if (_instance == null)
-        {
-            _instance = new FaenorScriptEngine();
-        }
+	private static FaenorScriptEngine _instance;
 
-        return _instance;
-    }
+	private LinkedList<ScriptDocument> _scripts;
 
-    private FaenorScriptEngine()
-    {
-        _scripts = new LinkedList<ScriptDocument>();
-        loadPackages();
-        parsePackages();
+	public static FaenorScriptEngine getInstance()
+	{
+		if (_instance == null)
+		{
+			_instance = new FaenorScriptEngine();
+		}
 
-    }
+		return _instance;
+	}
 
-    public void reloadPackages()
-    {
-        _scripts = new LinkedList<ScriptDocument>();
-        parsePackages();
-    }
+	private FaenorScriptEngine()
+	{
+		_scripts = new LinkedList<>();
+		loadPackages();
+		parsePackages();
 
-    private void loadPackages()
-    {
-        File packDirectory = new File(Config.DATAPACK_ROOT, PACKAGE_DIRECTORY);//_log.sss(packDirectory.getAbsolutePath());
+	}
 
-        FileFilter fileFilter = new FileFilter() {
-            public boolean accept(File file)
-            {
-                return file.getName().endsWith(".zip");
-            }
-        };
+	public void reloadPackages()
+	{
+		_scripts = new LinkedList<>();
+		parsePackages();
+	}
 
-        File[] files = packDirectory.listFiles(fileFilter);
-        if (files == null) return;
-        ZipFile zipPack;
+	private void loadPackages()
+	{
+		File packDirectory = new File(Config.DATAPACK_ROOT, PACKAGE_DIRECTORY);// _log.sss(packDirectory.getAbsolutePath());
 
-        for (int i = 0; i < files.length; i++)
-        {
-            try
-            {
-                zipPack = new ZipFile(files[i]);
-            }
-            catch (ZipException e)
-            {
-                e.printStackTrace();
-                continue;
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-                continue;
-            }
+		FileFilter fileFilter = new FileFilter() {
+			@Override
+			public boolean accept(File file)
+			{
+				return file.getName().endsWith(".zip");
+			}
+		};
 
-            ScriptPackage module = new ScriptPackage(zipPack);
+		File[] files = packDirectory.listFiles(fileFilter);
+		if (files == null)
+		{
+			return;
+		}
+		ZipFile zipPack;
 
-            List<ScriptDocument> scrpts = module.getScriptFiles();
-            for (ScriptDocument script : scrpts)
-            {
-                _scripts.add(script);
-            }
+		for (File file : files)
+		{
+			try
+			{
+				zipPack = new ZipFile(file);
+			}
+			catch (ZipException e)
+			{
+				e.printStackTrace();
+				continue;
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+				continue;
+			}
 
-        }
-        /*for (ScriptDocument script : scripts)
-         {
-         _log.sss("Script: "+script);
-         }
-         _log.sss("Sorting");
-         orderScripts();
-         for (ScriptDocument script : scripts)
-         {
-         _log.sss("Script: "+script);
-         }*/
-    }
+			ScriptPackage module = new ScriptPackage(zipPack);
 
-    public void orderScripts()
-    {
-        if (_scripts.size() > 1)
-        {
-            //ScriptDocument npcInfo = null;
+			List<ScriptDocument> scrpts = module.getScriptFiles();
+			for (ScriptDocument script : scrpts)
+			{
+				_scripts.add(script);
+			}
 
-            for (int i = 0; i < _scripts.size();)
-            {
-                if (_scripts.get(i).getName().contains("NpcStatData"))
-                {
-                    _scripts.addFirst(_scripts.remove(i));
-                    //scripts.set(i, scripts.get(0));
-                    //scripts.set(0, npcInfo);
-                }
-                else
-                {
-                    i++;
-                }
-            }
-        }
-    }
+		}
+		/*
+		 * for (ScriptDocument script : scripts) { _log.sss("Script: "+script);
+		 * } _log.sss("Sorting"); orderScripts(); for (ScriptDocument script :
+		 * scripts) { _log.sss("Script: "+script); }
+		 */
+	}
 
-    public void parsePackages()
-    {
-        L2ScriptEngineManager sem = L2ScriptEngineManager.getInstance();
-        ScriptContext context = sem.getScriptContext("beanshell");
-        try
-        {
-            sem.eval("beanshell", "double log1p(double d) { return Math.log1p(d); }");
-            sem.eval("beanshell", "double pow(double d, double p) { return Math.pow(d,p); }");
+	public void orderScripts()
+	{
+		if (_scripts.size() > 1)
+		{
+			// ScriptDocument npcInfo = null;
 
-            for (ScriptDocument script : _scripts)
-            {
-                parseScript(script, context);
-            }
-        }
-        catch (ScriptException e)
-        {
-            e.printStackTrace();
-        }
-    }
+			for (int i = 0; i < _scripts.size();)
+			{
+				if (_scripts.get(i).getName().contains("NpcStatData"))
+				{
+					_scripts.addFirst(_scripts.remove(i));
+					// scripts.set(i, scripts.get(0));
+					// scripts.set(0, npcInfo);
+				}
+				else
+				{
+					i++;
+				}
+			}
+		}
+	}
 
-    public void parseScript(ScriptDocument script, ScriptContext context)
-    {
-        if (DEBUG) 
-        {
-            _log.fine("Parsing Script: " + script.getName());
-        }
+	public void parsePackages()
+	{
+		L2ScriptEngineManager sem = L2ScriptEngineManager.getInstance();
+		ScriptContext context = sem.getScriptContext("beanshell");
+		try
+		{
+			sem.eval("beanshell", "double log1p(double d) { return Math.log1p(d); }");
+			sem.eval("beanshell", "double pow(double d, double p) { return Math.pow(d,p); }");
 
-        Node node = script.getDocument().getFirstChild();
-        String parserClass = "faenor.Faenor" + node.getNodeName() + "Parser";
+			for (ScriptDocument script : _scripts)
+			{
+				parseScript(script, context);
+			}
+		}
+		catch (ScriptException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
-        Parser parser = null;
-        try
-        {
-            parser = createParser(parserClass);
-        }
-        catch (ParserNotCreatedException e)
-        {
-            _log.warning("ERROR: No parser registered for Script: " + parserClass);
-            e.printStackTrace();
-        }
+	public void parseScript(ScriptDocument script, ScriptContext context)
+	{
+		if (DEBUG)
+		{
+			_log.fine("Parsing Script: " + script.getName());
+		}
 
-        if (parser == null)
-        {
-            _log.warning("Unknown Script Type: " + script.getName());
-            return;
-        }
+		Node node = script.getDocument().getFirstChild();
+		String parserClass = "faenor.Faenor" + node.getNodeName() + "Parser";
 
-        try
-        {
-            parser.parseScript(node, context);
-            _log.fine(script.getName() + "Script Sucessfullty Parsed.");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            _log.warning("Script Parsing Failed.");
-        }
-    }
+		Parser parser = null;
+		try
+		{
+			parser = createParser(parserClass);
+		}
+		catch (ParserNotCreatedException e)
+		{
+			_log.warning("ERROR: No parser registered for Script: "
+			        + parserClass);
+			e.printStackTrace();
+		}
 
-    @Override
+		if (parser == null)
+		{
+			_log.warning("Unknown Script Type: " + script.getName());
+			return;
+		}
+
+		try
+		{
+			parser.parseScript(node, context);
+			_log.fine(script.getName() + "Script Sucessfullty Parsed.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			_log.warning("Script Parsing Failed.");
+		}
+	}
+
+	@Override
 	public String toString()
-    {
-        if (_scripts.isEmpty()) return "No Packages Loaded.";
+	{
+		if (_scripts.isEmpty())
+		{
+			return "No Packages Loaded.";
+		}
 
-        String out = "Script Packages currently loaded:\n";
+		String out = "Script Packages currently loaded:\n";
 
-        for (ScriptDocument script : _scripts)
-        {
-            out += script;
-        }
-        return out;
-    }
+		for (ScriptDocument script : _scripts)
+		{
+			out += script;
+		}
+		return out;
+	}
 }

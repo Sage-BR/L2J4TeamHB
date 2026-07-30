@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,12 +19,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.cache.HtmCache;
@@ -37,8 +37,6 @@ import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.util.Broadcast;
 
-import java.util.ArrayList;
-
 /**
  * This class ...
  *
@@ -49,8 +47,10 @@ public class Announcements
 	private static Logger _log = Logger.getLogger(Announcements.class.getName());
 
 	private static Announcements _instance;
-	private List<String> _announcements = new ArrayList<String>();
-	private List<List<Object>> _eventAnnouncements = new ArrayList<List<Object>>();
+
+	private List<String> _announcements = new ArrayList<>();
+
+	private List<List<Object>> _eventAnnouncements = new ArrayList<>();
 
 	public Announcements()
 	{
@@ -83,53 +83,55 @@ public class Announcements
 
 	public void showAnnouncements(L2PcInstance activeChar)
 	{
-		for (int i = 0; i < _announcements.size(); i++)
+		for (String _announcement : _announcements)
 		{
-			CreatureSay cs = new CreatureSay(0, Say2.ANNOUNCEMENT, activeChar.getName(), _announcements.get(i));
+			CreatureSay cs = new CreatureSay(0, Say2.ANNOUNCEMENT, activeChar.getName(), _announcement);
 			activeChar.sendPacket(cs);
 		}
 
-		for (int i = 0; i < _eventAnnouncements.size(); i++)
+		for (List<Object> entry : _eventAnnouncements)
 		{
-		    List<Object> entry   = _eventAnnouncements.get(i);
+			DateRange validDateRange = (DateRange) entry.get(0);
+			String[] msg = (String[]) entry.get(1);
+			Date currentDate = new Date();
 
-            DateRange validDateRange  = (DateRange)entry.get(0);
-            String[] msg              = (String[])entry.get(1);
-		    Date currentDate          = new Date();
-
-		    if (!validDateRange.isValid() || validDateRange.isWithinRange(currentDate))
-		    {
-                SystemMessage sm = new SystemMessage(SystemMessageId.S1);
-                for (int j=0; j<msg.length; j++)
-                {
-                    sm.addString(msg[j]);
-                }
-                activeChar.sendPacket(sm);
-		    }
+			if (!validDateRange.isValid()
+			        || validDateRange.isWithinRange(currentDate))
+			{
+				SystemMessage sm = new SystemMessage(SystemMessageId.S1);
+				for (String element : msg)
+				{
+					sm.addString(element);
+				}
+				activeChar.sendPacket(sm);
+			}
 
 		}
 	}
 
 	public void addEventAnnouncement(DateRange validDateRange, String[] msg)
 	{
-	    List<Object> entry = new ArrayList<Object>();
-	    entry.add(validDateRange);
-	    entry.add(msg);
-	    _eventAnnouncements.add(entry);
+		List<Object> entry = new ArrayList<>();
+		entry.add(validDateRange);
+		entry.add(msg);
+		_eventAnnouncements.add(entry);
 	}
 
 	public void listAnnouncements(L2PcInstance activeChar)
 	{
-        String content = HtmCache.getInstance().getHtmForce("data/html/admin/announce.htm");
-        NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
-        adminReply.setHtml(content);
-        StringBuilder replyMSG = new StringBuilder("<br>");
+		String content = HtmCache.getInstance().getHtmForce("data/html/admin/announce.htm");
+		NpcHtmlMessage adminReply = new NpcHtmlMessage(5);
+		adminReply.setHtml(content);
+		StringBuilder replyMSG = new StringBuilder("<br>");
 		for (int i = 0; i < _announcements.size(); i++)
 		{
-			replyMSG.append("<table width=260><tr><td width=220>" + _announcements.get(i) + "</td><td width=40>");
-			replyMSG.append("<button value=\"Delete\" action=\"bypass -h admin_del_announcement " + i + "\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
+			replyMSG.append("<table width=260><tr><td width=220>"
+			        + _announcements.get(i) + "</td><td width=40>");
+			replyMSG.append("<button value=\"Delete\" action=\"bypass -h admin_del_announcement "
+			        + i
+			        + "\" width=60 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
 		}
-        adminReply.replace("%announces%", replyMSG.toString());
+		adminReply.replace("%announces%", replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
 
@@ -150,12 +152,12 @@ public class Announcements
 		LineNumberReader lnr = null;
 		try
 		{
-			int i=0;
+			int i = 0;
 			String line = null;
 			lnr = new LineNumberReader(new FileReader(file));
-			while ( (line = lnr.readLine()) != null)
+			while ((line = lnr.readLine()) != null)
 			{
-				StringTokenizer st = new StringTokenizer(line,"\n\r");
+				StringTokenizer st = new StringTokenizer(line, "\n\r");
 				if (st.hasMoreTokens())
 				{
 					String announcement = st.nextToken();
@@ -165,8 +167,10 @@ public class Announcements
 				}
 			}
 
-			if(Config.DEBUG)
+			if (Config.DEBUG)
+			{
 				_log.config("Announcements: Loaded " + i + " Announcements.");
+			}
 		}
 		catch (IOException e1)
 		{
@@ -193,9 +197,9 @@ public class Announcements
 		try
 		{
 			save = new FileWriter(file);
-			for (int i = 0; i < _announcements.size(); i++)
+			for (String _announcement : _announcements)
 			{
-				save.write(_announcements.get(i));
+				save.write(_announcement);
 				save.write("\r\n");
 			}
 			save.flush();
@@ -208,10 +212,13 @@ public class Announcements
 		}
 	}
 
-	public void announceToAll(String text) {
+	public void announceToAll(String text)
+	{
 		Broadcast.announceToOnlinePlayers(text);
 	}
-	public void announceToAll(SystemMessage sm) {
+
+	public void announceToAll(SystemMessage sm)
+	{
 		Broadcast.toAllOnlinePlayers(sm);
 	}
 

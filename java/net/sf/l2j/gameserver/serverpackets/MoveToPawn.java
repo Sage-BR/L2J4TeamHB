@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,11 +18,14 @@ import net.sf.l2j.gameserver.model.L2Character;
 
 /**
  *
- * 0000: 75  7a 07 80 49  63 27 00 4a  ea 01 00 00  c1 37 fe    uz..Ic'.J.....7. <p>
- * 0010: ff 9e c3 03 00 8f f3 ff ff                         .........<p>
+ * 0000: 75 7a 07 80 49 63 27 00 4a ea 01 00 00 c1 37 fe uz..Ic'.J.....7.
+ * <p>
+ * 0010: ff 9e c3 03 00 8f f3 ff ff .........
+ * <p>
  * <p>
  *
- * format   dddddd		(player id, target id, distance, startx, starty, startz)<p>
+ * format dddddd (player id, target id, distance, startx, starty, startz)
+ * <p>
  *
  *
  * @version $Revision: 1.3.2.1.2.5 $ $Date: 2005/04/06 16:13:46 $
@@ -30,9 +33,13 @@ import net.sf.l2j.gameserver.model.L2Character;
 public class MoveToPawn extends L2GameServerPacket
 {
 	private static final String _S__75_MOVETOPAWN = "[S] 72 MoveToPawn";
+
 	private int _charObjId;
+
 	private int _targetId;
+
 	private int _distance;
+
 	private int _x, _y, _z;
 
 	public MoveToPawn(L2Character cha, L2Character target, int distance)
@@ -59,7 +66,9 @@ public class MoveToPawn extends L2GameServerPacket
 		writeD(_z);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

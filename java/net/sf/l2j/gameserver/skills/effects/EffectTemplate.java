@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,31 +27,41 @@ import net.sf.l2j.gameserver.skills.funcs.Lambda;
 /**
  * @author mkizub
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ *         TODO To change the template for this generated type comment go to
+ *         Window - Preferences - Java - Code Style - Code Templates
  */
 public final class EffectTemplate
 {
-    static Logger _log = Logger.getLogger(EffectTemplate.class.getName());
+	static Logger _log = Logger.getLogger(EffectTemplate.class.getName());
 
 	private final Class<?> _func;
+
 	private final Constructor<?> _constructor;
 
 	public final Condition attachCond;
+
 	public final Condition applayCond;
+
 	public final Lambda lambda;
+
 	public final int counter;
+
 	public final int period; // in seconds
+
 	public final int abnormalEffect;
+
 	public FuncTemplate[] funcTemplates;
 
 	public final String stackType;
+
 	public final float stackOrder;
+
 	public final boolean icon;
 
 	public EffectTemplate(Condition pAttachCond, Condition pApplayCond,
-			String func, Lambda pLambda, int pCounter, int pPeriod,
-			int pAbnormalEffect, String pStackType, float pStackOrder, boolean showicon)
+	        String func, Lambda pLambda, int pCounter, int pPeriod,
+	        int pAbnormalEffect, String pStackType, float pStackOrder,
+	        boolean showicon)
 	{
 		attachCond = pAttachCond;
 		applayCond = pApplayCond;
@@ -62,14 +72,21 @@ public final class EffectTemplate
 		stackType = pStackType;
 		stackOrder = pStackOrder;
 		icon = showicon;
-		try {
-			_func = Class.forName("net.sf.l2j.gameserver.skills.effects.Effect"+func);
-		} catch (ClassNotFoundException e) {
+		try
+		{
+			_func = Class.forName("net.sf.l2j.gameserver.skills.effects.Effect"
+			        + func);
+		}
+		catch (ClassNotFoundException e)
+		{
 			throw new RuntimeException(e);
 		}
-		try {
+		try
+		{
 			_constructor = _func.getConstructor(Env.class, EffectTemplate.class);
-		} catch (NoSuchMethodException e) {
+		}
+		catch (NoSuchMethodException e)
+		{
 			throw new RuntimeException(e);
 		}
 	}
@@ -77,40 +94,50 @@ public final class EffectTemplate
 	public L2Effect getEffect(Env env)
 	{
 		if (attachCond != null && !attachCond.test(env))
+		{
 			return null;
-		try {
-			L2Effect effect = (L2Effect)_constructor.newInstance(env, this);
-			//if (_applayCond != null)
-			//	effect.setCondition(_applayCond);
+		}
+		try
+		{
+			L2Effect effect = (L2Effect) _constructor.newInstance(env, this);
+			// if (_applayCond != null)
+			// effect.setCondition(_applayCond);
 			return effect;
-		} catch (IllegalAccessException e) {
+		}
+		catch (IllegalAccessException e)
+		{
 			e.printStackTrace();
 			return null;
-		} catch (InstantiationException e) {
+		}
+		catch (InstantiationException e)
+		{
 			e.printStackTrace();
 			return null;
-		} catch (InvocationTargetException e) {
-            _log.warning("Error creating new instance of Class "+_func+" Exception was:");
+		}
+		catch (InvocationTargetException e)
+		{
+			_log.warning("Error creating new instance of Class " + _func
+			        + " Exception was:");
 			e.getTargetException().printStackTrace();
 			return null;
 		}
 
 	}
 
-    public void attach(FuncTemplate f)
-    {
-    	if (funcTemplates == null)
-    	{
-    		funcTemplates = new FuncTemplate[]{f};
-    	}
-    	else
-    	{
-    		int len = funcTemplates.length;
-    		FuncTemplate[] tmp = new FuncTemplate[len+1];
-    		System.arraycopy(funcTemplates, 0, tmp, 0, len);
-    		tmp[len] = f;
-    		funcTemplates = tmp;
-    	}
-    }
+	public void attach(FuncTemplate f)
+	{
+		if (funcTemplates == null)
+		{
+			funcTemplates = new FuncTemplate[] { f };
+		}
+		else
+		{
+			int len = funcTemplates.length;
+			FuncTemplate[] tmp = new FuncTemplate[len + 1];
+			System.arraycopy(funcTemplates, 0, tmp, 0, len);
+			tmp[len] = f;
+			funcTemplates = tmp;
+		}
+	}
 
 }

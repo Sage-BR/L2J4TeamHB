@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,12 +27,15 @@ public class ExOlympiadUserInfoSpectator extends L2GameServerPacket
 {
 	// chcdSddddd
 	private static final String _S__FE_29_OLYMPIADUSERINFOSPECTATOR = "[S] FE:7a OlympiadUserInfoSpectator";
+
 	private int _side;
+
 	private L2PcInstance _player;
 
 	/**
 	 * @param _player
-	 * @param _side (1 = right, 2 = left)
+	 * @param _side
+	 *            (1 = right, 2 = left)
 	 */
 	public ExOlympiadUserInfoSpectator(L2PcInstance player, int side)
 	{
@@ -49,13 +52,15 @@ public class ExOlympiadUserInfoSpectator extends L2GameServerPacket
 		writeD(_player.getObjectId());
 		writeS(_player.getName());
 		writeD(_player.getClassId().getId());
-		writeD((int)_player.getCurrentHp());
+		writeD((int) _player.getCurrentHp());
 		writeD(_player.getMaxHp());
-		writeD((int)_player.getCurrentCp());
+		writeD((int) _player.getCurrentCp());
 		writeD(_player.getMaxCp());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

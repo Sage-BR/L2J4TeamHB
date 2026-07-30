@@ -3,31 +3,36 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.communitybbs.Manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.serverpackets.ShowBoard;
 
-import java.util.ArrayList;
-
 public abstract class BaseBBSManager
 {
 	public abstract void parsecmd(String command, L2PcInstance activeChar);
-	public abstract void parsewrite(String ar1,String ar2,String ar3,String ar4,String ar5, L2PcInstance activeChar);
+
+	public abstract void parsewrite(String ar1, String ar2, String ar3,
+	        String ar4, String ar5, L2PcInstance activeChar);
+
 	protected void separateAndSend(String html, L2PcInstance acha)
 	{
-		if (html == null) return;
+		if (html == null)
+		{
+			return;
+		}
 		if (html.length() < 4090)
 		{
 			acha.sendPacket(new ShowBoard(html, "101"));
@@ -50,6 +55,7 @@ public abstract class BaseBBSManager
 
 		}
 	}
+
 	/**
 	 * @param html
 	 */
@@ -60,21 +66,24 @@ public abstract class BaseBBSManager
 			acha.sendPacket(new ShowBoard(html, "1001"));
 		}
 	}
+
 	/**
 	 * @param i
 	 */
 	protected void send1002(L2PcInstance acha)
 	{
-		send1002(acha," "," ","0");
+		send1002(acha, " ", " ", "0");
 	}
+
 	/**
 	 * @param activeChar
 	 * @param string
 	 * @param string2
 	 */
-	protected void send1002(L2PcInstance activeChar, String string, String string2,String string3)
+	protected void send1002(L2PcInstance activeChar, String string,
+	        String string2, String string3)
 	{
-		List<String> _arg = new ArrayList<String>();
+		List<String> _arg = new ArrayList<>();
 		_arg.add("0");
 		_arg.add("0");
 		_arg.add("0");

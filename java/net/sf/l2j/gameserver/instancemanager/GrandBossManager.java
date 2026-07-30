@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.L2DatabaseFactory;
@@ -31,38 +32,26 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
 import net.sf.l2j.util.L2ArrayList;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  *
- * @author DaRkRaGe
- * Revised by Emperorc
+ * @author DaRkRaGe Revised by Emperorc
  */
 public class GrandBossManager
 {
-	/* =========================================================
-	 * This class handles all Grand Bosses:
-	 * <ul>
-	 * <li>22215-22217  Tyrannosaurus</li>
-	 * <li>25333-25338  Anakazel</li>
-	 * <li>29001        Queen Ant</li>
-	 * <li>29006        Core</li>
-	 * <li>29014        Orfen</li>
-	 * <li>29019        Antharas</li>
-	 * <li>29020        Baium</li>
-	 * <li>29022        Zaken</li>
-	 * <li>29028        Valakas</li>
-	 * <li>29045        Frintezza</li>
-	 * <li>29046-29047  Scarlet van Halisha</li>
-	 * </ul>
+	/*
+	 * ========================================================= This class
+	 * handles all Grand Bosses: <ul> <li>22215-22217 Tyrannosaurus</li>
+	 * <li>25333-25338 Anakazel</li> <li>29001 Queen Ant</li> <li>29006
+	 * Core</li> <li>29014 Orfen</li> <li>29019 Antharas</li> <li>29020
+	 * Baium</li> <li>29022 Zaken</li> <li>29028 Valakas</li> <li>29045
+	 * Frintezza</li> <li>29046-29047 Scarlet van Halisha</li> </ul>
 	 *
-	 * It handles the saving of hp, mp, location, and status
-	 * of all Grand Bosses. It also manages the zones associated
-	 * with the Grand Bosses.
-	 * NOTE: The current version does NOT spawn the Grand Bosses,
-	 * it just stores and retrieves the values on reboot/startup,
-	 * for AI scripts to utilize as needed.
-	*/
+	 * It handles the saving of hp, mp, location, and status of all Grand
+	 * Bosses. It also manages the zones associated with the Grand Bosses. NOTE:
+	 * The current version does NOT spawn the Grand Bosses, it just stores and
+	 * retrieves the values on reboot/startup, for AI scripts to utilize as
+	 * needed.
+	 */
 
 	/**
 	 * DELETE FROM grandboss_list
@@ -75,12 +64,14 @@ public class GrandBossManager
 	private static final String INSERT_GRAND_BOSS_LIST = "INSERT INTO grandboss_list (player_id,zone) VALUES (?,?)";
 
 	/**
-	 * UPDATE grandboss_data set loc_x = ?, loc_y = ?, loc_z = ?, heading = ?, respawn_time = ?, currentHP = ?, currentMP = ?, status = ? where boss_id = ?
+	 * UPDATE grandboss_data set loc_x = ?, loc_y = ?, loc_z = ?, heading = ?,
+	 * respawn_time = ?, currentHP = ?, currentMP = ?, status = ? where boss_id
+	 * = ?
 	 */
 	private static final String UPDATE_GRAND_BOSS_DATA = "UPDATE grandboss_data set loc_x = ?, loc_y = ?, loc_z = ?, heading = ?, respawn_time = ?, currentHP = ?, currentMP = ?, status = ? where boss_id = ?";
 
 	private static final String UPDATE_GRAND_BOSS_DATA2 = "UPDATE grandboss_data set status = ? where boss_id = ?";
-	
+
 	private static Logger _log = Logger.getLogger(GrandBossManager.class.getName());
 
 	private static GrandBossManager _instance;
@@ -110,11 +101,11 @@ public class GrandBossManager
 
 	private void init()
 	{
-		_zones = new L2ArrayList<L2BossZone>();
+		_zones = new L2ArrayList<>();
 
-		_bosses = new ConcurrentHashMap<Integer, L2GrandBossInstance>();
-		_storedInfo = new ConcurrentHashMap<Integer, StatsSet>();
-		_bossStatus = new ConcurrentHashMap<Integer, Integer>();
+		_bosses = new ConcurrentHashMap<>();
+		_storedInfo = new ConcurrentHashMap<>();
+		_bossStatus = new ConcurrentHashMap<>();
 		Connection con = null;
 		try
 		{
@@ -125,8 +116,9 @@ public class GrandBossManager
 
 			while (rset.next())
 			{
-				//Read all info from DB, and store it for AI to read and decide what to do
-				//faster than accessing DB in real time
+				// Read all info from DB, and store it for AI to read and decide
+				// what to do
+				// faster than accessing DB in real time
 				StatsSet info = new StatsSet();
 				int bossId = rset.getInt("boss_id");
 				info.set("loc_x", rset.getInt("loc_x"));
@@ -134,9 +126,10 @@ public class GrandBossManager
 				info.set("loc_z", rset.getInt("loc_z"));
 				info.set("heading", rset.getInt("heading"));
 				info.set("respawn_time", rset.getLong("respawn_time"));
-				double HP = rset.getDouble("currentHP"); //jython doesn't recognize doubles
-				int true_HP = (int) HP; //so use java's ability to type cast
-				info.set("currentHP", true_HP); //to convert double to int
+				double HP = rset.getDouble("currentHP"); // jython doesn't
+				                                         // recognize doubles
+				int true_HP = (int) HP; // so use java's ability to type cast
+				info.set("currentHP", true_HP); // to convert double to int
 				double MP = rset.getDouble("currentMP");
 				int true_MP = (int) MP;
 				info.set("currentMP", true_MP);
@@ -146,7 +139,8 @@ public class GrandBossManager
 				info = null;
 			}
 
-			_log.info("GrandBossManager: Loaded " + _storedInfo.size() + " Instances");
+			_log.info("GrandBossManager: Loaded " + _storedInfo.size()
+			        + " Instances");
 
 			rset.close();
 			statement.close();
@@ -180,7 +174,7 @@ public class GrandBossManager
 	{
 		Connection con = null;
 
-		ConcurrentHashMap<Integer, L2ArrayList<Integer>> zones = new ConcurrentHashMap<Integer, L2ArrayList<Integer>>();
+		ConcurrentHashMap<Integer, L2ArrayList<Integer>> zones = new ConcurrentHashMap<>();
 
 		if (_zones == null)
 		{
@@ -191,8 +185,10 @@ public class GrandBossManager
 		for (L2BossZone zone : _zones)
 		{
 			if (zone == null)
+			{
 				continue;
-			zones.put(zone.getId(), new L2ArrayList<Integer>());
+			}
+			zones.put(zone.getId(), new L2ArrayList<>());
 		}
 
 		try
@@ -212,7 +208,8 @@ public class GrandBossManager
 			rset.close();
 			statement.close();
 
-			_log.info("GrandBossManager: Initialized " + _zones.size() + " Grand Boss Zones");
+			_log.info("GrandBossManager: Initialized " + _zones.size()
+			        + " Grand Boss Zones");
 		}
 		catch (SQLException e)
 		{
@@ -237,7 +234,9 @@ public class GrandBossManager
 		for (L2BossZone zone : _zones)
 		{
 			if (zone == null)
+			{
 				continue;
+			}
 			zone.setAllowedPlayers(zones.get(zone.getId()));
 		}
 
@@ -255,6 +254,7 @@ public class GrandBossManager
 	public final L2BossZone getZone(L2Character character)
 	{
 		if (_zones != null)
+		{
 			for (L2BossZone temp : _zones)
 			{
 				if (temp.isCharacterInZone(character))
@@ -262,12 +262,14 @@ public class GrandBossManager
 					return temp;
 				}
 			}
+		}
 		return null;
 	}
 
 	public final L2BossZone getZone(int x, int y, int z)
 	{
 		if (_zones != null)
+		{
 			for (L2BossZone temp : _zones)
 			{
 				if (temp.isInsideZone(x, y, z))
@@ -275,6 +277,7 @@ public class GrandBossManager
 					return temp;
 				}
 			}
+		}
 		return null;
 	}
 
@@ -312,7 +315,9 @@ public class GrandBossManager
 		if (boss != null)
 		{
 			if (_bosses.containsKey(boss.getNpcId()))
+			{
 				_bosses.remove(boss.getNpcId());
+			}
 			_bosses.put(boss.getNpcId(), boss);
 		}
 	}
@@ -321,10 +326,12 @@ public class GrandBossManager
 	{
 		return _bosses.get(bossId);
 	}
+
 	public L2GrandBossInstance deleteBoss(final int bossId)
 	{
 		return _bosses.remove(bossId);
 	}
+
 	public StatsSet getStatsSet(int bossId)
 	{
 		return _storedInfo.get(bossId);
@@ -333,7 +340,9 @@ public class GrandBossManager
 	public void setStatsSet(int bossId, StatsSet info)
 	{
 		if (_storedInfo.containsKey(bossId))
+		{
 			_storedInfo.remove(bossId);
+		}
 		_storedInfo.put(bossId, info);
 	}
 
@@ -352,11 +361,15 @@ public class GrandBossManager
 			for (L2BossZone zone : _zones)
 			{
 				if (zone == null)
+				{
 					continue;
+				}
 				Integer id = zone.getId();
 				L2ArrayList<Integer> list = zone.getAllowedPlayers();
 				if (list == null || list.isEmpty())
+				{
 					continue;
+				}
 				for (Integer player : list)
 				{
 					statement = con.prepareStatement(INSERT_GRAND_BOSS_LIST);
@@ -403,7 +416,8 @@ public class GrandBossManager
 		}
 		catch (SQLException e)
 		{
-			_log.warning("GrandBossManager: Couldn't store grandbosses to database:" + e);
+			_log.warning("GrandBossManager: Couldn't store grandbosses to database:"
+			        + e);
 		}
 		finally
 		{
@@ -421,30 +435,31 @@ public class GrandBossManager
 	public L2NpcTemplate getValidTemplate(final int bossId)
 	{
 		final L2NpcTemplate template = NpcTable.getInstance().getTemplate(bossId);
-		if (template == null)
+		if ((template == null) || !template.type.equalsIgnoreCase("L2GrandBoss"))
+		{
 			return null;
-		
-		if (!template.type.equalsIgnoreCase("L2GrandBoss"))
-			return null;
-		
+		}
+
 		return template;
 	}
+
 	public boolean isDefined(final int bossId) // into database
 	{
 		return _bossStatus.get(bossId) != null;
 	}
+
 	/**
-	 * Saves all Grand Boss info and then clears all info from memory,
-	 * including all schedules.
+	 * Saves all Grand Boss info and then clears all info from memory, including
+	 * all schedules.
 	 */
 	public void cleanUp()
 	{
 		storeToDb();
 
-		 _bosses.clear();
-		 _storedInfo.clear();
-		 _bossStatus.clear();
-		 _zones.clear();
+		_bosses.clear();
+		_storedInfo.clear();
+		_bossStatus.clear();
+		_zones.clear();
 	}
 
 }

@@ -25,11 +25,13 @@ import net.sf.l2j.gameserver.templates.L2Item;
 
 /**
  * Format(ch) d
- * @author  -Wooden-
+ *
+ * @author -Wooden-
  */
 public final class RequestRefineCancel extends L2GameClientPacket
 {
 	private static final String _C__D0_2E_REQUESTREFINECANCEL = "[C] D0:2E RequestRefineCancel";
+
 	private int _targetItemObjId;
 
 	@Override
@@ -45,7 +47,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 	protected void runImpl()
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
-		L2ItemInstance targetItem = (L2ItemInstance)L2World.getInstance().findObject(_targetItemObjId);
+		L2ItemInstance targetItem = (L2ItemInstance) L2World.getInstance().findObject(_targetItemObjId);
 
 		if (activeChar == null)
 		{
@@ -66,7 +68,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 		}
 
 		// get the price
-		int price=0;
+		int price = 0;
 		switch (targetItem.getItem().getItemGrade())
 		{
 			case L2Item.CRYSTAL_C:

@@ -44,7 +44,8 @@ public final class NioNetStringBuffer
 		if (_len < _size)
 		{
 			_buf[_len++] = c;
-		} else
+		}
+		else
 		{
 			throw new BufferOverflowException();
 		}

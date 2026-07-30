@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,46 +26,54 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
  */
 public final class RequestReplyStartPledgeWar extends L2GameClientPacket
 {
-    private static final String _C__4e_REQUESTREPLYSTARTPLEDGEWAR = "[C] 4e RequestReplyStartPledgeWar";
-	//private static Logger _log = Logger.getLogger(RequestReplyStartPledgeWar.class.getName());
+	private static final String _C__4e_REQUESTREPLYSTARTPLEDGEWAR = "[C] 4e RequestReplyStartPledgeWar";
+	// private static Logger _log =
+	// Logger.getLogger(RequestReplyStartPledgeWar.class.getName());
 
-    private int _answer;
+	private int _answer;
 
-    @Override
+	@Override
 	protected void readImpl()
-    {
-        @SuppressWarnings("unused") String _reqName = readS();
-        _answer  = readD();
-    }
+	{
+		@SuppressWarnings("unused")
+		String _reqName = readS();
+		_answer = readD();
+	}
 
-    @Override
+	@Override
 	protected void runImpl()
-    {
-        L2PcInstance activeChar = getClient().getActiveChar();
-        if (activeChar == null)
-            return;
-        L2PcInstance requestor = activeChar.getActiveRequester();
-        if (requestor == null)
-            return;
+	{
+		L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null)
+		{
+			return;
+		}
+		L2PcInstance requestor = activeChar.getActiveRequester();
+		if (requestor == null)
+		{
+			return;
+		}
 
-        if (_answer == 1)
-        {
-            ClanTable.getInstance().storeclanswars(requestor.getClanId(), activeChar.getClanId());
-        }
-        else
-        {
-            requestor.sendPacket(new SystemMessage(SystemMessageId.WAR_PROCLAMATION_HAS_BEEN_REFUSED));
-        }
-        activeChar.setActiveRequester(null);
-        requestor.onTransactionResponse();
-    }
+		if (_answer == 1)
+		{
+			ClanTable.getInstance().storeclanswars(requestor.getClanId(), activeChar.getClanId());
+		}
+		else
+		{
+			requestor.sendPacket(new SystemMessage(SystemMessageId.WAR_PROCLAMATION_HAS_BEEN_REFUSED));
+		}
+		activeChar.setActiveRequester(null);
+		requestor.onTransactionResponse();
+	}
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
-     */
-    @Override
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
+	 */
+	@Override
 	public String getType()
-    {
-        return _C__4e_REQUESTREPLYSTARTPLEDGEWAR;
-    }
+	{
+		return _C__4e_REQUESTREPLYSTARTPLEDGEWAR;
+	}
 }

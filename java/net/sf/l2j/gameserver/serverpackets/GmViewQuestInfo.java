@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,13 +20,14 @@ import net.sf.l2j.gameserver.model.quest.QuestState;
 
 /**
  * Sh (dd) h (dddd)
+ *
  * @author Tempy
  */
 public class GmViewQuestInfo extends L2GameServerPacket
 {
 	private static final String _S__AC_GMVIEWQUESTLIST = "[S] 99 GMViewQuestList";
 
-    private L2PcInstance _activeChar;
+	private L2PcInstance _activeChar;
 
 	public GmViewQuestInfo(L2PcInstance cha)
 	{
@@ -39,35 +40,37 @@ public class GmViewQuestInfo extends L2GameServerPacket
 		writeC(0x99);
 		writeS(_activeChar.getName());
 
-        Quest[] questList = _activeChar.getAllActiveQuests();
+		Quest[] questList = _activeChar.getAllActiveQuests();
 
-        if (questList.length == 0)
-        {
-            writeC(0);
-            writeH(0);
-            writeH(0);
-            return;
-        }
+		if (questList.length == 0)
+		{
+			writeC(0);
+			writeH(0);
+			writeH(0);
+			return;
+		}
 
-        writeH(questList.length); // quest count
+		writeH(questList.length); // quest count
 
-        for (Quest q : questList)
-        {
-            writeD(q.getQuestIntId());
+		for (Quest q : questList)
+		{
+			writeD(q.getQuestIntId());
 
-            QuestState qs = _activeChar.getQuestState(q.getName());
+			QuestState qs = _activeChar.getQuestState(q.getName());
 
-            if (qs == null)
-            {
-                writeD(0);
-                continue;
-            }
+			if (qs == null)
+			{
+				writeD(0);
+				continue;
+			}
 
-            writeD(qs.getInt("cond"));   // stage of quest progress
-        }
+			writeD(qs.getInt("cond")); // stage of quest progress
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

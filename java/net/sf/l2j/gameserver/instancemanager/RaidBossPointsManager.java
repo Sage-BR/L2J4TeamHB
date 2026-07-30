@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,26 +23,27 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
-  * @author Kerberos
-  */
+ * @author Kerberos
+ */
 
 public class RaidBossPointsManager
 {
 	private final static Logger _log = Logger.getLogger(RaidBossPointsManager.class.getName());
+
 	protected static ConcurrentHashMap<Integer, Map<Integer, Integer>> _list;
-	
-	private static final Comparator<Map.Entry<Integer, Integer>> _comparator = new Comparator<Map.Entry<Integer, Integer>>(){
-		public int compare(Map.Entry<Integer, Integer> entry, Map.Entry<Integer, Integer> entry1)
+
+	private static final Comparator<Map.Entry<Integer, Integer>> _comparator = new Comparator<>() {
+		@Override
+		public int compare(Map.Entry<Integer, Integer> entry,
+		        Map.Entry<Integer, Integer> entry1)
 		{
 			return entry.getValue().equals(entry1.getValue()) ? 0 : entry.getValue() < entry1.getValue() ? 1 : -1;
 		}
@@ -50,30 +51,30 @@ public class RaidBossPointsManager
 
 	public final static void init()
 	{
-		_list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
-		ArrayList<Integer> _chars = new ArrayList<Integer>();
+		_list = new ConcurrentHashMap<>();
+		ArrayList<Integer> _chars = new ArrayList<>();
 		Connection con = null;
 		try
 		{
 			con = L2DatabaseFactory.getInstance().getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM `character_raid_points`");
 			ResultSet rset = statement.executeQuery();
-			while(rset.next())
+			while (rset.next())
 			{
 				_chars.add(rset.getInt("charId"));
 			}
 			rset.close();
 			statement.close();
-			
+
 			statement = con.prepareStatement("SELECT * FROM `character_raid_points` WHERE `charId`=?");
-			for(int charId : _chars)
+			for (int charId : _chars)
 			{
-				ConcurrentHashMap<Integer, Integer> values = new ConcurrentHashMap<Integer, Integer>();
-				
+				ConcurrentHashMap<Integer, Integer> values = new ConcurrentHashMap<>();
+
 				statement.setInt(1, charId);
 				rset = statement.executeQuery();
 				statement.clearParameters();
-				while(rset.next())
+				while (rset.next())
 				{
 					values.put(rset.getInt("boss_id"), rset.getInt("points"));
 				}
@@ -90,70 +91,94 @@ public class RaidBossPointsManager
 		{
 			_log.warning(e.getMessage());
 		}
-		finally {
-			try { con.close(); } catch (Exception e) {}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 
-    public final static void updatePointsInDB(L2PcInstance player, int raidId, int points)
-    {
-        Connection con = null;
-        try
-        {
-            con = L2DatabaseFactory.getInstance().getConnection();
-            PreparedStatement statement;
-            statement = con.prepareStatement("REPLACE INTO character_raid_points (`charId`,`boss_id`,`points`) VALUES (?,?,?)");
-            statement.setInt(1, player.getObjectId());
-            statement.setInt(2, raidId);
-            statement.setInt(3, points);
+	public final static void updatePointsInDB(L2PcInstance player, int raidId,
+	        int points)
+	{
+		Connection con = null;
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement;
+			statement = con.prepareStatement("REPLACE INTO character_raid_points (`charId`,`boss_id`,`points`) VALUES (?,?,?)");
+			statement.setInt(1, player.getObjectId());
+			statement.setInt(2, raidId);
+			statement.setInt(3, points);
 			statement.executeUpdate();
-            statement.close();
-        }
-        catch (Exception e)
-        {
+			statement.close();
+		}
+		catch (Exception e)
+		{
 			_log.log(Level.WARNING, "could not update char raid points:", e);
-        }
-        finally {
-        	try { con.close(); } catch (Exception e) {}
-        }
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
+		}
 	}
 
-    public final static void addPoints(L2PcInstance player, int bossId, int points)
-    {
-    	int ownerId = player.getObjectId();
-    	Map<Integer, Integer> tmpPoint;
+	public final static void addPoints(L2PcInstance player, int bossId,
+	        int points)
+	{
+		int ownerId = player.getObjectId();
+		Map<Integer, Integer> tmpPoint;
 		if (_list == null)
-			_list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
-    	tmpPoint = _list.get(ownerId);
-    	if(tmpPoint == null || tmpPoint.isEmpty())
-    	{
-    		tmpPoint = new ConcurrentHashMap<Integer, Integer>();
-    		tmpPoint.put(bossId, points);
-    		updatePointsInDB(player, bossId, points);
-    	}
-    	else
-    	{
-    		int currentPoins = tmpPoint.containsKey(bossId) ? tmpPoint.get(bossId).intValue() : 0;
-    		tmpPoint.remove(bossId);
-    		tmpPoint.put(bossId, currentPoins == 0 ? points : currentPoins + points);
-    		updatePointsInDB(player, bossId, currentPoins == 0 ? points : currentPoins + points);
-    	}
-    	_list.remove(ownerId);
-    	_list.put(ownerId, tmpPoint);
-    }
+		{
+			_list = new ConcurrentHashMap<>();
+		}
+		tmpPoint = _list.get(ownerId);
+		if (tmpPoint == null || tmpPoint.isEmpty())
+		{
+			tmpPoint = new ConcurrentHashMap<>();
+			tmpPoint.put(bossId, points);
+			updatePointsInDB(player, bossId, points);
+		}
+		else
+		{
+			int currentPoins = tmpPoint.containsKey(bossId) ? tmpPoint.get(bossId).intValue() : 0;
+			tmpPoint.remove(bossId);
+			tmpPoint.put(bossId, currentPoins == 0 ? points : currentPoins
+			        + points);
+			updatePointsInDB(player, bossId, currentPoins == 0 ? points : currentPoins
+			        + points);
+		}
+		_list.remove(ownerId);
+		_list.put(ownerId, tmpPoint);
+	}
 
 	public final static int getPointsByOwnerId(int ownerId)
 	{
 		Map<Integer, Integer> tmpPoint;
 		if (_list == null)
-			_list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
+		{
+			_list = new ConcurrentHashMap<>();
+		}
 		tmpPoint = _list.get(ownerId);
 		int totalPoints = 0;
-		
+
 		if (tmpPoint == null || tmpPoint.isEmpty())
+		{
 			return 0;
-		
-		for(int bossId : tmpPoint.keySet())
+		}
+
+		for (int bossId : tmpPoint.keySet())
 		{
 			totalPoints += tmpPoint.get(bossId);
 		}
@@ -168,70 +193,76 @@ public class RaidBossPointsManager
 	public final static void cleanUp()
 	{
 		Connection con = null;
-        try
-        {
-            con = L2DatabaseFactory.getInstance().getConnection();
-            PreparedStatement statement;
-            statement = con.prepareStatement("DELETE from character_raid_points WHERE charId > 0");
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement;
+			statement = con.prepareStatement("DELETE from character_raid_points WHERE charId > 0");
 			statement.executeUpdate();
-            statement.close();
-            _list.clear();
-            _list = new ConcurrentHashMap<Integer, Map<Integer, Integer>>();
-        }
-        catch (Exception e)
-        {
+			statement.close();
+			_list.clear();
+			_list = new ConcurrentHashMap<>();
+		}
+		catch (Exception e)
+		{
 			_log.log(Level.WARNING, "could not clean raid points: ", e);
-        }
+		}
 	}
 
 	public final static int calculateRanking(int playerObjId)
 	{
-		Map<Integer, Integer> tmpRanking = new ConcurrentHashMap<Integer, Integer>();
-		Map<Integer, Integer> tmpPoints = new ConcurrentHashMap<Integer, Integer>();
+		Map<Integer, Integer> tmpRanking = new ConcurrentHashMap<>();
+		Map<Integer, Integer> tmpPoints = new ConcurrentHashMap<>();
 		int totalPoints;
-		
-		for(int ownerId : _list.keySet())
+
+		for (int ownerId : _list.keySet())
 		{
 			totalPoints = getPointsByOwnerId(ownerId);
-			if(totalPoints != 0)
+			if (totalPoints != 0)
 			{
 				tmpPoints.put(ownerId, totalPoints);
 			}
 		}
-		ArrayList<Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(tmpPoints.entrySet());
-		
+		ArrayList<Entry<Integer, Integer>> list = new ArrayList<>(tmpPoints.entrySet());
+
 		Collections.sort(list, _comparator);
 
 		int ranking = 1;
-		for(Map.Entry<Integer, Integer> entry : list)
+		for (Map.Entry<Integer, Integer> entry : list)
+		{
 			tmpRanking.put(entry.getKey(), ranking++);
+		}
 
 		if (tmpRanking.containsKey(playerObjId))
+		{
 			return tmpRanking.get(playerObjId);
+		}
 		return 0;
 	}
-	
+
 	public static Map<Integer, Integer> getRankList()
 	{
-		Map<Integer, Integer> tmpRanking = new ConcurrentHashMap<Integer, Integer>();
-		Map<Integer, Integer> tmpPoints = new ConcurrentHashMap<Integer, Integer>();
+		Map<Integer, Integer> tmpRanking = new ConcurrentHashMap<>();
+		Map<Integer, Integer> tmpPoints = new ConcurrentHashMap<>();
 		int totalPoints;
-		
-		for(int ownerId : _list.keySet())
+
+		for (int ownerId : _list.keySet())
 		{
 			totalPoints = getPointsByOwnerId(ownerId);
-			if(totalPoints != 0)
+			if (totalPoints != 0)
 			{
 				tmpPoints.put(ownerId, totalPoints);
 			}
 		}
-		ArrayList<Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(tmpPoints.entrySet());
-		
+		ArrayList<Entry<Integer, Integer>> list = new ArrayList<>(tmpPoints.entrySet());
+
 		Collections.sort(list, _comparator);
 
 		int ranking = 1;
-		for(Map.Entry<Integer, Integer> entry : list)
+		for (Map.Entry<Integer, Integer> entry : list)
+		{
 			tmpRanking.put(entry.getKey(), ranking++);
+		}
 
 		return tmpRanking;
 	}

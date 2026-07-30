@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="6656" name="Earring of Antharas">
+  <item id='6656' name="Earring of Antharas">
     <for>
       <add val="71" order="0x10" stat="mDef" />
       <add val="31" order="0x40" stat="maxMp" />
@@ -27,7 +27,7 @@
     <set name="m_def" val="71" />
     <set name="mp_bonus" val="31" />
   </item>
-  <item id="6657" name="Necklace of Valakas">
+<item id='6657' name="Necklace of Valakas">
     <for>
       <add val="95" order="0x10" stat="mDef" />
       <add val="42" order="0x40" stat="maxMp" />
@@ -54,7 +54,7 @@
     <set name="m_def" val="95" />
     <set name="mp_bonus" val="42" />
   </item>
-  <item id="6658" name="Ring of Baium">
+<item id='6658' name="Ring of Baium">
     <for>
       <add val="48" order="0x10" stat="mDef" />
       <add val="21" order="0x40" stat="maxMp" />
@@ -81,15 +81,34 @@
     <set name="m_def" val="48" />
     <set name="mp_bonus" val="21" />
   </item>
-  <item id="6659" name="Zaken's Earring">
+<item id='6659' name="Zaken's Earring">
     <for>
       <add val="71" order="0x10" stat="mDef" />
       <add val="31" order="0x40" stat="maxMp" />
       <enchant val="0" order="0x0C" stat="mDef" />
     </for>
+    <set name="bodypart" val="6"/>
+    <set name="crystallizable" val="false" />
     <set name="armor_type" val="none" />
+    <set name="weight" val="150" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="2590000" />
+    <set name="crystal_count" val="129" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="1" />
+    <set name="type2" val="3" />
+    <set name="p_def" val="0" />
+    <set name="m_def" val="71" />
+    <set name="mp_bonus" val="31" />
   </item>
-  <item id="6660" name="Ring of Queen Ant">
+<item id='6660' name="Ring of Queen Ant">
     <for>
       <add val="48" order="0x10" stat="mDef" />
       <add val="21" order="0x40" stat="maxMp" />
@@ -116,7 +135,7 @@
     <set name="m_def" val="48" />
     <set name="mp_bonus" val="21" />
   </item>
-  <item id="6661" name="Earring of Orfen">
+<item id='6661' name="Earring of Orfen">
     <for>
       <add val="71" order="0x10" stat="mDef" />
       <add val="31" order="0x40" stat="maxMp" />
@@ -143,7 +162,7 @@
     <set name="m_def" val="71" />
     <set name="mp_bonus" val="31" />
   </item>
-  <item id="6662" name="Ring of Core">
+<item id='6662' name="Ring of Core">
     <for>
       <add val="48" order="0x10" stat="mDef" />
       <add val="21" order="0x40" stat="maxMp" />
@@ -170,7 +189,7 @@
     <set name="m_def" val="48" />
     <set name="mp_bonus" val="21" />
   </item>
-  <item id="6674" name="Sealed Imperial Crusader Breastplate">
+<item id='6674' name="Sealed Imperial Crusader Breastplate">
     <for>
       <add val="193" order="0x10" stat="pDef" />
     </for>
@@ -195,7 +214,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6675" name="Sealed Imperial Crusader Gaiters">
+<item id='6675' name="Sealed Imperial Crusader Gaiters">
     <for>
       <add val="121" order="0x10" stat="pDef" />
     </for>
@@ -220,7 +239,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6676" name="Sealed Imperial Crusader Gauntlet">
+<item id='6676' name="Sealed Imperial Crusader Gauntlet">
     <for>
       <add val="55" order="0x10" stat="pDef" />
     </for>
@@ -245,7 +264,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6677" name="Sealed Imperial Crusader Boots">
+<item id='6677' name="Sealed Imperial Crusader Boots">
     <for>
       <add val="55" order="0x10" stat="pDef" />
     </for>
@@ -270,7 +289,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6679" name="Sealed Imperial Crusader Helmet">
+<item id='6679' name="Sealed Imperial Crusader Helmet">
     <for>
       <add val="83" order="0x10" stat="pDef" />
     </for>
@@ -295,7 +314,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6680" name="Sealed Draconic Leather Armor">
+<item id='6680' name="Sealed Draconic Leather Armor">
     <for>
       <add val="236" order="0x10" stat="pDef" />
     </for>
@@ -320,7 +339,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6681" name="Sealed Draconic Leather Glove">
+<item id='6681' name="Sealed Draconic Leather Glove">
     <for>
       <add val="55" order="0x10" stat="pDef" />
     </for>
@@ -345,7 +364,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6682" name="Sealed Draconic Leather Boots">
+<item id='6682' name="Sealed Draconic Leather Boots">
     <for>
       <add val="55" order="0x10" stat="pDef" />
     </for>
@@ -370,7 +389,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6683" name="Sealed Draconic Leather Helmet">
+<item id='6683' name="Sealed Draconic Leather Helmet">
     <for>
       <add val="83" order="0x10" stat="pDef" />
     </for>
@@ -395,7 +414,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6684" name="Sealed Major Arcana Robe">
+<item id='6684' name="Sealed Major Arcana Robe">
     <for>
       <add val="157" order="0x10" stat="pDef" />
     </for>
@@ -420,7 +439,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="866" />
   </item>
-  <item id="6685" name="Sealed Major Arcana Glove">
+<item id='6685' name="Sealed Major Arcana Glove">
     <for>
       <add val="55" order="0x10" stat="pDef" />
     </for>
@@ -445,7 +464,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6686" name="Sealed Major Arcana Boots">
+<item id='6686' name="Sealed Major Arcana Boots">
     <for>
       <add val="55" order="0x10" stat="pDef" />
     </for>
@@ -470,7 +489,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6687" name="Sealed Major Arcana Circlet">
+<item id='6687' name="Sealed Major Arcana Circlet">
     <for>
       <add val="83" order="0x10" stat="pDef" />
     </for>
@@ -495,7 +514,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6724" name="Sealed Tateossian Earring">
+<item id='6724' name="Sealed Tateossian Earring">
     <for>
       <add val="68" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
@@ -521,7 +540,7 @@
     <set name="m_def" val="68" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6725" name="Sealed Tateossian Ring">
+<item id='6725' name="Sealed Tateossian Ring">
     <for>
       <add val="46" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />
@@ -547,7 +566,7 @@
     <set name="m_def" val="46" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="6726" name="Sealed Tateossian Necklace">
+<item id='6726' name="Sealed Tateossian Necklace">
     <for>
       <add val="91" order="0x10" stat="mDef" />
       <enchant val="0" order="0x0C" stat="mDef" />

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,20 +20,23 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-
 /**
  * This class manages requests (transactions) between two L2PcInstance.
  *
- * @author  kriau
+ * @author kriau
  */
 public class L2Request
 {
-	private static final int REQUEST_TIMEOUT = 15; //in secs
+	private static final int REQUEST_TIMEOUT = 15; // in secs
 
 	protected L2PcInstance _player;
+
 	protected L2PcInstance _partner;
+
 	protected boolean _isRequestor;
+
 	protected boolean _isAnswerer;
+
 	protected L2GameClientPacket _requestPacket;
 
 	public L2Request(L2PcInstance player)
@@ -50,7 +53,9 @@ public class L2Request
 	}
 
 	/**
-	 * Set the L2PcInstance member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
+	 * Set the L2PcInstance member of a transaction (ex : FriendInvite,
+	 * JoinAlly, JoinParty...).<BR>
+	 * <BR>
 	 */
 	private synchronized void setPartner(L2PcInstance partner)
 	{
@@ -58,7 +63,9 @@ public class L2Request
 	}
 
 	/**
-	 * Return the L2PcInstance member of a transaction (ex : FriendInvite, JoinAlly, JoinParty...).<BR><BR>
+	 * Return the L2PcInstance member of a transaction (ex : FriendInvite,
+	 * JoinAlly, JoinParty...).<BR>
+	 * <BR>
 	 */
 	public L2PcInstance getPartner()
 	{
@@ -66,7 +73,8 @@ public class L2Request
 	}
 
 	/**
-	 * Set the packet incomed from requestor.<BR><BR>
+	 * Set the packet incomed from requestor.<BR>
+	 * <BR>
 	 */
 	private synchronized void setRequestPacket(L2GameClientPacket packet)
 	{
@@ -74,7 +82,8 @@ public class L2Request
 	}
 
 	/**
-	 * Return the packet originally incomed from requestor.<BR><BR>
+	 * Return the packet originally incomed from requestor.<BR>
+	 * <BR>
 	 */
 	public L2GameClientPacket getRequestPacket()
 	{
@@ -82,15 +91,18 @@ public class L2Request
 	}
 
 	/**
-	 * Checks if request can be made and in success case puts both PC on request state.<BR><BR>
+	 * Checks if request can be made and in success case puts both PC on request
+	 * state.<BR>
+	 * <BR>
 	 */
-	public synchronized boolean setRequest(L2PcInstance partner, L2GameClientPacket packet)
+	public synchronized boolean setRequest(L2PcInstance partner,
+	        L2GameClientPacket packet)
 	{
-        if (partner == null)
-        {
-        	_player.sendPacket(new SystemMessage(SystemMessageId.YOU_HAVE_INVITED_THE_WRONG_TARGET));
-            return false;
-        }
+		if (partner == null)
+		{
+			_player.sendPacket(new SystemMessage(SystemMessageId.YOU_HAVE_INVITED_THE_WRONG_TARGET));
+			return false;
+		}
 		if (partner.getRequest().isProcessingRequest())
 		{
 			SystemMessage sm = new SystemMessage(SystemMessageId.S1_IS_BUSY_TRY_LATER);
@@ -101,7 +113,7 @@ public class L2Request
 		}
 		if (isProcessingRequest())
 		{
-        	_player.sendPacket(new SystemMessage(SystemMessageId.WAITING_FOR_ANOTHER_REPLY));
+			_player.sendPacket(new SystemMessage(SystemMessageId.WAITING_FOR_ANOTHER_REPLY));
 			return false;
 		}
 
@@ -118,8 +130,8 @@ public class L2Request
 	{
 		_isRequestor = isRequestor ? true : false;
 		_isAnswerer = isRequestor ? false : true;
-		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable()
-		{
+		ThreadPoolManager.getInstance().scheduleGeneral(new Runnable() {
+			@Override
 			public void run()
 			{
 				clear();
@@ -129,19 +141,22 @@ public class L2Request
 	}
 
 	/**
-	 * Clears PC request state. Should be called after answer packet receive.<BR><BR>
+	 * Clears PC request state. Should be called after answer packet
+	 * receive.<BR>
+	 * <BR>
 	 */
 	public void onRequestResponse()
-    {
+	{
 		if (_partner != null)
 		{
 			_partner.getRequest().clear();
 		}
 		clear();
-    }
+	}
 
 	/**
-	 * Return True if a transaction is in progress.<BR><BR>
+	 * Return True if a transaction is in progress.<BR>
+	 * <BR>
 	 */
 	public boolean isProcessingRequest()
 	{

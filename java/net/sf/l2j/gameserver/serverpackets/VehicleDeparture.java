@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,11 +24,17 @@ public class VehicleDeparture extends L2GameServerPacket
 {
 
 	private L2BoatInstance _boat;
+
 	private int _speed1;
-	private int _speed2;//rotation
+
+	private int _speed2;// rotation
+
 	private int _x;
+
 	private int _y;
+
 	private int _z;
+
 	/**
 	 * @param _boat
 	 * @param speed1
@@ -37,7 +43,8 @@ public class VehicleDeparture extends L2GameServerPacket
 	 * @param y
 	 * @param z
 	 */
-	public VehicleDeparture(L2BoatInstance boat, int speed1, int speed2, int x, int y, int z)
+	public VehicleDeparture(L2BoatInstance boat, int speed1, int speed2, int x,
+	        int y, int z)
 	{
 		_boat = boat;
 		_speed1 = speed1;
@@ -47,12 +54,13 @@ public class VehicleDeparture extends L2GameServerPacket
 		_z = z;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
-	protected
-	void writeImpl()
+	protected void writeImpl()
 	{
 		writeC(0x6c);
 		writeD(_boat.getObjectId());
@@ -64,7 +72,9 @@ public class VehicleDeparture extends L2GameServerPacket
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
 	@Override

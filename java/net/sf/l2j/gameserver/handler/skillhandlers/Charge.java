@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,6 +23,7 @@ import net.sf.l2j.gameserver.model.L2Object;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.L2Skill.SkillType;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
+
 /**
  * This class ...
  *
@@ -33,31 +34,40 @@ public class Charge implements ISkillHandler
 {
 	static Logger _log = Logger.getLogger(Charge.class.getName());
 
-	/* (non-Javadoc)
-	 * @see net.sf.l2j.gameserver.handler.IItemHandler#useItem(net.sf.l2j.gameserver.model.L2PcInstance, net.sf.l2j.gameserver.model.L2ItemInstance)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.handler.IItemHandler#useItem(net.sf.l2j.gameserver.
+	 * model.L2PcInstance, net.sf.l2j.gameserver.model.L2ItemInstance)
 	 */
-	private static final SkillType[] SKILL_IDS = {/*SkillType.CHARGE*/};
+	private static final SkillType[] SKILL_IDS = { /* SkillType.CHARGE */ };
 
-	public void useSkill(L2Character activeChar, L2Skill skill, L2Object[] targets)
+	@Override
+	public void useSkill(L2Character activeChar, L2Skill skill,
+	        L2Object[] targets)
 	{
 
-        for(int index = 0;index < targets.length;index++)
-        {
-        	if (!(targets[index] instanceof L2PcInstance))
-        		continue;
-			L2PcInstance target = (L2PcInstance)targets[index];
-        	skill.getEffects(activeChar, target);
+		for (L2Object target2 : targets)
+		{
+			if (!(target2 instanceof L2PcInstance))
+			{
+				continue;
+			}
+			L2PcInstance target = (L2PcInstance) target2;
+			skill.getEffects(activeChar, target);
 		}
-        // self Effect :]
-        L2Effect effect = activeChar.getFirstEffect(skill.getId());
-        if (effect != null && effect.isSelfEffect())
-        {
-        	//Replace old effect with new one.
-        	effect.exit();
-        }
-        skill.getEffectsSelf(activeChar);
+		// self Effect :]
+		L2Effect effect = activeChar.getFirstEffect(skill.getId());
+		if (effect != null && effect.isSelfEffect())
+		{
+			// Replace old effect with new one.
+			effect.exit();
+		}
+		skill.getEffectsSelf(activeChar);
 	}
 
+	@Override
 	public SkillType[] getSkillIds()
 	{
 		return SKILL_IDS;

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,63 +39,74 @@ import net.sf.l2j.gameserver.model.entity.Fort;
  * d = current time (seconds)<BR>
  * d = Siege time (seconds) (0 for selectable)<BR>
  * d = (UNKNOW) Siege Time Select Related?
- * 
+ *
  * @author KenM
  */
 public class FortressSiegeInfo extends L2GameServerPacket
 {
-    private static final String _S__C9_SIEGEINFO = "[S] c9 SiegeInfo";
-    private static Logger _log = Logger.getLogger(FortressSiegeInfo.class.getName());
-    private Fort _fort;
+	private static final String _S__C9_SIEGEINFO = "[S] c9 SiegeInfo";
 
-    public FortressSiegeInfo(Fort fort)
-    {
-        _fort = fort;
-    }
+	private static Logger _log = Logger.getLogger(FortressSiegeInfo.class.getName());
 
-    @Override
-    protected final void writeImpl()
-    {
-        L2PcInstance activeChar = getClient().getActiveChar();
-        if (activeChar == null) return;
+	private Fort _fort;
 
-        writeC(0xc9);
-        writeD(_fort.getFortId());
-        writeD(((_fort.getOwnerId() == activeChar.getClanId()) && (activeChar.isClanLeader())) ? 0x01 : 0x00);
-        writeD(_fort.getOwnerId());
-        if (_fort.getOwnerId() > 0)
-        {
-            L2Clan owner = ClanTable.getInstance().getClan(_fort.getOwnerId());
-            if (owner != null)
-            {
-                writeS(owner.getName());        // Clan Name
-                writeS(owner.getLeaderName());  // Clan Leader Name
-                writeD(owner.getAllyId());      // Ally ID
-                writeS(owner.getAllyName());    // Ally Name
-            }
-            else
-                _log.warning("Null owner for fort: " + _fort.getName());
-        }
-        else
-        {
-            writeS("NPC");  // Clan Name
-            writeS("");     // Clan Leader Name
-            writeD(0);      // Ally ID
-            writeS("");     // Ally Name
-        }
+	public FortressSiegeInfo(Fort fort)
+	{
+		_fort = fort;
+	}
 
-        writeD((int) (Calendar.getInstance().getTimeInMillis()/1000));
-        writeD((int) (_fort.getSiege().getSiegeDate().getTimeInMillis()/1000));
-        writeD(0x00); //number of choices?
-    }
+	@Override
+	protected final void writeImpl()
+	{
+		L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null)
+		{
+			return;
+		}
 
-    /* (non-Javadoc)
-     * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
-     */
-    @Override
-    public String getType()
-    {
-        return _S__C9_SIEGEINFO;
-    }
+		writeC(0xc9);
+		writeD(_fort.getFortId());
+		writeD(((_fort.getOwnerId() == activeChar.getClanId())
+		        && (activeChar.isClanLeader())) ? 0x01 : 0x00);
+		writeD(_fort.getOwnerId());
+		if (_fort.getOwnerId() > 0)
+		{
+			L2Clan owner = ClanTable.getInstance().getClan(_fort.getOwnerId());
+			if (owner != null)
+			{
+				writeS(owner.getName()); // Clan Name
+				writeS(owner.getLeaderName()); // Clan Leader Name
+				writeD(owner.getAllyId()); // Ally ID
+				writeS(owner.getAllyName()); // Ally Name
+			}
+			else
+			{
+				_log.warning("Null owner for fort: " + _fort.getName());
+			}
+		}
+		else
+		{
+			writeS("NPC"); // Clan Name
+			writeS(""); // Clan Leader Name
+			writeD(0); // Ally ID
+			writeS(""); // Ally Name
+		}
+
+		writeD((int) (Calendar.getInstance().getTimeInMillis() / 1000));
+		writeD((int) (_fort.getSiege().getSiegeDate().getTimeInMillis()
+		        / 1000));
+		writeD(0x00); // number of choices?
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
+	 */
+	@Override
+	public String getType()
+	{
+		return _S__C9_SIEGEINFO;
+	}
 
 }

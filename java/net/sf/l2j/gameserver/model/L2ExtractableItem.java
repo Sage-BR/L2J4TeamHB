@@ -23,9 +23,11 @@ import java.util.ArrayList;
 public class L2ExtractableItem
 {
 	private final int _itemId;
+
 	private final L2ExtractableProductItem[] _products;
 
-	public L2ExtractableItem(int itemid, ArrayList<L2ExtractableProductItem> products)
+	public L2ExtractableItem(int itemid,
+	        ArrayList<L2ExtractableProductItem> products)
 	{
 		_itemId = itemid;
 		_products = new L2ExtractableProductItem[products.size()];

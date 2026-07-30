@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,8 +29,9 @@ import net.sf.l2j.gameserver.serverpackets.ActionFailed;
  */
 public final class RequestPetGetItem extends L2GameClientPacket
 {
-	//private static Logger _log = Logger.getLogger(RequestPetGetItem.class.getName());
-	private static final String _C__8f_REQUESTPETGETITEM= "[C] 8F RequestPetGetItem";
+	// private static Logger _log =
+	// Logger.getLogger(RequestPetGetItem.class.getName());
+	private static final String _C__8f_REQUESTPETGETITEM = "[C] 8F RequestPetGetItem";
 
 	private int _objectId;
 
@@ -44,22 +45,19 @@ public final class RequestPetGetItem extends L2GameClientPacket
 	protected void runImpl()
 	{
 		L2World world = L2World.getInstance();
-		L2ItemInstance item = (L2ItemInstance)world.findObject(_objectId);
+		L2ItemInstance item = (L2ItemInstance) world.findObject(_objectId);
 		if (item == null || getClient().getActiveChar() == null)
-		    return;
-
-		int castleId = MercTicketManager.getInstance().getTicketCastleId(item.getItemId());
-		if (castleId > 0) {
-			sendPacket(ActionFailed.STATIC_PACKET);
+		{
 			return;
 		}
 
-		if(getClient().getActiveChar().getPet() instanceof L2SummonInstance)
+		int castleId = MercTicketManager.getInstance().getTicketCastleId(item.getItemId());
+		if ((castleId > 0) || (getClient().getActiveChar().getPet() instanceof L2SummonInstance))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		L2PetInstance pet = (L2PetInstance)getClient().getActiveChar().getPet();
+		L2PetInstance pet = (L2PetInstance) getClient().getActiveChar().getPet();
 		if (pet == null || pet.isDead() || pet.isOutOfControl())
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);

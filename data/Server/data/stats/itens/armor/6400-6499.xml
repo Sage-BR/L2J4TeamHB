@@ -10,7 +10,7 @@
    </add>
   <enchant val='0' order='0x0C' stat='pDef'/>
 </for>
-  <set name="bodypart" val="512"/>
+  <set name="bodypart" val="32768"/>
   <set name="crystallizable" val="false"/>
   <set name="armor_type" val="none"/>
   <set name="weight" val="1000"/>

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -16,24 +16,26 @@ package net.sf.l2j.gameserver.communitybbs.Manager;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.BB.Forum;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-
 public class ForumsBBSManager extends BaseBBSManager
 {
 	private static Logger _log = Logger.getLogger(ForumsBBSManager.class.getName());
+
 	private Map<Integer, Forum> _root;
+
 	private List<Forum> _table;
+
 	private static ForumsBBSManager _instance;
+
 	private int _lastid = 1;
 
 	/**
@@ -51,8 +53,8 @@ public class ForumsBBSManager extends BaseBBSManager
 
 	public ForumsBBSManager()
 	{
-		_root = new ConcurrentHashMap<Integer, Forum>();
-		_table = new ArrayList<Forum>();
+		_root = new ConcurrentHashMap<>();
+		_table = new ArrayList<>();
 	}
 
 	public void addForum(Forum ff)
@@ -102,8 +104,12 @@ public class ForumsBBSManager extends BaseBBSManager
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.sf.l2j.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java.lang.String, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.communitybbs.Manager.BaseBBSManager#parsecmd(java.
+	 * lang.String, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance)
 	 */
 	@Override
 	public void parsecmd(String command, L2PcInstance activeChar)
@@ -134,7 +140,8 @@ public class ForumsBBSManager extends BaseBBSManager
 	 * @param forumByName
 	 * @return
 	 */
-	public Forum createNewForum(String name, Forum parent, int type, int perm, int oid)
+	public Forum createNewForum(String name, Forum parent, int type, int perm,
+	        int oid)
 	{
 		Forum forum;
 		forum = new Forum(name, parent, type, perm, oid);
@@ -167,11 +174,18 @@ public class ForumsBBSManager extends BaseBBSManager
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.sf.l2j.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, net.sf.l2j.gameserver.model.actor.instance.L2PcInstance)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * net.sf.l2j.gameserver.communitybbs.Manager.BaseBBSManager#parsewrite(java
+	 * .lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String,
+	 * net.sf.l2j.gameserver.model.actor.instance.L2PcInstance)
 	 */
 	@Override
-	public void parsewrite(String ar1, String ar2, String ar3, String ar4, String ar5, L2PcInstance activeChar)
+	public void parsewrite(String ar1, String ar2, String ar3, String ar4,
+	        String ar5, L2PcInstance activeChar)
 	{
 		// TODO Auto-generated method stub
 

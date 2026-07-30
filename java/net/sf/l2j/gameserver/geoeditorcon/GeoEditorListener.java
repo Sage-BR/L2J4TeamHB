@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,25 +26,32 @@ import java.util.logging.Logger;
 public class GeoEditorListener extends Thread
 {
 	private static GeoEditorListener _instance;
+
 	private static final int PORT = 9011;
+
 	private static Logger _log = Logger.getLogger(GeoEditorListener.class.getName());
+
 	private ServerSocket _serverSocket;
+
 	private static GeoEditorThread _geoEditor;
 
 	public static GeoEditorListener getInstance()
 	{
 		if (_instance == null)
+		{
 			try
 			{
 				_instance = new GeoEditorListener();
 				_instance.start();
 				_log.info("GeoEditorListener Initialized.");
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				_log.severe("Error creating geoeditor listener! "
-						+ e.getMessage());
+				        + e.getMessage());
 				System.exit(1);
 			}
+		}
 		return _instance;
 	}
 
@@ -83,25 +90,29 @@ public class GeoEditorListener extends Thread
 					continue;
 				}
 				_log.info("Received geoeditor connection from: "
-						+ connection.getInetAddress().getHostAddress());
+				        + connection.getInetAddress().getHostAddress());
 				_geoEditor = new GeoEditorThread(connection);
 				_geoEditor.start();
 			}
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			_log.info("GeoEditorListener: " + e.getMessage());
 			try
 			{
 				connection.close();
-			} catch (Exception e2)
+			}
+			catch (Exception e2)
 			{
 			}
-		} finally
+		}
+		finally
 		{
 			try
 			{
 				_serverSocket.close();
-			} catch (IOException io)
+			}
+			catch (IOException io)
 			{
 				_log.log(Level.INFO, "", io);
 			}

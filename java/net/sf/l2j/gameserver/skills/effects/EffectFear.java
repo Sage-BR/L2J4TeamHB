@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,13 +27,14 @@ import net.sf.l2j.gameserver.skills.Env;
 /**
  * @author littlecrow
  *
- * Implementation of the Fear Effect
+ *         Implementation of the Fear Effect
  */
 final class EffectFear extends L2Effect
 {
 	public static final int FEAR_RANGE = 500;
-	
+
 	private int _dX = -1;
+
 	private int _dY = -1;
 
 	public EffectFear(Env env, EffectTemplate template)
@@ -51,35 +52,43 @@ final class EffectFear extends L2Effect
 	@Override
 	public void onStart()
 	{
-		// Fear skills cannot be used l2pcinstance to l2pcinstance. Heroic Dread, Curse: Fear, Fear, Horror, Sword Symphony, Word of Fear and Mass Curse Fear are the exceptions.
-		if(getEffected() instanceof L2PcInstance && getEffector() instanceof L2PcInstance 				
-				&& getSkill().getId() != 1376 
-				&& getSkill().getId() != 1169 
-				&& getSkill().getId() != 65 
-				&& getSkill().getId() != 1092 
-				&& getSkill().getId() != 98 
-				&& getSkill().getId() != 1272 
-				&& getSkill().getId() != 1381) 
+		// Fear skills cannot be used l2pcinstance to l2pcinstance. Heroic
+		// Dread, Curse: Fear, Fear, Horror, Sword Symphony, Word of Fear and
+		// Mass Curse Fear are the exceptions.
+		if (getEffected() instanceof L2PcInstance
+		        && getEffector() instanceof L2PcInstance
+		        && getSkill().getId() != 1376 && getSkill().getId() != 1169
+		        && getSkill().getId() != 65 && getSkill().getId() != 1092
+		        && getSkill().getId() != 98 && getSkill().getId() != 1272
+		        && getSkill().getId() != 1381)
+		{
 			return;
-		
-		if(getEffected() instanceof L2FolkInstance
-				|| getEffected() instanceof L2SiegeGuardInstance
-				|| getEffected() instanceof L2SiegeFlagInstance
-				|| getEffected() instanceof L2SiegeSummonInstance) 
+		}
+
+		if (getEffected() instanceof L2FolkInstance
+		        || getEffected() instanceof L2SiegeGuardInstance
+		        || getEffected() instanceof L2SiegeFlagInstance
+		        || getEffected() instanceof L2SiegeSummonInstance)
+		{
 			return;
-		
+		}
+
 		if (!getEffected().isAfraid())
 		{
 			if (getEffected().getX() > getEffector().getX())
+			{
 				_dX = 1;
+			}
 			if (getEffected().getY() > getEffector().getY())
+			{
 				_dY = 1;
-			
+			}
+
 			getEffected().startFear();
 			onActionTime();
 		}
 	}
-	
+
 	/** Notify exited */
 	@Override
 	public void onExit()
@@ -93,12 +102,12 @@ final class EffectFear extends L2Effect
 		int posX = getEffected().getX();
 		int posY = getEffected().getY();
 		int posZ = getEffected().getZ();
-		
-		posX += _dX*FEAR_RANGE;
-		posY += _dY*FEAR_RANGE;
-		
+
+		posX += _dX * FEAR_RANGE;
+		posY += _dY * FEAR_RANGE;
+
 		getEffected().setRunning();
-		getEffected().getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO,new L2CharPosition(posX,posY,posZ,0));
+		getEffected().getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(posX, posY, posZ, 0));
 		return true;
 	}
 }

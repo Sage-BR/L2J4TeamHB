@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,6 +25,7 @@ import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -47,8 +48,6 @@ import net.sf.l2j.loginserver.loginserverpackets.PlayerAuthResponse;
 import net.sf.l2j.loginserver.serverpackets.ServerBasePacket;
 import net.sf.l2j.util.Util;
 
-import java.util.HashSet;
-
 /**
  * @author -Wooden-
  * @author KenM
@@ -58,30 +57,38 @@ import java.util.HashSet;
 public class GameServerThread extends Thread
 {
 	protected static final Logger _log = Logger.getLogger(GameServerThread.class.getName());
+
 	private Socket _connection;
+
 	private InputStream _in;
+
 	private OutputStream _out;
+
 	private RSAPublicKey _publicKey;
+
 	private RSAPrivateKey _privateKey;
+
 	private NewCrypt _blowfish;
+
 	private byte[] _blowfishKey;
 
 	private String _connectionIp;
 
 	private GameServerInfo _gsi;
 
-	/** Authed Clients on a GameServer*/
-	private Set<String> _accountsOnGameServer = new HashSet<String>();
+	/** Authed Clients on a GameServer */
+	private Set<String> _accountsOnGameServer = new HashSet<>();
 
 	private String _connectionIPAddress;
 
 	@Override
 	public void run()
 	{
-		_connectionIPAddress   = _connection.getInetAddress().getHostAddress();
+		_connectionIPAddress = _connection.getInetAddress().getHostAddress();
 		if (GameServerThread.isBannedGameserverIP(_connectionIPAddress))
 		{
-			_log.info("GameServerRegistration: IP Address " + _connectionIPAddress + " is on Banned IP list.");
+			_log.info("GameServerRegistration: IP Address "
+			        + _connectionIPAddress + " is on Banned IP list.");
 			forceClose(LoginServerFail.REASON_IP_BANNED);
 			// ensure no further processing for this connection
 			return;
@@ -100,7 +107,7 @@ public class GameServerThread extends Thread
 			{
 				lengthLo = _in.read();
 				lengthHi = _in.read();
-				length= lengthHi*256 + lengthLo;
+				length = lengthHi * 256 + lengthLo;
 
 				if (lengthHi < 0 || _connection.isClosed())
 				{
@@ -112,13 +119,13 @@ public class GameServerThread extends Thread
 
 				int receivedBytes = 0;
 				int newBytes = 0;
-				while (newBytes != -1 && receivedBytes<length-2)
+				while (newBytes != -1 && receivedBytes < length - 2)
 				{
-					newBytes =  _in.read(data, 0, length-2);
+					newBytes = _in.read(data, 0, length - 2);
 					receivedBytes = receivedBytes + newBytes;
 				}
 
-				if (receivedBytes != length-2)
+				if (receivedBytes != length - 2)
 				{
 					_log.warning("Incomplete Packet is sent to the server, closing connection.(LS)");
 					break;
@@ -135,7 +142,7 @@ public class GameServerThread extends Thread
 
 				if (Config.DEBUG)
 				{
-					_log.warning("[C]\n"+Util.printData(data));
+					_log.warning("[C]\n" + Util.printData(data));
 				}
 
 				int packetType = data[0] & 0xff;
@@ -163,7 +170,9 @@ public class GameServerThread extends Thread
 						onReceiveServerStatus(data);
 						break;
 					default:
-						_log.warning("Unknown Opcode ("+Integer.toHexString(packetType).toUpperCase()+") from GameServer, closing connection.");
+						_log.warning("Unknown Opcode ("
+						        + Integer.toHexString(packetType).toUpperCase()
+						        + ") from GameServer, closing connection.");
 						forceClose(LoginServerFail.NOT_AUTHED);
 				}
 
@@ -171,8 +180,12 @@ public class GameServerThread extends Thread
 		}
 		catch (IOException e)
 		{
-			String serverName = (getServerId() != -1 ? "["+getServerId()+"] "+GameServerTable.getInstance().getServerNameById(getServerId()) : "("+_connectionIPAddress+")");
-			String msg = "GameServer "+serverName+": Connection lost: "+e.getMessage();
+			String serverName = (getServerId() != -1 ? "[" + getServerId()
+			        + "] "
+			        + GameServerTable.getInstance().getServerNameById(getServerId()) : "("
+			                + _connectionIPAddress + ")");
+			String msg = "GameServer " + serverName + ": Connection lost: "
+			        + e.getMessage();
 			_log.info(msg);
 			broadcastToTelnet(msg);
 		}
@@ -181,7 +194,9 @@ public class GameServerThread extends Thread
 			if (isAuthed())
 			{
 				_gsi.setDown();
-				_log.info("Server ["+getServerId()+"] "+GameServerTable.getInstance().getServerNameById(getServerId())+" is now set as disconnected");
+				_log.info("Server [" + getServerId() + "] "
+				        + GameServerTable.getInstance().getServerNameById(getServerId())
+				        + " is now set as disconnected");
 			}
 			L2LoginServer.getInstance().getGameServerListener().removeGameServer(this);
 			L2LoginServer.getInstance().getGameServerListener().removeFloodProtection(_connectionIp);
@@ -190,22 +205,22 @@ public class GameServerThread extends Thread
 
 	private void onReceiveBlowfishKey(byte[] data)
 	{
-		/*if (_blowfish == null)
-		{*/
-		BlowFishKey bfk = new BlowFishKey(data,_privateKey);
+		/*
+		 * if (_blowfish == null) {
+		 */
+		BlowFishKey bfk = new BlowFishKey(data, _privateKey);
 		_blowfishKey = bfk.getKey();
 		_blowfish = new NewCrypt(_blowfishKey);
 		if (Config.DEBUG)
 		{
 			_log.info("New BlowFish key received, Blowfih Engine initialized:");
 		}
-		/*}
-		else
-		{
-			_log.warning("GameServer attempted to re-initialize the blowfish key.");
-			// TODO get a better reason
-			this.forceClose(LoginServerFail.NOT_AUTHED);
-		}*/
+		/*
+		 * } else { _log.
+		 * warning("GameServer attempted to re-initialize the blowfish key.");
+		 * // TODO get a better reason
+		 * this.forceClose(LoginServerFail.NOT_AUTHED); }
+		 */
 	}
 
 	private void onGameServerAuth(byte[] data) throws IOException
@@ -222,9 +237,11 @@ public class GameServerThread extends Thread
 			sendPacket(ar);
 			if (Config.DEBUG)
 			{
-				_log.info("Authed: id: "+getGameServerInfo().getId());
+				_log.info("Authed: id: " + getGameServerInfo().getId());
 			}
-			broadcastToTelnet("GameServer ["+getServerId()+"] "+GameServerTable.getInstance().getServerNameById(getServerId())+" is connected");
+			broadcastToTelnet("GameServer [" + getServerId() + "] "
+			        + GameServerTable.getInstance().getServerNameById(getServerId())
+			        + " is connected");
 		}
 	}
 
@@ -239,10 +256,13 @@ public class GameServerThread extends Thread
 				_accountsOnGameServer.add(account);
 				if (Config.DEBUG)
 				{
-					_log.info("Account "+account+" logged in GameServer: ["+getServerId()+"] "+GameServerTable.getInstance().getServerNameById(getServerId()));
+					_log.info("Account " + account + " logged in GameServer: ["
+					        + getServerId() + "] "
+					        + GameServerTable.getInstance().getServerNameById(getServerId()));
 				}
 
-				broadcastToTelnet("Account "+account+" logged in GameServer "+getServerId());
+				broadcastToTelnet("Account " + account
+				        + " logged in GameServer " + getServerId());
 			}
 
 		}
@@ -260,10 +280,13 @@ public class GameServerThread extends Thread
 			_accountsOnGameServer.remove(plo.getAccount());
 			if (Config.DEBUG)
 			{
-				_log.info("Player "+plo.getAccount()+" logged out from gameserver ["+getServerId()+"] "+GameServerTable.getInstance().getServerNameById(getServerId()));
+				_log.info("Player " + plo.getAccount()
+				        + " logged out from gameserver [" + getServerId() + "] "
+				        + GameServerTable.getInstance().getServerNameById(getServerId()));
 			}
 
-			broadcastToTelnet("Player "+plo.getAccount()+" disconnected from GameServer "+getServerId());
+			broadcastToTelnet("Player " + plo.getAccount()
+			        + " disconnected from GameServer " + getServerId());
 		}
 		else
 		{
@@ -276,8 +299,9 @@ public class GameServerThread extends Thread
 		if (isAuthed())
 		{
 			ChangeAccessLevel cal = new ChangeAccessLevel(data);
-			LoginController.getInstance().setAccountAccessLevel(cal.getAccount(),cal.getLevel());
-			_log.info("Changed "+cal.getAccount()+" access level to "+cal.getLevel());
+			LoginController.getInstance().setAccountAccessLevel(cal.getAccount(), cal.getLevel());
+			_log.info("Changed " + cal.getAccount() + " access level to "
+			        + cal.getLevel());
 		}
 		else
 		{
@@ -293,7 +317,8 @@ public class GameServerThread extends Thread
 			PlayerAuthResponse authResponse;
 			if (Config.DEBUG)
 			{
-				_log.info("auth request received for Player "+par.getAccount());
+				_log.info("auth request received for Player "
+				        + par.getAccount());
 			}
 			SessionKey key = LoginController.getInstance().getKeyForAccount(par.getAccount());
 			if (key != null && key.equals(par.getKey()))
@@ -310,8 +335,8 @@ public class GameServerThread extends Thread
 				if (Config.DEBUG)
 				{
 					_log.info("auth request: NO");
-					_log.info("session key from self: "+key);
-					_log.info("session key sent: "+par.getKey());
+					_log.info("session key from self: " + key);
+					_log.info("session key sent: " + par.getKey());
 				}
 				authResponse = new PlayerAuthResponse(par.getAccount(), false);
 			}
@@ -332,7 +357,11 @@ public class GameServerThread extends Thread
 				_log.info("ServerStatus received");
 			}
 			@SuppressWarnings("unused")
-			ServerStatus ss = new ServerStatus(data,getServerId()); //will do the actions by itself
+			ServerStatus ss = new ServerStatus(data, getServerId()); // will do
+			                                                         // the
+			                                                         // actions
+			                                                         // by
+			                                                         // itself
 		}
 		else
 		{
@@ -369,9 +398,11 @@ public class GameServerThread extends Thread
 			}
 			else
 			{
-				// there is already a server registered with the desired id and different hex id
+				// there is already a server registered with the desired id and
+				// different hex id
 				// try to register this one with an alternative id
-				if (Config.ACCEPT_NEW_GAMESERVER && gameServerAuth.acceptAlternateID())
+				if (Config.ACCEPT_NEW_GAMESERVER
+				        && gameServerAuth.acceptAlternateID())
 				{
 					gsi = new GameServerInfo(id, hexId, this);
 					if (gameServerTable.registerWithFirstAvaliableId(gsi))
@@ -386,7 +417,8 @@ public class GameServerThread extends Thread
 				}
 				else
 				{
-					// server id is already taken, and we cant get a new one for you
+					// server id is already taken, and we cant get a new one for
+					// you
 					forceClose(LoginServerFail.REASON_WRONG_HEXID);
 				}
 			}
@@ -429,10 +461,14 @@ public class GameServerThread extends Thread
 	 * Attachs a GameServerInfo to this Thread
 	 * <li>Updates the GameServerInfo values based on GameServerAuth packet</li>
 	 * <li><b>Sets the GameServerInfo as Authed</b></li>
-	 * @param gsi The GameServerInfo to be attached.
-	 * @param gameServerAuth The server info.
+	 *
+	 * @param gsi
+	 *            The GameServerInfo to be attached.
+	 * @param gameServerAuth
+	 *            The server info.
 	 */
-	private void attachGameServerInfo(GameServerInfo gsi, GameServerAuth gameServerAuth)
+	private void attachGameServerInfo(GameServerInfo gsi,
+	        GameServerAuth gameServerAuth)
 	{
 		setGameServerInfo(gsi);
 		gsi.setGameServerThread(this);
@@ -451,7 +487,8 @@ public class GameServerThread extends Thread
 		}
 		catch (IOException e)
 		{
-			_log.finer("GameServerThread: Failed kicking banned server. Reason: "+e.getMessage());
+			_log.finer("GameServerThread: Failed kicking banned server. Reason: "
+			        + e.getMessage());
 		}
 
 		try
@@ -468,108 +505,59 @@ public class GameServerThread extends Thread
 	 *
 	 * @param gameServerauth
 	 */
-	/*private void handleRegisterationProcess(GameServerAuth gameServerauth)
-	{
-		try
-		{
-			GameServerTable gsTableInstance = GameServerTable.getInstance();
-			if (gsTableInstance.isARegisteredServer(gameServerauth.getHexID()))
-			{
-				if (Config.DEBUG)
-				{
-					_log.info("Valid HexID");
-				}
-				_server_id = gsTableInstance.getServerIDforHex(gameServerauth.getHexID());
-				if (gsTableInstance.isServerAuthed(_server_id))
-				{
-					LoginServerFail lsf = new LoginServerFail(LoginServerFail.REASON_ALREADY_LOGGED8IN);
-					sendPacket(lsf);
-					_connection.close();
-					return;
-				}
-				_gamePort = gameServerauth.getPort();
-				setGameHosts(gameServerauth.getExternalHost(), gameServerauth.getInternalHost());
-				_max_players = gameServerauth.getMaxPlayers();
-				_hexID = gameServerauth.getHexID();
-				//gsTableInstance.addServer(this);
-			}
-			else if (Config.ACCEPT_NEW_GAMESERVER)
-			{
-				if (Config.DEBUG)
-				{
-					_log.info("New HexID");
-				}
-				if(!gameServerauth.acceptAlternateID())
-				{
-					if(gsTableInstance.isIDfree(gameServerauth.getDesiredID()))
-					{
-						if (Config.DEBUG)_log.info("Desired ID is Valid");
-						_server_id = gameServerauth.getDesiredID();
-						_gamePort = gameServerauth.getPort();
-						setGameHosts(gameServerauth.getExternalHost(), gameServerauth.getInternalHost());
-						_max_players = gameServerauth.getMaxPlayers();
-						_hexID = gameServerauth.getHexID();
-						gsTableInstance.createServer(this);
-						//gsTableInstance.addServer(this);
-					}
-					else
-					{
-						LoginServerFail lsf = new LoginServerFail(LoginServerFail.REASON_ID_RESERVED);
-						sendPacket(lsf);
-						_connection.close();
-						return;
-					}
-				}
-				else
-				{
-					int id;
-					if(!gsTableInstance.isIDfree(gameServerauth.getDesiredID()))
-					{
-						id = gsTableInstance.findFreeID();
-						if (Config.DEBUG)_log.info("Affected New ID:"+id);
-						if(id < 0)
-						{
-							LoginServerFail lsf = new LoginServerFail(LoginServerFail.REASON_NO_FREE_ID);
-							sendPacket(lsf);
-							_connection.close();
-							return;
-						}
-					}
-					else
-					{
-						id = gameServerauth.getDesiredID();
-						if (Config.DEBUG)_log.info("Desired ID is Valid");
-					}
-					_server_id = id;
-					_gamePort = gameServerauth.getPort();
-					setGameHosts(gameServerauth.getExternalHost(), gameServerauth.getInternalHost());
-					_max_players = gameServerauth.getMaxPlayers();
-					_hexID = gameServerauth.getHexID();
-					gsTableInstance.createServer(this);
-					//gsTableInstance.addServer(this);
-				}
-			}
-			else
-			{
-				_log.info("Wrong HexID");
-				LoginServerFail lsf = new LoginServerFail(LoginServerFail.REASON_WRONG_HEXID);
-				sendPacket(lsf);
-				_connection.close();
-				return;
-			}
-
-		}
-		catch (IOException e)
-		{
-			_log.info("Error while registering GameServer "+GameServerTable.getInstance().serverNames.get(_server_id)+" (ID:"+_server_id+")");
-		}
-	}*/
+	/*
+	 * private void handleRegisterationProcess(GameServerAuth gameServerauth) {
+	 * try { GameServerTable gsTableInstance = GameServerTable.getInstance(); if
+	 * (gsTableInstance.isARegisteredServer(gameServerauth.getHexID())) { if
+	 * (Config.DEBUG) { _log.info("Valid HexID"); } _server_id =
+	 * gsTableInstance.getServerIDforHex(gameServerauth.getHexID()); if
+	 * (gsTableInstance.isServerAuthed(_server_id)) { LoginServerFail lsf = new
+	 * LoginServerFail(LoginServerFail.REASON_ALREADY_LOGGED8IN);
+	 * sendPacket(lsf); _connection.close(); return; } _gamePort =
+	 * gameServerauth.getPort(); setGameHosts(gameServerauth.getExternalHost(),
+	 * gameServerauth.getInternalHost()); _max_players =
+	 * gameServerauth.getMaxPlayers(); _hexID = gameServerauth.getHexID();
+	 * //gsTableInstance.addServer(this); } else if
+	 * (Config.ACCEPT_NEW_GAMESERVER) { if (Config.DEBUG) {
+	 * _log.info("New HexID"); } if(!gameServerauth.acceptAlternateID()) {
+	 * if(gsTableInstance.isIDfree(gameServerauth.getDesiredID())) { if
+	 * (Config.DEBUG)_log.info("Desired ID is Valid"); _server_id =
+	 * gameServerauth.getDesiredID(); _gamePort = gameServerauth.getPort();
+	 * setGameHosts(gameServerauth.getExternalHost(),
+	 * gameServerauth.getInternalHost()); _max_players =
+	 * gameServerauth.getMaxPlayers(); _hexID = gameServerauth.getHexID();
+	 * gsTableInstance.createServer(this); //gsTableInstance.addServer(this); }
+	 * else { LoginServerFail lsf = new
+	 * LoginServerFail(LoginServerFail.REASON_ID_RESERVED); sendPacket(lsf);
+	 * _connection.close(); return; } } else { int id;
+	 * if(!gsTableInstance.isIDfree(gameServerauth.getDesiredID())) { id =
+	 * gsTableInstance.findFreeID(); if
+	 * (Config.DEBUG)_log.info("Affected New ID:"+id); if(id < 0) {
+	 * LoginServerFail lsf = new
+	 * LoginServerFail(LoginServerFail.REASON_NO_FREE_ID); sendPacket(lsf);
+	 * _connection.close(); return; } } else { id =
+	 * gameServerauth.getDesiredID(); if
+	 * (Config.DEBUG)_log.info("Desired ID is Valid"); } _server_id = id;
+	 * _gamePort = gameServerauth.getPort();
+	 * setGameHosts(gameServerauth.getExternalHost(),
+	 * gameServerauth.getInternalHost()); _max_players =
+	 * gameServerauth.getMaxPlayers(); _hexID = gameServerauth.getHexID();
+	 * gsTableInstance.createServer(this); //gsTableInstance.addServer(this); }
+	 * } else { _log.info("Wrong HexID"); LoginServerFail lsf = new
+	 * LoginServerFail(LoginServerFail.REASON_WRONG_HEXID); sendPacket(lsf);
+	 * _connection.close(); return; }
+	 *
+	 * } catch (IOException e) {
+	 * _log.info("Error while registering GameServer "+GameServerTable.
+	 * getInstance().serverNames.get(_server_id)+" (ID:"+_server_id+")"); } }
+	 */
 
 	/**
 	 * @param ipAddress
 	 * @return
 	 */
-	public static boolean isBannedGameserverIP(@SuppressWarnings("unused") String ipAddress)
+	public static boolean isBannedGameserverIP(@SuppressWarnings("unused")
+	String ipAddress)
 	{
 		// TODO Auto-generated method stub
 		return false;
@@ -605,15 +593,16 @@ public class GameServerThread extends Thread
 		NewCrypt.appendChecksum(data);
 		if (Config.DEBUG)
 		{
-			_log.finest("[S] "+sl.getClass().getSimpleName()+":\n"+Util.printData(data));
+			_log.finest("[S] " + sl.getClass().getSimpleName() + ":\n"
+			        + Util.printData(data));
 		}
 		data = _blowfish.crypt(data);
 
-		int len = data.length+2;
-		synchronized(_out)
+		int len = data.length + 2;
+		synchronized (_out)
 		{
 			_out.write(len & 0xff);
-			_out.write(len >> 8 &0xff);
+			_out.write(len >> 8 & 0xff);
 			_out.write(data);
 			_out.flush();
 		}
@@ -641,7 +630,8 @@ public class GameServerThread extends Thread
 	}
 
 	/**
-	 * @param gameHost The gameHost to set.
+	 * @param gameHost
+	 *            The gameHost to set.
 	 */
 	public void setGameHosts(String gameExternalHost, String gameInternalHost)
 	{
@@ -659,14 +649,15 @@ public class GameServerThread extends Thread
 			}
 			catch (UnknownHostException e)
 			{
-				_log.warning("Couldn't resolve hostname \""+gameExternalHost+"\"");
+				_log.warning("Couldn't resolve hostname \"" + gameExternalHost
+				        + "\"");
 			}
 		}
 		else
 		{
 			_gsi.setExternalIp(_connectionIp);
 		}
-		if(!gameInternalHost.equals("*"))
+		if (!gameInternalHost.equals("*"))
 		{
 			try
 			{
@@ -674,7 +665,8 @@ public class GameServerThread extends Thread
 			}
 			catch (UnknownHostException e)
 			{
-				_log.warning("Couldn't resolve hostname \""+gameInternalHost+"\"");
+				_log.warning("Couldn't resolve hostname \"" + gameInternalHost
+				        + "\"");
 			}
 		}
 		else
@@ -682,11 +674,19 @@ public class GameServerThread extends Thread
 			_gsi.setInternalIp(_connectionIp);
 		}
 
-		_log.info("Updated Gameserver ["+getServerId()+"] "+GameServerTable.getInstance().getServerNameById(getServerId())+" IP's:");
-		if (oldInternal == null || !oldInternal.equalsIgnoreCase(gameInternalHost))
-			_log.info("InternalIP: "+gameInternalHost);
-		if (oldExternal == null || !oldExternal.equalsIgnoreCase(gameExternalHost))
-			_log.info("ExternalIP: "+gameExternalHost);
+		_log.info("Updated Gameserver [" + getServerId() + "] "
+		        + GameServerTable.getInstance().getServerNameById(getServerId())
+		        + " IP's:");
+		if (oldInternal == null
+		        || !oldInternal.equalsIgnoreCase(gameInternalHost))
+		{
+			_log.info("InternalIP: " + gameInternalHost);
+		}
+		if (oldExternal == null
+		        || !oldExternal.equalsIgnoreCase(gameExternalHost))
+		{
+			_log.info("ExternalIP: " + gameExternalHost);
+		}
 	}
 
 	/**
@@ -695,7 +695,9 @@ public class GameServerThread extends Thread
 	public boolean isAuthed()
 	{
 		if (getGameServerInfo() == null)
+		{
 			return false;
+		}
 		return getGameServerInfo().isAuthed();
 	}
 

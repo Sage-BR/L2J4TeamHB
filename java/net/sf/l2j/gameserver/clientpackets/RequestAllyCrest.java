@@ -28,9 +28,11 @@ import net.sf.l2j.gameserver.serverpackets.AllyCrest;
 public final class RequestAllyCrest extends L2GameClientPacket
 {
 	private static final String _C__88_REQUESTALLYCREST = "[C] 88 RequestAllyCrest";
+
 	private static Logger _log = Logger.getLogger(RequestAllyCrest.class.getName());
 
 	private int _crestId;
+
 	/**
 	 * packet type id 0x88 format: cd
 	 *
@@ -50,11 +52,11 @@ public final class RequestAllyCrest extends L2GameClientPacket
 			_log.fine("allycrestid " + _crestId + " requested");
 		}
 
-        byte[] data = CrestCache.getInstance().getAllyCrest(_crestId);
+		byte[] data = CrestCache.getInstance().getAllyCrest(_crestId);
 
 		if (data != null)
 		{
-			AllyCrest ac = new AllyCrest(_crestId,data);
+			AllyCrest ac = new AllyCrest(_crestId, data);
 			sendPacket(ac);
 		}
 		else
@@ -66,7 +68,9 @@ public final class RequestAllyCrest extends L2GameClientPacket
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

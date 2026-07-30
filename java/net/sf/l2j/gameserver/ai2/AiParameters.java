@@ -3,17 +3,18 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.ai2;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Queue;
@@ -21,8 +22,6 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
-
-import java.util.ArrayList;
 
 /**
  *
@@ -32,15 +31,21 @@ import java.util.ArrayList;
 public class AiParameters
 {
 	private Queue<AiEvent> _eventQueue;
+
 	private EnumSet<AiEventType> _inhibitions;
+
 	private L2NpcInstance _actor;
+
 	private List<Hated> _hated;
+
 	private List<Liked> _liked;
 
 	public class Hated
 	{
 		public L2Character character;
+
 		public HateReason reason;
+
 		public int degree;
 
 	}
@@ -48,7 +53,9 @@ public class AiParameters
 	public class Liked
 	{
 		public L2Character character;
+
 		public LikeReason reason;
+
 		public int degree;
 	}
 
@@ -70,9 +77,9 @@ public class AiParameters
 
 	public AiParameters(L2NpcInstance actor)
 	{
-		_eventQueue = new PriorityBlockingQueue<AiEvent>();
-		_hated = new ArrayList<Hated>();
-		_liked = new ArrayList<Liked>();
+		_eventQueue = new PriorityBlockingQueue<>();
+		_hated = new ArrayList<>();
+		_liked = new ArrayList<>();
 		_actor = actor;
 		_inhibitions = EnumSet.noneOf(AiEventType.class);
 	}
@@ -130,12 +137,12 @@ public class AiParameters
 		_eventQueue.clear();
 		_inhibitions.clear();
 	}
-	
+
 	public void inhibit(AiEventType type)
 	{
 		_inhibitions.add(type);
 	}
-	
+
 	public void deInhibit(AiEventType type)
 	{
 		_inhibitions.remove(type);
@@ -149,5 +156,5 @@ public class AiParameters
 	{
 		return _inhibitions.contains(type);
 	}
-	
+
 }

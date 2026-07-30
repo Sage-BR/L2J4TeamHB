@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,20 +19,19 @@ import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
-
 /**
- * @author zabbix
- * Lets drink to code!
+ * @author zabbix Lets drink to code!
  */
 public class AuditFormatter extends Formatter
 {
 	private static final String CRLF = "\r\n";
+
 	private SimpleDateFormat dateFmt = new SimpleDateFormat("dd MMM H:mm:ss");
 
 	@Override
 	public String format(LogRecord record)
 	{
-        StringBuilder output = new StringBuilder();
+		StringBuilder output = new StringBuilder();
 		output.append('[');
 		output.append(dateFmt.format(new Date(record.getMillis())));
 		output.append(']');
@@ -40,7 +39,10 @@ public class AuditFormatter extends Formatter
 		output.append(record.getMessage());
 		for (Object p : record.getParameters())
 		{
-			if (p == null) continue;
+			if (p == null)
+			{
+				continue;
+			}
 			output.append(',');
 			output.append(' ');
 			output.append(p.toString());

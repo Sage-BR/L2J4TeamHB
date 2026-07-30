@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,6 +24,7 @@ import net.sf.l2j.gameserver.model.L2Clan;
 public class PledgeShowInfoUpdate extends L2GameServerPacket
 {
 	private static final String _S__A1_PLEDGESHOWINFOUPDATE = "[S] 8e PledgeShowInfoUpdate";
+
 	private L2Clan _clan;
 
 	public PledgeShowInfoUpdate(L2Clan clan)
@@ -34,12 +35,12 @@ public class PledgeShowInfoUpdate extends L2GameServerPacket
 	@Override
 	protected final void writeImpl()
 	{
-		//dddddddddddSdd
+		// dddddddddddSdd
 		writeC(0x8e);
-		//sending empty data so client will ask all the info in response ;)
+		// sending empty data so client will ask all the info in response ;)
 		writeD(_clan.getClanId());
 		writeD(0);
-		writeD(_clan.getLevel()); //clan level
+		writeD(_clan.getLevel()); // clan level
 		writeD(_clan.getHasCastle());
 		writeD(_clan.getHasHideout());
 		writeD(_clan.getHasFort());
@@ -48,14 +49,16 @@ public class PledgeShowInfoUpdate extends L2GameServerPacket
 		writeD(0);
 		writeD(0);
 		writeD(0x00);
-		writeD(0); //c5
-		writeS(""); //c5
-		writeD(0); //c5
-		writeD(0); //c5
-        writeD(0x00);
+		writeD(0); // c5
+		writeS(""); // c5
+		writeD(0); // c5
+		writeD(0); // c5
+		writeD(0x00);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

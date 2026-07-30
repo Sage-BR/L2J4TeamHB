@@ -3,24 +3,24 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.instancemanager;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-
-
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.GmListTable;
@@ -33,9 +33,6 @@ import net.sf.l2j.gameserver.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.ArrayList;
-
 /**
  * Petition Manager
  *
@@ -45,9 +42,11 @@ import java.util.ArrayList;
 public final class PetitionManager
 {
 	protected static final Logger _log = Logger.getLogger(PetitionManager.class.getName());
+
 	private static PetitionManager _instance;
 
 	private Map<Integer, Petition> _pendingPetitions;
+
 	private Map<Integer, Petition> _completedPetitions;
 
 	private static enum PetitionState
@@ -92,22 +91,28 @@ public final class PetitionManager
 		private long _submitTime = System.currentTimeMillis();
 
 		private int _id;
+
 		private PetitionType _type;
+
 		private PetitionState _state = PetitionState.Pending;
+
 		private String _content;
 
-		private List<CreatureSay> _messageLog = new ArrayList<CreatureSay>();
+		private List<CreatureSay> _messageLog = new ArrayList<>();
 
 		private L2PcInstance _petitioner;
+
 		private L2PcInstance _responder;
 
-		public Petition(L2PcInstance petitioner, String petitionText, int petitionType)
+		public Petition(L2PcInstance petitioner, String petitionText,
+		        int petitionType)
 		{
 			petitionType--;
 			_id = IdFactory.getInstance().getNextId();
-			if(petitionType >= PetitionType.values().length)
+			if (petitionType >= PetitionType.values().length)
 			{
-				_log.warning("PetitionManager:Petition : invalid petition type (received type was +1) : "+ petitionType);
+				_log.warning("PetitionManager:Petition : invalid petition type (received type was +1) : "
+				        + petitionType);
 			}
 			_type = PetitionType.values()[petitionType];
 			_content = petitionText;
@@ -115,7 +120,7 @@ public final class PetitionManager
 			_petitioner = petitioner;
 		}
 
-        protected boolean addLogMessage(CreatureSay cs)
+		protected boolean addLogMessage(CreatureSay cs)
 		{
 			return _messageLog.add(cs);
 		}
@@ -137,14 +142,14 @@ public final class PetitionManager
 				}
 				else
 				{
-                    // Ending petition consultation with <Player>.
+					// Ending petition consultation with <Player>.
 					SystemMessage sm = new SystemMessage(SystemMessageId.PETITION_ENDED_WITH_S1);
 					sm.addString(getPetitioner().getName());
 					getResponder().sendPacket(sm);
 
 					if (endState == PetitionState.Petitioner_Cancel)
 					{
-                        // Receipt No. <ID> petition cancelled.
+						// Receipt No. <ID> petition cancelled.
 						sm = new SystemMessage(SystemMessageId.RECENT_NO_S1_CANCELED);
 						sm.addNumber(getId());
 						getResponder().sendPacket(sm);
@@ -152,9 +157,12 @@ public final class PetitionManager
 				}
 			}
 
-            // End petition consultation and inform them, if they are still online.
+			// End petition consultation and inform them, if they are still
+			// online.
 			if (getPetitioner() != null && getPetitioner().isOnline() == 1)
+			{
 				getPetitioner().sendPacket(new SystemMessage(SystemMessageId.THIS_END_THE_PETITION_PLEASE_PROVIDE_FEEDBACK));
+			}
 
 			getCompletedPetitions().put(getId(), this);
 			return (getPendingPetitions().remove(getId()) != null);
@@ -199,10 +207,10 @@ public final class PetitionManager
 		{
 			if (getPetitioner() == null || getPetitioner().isOnline() == 0)
 			{
-                // Allows petitioners to see the results of their petition when
-                // they log back into the game.
+				// Allows petitioners to see the results of their petition when
+				// they log back into the game.
 
-				//endPetitionConsultation(PetitionState.Petitioner_Missing);
+				// endPetitionConsultation(PetitionState.Petitioner_Missing);
 				return;
 			}
 
@@ -227,8 +235,10 @@ public final class PetitionManager
 
 		public void setResponder(L2PcInstance respondingAdmin)
 		{
-            if (getResponder() != null)
-                return;
+			if (getResponder() != null)
+			{
+				return;
+			}
 
 			_responder = respondingAdmin;
 		}
@@ -236,8 +246,8 @@ public final class PetitionManager
 
 	private PetitionManager()
 	{
-		_pendingPetitions = new ConcurrentHashMap<Integer, Petition>();
-		_completedPetitions = new ConcurrentHashMap<Integer, Petition>();
+		_pendingPetitions = new ConcurrentHashMap<>();
+		_completedPetitions = new ConcurrentHashMap<>();
 	}
 
 	public void clearCompletedPetitions()
@@ -245,7 +255,8 @@ public final class PetitionManager
 		int numPetitions = getPendingPetitionCount();
 
 		getCompletedPetitions().clear();
-		_log.info("PetitionManager: Completed petition data cleared. " + numPetitions + " petition(s) removed.");
+		_log.info("PetitionManager: Completed petition data cleared. "
+		        + numPetitions + " petition(s) removed.");
 	}
 
 	public void clearPendingPetitions()
@@ -253,31 +264,36 @@ public final class PetitionManager
 		int numPetitions = getPendingPetitionCount();
 
 		getPendingPetitions().clear();
-		_log.info("PetitionManager: Pending petition queue cleared. " + numPetitions + " petition(s) removed.");
+		_log.info("PetitionManager: Pending petition queue cleared. "
+		        + numPetitions + " petition(s) removed.");
 	}
 
 	public boolean acceptPetition(L2PcInstance respondingAdmin, int petitionId)
 	{
 		if (!isValidPetition(petitionId))
+		{
 			return false;
+		}
 
 		Petition currPetition = getPendingPetitions().get(petitionId);
 
 		if (currPetition.getResponder() != null)
+		{
 			return false;
+		}
 
 		currPetition.setResponder(respondingAdmin);
 		currPetition.setState(PetitionState.In_Process);
 
-        // Petition application accepted. (Send to Petitioner)
+		// Petition application accepted. (Send to Petitioner)
 		currPetition.sendPetitionerPacket(new SystemMessage(SystemMessageId.PETITION_APP_ACCEPTED));
 
-        // Petition application accepted. Reciept No. is <ID>
+		// Petition application accepted. Reciept No. is <ID>
 		SystemMessage sm = new SystemMessage(SystemMessageId.PETITION_ACCEPTED_RECENT_NO_S1);
 		sm.addNumber(currPetition.getId());
 		currPetition.sendResponderPacket(sm);
 
-        // Petition consultation with <Player> underway.
+		// Petition consultation with <Player> underway.
 		sm = new SystemMessage(SystemMessageId.PETITION_WITH_S1_UNDER_WAY);
 		sm.addString(currPetition.getPetitioner().getName());
 		currPetition.sendResponderPacket(sm);
@@ -286,59 +302,79 @@ public final class PetitionManager
 
 	public boolean cancelActivePetition(L2PcInstance player)
 	{
-        for (Petition currPetition : getPendingPetitions().values())
-    	{
-            if (currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == player.getObjectId())
-                return (currPetition.endPetitionConsultation(PetitionState.Petitioner_Cancel));
+		for (Petition currPetition : getPendingPetitions().values())
+		{
+			if (currPetition.getPetitioner() != null
+			        && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+			{
+				return (currPetition.endPetitionConsultation(PetitionState.Petitioner_Cancel));
+			}
 
-            if (currPetition.getResponder() != null && currPetition.getResponder().getObjectId() == player.getObjectId())
-                return (currPetition.endPetitionConsultation(PetitionState.Responder_Cancel));
-        }
+			if (currPetition.getResponder() != null
+			        && currPetition.getResponder().getObjectId() == player.getObjectId())
+			{
+				return (currPetition.endPetitionConsultation(PetitionState.Responder_Cancel));
+			}
+		}
 
 		return false;
 	}
 
 	public void checkPetitionMessages(L2PcInstance petitioner)
 	{
-        if (petitioner != null)
-    		for (Petition currPetition : getPendingPetitions().values())
-    		{
-                if (currPetition == null)
-                    continue;
+		if (petitioner != null)
+		{
+			for (Petition currPetition : getPendingPetitions().values())
+			{
+				if (currPetition == null)
+				{
+					continue;
+				}
 
-    			if (currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == petitioner.getObjectId())
-    			{
-    				for (CreatureSay logMessage : currPetition.getLogMessages())
-    					petitioner.sendPacket(logMessage);
+				if (currPetition.getPetitioner() != null
+				        && currPetition.getPetitioner().getObjectId() == petitioner.getObjectId())
+				{
+					for (CreatureSay logMessage : currPetition.getLogMessages())
+					{
+						petitioner.sendPacket(logMessage);
+					}
 
-    				return;
-    			}
-    		}
+					return;
+				}
+			}
+		}
 	}
 
 	public boolean endActivePetition(L2PcInstance player)
 	{
 		if (!player.isGM())
+		{
 			return false;
+		}
 
 		for (Petition currPetition : getPendingPetitions().values())
-        {
-            if (currPetition == null)
-                continue;
+		{
+			if (currPetition == null)
+			{
+				continue;
+			}
 
-			if (currPetition.getResponder() != null && currPetition.getResponder().getObjectId() == player.getObjectId())
+			if (currPetition.getResponder() != null
+			        && currPetition.getResponder().getObjectId() == player.getObjectId())
+			{
 				return (currPetition.endPetitionConsultation(PetitionState.Completed));
-        }
+			}
+		}
 
 		return false;
 	}
 
-    protected Map<Integer, Petition> getCompletedPetitions()
+	protected Map<Integer, Petition> getCompletedPetitions()
 	{
 		return _completedPetitions;
 	}
 
-    protected Map<Integer, Petition> getPendingPetitions()
+	protected Map<Integer, Petition> getPendingPetitions()
 	{
 		return _pendingPetitions;
 	}
@@ -350,28 +386,40 @@ public final class PetitionManager
 
 	public int getPlayerTotalPetitionCount(L2PcInstance player)
 	{
-        if (player == null)
-            return 0;
+		if (player == null)
+		{
+			return 0;
+		}
 
 		int petitionCount = 0;
 
 		for (Petition currPetition : getPendingPetitions().values())
-        {
-            if (currPetition == null)
-                continue;
+		{
+			if (currPetition == null)
+			{
+				continue;
+			}
 
-			if (currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+			if (currPetition.getPetitioner() != null
+			        && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+			{
 				petitionCount++;
-        }
+			}
+		}
 
 		for (Petition currPetition : getCompletedPetitions().values())
-        {
-            if (currPetition == null)
-                continue;
+		{
+			if (currPetition == null)
+			{
+				continue;
+			}
 
-			if (currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+			if (currPetition.getPetitioner() != null
+			        && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+			{
 				petitionCount++;
-        }
+			}
+		}
 
 		return petitionCount;
 	}
@@ -379,13 +427,17 @@ public final class PetitionManager
 	public boolean isPetitionInProcess()
 	{
 		for (Petition currPetition : getPendingPetitions().values())
-        {
-            if (currPetition == null)
-                continue;
+		{
+			if (currPetition == null)
+			{
+				continue;
+			}
 
 			if (currPetition.getState() == PetitionState.In_Process)
+			{
 				return true;
-        }
+			}
+		}
 
 		return false;
 	}
@@ -393,7 +445,9 @@ public final class PetitionManager
 	public boolean isPetitionInProcess(int petitionId)
 	{
 		if (!isValidPetition(petitionId))
+		{
 			return false;
+		}
 
 		Petition currPetition = getPendingPetitions().get(petitionId);
 		return (currPetition.getState() == PetitionState.In_Process);
@@ -401,19 +455,24 @@ public final class PetitionManager
 
 	public boolean isPlayerInConsultation(L2PcInstance player)
 	{
-        if (player != null)
-    	    for (Petition currPetition : getPendingPetitions().values())
-    	    {
-                if (currPetition == null)
-                    continue;
+		if (player != null)
+		{
+			for (Petition currPetition : getPendingPetitions().values())
+			{
+				if ((currPetition == null) || (currPetition.getState() != PetitionState.In_Process))
+				{
+					continue;
+				}
 
-                if (currPetition.getState() != PetitionState.In_Process)
-                    continue;
-
-                if ((currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == player.getObjectId()) ||
-                        (currPetition.getResponder() != null && currPetition.getResponder().getObjectId() == player.getObjectId()))
-    	            return true;
-    	    }
+				if ((currPetition.getPetitioner() != null
+				        && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+				        || (currPetition.getResponder() != null
+				                && currPetition.getResponder().getObjectId() == player.getObjectId()))
+				{
+					return true;
+				}
+			}
+		}
 
 		return false;
 	}
@@ -425,15 +484,22 @@ public final class PetitionManager
 
 	public boolean isPlayerPetitionPending(L2PcInstance petitioner)
 	{
-        if (petitioner != null)
-    		for (Petition currPetition : getPendingPetitions().values())
-            {
-                if (currPetition == null)
-                    continue;
+		if (petitioner != null)
+		{
+			for (Petition currPetition : getPendingPetitions().values())
+			{
+				if (currPetition == null)
+				{
+					continue;
+				}
 
-    			if (currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == petitioner.getObjectId())
-    				return true;
-            }
+				if (currPetition.getPetitioner() != null
+				        && currPetition.getPetitioner().getObjectId() == petitioner.getObjectId())
+				{
+					return true;
+				}
+			}
+		}
 
 		return false;
 	}
@@ -446,30 +512,38 @@ public final class PetitionManager
 	public boolean rejectPetition(L2PcInstance respondingAdmin, int petitionId)
 	{
 		if (!isValidPetition(petitionId))
+		{
 			return false;
+		}
 
 		Petition currPetition = getPendingPetitions().get(petitionId);
 
 		if (currPetition.getResponder() != null)
+		{
 			return false;
+		}
 
 		currPetition.setResponder(respondingAdmin);
 		return (currPetition.endPetitionConsultation(PetitionState.Responder_Reject));
 	}
 
-	public boolean sendActivePetitionMessage(L2PcInstance player, String messageText)
+	public boolean sendActivePetitionMessage(L2PcInstance player,
+	        String messageText)
 	{
-		//if (!isPlayerInConsultation(player))
-		//return false;
+		// if (!isPlayerInConsultation(player))
+		// return false;
 
 		CreatureSay cs;
 
 		for (Petition currPetition : getPendingPetitions().values())
 		{
-            if (currPetition == null)
-                continue;
+			if (currPetition == null)
+			{
+				continue;
+			}
 
-			if (currPetition.getPetitioner() != null && currPetition.getPetitioner().getObjectId() == player.getObjectId())
+			if (currPetition.getPetitioner() != null
+			        && currPetition.getPetitioner().getObjectId() == player.getObjectId())
 			{
 				cs = new CreatureSay(player.getObjectId(), Say2.PETITION_PLAYER, player.getName(), messageText);
 				currPetition.addLogMessage(cs);
@@ -479,7 +553,8 @@ public final class PetitionManager
 				return true;
 			}
 
-			if (currPetition.getResponder() != null && currPetition.getResponder().getObjectId() == player.getObjectId())
+			if (currPetition.getResponder() != null
+			        && currPetition.getResponder().getObjectId() == player.getObjectId())
 			{
 				cs = new CreatureSay(player.getObjectId(), Say2.PETITION_GM, player.getName(), messageText);
 				currPetition.addLogMessage(cs);
@@ -495,52 +570,69 @@ public final class PetitionManager
 
 	public void sendPendingPetitionList(L2PcInstance activeChar)
 	{
-        StringBuilder htmlContent = new StringBuilder("<html><body>" +
-		"<center><font color=\"LEVEL\">Current Petitions</font><br><table width=\"300\">");
+		StringBuilder htmlContent = new StringBuilder("<html><body>"
+		        + "<center><font color=\"LEVEL\">Current Petitions</font><br><table width=\"300\">");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm z");
 
 		if (getPendingPetitionCount() == 0)
+		{
 			htmlContent.append("<tr><td colspan=\"4\">There are no currently pending petitions.</td></tr>");
+		}
 		else
-			htmlContent.append("<tr><td></td><td><font color=\"999999\">Petitioner</font></td>" +
-			"<td><font color=\"999999\">Petition Type</font></td><td><font color=\"999999\">Submitted</font></td></tr>");
+		{
+			htmlContent.append("<tr><td></td><td><font color=\"999999\">Petitioner</font></td>"
+			        + "<td><font color=\"999999\">Petition Type</font></td><td><font color=\"999999\">Submitted</font></td></tr>");
+		}
 
 		for (Petition currPetition : getPendingPetitions().values())
 		{
-            if (currPetition == null)
-                continue;
+			if (currPetition == null)
+			{
+				continue;
+			}
 
 			htmlContent.append("<tr><td>");
 
 			if (currPetition.getState() != PetitionState.In_Process)
-				htmlContent.append("<button value=\"View\" action=\"bypass -h admin_view_petition " + currPetition.getId() + "\" " +
-		"width=\"40\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			{
+				htmlContent.append("<button value=\"View\" action=\"bypass -h admin_view_petition "
+				        + currPetition.getId() + "\" "
+				        + "width=\"40\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			}
 			else
+			{
 				htmlContent.append("<font color=\"999999\">In Process</font>");
+			}
 
-			htmlContent.append("</td><td>" + currPetition.getPetitioner().getName() +
-			                   "</td><td>" + currPetition.getTypeAsString() + "</td><td>" +
-			                   dateFormat.format(new Date(currPetition.getSubmitTime())) + "</td></tr>");
+			htmlContent.append("</td><td>"
+			        + currPetition.getPetitioner().getName() + "</td><td>"
+			        + currPetition.getTypeAsString() + "</td><td>"
+			        + dateFormat.format(new Date(currPetition.getSubmitTime()))
+			        + "</td></tr>");
 		}
 
-		htmlContent.append("</table><br><button value=\"Refresh\" action=\"bypass -h admin_view_petitions\" width=\"50\" " +
-		                   "height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br><button value=\"Back\" action=\"bypass -h admin_admin\" " +
-		"width=\"40\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center></body></html>");
+		htmlContent.append("</table><br><button value=\"Refresh\" action=\"bypass -h admin_view_petitions\" width=\"50\" "
+		        + "height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br><button value=\"Back\" action=\"bypass -h admin_admin\" "
+		        + "width=\"40\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center></body></html>");
 
 		NpcHtmlMessage htmlMsg = new NpcHtmlMessage(0);
 		htmlMsg.setHtml(htmlContent.toString());
 		activeChar.sendPacket(htmlMsg);
 	}
 
-	public int submitPetition(L2PcInstance petitioner, String petitionText, int petitionType)
+	public int submitPetition(L2PcInstance petitioner, String petitionText,
+	        int petitionType)
 	{
-		// Create a new petition instance and add it to the list of pending petitions.
+		// Create a new petition instance and add it to the list of pending
+		// petitions.
 		Petition newPetition = new Petition(petitioner, petitionText, petitionType);
 		int newPetitionId = newPetition.getId();
 		getPendingPetitions().put(newPetitionId, newPetition);
 
 		// Notify all GMs that a new petition has been submitted.
-		String msgContent = petitioner.getName() + " has submitted a new petition."; //(ID: " + newPetitionId + ").";
+		String msgContent = petitioner.getName()
+		        + " has submitted a new petition."; // (ID: " + newPetitionId +
+		                                            // ").";
 		GmListTable.broadcastToGMs(new CreatureSay(petitioner.getObjectId(), 17, "Petition System", msgContent));
 
 		return newPetitionId;
@@ -548,27 +640,33 @@ public final class PetitionManager
 
 	public void viewPetition(L2PcInstance activeChar, int petitionId)
 	{
-		if (!activeChar.isGM())
+		if (!activeChar.isGM() || !isValidPetition(petitionId))
+		{
 			return;
-
-		if (!isValidPetition(petitionId))
-			return;
+		}
 
 		Petition currPetition = getPendingPetitions().get(petitionId);
-        StringBuilder htmlContent = new StringBuilder("<html><body>");
+		StringBuilder htmlContent = new StringBuilder("<html><body>");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd MMM HH:mm z");
 
-		htmlContent.append("<center><br><font color=\"LEVEL\">Petition #" + currPetition.getId() + "</font><br1>");
+		htmlContent.append("<center><br><font color=\"LEVEL\">Petition #"
+		        + currPetition.getId() + "</font><br1>");
 		htmlContent.append("<img src=\"L2UI.SquareGray\" width=\"200\" height=\"1\"></center><br>");
-		htmlContent.append("Submit Time: " + dateFormat.format(new Date(currPetition.getSubmitTime())) + "<br1>");
-		htmlContent.append("Petitioner: " + currPetition.getPetitioner().getName() + "<br1>");
-		htmlContent.append("Petition Type: " + currPetition.getTypeAsString() + "<br>" + currPetition.getContent() + "<br>");
-		htmlContent.append("<center><button value=\"Accept\" action=\"bypass -h admin_accept_petition " + currPetition.getId() + "\"" +
-		"width=\"50\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br1>");
-		htmlContent.append("<button value=\"Reject\" action=\"bypass -h admin_reject_petition " + currPetition.getId() + "\" " +
-		"width=\"50\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
-		htmlContent.append("<button value=\"Back\" action=\"bypass -h admin_view_petitions\" width=\"40\" height=\"15\" back=\"L2UI_ct1.button_df\" " +
-		"fore=\"L2UI_ct1.button_df\"></center>");
+		htmlContent.append("Submit Time: "
+		        + dateFormat.format(new Date(currPetition.getSubmitTime()))
+		        + "<br1>");
+		htmlContent.append("Petitioner: "
+		        + currPetition.getPetitioner().getName() + "<br1>");
+		htmlContent.append("Petition Type: " + currPetition.getTypeAsString()
+		        + "<br>" + currPetition.getContent() + "<br>");
+		htmlContent.append("<center><button value=\"Accept\" action=\"bypass -h admin_accept_petition "
+		        + currPetition.getId() + "\""
+		        + "width=\"50\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br1>");
+		htmlContent.append("<button value=\"Reject\" action=\"bypass -h admin_reject_petition "
+		        + currPetition.getId() + "\" "
+		        + "width=\"50\" height=\"15\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
+		htmlContent.append("<button value=\"Back\" action=\"bypass -h admin_view_petitions\" width=\"40\" height=\"15\" back=\"L2UI_ct1.button_df\" "
+		        + "fore=\"L2UI_ct1.button_df\"></center>");
 		htmlContent.append("</body></html>");
 
 		NpcHtmlMessage htmlMsg = new NpcHtmlMessage(0);

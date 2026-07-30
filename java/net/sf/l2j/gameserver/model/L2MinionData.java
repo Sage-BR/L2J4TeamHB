@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,12 +17,14 @@ package net.sf.l2j.gameserver.model;
 import net.sf.l2j.util.Rnd;
 
 /**
- * This class defines the spawn data of a Minion type
- * In a group mob, there are one master called RaidBoss and several slaves called Minions.
+ * This class defines the spawn data of a Minion type In a group mob, there are
+ * one master called RaidBoss and several slaves called Minions.
  *
- * <B><U> Data</U> :</B><BR><BR>
- * <li>_minionId : The Identifier of the L2Minion to spawn </li>
- * <li>_minionAmount :  The number of this Minion Type to spawn </li><BR><BR>
+ * <B><U> Data</U> :</B><BR>
+ * <BR>
+ * <li>_minionId : The Identifier of the L2Minion to spawn</li>
+ * <li>_minionAmount : The number of this Minion Type to spawn</li><BR>
+ * <BR>
  *
  */
 public class L2MinionData
@@ -33,13 +35,17 @@ public class L2MinionData
 
 	/** The number of this Minion Type to spawn */
 	private int _minionAmount;
+
 	private int _minionAmountMin;
+
 	private int _minionAmountMax;
 
 	/**
-	 * Set the Identifier of the Minion to spawn.<BR><BR>
+	 * Set the Identifier of the Minion to spawn.<BR>
+	 * <BR>
 	 *
-	 * @param if The L2Character Identifier to spawn
+	 * @param if
+	 *            The L2Character Identifier to spawn
 	 *
 	 */
 	public void setMinionId(int id)
@@ -48,7 +54,8 @@ public class L2MinionData
 	}
 
 	/**
-	 * Return the Identifier of the Minion to spawn.<BR><BR>
+	 * Return the Identifier of the Minion to spawn.<BR>
+	 * <BR>
 	 */
 	public int getMinionId()
 	{
@@ -56,9 +63,11 @@ public class L2MinionData
 	}
 
 	/**
-	 * Set the minimum of minions to amount.<BR><BR>
+	 * Set the minimum of minions to amount.<BR>
+	 * <BR>
 	 *
-	 * @param amountMin The minimum quantity of this Minion type to spawn
+	 * @param amountMin
+	 *            The minimum quantity of this Minion type to spawn
 	 *
 	 */
 	public void setAmountMin(int amountMin)
@@ -67,9 +76,11 @@ public class L2MinionData
 	}
 
 	/**
-	 * Set the maximum of minions to amount.<BR><BR>
+	 * Set the maximum of minions to amount.<BR>
+	 * <BR>
 	 *
-	 * @param amountMax The maximum quantity of this Minion type to spawn
+	 * @param amountMax
+	 *            The maximum quantity of this Minion type to spawn
 	 *
 	 */
 	public void setAmountMax(int amountMax)
@@ -78,9 +89,11 @@ public class L2MinionData
 	}
 
 	/**
-	 * Set the amount of this Minion type to spawn.<BR><BR>
+	 * Set the amount of this Minion type to spawn.<BR>
+	 * <BR>
 	 *
-	 * @param amount The quantity of this Minion type to spawn
+	 * @param amount
+	 *            The quantity of this Minion type to spawn
 	 *
 	 */
 	public void setAmount(int amount)
@@ -89,7 +102,8 @@ public class L2MinionData
 	}
 
 	/**
-	 * Return the amount of this Minion type to spawn.<BR><BR>
+	 * Return the amount of this Minion type to spawn.<BR>
+	 * <BR>
 	 */
 	public int getAmount()
 	{

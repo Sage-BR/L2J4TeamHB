@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,7 +24,6 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-
 /**
  * This class ...
  *
@@ -33,6 +32,7 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 public final class RequestFriendList extends L2GameClientPacket
 {
 	private static Logger _log = Logger.getLogger(RequestFriendList.class.getName());
+
 	private static final String _C__60_REQUESTFRIENDLIST = "[C] 60 RequestFriendList";
 
 	@Override
@@ -47,7 +47,9 @@ public final class RequestFriendList extends L2GameClientPacket
 		L2PcInstance activeChar = getClient().getActiveChar();
 
 		if (activeChar == null)
+		{
 			return;
+		}
 
 		SystemMessage sm;
 		java.sql.Connection con = null;
@@ -60,10 +62,10 @@ public final class RequestFriendList extends L2GameClientPacket
 
 			ResultSet rset = statement.executeQuery();
 
-			//======<Friend List>======
+			// ======<Friend List>======
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.FRIEND_LIST_HEADER));
 
-            L2PcInstance friend = null;
+			L2PcInstance friend = null;
 			while (rset.next())
 			{
 				// int friendId = rset.getInt("friendId");
@@ -72,31 +74,39 @@ public final class RequestFriendList extends L2GameClientPacket
 
 				if (friend == null)
 				{
-				    //	(Currently: Offline)
-				    sm = new SystemMessage(SystemMessageId.S1_OFFLINE);
-				    sm.addString(friendName);
+					// (Currently: Offline)
+					sm = new SystemMessage(SystemMessageId.S1_OFFLINE);
+					sm.addString(friendName);
 				}
 				else
 				{
-				    //(Currently: Online)
-				    sm = new SystemMessage(SystemMessageId.S1_ONLINE);
-				    sm.addString(friendName);
+					// (Currently: Online)
+					sm = new SystemMessage(SystemMessageId.S1_ONLINE);
+					sm.addString(friendName);
 				}
 
 				activeChar.sendPacket(sm);
 			}
 
-			//=========================
+			// =========================
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.FRIEND_LIST_FOOTER));
 			sm = null;
 			rset.close();
 			statement.close();
 		}
-		catch (Exception e) {
+		catch (Exception e)
+		{
 			_log.warning("Error in /friendlist for " + activeChar + ": " + e);
 		}
-		finally	{
-			try {con.close();} catch (Exception e) {}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 	}
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-  <item id="2376" name="Avadon Breastplate">
+  <item id='2376' name="Avadon Breastplate">
     <for>
       <add val="157" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -26,7 +26,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2377" name="Mithril Scale Gaiters">
+<item id='2377' name="Mithril Scale Gaiters">
     <for>
       <add val="64" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -52,7 +52,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2378" name="Brigandine Gaiters">
+<item id='2378' name="Brigandine Gaiters">
     <for>
       <add val="64" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -78,7 +78,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2379" name="Avadon Gaiters">
+<item id='2379' name="Avadon Gaiters">
     <for>
       <add val="98" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -104,7 +104,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2380" name="Blue Wolf Gaiters">
+<item id='2380' name="Blue Wolf Gaiters">
     <for>
       <add val="104" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -130,7 +130,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2381" name="Doom Plate Armor">
+<item id='2381' name="Doom Plate Armor">
     <for>
       <add val="270" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -156,7 +156,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2382" name="Tallum Plate Armor">
+<item id='2382' name="Tallum Plate Armor">
     <for>
       <add val="278" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -182,7 +182,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2383" name="Majestic Plate Armor">
+<item id='2383' name="Majestic Plate Armor">
     <for>
       <add val="293" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -208,14 +208,33 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2384" name="Zubei's Leather Shirt">
+<item id='2384' name="Zubei's Leather Shirt">
     <for>
       <add val="117" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="armor_type" val="none" />
+    <set name="bodypart" val="1024"/>
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="4330" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="1560000" />
+    <set name="crystal_count" val="208" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="117" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="2385" name="Dark Crystal Leather Armor">
+<item id='2385' name="Dark Crystal Leather Armor">
     <for>
       <add val="128" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -241,7 +260,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2386" name="Wooden Gaiters">
+<item id='2386' name="Wooden Gaiters">
     <for>
       <add val="29" order="0x10" stat="pDef" />
     </for>
@@ -266,7 +285,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2387" name="Tempered Mithril Gaiters">
+<item id='2387' name="Tempered Mithril Gaiters">
     <for>
       <add val="56" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -292,14 +311,33 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2388" name="Zubei's Leather Gaiters">
+<item id='2388' name="Zubei's Leather Gaiters">
     <for>
       <add val="73" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
     </for>
-    <set name="armor_type" val="none" />
+    <set name="bodypart" val="2048"/>
+    <set name="crystallizable" val="false" />
+    <set name="armor_type" val="light" />
+    <set name="weight" val="1480" />
+    <set name="material" val="4" />
+    <set name="crystal_type" val="0" />
+    <set name="avoid_modify" val="0" />
+    <set name="duration" val="-1" />
+    <set name="price" val="973000" />
+    <set name="crystal_count" val="129" />
+    <set name="sellable" val="true" />
+    <set name="dropable" val="true" />
+    <set name="destroyable" val="true" />
+    <set name="tradeable" val="true" />
+    <set name="skill" val="0-0;" />
+    <set name="type1" val="2" />
+    <set name="type2" val="2" />
+    <set name="p_def" val="73" />
+    <set name="m_def" val="0" />
+    <set name="mp_bonus" val="0" />
   </item>
-  <item id="2389" name="Dark Crystalline Leggings">
+<item id='2389' name="Dark Crystalline Leggings">
     <for>
       <add val="80" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -325,7 +363,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2390" name="Avadon Leather Armor">
+<item id='2390' name="Avadon Leather Armor">
     <for>
       <add val="191" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -351,7 +389,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2391" name="Blue Wolf Leather Armor">
+<item id='2391' name="Blue Wolf Leather Armor">
     <for>
       <add val="202" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -377,7 +415,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2392" name="Leather Armor of Doom">
+<item id='2392' name="Leather Armor of Doom">
     <for>
       <add val="202" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -403,7 +441,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2393" name="Tallum Leather Armor">
+<item id='2393' name="Tallum Leather Armor">
     <for>
       <add val="209" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -429,7 +467,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2394" name="Nightmarish Leather Armor">
+<item id='2394' name="Nightmarish Leather Armor">
     <for>
       <add val="220" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -455,7 +493,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2395" name="Majestic Leather Armor">
+<item id='2395' name="Majestic Leather Armor">
     <for>
       <add val="220" order="0x10" stat="pDef" />
       <enchant val="0" order="0x0C" stat="pDef" />
@@ -481,7 +519,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="0" />
   </item>
-  <item id="2396" name="Elven Mithril Tunic">
+<item id='2396' name="Elven Mithril Tunic">
     <for>
       <add val="54" order="0x10" stat="pDef" />
       <add val="169" order="0x60" stat="maxMp" />
@@ -508,7 +546,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="169" />
   </item>
-  <item id="2397" name="Tunic of Zubei">
+<item id='2397' name="Tunic of Zubei">
     <for>
       <add val="78" order="0x10" stat="pDef" />
       <add val="345" order="0x60" stat="maxMp" />
@@ -535,7 +573,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="345" />
   </item>
-  <item id="2398" name="Blue Wolf Tunic">
+<item id='2398' name="Blue Wolf Tunic">
     <for>
       <add val="83" order="0x10" stat="pDef" />
       <add val="377" order="0x60" stat="maxMp" />
@@ -562,7 +600,7 @@
     <set name="m_def" val="0" />
     <set name="mp_bonus" val="377" />
   </item>
-  <item id="2399" name="Tunic of Doom">
+<item id='2399' name="Tunic of Doom">
     <for>
       <add val="83" order="0x10" stat="pDef" />
       <add val="377" order="0x60" stat="maxMp" />

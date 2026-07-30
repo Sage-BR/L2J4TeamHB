@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,36 +31,46 @@ public class KnownListUpdateTaskManager
 	protected static final Logger _log = Logger.getLogger(DecayTaskManager.class.getName());
 
 	private final static int FULL_UPDATE_TIMER = 100;
+
 	private Object syncObject = new Object();
+
 	public static boolean updatePass = true;
-	public static int _fullUpdateTimer = FULL_UPDATE_TIMER; // Do full update every FULL_UPDATE_TIMER * KNOWNLIST_UPDATE_INTERVAL
-	
+
+	public static int _fullUpdateTimer = FULL_UPDATE_TIMER; // Do full update
+	                                                        // every
+	                                                        // FULL_UPDATE_TIMER
+	                                                        // *
+	                                                        // KNOWNLIST_UPDATE_INTERVAL
+
 	private static KnownListUpdateTaskManager _instance;
-	
+
 	public KnownListUpdateTaskManager()
 	{
 		ThreadPoolManager.getInstance().scheduleAi(new KnownListUpdate(), 1000);
 	}
-	
+
 	public static KnownListUpdateTaskManager getInstance()
 	{
 		if (_instance == null)
+		{
 			_instance = new KnownListUpdateTaskManager();
-		
+		}
+
 		return _instance;
 	}
-	
+
 	public Object getSync()
 	{
 		return syncObject;
 	}
-	
+
 	private class KnownListUpdate implements Runnable
 	{
 		public KnownListUpdate()
 		{
 		}
-		
+
+		@Override
 		public void run()
 		{
 			try
@@ -70,7 +80,8 @@ public class KnownListUpdateTaskManager
 					for (L2WorldRegion r : regions) // go through all world
 					// regions
 					{
-						// avoid stopping update if something went wrong in updateRegion()
+						// avoid stopping update if something went wrong in
+						// updateRegion()
 						try
 						{
 							if (r.isActive()) // and check only if the region
@@ -91,57 +102,80 @@ public class KnownListUpdateTaskManager
 				_log.warning(e.toString());
 			}
 			updatePass = !updatePass;
-			if (_fullUpdateTimer > 0) _fullUpdateTimer--;
-			else _fullUpdateTimer = FULL_UPDATE_TIMER;
+			if (_fullUpdateTimer > 0)
+			{
+				_fullUpdateTimer--;
+			}
+			else
+			{
+				_fullUpdateTimer = FULL_UPDATE_TIMER;
+			}
 			ThreadPoolManager.getInstance().scheduleAi(new KnownListUpdate(), Config.KNOWNLIST_UPDATE_INTERVAL);
 		}
 	}
-	
+
 	public void updateRegion(L2WorldRegion region, boolean fullUpdate,
 	        boolean forgetObjects)
 	{
-		//synchronized (syncObject)
+		// synchronized (syncObject)
 		{
 			Collection<L2Object> vObj = region.getVisibleObjects().values();
-			//synchronized (region.getVisibleObjects())
+			// synchronized (region.getVisibleObjects())
 			{
 				for (L2Object object : vObj) // and for all members in region
 				{
 					if (!object.isVisible())
+					{
 						continue; // skip dying objects
+					}
 					if (forgetObjects)
 					{
 						object.getKnownList().forgetObjects((object instanceof L2PlayableInstance
-						        || (Config.GUARD_ATTACK_AGGRO_MOB && object instanceof L2GuardInstance) || fullUpdate));
+						        || (Config.GUARD_ATTACK_AGGRO_MOB
+						                && object instanceof L2GuardInstance)
+						        || fullUpdate));
 						continue;
 					}
 					if (object instanceof L2PlayableInstance
-					        || (Config.GUARD_ATTACK_AGGRO_MOB && object instanceof L2GuardInstance)
+					        || (Config.GUARD_ATTACK_AGGRO_MOB
+					                && object instanceof L2GuardInstance)
 					        || fullUpdate)
 					{
-						for (L2WorldRegion regi : region.getSurroundingRegions()) 
+						for (L2WorldRegion regi : region.getSurroundingRegions())
 						{
 							Collection<L2Object> inrObj = regi.getVisibleObjects().values();
-							//synchronized (regi.getVisibleObjects())
+							// synchronized (regi.getVisibleObjects())
 							{
 								for (L2Object _object : inrObj)
+								{
 									if (_object != object)
+									{
 										object.getKnownList().addKnownObject(_object);
+									}
+								}
 							}
 						}
 					}
 					else if (object instanceof L2Character)
+					{
 						for (L2WorldRegion regi : region.getSurroundingRegions())
 						{
 							Collection<L2PlayableInstance> inrPls = regi.getVisiblePlayable().values();
-							//synchronized (regi.getVisiblePlayable())
+							// synchronized (regi.getVisiblePlayable())
 							{
 								if (regi.isActive())
+								{
 									for (L2Object _object : inrPls)
+									{
 										if (_object != object)
+										{
 											object.getKnownList().addKnownObject(_object);
+										}
+									}
+								}
 							}
 						}
+					}
 				}
 			}
 		}

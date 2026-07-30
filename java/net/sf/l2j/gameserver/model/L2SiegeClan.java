@@ -3,22 +3,21 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.l2j.gameserver.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
-
-import java.util.ArrayList;
 
 public class L2SiegeClan
 {
@@ -26,9 +25,12 @@ public class L2SiegeClan
 	// Instance
 	// ===============================================================
 	// Data Field
-	private int _clanId                = 0;
-	private List<L2NpcInstance> _flag  = new ArrayList<L2NpcInstance>();
+	private int _clanId = 0;
+
+	private List<L2NpcInstance> _flag = new ArrayList<>();
+
 	private int _numFlagsAdded = 0;
+
 	private SiegeClanType _type;
 
 	public enum SiegeClanType
@@ -63,14 +65,23 @@ public class L2SiegeClan
 
 	public boolean removeFlag(L2NpcInstance flag)
 	{
-		if (flag == null) return false;
+		if (flag == null)
+		{
+			return false;
+		}
 		boolean ret = getFlag().remove(flag);
-		//flag.deleteMe();
-		//check if null objects or dups remain in the list.
-		//for some reason, this might be happenning sometimes...
-		// delete false dupplicates: if this flag got deleted, delete its copies too.
+		// flag.deleteMe();
+		// check if null objects or dups remain in the list.
+		// for some reason, this might be happenning sometimes...
+		// delete false dupplicates: if this flag got deleted, delete its copies
+		// too.
 		if (ret)
-			while (getFlag().remove(flag)) ;
+		{
+			while (getFlag().remove(flag))
+			{
+
+			}
+		}
 
 		// now delete nulls
 		int n;
@@ -79,14 +90,18 @@ public class L2SiegeClan
 		{
 			more = false;
 			n = getFlag().size();
-			if (n>0)
-				for(int i=0; i<n;i++)
-					if(getFlag().get(i)==null)
+			if (n > 0)
+			{
+				for (int i = 0; i < n; i++)
+				{
+					if (getFlag().get(i) == null)
 					{
 						getFlag().remove(i);
 						more = true;
 						break;
 					}
+				}
+			}
 		}
 
 		flag.deleteMe();
@@ -96,21 +111,35 @@ public class L2SiegeClan
 
 	public void removeFlags()
 	{
-		for (L2NpcInstance flag: getFlag())
+		for (L2NpcInstance flag : getFlag())
+		{
 			removeFlag(flag);
+		}
 	}
 
 	// =========================================================
 	// Proeprty
-	public final int getClanId() { return _clanId; }
+	public final int getClanId()
+	{
+		return _clanId;
+	}
 
 	public final List<L2NpcInstance> getFlag()
 	{
-		if (_flag == null) _flag  = new ArrayList<L2NpcInstance>();
+		if (_flag == null)
+		{
+			_flag = new ArrayList<>();
+		}
 		return _flag;
 	}
 
-	public SiegeClanType getType() { return _type; }
+	public SiegeClanType getType()
+	{
+		return _type;
+	}
 
-    public void setType(SiegeClanType setType) { _type = setType; }
+	public void setType(SiegeClanType setType)
+	{
+		_type = setType;
+	}
 }

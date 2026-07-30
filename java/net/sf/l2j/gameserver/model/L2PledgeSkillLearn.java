@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,69 +21,73 @@ package net.sf.l2j.gameserver.model;
  */
 public final class L2PledgeSkillLearn
 {
-    // these two build the primary key
-    private final int _id;
-    private final int _level;
+	// these two build the primary key
+	private final int _id;
 
-    // not needed, just for easier debug
-    private final String _name;
+	private final int _level;
 
-    private final int _repCost;
-    private final int _baseLvl;
-    private final int _itemId;
+	// not needed, just for easier debug
+	private final String _name;
 
-    public L2PledgeSkillLearn(int id, int lvl, int baseLvl, String name, int cost, int itemId)
-    {
-        _id = id;
-        _level = lvl;
-        _baseLvl = baseLvl;
-        _name = name.intern();
-        _repCost = cost;
-        _itemId = itemId;
-    }
+	private final int _repCost;
 
-    /**
-     * @return Returns the id.
-     */
-    public int getId()
-    {
-        return _id;
-    }
+	private final int _baseLvl;
 
-    /**
-     * @return Returns the level.
-     */
-    public int getLevel()
-    {
-        return _level;
-    }
+	private final int _itemId;
 
-    /**
-     * @return Returns the minLevel.
-     */
-    public int getBaseLevel()
-    {
-        return _baseLvl;
-    }
+	public L2PledgeSkillLearn(int id, int lvl, int baseLvl, String name,
+	        int cost, int itemId)
+	{
+		_id = id;
+		_level = lvl;
+		_baseLvl = baseLvl;
+		_name = name.intern();
+		_repCost = cost;
+		_itemId = itemId;
+	}
 
-    /**
-     * @return Returns the name.
-     */
-    public String getName()
-    {
-        return _name;
-    }
+	/**
+	 * @return Returns the id.
+	 */
+	public int getId()
+	{
+		return _id;
+	}
 
-    /**
-     * @return Returns the spCost.
-     */
-    public int getRepCost()
-    {
-        return _repCost;
-    }
+	/**
+	 * @return Returns the level.
+	 */
+	public int getLevel()
+	{
+		return _level;
+	}
 
-    public int getItemId()
-    {
-        return _itemId;
-    }
+	/**
+	 * @return Returns the minLevel.
+	 */
+	public int getBaseLevel()
+	{
+		return _baseLvl;
+	}
+
+	/**
+	 * @return Returns the name.
+	 */
+	public String getName()
+	{
+		return _name;
+	}
+
+	/**
+	 * @return Returns the spCost.
+	 */
+	public int getRepCost()
+	{
+		return _repCost;
+	}
+
+	public int getItemId()
+	{
+		return _itemId;
+	}
 }

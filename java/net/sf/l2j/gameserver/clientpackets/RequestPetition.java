@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,29 +21,33 @@ import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-
 /**
- * <p>Format: (c) Sd
+ * <p>
+ * Format: (c) Sd
  * <ul>
  * <li>S: content</li>
  * <li>d: type</li>
- * </ul></p>
+ * </ul>
+ * </p>
+ *
  * @author -Wooden-, TempyIncursion
  *
  */
 public final class RequestPetition extends L2GameClientPacket
 {
 	private static final String _C__7F_RequestPetition = "[C] 7F RequestPetition";
-	//private static Logger _log = Logger.getLogger(RequestPetition.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(RequestPetition.class.getName());
 
 	private String _content;
-	private int _type;       // 1 = on : 0 = off;
+
+	private int _type; // 1 = on : 0 = off;
 
 	@Override
 	protected void readImpl()
 	{
 		_content = readS();
-		_type    = readD();
+		_type = readD();
 	}
 
 	@Override
@@ -51,7 +55,9 @@ public final class RequestPetition extends L2GameClientPacket
 	{
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
+		{
 			return;
+		}
 
 		if (!GmListTable.getInstance().isGmOnline(false))
 		{
@@ -77,7 +83,8 @@ public final class RequestPetition extends L2GameClientPacket
 			return;
 		}
 
-		int totalPetitions = PetitionManager.getInstance().getPlayerTotalPetitionCount(activeChar) + 1;
+		int totalPetitions = PetitionManager.getInstance().getPlayerTotalPetitionCount(activeChar)
+		        + 1;
 
 		if (totalPetitions > Config.MAX_PETITIONS_PER_PLAYER)
 		{
@@ -111,10 +118,12 @@ public final class RequestPetition extends L2GameClientPacket
 		sm = null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
-	 @Override
+	@Override
 	public String getType()
 	{
 		return _C__7F_RequestPetition;

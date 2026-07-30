@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,35 +23,37 @@ import net.sf.l2j.gameserver.skills.Env;
  */
 public class EffectRemoveTarget extends L2Effect
 {
-    public EffectRemoveTarget(Env env, EffectTemplate template)
-    {
-        super(env, template);
-    }
+	public EffectRemoveTarget(Env env, EffectTemplate template)
+	{
+		super(env, template);
+	}
 
-    @Override
+	@Override
 	public EffectType getEffectType()
-    {
-        return EffectType.REMOVE_TARGET;
-    }
+	{
+		return EffectType.REMOVE_TARGET;
+	}
 
-    /** Notify started */
-    @Override
-	public void onStart() {
-        getEffected().setTarget(null);
-        getEffected().abortAttack();
-        getEffected().abortCast();
-    }
+	/** Notify started */
+	@Override
+	public void onStart()
+	{
+		getEffected().setTarget(null);
+		getEffected().abortAttack();
+		getEffected().abortCast();
+	}
 
-    /** Notify exited */
-    @Override
-	public void onExit() {
-        //nothing
-    }
+	/** Notify exited */
+	@Override
+	public void onExit()
+	{
+		// nothing
+	}
 
-    @Override
+	@Override
 	public boolean onActionTime()
-    {
-    	//nothing
-        return false;
-    }
+	{
+		// nothing
+		return false;
+	}
 }

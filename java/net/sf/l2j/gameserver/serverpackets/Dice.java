@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,40 +22,49 @@ package net.sf.l2j.gameserver.serverpackets;
 public class Dice extends L2GameServerPacket
 {
 	private static final String _S__D4_Dice = "[S] da Dice";
+
 	private int _charObjId;
+
 	private int _itemId;
+
 	private int _number;
+
 	private int _x;
+
 	private int _y;
+
 	private int _z;
 
 	/**
-	 * 0xd4 Dice         dddddd
+	 * 0xd4 Dice dddddd
+	 *
 	 * @param _characters
 	 */
-	public Dice(int charObjId, int itemId, int number, int x , int y , int z)
+	public Dice(int charObjId, int itemId, int number, int x, int y, int z)
 	{
 		_charObjId = charObjId;
 		_itemId = itemId;
 		_number = number;
-		_x =x;
-		_y =y;
-		_z =z;
+		_x = x;
+		_y = y;
+		_z = z;
 	}
 
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0xda);
-		writeD(_charObjId);  //object id of player
-		writeD(_itemId);     //	item id of dice (spade)  4625,4626,4627,4628
-		writeD(_number);      //number rolled
-		writeD(_x);       //x
-		writeD(_y);       //y
-		writeD(_z);     //z
+		writeD(_charObjId); // object id of player
+		writeD(_itemId); // item id of dice (spade) 4625,4626,4627,4628
+		writeD(_number); // number rolled
+		writeD(_x); // x
+		writeD(_y); // y
+		writeD(_z); // z
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

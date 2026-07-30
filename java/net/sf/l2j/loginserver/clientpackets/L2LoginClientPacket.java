@@ -22,9 +22,10 @@ import net.sf.l2j.loginserver.L2LoginClient;
 
 /**
  *
- * @author  KenM
+ * @author KenM
  */
-public abstract class L2LoginClientPacket extends ReceivablePacket<L2LoginClient>
+public abstract class L2LoginClientPacket
+        extends ReceivablePacket<L2LoginClient>
 {
 	private static Logger _log = Logger.getLogger(L2LoginClientPacket.class.getName());
 
@@ -40,7 +41,7 @@ public abstract class L2LoginClientPacket extends ReceivablePacket<L2LoginClient
 		}
 		catch (Exception e)
 		{
-			_log.severe("ERROR READING: "+this.getClass().getSimpleName());
+			_log.severe("ERROR READING: " + this.getClass().getSimpleName());
 			e.printStackTrace();
 			return false;
 		}

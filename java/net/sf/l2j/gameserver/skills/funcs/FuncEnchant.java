@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,135 +23,139 @@ import net.sf.l2j.gameserver.templates.L2WeaponType;
 public class FuncEnchant extends Func
 {
 
-    public FuncEnchant(Stats pStat, int pOrder, Object owner, @SuppressWarnings("unused")
-    Lambda lambda)
-    {
-        super(pStat, pOrder, owner);
-    }
+	public FuncEnchant(Stats pStat, int pOrder, Object owner,
+	        @SuppressWarnings("unused")
+			Lambda lambda)
+	{
+		super(pStat, pOrder, owner);
+	}
 
-    @Override
+	@Override
 	public void calc(Env env)
-    {
-        if (cond != null && !cond.test(env)) 
-            return;
-        L2ItemInstance item = (L2ItemInstance) funcOwner;
-  
-        int enchant = item.getEnchantLevel();
-        
-        if (enchant <= 0)
-        	return;
-        
-        int overenchant = 0;
-        
-        if (enchant > 3)
-        {
-            overenchant = enchant - 3;
-            enchant = 3;
-        }
+	{
+		if (cond != null && !cond.test(env))
+		{
+			return;
+		}
+		L2ItemInstance item = (L2ItemInstance) funcOwner;
 
-        if (stat == Stats.MAGIC_DEFENCE || stat == Stats.POWER_DEFENCE)
-        {
-            env.value += enchant + 3 * overenchant;
-            return;
-        }
+		int enchant = item.getEnchantLevel();
 
-        if (stat == Stats.MAGIC_ATTACK)
-        {
-            switch (item.getItem().getCrystalType())
-            {
-                case L2Item.CRYSTAL_S:
-                case L2Item.CRYSTAL_S80:
-                    env.value += 4 * enchant + 8 * overenchant;
-                    break;
-                case L2Item.CRYSTAL_A:
-                    env.value += 3 * enchant + 6 * overenchant;
-                    break;
-                case L2Item.CRYSTAL_B:
-                    env.value += 3 * enchant + 6 * overenchant;
-                    break;
-                case L2Item.CRYSTAL_C:
-                    env.value += 3 * enchant + 6 * overenchant;
-                    break;
-                case L2Item.CRYSTAL_D:
-                    env.value += 2 * enchant + 4 * overenchant;
-                    break;
-            }
-            return;
-        }
+		if (enchant <= 0)
+		{
+			return;
+		}
 
-        
-        if (item.isWeapon())
-        {
-            L2WeaponType type = (L2WeaponType) item.getItemType();
-            
-            switch (item.getItem().getCrystalType())
-            {
-            	case L2Item.CRYSTAL_S:
-                case L2Item.CRYSTAL_S80:
-                    switch(type)
-                    {
-                        case BOW:
-                        case CROSSBOW:
-                            env.value += 10 * enchant + 20 * overenchant;
-                            break;
-                        default:
-                            env.value += 5 * enchant + 10 * overenchant;
-                            break;
-                    }
-                    break;
-                case L2Item.CRYSTAL_A:
-                    switch(type)
-                    {
-                        case BOW:
-                        case CROSSBOW:
-                            env.value += 8 * enchant + 16 * overenchant; 
-                            break;
-                        default:
-                            env.value += 4 * enchant + 8 * overenchant;
-                            break;
-                    }
-                    break;
-                case L2Item.CRYSTAL_B:
-                    switch(type)
-                    {
-                        case BOW:
-                        case CROSSBOW:
-                            env.value += 6 * enchant + 12 * overenchant;
-                            break;
-                        default:
-                            env.value += 3 * enchant + 6 * overenchant;
-                            break;
-                    }
-                    break;
-                case L2Item.CRYSTAL_C:
-                    switch(type)
-                    {
-                        case BOW:
-                        case CROSSBOW:
-                            env.value += 6 * enchant + 12 * overenchant;
-                            break;
-                        default:
-                            env.value += 3 * enchant + 6 * overenchant;
-                            break;
-                    }
-                    break;
-                case L2Item.CRYSTAL_D:
-                case L2Item.CRYSTAL_NONE:
-                    switch(type)
-                    {
-                        case BOW:
-                        case CROSSBOW:
-                        {
-                            env.value += 4 * enchant + 8 * overenchant;
-                            break;
-                        }
-                        default:
-                            env.value += 2 * enchant + 4 * overenchant;
-                            break;
-                    }
-                    break;
-                }
-            }
-        return;
-    }
+		int overenchant = 0;
+
+		if (enchant > 3)
+		{
+			overenchant = enchant - 3;
+			enchant = 3;
+		}
+
+		if (stat == Stats.MAGIC_DEFENCE || stat == Stats.POWER_DEFENCE)
+		{
+			env.value += enchant + 3 * overenchant;
+			return;
+		}
+
+		if (stat == Stats.MAGIC_ATTACK)
+		{
+			switch (item.getItem().getCrystalType())
+			{
+				case L2Item.CRYSTAL_S:
+				case L2Item.CRYSTAL_S80:
+					env.value += 4 * enchant + 8 * overenchant;
+					break;
+				case L2Item.CRYSTAL_A:
+					env.value += 3 * enchant + 6 * overenchant;
+					break;
+				case L2Item.CRYSTAL_B:
+					env.value += 3 * enchant + 6 * overenchant;
+					break;
+				case L2Item.CRYSTAL_C:
+					env.value += 3 * enchant + 6 * overenchant;
+					break;
+				case L2Item.CRYSTAL_D:
+					env.value += 2 * enchant + 4 * overenchant;
+					break;
+			}
+			return;
+		}
+
+		if (item.isWeapon())
+		{
+			L2WeaponType type = (L2WeaponType) item.getItemType();
+
+			switch (item.getItem().getCrystalType())
+			{
+				case L2Item.CRYSTAL_S:
+				case L2Item.CRYSTAL_S80:
+					switch (type)
+					{
+						case BOW:
+						case CROSSBOW:
+							env.value += 10 * enchant + 20 * overenchant;
+							break;
+						default:
+							env.value += 5 * enchant + 10 * overenchant;
+							break;
+					}
+					break;
+				case L2Item.CRYSTAL_A:
+					switch (type)
+					{
+						case BOW:
+						case CROSSBOW:
+							env.value += 8 * enchant + 16 * overenchant;
+							break;
+						default:
+							env.value += 4 * enchant + 8 * overenchant;
+							break;
+					}
+					break;
+				case L2Item.CRYSTAL_B:
+					switch (type)
+					{
+						case BOW:
+						case CROSSBOW:
+							env.value += 6 * enchant + 12 * overenchant;
+							break;
+						default:
+							env.value += 3 * enchant + 6 * overenchant;
+							break;
+					}
+					break;
+				case L2Item.CRYSTAL_C:
+					switch (type)
+					{
+						case BOW:
+						case CROSSBOW:
+							env.value += 6 * enchant + 12 * overenchant;
+							break;
+						default:
+							env.value += 3 * enchant + 6 * overenchant;
+							break;
+					}
+					break;
+				case L2Item.CRYSTAL_D:
+				case L2Item.CRYSTAL_NONE:
+					switch (type)
+					{
+						case BOW:
+						case CROSSBOW:
+						{
+							env.value += 4 * enchant + 8 * overenchant;
+							break;
+						}
+						default:
+							env.value += 2 * enchant + 4 * overenchant;
+							break;
+					}
+					break;
+			}
+		}
+		return;
+	}
 }

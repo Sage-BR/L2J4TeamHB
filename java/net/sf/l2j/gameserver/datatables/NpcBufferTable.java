@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,50 +18,57 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.l2j.L2DatabaseFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 public class NpcBufferTable
 {
 	private class NpcBufferSkills
 	{
-		private Map<Integer, Integer> _skillId = new ConcurrentHashMap<Integer, Integer>();
-		private Map<Integer, Integer> _skillLevels = new ConcurrentHashMap<Integer, Integer>();
-		private Map<Integer, Integer> _skillFeeIds = new ConcurrentHashMap<Integer, Integer>();
-		private Map<Integer, Integer> _skillFeeAmounts = new ConcurrentHashMap<Integer, Integer>();
+		private Map<Integer, Integer> _skillId = new ConcurrentHashMap<>();
+
+		private Map<Integer, Integer> _skillLevels = new ConcurrentHashMap<>();
+
+		private Map<Integer, Integer> _skillFeeIds = new ConcurrentHashMap<>();
+
+		private Map<Integer, Integer> _skillFeeAmounts = new ConcurrentHashMap<>();
 
 		public NpcBufferSkills()
 		{
 		}
 
-		public void addSkill(int skillId, int skillLevel, int skillFeeId, int skillFeeAmount, int buffGroup)
+		public void addSkill(int skillId, int skillLevel, int skillFeeId,
+		        int skillFeeAmount, int buffGroup)
 		{
 			_skillId.put(buffGroup, skillId);
 			_skillLevels.put(buffGroup, skillLevel);
 			_skillFeeIds.put(buffGroup, skillFeeId);
 			_skillFeeAmounts.put(buffGroup, skillFeeAmount);
 		}
-		
+
 		public int[] getSkillGroupInfo(int buffGroup)
 		{
 			Integer skillId = _skillId.get(buffGroup);
 			Integer skillLevel = _skillLevels.get(buffGroup);
 			Integer skillFeeId = _skillFeeIds.get(buffGroup);
 			Integer skillFeeAmount = _skillFeeAmounts.get(buffGroup);
-			
-			if (skillId == null || skillLevel == null || skillFeeId == null || skillFeeAmount == null)
-				return null;
 
-			return new int[] {skillId, skillLevel, skillFeeId, skillFeeAmount};
+			if (skillId == null || skillLevel == null || skillFeeId == null
+			        || skillFeeAmount == null)
+			{
+				return null;
+			}
+
+			return new int[] { skillId, skillLevel, skillFeeId,
+			        skillFeeAmount };
 		}
 
 	}
-	
-	
+
 	private static NpcBufferTable _instance = null;
-	private Map<Integer, NpcBufferSkills> _buffers = new ConcurrentHashMap<Integer, NpcBufferSkills>();
+
+	private Map<Integer, NpcBufferSkills> _buffers = new ConcurrentHashMap<>();
 
 	private NpcBufferTable()
 	{
@@ -90,38 +97,52 @@ public class NpcBufferTable
 				if (npcId != lastNpcId)
 				{
 					if (lastNpcId != 0)
+					{
 						_buffers.put(lastNpcId, skills);
+					}
 
 					skills = new NpcBufferSkills();
 					skills.addSkill(skillId, skillLevel, skillFeeId, skillFeeAmount, buffGroup);
 				}
 				else
+				{
 					skills.addSkill(skillId, skillLevel, skillFeeId, skillFeeAmount, buffGroup);
+				}
 
 				lastNpcId = npcId;
 				skillCount++;
 			}
-			
+
 			_buffers.put(lastNpcId, skills);
 			rset.close();
 			statement.close();
 		}
 		catch (Exception e)
 		{
-			System.out.println("NpcBufferSkillIdsTable: Error reading npc_buffer table: " + e);
+			System.out.println("NpcBufferSkillIdsTable: Error reading npc_buffer table: "
+			        + e);
 		}
 		finally
 		{
-			try{con.close();}catch(Exception e){}
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
 		}
 
-		System.out.println("NpcBufferSkillIdsTable: Loaded " + _buffers.size() + " buffers and " + skillCount + " skills.");
+		System.out.println("NpcBufferSkillIdsTable: Loaded " + _buffers.size()
+		        + " buffers and " + skillCount + " skills.");
 	}
 
 	public static NpcBufferTable getInstance()
 	{
 		if (_instance == null)
+		{
 			_instance = new NpcBufferTable();
+		}
 
 		return _instance;
 	}
@@ -129,9 +150,11 @@ public class NpcBufferTable
 	public int[] getSkillInfo(int npcId, int buffGroup)
 	{
 		NpcBufferSkills skills = _buffers.get(npcId);
-		
+
 		if (skills == null)
+		{
 			return null;
+		}
 
 		return skills.getSkillGroupInfo(buffGroup);
 	}

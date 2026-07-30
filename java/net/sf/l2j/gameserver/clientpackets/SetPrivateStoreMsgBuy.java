@@ -25,7 +25,8 @@ import net.sf.l2j.gameserver.serverpackets.PrivateStoreMsgBuy;
 public final class SetPrivateStoreMsgBuy extends L2GameClientPacket
 {
 	private static final String _C__94_SETPRIVATESTOREMSGBUY = "[C] 94 SetPrivateStoreMsgBuy";
-	//private static Logger _log = Logger.getLogger(SetPrivateStoreMsgBuy.class.getName());
+	// private static Logger _log =
+	// Logger.getLogger(SetPrivateStoreMsgBuy.class.getName());
 
 	private String _storeMsg;
 
@@ -48,7 +49,9 @@ public final class SetPrivateStoreMsgBuy extends L2GameClientPacket
 		player.sendPacket(new PrivateStoreMsgBuy(player));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,17 +31,23 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
 public class MysteryPotion implements IItemHandler
 {
-    private static final int[] ITEM_IDS = { 5234 };
-    private static final int BIGHEAD_EFFECT = 0x2000;
-    private static final int MYSTERY_POTION_SKILL = 2103;
-    private static final int EFFECT_DURATION = 1200000; // 20 mins
+	private static final int[] ITEM_IDS = { 5234 };
 
+	private static final int BIGHEAD_EFFECT = 0x2000;
+
+	private static final int MYSTERY_POTION_SKILL = 2103;
+
+	private static final int EFFECT_DURATION = 1200000; // 20 mins
+
+	@Override
 	public void useItem(L2PlayableInstance playable, L2ItemInstance item)
 	{
 		if (!(playable instanceof L2PcInstance))
+		{
 			return;
-		L2PcInstance activeChar = (L2PcInstance)playable;
-		//item.getItem().getEffects(item, activeChar);
+		}
+		L2PcInstance activeChar = (L2PcInstance) playable;
+		// item.getItem().getEffects(item, activeChar);
 
 		// Use a summon skill effect for fun ;)
 		MagicSkillUse MSU = new MagicSkillUse(playable, playable, 2103, 1, 0, 0);
@@ -57,31 +63,38 @@ public class MysteryPotion implements IItemHandler
 
 		MysteryPotionStop mp = new MysteryPotionStop(playable);
 		ThreadPoolManager.getInstance().scheduleEffect(mp, EFFECT_DURATION);
-    }
+	}
 
 	public class MysteryPotionStop implements Runnable
 	{
 		private L2PlayableInstance _playable;
 
-		public MysteryPotionStop (L2PlayableInstance playable)
+		public MysteryPotionStop(L2PlayableInstance playable)
 		{
 			_playable = playable;
 		}
 
+		@Override
 		public void run()
 		{
-			try	{
+			try
+			{
 				if (!(_playable instanceof L2PcInstance player))
+				{
 					return;
+				}
 
 				player.stopAbnormalEffect(BIGHEAD_EFFECT);
 			}
-			catch (Throwable t) {}
+			catch (Throwable t)
+			{
+			}
 		}
 	}
 
-    public int[] getItemIds()
-    {
-        return ITEM_IDS;
-    }
+	@Override
+	public int[] getItemIds()
+	{
+		return ITEM_IDS;
+	}
 }

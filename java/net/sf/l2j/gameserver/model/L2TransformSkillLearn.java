@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,17 +23,22 @@ public final class L2TransformSkillLearn
 {
 	// these two build the primary key
 	private final int _race_id;
+
 	private final int _skill_id;
+
 	private final int _item_id;
+
 	private final int _level;
 
 	// not needed, just for easier debug
 	private final String _name;
 
 	private final int _sp;
+
 	private final int _min_level;
 
-	public L2TransformSkillLearn(int race_id, int skill_id, int item_id, int level, String name, int sp, int min_level)
+	public L2TransformSkillLearn(int race_id, int skill_id, int item_id,
+	        int level, String name, int sp, int min_level)
 	{
 		_race_id = race_id;
 		_skill_id = skill_id;
@@ -83,10 +88,12 @@ public final class L2TransformSkillLearn
 	{
 		return _sp;
 	}
+
 	public int getRace()
 	{
 		return _race_id;
 	}
+
 	public int getItemId()
 	{
 		return _item_id;

@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,9 +20,10 @@ import net.sf.l2j.gameserver.model.actor.instance.L2BoatInstance;
  * @author Maktakien
  *
  */
-public class VehicleInfo  extends L2GameServerPacket
+public class VehicleInfo extends L2GameServerPacket
 {
-	 private L2BoatInstance _boat;
+	private L2BoatInstance _boat;
+
 	/**
 	 * @param instance
 	 */
@@ -31,7 +32,9 @@ public class VehicleInfo  extends L2GameServerPacket
 		_boat = boat;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#writeImpl()
 	 */
 	@Override
@@ -41,12 +44,14 @@ public class VehicleInfo  extends L2GameServerPacket
 		writeD(_boat.getObjectId());
 		writeD(_boat.getX());
 		writeD(_boat.getY());
-        writeD(_boat.getZ());
-        writeD(_boat.getPosition().getHeading());
+		writeD(_boat.getZ());
+		writeD(_boat.getPosition().getHeading());
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.BasePacket#getType()
 	 */
 	@Override

@@ -19,16 +19,23 @@ package net.sf.l2j.gameserver.datatables;
  */
 public class AdminCommandAccessRight
 {
-	/** The admin command<br> */
+	/**
+	 * The admin command<br>
+	 */
 	private String _adminCommand = null;
-	/** The access levels which can use the admin command<br> */
+
+	/**
+	 * The access levels which can use the admin command<br>
+	 */
 	private AccessLevel[] _accessLevels = null;
 
 	/**
 	 * Initialized members
 	 *
-	 * @param adminCommand as String
-	 * @param accessLevels as String
+	 * @param adminCommand
+	 *            as String
+	 * @param accessLevels
+	 *            as String
 	 */
 	public AdminCommandAccessRight(String adminCommand, String accessLevels)
 	{
@@ -53,7 +60,8 @@ public class AdminCommandAccessRight
 	}
 
 	/**
-	 * Returns the admin command the access right belongs to<br><br>
+	 * Returns the admin command the access right belongs to<br>
+	 * <br>
 	 *
 	 * @return String: the admin command the access right belongs to<br>
 	 */
@@ -63,18 +71,23 @@ public class AdminCommandAccessRight
 	}
 
 	/**
-	 * Checks if the given characterAccessLevel is allowed to use the admin command which belongs to this access right<br><br>
+	 * Checks if the given characterAccessLevel is allowed to use the admin
+	 * command which belongs to this access right<br>
+	 * <br>
 	 *
-	 * @param characterAccessLevel<br><br>
+	 * @param characterAccessLevel<br>
+	 * <br>
 	 *
-	 * @return boolean: true if characterAccessLevel is allowed to use the admin command which belongs to this access right, otherwise false<br>
+	 * @return boolean: true if characterAccessLevel is allowed to use the admin
+	 *         command which belongs to this access right, otherwise false<br>
 	 */
 	public boolean hasAccess(AccessLevel characterAccessLevel)
 	{
 		for (AccessLevel accessLevel : _accessLevels)
 		{
 			if (accessLevel != null
-					&& (accessLevel.getLevel() == characterAccessLevel.getLevel() || characterAccessLevel.hasChildAccess(accessLevel)))
+			        && (accessLevel.getLevel() == characterAccessLevel.getLevel()
+			                || characterAccessLevel.hasChildAccess(accessLevel)))
 			{
 				return true;
 			}

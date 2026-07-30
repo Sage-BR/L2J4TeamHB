@@ -22,7 +22,7 @@ public final class ChooseInventoryItem extends L2GameServerPacket
 
 	public ChooseInventoryItem(int itemId)
 	{
-		_itemId=itemId;
+		_itemId = itemId;
 	}
 
 	@Override
@@ -32,7 +32,9 @@ public final class ChooseInventoryItem extends L2GameServerPacket
 		writeD(_itemId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
 	@Override

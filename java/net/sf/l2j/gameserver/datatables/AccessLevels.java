@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,32 +18,51 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author FBIagent<br>
  */
 public class AccessLevels
 {
-	/** The logger<br> */
+	/**
+	 * The logger<br>
+	 */
 	private static Logger _log = Logger.getLogger(AccessLevels.class.getName());
-	/** The one and only instance of this class, retriveable by getInstance()<br> */
+
+	/**
+	 * The one and only instance of this class, retriveable by getInstance()<br>
+	 */
 	private static AccessLevels _instance = null;
-	/** Reserved master access level<br> */
+
+	/**
+	 * Reserved master access level<br>
+	 */
 	public static final int _masterAccessLevelNum = Config.MASTERACCESS_LEVEL;
-	/** The master access level which can use everything<br> */
+
+	/**
+	 * The master access level which can use everything<br>
+	 */
 	public static AccessLevel _masterAccessLevel = new AccessLevel(_masterAccessLevelNum, "Master Access", Config.MASTERACCESS_NAME_COLOR, Config.MASTERACCESS_TITLE_COLOR, null, true, true, true, true, true, true, true, true);
-	/** Reserved user access level<br> */
+
+	/**
+	 * Reserved user access level<br>
+	 */
 	public static final int _userAccessLevelNum = 0;
-	/** The user access level which can do no administrative tasks<br> */
+
+	/**
+	 * The user access level which can do no administrative tasks<br>
+	 */
 	public static AccessLevel _userAccessLevel = new AccessLevel(_userAccessLevelNum, "User", Integer.decode("0xFFFFFF"), Integer.decode("0xFFFFFF"), null, false, false, false, true, false, true, true, true);
-	/** ConcurrentHashMap of access levels defined in database<br> */
-	private Map<Integer, AccessLevel> _accessLevels = new ConcurrentHashMap<Integer, AccessLevel>();
+
+	/**
+	 * ConcurrentHashMap of access levels defined in database<br>
+	 */
+	private Map<Integer, AccessLevel> _accessLevels = new ConcurrentHashMap<>();
 
 	/**
 	 * Loads the access levels from database<br>
@@ -79,50 +98,57 @@ public class AccessLevels
 
 				if (accessLevel == _userAccessLevelNum)
 				{
-					_log.warning("AccessLevels: Access level with name " + name + " is using reserved user access level " + _userAccessLevelNum + ". Ignoring it!");
+					_log.warning("AccessLevels: Access level with name " + name
+					        + " is using reserved user access level "
+					        + _userAccessLevelNum + ". Ignoring it!");
 					continue;
 				}
 				else if (accessLevel == _masterAccessLevelNum)
 				{
-					_log.warning("AccessLevels: Access level with name " + name + " is using reserved master access level " + _masterAccessLevelNum + ". Ignoring it!");
+					_log.warning("AccessLevels: Access level with name " + name
+					        + " is using reserved master access level "
+					        + _masterAccessLevelNum + ". Ignoring it!");
 					continue;
 				}
 				else if (accessLevel < 0)
 				{
-					_log.warning("AccessLevels: Access level with name " + name + " is using banned access level state(below 0). Ignoring it!");
+					_log.warning("AccessLevels: Access level with name " + name
+					        + " is using banned access level state(below 0). Ignoring it!");
 					continue;
 				}
-				
+
 				try
 				{
-					nameColor = Integer.decode("0x" + rset.getString("nameColor"));
+					nameColor = Integer.decode("0x"
+					        + rset.getString("nameColor"));
 				}
-				catch ( NumberFormatException nfe )
+				catch (NumberFormatException nfe)
 				{
 					try
 					{
 						nameColor = Integer.decode("0xFFFFFF");
 					}
-					catch ( NumberFormatException nfe2 )
+					catch (NumberFormatException nfe2)
 					{
-						
+
 					}
 				}
 
 				try
 				{
-					titleColor = Integer.decode("0x" + rset.getString( "titleColor" ));
-					
+					titleColor = Integer.decode("0x"
+					        + rset.getString("titleColor"));
+
 				}
-				catch ( NumberFormatException nfe )
+				catch (NumberFormatException nfe)
 				{
 					try
 					{
-						titleColor = Integer.decode( "0x77FFFF" );
+						titleColor = Integer.decode("0x77FFFF");
 					}
-					catch ( NumberFormatException nfe2 )
+					catch (NumberFormatException nfe2)
 					{
-						
+
 					}
 				}
 
@@ -142,9 +168,9 @@ public class AccessLevels
 			rset.close();
 			stmt.close();
 		}
-		catch ( SQLException e )
+		catch (SQLException e)
 		{
-			_log.warning( "AccessLevels: Error loading from database:" + e );
+			_log.warning("AccessLevels: Error loading from database:" + e);
 		}
 		finally
 		{
@@ -152,17 +178,19 @@ public class AccessLevels
 			{
 				con.close();
 			}
-			catch ( Exception e )
+			catch (Exception e)
 			{
 
 			}
 		}
-		_log.info( "AccessLevels: Loaded " + _accessLevels.size() + " from database." );
+		_log.info("AccessLevels: Loaded " + _accessLevels.size()
+		        + " from database.");
 	}
 
 	/**
-	 * Returns the one and only instance of this class<br><br>
-	 * 
+	 * Returns the one and only instance of this class<br>
+	 * <br>
+	 *
 	 * @return AccessLevels: the one and only instance of this class<br>
 	 */
 	public static AccessLevels getInstance()
@@ -171,9 +199,12 @@ public class AccessLevels
 	}
 
 	/**
-	 * Returns the access level by characterAccessLevel<br><br>
-	 * 
-	 * @param accessLevelNum as int<br><br>
+	 * Returns the access level by characterAccessLevel<br>
+	 * <br>
+	 *
+	 * @param accessLevelNum
+	 *            as int<br>
+	 *            <br>
 	 *
 	 * @return AccessLevel: AccessLevel instance by char access level<br>
 	 */
@@ -188,16 +219,16 @@ public class AccessLevels
 		return accessLevel;
 	}
 
-	public void addBanAccessLevel( int accessLevel )
+	public void addBanAccessLevel(int accessLevel)
 	{
-		synchronized ( _accessLevels )
+		synchronized (_accessLevels)
 		{
-			if ( accessLevel > -1 )
+			if (accessLevel > -1)
 			{
 				return;
 			}
 
-			_accessLevels.put(accessLevel, new AccessLevel(accessLevel, "Banned", Integer.decode( "0x000000" ), Integer.decode( "0x000000" ), null, false, false, false, false, false, false, false, false));
+			_accessLevels.put(accessLevel, new AccessLevel(accessLevel, "Banned", Integer.decode("0x000000"), Integer.decode("0x000000"), null, false, false, false, false, false, false, false, false));
 		}
 	}
 }

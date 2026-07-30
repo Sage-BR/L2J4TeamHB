@@ -1,17 +1,16 @@
-/* This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+/*
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  * http://www.gnu.org/copyleft/gpl.html
  */
@@ -28,131 +27,182 @@ import net.sf.l2j.util.L2FastMap.I2ForEachValue;
 /**
  *
  * Fully synchronized version of L2ConcurrentHashMap class.<br>
- * In addition it`s provide ForEach methods and interfaces that can be used for iterating collection<br>
- * without using iterators. As addition its provide full lock on entire class if needed<br>
- * <font color="red">WARNING!!! methods: keySet(), values() and entrySet() are removed!</font>
- * <br>
- * @author  Julian Version: 1.0.0 <2008-02-07> - Original release
- * @author  Julian Varsion: 1.0.1 <2008-06-17> - Changed underlayng map to L2ConcurrentHashMap
+ * In addition it`s provide ForEach methods and interfaces that can be used for
+ * iterating collection<br>
+ * without using iterators. As addition its provide full lock on entire class if
+ * needed<br>
+ * <font color="red">WARNING!!! methods: keySet(), values() and entrySet() are
+ * removed!</font> <br>
+ *
+ * @author Julian Version: 1.0.0 <2008-02-07> - Original release
+ * @author Julian Varsion: 1.0.1 <2008-06-17> - Changed underlayng map to
+ *         L2ConcurrentHashMap
  */
 public class L2SyncMap<K extends Object, V extends Object> implements Map<K, V>
 {
-    static final long serialVersionUID = 1L;
-    private final L2FastMap<K, V> _map = new L2FastMap<K, V>();
-    
-    public synchronized V put(K key, V value) {
-    	return _map.put(key, value);
-    }
-    
-    public synchronized V get(Object key) {
-        return _map.get(key);
-    }
-    
-    public synchronized V remove(Object key) {
-        return _map.remove(key);
-    }
-    
-    public synchronized boolean containsKey(Object key) {
-    	return _map.containsKey(key);
-    }
-    
-    public synchronized int size() {
-    	return _map.size();
-    }
+	static final long serialVersionUID = 1L;
 
-    public synchronized boolean isEmpty() {
-        return _map.isEmpty();
-    }
-    
-    public synchronized void clear() {
-        _map.clear();
-    }
-    
-    /**
-     * Keeps a stable lock ordering without depending on map contents.
-     * @see java.util.Map#putAll(java.util.Map)
-     */
-    public void putAll(Map<? extends K, ? extends V> map) {
-    	if (map == null || this == map) return;
-    	Object first = this;
-    	Object second = map;
+	private final L2FastMap<K, V> _map = new L2FastMap<>();
 
-    	if (System.identityHashCode(first) > System.identityHashCode(second)) {
-    		first = map;
-    		second = this;
-    	}
+	@Override
+	public synchronized V put(K key, V value)
+	{
+		return _map.put(key, value);
+	}
 
-    	synchronized (first) {
-    		synchronized (second) {
-    			_map.putAll(map);
-    		}
-    	}
-    }
-    
-    public synchronized boolean containsValue(Object value) {
-        return _map.containsValue(value);
-    }
+	@Override
+	public synchronized V get(Object key)
+	{
+		return _map.get(key);
+	}
 
-    public synchronized boolean equals(Object o) {
-        return _map.equals(o);
-    }
-    
-    public synchronized int hashCode() {
-        return _map.hashCode();
-    }
-    
-    public synchronized String toString() {
-        return _map.toString();
-    }
-    
-    /**
-     * Public method that iterate entire collection.<br>
-     * <br>
-     * @param func - a class method that must be executed on every element of collection.<br>
-     * @return - returns true if entire collection is iterated, false if it`s been interrupted by
-     *             check method (I2ForEach.forEach())<br>
-     */
-    public synchronized final boolean ForEach(I2ForEach<K,V> func) {
-    	return _map.ForEach(func);
-    }
-    
-    public synchronized final boolean ForEachValue(I2ForEachValue<V> func) {
-    	return _map.ForEachValue(func);
-    }
+	@Override
+	public synchronized V remove(Object key)
+	{
+		return _map.remove(key);
+	}
 
-    public synchronized final boolean ForEachKey(I2ForEachKey<K> func) {
-    	return _map.ForEachKey(func);
-    }
+	@Override
+	public synchronized boolean containsKey(Object key)
+	{
+		return _map.containsKey(key);
+	}
 
-    /**
-     * <font color="red">Unsupported operation!!!</font>
-     * @deprecated
-     * @throws UnsupportedOperationException
-     * @see java.util.Map#values()
-     */
-    @Deprecated
-    public Collection<V> values() {
-    	throw new UnsupportedOperationException();
-    }
-    
-    /**
-     * <font color="red">Unsupported operation!!!</font>
-     * @deprecated
-     * @throws UnsupportedOperationException
-     */
-    @Deprecated
-    public Set<K> keySet() {
-    	throw new UnsupportedOperationException();
-    }
-    
-    /**
-     * <font color="red">Unsupported operation!!!</font>
-     * @deprecated
-     * @throws UnsupportedOperationException
-     * @see java.util.Map#entrySet()
-     */
-    @Deprecated
-    public Set<Map.Entry<K,V>> entrySet() {
-    	throw new UnsupportedOperationException();
-    }
+	@Override
+	public synchronized int size()
+	{
+		return _map.size();
+	}
+
+	@Override
+	public synchronized boolean isEmpty()
+	{
+		return _map.isEmpty();
+	}
+
+	@Override
+	public synchronized void clear()
+	{
+		_map.clear();
+	}
+
+	/**
+	 * Keeps a stable lock ordering without depending on map contents.
+	 *
+	 * @see java.util.Map#putAll(java.util.Map)
+	 */
+	@Override
+	public void putAll(Map<? extends K, ? extends V> map)
+	{
+		if (map == null || this == map)
+		{
+			return;
+		}
+		Object first = this;
+		Object second = map;
+
+		if (System.identityHashCode(first) > System.identityHashCode(second))
+		{
+			first = map;
+			second = this;
+		}
+
+		synchronized (first)
+		{
+			synchronized (second)
+			{
+				_map.putAll(map);
+			}
+		}
+	}
+
+	@Override
+	public synchronized boolean containsValue(Object value)
+	{
+		return _map.containsValue(value);
+	}
+
+	@Override
+	public synchronized boolean equals(Object o)
+	{
+		return _map.equals(o);
+	}
+
+	@Override
+	public synchronized int hashCode()
+	{
+		return _map.hashCode();
+	}
+
+	@Override
+	public synchronized String toString()
+	{
+		return _map.toString();
+	}
+
+	/**
+	 * Public method that iterate entire collection.<br>
+	 * <br>
+	 *
+	 * @param func
+	 *            - a class method that must be executed on every element of
+	 *            collection.<br>
+	 * @return - returns true if entire collection is iterated, false if it`s
+	 *         been interrupted by check method (I2ForEach.forEach())<br>
+	 */
+	public synchronized final boolean ForEach(I2ForEach<K, V> func)
+	{
+		return _map.ForEach(func);
+	}
+
+	public synchronized final boolean ForEachValue(I2ForEachValue<V> func)
+	{
+		return _map.ForEachValue(func);
+	}
+
+	public synchronized final boolean ForEachKey(I2ForEachKey<K> func)
+	{
+		return _map.ForEachKey(func);
+	}
+
+	/**
+	 * <font color="red">Unsupported operation!!!</font>
+	 *
+	 * @deprecated
+	 * @throws UnsupportedOperationException
+	 * @see java.util.Map#values()
+	 */
+	@Override
+	@Deprecated
+	public Collection<V> values()
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <font color="red">Unsupported operation!!!</font>
+	 *
+	 * @deprecated
+	 * @throws UnsupportedOperationException
+	 */
+	@Override
+	@Deprecated
+	public Set<K> keySet()
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <font color="red">Unsupported operation!!!</font>
+	 *
+	 * @deprecated
+	 * @throws UnsupportedOperationException
+	 * @see java.util.Map#entrySet()
+	 */
+	@Override
+	@Deprecated
+	public Set<Map.Entry<K, V>> entrySet()
+	{
+		throw new UnsupportedOperationException();
+	}
 }

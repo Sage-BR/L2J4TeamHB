@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,7 +24,6 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.serverpackets.PledgeShowMemberListDelete;
 import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 
-
 /**
  * This class ...
  *
@@ -33,6 +32,7 @@ import net.sf.l2j.gameserver.serverpackets.SystemMessage;
 public final class RequestOustPledgeMember extends L2GameClientPacket
 {
 	private static final String _C__27_REQUESTOUSTPLEDGEMEMBER = "[C] 27 RequestOustPledgeMember";
+
 	static Logger _log = Logger.getLogger(RequestOustPledgeMember.class.getName());
 
 	private String _target;
@@ -40,7 +40,7 @@ public final class RequestOustPledgeMember extends L2GameClientPacket
 	@Override
 	protected void readImpl()
 	{
-		_target  = readS();
+		_target = readS();
 	}
 
 	@Override
@@ -49,14 +49,15 @@ public final class RequestOustPledgeMember extends L2GameClientPacket
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 		{
-		    return;
+			return;
 		}
 		if (activeChar.getClan() == null)
-        {
+		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_ARE_NOT_A_CLAN_MEMBER));
-            return;
-        }
-		if ((activeChar.getClanPrivileges() & L2Clan.CP_CL_DISMISS) != L2Clan.CP_CL_DISMISS)
+			return;
+		}
+		if ((activeChar.getClanPrivileges()
+		        & L2Clan.CP_CL_DISMISS) != L2Clan.CP_CL_DISMISS)
 		{
 			activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT));
 			return;
@@ -72,7 +73,7 @@ public final class RequestOustPledgeMember extends L2GameClientPacket
 		L2ClanMember member = clan.getClanMember(_target);
 		if (member == null)
 		{
-			_log.warning("Target ("+_target+") is not member of the clan");
+			_log.warning("Target (" + _target + ") is not member of the clan");
 			return;
 		}
 		if (member.isOnline() && member.getPlayerInstance().isInCombat())
@@ -81,10 +82,14 @@ public final class RequestOustPledgeMember extends L2GameClientPacket
 			return;
 		}
 
-        // this also updates the database
-		clan.removeClanMember(member.getObjectId(), System.currentTimeMillis() + Config.ALT_CLAN_JOIN_DAYS * 86400000L); //24*60*60*1000 = 86400000
-        clan.setCharPenaltyExpiryTime(System.currentTimeMillis() + Config.ALT_CLAN_JOIN_DAYS * 86400000L); //24*60*60*1000 = 86400000
-        clan.updateClanInDB();
+		// this also updates the database
+		clan.removeClanMember(member.getObjectId(), System.currentTimeMillis()
+		        + Config.ALT_CLAN_JOIN_DAYS * 86400000L); // 24*60*60*1000 =
+		                                                  // 86400000
+		clan.setCharPenaltyExpiryTime(System.currentTimeMillis()
+		        + Config.ALT_CLAN_JOIN_DAYS * 86400000L); // 24*60*60*1000 =
+		                                                  // 86400000
+		clan.updateClanInDB();
 
 		SystemMessage sm = new SystemMessage(SystemMessageId.CLAN_MEMBER_S1_EXPELLED);
 		sm.addString(member.getName());
@@ -93,7 +98,7 @@ public final class RequestOustPledgeMember extends L2GameClientPacket
 		activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_HAVE_SUCCEEDED_IN_EXPELLING_CLAN_MEMBER));
 		activeChar.sendPacket(new SystemMessage(SystemMessageId.YOU_MUST_WAIT_BEFORE_ACCEPTING_A_NEW_MEMBER));
 
-    	// Remove the Player From the Member list
+		// Remove the Player From the Member list
 		clan.broadcastToOnlineMembers(new PledgeShowMemberListDelete(_target));
 
 		if (member.isOnline())
@@ -103,7 +108,9 @@ public final class RequestOustPledgeMember extends L2GameClientPacket
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.l2j.gameserver.clientpackets.ClientBasePacket#getType()
 	 */
 	@Override
