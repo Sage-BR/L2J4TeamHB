@@ -87,7 +87,7 @@ public class GeoPathFinding extends PathFinding
 
 		Node start = readNode(gx, gy, gz);
 		Node end = readNode(gtx, gty, gtz);
-		if (start == null || end == null || (Math.abs(start.getLoc().getZ() - z) > 128) || (Math.abs(end.getLoc().getZ() - tz) > 128))
+		if (start == null || end == null || (Math.abs(start.getLoc().getZ() - z) > 200) || (Math.abs(end.getLoc().getZ() - tz) > 200))
 		{
 			return null;
 		}
@@ -96,25 +96,39 @@ public class GeoPathFinding extends PathFinding
 			return null;
 		}
 
-		// TODO: Find closest path node we CAN access. Now only checks if we can
-	// not reach the closest
+		// Try to find the start node. If we can't reach it directly,
+		// search nearby nodes for one we CAN reach.
 		Location temp = GeoData.getInstance().moveCheck(x, y, z, start.getLoc().getX(), start.getLoc().getY(), start.getLoc().getZ());
 		if ((temp.getX() != start.getLoc().getX())
 		        || (temp.getY() != start.getLoc().getY()))
 		{
-			return null; // cannot reach closest...
+			Node reachableStart = findReachableNode(x, y, z, gx, gy, start);
+			if (reachableStart != null)
+			{
+				start = reachableStart;
+			}
+			else
+			{
+				return null; // truly unreachable
+			}
 		}
 
-		// TODO: Find closest path node around target, now only checks if final
-		// location can be reached
+		// Try to find the end node. If unreachable, search nearby.
 		temp = GeoData.getInstance().moveCheck(tx, ty, tz, end.getLoc().getX(), end.getLoc().getY(), end.getLoc().getZ());
 		if ((temp.getX() != end.getLoc().getX())
 		        || (temp.getY() != end.getLoc().getY()))
 		{
-			return null; // cannot reach closest...
+			Node reachableEnd = findReachableNode(tx, ty, tz, gtx, gty, end);
+			if (reachableEnd != null)
+			{
+				end = reachableEnd;
+			}
+			else
+			{
+				return null; // truly unreachable
+			}
 		}
 
-		// return searchAStar(start, end);
 		return searchByClosest(start, end);
 	}
 
@@ -239,6 +253,44 @@ public class GeoPathFinding extends PathFinding
 		}
 		Node[] result = new Node[Neighbors.size()];
 		return Neighbors.toArray(result);
+	}
+
+	/**
+	 * Search nearby pathnodes in expanding rings for one we can actually
+	 * reach from the character's position. Each pathnode covers 8x8 geo
+	 * cells (~128 world units). Rings at radius 1..3 search up to 384
+	 * world units away.
+	 */
+	private Node findReachableNode(int worldX, int worldY, int worldZ, int baseGeoX, int baseGeoY, Node fallback)
+	{
+		for (int radius = 1; radius <= 3; radius++)
+		{
+			for (int dx = -radius; dx <= radius; dx++)
+			{
+				for (int dy = -radius; dy <= radius; dy++)
+				{
+					if (Math.abs(dx) != radius && Math.abs(dy) != radius)
+					{
+						continue; // only check border cells
+					}
+					int nx = baseGeoX + (dx * 8);
+					int ny = baseGeoY + (dy * 8);
+					Node candidate = readNode(nx, ny, (short) worldZ);
+					if (candidate == null || candidate.equals(fallback))
+					{
+						continue;
+					}
+					Location temp = GeoData.getInstance().moveCheck(worldX, worldY, worldZ,
+					        candidate.getLoc().getX(), candidate.getLoc().getY(), candidate.getLoc().getZ());
+					if ((temp.getX() == candidate.getLoc().getX())
+					        && (temp.getY() == candidate.getLoc().getY()))
+					{
+						return candidate;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	// Private

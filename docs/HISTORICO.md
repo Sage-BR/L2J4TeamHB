@@ -1,5 +1,19 @@
 # Histórico de Modificações
 
+## 2026-07-30 — Sessão 17: Fix pathfinding não encontrava rotas (personagem andava em linha reta e batia na parede)
+
+### Diagnóstico
+
+`GeoPathFinding.findPath()` tinha pre-checks riggidos que retornavam `null` imediatamente quando o pathnode mais proximo era inalcançavel via `moveCheck()`. Se havia uma parede entre o personagem e o pathnode mais proximo, o pathfinding morria sem tentar alternativas. O proprio codigo tinha um TODO reconhecendo o problema: `// TODO: Find closest path node we CAN access.`
+
+### Correções
+
+- **GeoPathFinding.java** — Novo metodo `findReachableNode()` que busca pathnodes acessiveis em aneis expansivos (raio 1-3 = ate ~384 world units). Se o pathnode mais proximo esta atras de uma parede, procura alternativas nearby antes de desistir.
+- Tolerancia Z aumentada de 128 para 200 units — aceita mais pathnodes como candidatos.
+- Pre-checks flexibilizados — em vez de retornar null imediatamente, tenta encontrar pathnode alternativo acessivel.
+
+---
+
 Java 25 c/ virtual threads e I/O
 remoção de javolution 
 Atualização das Libs
