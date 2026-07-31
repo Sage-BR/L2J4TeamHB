@@ -84,6 +84,58 @@ public class GeoEngine extends GeoData
 		nInitGeodata();
 	}
 
+	// ========================================================================
+	// PUBLIC ACCESS METHODS (for GeoGridPathFinder and external callers)
+	// ========================================================================
+
+	/** Convert world X to geo X. */
+	public int getGeoX(int worldX)
+	{
+		return (worldX - L2World.MAP_MIN_X) >> 4;
+	}
+
+	/** Convert world Y to geo Y. */
+	public int getGeoY(int worldY)
+	{
+		return (worldY - L2World.MAP_MIN_Y) >> 4;
+	}
+
+	/** Convert geo X to world X. */
+	public int getWorldX(int geoX)
+	{
+		return (geoX << 4) + L2World.MAP_MIN_X + 8;
+	}
+
+	/** Convert geo Y to world Y. */
+	public int getWorldY(int geoY)
+	{
+		return (geoY << 4) + L2World.MAP_MIN_Y + 8;
+	}
+
+	/** Get height at geo position nearest to worldZ (geo coordinates). */
+	public short getHeightGeo(int geoX, int geoY, int worldZ)
+	{
+		return nGetHeight(geoX, geoY, worldZ);
+	}
+
+	/** Get NSWE flags at geo position nearest to worldZ (geo coordinates). */
+	public byte getNsweGeo(int geoX, int geoY, int worldZ)
+	{
+		return (byte) (nGetNSWE(geoX, geoY, worldZ) & 0xFF);
+	}
+
+	/** Check if geo position has valid geodata (geo coordinates). */
+	public boolean hasGeoPos(int geoX, int geoY)
+	{
+		return getABlock(geoX, geoY).hasGeoPos();
+	}
+
+	/** Public access to ABlock for pathfinder. */
+	public ABlock getBlock(int geoX, int geoY)
+	{
+		return getABlock(geoX, geoY);
+	}
+
 	// Public Methods
 	/**
 	 * @see net.sf.l2j.gameserver.GeoData#getType(int, int)

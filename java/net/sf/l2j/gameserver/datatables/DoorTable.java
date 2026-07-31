@@ -30,6 +30,7 @@ import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.model.actor.instance.L2DoorInstance;
 import net.sf.l2j.gameserver.model.entity.ClanHall;
+import net.sf.l2j.gameserver.model.Location;
 import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
 import net.sf.l2j.gameserver.templates.L2CharTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
@@ -307,6 +308,11 @@ public class DoorTable
 
 	public boolean checkIfDoorsBetween(AbstractNodeLoc start,
 	        AbstractNodeLoc end)
+	{
+		return checkIfDoorsBetween(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
+	}
+
+	public boolean checkIfDoorsBetween(Location start, Location end)
 	{
 		return checkIfDoorsBetween(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
 	}

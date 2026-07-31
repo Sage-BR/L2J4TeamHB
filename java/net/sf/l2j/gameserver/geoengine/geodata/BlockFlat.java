@@ -41,4 +41,16 @@ public class BlockFlat extends ABlock
 	{
 		return _height;
 	}
+
+	@Override
+	public short getHeightBelow(int geoX, int geoY, int worldZ)
+	{
+		return _height;
+	}
+
+	@Override
+	public byte getNsweBelow(int geoX, int geoY, int worldZ)
+	{
+		return GeoStructure.CELL_FLAG_ALL;
+	}
 }

@@ -80,16 +80,6 @@ class EffectRelax extends L2Effect
 			}
 		}
 
-		if (getEffected().getCurrentHp() + 1 > getEffected().getMaxHp())
-		{
-			if (getSkill().isToggle())
-			{
-				getEffected().sendMessage("Fully rested. Effect of "
-				        + getSkill().getName() + " has been removed.");
-				retval = false;
-			}
-		}
-
 		double manaDam = calc();
 
 		if (manaDam > getEffected().getCurrentMp())

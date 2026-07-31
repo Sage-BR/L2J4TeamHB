@@ -76,8 +76,7 @@ import net.sf.l2j.gameserver.model.entity.Duel;
 import net.sf.l2j.gameserver.model.quest.Quest;
 import net.sf.l2j.gameserver.model.quest.QuestState;
 import net.sf.l2j.gameserver.network.SystemMessageId;
-import net.sf.l2j.gameserver.pathfinding.AbstractNodeLoc;
-import net.sf.l2j.gameserver.pathfinding.geonodes.GeoPathFinding;
+import net.sf.l2j.gameserver.pathfinding.geonodes.GeoGridPathFinder;
 import net.sf.l2j.gameserver.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.serverpackets.Attack;
 import net.sf.l2j.gameserver.serverpackets.ChangeMoveType;
@@ -4363,7 +4362,7 @@ public abstract class L2Character extends L2Object
 
 		public int onGeodataPathIndex;
 
-		public List<AbstractNodeLoc> geoPath;
+		public List<Location> geoPath;
 
 		public int geoPathAccurateTx;
 
@@ -5708,7 +5707,7 @@ public abstract class L2Character extends L2Object
 				if (this instanceof L2PlayableInstance || this.isInCombat())
 				{
 
-					m.geoPath = GeoPathFinding.getInstance().findPath(curX, curY, curZ, originalX, originalY, originalZ);
+					m.geoPath = new GeoGridPathFinder().findPath(curX, curY, curZ, originalX, originalY, originalZ);
 					if (m.geoPath == null || m.geoPath.size() < 2) // No path
 					                                               // found
 					{
@@ -6042,7 +6041,7 @@ public abstract class L2Character extends L2Object
 			return false;
 		}
 
-		List<AbstractNodeLoc> path = GeoPathFinding.getInstance().findPath(curX, curY, curZ, origX, origY, origZ);
+		List<Location> path = new GeoGridPathFinder().findPath(curX, curY, curZ, origX, origY, origZ);
 		if (path == null || path.size() < 2)
 		{
 			return false;
@@ -6053,8 +6052,8 @@ public abstract class L2Character extends L2Object
 		double dxToGoal = origX - curX;
 		double dyToGoal = origY - curY;
 
-		AbstractNodeLoc nextForward = null;
-		for (AbstractNodeLoc loc : path)
+		Location nextForward = null;
+		for (Location loc : path)
 		{
 			double dxToPoint = loc.getX() - curX;
 			double dyToPoint = loc.getY() - curY;

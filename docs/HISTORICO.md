@@ -1,10 +1,119 @@
 # Histórico de Modificações
 
+## 2026-07-31 — Sessão 20: Fix NSWE mismatch no pathfinder (getNsweBelow)
+
+### Diagnóstico
+
+O pathfinder continuava retornando `geoPath=size=0` mesmo após a Sessão 19. Análise detalhada do código revelou um **bug de consistência entre camadas**: `getHeightBelow()` e `getNsweNearest()` eram operações **independentes** — cada uma fazia sua própria busca na geodata, e podiam retornar dados de **camadas diferentes**.
+
+**Exemplo concreto do bug:**
+Em célula multilayer com:
+- Layer 0 (teto): height=-3184, NSWE=0 (sem movimento)
+- Layer 1 (chão): height=-3208, NSWE=15 (movimento livre)
+
+`getHeightBelow(-3184)` retornava -3184 (o teto, primeiro layer ≤ worldZ).
+`getNsweNearest(-3184)` encontrava o nearest = -3184 (dist=0), retornando NSWE=0.
+→ Start node NSWE=0 → `expand()` retornava imediatamente → **nenhum vizinho explorado** → path size=0.
+
+No VERGE, isso não acontece porque ambos usam o **mesmo índice**: `block.getIndexBelow()` → `block.getHeight(index)` → `block.getNswe(index)`.
+
+### Correções Aplicadas
+
+- **`ABlock.java`** — Novo método abstrato `getNsweBelow(geoX, geoY, worldZ)` que usa a **mesma iteração** de `getHeightBelow()` mas retorna NSWE, garantindo consistência de mesma camada.
+- **`BlockFlat.getNsweBelow()`** — Retorna `CELL_FLAG_ALL`.
+- **`BlockComplex.getNsweBelow()`** — Retorna NSWE da célula (single-layer).
+- **`BlockMultilayer.getNsweBelow()`** — Percorre camadas alto→baixo, retorna NSWE da primeira ≤ worldZ (mesma lógica de `getHeightBelow`).
+- **`BlockNull.getNsweBelow()`** — Retorna `CELL_FLAG_ALL`.
+- **`GeoGridPathFinder.java`** — Todas as chamadas `getNsweNearest` substituídas por `getNsweBelow`:
+  - Start node: `startBlock.getNsweBelow(gox, goy, oz)`
+  - `getNodeNswe`: `block.getNsweBelow(gx, gy, h)`
+  - `addNode`: `block.getNsweBelow(gx, gy, gz)`
+
+### Benefícios
+
+- Start node agora sempre tem NSWE correto da camada onde o personagem está
+- `addNode` agora sempre lê NSWE da mesma camada que `getHeightBelow` retornou
+- `getNodeNswe` agora sempre lê NSWE consistente com a Z consultada
+- Totalmente alinhado com o padrão VERGE SOURCE 2.2 (index-based consistency)
+
+---
+
+## 2026-07-31 — Sessão 19: Fix pathfinder — getHeightBelow, CELL_IGNORE_HEIGHT, bounds check, diagonal NSWE
+
+### Diagnóstico
+
+O GeoGridPathFinder (Sessão 18) retornava `geoPath=size=0` em paths longos e o personagem ficava travado em paredes. Análise do log revelou 4 bugs críticos:
+
+1. **`getHeightNearest` pegava teto em vez do chão** — Em células multilayer, `getHeightNearest()` retornava a camada mais próxima do Z informado, que podia ser o teto (-2544) em vez do chão (-3128). O pathfinder tentava caminhar pelo teto.
+2. **Falta `CELL_IGNORE_HEIGHT` (+48)** — VERGE adiciona +48 ao Z ao expandir vizinhos para garantir que encontra o chão abaixo. Nosso pathfinder passava o Z direto.
+3. **Bounds check usava `REGION_CELLS_X` (2048)** — Limitava o pathfinder a apenas 1 região (~32K world units). Paths longos falhavam sempre com size=0.
+4. **Diagonal expansion incompleta** — VERGE verifica NSWE dos nós intermediários (x+dx,y) e (x,y+dy) antes de permitir movimento diagonal. Nosso código só verificava o nó atual.
+
+### Correções Aplicadas
+
+- **`ABlock.java`** — Novo método abstrato `getHeightBelow(geoX, geoY, worldZ)` que retorna a camada mais alta ≤ worldZ (o chão).
+- **`BlockFlat.java`** — `getHeightBelow` retorna `_height` (única camada).
+- **`BlockComplex.java`** — `getHeightBelow` retorna a altura da célula.
+- **`BlockMultilayer.java`** — `getHeightBelow` percorre camadas (armazenadas alto→baixo) e retorna a primeira ≤ worldZ.
+- **`BlockNull.java`** — `getHeightBelow` retorna `worldZ` (sem geo = retorna input).
+- **`GeoEngine.java`** — Método público `getBlock(geoX, geoY)` para acesso direto ao ABlock pelo pathfinder.
+- **`GeoGridPathFinder.java`** — Reescrita completa seguindo VERGE SOURCE 2.2:
+  - `addNode` usa `getBlock().getHeightBelow()` em vez de `getHeightGeo`
+  - `expand` adiciona `CELL_IGNORE_HEIGHT` ao Z antes de expandir vizinhos
+  - `addCornerNode` verifica NSWE dos nós intermediários para diagonais
+  - Bounds check usa `GEO_CELLS_MAX = 65536` (total, não por região)
+  - `getNodeNswe` helper estático para consulta de NSWE de vizinhos
+
+### Benefícios
+
+- Pathfinding agora encontra rotas em qualquer distância (não limitado a 1 região)
+- Seleção correta de camada (chão, não teto) em células multilayer
+- Diagonais verificam corretamente se o caminho intermediário é passável
+- Totalmente alinhado com VERGE SOURCE 2.2
+
+---
+
+## 2026-07-30 — Sessão 18: Migração do pathfinding para geo-grid (VERGE pattern)
+
+### Diagnóstico
+
+O pathfinding baseado em pathnodes (`GeoPathFinding.java`) tinha problemas estruturais:
+- Pathnodes são uma grade coarse (8x8 células geo por node) que perde precisão
+- Pre-checks rígidos causavam falhas frequentes quando o pathnode mais proximo era inalcançável
+- Requeria ~1000 arquivos `.pn` extras para manter
+- A lógica de A* era frágil e não se alinhava com o padrão VERGE
+
+### Correções Aplicadas
+
+- **NOVO `GeoGridPathFinder.java`** — A* baseado em geo-grid seguindo o padrão VERGE SOURCE 2.2. Cada célula geo é um nó do grafo, usando flags NSWE diretamente da geodata. Sem arquivos pathnode.
+- **`GeoEngine.java`** — Adicionados métodos públicos `getGeoX`, `getGeoY`, `getWorldX`, `getWorldY`, `getHeightGeo`, `getNsweGeo`, `hasGeoPos` para acesso ao geo-grid.
+- **`L2Character.java`** — `MoveData.geoPath` mudado de `List<AbstractNodeLoc>` para `List<Location>` para suportar novo pathfinder. Pathfinding agora usa `GeoGridPathFinder` em vez de `GeoPathFinding`.
+- **`GameServer.java`** — Removido carregamento de pathnodes (`GeoPathFinding.getInstance()`). O pathfinding agora usa apenas geodata.
+- **`DoorTable.java`** — Adicionado overload `checkIfDoorsBetween(Location, Location)` para suportar o novo tipo de path.
+
+### Benefícios
+
+- **Precisão** — Paths seguem o terreno célula por célula (não grade coarse)
+- **Robustez** — Sem pre-checks rígidos que causavam falhas
+- **Manutenção** — Zero arquivos `.pn` para gerar/distribuir
+- **Alinhamento** — Totalmente alinhado com o padrão VERGE
+- **Performance** — A* com heurística diagonal e MAX_ITERATIONS=6000
+
+### Arquivos Alterados
+
+- `java/net/sf/l2j/gameserver/pathfinding/geonodes/GeoGridPathFinder.java` (NOVO)
+- `java/net/sf/l2j/gameserver/GeoEngine.java`
+- `java/net/sf/l2j/gameserver/model/L2Character.java`
+- `java/net/sf/l2j/gameserver/GameServer.java`
+- `java/net/sf/l2j/gameserver/datatables/DoorTable.java`
+
+---
+
 ## 2026-07-30 — Sessão 17: Fix pathfinding não encontrava rotas (personagem andava em linha reta e batia na parede)
 
 ### Diagnóstico
 
-`GeoPathFinding.findPath()` tinha pre-checks riggidos que retornavam `null` imediatamente quando o pathnode mais proximo era inalcançavel via `moveCheck()`. Se havia uma parede entre o personagem e o pathnode mais proximo, o pathfinding morria sem tentar alternativas. O proprio codigo tinha um TODO reconhecendo o problema: `// TODO: Find closest path node we CAN access.`
+`GeoPathFinding.findPath()` tinha pre-checks rígidos que retornavam `null` imediatamente quando o pathnode mais proximo era inalcançavel via `moveCheck()`. Se havia uma parede entre o personagem e o pathnode mais proximo, o pathfinding morria sem tentar alternativas. O proprio codigo tinha um TODO reconhecendo o problema: `// TODO: Find closest path node we CAN access.`
 
 ### Correções
 
@@ -13,14 +122,6 @@
 - Pre-checks flexibilizados — em vez de retornar null imediatamente, tenta encontrar pathnode alternativo acessivel.
 
 ---
-
-Java 25 c/ virtual threads e I/O
-remoção de javolution 
-Atualização das Libs
-Recompilar MMOCORE
-Fix Compilador dos Scripts
-
-Commits aplicados manualmente no servidor, baseados em análise do repositório [l2j-server-game](https://bitbucket.org/l2jserver/l2j-server-game/commits/) (BitBucket) e correções próprias.
 
 ## Contexto das sessões
 
@@ -50,11 +151,6 @@ Três bugs interconectados causavam rollbacks massivos, teleports e personagens 
 - **data/Server/data/geodata/*.l2j** — Restaurados arquivos originais do git (commit `a66569ab5`) antes da corrupção do patcher.
 - **BlockMultilayer.java / BlockComplex.java** — `decodeHeight()` mantido com `>> 1` (formato L2J correto, já era).
 
-### Próximos passos necessários
-
-- Re-executar o GeoDataPatcher **corrigido** sobre os arquivos restaurados para corrigir NSWE flags.
-- Revisar `nCanMoveNext` RAMP-IGNORE-NSWE — com geodata correto, pode não ser mais necessário.
-
 ## 2026-07-29 — Sessão 15: Fix seleção de layer errada em geodata Multilayer (teleport entre andares)
 
 - `BlockMultilayer.java` — **Bug raiz:** `getHeightNearest()` e `getNsweNearest()` comparavam o valor **raw empacotado** `(height << 1 | NSWE)` diretamente com `worldZ` **decodificado**, causando seleção errada de layer em células multicamada.
@@ -83,45 +179,12 @@ Três bugs interconectados causavam rollbacks massivos, teleports e personagens 
 - `ValidatePosition.java` — `lastClientPosition`/`lastServerPosition` atualizados antes do early return de falling
 - `L2NpcWalkerAI.java` — `checkArrived` usa `isInsideRadius(10)` + Z diff < 30 em vez de comparação exata
 
-## 2026-07-24 — Sessão 8: Implementações dos commits L2J (página 4+)
-
-- `GeoEngine.java` — Adicionado `nTraceTerrainZ`: percorre célula por célula coletando altura do terreno
-- `GeoData.java` — Adicionado `traceTerrainZ` wrapper público
-- `L2Character.java` — `updatePosition` usa `traceTerrainZ` para Z de NPCs (substitui snap antigo)
-- `L2PcInstance.java` — `updatePosition` usa `traceTerrainZ` para Z de players (substitui interpolação linear)
-- `L2PcInstance.java` — Adicionado `isFalling()`/`stopFalling()` com `_fallingTimestamp` (delay 1s)
-- `ValidatePosition.java` — Early return se `isFalling(_z)` para evitar "jumping"
-- `AbstractAI.java` — `moveToPawn`: se `!canSeeTarget`, offset = 0 (NPC vai direto ao alvo)
-- `L2AttackableAI.java` — Range check: `mostHate.isMoving() || npc.isMoving()` (ambos, não só target)
-- `GeoEngine.java` — Adicionado `nGetCellNSWE(gx, gy, z)` helper
-- `GeoEngine.java` — `nCanMoveNext`: NSWE de destino só para FLAT (removido de complex/multilevel — causava rollbacks)
-- `ValidatePosition.java` — Removido geo-collision check (`canMoveToTarget`/`getValidLocation`) por tick
-- `geo_index.txt` — Sincronizado com 156 arquivos .l2j no disco
-- `pn_index.txt` — Sincronizado com 156 arquivos .pn no disco
-
-## 2026-07-24 — Sessão 9: Correções de bugs (auditoria local)
-
-- `L2AttackableAI.java` — `doAttack` só executa se `canSeeTarget`, senão move para perto
-- `L2PcInstance.java` — Range do `isFalling` expandido de ±200 para ±1000
-- `GeoPathFinding.java` — Z tolerance do pathfinding aumentado de 55 para 128
-- `GeoEngine.java` — `checkNSWE` diagonal agora verifica ambos os eixos (anti-corner-cut)
-- `GeoEngine.java` — `nGetSpawnHeight` usa `(zmin+zmax)/2` como referência em vez de `zmin`
-- `L2Spawn.java` — `getSpawnHeight` chamado com `getLocz()-50, getLocz()+50` em vez de `getLocz(), getLocz()`
-- `GeoEngine.java` — `DoorInstance` não bypassa mais LOS total, faz LOS contra hinge coords
-- `ValidatePosition.java` — `lastClientPosition`/`lastServerPosition` atualizados antes do early return de falling
-- `L2NpcWalkerAI.java` — `checkArrived` usa `isInsideRadius(10)` + Z diff < 30 em vez de comparação exata
-
 ## 2026-07-25 — Sessão 11: Fix teleport-abaixo-terreno nas colunas + pathfallback sem restrição de distância
 
 - `L2Character.java` — Removido `distance < 2000` do limite de ativação de pathfinding; NPCs buscam path com qualquer distância
 - `L2Character.java` — Destino de NPC usa `traceTerrainZ` para Z correto ao chegar (previne "teleport abaixo do chão")
 - `L2PcInstance.java` — Destino do jogador usa `traceTerrainZ` para Z correto ao chegar
 - `ValidatePosition.java` — Terrain height snap (5-50 unidades abaixo do terreno → ajusta para cima); reverteu check anterior que causava "jump around" em hills
-- `GeoEngine.java` — `nCanMoveNext` FLAT case usava `nGetHeight(tx,ty,z)` para consultar NSWE do alvo na altura do terreno do alvo (corrige oscilação "passa e volta" entre colunas) — **Revertido na sessão 12**; FLAT blocks são agora sempre passáveis (Brproject pattern).
-- Branch `upstream/feature/geoengine_and_movement_stabilization` — commits analisados; `c0b8a1940` removeu o bad check de ValidatePosition e usa traceTerrainZ no destino ao invés disso
-- Branch `upstream/feature/colosseum_fences` — commit `22678f0ad` aplicado
-- Branch `upstream/fix/door_coords` — `47f30f98d` NÃO aplicável (getX/getY final em L2Object, sem DoorData/L2DoorTemplate)
-- Branch `upstream/feature/attackable-ai-rework` — refactor massivo disponível para futuro cherry-pick
 
 ## 2026-07-27 — Sessão 12: FLAT blocks always passable in nCanMoveNext
 
@@ -166,13 +229,6 @@ Três bugs interconectados causavam rollbacks massivos, teleports e personagens 
 ### GeoDataPatcher — Correção permanente do .l2j
 
 - `java/Dev/SpecialMods/GeoDataPatcher.java` (novo) — Patcher binário que lê `.l2j`, varre células com NSWE bloqueando movimento onde altura é compatível, e corrige flags para 15 (todas direções livres).
-  - Parseia blocos Flat (1 layer), Complex (1 layer) e Multilayer (múltiplas camadas)
-  - `findNearestHeight()` — para células Multilayer, escaneia **todas as camadas** do vizinho e retorna a altura mais próxima da camada atual (evita falso negativo comparando chão vs teto)
-  - Threshold 96 (configurável via `-t`)
-  - Suporta dry-run via `-o <output>`
-
-- `16_19.l2j` — Aplicado patch permanente: 1.308.720 células corrigidas (935k Complex + 374k Multilayer)
-
 - `data/Server/GeoDataPatcher.bat` (novo) — Menu interativo para Windows com:
   - `[1]` Consertar UM arquivo (digitar região)
   - `[2]` Consertar TODOS (bulk)

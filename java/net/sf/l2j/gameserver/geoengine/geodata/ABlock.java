@@ -30,4 +30,23 @@ public abstract class ABlock
 	 * @return height of the layer just above worldZ, or Short.MAX_VALUE if none
 	 */
 	public abstract short getHeightAbove(int geoX, int geoY, int worldZ);
+
+	/**
+	 * @param geoX
+	 * @param geoY
+	 * @param worldZ
+	 * @return height of the highest layer at or below worldZ (the floor), or worldZ if none
+	 */
+	public abstract short getHeightBelow(int geoX, int geoY, int worldZ);
+
+	/**
+	 * @param geoX
+	 * @param geoY
+	 * @param worldZ
+	 * @return NSWE of the same layer returned by getHeightBelow (same-layer
+	 *         guarantee). This avoids the mismatch that occurs when
+	 *         getHeightBelow returns height X but getNsweNearest(X) finds a
+	 *         different layer.
+	 */
+	public abstract byte getNsweBelow(int geoX, int geoY, int worldZ);
 }

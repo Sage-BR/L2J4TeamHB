@@ -98,4 +98,22 @@ public class BlockComplex extends ABlock
 		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
 		return decodeHeight(raw);
 	}
+
+	@Override
+	public short getHeightBelow(int geoX, int geoY, int worldZ)
+	{
+		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
+		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		return decodeHeight(raw);
+	}
+
+	@Override
+	public byte getNsweBelow(int geoX, int geoY, int worldZ)
+	{
+		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
+		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
+		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
+		return (byte) (raw & 0x0F);
+	}
 }

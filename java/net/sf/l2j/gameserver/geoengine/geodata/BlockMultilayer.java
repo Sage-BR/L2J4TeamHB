@@ -289,4 +289,56 @@ public class BlockMultilayer extends ABlock
 		}
 		return nswes;
 	}
+
+	@Override
+	public short getHeightBelow(int geoX, int geoY, int worldZ)
+	{
+		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
+		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
+		if (layers <= 0)
+		{
+			return (short) worldZ;
+		}
+
+		// Layers stored highest to lowest; find highest layer <= worldZ
+		for (int i = 0; i < layers; i++)
+		{
+			int layerAddr = addr + i * 2;
+			short h = decodeHeight(_geo.getShort(layerAddr) & 0xFFFF);
+			if (h <= worldZ)
+			{
+				return h;
+			}
+		}
+		return (short) worldZ;
+	}
+
+	@Override
+	public byte getNsweBelow(int geoX, int geoY, int worldZ)
+	{
+		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
+		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
+		int addr = findCellStart(cellX, cellY);
+		int layers = _geo.get(addr++) & 0xFF;
+		if (layers <= 0)
+		{
+			return GeoStructure.CELL_FLAG_ALL;
+		}
+
+		// Same logic as getHeightBelow — returns NSWE of the SAME layer.
+		// This guarantees that getNsweBelow and getHeightBelow agree.
+		for (int i = 0; i < layers; i++)
+		{
+			int layerAddr = addr + i * 2;
+			short h = decodeHeight(_geo.getShort(layerAddr) & 0xFFFF);
+			if (h <= worldZ)
+			{
+				int raw = _geo.getShort(layerAddr) & 0xFFFF;
+				return (byte) (raw & 0x0F);
+			}
+		}
+		return GeoStructure.CELL_FLAG_ALL;
+	}
 }

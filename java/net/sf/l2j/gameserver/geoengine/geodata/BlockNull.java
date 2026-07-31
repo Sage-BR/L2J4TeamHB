@@ -35,4 +35,16 @@ public final class BlockNull extends ABlock
 	{
 		return (short) worldZ;
 	}
+
+	@Override
+	public short getHeightBelow(int geoX, int geoY, int worldZ)
+	{
+		return (short) worldZ;
+	}
+
+	@Override
+	public byte getNsweBelow(int geoX, int geoY, int worldZ)
+	{
+		return GeoStructure.CELL_FLAG_ALL;
+	}
 }
