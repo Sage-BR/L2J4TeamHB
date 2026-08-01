@@ -19,8 +19,7 @@ Else
 End If
 
 Dim args
-args = " -Xms1500m -Xmx2g -server -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
-args = args & " -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication"
+args = " -Xms1500m -Xmx2g -server -XX:+UseZGC -XX:+UseCompactObjectHeaders"
 args = args & " -cp """ & scriptDir & "\lib\*" & ";" & scriptDir & "\l2jserver.jar"""
 args = args & " net.sf.l2j.gameserver.GameServer"
 

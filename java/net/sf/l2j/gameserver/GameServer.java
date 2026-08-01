@@ -620,6 +620,15 @@ public class GameServer
 		LogManager.getLogManager().readConfiguration(is);
 		is.close();
 
+		// Server logo (same as LoginServer)
+		_log.info("                                                                      ");
+		_log.info("                      ###  #####  #####    ##    ##   ##              ");
+		_log.info("                     ####  #####  ##      ####   ### ###              ");
+		_log.info("                    ## ##   ###   #####  ##  ##  #######              ");
+		_log.info("                   ######   ###   ##    ######## ## # ##              ");
+		_log.info("                      ###   ###   ##### ###  ### ##   ##              ");
+		_log.info("                       www.4teambr.com      bY SageBR!                ");
+
 		// Initialize config
 		Config.load();
 		L2DatabaseFactory.getInstance();

@@ -143,13 +143,12 @@ public class GeoGridPathFinder
 
         // Get blocks for start and target — use getHeightBelow consistently
         // so start/target Z matches what addNode produces for neighbors.
+        // NOTE: cells without geodata (BlockNull, e.g. unloaded regions) are
+        // OPEN by design (NSWE=ALL, floor=worldZ) — identical to
+        // GeoEngine.nGetNSWE/nCanMoveNext. We must NOT abort here: the
+        // pathfinder keeps trying and routes through them (with guards).
         ABlock startBlock = GeoEngine.getInstance().getBlock(gox, goy);
-        if (!startBlock.hasGeoPos())
-            return Collections.emptyList();
-
         ABlock targetBlock = GeoEngine.getInstance().getBlock(gtx, gty);
-        if (!targetBlock.hasGeoPos())
-            return Collections.emptyList();
 
         // Use getHeightBelow for both start and target to stay consistent
         // with addNode's getHeightBelow usage.
@@ -177,21 +176,51 @@ public class GeoGridPathFinder
 
         opened.add(_current);
 
+        // Best-effort fallback: remember the closest node reached, so that
+        // when the exact target cell/Z is unreachable (blocked cell, or a
+        // multilayer Z mismatch), the caller still gets a plausible partial
+        // route instead of an empty list (which would make the character
+        // fall back to a straight-line moveCheck and bump into walls).
+        PathNode bestNode = null;
+        int bestCostH = Integer.MAX_VALUE;
+
         int count = 0;
         while (!opened.isEmpty() && count < MAX_ITERATIONS)
         {
             _current = opened.poll();
+            if (_current == null)
+                break;
 
-            // Reached target
-            if (_current.geoX == _gtx && _current.geoY == _gty && _current.z == _gtz)
+            // Reached target: XY match with Z within the climb tolerance.
+            // Exact Z equality is too strict on multilayer terrain (the
+            // target layer may sit one CELL_IGNORE_HEIGHT band away).
+            if (_current.geoX == _gtx && _current.geoY == _gty
+                    && Math.abs(_current.z - _gtz) <= GeoStructure.CELL_IGNORE_HEIGHT)
             {
                 return constructPath();
+            }
+
+            // Track the closest node reached so far for the fallback.
+            if (_current.costH < bestCostH)
+            {
+                bestCostH = _current.costH;
+                bestNode = _current;
             }
 
             closed.add(_current);
             expand(_current, opened, closed);
 
             count++;
+        }
+
+        // No exact target reached: fall back to the closest node found, but
+        // only if it is a REAL advance (distinct cell from start, with a
+        // parent chain so the returned path has >= 2 nodes).
+        if (bestNode != null && bestNode.parent != null
+                && (bestNode.geoX != gox || bestNode.geoY != goy))
+        {
+            _current = bestNode;
+            return constructPath();
         }
 
         // No path found
@@ -252,8 +281,10 @@ public class GeoGridPathFinder
             return GeoStructure.CELL_FLAG_NONE;
 
         final ABlock block = GeoEngine.getInstance().getBlock(gx, gy);
+        // No geodata (BlockNull) = open space, same as GeoEngine.nGetNSWE.
         if (!block.hasGeoPos())
-            return GeoStructure.CELL_FLAG_NONE;	short h = block.getHeightBelow(gx, gy, gz);
+            return GeoStructure.CELL_FLAG_ALL;
+        short h = block.getHeightBelow(gx, gy, gz);
         return block.getNsweBelow(gx, gy, h);
     }
 
@@ -270,8 +301,17 @@ public class GeoGridPathFinder
 
         // Get geodata block
         final ABlock block = GeoEngine.getInstance().getBlock(gx, gy);
+        // No geodata (BlockNull) = open space, same as GeoEngine.nGetNSWE.
+        // BlockNull has no floor data: revert the +CELL_IGNORE_HEIGHT probe
+        // used by expand(), so Z does NOT drift +48 per step through
+        // unloaded cells — the neighbor simply continues at the parent's
+        // height (flat open ground semantics).
         if (!block.hasGeoPos())
-            return GeoStructure.CELL_FLAG_NONE;	// Get floor height below gz (using getHeightBelow like VERGE getIndexBelow)
+        {
+            gz -= GeoStructure.CELL_IGNORE_HEIGHT;
+            return GeoStructure.CELL_FLAG_ALL;
+        }
+        // Get floor height below gz (using getHeightBelow like VERGE getIndexBelow)
         gz = block.getHeightBelow(gx, gy, gz);
         final byte nswe = block.getNsweBelow(gx, gy, gz);
 
@@ -408,10 +448,14 @@ public class GeoGridPathFinder
             return cached;
 
         ABlock block = cachedBlock(gx, gy);
+        // No geodata (BlockNull) = open space, same as GeoEngine.nGetNSWE.
+        // Treating it as CELL_FLAG_NONE here made the LOS walk see a wall
+        // where the movement engine allows walking (unloaded regions),
+        // collapsing the pruned path into straight segments into walls.
         if (!block.hasGeoPos())
         {
-            _nsweCache.put(key, GeoStructure.CELL_FLAG_NONE);
-            return GeoStructure.CELL_FLAG_NONE;
+            _nsweCache.put(key, GeoStructure.CELL_FLAG_ALL);
+            return GeoStructure.CELL_FLAG_ALL;
         }
         short h = block.getHeightBelow(gx, gy, worldZ);
         byte nswe = block.getNsweBelow(gx, gy, h);
@@ -518,26 +562,34 @@ public class GeoGridPathFinder
             if (dir == 0)
                 return false;
 
+            // Bounds check BEFORE any lookups of the next cell (prevents
+            // out-of-range getBlock calls at the grid edges).
+            if (nextX < 0 || nextX >= GEO_CELLS_MAX || nextY < 0 || nextY >= GEO_CELLS_MAX)
+                return false;
+
             // Check current cell allows this movement
             if ((curNswe & dir) == 0)
                 return false;
 
-            // Diagonal: verify intermediate cells allow the corner cut
-            // (matches addCornerNode logic in A* expansion)
+            // Diagonal: verify intermediate cells allow the corner cut.
+            // The flags are CROSSED, exactly like addCornerNode in the A*
+            // expansion: the cell beside us in X must allow movement in the
+            // Y direction (and vice-versa), otherwise the diagonal would cut
+            // through a wall corner. Using parallel flags here made
+            // hasLineOfSight return "clear" across blocked corners, which
+            // collapsed the pruned path into straight segments that ran
+            // straight into walls (pathfinder appeared to be ignored).
             if (nextX != curX && nextY != curY)
             {
                 byte nsweSideX = cachedNswe(nextX, curY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
                 byte nsweSideY = cachedNswe(curX, nextY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
                 byte sideDirX = dirFlag(nextX - curX, 0);
                 byte sideDirY = dirFlag(0, nextY - curY);
-                if ((nsweSideX & sideDirX) == 0 || (nsweSideY & sideDirY) == 0)
+                if ((nsweSideX & sideDirY) == 0 || (nsweSideY & sideDirX) == 0)
                     return false;
             }
 
             // Get next cell info
-            if (nextX < 0 || nextX >= GEO_CELLS_MAX || nextY < 0 || nextY >= GEO_CELLS_MAX)
-                return false;
-
             short nextH = cachedHeight(nextX, nextY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
             byte nextNswe = cachedNswe(nextX, nextY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
 
