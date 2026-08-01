@@ -16,6 +16,7 @@ package net.sf.l2j.gameserver.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -71,8 +72,8 @@ public final class L2ItemInstance extends L2Object
 	/** ID of the owner */
 	private int _ownerId;
 
-	/** Quantity of the item */
-	private int _count;
+	/** Quantity of the item (AtomicInteger to prevent lost updates in concurrent access) */
+	private final AtomicInteger _count = new AtomicInteger(1);
 
 	/** Initial Quantity of the item */
 	private int _initCount;
@@ -344,12 +345,13 @@ public final class L2ItemInstance extends L2Object
 	 */
 	public void setCount(int count)
 	{
-		if (getCount() == count)
+		int newCount = count >= -1 ? count : 0;
+		if (_count.get() == newCount)
 		{
 			return;
 		}
 
-		_count = count >= -1 ? count : 0;
+		_count.set(newCount);
 		_storedInDb = false;
 	}
 
@@ -358,7 +360,7 @@ public final class L2ItemInstance extends L2Object
 	 */
 	public int getCount()
 	{
-		return _count;
+		return _count.get();
 	}
 
 	/**
@@ -385,19 +387,23 @@ public final class L2ItemInstance extends L2Object
 			return;
 		}
 
-		if (count > 0 && getCount() > Integer.MAX_VALUE - count)
+		// Atomic read-modify-write to prevent lost updates with concurrent threads
+		int oldVal, newVal;
+		do
 		{
-			setCount(Integer.MAX_VALUE);
+			oldVal = _count.get();
+			newVal = oldVal + count;
+			// Clamp overflow/underflow
+			if (count > 0 && newVal < 0)
+			{
+				newVal = Integer.MAX_VALUE;
+			}
+			if (newVal < 0)
+			{
+				newVal = 0;
+			}
 		}
-		else
-		{
-			setCount(getCount() + count);
-		}
-
-		if (getCount() < 0)
-		{
-			setCount(0);
-		}
+		while (!_count.compareAndSet(oldVal, newVal));
 
 		_storedInDb = false;
 

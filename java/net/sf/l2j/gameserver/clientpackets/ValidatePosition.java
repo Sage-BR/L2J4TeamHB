@@ -142,12 +142,67 @@ public class ValidatePosition extends L2GameClientPacket
 				dist = Math.sqrt(Math.pow(_x - realX0, 2) + Math.pow(_y - realY0, 2));
 			}
 
-			if (dist > actualSpeed)
+			// Latency-tolerant desync check (time-based).
+			// The client reports its position roughly once per second, so a
+			// legitimate client's reported position can be up to
+			// speed * (reportInterval + networkLatency) behind the server.
+			// Use the elapsed time since the last report as the interval
+			// proxy plus a 1-second latency buffer, capped at 3 seconds of
+			// movement so sustained speedhacks are still caught.
+			long now = System.currentTimeMillis();
+			// Math.max guards against clock adjustments (NTP) making the
+			// elapsed negative, which would shrink allowedDist below
+			// actualSpeed and cause a spurious ROLLBACK.
+			long elapsed = Math.max(0L, now - activeChar.getLastValidateTime());
+			activeChar.setLastValidateTime(now);
+
+			double allowedDist = actualSpeed * (1.0 + Math.min(elapsed, 2000L) / 1000.0);
+			if (allowedDist > actualSpeed * 3.0)
+			{
+				allowedDist = actualSpeed * 3.0;
+			}
+
+			// Anti-cheat: the time-based tolerance stands whenever the client is
+			// at-or-behind the server along the authoritative movement
+			// direction — a stale report is never ahead of the server. Only a
+			// client strictly AHEAD of the server by more than one second of
+			// movement (the unambiguous speedhack signature) falls back to the
+			// strict speed threshold. The > actualSpeed threshold (instead of
+			// > 0) avoids spurious ROLLBACKs at pathfinding corners: at a
+			// sharp (>90°) turn a legit client behind along the old segment
+			// projects positive onto the new segment direction, but by less
+			// than a second of movement.
+			if (activeChar.isMoving())
+			{
+				final double toDestX = activeChar.getXdestination() - realX0;
+				final double toDestY = activeChar.getYdestination() - realY0;
+				final double distToDest = Math.sqrt(toDestX * toDestX + toDestY * toDestY);
+				if (distToDest > 0)
+				{
+					final double clientAhead = ((_x - realX0) * toDestX + (_y - realY0) * toDestY) / distToDest;
+					if (clientAhead > actualSpeed)
+					{
+						allowedDist = actualSpeed;
+					}
+				}
+				else
+				{
+					// Moving but no usable direction (arriving) — strict only.
+					allowedDist = actualSpeed;
+				}
+			}
+			else
+			{
+				// Not moving: a large offset is a teleport, not latency.
+				allowedDist = actualSpeed;
+			}
+
+			if (dist > allowedDist)
 			{
 				// Desync too large — send ValidateLocation to snap client back.
 				if (Config.MOVE_DEBUG)
 				{
-					_log.info("[MOVE] ROLLBACK (desync>" + actualSpeed
+					_log.info("[MOVE] ROLLBACK (desync>" + (int) allowedDist
 					        + "): client=(" + _x + "," + _y + "," + _z
 					        + ") server=(" + realX0 + "," + realY0 + ","
 					        + realZ0 + ") distance=" + dist);

@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,11 +38,12 @@ public abstract class ItemContainer
 {
 	protected static final Logger _log = Logger.getLogger(ItemContainer.class.getName());
 
-	protected final List<L2ItemInstance> _items;
+	// CopyOnWriteArrayList prevents ConcurrentModificationException from concurrent
+	// virtual threads (AI autoloot + packet handlers) iterating/mutating the list.
+	protected final List<L2ItemInstance> _items = new CopyOnWriteArrayList<>();
 
 	protected ItemContainer()
 	{
-		_items = new ArrayList<>();
 	}
 
 	protected abstract L2Character getOwner();

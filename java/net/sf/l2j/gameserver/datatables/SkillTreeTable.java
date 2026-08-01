@@ -162,14 +162,11 @@ public class SkillTreeTable
 		int classId = 0;
 		int count = 0;
 
-		java.sql.Connection con = null;
-
-		try
+		// Block 1: Class skill trees (uses its own connection)
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("SELECT * FROM class_list ORDER BY id");
+		     ResultSet classlist = statement.executeQuery())
 		{
-			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement statement = con.prepareStatement("SELECT * FROM class_list ORDER BY id");
-			ResultSet classlist = statement.executeQuery();
-
 			Map<Integer, L2SkillLearn> map;
 			int parentClassId;
 			L2SkillLearn skillLearn;
@@ -216,9 +213,6 @@ public class SkillTreeTable
 				_log.fine("SkillTreeTable: skill tree for class " + classId
 				        + " has " + map.size() + " skills");
 			}
-
-			classlist.close();
-			statement.close();
 		}
 		catch (Exception e)
 		{
@@ -228,17 +222,16 @@ public class SkillTreeTable
 
 		_log.config("SkillTreeTable: Loaded " + count + " skills.");
 
-		// Skill tree for fishing skill (from Fisherman)
+		// Block 2: Fishing skill trees (own connection)
 		int count2 = 0;
 		int count3 = 0;
 
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, sp, min_level, costid, cost, isfordwarf FROM fishing_skill_trees ORDER BY skill_id, level");
+		     ResultSet skilltree2 = statement.executeQuery())
 		{
 			_fishingSkillTrees = new ArrayList<>();
 			_expandDwarfCraftSkillTrees = new ArrayList<>();
-
-			PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, sp, min_level, costid, cost, isfordwarf FROM fishing_skill_trees ORDER BY skill_id, level");
-			ResultSet skilltree2 = statement.executeQuery();
 
 			int prevSkillId = -1;
 
@@ -270,9 +263,6 @@ public class SkillTreeTable
 				}
 			}
 
-			skilltree2.close();
-			statement.close();
-
 			count2 = _fishingSkillTrees.size();
 			count3 = _expandDwarfCraftSkillTrees.size();
 		}
@@ -281,13 +271,13 @@ public class SkillTreeTable
 			_log.severe("Error while creating fishing skill table: " + e);
 		}
 
+		// Block 3: Enchant skill trees (own connection)
 		int count4 = 0;
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, base_lvl, sp, min_skill_lvl, exp, success_rate76, success_rate77, success_rate78 FROM enchant_skill_trees ORDER BY skill_id, level");
+		     ResultSet skilltree3 = statement.executeQuery())
 		{
 			_enchantSkillTrees = new ConcurrentHashMap<>();
-
-			PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, base_lvl, sp, min_skill_lvl, exp, success_rate76, success_rate77, success_rate78 FROM enchant_skill_trees ORDER BY skill_id, level");
-			ResultSet skilltree3 = statement.executeQuery();
 
 			int prevSkillId = -1;
 
@@ -319,9 +309,6 @@ public class SkillTreeTable
 				skill.addEnchantDetail(esd);
 			}
 
-			skilltree3.close();
-			statement.close();
-
 			count4 = _enchantSkillTrees.size();
 		}
 		catch (Exception e)
@@ -329,13 +316,13 @@ public class SkillTreeTable
 			_log.log(Level.SEVERE, "Error while creating enchant skill table ", e);
 		}
 
+		// Block 4: Pledge skill trees (own connection)
 		int count5 = 0;
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, clan_lvl, repCost, itemId FROM pledge_skill_trees ORDER BY skill_id, level");
+		     ResultSet skilltree4 = statement.executeQuery())
 		{
 			_pledgeSkillTrees = new ArrayList<>();
-
-			PreparedStatement statement = con.prepareStatement("SELECT skill_id, level, name, clan_lvl, repCost, itemId FROM pledge_skill_trees ORDER BY skill_id, level");
-			ResultSet skilltree4 = statement.executeQuery();
 
 			int prevSkillId = -1;
 
@@ -358,22 +345,20 @@ public class SkillTreeTable
 				_pledgeSkillTrees.add(skill);
 			}
 
-			skilltree4.close();
-			statement.close();
-
 			count5 = _pledgeSkillTrees.size();
 		}
 		catch (Exception e)
 		{
-			_log.severe("Error while creating fishing skill table: " + e);
+			_log.severe("Error while creating pledge skill table: " + e);
 		}
+
+		// Block 5: Transform skill trees (own connection)
 		int count6 = 0;
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("SELECT race_id, skill_id, item_id, level, name, sp, min_level FROM transform_skill_trees ORDER BY race_id, skill_id, level");
+		     ResultSet skilltree5 = statement.executeQuery())
 		{
 			_TransformSkillTrees = new ArrayList<>();
-
-			PreparedStatement statement = con.prepareStatement("SELECT race_id, skill_id, item_id, level, name, sp, min_level FROM transform_skill_trees ORDER BY race_id, skill_id, level");
-			ResultSet skilltree5 = statement.executeQuery();
 
 			int prevSkillId = -1;
 
@@ -397,25 +382,11 @@ public class SkillTreeTable
 				_TransformSkillTrees.add(skill);
 			}
 
-			skilltree5.close();
-			statement.close();
-
 			count6 = _TransformSkillTrees.size();
 		}
 		catch (Exception e)
 		{
 			_log.log(Level.SEVERE, "Error while creating Transformation skill table ", e);
-		}
-
-		finally
-		{
-			try
-			{
-				con.close();
-			}
-			catch (Exception e)
-			{
-			}
 		}
 
 		_log.config("FishingSkillTreeTable: Loaded " + count2

@@ -99,36 +99,20 @@ public class AuctionManager
 
 	private final void load()
 	{
-		java.sql.Connection con = null;
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("SELECT id FROM auction ORDER BY id");
+		     ResultSet rs = statement.executeQuery())
 		{
-			PreparedStatement statement;
-			ResultSet rs;
-			con = L2DatabaseFactory.getInstance().getConnection();
-			statement = con.prepareStatement("SELECT id FROM auction ORDER BY id");
-			rs = statement.executeQuery();
 			while (rs.next())
 			{
 				_auctions.add(new Auction(rs.getInt("id")));
 			}
-			statement.close();
 			_log.info("Loaded: " + getAuctions().size() + " auction(s)");
 		}
 		catch (Exception e)
 		{
 			_log.warning("Exception: AuctionManager.load(): " + e.getMessage());
 			e.printStackTrace();
-		}
-
-		finally
-		{
-			try
-			{
-				con.close();
-			}
-			catch (Exception e)
-			{
-			}
 		}
 	}
 
@@ -164,7 +148,6 @@ public class AuctionManager
 	/** Init Clan NPC aution */
 	public void initNPC(int id)
 	{
-		java.sql.Connection con = null;
 		int i = 0;
 		for (i = 0; i < ItemInitDataId.length; i++)
 		{
@@ -178,30 +161,17 @@ public class AuctionManager
 			_log.warning("Clan Hall auction not found for Id :" + id);
 			return;
 		}
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection();
+		     PreparedStatement statement = con.prepareStatement("INSERT INTO `auction` VALUES "
+		             + ITEM_INIT_DATA[i]))
 		{
-			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement statement;
-			statement = con.prepareStatement("INSERT INTO `auction` VALUES "
-			        + ITEM_INIT_DATA[i]);
 			statement.execute();
-			statement.close();
 			_auctions.add(new Auction(id));
 		}
 		catch (Exception e)
 		{
 			_log.log(Level.SEVERE, "Exception: Auction.initNPC(): "
 			        + e.getMessage(), e);
-		}
-		finally
-		{
-			try
-			{
-				con.close();
-			}
-			catch (Exception e)
-			{
-			}
 		}
 	}
 }

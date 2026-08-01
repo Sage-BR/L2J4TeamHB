@@ -814,9 +814,15 @@ public class TradeList
 			InventoryUpdate ownerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 			InventoryUpdate partnerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 
-			// Transfer items
-			partnerList.TransferItems(getOwner(), partnerIU, ownerIU);
-			TransferItems(partnerList.getOwner(), ownerIU, partnerIU);
+			// Transfer items — check return values to detect partial failures
+			boolean ok1 = partnerList.TransferItems(getOwner(), partnerIU, ownerIU);
+			boolean ok2 = TransferItems(partnerList.getOwner(), ownerIU, partnerIU);
+
+			if (!ok1 || !ok2)
+			{
+				_log.warning("doExchange: Partial transfer failure! ok1=" + ok1 + " ok2=" + ok2
+				        + " owner=" + _owner.getName() + " partner=" + _partner.getName());
+			}
 
 			// Send inventory update packet
 			if (ownerIU != null)
@@ -845,7 +851,7 @@ public class TradeList
 			playerSU.addAttribute(StatusUpdate.CUR_LOAD, _partner.getCurrentLoad());
 			_partner.sendPacket(playerSU);
 
-			success = true;
+			success = ok1 && ok2;
 		}
 		// Finish the trade
 		partnerList.getOwner().onTradeFinish(success);

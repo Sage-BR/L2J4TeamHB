@@ -15,6 +15,7 @@
 package net.sf.l2j.gameserver.pathfinding.geonodes;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,6 +57,10 @@ public class GeoGridPathFinder
     private int _gtz;
 
     private PathNode _current;
+
+    // Per-pathfinding caches for LOS pruning (avoid redundant getBlock/NSWE lookups)
+    private HashMap<Long, ABlock> _blockCache;
+    private HashMap<Long, Byte> _nsweCache;
 
     /**
      * Inner Node class for A* pathfinding.
@@ -154,7 +159,13 @@ public class GeoGridPathFinder
         // Set target coordinates
         _gtx = gtx;
         _gty = gty;
-        _gtz = gtz;	byte startNswe = startBlock.getNsweBelow(gox, goy, oz);
+        _gtz = gtz;
+
+        // Initialize per-path caches
+        _blockCache = new HashMap<>(512);
+        _nsweCache = new HashMap<>(1024);
+
+        byte startNswe = startBlock.getNsweBelow(gox, goy, oz);
 
         // Create start node
         _current = new PathNode(gox, goy, goz, startNswe);
@@ -299,6 +310,15 @@ public class GeoGridPathFinder
      * Construct path from target back to start. Keeps only corner waypoints
      * and prunes intermediate nodes that have line-of-sight to non-consecutive
      * points (smooth path, no zigzag).
+     *
+     * The returned path EXCLUDES the start node (the cell the character is
+     * already standing in): routing the first segment through its center would
+     * cause a visible micro-hop (abrupt turn) before the route begins. The
+     * character moves directly toward the first real waypoint instead.
+     *
+     * Note: the degenerate early return (raw.size() <= 2) still contains the
+     * start node — the caller requires a path of at least 2 nodes, and a
+     * 2-node path is already a single tiny segment, so the hop is negligible.
      */
     private List<Location> constructPath()
     {
@@ -346,21 +366,192 @@ public class GeoGridPathFinder
             path.add(raw.get(raw.size() - 1));
         }
 
+        // Drop the start node: the character is already standing inside that
+        // cell, so routing the first segment through its center would cause a
+        // visible micro-hop (abrupt turn) before the route actually begins.
+        // Only drop it when at least one real waypoint remains (path must keep
+        // size >= 2 so moveToLocation() still treats it as a valid path).
+        if (path.size() > 2)
+        {
+            path.removeFirst();
+        }
+
         return path;
     }
 
     /**
-     * Check line-of-sight between two world-coordinate points using
-     * GeoEngine.moveCheck. Returns true if movement is possible.
+     * Get a cached geo block for the given cell. Blocks don't change during
+     * pathfinding, so this avoids repeated GeoEngine.getBlock() lookups.
      */
-    private static boolean hasLineOfSight(Location from, Location to)
+    private ABlock cachedBlock(int gx, int gy)
     {
-        Location result = GeoEngine.getInstance().moveCheck(
-                from.getX(), from.getY(), from.getZ(),
-                to.getX(), to.getY(), to.getZ());
-        // If moveCheck reaches the target (or very close), LOS is clear
-        int dx = Math.abs(result.getX() - to.getX());
-        int dy = Math.abs(result.getY() - to.getY());
-        return (dx <= 16 && dy <= 16);
+        long key = ((long) gx << 16) | (gy & 0xFFFFL);
+        ABlock block = _blockCache.get(key);
+        if (block == null)
+        {
+            block = GeoEngine.getInstance().getBlock(gx, gy);
+            _blockCache.put(key, block);
+        }
+        return block;
+    }
+
+    /**
+     * Get a cached NSWE for a cell at a given height. Avoids repeated
+     * getHeightBelow + getNsweBelow calls for the same cell.
+     */
+    private byte cachedNswe(int gx, int gy, int worldZ)
+    {
+        // Key packs geoX, geoY, and worldZ into a single long
+        long key = ((long) gx << 32) | ((long) gy << 16) | (worldZ & 0xFFFFL);
+        Byte cached = _nsweCache.get(key);
+        if (cached != null)
+            return cached;
+
+        ABlock block = cachedBlock(gx, gy);
+        if (!block.hasGeoPos())
+        {
+            _nsweCache.put(key, GeoStructure.CELL_FLAG_NONE);
+            return GeoStructure.CELL_FLAG_NONE;
+        }
+        short h = block.getHeightBelow(gx, gy, worldZ);
+        byte nswe = block.getNsweBelow(gx, gy, h);
+        _nsweCache.put(key, nswe);
+        return nswe;
+    }
+
+    /**
+     * Get a cached floor height for a cell at a given Z.
+     * Also warms _nsweCache to avoid a redundant lookup for the same cell.
+     */
+    private short cachedHeight(int gx, int gy, int worldZ)
+    {
+        ABlock block = cachedBlock(gx, gy);
+        if (!block.hasGeoPos())
+            return (short) worldZ;
+        short h = block.getHeightBelow(gx, gy, worldZ);
+        // Warm the NSWE cache for this cell/height to avoid redundant lookup
+        long nsweKey = ((long) gx << 32) | ((long) gy << 16) | (worldZ & 0xFFFFL);
+        if (!_nsweCache.containsKey(nsweKey))
+            _nsweCache.put(nsweKey, block.getNsweBelow(gx, gy, h));
+        return h;
+    }
+
+    /**
+     * Convert direction deltas to NSWE flag bits.
+     */
+    private static byte dirFlag(int dx, int dy)
+    {
+        if (dx == 0 && dy < 0) return GeoStructure.CELL_FLAG_N;  // North
+        if (dx == 0 && dy > 0) return GeoStructure.CELL_FLAG_S;  // South
+        if (dx < 0 && dy == 0) return GeoStructure.CELL_FLAG_W;  // West
+        if (dx > 0 && dy == 0) return GeoStructure.CELL_FLAG_E;  // East
+        // Diagonal — both cardinal flags must be set
+        if (dx < 0 && dy < 0) return (byte) (GeoStructure.CELL_FLAG_W | GeoStructure.CELL_FLAG_N);
+        if (dx > 0 && dy < 0) return (byte) (GeoStructure.CELL_FLAG_E | GeoStructure.CELL_FLAG_N);
+        if (dx < 0 && dy > 0) return (byte) (GeoStructure.CELL_FLAG_W | GeoStructure.CELL_FLAG_S);
+        if (dx > 0 && dy > 0) return (byte) (GeoStructure.CELL_FLAG_E | GeoStructure.CELL_FLAG_S);
+        return 0;
+    }
+
+    /**
+     * Check line-of-sight between two world-coordinate points using a
+     * Bresenham line walk with cached block/NSWE lookups. Much faster than
+     * calling GeoEngine.moveCheck() repeatedly during LOS pruning.
+     *
+     * Returns true if every cell along the line allows movement toward the
+     * next cell and the height difference is within CELL_IGNORE_HEIGHT.
+     */
+    private boolean hasLineOfSight(Location from, Location to)
+    {
+        // Convert to geo cell coordinates (cell center)
+        int fromGX = (from.getX() - L2World.MAP_MIN_X - 8) >> 4;
+        int fromGY = (from.getY() - L2World.MAP_MIN_Y - 8) >> 4;
+        int toGX = (to.getX() - L2World.MAP_MIN_X - 8) >> 4;
+        int toGY = (to.getY() - L2World.MAP_MIN_Y - 8) >> 4;
+
+        // Same cell = always clear
+        if (fromGX == toGX && fromGY == toGY)
+            return true;
+
+        // Bounds check
+        if (fromGX < 0 || fromGX >= GEO_CELLS_MAX || fromGY < 0 || fromGY >= GEO_CELLS_MAX)
+            return false;
+        if (toGX < 0 || toGX >= GEO_CELLS_MAX || toGY < 0 || toGY >= GEO_CELLS_MAX)
+            return false;
+
+        // Starting cell NSWE check
+        int curZ = from.getZ();
+        short curH = cachedHeight(fromGX, fromGY, curZ);
+        byte curNswe = cachedNswe(fromGX, fromGY, curZ);
+        if (curNswe == GeoStructure.CELL_FLAG_NONE)
+            return false;
+
+        // Bresenham line walk
+        int dx = Math.abs(toGX - fromGX);
+        int dy = Math.abs(toGY - fromGY);
+        int sx = fromGX < toGX ? 1 : -1;
+        int sy = fromGY < toGY ? 1 : -1;
+        int err = dx - dy;
+
+        int curX = fromGX;
+        int curY = fromGY;
+
+        while (curX != toGX || curY != toGY)
+        {
+            // Compute next cell
+            int e2 = 2 * err;
+            int nextX = curX;
+            int nextY = curY;
+            if (e2 > -dy)
+            {
+                err -= dy;
+                nextX += sx;
+            }
+            if (e2 < dx)
+            {
+                err += dx;
+                nextY += sy;
+            }
+
+            // Determine required direction flag
+            byte dir = dirFlag(nextX - curX, nextY - curY);
+            if (dir == 0)
+                return false;
+
+            // Check current cell allows this movement
+            if ((curNswe & dir) == 0)
+                return false;
+
+            // Diagonal: verify intermediate cells allow the corner cut
+            // (matches addCornerNode logic in A* expansion)
+            if (nextX != curX && nextY != curY)
+            {
+                byte nsweSideX = cachedNswe(nextX, curY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
+                byte nsweSideY = cachedNswe(curX, nextY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
+                byte sideDirX = dirFlag(nextX - curX, 0);
+                byte sideDirY = dirFlag(0, nextY - curY);
+                if ((nsweSideX & sideDirX) == 0 || (nsweSideY & sideDirY) == 0)
+                    return false;
+            }
+
+            // Get next cell info
+            if (nextX < 0 || nextX >= GEO_CELLS_MAX || nextY < 0 || nextY >= GEO_CELLS_MAX)
+                return false;
+
+            short nextH = cachedHeight(nextX, nextY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
+            byte nextNswe = cachedNswe(nextX, nextY, curH + GeoStructure.CELL_IGNORE_HEIGHT);
+
+            // Check height difference — mirror A* expansion tolerance
+            if (Math.abs(nextH - curH) > GeoStructure.CELL_IGNORE_HEIGHT)
+                return false;
+
+            // Advance
+            curX = nextX;
+            curY = nextY;
+            curH = nextH;
+            curNswe = nextNswe;
+        }
+
+        return true;
     }
 }

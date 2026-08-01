@@ -499,6 +499,10 @@ public final class L2PcInstance extends L2PlayableInstance
 
 	private Point3D _lastServerPosition = new Point3D(0, 0, 0);
 
+	// Volatile: ValidatePosition packets may be handled by concurrent threads
+	// (the server runs packet handlers on virtual threads).
+	private volatile long _lastValidateTime = 0;
+
 	private long _fallingTimestamp = 0;
 
 	private static final long FALLING_VALIDATION_DELAY = 1000;
@@ -12665,6 +12669,16 @@ public final class L2PcInstance extends L2PlayableInstance
 		revalidateZone(false);
 
 		return (distFraction > 1);
+	}
+
+	public long getLastValidateTime()
+	{
+		return _lastValidateTime;
+	}
+
+	public void setLastValidateTime(long time)
+	{
+		_lastValidateTime = time;
 	}
 
 	public void setLastClientPosition(int x, int y, int z)

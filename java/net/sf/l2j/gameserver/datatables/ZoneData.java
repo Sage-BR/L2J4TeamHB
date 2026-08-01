@@ -100,18 +100,14 @@ public class ZoneData
 
 	private final void load()
 	{
-		java.sql.Connection con = null;
 		int zoneCount = 0;
 
 		// Get the world regions
 		L2WorldRegion[][] worldRegions = L2World.getInstance().getAllWorldRegions();
 
 		// Load the zone xml
-		try
+		try (java.sql.Connection con = L2DatabaseFactory.getInstance().getConnection())
 		{
-			// Get a sql connection here
-			con = L2DatabaseFactory.getInstance().getConnection();
-
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
@@ -443,16 +439,6 @@ public class ZoneData
 		{
 			_log.log(Level.SEVERE, "Error while loading zones.", e);
 			return;
-		}
-		finally
-		{
-			try
-			{
-				con.close();
-			}
-			catch (Exception e)
-			{
-			}
 		}
 
 		GrandBossManager.getInstance().initZones();
