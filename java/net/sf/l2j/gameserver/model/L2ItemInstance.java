@@ -549,6 +549,17 @@ public final class L2ItemInstance extends L2Object
 	}
 
 	/**
+	 * Returns the ID used to display the item on the client (item template's
+	 * displayId, or the real ID if none is defined).
+	 *
+	 * @return int
+	 */
+	public int getDisplayId()
+	{
+		return _item.getDisplayId();
+	}
+
+	/**
 	 * Returns true if item is an EtcItem
 	 *
 	 * @return boolean

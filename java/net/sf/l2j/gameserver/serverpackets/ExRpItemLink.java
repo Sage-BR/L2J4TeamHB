@@ -48,7 +48,7 @@ public final class ExRpItemLink extends L2GameServerPacket
 		writeH(0x6c);
 		// guessing xD
 		writeD(_item.getObjectId());
-		writeD(_item.getItemId());
+		writeD(_item.getDisplayId());
 		writeD(_item.getCount());
 		writeH(_item.getItem().getType2());
 		writeD(_item.getItem().getBodyPart());

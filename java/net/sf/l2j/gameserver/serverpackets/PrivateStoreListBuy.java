@@ -58,7 +58,7 @@ public class PrivateStoreListBuy extends L2GameServerPacket
 		for (TradeList.TradeItem item : _items)
 		{
 			writeD(item.getObjectId());
-			writeD(item.getItem().getItemId());
+			writeD(item.getDisplayId());
 			writeH(item.getEnchant());
 			writeD(item.getCount()); // give max possible sell amount
 

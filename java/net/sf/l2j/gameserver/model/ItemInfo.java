@@ -204,6 +204,17 @@ public class ItemInfo
 		return _item;
 	}
 
+	/**
+	 * Returns the ID used to display the item on the client (item template's
+	 * displayId, or the real ID if none is defined).
+	 *
+	 * @return int
+	 */
+	public int getDisplayId()
+	{
+		return _item.getDisplayId();
+	}
+
 	public int getEnchant()
 	{
 		return _enchant;

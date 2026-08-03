@@ -17,6 +17,8 @@ package net.sf.l2j.gameserver.clientpackets;
 import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import Guard.hwidmanager.HWIDManager;
@@ -41,6 +43,7 @@ import net.sf.l2j.gameserver.instancemanager.PetitionManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeRewardManager;
 import net.sf.l2j.gameserver.instancemanager.TransformationManager;
+import net.sf.l2j.gameserver.instancemanager.VipManager;
 import net.sf.l2j.gameserver.model.L2Character;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2Effect;
@@ -216,6 +219,8 @@ public class EnterWorld extends L2GameClientPacket
 			activeChar.setHero(true);
 		}
 
+		activeChar.restoreVipStatus();
+
 		setPledgeClass(activeChar);
 
 		activeChar.sendPacket(new UserInfo(activeChar));
@@ -256,6 +261,34 @@ public class EnterWorld extends L2GameClientPacket
 		}
 
 		activeChar.spawnMe(activeChar.getX(), activeChar.getY(), activeChar.getZ());
+
+		if (Config.START_VIP)
+		{
+			// Check if it's really the character's first login (lvl 1 and 0 exp)
+			if (activeChar.getLevel() == 1 && activeChar.getExp() == 0)
+			{
+				// Did it ever receive a VIP before?
+				if (!VipManager.getInstance().hasVipPrivileges(activeChar.getObjectId())
+				        && !VipManager.getInstance().hasEverReceivedVip(activeChar.getObjectId()))
+				{
+					long duration = System.currentTimeMillis() + (24 * 60 * 60 * 1000); // 24 hours
+
+					VipManager.getInstance().addVip(activeChar.getObjectId(), duration);
+					VipManager.getInstance().markVipReceived(activeChar.getObjectId());
+
+					// Format the expiration date
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+					String expireDate = sdf.format(new Date(duration));
+
+					// Player messages
+					activeChar.sendMessage("Congratulations! You've received 24 hours of free VIP.");
+					activeChar.sendMessage("Your VIP will expire on: " + expireDate);
+
+					// Console log
+					_log.info("START_VIP: Player " + activeChar.getName() + " (objId: " + activeChar.getObjectId() + ") recebeu 24h de VIP gratuito. Expira em: " + expireDate);
+				}
+			}
+		}
 
 		if (L2Event.active
 		        && L2Event.connectionLossData.containsKey(activeChar.getName())

@@ -80,6 +80,7 @@ import net.sf.l2j.gameserver.instancemanager.FortSiegeManager;
 import net.sf.l2j.gameserver.instancemanager.ItemsOnGroundManager;
 import net.sf.l2j.gameserver.instancemanager.QuestManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
+import net.sf.l2j.gameserver.instancemanager.VipManager;
 import net.sf.l2j.gameserver.model.BlockList;
 import net.sf.l2j.gameserver.model.FishData;
 import net.sf.l2j.gameserver.model.Inventory;
@@ -245,9 +246,9 @@ public final class L2PcInstance extends L2PlayableInstance
 	// Character Character SQL String Definitions:
 	private static final String INSERT_CHARACTER = "INSERT INTO characters (account_name,charId,char_name,level,maxHp,curHp,maxCp,curCp,maxMp,curMp,face,hairStyle,hairColor,sex,exp,sp,karma,pvpkills,pkkills,clanid,race,classid,deletetime,cancraft,title,accesslevel,online,isin7sdungeon,clan_privs,wantspeace,base_class,newbie,nobless,power_grade,last_recom_date) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-	private static final String UPDATE_CHARACTER = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,pvpkills=?,pkkills=?,rec_have=?,rec_left=?,clanid=?,race=?,classid=?,deletetime=?,title=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,in_jail=?,jail_timer=?,newbie=?,nobless=?,power_grade=?,subpledge=?,last_recom_date=?,lvl_joined_academy=?,apprentice=?,sponsor=?,varka_ketra_ally=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=? WHERE charId=?";
+	private static final String UPDATE_CHARACTER = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,pvpkills=?,pkkills=?,rec_have=?,rec_left=?,clanid=?,race=?,classid=?,deletetime=?,title=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,in_jail=?,jail_timer=?,newbie=?,nobless=?,power_grade=?,subpledge=?,last_recom_date=?,lvl_joined_academy=?,apprentice=?,sponsor=?,varka_ketra_ally=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=?,color_name=?,color_title=? WHERE charId=?";
 
-	private static final String RESTORE_CHARACTER = "SELECT account_name, charId, char_name, level, maxHp, curHp, maxCp, curCp, maxMp, curMp, face, hairStyle, hairColor, sex, heading, x, y, z, exp, expBeforeDeath, sp, karma, pvpkills, pkkills, clanid, race, classid, deletetime, cancraft, title, rec_have, rec_left, accesslevel, online, char_slot, lastAccess, clan_privs, wantspeace, base_class, onlinetime, isin7sdungeon, in_jail, jail_timer, newbie, nobless, power_grade, subpledge, last_recom_date, lvl_joined_academy, apprentice, sponsor, varka_ketra_ally,clan_join_expiry_time,clan_create_expiry_time,death_penalty_level FROM characters WHERE charId=?";
+	private static final String RESTORE_CHARACTER = "SELECT account_name, charId, char_name, level, maxHp, curHp, maxCp, curCp, maxMp, curMp, face, hairStyle, hairColor, sex, heading, x, y, z, exp, expBeforeDeath, sp, karma, pvpkills, pkkills, clanid, race, classid, deletetime, cancraft, title, rec_have, rec_left, accesslevel, online, char_slot, lastAccess, clan_privs, wantspeace, base_class, onlinetime, isin7sdungeon, in_jail, jail_timer, newbie, nobless, power_grade, subpledge, last_recom_date, lvl_joined_academy, apprentice, sponsor, varka_ketra_ally,clan_join_expiry_time,clan_create_expiry_time,death_penalty_level,color_name,color_title FROM characters WHERE charId=?";
 
 	// Character Subclass SQL String Definitions:
 	private static final String RESTORE_CHAR_SUBCLASSES = "SELECT class_id,exp,sp,level,class_index FROM character_subclasses WHERE charId=? ORDER BY class_index ASC";
@@ -560,6 +561,8 @@ public final class L2PcInstance extends L2PlayableInstance
 	private boolean _noble = false;
 
 	private boolean _hero = false;
+
+	private boolean _isVip = false;
 
 	/**
 	 * The L2FolkInstance corresponding to the last Folk wich one the player
@@ -2785,6 +2788,12 @@ public final class L2PcInstance extends L2PlayableInstance
 		if (isHero())
 		{
 			setHero(true);
+		}
+
+		// Add Vip skill
+		if (isVip() || VipManager.getInstance().hasVipPrivileges(getObjectId()))
+		{
+			setVip(true);
 		}
 
 		// Add clan skills
@@ -8052,6 +8061,18 @@ public final class L2PcInstance extends L2PlayableInstance
 
 				player.setDeathPenaltyBuffLevel(rset.getInt("death_penalty_level"));
 
+				String colorName = rset.getString("color_name");
+				if (colorName != null && !colorName.isEmpty())
+				{
+					player.getAppearance().setNameColor(Integer.decode("0x" + colorName));
+				}
+
+				String colorTitle = rset.getString("color_title");
+				if (colorTitle != null && !colorTitle.isEmpty())
+				{
+					player.getAppearance().setTitleColor(Integer.decode("0x" + colorTitle));
+				}
+
 				// Add the L2PcInstance object in _allObjects
 				// L2World.getInstance().storeObject(player);
 
@@ -8408,7 +8429,9 @@ public final class L2PcInstance extends L2PlayableInstance
 			statement.setLong(47, snapshot.clanCreateExpiryTime);
 			statement.setString(48, snapshot.name);
 			statement.setLong(49, snapshot.deathPenaltyBuffLevel);
-			statement.setInt(50, snapshot.objectId);
+			statement.setString(50, snapshot.colorName);
+			statement.setString(51, snapshot.colorTitle);
+			statement.setInt(52, snapshot.objectId);
 
 			statement.execute();
 			statement.close();
@@ -8635,7 +8658,7 @@ public final class L2PcInstance extends L2PlayableInstance
 		int y = _observerMode ? _obsY : getY();
 		int z = _observerMode ? _obsZ : getZ();
 
-		return new StoreBaseSnapshot(level, getMaxHp(), getCurrentHp(), getMaxCp(), getCurrentCp(), getMaxMp(), getCurrentMp(), getAppearance().getFace(), getAppearance().getHairStyle(), getAppearance().getHairColor(), getHeading(), x, y, z, exp, getExpBeforeDeath(), sp, getKarma(), getPvpKills(), getPkKills(), getRecomHave(), getRecomLeft(), getClanId(), getRace().ordinal(), getClassId().getId(), getDeleteTimer(), getTitle(), getAccessLevel().getLevel(), isOnline(), isIn7sDungeon() ? 1 : 0, getClanPrivileges(), getWantsPeace(), getBaseClass(), totalOnlineTime, isInJail() ? 1 : 0, getJailTimer(), getNewbie(), isNoble() ? 1 : 0, getPowerGrade(), getPledgeType(), getLastRecomUpdate(), getLvlJoinedAcademy(), getApprentice(), getSponsor(), getAllianceWithVarkaKetra(), getClanJoinExpiryTime(), getClanCreateExpiryTime(), getName(), getDeathPenaltyBuffLevel(), getObjectId());
+		return new StoreBaseSnapshot(level, getMaxHp(), getCurrentHp(), getMaxCp(), getCurrentCp(), getMaxMp(), getCurrentMp(), getAppearance().getFace(), getAppearance().getHairStyle(), getAppearance().getHairColor(), getHeading(), x, y, z, exp, getExpBeforeDeath(), sp, getKarma(), getPvpKills(), getPkKills(), getRecomHave(), getRecomLeft(), getClanId(), getRace().ordinal(), getClassId().getId(), getDeleteTimer(), getTitle(), getAccessLevel().getLevel(), isOnline(), isIn7sDungeon() ? 1 : 0, getClanPrivileges(), getWantsPeace(), getBaseClass(), totalOnlineTime, isInJail() ? 1 : 0, getJailTimer(), getNewbie(), isNoble() ? 1 : 0, getPowerGrade(), getPledgeType(), getLastRecomUpdate(), getLvlJoinedAcademy(), getApprentice(), getSponsor(), getAllianceWithVarkaKetra(), getClanJoinExpiryTime(), getClanCreateExpiryTime(), getName(), getDeathPenaltyBuffLevel(), Integer.toHexString(getAppearance().getNameColor()), Integer.toHexString(getAppearance().getTitleColor()), getObjectId());
 	}
 
 	private synchronized StoreSubSnapshot captureSubSnapshot()
@@ -8810,6 +8833,10 @@ public final class L2PcInstance extends L2PlayableInstance
 
 		private final long deathPenaltyBuffLevel;
 
+		private final String colorName;
+
+		private final String colorTitle;
+
 		private final int objectId;
 
 		private StoreBaseSnapshot(int pLevel, int pMaxHp, double pCurrentHp,
@@ -8825,7 +8852,8 @@ public final class L2PcInstance extends L2PlayableInstance
 		        int pPledgeType, long pLastRecomUpdate, int pLvlJoinedAcademy,
 		        long pApprentice, long pSponsor, int pAllianceWithVarkaKetra,
 		        long pClanJoinExpiryTime, long pClanCreateExpiryTime,
-		        String pName, long pDeathPenaltyBuffLevel, int pObjectId)
+		        String pName, long pDeathPenaltyBuffLevel, String pColorName,
+		        String pColorTitle, int pObjectId)
 		{
 			this.level = pLevel;
 			this.maxHp = pMaxHp;
@@ -8876,6 +8904,8 @@ public final class L2PcInstance extends L2PlayableInstance
 			this.clanCreateExpiryTime = pClanCreateExpiryTime;
 			this.name = pName;
 			this.deathPenaltyBuffLevel = pDeathPenaltyBuffLevel;
+			this.colorName = pColorName;
+			this.colorTitle = pColorTitle;
 			this.objectId = pObjectId;
 		}
 	}
@@ -11418,6 +11448,66 @@ public final class L2PcInstance extends L2PlayableInstance
 		_hero = hero;
 
 		sendSkillList();
+	}
+
+	public boolean isVip()
+	{
+		return _isVip;
+	}
+
+	public void setVip(final boolean vip)
+	{
+		_isVip = vip;
+		if (_isVip)
+		{
+			getAppearance().setNameColor(Config.VIP_NAME_COLOR);
+		}
+		else
+		{
+			getAppearance().setNameColor(_accessLevel.getNameColor());
+		}
+	}
+
+	public void restoreVipStatus()
+	{
+		int Vip = 0;
+		Connection con = null;
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement = con.prepareStatement("SELECT vip FROM characters_vip_eterno WHERE obj_Id = ?");
+			statement.setInt(1, getObjectId());
+
+			ResultSet rset = statement.executeQuery();
+
+			while (rset.next())
+			{
+				Vip = rset.getInt("vip");
+			}
+			rset.close();
+			statement.close();
+			statement = null;
+			rset = null;
+		}
+		catch (Exception e)
+		{
+			_log.warning("Error: Vip ETERNO: " + e);
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
+		}
+
+		if (Vip > 0)
+		{
+			setVip(true);
+		}
 	}
 
 	public void setIsInOlympiadMode(boolean b)

@@ -75,6 +75,7 @@ import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTeleport;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTest;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTvTEvent;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminUnblockIp;
+import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminVip;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminZone;
 
 /**
@@ -159,6 +160,7 @@ public class AdminCommandHandler
 		registerAdminCommandHandler(new AdminGeoEditor());
 		registerAdminCommandHandler(new AdminManor());
 		registerAdminCommandHandler(new AdminTvTEvent());
+		registerAdminCommandHandler(new AdminVip());
 		_log.config("AdminCommandHandler: Loaded " + _datatable.size()
 		        + " handlers.");
 	}

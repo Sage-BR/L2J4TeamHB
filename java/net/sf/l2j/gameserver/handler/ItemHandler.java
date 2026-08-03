@@ -51,6 +51,11 @@ import net.sf.l2j.gameserver.handler.itemhandlers.SoulShots;
 import net.sf.l2j.gameserver.handler.itemhandlers.SpecialXMas;
 import net.sf.l2j.gameserver.handler.itemhandlers.SpiritShot;
 import net.sf.l2j.gameserver.handler.itemhandlers.SummonItems;
+import net.sf.l2j.gameserver.handler.itemhandlers.Vip24h;
+import net.sf.l2j.gameserver.handler.itemhandlers.Vip7days;
+import net.sf.l2j.gameserver.handler.itemhandlers.Vip15days;
+import net.sf.l2j.gameserver.handler.itemhandlers.Vip30days;
+import net.sf.l2j.gameserver.handler.itemhandlers.VipEterno;
 
 /**
  * This class manages handlers of items
@@ -128,6 +133,11 @@ public class ItemHandler
 		registerItemHandler(new SpecialXMas());
 		registerItemHandler(new SummonItems());
 		registerItemHandler(new BeastSpice());
+		registerItemHandler(new Vip24h());
+		registerItemHandler(new Vip7days());
+		registerItemHandler(new Vip15days());
+		registerItemHandler(new Vip30days());
+		registerItemHandler(new VipEterno());
 		_log.config("ItemHandler: Loaded " + _datatable.size() + " handlers.");
 	}
 

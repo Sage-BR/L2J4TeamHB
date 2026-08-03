@@ -156,7 +156,7 @@ public class InventoryUpdate extends L2GameServerPacket
 			                                   // 04-item/questitem/adena
 
 			writeD(item.getObjectId()); // ObjectId
-			writeD(item.getItem().getItemId()); // ItemId
+			writeD(item.getDisplayId()); // ItemId
 			writeD(item.getLocation()); // T1
 			writeD(item.getCount()); // Quantity
 			writeH(item.getItem().getType2()); // Item Type 2 : 00-weapon,

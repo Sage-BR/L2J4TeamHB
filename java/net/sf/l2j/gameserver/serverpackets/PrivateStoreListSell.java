@@ -71,7 +71,7 @@ public class PrivateStoreListSell extends L2GameServerPacket
 		{
 			writeD(item.getItem().getType2());
 			writeD(item.getObjectId());
-			writeD(item.getItem().getItemId());
+			writeD(item.getDisplayId());
 			writeD(item.getCount());
 			writeH(0x00);
 			writeH(item.getEnchant());

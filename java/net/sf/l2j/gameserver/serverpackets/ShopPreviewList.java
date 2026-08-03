@@ -77,7 +77,7 @@ public class ShopPreviewList extends L2GameServerPacket
 			if (item.getTemplate().getCrystalType() <= _expertise
 			        && item.getTemplate().isEquipable())
 			{
-				writeD(item.getItemId());
+				writeD(item.getTemplate().getDisplayId());
 				writeH(item.getTemplate().getType2()); // item type2
 
 				if (item.getTemplate().getType1() != L2Item.TYPE1_ITEM_QUESTITEM_ADENA)

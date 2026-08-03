@@ -55,7 +55,7 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 		writeD(_itemList.length); // inventory items for potential buy
 		for (L2ItemInstance item : _itemList)
 		{
-			writeD(item.getItemId());
+			writeD(item.getDisplayId());
 			writeH(0); // show enchant lvl as 0, as you can't buy enchanted
 			           // weapons
 			writeD(item.getCount());
@@ -79,7 +79,7 @@ public class PrivateStoreManageListBuy extends L2GameServerPacket
 		writeD(_buyList.length); // count for all items already added for buy
 		for (TradeList.TradeItem item : _buyList)
 		{
-			writeD(item.getItem().getItemId());
+			writeD(item.getDisplayId());
 			writeH(0);
 			writeD(item.getCount());
 			writeD(item.getItem().getReferencePrice());

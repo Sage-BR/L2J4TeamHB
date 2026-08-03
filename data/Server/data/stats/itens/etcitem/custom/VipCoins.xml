@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<list>
+<item id='10279' name="Vip 24h">
+  <set name="item_type" val="none"/>
+  <set name="consume_type" val="stackable"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="10"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="false"/>
+  <set name="tradeable" val="true"/>
+  <set name="type1" val="4"/>
+  <set name="type2" val="5"/>
+  <set name="bodypart" val="0"/>
+  <set name="stackable" val="true"/>
+</item>
+<item id='10280' name="Vip 7 days">
+  <set name="item_type" val="none"/>
+  <set name="consume_type" val="stackable"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="10"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="false"/>
+  <set name="tradeable" val="true"/>
+  <set name="type1" val="4"/>
+  <set name="type2" val="5"/>
+  <set name="bodypart" val="0"/>
+  <set name="stackable" val="true"/>
+</item>
+<item id='10281' name="Vip 15 days">
+  <set name="item_type" val="none"/>
+  <set name="consume_type" val="stackable"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="10"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="false"/>
+  <set name="tradeable" val="true"/>
+  <set name="type1" val="4"/>
+  <set name="type2" val="5"/>
+  <set name="bodypart" val="0"/>
+  <set name="stackable" val="true"/>
+</item>
+<item id='10282' name="Vip 30 days">
+  <set name="item_type" val="none"/>
+  <set name="consume_type" val="stackable"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="10"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="false"/>
+  <set name="tradeable" val="true"/>
+  <set name="type1" val="4"/>
+  <set name="type2" val="5"/>
+  <set name="bodypart" val="0"/>
+  <set name="stackable" val="true"/>
+</item>
+<item id='10283' name="Vip Eterno">
+  <set name="item_type" val="none"/>
+  <set name="consume_type" val="stackable"/>
+  <set name="crystallizable" val="false"/>
+  <set name="weight" val="10"/>
+  <set name="material" val="1"/>
+  <set name="crystal_type" val="0"/>
+  <set name="duration" val="-1"/>
+  <set name="price" val="0"/>
+  <set name="crystal_count" val="0"/>
+  <set name="sellable" val="false"/>
+  <set name="dropable" val="false"/>
+  <set name="destroyable" val="false"/>
+  <set name="tradeable" val="true"/>
+  <set name="type1" val="4"/>
+  <set name="type2" val="5"/>
+  <set name="bodypart" val="0"/>
+  <set name="stackable" val="true"/>
+</item>
+</list>

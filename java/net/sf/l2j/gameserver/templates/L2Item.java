@@ -200,6 +200,8 @@ public abstract class L2Item
 
 	private final int _itemId;
 
+	private final int _displayId;
+
 	private final String _name;
 
 	private final int _type1; // needed for item list (inventory)
@@ -271,6 +273,7 @@ public abstract class L2Item
 	{
 		_type = type;
 		_itemId = set.getInteger("item_id");
+		_displayId = set.getInteger("displayId", _itemId);
 		_name = set.getString("name");
 		_type1 = set.getInteger("type1"); // needed for item list (inventory)
 		_type2 = set.getInteger("type2"); // different lists for armor, weapon,
@@ -320,6 +323,17 @@ public abstract class L2Item
 	public final int getItemId()
 	{
 		return _itemId;
+	}
+
+	/**
+	 * Returns the ID used to display the item on the client. If no displayId
+	 * is defined in the item XML, it equals the real item ID.
+	 *
+	 * @return int
+	 */
+	public final int getDisplayId()
+	{
+		return _displayId;
 	}
 
 	public abstract int getItemMask();

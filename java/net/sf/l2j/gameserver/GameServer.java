@@ -102,6 +102,7 @@ import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
 import net.sf.l2j.gameserver.instancemanager.SiegeRewardManager;
 import net.sf.l2j.gameserver.instancemanager.TransformationManager;
+import net.sf.l2j.gameserver.instancemanager.VipManager;
 import net.sf.l2j.gameserver.model.AutoChatHandler;
 import net.sf.l2j.gameserver.model.AutoSpawnHandler;
 import net.sf.l2j.gameserver.model.L2Manor;
@@ -288,6 +289,7 @@ public class GameServer
 			        QuestManager.getInstance();
 			        TransformationManager.getInstance();
 			        SiegeRewardManager.getInstance();
+			        VipManager.getInstance();
 		        });
 
 		// GeoData (pathfinding now uses geo-grid directly, no pathnode files needed)

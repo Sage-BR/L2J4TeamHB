@@ -1095,6 +1095,38 @@ public final class Config
 
 	public static boolean ANNOUNCE_GRANDBOS_KILL;
 
+	public static boolean VIP_EFFECT;
+
+	public static boolean ENABLE_DROP_VIP;
+
+	public static boolean START_VIP;
+
+	public static int VIP_NAME_COLOR;
+
+	public static double VIP_XP_SP_RATES;
+
+	public static String DROP_ITEM_VIP;
+
+	public static List<Integer> DROP_LIST_VIP = new ArrayList<>();
+
+	public static double RATE_DROP_VIP;
+
+	public static int VIP_30_DAYS_PRICE;
+
+	public static int VIP_60_DAYS_PRICE;
+
+	public static int VIP_90_DAYS_PRICE;
+
+	public static int VIP_ETERNAL_PRICE;
+
+	public static boolean COLOR_WITH_ITEM;
+
+	public static int COLOR_ITEM_ID;
+
+	public static int COLOR_NAME_ITEM_AMOUNT;
+
+	public static int COLOR_TITLE_ITEM_AMOUNT;
+
 	public static int ORFEN_RESP_FIRST;
 
 	public static int ORFEN_RESP_SECOND;
@@ -2410,6 +2442,31 @@ public final class Config
 				L2JMOD_ENABLE_WAREHOUSESORTING_CLAN = Boolean.valueOf(L2JModSettings.getProperty("EnableWarehouseSortingClan", "False"));
 				L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE = Boolean.valueOf(L2JModSettings.getProperty("EnableWarehouseSortingPrivate", "False"));
 				L2JMOD_ENABLE_WAREHOUSESORTING_FREIGHT = Boolean.valueOf(L2JModSettings.getProperty("EnableWarehouseSortingFreight", "False"));
+
+				/** Vip System */
+				VIP_EFFECT = Boolean.parseBoolean(L2JModSettings.getProperty("Vip_Effect", "False"));
+				START_VIP = Boolean.parseBoolean(L2JModSettings.getProperty("Start_vip_24hrs", "True"));
+				VIP_NAME_COLOR = Integer.decode("0x" + L2JModSettings.getProperty("Vip_NameColor", "FFFF00"));
+				VIP_XP_SP_RATES = Double.parseDouble(L2JModSettings.getProperty("VipExp/SpRates", "1.5"));
+				ENABLE_DROP_VIP = Boolean.parseBoolean(L2JModSettings.getProperty("EnableDropVIP", "False"));
+				DROP_ITEM_VIP = L2JModSettings.getProperty("ListDropVIPItens", "");
+				DROP_LIST_VIP = new ArrayList<>();
+				for (String itemId : DROP_ITEM_VIP.split(","))
+				{
+					if (!itemId.isEmpty())
+					{
+						DROP_LIST_VIP.add(Integer.parseInt(itemId));
+					}
+				}
+				RATE_DROP_VIP = Double.parseDouble(L2JModSettings.getProperty("RateDropVIP", "1.5"));
+				VIP_30_DAYS_PRICE = Integer.parseInt(L2JModSettings.getProperty("Vip_30_Days_Price", "30"));
+				VIP_60_DAYS_PRICE = Integer.parseInt(L2JModSettings.getProperty("Vip_60_Days_Price", "60"));
+				VIP_90_DAYS_PRICE = Integer.parseInt(L2JModSettings.getProperty("Vip_90_Days_Price", "90"));
+				VIP_ETERNAL_PRICE = Integer.parseInt(L2JModSettings.getProperty("Vip_Eternal_Price", "120"));
+				COLOR_WITH_ITEM = Boolean.parseBoolean(L2JModSettings.getProperty("ColorWithItem", "true"));
+				COLOR_ITEM_ID = Integer.parseInt(L2JModSettings.getProperty("ColorItemID", "9325"));
+				COLOR_NAME_ITEM_AMOUNT = Integer.parseInt(L2JModSettings.getProperty("ColorNameItemAmount", "100"));
+				COLOR_TITLE_ITEM_AMOUNT = Integer.parseInt(L2JModSettings.getProperty("ColorTitleItemAmount", "100"));
 
 				if (TVT_EVENT_PARTICIPATION_NPC_ID == 0)
 				{

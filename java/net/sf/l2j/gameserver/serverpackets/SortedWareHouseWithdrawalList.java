@@ -896,7 +896,7 @@ public class SortedWareHouseWithdrawalList extends L2GameServerPacket
 			writeH(item.getItem().getType1()); // item type1 //unconfirmed,
 			                                   // works
 			writeD(item.getObjectId());
-			writeD(item.getItemId()); // unconfirmed, works
+			writeD(item.getItem().getDisplayId()); // unconfirmed, works
 			writeD(item.getCount()); // unconfirmed, works
 			writeH(item.getItem().getType2()); // item type2 //unconfirmed,
 			                                   // works

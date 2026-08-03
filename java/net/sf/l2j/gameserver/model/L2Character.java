@@ -4135,6 +4135,10 @@ public abstract class L2Character extends L2Object
 		{
 			ae |= ABNORMAL_EFFECT_MUTED;
 		}
+		if (this instanceof L2PcInstance && ((L2PcInstance) this).isVip() && Config.VIP_EFFECT)
+		{
+			ae |= ABNORMAL_EFFECT_IMPRISIONING_1;
+		}
 		return ae;
 	}
 

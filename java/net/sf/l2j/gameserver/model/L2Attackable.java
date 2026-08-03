@@ -902,6 +902,12 @@ public class L2Attackable extends L2NpcInstance
 								sp *= Config.L2JMOD_CHAMPION_REWARDS;
 							}
 
+							if (attacker instanceof L2PcInstance player && player.isVip())
+							{
+								exp *= Config.VIP_XP_SP_RATES;
+								sp *= Config.VIP_XP_SP_RATES;
+							}
+
 							// Check for an over-hit enabled strike
 							if (attacker instanceof L2PcInstance)
 							{
@@ -1472,7 +1478,15 @@ public class L2Attackable extends L2NpcInstance
 		}
 
 		// Applies Drop rates
-		if (drop.getItemId() == 57)
+		if (Config.DROP_LIST_VIP.contains(drop.getItemId()) && lastAttacker.isVip() && Config.ENABLE_DROP_VIP)
+		{
+			dropChance *= Config.RATE_DROP_VIP;
+		}
+		else if (drop.getItemId() == 57 && lastAttacker.isVip() && Config.ENABLE_DROP_VIP)
+		{
+			dropChance *= (Config.RATE_DROP_ADENA * Config.RATE_DROP_VIP);
+		}
+		else if (drop.getItemId() == 57)
 		{
 			dropChance *= Config.RATE_DROP_ADENA;
 		}
@@ -1628,7 +1642,6 @@ public class L2Attackable extends L2NpcInstance
 
 		// Applies Drop rates
 		categoryDropChance *= isRaid() ? Config.RATE_DROP_ITEMS_BY_RAID : Config.RATE_DROP_ITEMS;
-		if (Config.L2JMOD_CHAMPION_ENABLE && isChampion())
 		{
 			categoryDropChance *= Config.L2JMOD_CHAMPION_REWARDS;
 		}
@@ -1672,7 +1685,15 @@ public class L2Attackable extends L2NpcInstance
 			// if smaller.
 
 			int dropChance = drop.getChance();
-			if (drop.getItemId() == 57)
+			if (Config.DROP_LIST_VIP.contains(drop.getItemId()) && lastAttacker.isVip() && Config.ENABLE_DROP_VIP)
+			{
+				dropChance *= Config.RATE_DROP_VIP;
+			}
+			else if (drop.getItemId() == 57 && lastAttacker.isVip() && Config.ENABLE_DROP_VIP)
+			{
+				dropChance *= (Config.RATE_DROP_ADENA * Config.RATE_DROP_VIP);
+			}
+			else if (drop.getItemId() == 57)
 			{
 				dropChance *= Config.RATE_DROP_ADENA;
 			}

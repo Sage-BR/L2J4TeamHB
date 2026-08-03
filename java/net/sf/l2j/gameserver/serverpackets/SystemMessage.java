@@ -144,13 +144,13 @@ public final class SystemMessage extends L2GameServerPacket
 
 	public SystemMessage addItemName(L2ItemInstance item)
 	{
-		return addItemName(item.getItem().getItemId());
+		return addItemName(item.getItem().getDisplayId());
 	}
 
 	public SystemMessage addItemName(L2Item item)
 	{
 		// TODO: template id for items
-		return addItemName(item.getItemId());
+		return addItemName(item.getDisplayId());
 	}
 
 	public SystemMessage addItemName(int id)

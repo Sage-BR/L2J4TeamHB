@@ -61,7 +61,7 @@ public class PetItemList extends L2GameServerPacket
 		{
 			writeH(temp.getItem().getType1()); // item type1
 			writeD(temp.getObjectId());
-			writeD(temp.getItemId());
+			writeD(temp.getDisplayId());
 			writeD(temp.getCount());
 			writeH(temp.getItem().getType2()); // item type2
 			writeH(0xff); // ?

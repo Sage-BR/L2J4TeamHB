@@ -123,6 +123,11 @@ public class TradeList
 			return _item;
 		}
 
+		public int getDisplayId()
+		{
+			return _item.getDisplayId();
+		}
+
 		public void setEnchant(int enchant)
 		{
 			_enchant = enchant;

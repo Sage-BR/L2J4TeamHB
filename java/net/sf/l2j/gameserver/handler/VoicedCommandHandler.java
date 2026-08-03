@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Banking;
+import net.sf.l2j.gameserver.handler.voicedcommandhandlers.VoicedColor;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Wedding;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.stats;
 
@@ -49,6 +50,7 @@ public class VoicedCommandHandler
 	{
 		_datatable = new ConcurrentHashMap<>();
 		registerVoicedCommandHandler(new stats());
+		registerVoicedCommandHandler(new VoicedColor());
 		if (Config.L2JMOD_ALLOW_WEDDING)
 		{
 			registerVoicedCommandHandler(new Wedding());
