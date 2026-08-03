@@ -17,6 +17,7 @@ package net.sf.l2j.gameserver.handler.itemhandlers;
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.handler.IItemHandler;
+import net.sf.l2j.gameserver.instancemanager.VipManager;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminVip;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
 import net.sf.l2j.gameserver.model.L2World;
@@ -50,9 +51,9 @@ public class VipEterno implements IItemHandler
 			return;
 		}
 
-		if (activeChar.isVip())
+		if (VipManager.getInstance().hasEternalVip(activeChar.getObjectId()))
 		{
-			activeChar.sendMessage("SYS: Voce ja esta com status Vip.");
+			activeChar.sendMessage("SYS: Voce ja possui Vip Eterno.");
 			return;
 		}
 

@@ -370,6 +370,156 @@ public class GeoEngine extends GeoData
 		                - L2World.MAP_MIN_Y) >> 4, tz);
 	}
 
+	/**
+	 * LOS check that allows attacks through thin walls (≤2 geo cells).
+	 * Used for melee attacks: a column or narrow fence shouldn't block the
+	 * attack if the obstacle is only 1-2 cells thick.
+	 *
+	 * Walks the Bresenham line and counts consecutive blocked cells.
+	 * If the longest blocked run is ≤ THIN_WALL_MAX_CELLS, the LOS
+	 * is considered clear.
+	 */
+	private static final int THIN_WALL_MAX_CELLS = 2;
+
+	@Override
+	public boolean canSeeThruThinWall(L2Object cha, L2Object target)
+	{
+		// Normal LOS first — fast path for clear lines
+		if (canSeeTarget(cha, target))
+		    return true;
+
+		// Doors always block
+		if (DoorTable.getInstance().checkIfDoorsBetween(
+		        cha.getX(), cha.getY(), cha.getZ(),
+		        target.getX(), target.getY(), target.getZ()))
+		    return false;
+
+		int z1 = cha.getZ() + 45;
+		int z2 = target.getZ() + 45;
+		if (cha.getZ() >= target.getZ())
+		    return canSeeThruThinWall(
+		            (cha.getX() - L2World.MAP_MIN_X) >> 4,
+		            (cha.getY() - L2World.MAP_MIN_Y) >> 4, z1,
+		            (target.getX() - L2World.MAP_MIN_X) >> 4,
+		            (target.getY() - L2World.MAP_MIN_Y) >> 4, z2);
+		else
+		    return canSeeThruThinWall(
+		            (target.getX() - L2World.MAP_MIN_X) >> 4,
+		            (target.getY() - L2World.MAP_MIN_Y) >> 4, z2,
+		            (cha.getX() - L2World.MAP_MIN_X) >> 4,
+		            (cha.getY() - L2World.MAP_MIN_Y) >> 4, z1);
+	}
+
+	/**
+	 * Core thin-wall LOS walk. Returns true if the longest consecutive
+	 * blocked run along the Bresenham line is ≤ THIN_WALL_MAX_CELLS.
+	 */
+	private static boolean canSeeThruThinWall(int x, int y, double z,
+	        int tx, int ty, int tz)
+	{
+		int dx = (tx - x);
+		int dy = (ty - y);
+		final double dz = (tz - z);
+		final int distance2 = dx * dx + dy * dy;
+
+		if (distance2 > 90000 || distance2 < 82)
+		    return false;
+
+		final int inc_x = sign(dx);
+		final int inc_y = sign(dy);
+		dx = Math.abs(dx);
+		dy = Math.abs(dy);
+		final double inc_z_directionx = dz * dx / (distance2);
+		final double inc_z_directiony = dz * dy / (distance2);
+
+		int next_x = x;
+		int next_y = y;
+
+		int maxBlockedRun = 0;
+		int currentBlockedRun = 0;
+
+		if (dx >= dy)
+		{
+		    int delta_A = 2 * dy;
+		    int d = delta_A - dx;
+		    int delta_B = delta_A - 2 * dx;
+
+		    for (int i = 0; i < dx; i++)
+		    {
+		        x = next_x;
+		        y = next_y;
+		        if (d > 0)
+		        {
+		            d += delta_B;
+		            next_x += inc_x;
+		            z += inc_z_directionx;
+		            next_y += inc_y;
+		            z += inc_z_directiony;
+		        }
+		        else
+		        {
+		            d += delta_A;
+		            next_x += inc_x;
+		            z += inc_z_directionx;
+		        }
+		        boolean blocked = !nLOS(x, y, (int) z, inc_x, inc_y,
+		                inc_z_directionx + inc_z_directiony, tz, false);
+		        if (blocked)
+		        {
+		            currentBlockedRun++;
+		            if (currentBlockedRun > maxBlockedRun)
+		                maxBlockedRun = currentBlockedRun;
+		            if (maxBlockedRun > THIN_WALL_MAX_CELLS)
+		                return false; // wall too thick, bail early
+		        }
+		        else
+		        {
+		            currentBlockedRun = 0;
+		        }
+		    }
+		}
+		else
+		{
+		    int delta_A = 2 * dx;
+		    int d = delta_A - dy;
+		    int delta_B = delta_A - 2 * dy;
+		    for (int i = 0; i < dy; i++)
+		    {
+		        x = next_x;
+		        y = next_y;
+		        if (d > 0)
+		        {
+		            d += delta_B;
+		            next_y += inc_y;
+		            z += inc_z_directiony;
+		            next_x += inc_x;
+		            z += inc_z_directionx;
+		        }
+		        else
+		        {
+		            d += delta_A;
+		            next_y += inc_y;
+		            z += inc_z_directiony;
+		        }
+		        boolean blocked = !nLOS(x, y, (int) z, inc_x, inc_y,
+		                inc_z_directionx + inc_z_directiony, tz, false);
+		        if (blocked)
+		        {
+		            currentBlockedRun++;
+		            if (currentBlockedRun > maxBlockedRun)
+		                maxBlockedRun = currentBlockedRun;
+		            if (maxBlockedRun > THIN_WALL_MAX_CELLS)
+		                return false;
+		        }
+		        else
+		        {
+		            currentBlockedRun = 0;
+		        }
+		    }
+		}
+		return true;
+	}
+
 	@Override
 	public boolean hasGeo(int x, int y)
 	{

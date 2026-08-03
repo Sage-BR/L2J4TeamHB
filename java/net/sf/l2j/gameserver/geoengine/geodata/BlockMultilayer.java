@@ -56,6 +56,14 @@ public class BlockMultilayer extends ABlock
 		return true;
 	}
 
+	/**
+	 * Sentinel height for "no ground / empty layer" in L2J geodata (0xC000
+	 * encoded). Layers at this height are void and must be skipped, otherwise
+	 * actors get snapped far below the terrain and disappear from the known
+	 * list.
+	 */
+	private static final short VOID_HEIGHT = -16384;
+
 	@Override
 	public short getHeightNearest(int geoX, int geoY, int worldZ)
 	{
@@ -68,22 +76,29 @@ public class BlockMultilayer extends ABlock
 			return (short) worldZ;
 		}
 
-		int nearestAddr = addr;
-		int nearestDist = Math.abs(decodeHeight(_geo.getShort(addr) & 0xFFFF)
-		        - worldZ);
+		// Find the nearest non-void layer. Void layers (-16384) are treated as
+		// "no ground": if every layer is void, behave like BlockNull.
+		int nearestAddr = -1;
+		int nearestDist = Integer.MAX_VALUE;
 
-		for (int i = 1; i < layers; i++)
+		for (int i = 0; i < layers; i++)
 		{
 			int layerAddr = addr + i * 2;
-			int dist = Math.abs(decodeHeight(_geo.getShort(layerAddr) & 0xFFFF)
-			        - worldZ);
+			short h = decodeHeight(_geo.getShort(layerAddr) & 0xFFFF);
+			if (h == VOID_HEIGHT)
+			{
+				continue;
+			}
+			int dist = Math.abs(h - worldZ);
 			if (dist < nearestDist)
 			{
 				nearestDist = dist;
 				nearestAddr = layerAddr;
 			}
 		}
-		return decodeHeight(_geo.getShort(nearestAddr) & 0xFFFF);
+
+		return (nearestAddr == -1) ? (short) worldZ
+		        : decodeHeight(_geo.getShort(nearestAddr) & 0xFFFF);
 	}
 
 	@Override

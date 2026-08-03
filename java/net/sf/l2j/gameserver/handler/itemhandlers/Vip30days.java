@@ -51,9 +51,9 @@ public class Vip30days implements IItemHandler
 			return;
 		}
 
-		if (activeChar.isVip())
+		if (VipManager.getInstance().hasEternalVip(activeChar.getObjectId()))
 		{
-			activeChar.sendMessage("SYS: Voce ja esta com status Vip.");
+			activeChar.sendMessage("SYS: Voce ja possui Vip Eterno.");
 			return;
 		}
 

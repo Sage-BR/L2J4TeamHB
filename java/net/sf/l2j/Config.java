@@ -2446,7 +2446,7 @@ public final class Config
 				/** Vip System */
 				VIP_EFFECT = Boolean.parseBoolean(L2JModSettings.getProperty("Vip_Effect", "False"));
 				START_VIP = Boolean.parseBoolean(L2JModSettings.getProperty("Start_vip_24hrs", "True"));
-				VIP_NAME_COLOR = Integer.decode("0x" + L2JModSettings.getProperty("Vip_NameColor", "FFFF00"));
+				VIP_NAME_COLOR = Integer.decode("0x" + L2JModSettings.getProperty("Vip_NameColor", "FFFF00")); // Cyan in BGR
 				VIP_XP_SP_RATES = Double.parseDouble(L2JModSettings.getProperty("VipExp/SpRates", "1.5"));
 				ENABLE_DROP_VIP = Boolean.parseBoolean(L2JModSettings.getProperty("EnableDropVIP", "False"));
 				DROP_ITEM_VIP = L2JModSettings.getProperty("ListDropVIPItens", "");

@@ -226,6 +226,15 @@ public class VipManager
 
 	public void removeVipPrivileges(int objectId)
 	{
+		// If the player has eternal VIP, do not remove privileges or clear color.
+		if (hasEternalVip(objectId))
+		{
+			return;
+		}
+
+		// Always clear color from DB immediately (online or offline)
+		clearNameColorInDb(objectId);
+
 		final L2PcInstance player = L2World.getInstance().getPlayer(objectId);
 		if (player == null)
 		{
@@ -233,6 +242,95 @@ public class VipManager
 		}
 		player.setVip(false);
 		player.broadcastUserInfo();
+	}
+
+	private void clearNameColorInDb(int objectId)
+	{
+		Connection con = null;
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement = con.prepareStatement("UPDATE characters SET color_name = '' WHERE charId = ?");
+			statement.setInt(1, objectId);
+			statement.execute();
+			statement.close();
+		}
+		catch (Exception e)
+		{
+			_log.warning("Exception: VipManager clearNameColorInDb: " + e.getMessage());
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
+		}
+	}
+
+	public boolean hasEternalVip(int objectId)
+	{
+		Connection con = null;
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement = con.prepareStatement("SELECT vip FROM characters_vip_eterno WHERE obj_Id = ?");
+			statement.setInt(1, objectId);
+			ResultSet rs = statement.executeQuery();
+			boolean result = false;
+			if (rs.next())
+			{
+				result = rs.getInt("vip") > 0;
+			}
+			rs.close();
+			statement.close();
+			return result;
+		}
+		catch (Exception e)
+		{
+			_log.warning("Exception: VipManager hasEternalVip: " + e.getMessage());
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		return false;
+	}
+
+	public void updateEternalVipToZero(int objectId)
+	{
+		Connection con = null;
+		try
+		{
+			con = L2DatabaseFactory.getInstance().getConnection();
+			PreparedStatement statement = con.prepareStatement("UPDATE characters_vip_eterno SET vip = 0 WHERE obj_Id = ?");
+			statement.setInt(1, objectId);
+			statement.execute();
+			statement.close();
+		}
+		catch (Exception e)
+		{
+			_log.warning("Exception: VipManager updateEternalVipToZero: " + e.getMessage());
+		}
+		finally
+		{
+			try
+			{
+				con.close();
+			}
+			catch (Exception e)
+			{
+			}
+		}
 	}
 
 	public class VipTask implements Runnable

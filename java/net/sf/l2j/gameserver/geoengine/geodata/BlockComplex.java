@@ -59,13 +59,22 @@ public class BlockComplex extends ABlock
 		return true;
 	}
 
+	/**
+	 * Sentinel height for "no ground / empty cell" in L2J geodata (0xC000
+	 * encoded). Such cells must behave like BlockNull: return the caller's
+	 * worldZ instead of the bogus -16384 height, otherwise actors get snapped
+	 * far below the terrain and disappear from the known list.
+	 */
+	private static final short VOID_HEIGHT = -16384;
+
 	@Override
 	public short getHeightNearest(int geoX, int geoY, int worldZ)
 	{
 		int cellX = geoX % GeoStructure.BLOCK_CELLS_X;
 		int cellY = geoY % GeoStructure.BLOCK_CELLS_Y;
 		int raw = _geo.getShort(getCellAddr(cellX, cellY)) & 0xFFFF;
-		return decodeHeight(raw);
+		short height = decodeHeight(raw);
+		return (height == VOID_HEIGHT) ? (short) worldZ : height;
 	}
 
 	@Override

@@ -267,9 +267,8 @@ public class EnterWorld extends L2GameClientPacket
 			// Check if it's really the character's first login (lvl 1 and 0 exp)
 			if (activeChar.getLevel() == 1 && activeChar.getExp() == 0)
 			{
-				// Did it ever receive a VIP before?
-				if (!VipManager.getInstance().hasVipPrivileges(activeChar.getObjectId())
-				        && !VipManager.getInstance().hasEverReceivedVip(activeChar.getObjectId()))
+				// Did it ever receive a free VIP before? (paid VIP doesn't interfere)
+				if (!VipManager.getInstance().hasEverReceivedVip(activeChar.getObjectId()))
 				{
 					long duration = System.currentTimeMillis() + (24 * 60 * 60 * 1000); // 24 hours
 

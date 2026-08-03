@@ -33,7 +33,8 @@ public class AdminVip implements IAdminCommandHandler
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_setvip",
-		"admin_remove_vip"
+		"admin_remove_vip",
+		"admin_remove_eternal_vip"
 	};
 
 	@Override
@@ -80,6 +81,10 @@ public class AdminVip implements IAdminCommandHandler
 		{
 			removeVip(activeChar, (L2PcInstance) target);
 		}
+		else if (command.equalsIgnoreCase("admin_remove_eternal_vip"))
+		{
+			removeEternalVip(activeChar, (L2PcInstance) target);
+		}
 
 		return true;
 	}
@@ -96,6 +101,23 @@ public class AdminVip implements IAdminCommandHandler
 		activeChar.sendMessage("You have removed Vip privileges from " + targetChar.getName() + ".");
 		targetChar.sendPacket(new ExShowScreenMessage("Your Vip privileges were removed by the admin.", 10000));
 		targetChar.setVip(false);
+		targetChar.broadcastUserInfo();
+	}
+
+	public static void removeEternalVip(L2PcInstance activeChar, L2PcInstance targetChar)
+	{
+		if (!VipManager.getInstance().hasEternalVip(targetChar.getObjectId()))
+		{
+			activeChar.sendMessage(targetChar.getName() + " does not have Eternal Vip.");
+			return;
+		}
+
+		VipManager.getInstance().updateEternalVipToZero(targetChar.getObjectId());
+		VipManager.getInstance().removeVip(targetChar.getObjectId());
+		targetChar.setVip(false);
+		targetChar.broadcastUserInfo();
+		activeChar.sendMessage("You have removed Eternal Vip from " + targetChar.getName() + ".");
+		targetChar.sendPacket(new ExShowScreenMessage("Your Eternal Vip was revoked by the admin.", 10000));
 	}
 
 	public static void updateDatabase(L2PcInstance player, boolean newVip)
@@ -111,7 +133,7 @@ public class AdminVip implements IAdminCommandHandler
 		{
 			// Database Connection
 			con = L2DatabaseFactory.getInstance().getConnection();
-			PreparedStatement stmt = con.prepareStatement(newVip ? INSERT_DATA : DEL_DATA);
+			PreparedStatement stmt = con.prepareStatement(INSERT_DATA);
 
 			// if it is a new donator insert proper data
 			if (newVip)
@@ -125,11 +147,10 @@ public class AdminVip implements IAdminCommandHandler
 			}
 			else
 			{
-				// deletes from database
-				stmt.setInt(1, player.getObjectId());
-				stmt.execute();
+				// delegate to VipManager to avoid SQL duplication
 				stmt.close();
 				stmt = null;
+				VipManager.getInstance().updateEternalVipToZero(player.getObjectId());
 			}
 		}
 		catch (Exception e)
@@ -150,7 +171,6 @@ public class AdminVip implements IAdminCommandHandler
 
 	// Updates That Will be Executed by MySQL
 	static String INSERT_DATA = "REPLACE INTO characters_vip_eterno (obj_Id, char_name, vip) VALUES (?,?,?)";
-	static String DEL_DATA = "UPDATE characters_vip_eterno SET vip = 0 WHERE obj_Id=?";
 
 	@Override
 	public String[] getAdminCommandList()

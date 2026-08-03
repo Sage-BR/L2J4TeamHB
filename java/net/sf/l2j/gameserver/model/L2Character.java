@@ -936,7 +936,9 @@ public abstract class L2Character extends L2Object
 		}
 
 		// GeoData Los Check here (or dz > 1000)
-		if (!GeoData.getInstance().canSeeTarget(this, target))
+		// Use canSeeThruThinWall for melee: thin columns/fences (≤2 cells)
+		// should not block melee attacks — the mob can reach through.
+		if (!GeoData.getInstance().canSeeThruThinWall(this, target))
 		{
 			sendPacket(new SystemMessage(SystemMessageId.CANT_SEE_TARGET));
 			getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE);
@@ -4370,11 +4372,17 @@ public abstract class L2Character extends L2Object
 
 		public int geoPathAccurateTx;
 
-		public int geoPathAccurateTy;
+		public int geoPathAccurateTy;	public int geoPathGtx;
 
-		public int geoPathGtx;
+	public int geoPathGty;
 
-		public int geoPathGty;
+	// Stuck detection: track position to detect when mob is trapped
+	// between obstacles (column + wall scenario)
+	public int _stuckTickCount;
+
+	public int _lastPosX;
+
+	public int _lastPosY;
 	}
 
 	/** Table containing all skillId that are disabled */
@@ -5312,6 +5320,106 @@ public abstract class L2Character extends L2Object
 			revalidateZone();
 		}
 
+		// Stuck detection: check if position changed since last tick
+		// If mob is an attackable and hasn't moved for 5+ ticks while trying to
+		// move, it's likely trapped between obstacles (column + wall scenario).
+		// Force a retreat to a random nearby walkable point to unblock.
+		if (this instanceof L2Attackable)
+		{
+			int curPosX = super.getX();
+			int curPosY = super.getY();
+
+			// Position hasn't changed significantly (within 10 units tolerance)
+			if (Math.abs(curPosX - m._lastPosX) <= 10
+			        && Math.abs(curPosY - m._lastPosY) <= 10)
+			{
+				m._stuckTickCount++;
+
+				// Mob stuck for 5+ ticks (0.5 seconds) — force retreat
+				if (m._stuckTickCount >= 5)
+				{
+					if (Config.MOVE_DEBUG)
+					{
+						_log.info("[MOVE] STUCK DETECTED: " + getName()
+						        + " at (" + curPosX + "," + curPosY + ","
+						        + super.getZ() + ") stuck for "
+					        + m._stuckTickCount + " ticks — forcing retreat");
+					}
+
+					// Try to find a random walkable nearby point
+					boolean retreated = false;
+				for (int attempt = 0; attempt < 8; attempt++)
+				{
+					// Random direction with slight randomization
+					double angle = attempt * Math.PI / 4.0 + Rnd.get() * 0.5;
+					int retreatDist = 100 + Rnd.get(100); // 100-200 units
+					int targetX = curPosX + (int) (Math.cos(angle) * retreatDist);
+					int targetY = curPosY + (int) (Math.sin(angle) * retreatDist);
+
+					// Bounds check: ensure target is within world limits
+					if (targetX < L2World.MAP_MIN_X || targetX > L2World.MAP_MAX_X
+					        || targetY < L2World.MAP_MIN_Y || targetY > L2World.MAP_MAX_Y)
+					{
+						continue;
+					}
+
+						// Check if the retreat point is walkable
+						Location dest = GeoData.getInstance().moveCheck(
+						        curPosX, curPosY, super.getZ(),
+						        targetX, targetY, super.getZ());
+
+						int dx = dest.getX() - curPosX;
+						int dy = dest.getY() - curPosY;
+						double dist = Math.sqrt(dx * dx + dy * dy);
+
+						// If we moved at least 50 units, this is a valid retreat
+						if (dist >= 50)
+						{
+							if (Config.MOVE_DEBUG)
+							{
+								_log.info("[MOVE] RETREAT: " + getName()
+								        + " from (" + curPosX + "," + curPosY
+								        + ") to (" + dest.getX() + ","
+								        + dest.getY() + "," + dest.getZ() + ")");
+							}
+
+							// Stop current movement and retreat
+							_move = null;
+							moveToLocation(dest.getX(), dest.getY(),
+							        dest.getZ(), 0);
+							retreated = true;
+							break;
+						}
+					}
+
+					// If no valid retreat found, just stop
+					if (!retreated)
+					{
+						if (Config.MOVE_DEBUG)
+						{
+							_log.info("[MOVE] RETREAT FAILED: " + getName()
+							        + " — no walkable nearby, stopping");
+						}
+						_move = null;
+						getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+					}
+
+					// Reset stuck counter
+					m._stuckTickCount = 0;
+					return false;
+				}
+			}
+			else
+			{
+				// Position changed — mob is moving, reset counter
+				m._stuckTickCount = 0;
+			}
+
+			// Update last known position
+			m._lastPosX = curPosX;
+			m._lastPosY = curPosY;
+		}
+
 		// Set the timer of last position update to now
 		m._moveTimestamp = gameTicks;
 
@@ -5605,6 +5713,11 @@ public abstract class L2Character extends L2Object
 		// Create and Init a MoveData object
 		MoveData m = new MoveData();
 
+		// Initialize stuck detection fields
+		m._stuckTickCount = 0;
+		m._lastPosX = curX;
+		m._lastPosY = curY;
+
 		// GEODATA MOVEMENT CHECKS AND PATHFINDING
 		m.onGeodataPathIndex = -1; // Initialize not on geodata path
 
@@ -5703,7 +5816,7 @@ public abstract class L2Character extends L2Object
 			// than the original movement was and the LoS gives a shorter
 			// distance than 2000
 			// This way of detecting need for pathfinding could be changed.
-			if (Config.GEODATA == 2 && originalDistance - distance > 100
+			if (Config.GEODATA == 2 && originalDistance - distance > 30
 			        && !this.isAfraid())
 			{
 				// Path calculation

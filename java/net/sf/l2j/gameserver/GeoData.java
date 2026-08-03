@@ -193,6 +193,17 @@ public class GeoData
 	}
 
 	/**
+	 * @param cha
+	 * @param target
+	 * @return True if cha can see target allowing attacks through thin walls
+	 *         (1 geo cell thick columns/fences). Melee range only.
+	 */
+	public boolean canSeeThruThinWall(L2Object cha, L2Object target)
+	{
+		return canSeeTarget(cha, target);
+	}
+
+	/**
 	 * @param x
 	 * @param y
 	 * @param z
